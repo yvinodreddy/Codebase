@@ -126,6 +126,24 @@ Script: /home/user01/auto_commit_hourly.sh
             return 1
         }
         log_success "Pushed to GitHub successfully"
+
+        # Verify sync with GitHub
+        log "Verifying GitHub synchronization..."
+        if [ -x "/home/user01/verify_github_sync.sh" ]; then
+            if /home/user01/verify_github_sync.sh >> "$LOG_FILE" 2>&1; then
+                log_success "✅ GitHub sync verified - Local and remote identical"
+            else
+                VERIFY_CODE=$?
+                if [ $VERIFY_CODE -eq 2 ]; then
+                    log_warning "⚠️ Sync verification shows local ahead - running monitor"
+                    /home/user01/monitor_github_sync.sh >> "$LOG_FILE" 2>&1 || true
+                else
+                    log_warning "⚠️ Sync verification returned code $VERIFY_CODE"
+                fi
+            fi
+        else
+            log_warning "Sync verification script not found or not executable"
+        fi
     else
         log_warning "GitHub remote 'origin' not configured"
         log_warning "Changes committed locally only"
