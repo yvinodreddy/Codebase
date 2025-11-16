@@ -1,5 +1,5 @@
 {
-  "numStartups": 213,
+  "numStartups": 217,
   "installMethod": "native",
   "autoUpdates": false,
   "autoCompactEnabled": false,
@@ -16,15 +16,15 @@
   "tipsHistory": {
     "new-user-warmup": 9,
     "plan-mode-for-complex-tasks": 164,
-    "terminal-setup": 204,
+    "terminal-setup": 216,
     "memory-command": 83,
-    "theme-command": 212,
+    "theme-command": 216,
     "status-line": 205,
     "prompt-queue": 7,
-    "enter-to-steer-in-relatime": 212,
+    "enter-to-steer-in-relatime": 216,
     "todo-list": 212,
-    "# for memory": 204,
-    "install-github-app": 204,
+    "# for memory": 215,
+    "install-github-app": 215,
     "drag-and-drop-images": 208,
     "double-esc-code-restore": 208,
     "continue": 208,
@@ -35,8 +35,8 @@
     "permissions": 208,
     "custom-commands": 212,
     "tab-toggle-thinking": 209,
-    "ultrathink-keyword": 205,
-    "git-worktrees": 203,
+    "ultrathink-keyword": 217,
+    "git-worktrees": 214,
     "stickers-command": 207
   },
   "memoryUsageCount": 1,
@@ -50,6 +50,12 @@
     "tengu_migrate_ignore_patterns": false,
     "tengu_halloween": false,
     "tengu_glob_with_rg": false
+  },
+  "cachedDynamicConfigs": {
+    "tengu-top-of-feed-tip": {
+      "tip": "",
+      "color": ""
+    }
   },
   "firstStartTime": "2025-09-30T18:17:18.227Z",
   "userID": "47b64b35ba0ed6f41ffc4578e2ce160eda35acaaeb9364714b7b1d7fc5e5f110",
@@ -191,7 +197,7 @@
     "5f40691d-ecf2-4e8b-bded-e094c6691947": {
       "hasAccess": false,
       "hasAccessNotAsDefault": false,
-      "timestamp": 1763265843476
+      "timestamp": 1763270287963
     },
     "9a16b879-6de2-4b4c-9c55-3c6035aad238": {
       "hasAccess": false,
@@ -199,7 +205,7 @@
       "timestamp": 1761118042110
     }
   },
-  "lastPlanModeUse": 1762971742148,
+  "lastPlanModeUse": 1763272248994,
   "hasIdeOnboardingBeenShown": {
     "vscode": true
   },

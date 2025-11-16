@@ -160,3 +160,10 @@ alias git-show-deleted='git diff HEAD --name-only --diff-filter=D'
 # VERIFICATION ALIASES
 alias git-verify='cd ~/; git status && git log --oneline -3'
 alias backup-verify='tail -20 ~/logs/auto_commit_$(date +%Y%m%d).log'
+alias cppm="/home/user01/claude-test/ClaudePrompt/cpp_with_metrics"
+export PATH="$HOME/bin:$PATH"
+
+# cpp_with_metrics function for easy access
+cppm() {
+    /home/user01/claude-test/ClaudePrompt/cpp_with_metrics "$@"
+}

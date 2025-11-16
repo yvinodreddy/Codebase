@@ -1,0 +1,186 @@
+#!/bin/bash
+#
+# cppm - Enhanced cpp wrapper with Real-Time Metrics
+#
+# This is a drop-in replacement for cpp that provides:
+# 1. Real-time metrics updates to the status line during execution
+# 2. Post-execution metrics summary (like cpp_with_metrics)
+# 3. Historical tracking in metrics.csv
+# 4. Zero breaking changes - works exactly like cpp
+#
+# Usage: Same as regular cpp
+#   ./cppm "your prompt" -v
+#   ./cppm --file prompt.txt
+#
+
+# Ensure we're in the correct directory
+SCRIPT_DIR="/home/user01/claude-test/ClaudePrompt"
+cd "$SCRIPT_DIR" || exit 1
+
+# Configuration
+CPP_COMMAND="$SCRIPT_DIR/cpp"
+METRICS_CSV="$SCRIPT_DIR/logs/metrics.csv"
+REALTIME_METRICS="$SCRIPT_DIR/tmp/realtime_metrics.json"
+UPDATE_METRICS="$SCRIPT_DIR/update_realtime_metrics.py"
+TEMP_OUTPUT=$(mktemp)
+
+# Ensure directories exist
+mkdir -p "$SCRIPT_DIR/logs"
+mkdir -p "$SCRIPT_DIR/tmp"
+
+# Initialize CSV if it doesn't exist
+if [[ ! -f "$METRICS_CSV" ]]; then
+    echo "Timestamp,Prompt,Agents,Context_Tokens,Context_Pct,Iterations,Confidence,Time_Sec" > "$METRICS_CSV"
+fi
+
+# Reset real-time metrics at start
+python3 "$UPDATE_METRICS" --reset 2>/dev/null
+
+# Capture start time
+START_TIME=$(date +%s.%N)
+TIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S')
+
+# Extract prompt from arguments for logging
+PROMPT_ARG=""
+for arg in "$@"; do
+    if [[ ! "$arg" =~ ^- ]]; then
+        PROMPT_ARG="$arg"
+        break
+    fi
+done
+
+# Truncate prompt for CSV (max 50 chars)
+PROMPT_SHORT="${PROMPT_ARG:0:50}"
+if [[ ${#PROMPT_ARG} -gt 50 ]]; then
+    PROMPT_SHORT="${PROMPT_SHORT}..."
+fi
+
+# Mark execution as started
+python3 "$UPDATE_METRICS" --executing 2>/dev/null
+
+# Function to update metrics during execution
+update_progress_metrics() {
+    local output_file="$1"
+
+    # Extract metrics from current output
+    local context_tokens=$(grep -oP '\[VERBOSE\].*?Context.*?:\s*\K[\d,]+(?=\s*tokens)' "$output_file" | tail -1 | tr -d ',')
+    local context_pct=$(grep -oP '\[VERBOSE\].*?Context.*?:\s*[\d,]+\s*tokens\s*\(\K[\d.]+' "$output_file" | tail -1)
+    local agents=$(grep -oP '\[VERBOSE\].*?Agents.*?:\s*\K\d+/\d+' "$output_file" | tail -1)
+    local confidence=$(grep -oP '\[VERBOSE\].*?Confidence.*?:\s*\K[\d.]+' "$output_file" | tail -1)
+
+    # Update real-time metrics if we have data
+    if [[ -n "$agents" ]] || [[ -n "$context_pct" ]] || [[ -n "$confidence" ]]; then
+        python3 "$UPDATE_METRICS" \
+            ${agents:+--agents "$agents"} \
+            ${context_pct:+--context-pct "$context_pct"} \
+            ${confidence:+--confidence "$confidence"} \
+            --executing \
+            2>/dev/null
+    fi
+}
+
+# Execute cpp with background monitoring
+echo "Executing cpp with real-time metrics tracking..."
+echo "└─ Metrics visible in status line (Shift+Tab to toggle)"
+echo ""
+
+# Run cpp in background, monitoring output
+"$CPP_COMMAND" "$@" 2>&1 | tee "$TEMP_OUTPUT" &
+CPP_PID=$!
+
+# Monitor progress and update metrics every 2 seconds
+while kill -0 $CPP_PID 2>/dev/null; do
+    sleep 2
+    if [[ -f "$TEMP_OUTPUT" ]]; then
+        update_progress_metrics "$TEMP_OUTPUT"
+    fi
+done
+
+# Wait for cpp to complete
+wait $CPP_PID
+EXIT_CODE=$?
+
+# Capture end time
+END_TIME=$(date +%s.%N)
+ELAPSED=$(echo "$END_TIME - $START_TIME" | bc -l)
+ELAPSED_FORMATTED=$(printf "%.1f" "$ELAPSED")
+
+# Parse final metrics from output
+CONTEXT_TOKENS=$(grep -oP '\[VERBOSE\].*?Context.*?:\s*\K[\d,]+(?=\s*tokens)' "$TEMP_OUTPUT" | tail -1 | tr -d ',')
+CONTEXT_PCT=$(grep -oP '\[VERBOSE\].*?Context.*?:\s*[\d,]+\s*tokens\s*\(\K[\d.]+' "$TEMP_OUTPUT" | tail -1)
+AGENTS=$(grep -oP '\[VERBOSE\].*?Agents.*?:\s*\K\d+/\d+' "$TEMP_OUTPUT" | tail -1)
+ITERATIONS=$(grep -oP '\[VERBOSE\].*?Iterations.*?:\s*\K\d+' "$TEMP_OUTPUT" | tail -1)
+CONFIDENCE=$(grep -oP '\[VERBOSE\].*?Confidence.*?:\s*\K[\d.]+' "$TEMP_OUTPUT" | tail -1)
+
+# Default values if extraction failed
+CONTEXT_TOKENS=${CONTEXT_TOKENS:-0}
+CONTEXT_PCT=${CONTEXT_PCT:-0.0}
+AGENTS=${AGENTS:-"N/A"}
+ITERATIONS=${ITERATIONS:-0}
+CONFIDENCE=${CONFIDENCE:-0.0}
+
+# Update final metrics (not executing anymore)
+python3 "$UPDATE_METRICS" \
+    --agents "$AGENTS" \
+    --context-pct "$CONTEXT_PCT" \
+    --confidence "$CONFIDENCE" \
+    2>/dev/null
+
+# Determine context status indicator
+CONTEXT_INDICATOR="🟢 OPTIMAL"
+if (( $(echo "$CONTEXT_PCT >= 95" | bc -l) )); then
+    CONTEXT_INDICATOR="🔴 CRITICAL"
+elif (( $(echo "$CONTEXT_PCT >= 85" | bc -l) )); then
+    CONTEXT_INDICATOR="🟡 WARNING"
+elif (( $(echo "$CONTEXT_PCT >= 50" | bc -l) )); then
+    CONTEXT_INDICATOR="✅ EFFICIENT"
+fi
+
+# Determine confidence indicator
+CONFIDENCE_INDICATOR="✅"
+if (( $(echo "$CONFIDENCE < 95" | bc -l) )); then
+    CONFIDENCE_INDICATOR="⚠️"
+elif (( $(echo "$CONFIDENCE >= 99" | bc -l) )); then
+    CONFIDENCE_INDICATOR="✅"
+fi
+
+# Display metrics box
+echo ""
+echo "┌────────────────────────────────────────────────────────────────────┐"
+echo "│ 📊 EXECUTION METRICS                                               │"
+echo "├────────────────────────────────────────────────────────────────────┤"
+if [[ -n "$PROMPT_SHORT" ]]; then
+    printf "│ %-66s │\n" "Prompt: \"$PROMPT_SHORT\""
+    echo "├────────────────────────────────────────────────────────────────────┤"
+fi
+printf "│ %-66s │\n" "Agents: $AGENTS"
+
+# Format context line with proper spacing
+if [[ $CONTEXT_TOKENS -gt 0 ]]; then
+    CONTEXT_TOKENS_FORMATTED=$(printf "%'d" "$CONTEXT_TOKENS" 2>/dev/null || echo "$CONTEXT_TOKENS")
+    CONTEXT_LINE=$(printf "Context: %s tokens (%.1f%%)  %s" "$CONTEXT_TOKENS_FORMATTED" "$CONTEXT_PCT" "$CONTEXT_INDICATOR")
+else
+    CONTEXT_LINE="Context: N/A"
+fi
+printf "│ %-66s │\n" "$CONTEXT_LINE"
+
+printf "│ %-66s │\n" "Iterations: $ITERATIONS"
+printf "│ %-66s │\n" "Confidence: ${CONFIDENCE}%  $CONFIDENCE_INDICATOR"
+printf "│ %-66s │\n" "Time: ${ELAPSED_FORMATTED}s"
+echo "└────────────────────────────────────────────────────────────────────┘"
+
+# Display warning if context is high
+if (( $(echo "$CONTEXT_PCT >= 85" | bc -l) )); then
+    echo ""
+    echo "⚠️  WARNING: Context usage above 85% may affect accuracy"
+    echo "   Recommendation: Simplify prompt or use task chunking"
+fi
+
+# Log to CSV
+echo "\"$TIMESTAMP\",\"$PROMPT_SHORT\",$AGENTS,$CONTEXT_TOKENS,$CONTEXT_PCT,$ITERATIONS,$CONFIDENCE,$ELAPSED_FORMATTED" >> "$METRICS_CSV"
+
+# Cleanup
+rm -f "$TEMP_OUTPUT"
+
+# Exit with the same code as cpp
+exit $EXIT_CODE
