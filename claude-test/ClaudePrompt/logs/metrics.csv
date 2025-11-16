@@ -25,3 +25,7 @@ Timestamp,Prompt,Agents,Context_Tokens,Context_Pct,Iterations,Confidence,Time_Se
 "2025-11-16 00:52:02","explain quantum computing",8/30,200000,0.0,0,100,2.1
 "2025-11-16 00:56:39","explain quantum computing",8/30,200000,0.0,0,100,2.2
 "2025-11-16 00:58:50","test prompt",8/30,200000,0.0,0,100,2.2
+"2025-11-16 01:07:27","explain quantum computing",8/30,200000,0.0,0,100,2.1
+"2025-11-16 01:11:27","
+
+  Why is it showing something like this which is...",25/30,200000,0.0,0,100,2.1

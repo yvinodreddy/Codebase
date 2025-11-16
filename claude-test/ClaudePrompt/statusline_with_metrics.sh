@@ -17,9 +17,48 @@
 INPUT_JSON=$(cat)
 
 # Extract basic session info from Claude Code's JSON input using Python (no jq dependency)
-MODEL=$(echo "$INPUT_JSON" | python3 -c "import sys, json; data=json.load(sys.stdin); print(data.get('model', {}).get('displayName', 'Unknown'))" 2>/dev/null || echo "Unknown")
-CURRENT_DIR=$(echo "$INPUT_JSON" | python3 -c "import sys, json; data=json.load(sys.stdin); print(data.get('currentDirectory', '~'))" 2>/dev/null || echo "~")
-DIR_NAME="${CURRENT_DIR##*/}"
+# Try to get model from JSON, fallback to config.py if unavailable
+MODEL=$(echo "$INPUT_JSON" | python3 -c "
+import sys, json
+try:
+    data = json.load(sys.stdin)
+    model = data.get('model', {}).get('displayName', '')
+    if not model:
+        # Fallback to config.py
+        import sys
+        sys.path.insert(0, '/home/user01/claude-test/ClaudePrompt')
+        from config import UltrathinkConfig
+        model_id = UltrathinkConfig.CLAUDE_MODEL_NAME
+        # Convert 'claude-sonnet-4-5-20250929' to 'Sonnet 4.5'
+        if 'sonnet-4-5' in model_id:
+            model = 'Sonnet 4.5'
+        elif 'sonnet' in model_id:
+            model = 'Sonnet'
+        elif 'opus' in model_id:
+            model = 'Opus'
+        elif 'haiku' in model_id:
+            model = 'Haiku'
+        else:
+            model = 'Claude'
+    print(model)
+except:
+    print('Sonnet 4.5')
+" 2>/dev/null || echo "Sonnet 4.5")
+
+# Get current directory - try multiple methods for robustness
+CURRENT_DIR=$(echo "$INPUT_JSON" | python3 -c "import sys, json; data=json.load(sys.stdin); print(data.get('currentDirectory', ''))" 2>/dev/null)
+if [[ -z "$CURRENT_DIR" ]]; then
+    CURRENT_DIR=$(pwd 2>/dev/null || echo "$HOME")
+fi
+
+# Extract directory name from full path
+if [[ "$CURRENT_DIR" == "$HOME" ]]; then
+    DIR_NAME="~"
+else
+    DIR_NAME="${CURRENT_DIR##*/}"
+    # If empty (root directory), use full path
+    [[ -z "$DIR_NAME" ]] && DIR_NAME="$CURRENT_DIR"
+fi
 
 # Path to real-time metrics file
 METRICS_FILE="/home/user01/claude-test/ClaudePrompt/tmp/realtime_metrics.json"
@@ -70,44 +109,55 @@ else
     CONFIDENCE_DISPLAY="--"
 fi
 
-# Build status line with color codes
-# Format: [$MODEL] 📁 dir | 👥 agents | 📊 context% | ✓ confidence% | status
+# Build complete status line matching user's desired format
+# Format: user@host:/path                  ctrl-g hint  [Model] metrics
 
-# Color codes
-RESET='\033[0m'
-BOLD='\033[1m'
-CYAN='\033[36m'
-GREEN='\033[32m'
-YELLOW='\033[33m'
-RED='\033[31m'
+# Color codes - use $'...' syntax for proper escape sequence interpretation
+RESET=$'\033[0m'
+BOLD=$'\033[1m'
+CYAN=$'\033[36m'
+GREEN=$'\033[32m'
+YELLOW=$'\033[33m'
+RED=$'\033[31m'
 
-# Output formatted status line
-echo -ne "${BOLD}[${CYAN}${MODEL}${RESET}${BOLD}]${RESET} 📁 ${DIR_NAME} | "
-echo -ne "👥 ${AGENTS} | "
+# Get system info
+USERNAME=$(whoami 2>/dev/null || echo "user")
+HOSTNAME=$(hostname 2>/dev/null || echo "localhost")
+
+# Build metrics portion
+METRICS=""
+METRICS+="${BOLD}[${CYAN}${MODEL}${RESET}${BOLD}]${RESET} "
+METRICS+="📁 ${DIR_NAME} | "
+METRICS+="👥 ${AGENTS} | "
 
 # Context with color based on percentage
 if (( $(echo "$CONTEXT_PCT >= 95" | bc -l 2>/dev/null || echo 0) )); then
-    echo -ne "${RED}📊 ${CONTEXT_DISPLAY}${RESET} | "
+    METRICS+="${RED}📊 ${CONTEXT_DISPLAY}${RESET} | "
 elif (( $(echo "$CONTEXT_PCT >= 85" | bc -l 2>/dev/null || echo 0) )); then
-    echo -ne "${YELLOW}📊 ${CONTEXT_DISPLAY}${RESET} | "
+    METRICS+="${YELLOW}📊 ${CONTEXT_DISPLAY}${RESET} | "
 elif (( $(echo "$CONTEXT_PCT >= 50" | bc -l 2>/dev/null || echo 0) )); then
-    echo -ne "${GREEN}📊 ${CONTEXT_DISPLAY}${RESET} | "
+    METRICS+="${GREEN}📊 ${CONTEXT_DISPLAY}${RESET} | "
 else
-    echo -ne "📊 ${CONTEXT_DISPLAY} | "
+    METRICS+="📊 ${CONTEXT_DISPLAY} | "
 fi
 
 # Confidence
 if [[ "$CONFIDENCE" != "--" ]]; then
     if (( $(echo "$CONFIDENCE >= 99" | bc -l 2>/dev/null || echo 0) )); then
-        echo -ne "${GREEN}✓ ${CONFIDENCE_DISPLAY}${RESET} | "
+        METRICS+="${GREEN}✓ ${CONFIDENCE_DISPLAY}${RESET} | "
     elif (( $(echo "$CONFIDENCE >= 95" | bc -l 2>/dev/null || echo 0) )); then
-        echo -ne "${YELLOW}✓ ${CONFIDENCE_DISPLAY}${RESET} | "
+        METRICS+="${YELLOW}✓ ${CONFIDENCE_DISPLAY}${RESET} | "
     else
-        echo -ne "${RED}✓ ${CONFIDENCE_DISPLAY}${RESET} | "
+        METRICS+="${RED}✓ ${CONFIDENCE_DISPLAY}${RESET} | "
     fi
 else
-    echo -ne "✓ ${CONFIDENCE_DISPLAY} | "
+    METRICS+="✓ ${CONFIDENCE_DISPLAY} | "
 fi
 
 # Status
-echo -n "${STATUS}"
+METRICS+="${STATUS}"
+
+# Output complete status line
+# Format: username@hostname:/path              ctrl-g hint  [metrics]
+# Use printf to output the statusline - METRICS already contains interpreted escape codes
+printf "%s@%s:%s                     ctrl-g to edit prompt in code  %s" "${USERNAME}" "${HOSTNAME}" "${CURRENT_DIR}" "${METRICS}"
