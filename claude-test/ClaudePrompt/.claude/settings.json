@@ -4,8 +4,8 @@
   },
   "hooks": {
     "PostToolUse": {
-      "capture_live_context_enhanced": {
-        "command": "/home/user01/claude-test/ClaudePrompt/.claude/hooks/PostToolUse/capture_live_context_enhanced.sh",
+      "capture_live_metrics": {
+        "command": "/home/user01/claude-test/ClaudePrompt/.claude/hooks/PostToolUse/capture_live_metrics.sh",
         "timeout": 1000
       }
     }

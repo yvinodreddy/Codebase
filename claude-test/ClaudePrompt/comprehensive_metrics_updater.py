@@ -293,8 +293,11 @@ class ComprehensiveMetricsUpdater:
         executing = agent_counts['active'] > 0 or len(background_tasks) > 0
 
         # Build metrics
+        # Changed 'agents' to show total (cumulative) instead of active (2025-11-16)
+        # This gives users visibility into how many tools/commands were executed
         metrics = {
-            'agents': str(agent_counts['active']),
+            'agents': str(agent_counts['total']),
+            'agents_active': agent_counts['active'],
             'agents_total': agent_counts['total'],
             'agents_completed': agent_counts['completed'],
             'agents_background': agent_counts['background'],

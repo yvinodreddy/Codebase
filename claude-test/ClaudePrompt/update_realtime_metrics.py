@@ -20,12 +20,17 @@ from datetime import datetime
 METRICS_FILE = Path("/home/user01/claude-test/ClaudePrompt/tmp/realtime_metrics.json")
 
 def update_metrics(agents=None, context_pct=None, confidence=None, executing=False):
-    """Update the real-time metrics file."""
+    """
+    Update the real-time metrics file.
+
+    ENHANCED (2025-11-16): Now preserves comprehensive metrics from PostToolUse hook.
+    Only updates specified fields, preserves all other comprehensive fields.
+    """
 
     # Ensure tmp directory exists
     METRICS_FILE.parent.mkdir(parents=True, exist_ok=True)
 
-    # Load existing metrics if file exists
+    # Load existing metrics if file exists (PRESERVE ALL EXISTING FIELDS)
     metrics = {}
     if METRICS_FILE.exists():
         try:
@@ -34,16 +39,38 @@ def update_metrics(agents=None, context_pct=None, confidence=None, executing=Fal
         except (json.JSONDecodeError, IOError):
             metrics = {}
 
-    # Update metrics with new values
+    # Update ONLY the specified fields (preserve everything else)
+    # NOTE: agents from cppm is in format "8/30" (used/total)
+    # We should NOT overwrite agents_total from comprehensive_metrics_updater
     if agents is not None:
-        metrics['agents'] = agents
+        # If agents is in format "X/Y", extract just X for agents field
+        if isinstance(agents, str) and '/' in agents:
+            agent_parts = agents.split('/')
+            metrics['agents'] = agent_parts[0].strip()  # Current/active agents
+            # DO NOT overwrite agents_total if it exists
+            if 'agents_total' not in metrics:
+                metrics['agents_total'] = agent_parts[0].strip()  # Fallback
+        else:
+            metrics['agents'] = agents
+
     if context_pct is not None:
         metrics['context_pct'] = float(context_pct)
+        # Also update tokens_pct if not present
+        if 'tokens_pct' not in metrics:
+            metrics['tokens_pct'] = float(context_pct)
+
     if confidence is not None:
         metrics['confidence'] = float(confidence)
 
     metrics['executing'] = executing
     metrics['last_update'] = datetime.now().isoformat()
+
+    # Preserve comprehensive fields if they exist:
+    # - agents_total, agents_active, agents_completed, agents_background
+    # - tokens_used, tokens_total, tokens_display
+    # - background_tasks_count, background_tasks
+    # - agent_counts, status
+    # These are already in metrics dict and won't be overwritten
 
     # Write atomically to prevent race conditions
     temp_file = METRICS_FILE.with_suffix('.tmp')
@@ -57,16 +84,40 @@ def update_metrics(agents=None, context_pct=None, confidence=None, executing=Fal
         return False
 
 def reset_metrics():
-    """Reset metrics to default state."""
-    metrics = {
-        'agents': 'N/A',
-        'context_pct': 0.0,
-        'confidence': 0.0,
+    """
+    Reset metrics to default state.
+
+    ENHANCED (2025-11-16): Preserves comprehensive metrics from PostToolUse hook.
+    Only resets legacy cppm fields, keeps all comprehensive tracking intact.
+    """
+    METRICS_FILE.parent.mkdir(parents=True, exist_ok=True)
+
+    # Load existing metrics to preserve comprehensive fields
+    existing_metrics = {}
+    if METRICS_FILE.exists():
+        try:
+            with open(METRICS_FILE, 'r') as f:
+                existing_metrics = json.load(f)
+        except (json.JSONDecodeError, IOError):
+            existing_metrics = {}
+
+    # Start with existing metrics (preserves comprehensive fields)
+    metrics = existing_metrics.copy()
+
+    # Only reset the legacy cppm fields
+    metrics.update({
+        'context_pct': 0.0,  # Legacy field
         'executing': False,
         'last_update': datetime.now().isoformat()
-    }
+    })
 
-    METRICS_FILE.parent.mkdir(parents=True, exist_ok=True)
+    # Preserve these comprehensive fields if they exist:
+    # - agents, agents_total, agents_active, agents_completed, agents_background
+    # - tokens_used, tokens_total, tokens_pct, tokens_display
+    # - confidence, status
+    # - background_tasks_count, background_tasks
+    # - agent_counts
+    # All already preserved by using existing_metrics.copy()
 
     with open(METRICS_FILE, 'w') as f:
         json.dump(metrics, f, indent=2)

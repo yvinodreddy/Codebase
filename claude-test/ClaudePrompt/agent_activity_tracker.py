@@ -99,8 +99,10 @@ class AgentActivityTracker:
             json.dump(db, f, indent=2)
 
         # Update counter file for backward compatibility
-        active_count = len([a for a in db['agents'] if a['status'] in ['pending', 'running']])
-        self.counter_file.write_text(str(active_count))
+        # Changed to total count instead of active count (2025-11-16)
+        # This shows cumulative agents used, not just currently running
+        total_count = len(db['agents'])
+        self.counter_file.write_text(str(total_count))
 
     def add_agent(self, tool_name: str, params: Optional[Dict] = None,
                   metadata: Optional[Dict] = None) -> int:

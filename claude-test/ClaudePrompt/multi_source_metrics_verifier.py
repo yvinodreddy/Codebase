@@ -191,10 +191,13 @@ class RealtimeMetricsSource(MetricsSource):
                 data = json.load(f)
 
             self.data = {
-                'agents': data.get('agents', 'N/A'),
+                'agents': data.get('agents_total', data.get('agents', 'N/A')),
                 'context_pct': data.get('context_pct', 0.0),
                 'confidence': data.get('confidence', '--'),
-                'executing': data.get('executing', False)
+                'executing': data.get('executing', False),
+                'tokens_used': data.get('tokens_used', 0),
+                'tokens_total': data.get('tokens_total', 200000),
+                'tokens_pct': data.get('tokens_pct', 0.0)
             }
             self.confidence = self.calculate_confidence(age)
             self.available = True
