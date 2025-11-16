@@ -1,0 +1,8 @@
+#!/bin/bash
+# ULTRATHINK Command - Global wrapper
+# Can be called from any directory
+
+ULTRATHINK_DIR="/home/user01/claude-test/TestPrompt"
+
+# Change to ULTRATHINK directory and run the command
+cd "$ULTRATHINK_DIR" && python3 ultrathink.py "$@"

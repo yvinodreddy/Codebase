@@ -1,0 +1,11 @@
+[user]
+	name = Vinod Yellagonda
+	email = yvinodreddy@gmail.com
+[init]
+	defaultBranch = main
+[color]
+	ui = auto
+[core]
+	editor = nano
+[credential]
+	helper = /mnt/c/Program\\ Files/Git/mingw64/bin/git-credential-manager.exe

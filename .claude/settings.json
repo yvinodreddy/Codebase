@@ -1,0 +1,7 @@
+{
+  "statusLine": {
+    "type": "command",
+    "command": "/home/user01/.claude/statusline.sh"
+  },
+  "alwaysThinkingEnabled": true
+}

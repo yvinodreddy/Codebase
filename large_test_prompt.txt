@@ -1,0 +1,13 @@
+This is a test prompt with many lines to demonstrate storage capacity.
+Line 2 - Testing multi-line prompt storage
+Line 3 - The history system handles ANY size prompt
+Line 4 - Whether it's 10 lines
+Line 5 - Or 100 lines
+Line 6 - Or 1,000 lines
+Line 7 - Or even 10,000 lines
+Line 8 - Everything gets stored in the same JSON file
+Line 9 - Located at: /home/user01/claude-test/TestPrompt/logs/prompt_history.json
+Line 10 - No matter how large your prompt is
+Line 11 - It will be saved completely
+Line 12 - With all metadata
+Line 13 - Ready for you to search and reuse later

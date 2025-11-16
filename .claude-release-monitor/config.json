@@ -1,0 +1,15 @@
+{
+  "notification_method": "console",
+  "check_frequency": "daily",
+  "skill_level": "intermediate",
+  "interests": [
+    "productivity",
+    "debugging",
+    "automation",
+    "testing"
+  ],
+  "email": "",
+  "slack_webhook": "",
+  "last_check": null,
+  "last_seen_version": null
+}

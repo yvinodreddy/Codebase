@@ -59,3 +59,13 @@ claude-test-backup-*/
 *.db
 *.sqlite
 *.db-journal
+
+
+# Large Claude session files (>100MB - GitHub limit)
+.claude/projects/**/*.jsonl
+.claude/*.jsonl
+
+# NuGet packages (large binaries)
+.nuget/packages/
+*.nupkg
+
