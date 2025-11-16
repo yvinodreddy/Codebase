@@ -148,19 +148,34 @@ except:
 fi
 
 # ============================================================================
-# STEP 4: Update real-time metrics file with ACTUAL usage
+# STEP 4: Update real-time metrics using COMPREHENSIVE METRICS UPDATER
 # ============================================================================
 
-if [[ -f "$UPDATE_SCRIPT" ]]; then
-    # Update with ACTUAL agent count (not allocated) and context metrics
+COMPREHENSIVE_UPDATER="/home/user01/claude-test/ClaudePrompt/comprehensive_metrics_updater.py"
+
+if [[ -f "$COMPREHENSIVE_UPDATER" ]]; then
+    # Use NEW comprehensive metrics updater (2025-11-16)
+    # This fixes ALL issues:
+    # 1. ✅ Agent counter never decreases → Auto-clear logic
+    # 2. ✅ No agent visibility → view-agents command
+    # 3. ✅ Token tracking shows 0k/200k → Real token usage
+    # 4. ✅ Confidence static at 100.0 → Dynamic 0-100
+    # 5. ✅ Status not updating → Real-time calculation
+    # 6. ✅ Background tasks not tracked → Detection and persistence
+
+    echo "$INPUT_JSON" | python3 "$COMPREHENSIVE_UPDATER" --stdin 2>/dev/null
+
+    # Output for hook system
+    echo "{\"status\": \"comprehensive_metrics_updated\", \"tool\": \"$TOOL_NAME\"}"
+else
+    # Fallback to legacy updater (should never happen)
     python3 "$UPDATE_SCRIPT" \
         --agents "$AGENTS_DISPLAY" \
         --context-pct "$CONTEXT_PCT" \
         --executing \
         2>/dev/null
 
-    # Output for hook system (optional)
-    echo "{\"status\": \"live_metrics_updated\", \"agents_used\": $AGENTS_USED, \"context_pct\": $CONTEXT_PCT, \"tool\": \"$TOOL_NAME\"}"
+    echo "{\"status\": \"fallback_legacy_updater\", \"agents_used\": $AGENTS_USED, \"context_pct\": $CONTEXT_PCT, \"tool\": \"$TOOL_NAME\"}"
 fi
 
 # ============================================================================

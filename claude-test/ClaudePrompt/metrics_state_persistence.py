@@ -55,17 +55,30 @@ class MetricsStatePersistence:
     4. Only updating when new request starts (ACTIVE)
     """
 
-    def __init__(self, state_file: Optional[str] = None):
+    def __init__(self, state_file: Optional[str] = None, instance_id: Optional[str] = None):
         """
         Initialize state persistence manager.
 
         Args:
             state_file: Path to state file (default: tmp/statusline_state.json)
+            instance_id: Optional instance ID for per-instance isolation
+                        (if provided, creates per-instance state file)
         """
-        if state_file is None:
+        # Support per-instance state files
+        if instance_id:
+            # Per-instance mode: statusline_state_{instance_id}.json
+            if state_file is None:
+                state_file = f"/home/user01/claude-test/ClaudePrompt/tmp/statusline_state_{instance_id}.json"
+            else:
+                # Insert instance_id before extension
+                base_path = Path(state_file)
+                state_file = str(base_path.parent / f"{base_path.stem}_{instance_id}{base_path.suffix}")
+        elif state_file is None:
+            # Shared mode (backward compatible)
             state_file = "/home/user01/claude-test/ClaudePrompt/tmp/statusline_state.json"
 
         self.state_file = Path(state_file)
+        self.instance_id = instance_id
         self.state_file.parent.mkdir(parents=True, exist_ok=True)
 
         # Default state

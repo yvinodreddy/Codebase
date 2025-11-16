@@ -9,12 +9,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/home/user01/claude-test/ClaudePrompt/.claude/hooks/PostToolUse/capture_metrics.sh",
-            "timeout": 1000
-          },
-          {
-            "type": "command",
-            "command": "/home/user01/claude-test/ClaudePrompt/.claude/hooks/PostToolUse/capture_live_context.sh",
+            "command": "/home/user01/claude-test/ClaudePrompt/.claude/hooks/PostToolUse/capture_live_metrics.sh",
             "timeout": 1000
           }
         ]

@@ -165,12 +165,19 @@ class ConversationStatsSource(MetricsSource):
 class RealtimeMetricsSource(MetricsSource):
     """Metrics from realtime_metrics.json (updated by hooks)."""
 
-    def __init__(self):
+    def __init__(self, instance_id: Optional[str] = None):
         super().__init__("RealtimeMetrics", max_age_seconds=300)
+        self.instance_id = instance_id
 
     def fetch(self) -> bool:
-        """Fetch metrics from realtime_metrics.json."""
-        metrics_file = "/home/user01/claude-test/ClaudePrompt/tmp/realtime_metrics.json"
+        """Fetch metrics from realtime_metrics.json (per-instance or shared)."""
+        # Determine metrics file path
+        if self.instance_id:
+            # Per-instance mode
+            metrics_file = f"/home/user01/claude-test/ClaudePrompt/tmp/realtime_metrics_{self.instance_id}.json"
+        else:
+            # Shared mode (backward compatible)
+            metrics_file = "/home/user01/claude-test/ClaudePrompt/tmp/realtime_metrics.json"
 
         if not os.path.exists(metrics_file):
             return False
@@ -201,12 +208,19 @@ class RealtimeMetricsSource(MetricsSource):
 class AgentCounterSource(MetricsSource):
     """Metrics from agent_usage_counter.txt (actual tool usage)."""
 
-    def __init__(self):
+    def __init__(self, instance_id: Optional[str] = None):
         super().__init__("AgentCounter", max_age_seconds=300)
+        self.instance_id = instance_id
 
     def fetch(self) -> bool:
-        """Fetch agent count from counter file."""
-        counter_file = "/home/user01/claude-test/ClaudePrompt/tmp/agent_usage_counter.txt"
+        """Fetch agent count from counter file (per-instance or shared)."""
+        # Determine counter file path
+        if self.instance_id:
+            # Per-instance mode
+            counter_file = f"/home/user01/claude-test/ClaudePrompt/tmp/agent_usage_counter_{self.instance_id}.txt"
+        else:
+            # Shared mode (backward compatible)
+            counter_file = "/home/user01/claude-test/ClaudePrompt/tmp/agent_usage_counter.txt"
 
         if not os.path.exists(counter_file):
             return False
@@ -244,16 +258,27 @@ class MultiSourceMetricsVerifier:
     - Automatic fallback chain
     """
 
-    def __init__(self):
+    def __init__(self, instance_id: Optional[str] = None):
+        """
+        Initialize metrics verifier with optional instance isolation.
+
+        Args:
+            instance_id: Optional instance ID for per-instance tracking
+        """
+        self.instance_id = instance_id
+
         self.sources = {
             'context_cache': ContextCacheSource(),
             'conversation_stats': ConversationStatsSource(),
-            'realtime_metrics': RealtimeMetricsSource(),
-            'agent_counter': AgentCounterSource()
+            'realtime_metrics': RealtimeMetricsSource(instance_id),
+            'agent_counter': AgentCounterSource(instance_id)
         }
 
-        # Initialize state persistence manager
-        self.state_manager = MetricsStatePersistence() if STATE_PERSISTENCE_AVAILABLE else None
+        # Initialize state persistence manager with instance ID
+        if STATE_PERSISTENCE_AVAILABLE:
+            self.state_manager = MetricsStatePersistence(instance_id=instance_id)
+        else:
+            self.state_manager = None
 
         self.verified_metrics = {
             'agents': 'N/A',

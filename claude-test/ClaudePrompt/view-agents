@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+#
+# view-agents - View all agent activity and status
+#
+# Usage:
+#   view-agents           # View all agents
+#   view-agents --active  # View only active agents
+#   view-agents --verbose # Verbose output with full details
+#   view-agents --count   # Show only counts
+#   view-agents --clear   # Clear completed agents
+
+# Always add --view flag, then pass additional args
+python3 /home/user01/claude-test/ClaudePrompt/agent_activity_tracker.py --view "$@"
