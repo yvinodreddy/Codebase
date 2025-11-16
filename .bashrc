@@ -142,3 +142,21 @@ alias cdcp='cd /home/user01/claude-test/ClaudePrompt'
 
 # Verification
 alias verify-isolation='/home/user01/claude-test/verify_isolation.sh'
+
+# ========================================
+# GIT PROTECTION & RECOVERY ALIASES
+# Added: 2025-11-15 (Production-Ready Safety)
+# ========================================
+
+# SAFE MODE (for critical operations)
+alias ccs='claude'
+
+# GIT RECOVERY ALIASES
+alias git-undo='git checkout HEAD --'
+alias git-undo-all='git reset --hard HEAD'
+alias git-show-changes='git diff HEAD --name-status'
+alias git-show-deleted='git diff HEAD --name-only --diff-filter=D'
+
+# VERIFICATION ALIASES
+alias git-verify='cd ~/; git status && git log --oneline -3'
+alias backup-verify='tail -20 ~/logs/auto_commit_$(date +%Y%m%d).log'
