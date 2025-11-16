@@ -1,0 +1,138 @@
+@model RMMS.Models.Sales.SalesOrder
+@{
+    ViewData["Title"] = "Create Sales Order";
+}
+
+<div class="container-fluid">
+    <h2><i class="fas fa-plus-circle"></i> Create New Sales Order</h2>
+    <hr />
+
+    <form asp-action="Create" method="post">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h5>Order Information</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label asp-for="OrderNumber" class="form-label"></label>
+                                <input asp-for="OrderNumber" class="form-control" readonly placeholder="Auto-generated" />
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="OrderDate" class="form-label"></label>
+                                <input asp-for="OrderDate" class="form-control" type="date" required />
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label asp-for="QuotationId" class="form-label">Quotation (Optional)</label>
+                                <select asp-for="QuotationId" class="form-select">
+                                    <option value="">No Quotation</option>
+                                    @if (ViewBag.Quotations != null)
+                                    {
+                                        @foreach (var quotation in ViewBag.Quotations)
+                                        {
+                                            <option value="@quotation.Id">@quotation.QuotationNumber - @quotation.Customer?.CustomerName</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="CustomerId" class="form-label">Customer *</label>
+                                <select asp-for="CustomerId" class="form-select" required>
+                                    <option value="">Select Customer</option>
+                                    @if (ViewBag.Customers != null)
+                                    {
+                                        @foreach (var customer in ViewBag.Customers)
+                                        {
+                                            <option value="@customer.Id">@customer.CustomerName (@customer.CustomerCode)</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label asp-for="DeliveryDate" class="form-label"></label>
+                                <input asp-for="DeliveryDate" class="form-control" type="date" required />
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="Priority" class="form-label"></label>
+                                <select asp-for="Priority" class="form-select">
+                                    <option value="Low">Low</option>
+                                    <option value="Normal" selected>Normal</option>
+                                    <option value="High">High</option>
+                                    <option value="Urgent">Urgent</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="DeliveryAddress" class="form-label"></label>
+                            <textarea asp-for="DeliveryAddress" class="form-control" rows="2"></textarea>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label asp-for="PaymentTerms" class="form-label"></label>
+                                <input asp-for="PaymentTerms" class="form-control" />
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="DeliveryTerms" class="form-label"></label>
+                                <input asp-for="DeliveryTerms" class="form-control" />
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="SpecialInstructions" class="form-label"></label>
+                            <textarea asp-for="SpecialInstructions" class="form-control" rows="2"></textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Remarks" class="form-label"></label>
+                            <textarea asp-for="Remarks" class="form-control" rows="2"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h5>Actions</h5>
+                    </div>
+                    <div class="card-body">
+                        <button type="submit" class="btn btn-success w-100 mb-2">
+                            <i class="fas fa-save"></i> Create Order
+                        </button>
+                        <a asp-action="Index" class="btn btn-secondary w-100">
+                            <i class="fas fa-times"></i> Cancel
+                        </a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Instructions</h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="small">
+                            <li>Order Number is auto-generated</li>
+                            <li>Customer is required</li>
+                            <li>Add order items after creation</li>
+                            <li>Pending orders can be edited</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,108 @@
+{
+  "total_records": 500,
+  "total_value": 1370954.22,
+  "avg_claim_value": 2741.91,
+  "billing_accuracy": 1.0,
+  "sample_records": [
+    {
+      "encounter_id": "ENC000000",
+      "services": [
+        "73500",
+        "71900"
+      ],
+      "total_charge": 586.0,
+      "status": "submitted"
+    },
+    {
+      "encounter_id": "ENC000001",
+      "services": [
+        "81400",
+        "83800",
+        "17200",
+        "00146"
+      ],
+      "total_charge": 3362.96,
+      "status": "submitted"
+    },
+    {
+      "encounter_id": "ENC000002",
+      "services": [
+        "99202",
+        "24600",
+        "18200",
+        "00120"
+      ],
+      "total_charge": 8140.49,
+      "status": "submitted"
+    },
+    {
+      "encounter_id": "ENC000003",
+      "services": [
+        "90600",
+        "99228"
+      ],
+      "total_charge": 227.75,
+      "status": "submitted"
+    },
+    {
+      "encounter_id": "ENC000004",
+      "services": [
+        "99289",
+        "16700",
+        "99293",
+        "99278"
+      ],
+      "total_charge": 3202.36,
+      "status": "submitted"
+    },
+    {
+      "encounter_id": "ENC000005",
+      "services": [
+        "10300",
+        "11000"
+      ],
+      "total_charge": 1007.29,
+      "status": "submitted"
+    },
+    {
+      "encounter_id": "ENC000006",
+      "services": [
+        "74400",
+        "73100",
+        "71250",
+        "99220"
+      ],
+      "total_charge": 1055.25,
+      "status": "submitted"
+    },
+    {
+      "encounter_id": "ENC000007",
+      "services": [
+        "12900",
+        "99211"
+      ],
+      "total_charge": 1306.07,
+      "status": "submitted"
+    },
+    {
+      "encounter_id": "ENC000008",
+      "services": [
+        "00138",
+        "93500"
+      ],
+      "total_charge": 723,
+      "status": "submitted"
+    },
+    {
+      "encounter_id": "ENC000009",
+      "services": [
+        "73850",
+        "99226",
+        "94900",
+        "10300"
+      ],
+      "total_charge": 1314.74,
+      "status": "submitted"
+    }
+  ]
+}

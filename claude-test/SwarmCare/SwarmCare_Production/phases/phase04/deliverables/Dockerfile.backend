@@ -1,0 +1,50 @@
+# Phase 04: Frontend Application - Backend API Dockerfile
+# Production-optimized FastAPI application with agent framework
+#
+# Build: docker build -f Dockerfile.backend -t swarmcare/backend-api:latest .
+# Run: docker run -p 8000:8000 swarmcare/backend-api:latest
+
+FROM python:3.11-slim
+
+# Set working directory
+WORKDIR /app
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    gcc \
+    g++ \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy requirements
+COPY requirements.txt .
+
+# Install Python dependencies
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt
+
+# Copy application code
+COPY backend_api.py .
+
+# Copy agent framework and guardrails
+COPY ../../agent_framework/ ./agent_framework/
+COPY ../../guardrails/ ./guardrails/
+
+# Create logs directory
+RUN mkdir -p /app/logs
+
+# Add healthcheck
+HEALTHCHECK --interval=30s --timeout=3s --start-period=10s --retries=3 \
+  CMD curl -f http://localhost:8000/api/health || exit 1
+
+# Expose API port
+EXPOSE 8000
+
+# Labels
+LABEL maintainer="SwarmCare Engineering <engineering@swarmcare.io>"
+LABEL description="SwarmCare Backend API - FastAPI with guardrails"
+LABEL version="1.0.0"
+LABEL phase="04"
+
+# Start application
+CMD ["uvicorn", "backend_api:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "4"]

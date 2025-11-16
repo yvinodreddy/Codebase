@@ -1,0 +1,263 @@
+@model RMMS.Services.Services.Analytics.ProductionDashboardDto
+@{
+    ViewData["Title"] = "Production Analytics";
+}
+
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <h2>Production Analytics Dashboard</h2>
+            <p class="text-muted">Real-time production efficiency, OEE, and performance metrics</p>
+        </div>
+        <div class="col-md-4 text-end">
+            <a href="@Url.Action("Index", "Analytics")" class="btn btn-secondary">
+                <i class="bi bi-arrow-left"></i> Back to Analytics
+            </a>
+        </div>
+    </div>
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+    }
+
+    @if (Model != null)
+    {
+        <!-- Key Metrics -->
+        <div class="row mb-4">
+            <div class="col-md-3">
+                <div class="card bg-primary text-white">
+                    <div class="card-body">
+                        <h6>Overall OEE</h6>
+                        <h3>@Model.OverallOEE.ToString("N1")%</h3>
+                        <small>Overall Equipment Effectiveness</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card bg-success text-white">
+                    <div class="card-body">
+                        <h6>Overall Efficiency</h6>
+                        <h3>@Model.OverallEfficiency.ToString("N1")%</h3>
+                        <small>Production Efficiency</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card bg-info text-white">
+                    <div class="card-body">
+                        <h6>Active Machines</h6>
+                        <h3>@Model.ActiveMachines / @Model.TotalMachines</h3>
+                        <small>Operational Status</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card bg-warning">
+                    <div class="card-body">
+                        <h6>Today's Output</h6>
+                        <h3>@Model.TodayOutput.ToString("N0")</h3>
+                        <small>Target: @Model.TodayTarget.ToString("N0")</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Production Status -->
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0">Production Status</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-6">
+                                <h4 class="text-primary">@Model.RunningBatches</h4>
+                                <p class="mb-0">Running Batches</p>
+                            </div>
+                            <div class="col-6">
+                                <h4 class="text-success">@Model.CompletedBatchesToday</h4>
+                                <p class="mb-0">Completed Today</p>
+                            </div>
+                        </div>
+                        <div class="progress mt-3" style="height: 25px;">
+                            <div class="progress-bar bg-success" role="progressbar"
+                                 style="width: @((Model.TodayTarget > 0 ? (Model.TodayOutput / Model.TodayTarget * 100) : 0).ToString("N1"))%">
+                                @((Model.TodayTarget > 0 ? (Model.TodayOutput / Model.TodayTarget * 100) : 0).ToString("N1"))%
+                            </div>
+                        </div>
+                        <small class="text-muted">Progress towards today's target</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header bg-success text-white">
+                        <h5 class="mb-0">Machine Status Distribution</h5>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="machineStatusChart" height="150"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Machine Efficiencies -->
+        @if (Model.MachineEfficiencies != null && Model.MachineEfficiencies.Any())
+        {
+            <div class="row mb-4">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header bg-info text-white">
+                            <h5 class="mb-0">Machine Efficiency Details</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Machine</th>
+                                            <th>Efficiency</th>
+                                            <th>OEE</th>
+                                            <th>Output</th>
+                                            <th>Downtime</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var machine in Model.MachineEfficiencies.Take(10))
+                                        {
+                                            var statusClass = machine.Status switch
+                                            {
+                                                "Excellent" => "success",
+                                                "Good" => "info",
+                                                "Average" => "warning",
+                                                _ => "danger"
+                                            };
+
+                                            <tr>
+                                                <td>@machine.MachineName</td>
+                                                <td>
+                                                    <div class="progress" style="height: 20px;">
+                                                        <div class="progress-bar bg-@statusClass" role="progressbar"
+                                                             style="width: @machine.EfficiencyPercentage%">
+                                                            @machine.EfficiencyPercentage.ToString("N1")%
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>@machine.OEE.ToString("N1")%</td>
+                                                <td>@machine.ActualOutput.ToString("N0") / @machine.PlannedOutput.ToString("N0")</td>
+                                                <td>@machine.TotalDowntimeMinutes min</td>
+                                                <td><span class="badge bg-@statusClass">@machine.Status</span></td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                            <a href="@Url.Action("MachineEfficiency", "Analytics")" class="btn btn-outline-info">
+                                View Detailed Report
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+        <!-- Quality Metrics -->
+        @if (Model.RecentQualityMetrics != null && Model.RecentQualityMetrics.Any())
+        {
+            <div class="row mb-4">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header bg-warning">
+                            <h5 class="mb-0">Quality Trends (Last 7 Days)</h5>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="qualityTrendsChart" height="80"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+
+    <!-- Quick Links -->
+    <div class="row">
+        <div class="col-md-3">
+            <a href="@Url.Action("ShiftPerformance", "Analytics")" class="btn btn-outline-primary w-100 mb-2">
+                <i class="bi bi-clock"></i> Shift Performance
+            </a>
+        </div>
+        <div class="col-md-3">
+            <a href="@Url.Action("MachineUtilization", "Analytics")" class="btn btn-outline-success w-100 mb-2">
+                <i class="bi bi-gear"></i> Machine Utilization
+            </a>
+        </div>
+        <div class="col-md-3">
+            <a href="@Url.Action("QualityAnalytics", "Analytics")" class="btn btn-outline-info w-100 mb-2">
+                <i class="bi bi-award"></i> Quality Analytics
+            </a>
+        </div>
+        <div class="col-md-3">
+            <a href="@Url.Action("WasteTracking", "Analytics")" class="btn btn-outline-warning w-100 mb-2">
+                <i class="bi bi-trash"></i> Waste Tracking
+            </a>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Machine Status Chart
+        @if (Model != null)
+        {
+            <text>
+            const machineCtx = document.getElementById('machineStatusChart').getContext('2d');
+            new Chart(machineCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Active', 'Idle'],
+                    datasets: [{
+                        data: [@Model.ActiveMachines, @(Model.TotalMachines - Model.ActiveMachines)],
+                        backgroundColor: ['#28a745', '#6c757d']
+                    }]
+                }
+            });
+            </text>
+
+            if (Model.RecentQualityMetrics != null && Model.RecentQualityMetrics.Any())
+            {
+                <text>
+                // Quality Trends Chart
+                const qualityCtx = document.getElementById('qualityTrendsChart').getContext('2d');
+                new Chart(qualityCtx, {
+                    type: 'line',
+                    data: {
+                        labels: [@Html.Raw(string.Join(",", Model.RecentQualityMetrics.Select(q => $"'{q.Date:MMM dd}'")))],
+                        datasets: [{
+                            label: 'Average Yield %',
+                            data: [@Html.Raw(string.Join(",", Model.RecentQualityMetrics.Select(q => q.AverageYieldPercentage)))],
+                            borderColor: '#ffc107',
+                            backgroundColor: 'rgba(255, 193, 7, 0.1)',
+                            tension: 0.4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: {
+                                beginAtZero: false,
+                                min: 70,
+                                max: 100
+                            }
+                        }
+                    }
+                });
+                </text>
+            }
+        }
+    </script>
+}

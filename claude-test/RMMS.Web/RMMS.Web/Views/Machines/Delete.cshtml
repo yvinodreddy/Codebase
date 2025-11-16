@@ -1,0 +1,79 @@
+@model RMMS.Models.Production.Machine
+@{
+    ViewData["Title"] = "Delete Machine";
+}
+
+<div class="container">
+    <h2 class="text-danger">
+        <i class="fas fa-trash"></i>
+        @ViewData["Title"]
+    </h2>
+    <hr />
+
+    <div class="alert alert-danger">
+        <h5><i class="fas fa-exclamation-triangle"></i> Confirm Deletion</h5>
+        <p>Are you sure you want to delete this machine?</p>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.MachineCode)</dt>
+                <dd class="col-sm-8"><strong>@Model.MachineCode</strong></dd>
+
+                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.MachineName)</dt>
+                <dd class="col-sm-8">@Model.MachineName</dd>
+
+                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.MachineType)</dt>
+                <dd class="col-sm-8">
+                    <span class="badge bg-secondary">
+                        <i class="fas @Model.TypeIcon"></i> @Model.MachineType
+                    </span>
+                </dd>
+
+                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Status)</dt>
+                <dd class="col-sm-8">
+                    <span class="badge @Model.StatusBadgeClass">
+                        <i class="fas @Model.StatusIcon"></i> @Model.Status
+                    </span>
+                </dd>
+
+                <dt class="col-sm-4">Capacity</dt>
+                <dd class="col-sm-8">@Model.CapacityDisplay</dd>
+
+                <dt class="col-sm-4">Location</dt>
+                <dd class="col-sm-8">@Model.Location</dd>
+
+                <dt class="col-sm-4">Manufacturer</dt>
+                <dd class="col-sm-8">@Model.Manufacturer</dd>
+
+                @if (Model.PurchasePrice.HasValue)
+                {
+                    <dt class="col-sm-4">Purchase Price</dt>
+                    <dd class="col-sm-8">₹@Model.PurchasePrice.Value.ToString("N2")</dd>
+                }
+
+                @if (Model.CurrentValue.HasValue)
+                {
+                    <dt class="col-sm-4">Current Value</dt>
+                    <dd class="col-sm-8">₹@Model.CurrentValue.Value.ToString("N2")</dd>
+                }
+
+                <dt class="col-sm-4">Running Hours</dt>
+                <dd class="col-sm-8">@Model.RunningHours.ToString("N0") hours</dd>
+            </dl>
+        </div>
+    </div>
+
+    <form asp-action="Delete" method="post" class="mt-3">
+        <input type="hidden" asp-for="Id" />
+        <div class="d-flex justify-content-between">
+            <a asp-action="Index" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i> Back to List
+            </a>
+            <button type="submit" class="btn btn-danger">
+                <i class="fas fa-trash"></i> Confirm Delete
+            </button>
+        </div>
+    </form>
+</div>

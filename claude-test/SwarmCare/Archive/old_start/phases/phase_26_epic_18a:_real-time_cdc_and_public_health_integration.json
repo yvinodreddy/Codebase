@@ -1,0 +1,31 @@
+{
+  "phase_id": 26,
+  "name": "Epic 18A: Real-time CDC & Public Health Integration",
+  "epic": "Epic 18A",
+  "story_points": 21,
+  "priority": "P0",
+  "dependencies": [
+    17
+  ],
+  "version": "v2.1",
+  "user_stories": [
+    {
+      "story_id": "18A.1",
+      "title": "CDC NNDSS Reportable Disease Automation",
+      "story_points": 8,
+      "priority": "P0"
+    },
+    {
+      "story_id": "18A.2",
+      "title": "Social Determinants of Health (SDOH) Data Integration",
+      "story_points": 8,
+      "priority": "P0"
+    },
+    {
+      "story_id": "18A.3",
+      "title": "CMS Quality Measure Auto-Reporting",
+      "story_points": 5,
+      "priority": "P0"
+    }
+  ]
+}

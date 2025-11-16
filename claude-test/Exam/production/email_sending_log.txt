@@ -1,0 +1,776 @@
+[2025-11-04 23:01:10] [INFO] 🔌 Testing connection to smtp.hostinger.com:465...
+[2025-11-04 23:01:20] [ERROR] ❌ SMTP connection test failed: Connection unexpectedly closed: timed out
+[2025-11-04 23:03:41] [INFO] ✅ Loaded 55 candidates from candidates.csv
+[2025-11-04 23:03:43] [INFO] 🔌 Testing connection to smtp.hostinger.com:465...
+[2025-11-04 23:03:56] [ERROR] ❌ SMTP connection test failed: Connection unexpectedly closed: timed out
+[2025-11-04 23:04:08] [INFO] 🔌 Testing connection to smtp.hostinger.com:587...
+[2025-11-04 23:04:08] [INFO] ✅ SMTP connection test successful!
+[2025-11-04 23:04:18] [INFO] ================================================================================
+[2025-11-04 23:04:18] [INFO] 🧪 SENDING TEST EMAIL
+[2025-11-04 23:04:18] [INFO] ================================================================================
+[2025-11-04 23:04:18] [INFO] 🔐 Starting TLS encryption...
+[2025-11-04 23:04:18] [INFO] 🔑 Logging in as careers@semanticdataservices.com...
+[2025-11-04 23:04:19] [INFO] ✅ Sent to: Test Candidate <vinodyellagonda@paragroup.com>
+[2025-11-04 23:04:19] [INFO] 
+[2025-11-04 23:04:19] [INFO] ✅ Test email sent successfully!
+[2025-11-04 23:04:19] [INFO] 📬 Check your inbox at: vinodyellagonda@paragroup.com
+[2025-11-04 23:04:19] [INFO] 
+[2025-11-04 23:04:19] [INFO] If the email looks good, run: python3 send_with_company_email.py --send-all
+[2025-11-04 23:04:25] [INFO] ================================================================================
+[2025-11-04 23:04:25] [INFO] 📧 STARTING AUTOMATED EMAIL CAMPAIGN
+[2025-11-04 23:04:25] [INFO] ================================================================================
+[2025-11-04 23:04:25] [INFO] ✅ Loaded 55 candidates from candidates.csv
+[2025-11-04 23:04:25] [INFO] 📊 Total candidates: 55
+[2025-11-04 23:04:25] [INFO] ✅ Already sent: 1
+[2025-11-04 23:04:25] [INFO] 📤 Pending to send: 55
+[2025-11-04 23:04:25] [INFO] 
+[2025-11-04 23:04:25] [INFO] 🔌 Connecting to smtp.hostinger.com:587...
+[2025-11-04 23:04:26] [INFO] 🔐 Starting TLS encryption...
+[2025-11-04 23:04:26] [INFO] 🔑 Logging in as careers@semanticdataservices.com...
+[2025-11-04 23:04:26] [INFO] ✅ SMTP connection established
+[2025-11-04 23:04:26] [INFO] 
+[2025-11-04 23:04:27] [INFO] ✅ Sent to: Anoushka Malik <anoushka22m@gmail.com>
+[2025-11-04 23:04:29] [INFO] ✅ Sent to: Abhishek Kumar Shukla <abhishekkumarshukla.official@gmail.com>
+[2025-11-04 23:04:32] [INFO] ✅ Sent to: Aayush Saini <ayushsaini2308@gmail.com>
+[2025-11-04 23:04:34] [INFO] ✅ Sent to: Aditya Anand <adidiwakar1316@gmail.com>
+[2025-11-04 23:04:36] [INFO] ✅ Sent to: Arshdeep Singh <as9.arshdeepsingh9@gmail.com>
+[2025-11-04 23:04:39] [INFO] ✅ Sent to: Aryan Sharma <aryan.sharma6428@gmail.com>
+[2025-11-04 23:04:41] [INFO] ✅ Sent to: Bhawna Parashar <parasharbhawna51@gmail.com>
+[2025-11-04 23:04:44] [INFO] ✅ Sent to: Harshita Khanijo <khanijoharshita@gmail.com>
+[2025-11-04 23:04:46] [INFO] ✅ Sent to: Jayaprakash Dirisala <jayprakashdirisala@gmail.com>
+[2025-11-04 23:04:49] [INFO] ✅ Sent to: Juturu Yaswanth Reddy <juturuyaswanthreddyreddy@gmail.com>
+[2025-11-04 23:04:49] [INFO] ⏸️  Batch complete (10/55). Waiting 60s...
+[2025-11-04 23:05:14] [INFO] ================================================================================
+[2025-11-04 23:05:14] [INFO] 📧 STARTING AUTOMATED EMAIL CAMPAIGN
+[2025-11-04 23:05:14] [INFO] ================================================================================
+[2025-11-04 23:05:14] [INFO] ✅ Loaded 55 candidates from candidates.csv
+[2025-11-04 23:05:14] [INFO] 📊 Total candidates: 55
+[2025-11-04 23:05:14] [INFO] ✅ Already sent: 11
+[2025-11-04 23:05:14] [INFO] 📤 Pending to send: 45
+[2025-11-04 23:05:14] [INFO] 
+[2025-11-04 23:05:14] [INFO] 🔌 Connecting to smtp.hostinger.com:587...
+[2025-11-04 23:05:15] [INFO] 🔐 Starting TLS encryption...
+[2025-11-04 23:05:15] [INFO] 🔑 Logging in as careers@semanticdataservices.com...
+[2025-11-04 23:05:15] [INFO] ✅ SMTP connection established
+[2025-11-04 23:05:15] [INFO] 
+[2025-11-04 23:05:16] [INFO] ✅ Sent to: Ketan Mittal <ketanmittal3000@gmail.com>
+[2025-11-04 23:05:19] [INFO] ✅ Sent to: Nageli Thirumala Naidu <nagelithirumalanaidu0@gmail.com>
+[2025-11-04 23:05:21] [INFO] ✅ Sent to: Nitin Johri <nitinjohri12@gmail.com>
+[2025-11-04 23:05:24] [INFO] ✅ Sent to: Rachita Kothiyal <rachitakothiyal4@gmail.com>
+[2025-11-04 23:05:26] [INFO] ✅ Sent to: Rishab Arora <rishab2104@gmail.com>
+[2025-11-04 23:05:29] [INFO] ✅ Sent to: Rohit Sharma <rohitsharma46100@gmail.com>
+[2025-11-04 23:05:31] [INFO] ✅ Sent to: Sangeeta Mittal <msangeeta2222@gmail.com>
+[2025-11-04 23:05:37] [INFO] ✅ Sent to: Sumi Tiwari <sumitiwari70@gmail.com>
+[2025-11-04 23:05:39] [INFO] ✅ Sent to: Suryansh Goyal <goyalsuryansh30@gmail.com>
+[2025-11-04 23:05:42] [INFO] ✅ Sent to: Swastik Bainsla <bainslaswastik@gmail.com>
+[2025-11-04 23:05:42] [INFO] ⏸️  Batch complete (10/45). Waiting 60s...
+[2025-11-04 23:05:55] [ERROR] ❌ FAILED to send to ketanmittal3000@gmail.com: (421, b'4.4.2 smtp.hostinger.com Error: timeout exceeded', 'careers@semanticdataservices.com')
+[2025-11-04 23:05:57] [ERROR] ❌ FAILED to send to nagelithirumalanaidu0@gmail.com: please run connect() first
+[2025-11-04 23:05:59] [ERROR] ❌ FAILED to send to nitinjohri12@gmail.com: please run connect() first
+[2025-11-04 23:06:01] [ERROR] ❌ FAILED to send to rachitakothiyal4@gmail.com: please run connect() first
+[2025-11-04 23:06:03] [ERROR] ❌ FAILED to send to rishab2104@gmail.com: please run connect() first
+[2025-11-04 23:06:05] [ERROR] ❌ FAILED to send to rohitsharma46100@gmail.com: please run connect() first
+[2025-11-04 23:06:10] [ERROR] ❌ FAILED to send to msangeeta2222@gmail.com: please run connect() first
+[2025-11-04 23:06:12] [ERROR] ❌ FAILED to send to sumitiwari70@gmail.com: please run connect() first
+[2025-11-04 23:06:14] [ERROR] ❌ FAILED to send to goyalsuryansh30@gmail.com: please run connect() first
+[2025-11-04 23:06:16] [ERROR] ❌ FAILED to send to bainslaswastik@gmail.com: please run connect() first
+[2025-11-04 23:06:16] [INFO] ⏸️  Batch complete (20/55). Waiting 60s...
+[2025-11-04 23:06:48] [ERROR] ❌ FAILED to send to umamahesh8838@gmail.com: (421, b'4.4.2 smtp.hostinger.com Error: timeout exceeded', 'careers@semanticdataservices.com')
+[2025-11-04 23:06:50] [ERROR] ❌ FAILED to send to visutiwari93@gmail.com: please run connect() first
+[2025-11-04 23:06:52] [ERROR] ❌ FAILED to send to anishdewat@gmail.com: please run connect() first
+[2025-11-04 23:06:54] [ERROR] ❌ FAILED to send to lakshaybedi19@gmail.com: please run connect() first
+[2025-11-04 23:06:56] [ERROR] ❌ FAILED to send to amardeepkr1962003@gmail.com: please run connect() first
+[2025-11-04 23:06:58] [ERROR] ❌ FAILED to send to batraa333@gmail.com: please run connect() first
+[2025-11-04 23:07:00] [ERROR] ❌ FAILED to send to romi.chauhan2275@gmail.com: please run connect() first
+[2025-11-04 23:07:02] [ERROR] ❌ FAILED to send to ayushibhatia2000@gmail.com: please run connect() first
+[2025-11-04 23:07:04] [ERROR] ❌ FAILED to send to chiragtaneja138@gmail.com: please run connect() first
+[2025-11-04 23:07:06] [ERROR] ❌ FAILED to send to deepaliverma.2604@gmail.com: please run connect() first
+[2025-11-04 23:07:06] [INFO] ⏸️  Batch complete (20/45). Waiting 60s...
+[2025-11-04 23:07:23] [ERROR] ❌ FAILED to send to umamahesh8838@gmail.com: please run connect() first
+[2025-11-04 23:07:25] [ERROR] ❌ FAILED to send to visutiwari93@gmail.com: please run connect() first
+[2025-11-04 23:07:27] [ERROR] ❌ FAILED to send to anishdewat@gmail.com: please run connect() first
+[2025-11-04 23:07:29] [ERROR] ❌ FAILED to send to lakshaybedi19@gmail.com: please run connect() first
+[2025-11-04 23:07:31] [ERROR] ❌ FAILED to send to amardeepkr1962003@gmail.com: please run connect() first
+[2025-11-04 23:07:33] [ERROR] ❌ FAILED to send to batraa333@gmail.com: please run connect() first
+[2025-11-04 23:07:35] [ERROR] ❌ FAILED to send to romi.chauhan2275@gmail.com: please run connect() first
+[2025-11-04 23:07:37] [ERROR] ❌ FAILED to send to ayushibhatia2000@gmail.com: please run connect() first
+[2025-11-04 23:07:39] [ERROR] ❌ FAILED to send to chiragtaneja138@gmail.com: please run connect() first
+[2025-11-04 23:07:41] [ERROR] ❌ FAILED to send to deepaliverma.2604@gmail.com: please run connect() first
+[2025-11-04 23:07:41] [INFO] ⏸️  Batch complete (30/55). Waiting 60s...
+[2025-11-04 23:08:13] [ERROR] ❌ FAILED to send to deepanshusatija06@gmail.com: please run connect() first
+[2025-11-04 23:08:15] [ERROR] ❌ FAILED to send to dhiraj9693279@gmail.com: please run connect() first
+[2025-11-04 23:08:17] [ERROR] ❌ FAILED to send to gauravmishra92812@gmail.com: please run connect() first
+[2025-11-04 23:08:19] [ERROR] ❌ FAILED to send to harshmalik00011@gmail.com: please run connect() first
+[2025-11-04 23:08:21] [ERROR] ❌ FAILED to send to janyapandey03636@gmail.com: please run connect() first
+[2025-11-04 23:08:23] [ERROR] ❌ FAILED to send to kartiksajwan105@gmail.com: please run connect() first
+[2025-11-04 23:08:25] [ERROR] ❌ FAILED to send to khushi.panwar989@gmail.com: please run connect() first
+[2025-11-04 23:08:27] [ERROR] ❌ FAILED to send to kratikajain8708@gmail.com: please run connect() first
+[2025-11-04 23:08:32] [ERROR] ❌ FAILED to send to jlakshita2002@gmail.com: please run connect() first
+[2025-11-04 23:08:34] [ERROR] ❌ FAILED to send to mahenoorashraf9934@gmail.com: please run connect() first
+[2025-11-04 23:08:34] [INFO] ⏸️  Batch complete (30/45). Waiting 60s...
+[2025-11-04 23:08:47] [ERROR] ❌ FAILED to send to deepanshusatija06@gmail.com: please run connect() first
+[2025-11-04 23:08:49] [ERROR] ❌ FAILED to send to dhiraj9693279@gmail.com: please run connect() first
+[2025-11-04 23:08:51] [ERROR] ❌ FAILED to send to gauravmishra92812@gmail.com: please run connect() first
+[2025-11-04 23:08:53] [ERROR] ❌ FAILED to send to harshmalik00011@gmail.com: please run connect() first
+[2025-11-04 23:08:55] [ERROR] ❌ FAILED to send to janyapandey03636@gmail.com: please run connect() first
+[2025-11-04 23:08:57] [ERROR] ❌ FAILED to send to kartiksajwan105@gmail.com: please run connect() first
+[2025-11-04 23:08:59] [ERROR] ❌ FAILED to send to khushi.panwar989@gmail.com: please run connect() first
+[2025-11-04 23:09:01] [ERROR] ❌ FAILED to send to kratikajain8708@gmail.com: please run connect() first
+[2025-11-04 23:09:03] [ERROR] ❌ FAILED to send to jlakshita2002@gmail.com: please run connect() first
+[2025-11-04 23:09:08] [ERROR] ❌ FAILED to send to mahenoorashraf9934@gmail.com: please run connect() first
+[2025-11-04 23:09:08] [INFO] ⏸️  Batch complete (40/55). Waiting 60s...
+[2025-11-04 23:09:37] [ERROR] ❌ FAILED to send to mayankrohilla301@gmail.com: please run connect() first
+[2025-11-04 23:09:39] [ERROR] ❌ FAILED to send to gerameghna@gmail.com: please run connect() first
+[2025-11-04 23:09:44] [ERROR] ❌ FAILED to send to mohdanasshaikh67@gmail.com: please run connect() first
+[2025-11-04 23:09:46] [ERROR] ❌ FAILED to send to dagarmohit94@gmail.com: please run connect() first
+[2025-11-04 23:09:48] [ERROR] ❌ FAILED to send to nipungoyal83909@gmail.com: please run connect() first
+[2025-11-04 23:09:50] [ERROR] ❌ FAILED to send to pooja.rajput62002@gmail.com: please run connect() first
+[2025-11-04 23:09:52] [ERROR] ❌ FAILED to send to sharmapriyam1608@gmail.com: please run connect() first
+[2025-11-04 23:09:54] [ERROR] ❌ FAILED to send to radhikaagarwal372@gmail.com: please run connect() first
+[2025-11-04 23:09:56] [ERROR] ❌ FAILED to send to phagnariya@gmail.com: please run connect() first
+[2025-11-04 23:09:58] [ERROR] ❌ FAILED to send to shivamverma.rhs@gmail.com: please run connect() first
+[2025-11-04 23:09:58] [INFO] ⏸️  Batch complete (40/45). Waiting 60s...
+[2025-11-04 23:10:12] [ERROR] ❌ FAILED to send to mayankrohilla301@gmail.com: please run connect() first
+[2025-11-04 23:10:14] [ERROR] ❌ FAILED to send to gerameghna@gmail.com: please run connect() first
+[2025-11-04 23:10:19] [ERROR] ❌ FAILED to send to mohdanasshaikh67@gmail.com: please run connect() first
+[2025-11-04 23:10:21] [ERROR] ❌ FAILED to send to dagarmohit94@gmail.com: please run connect() first
+[2025-11-04 23:10:23] [ERROR] ❌ FAILED to send to nipungoyal83909@gmail.com: please run connect() first
+[2025-11-04 23:10:25] [ERROR] ❌ FAILED to send to pooja.rajput62002@gmail.com: please run connect() first
+[2025-11-04 23:10:27] [ERROR] ❌ FAILED to send to sharmapriyam1608@gmail.com: please run connect() first
+[2025-11-04 23:10:29] [ERROR] ❌ FAILED to send to radhikaagarwal372@gmail.com: please run connect() first
+[2025-11-04 23:10:31] [ERROR] ❌ FAILED to send to phagnariya@gmail.com: please run connect() first
+[2025-11-04 23:10:33] [ERROR] ❌ FAILED to send to shivamverma.rhs@gmail.com: please run connect() first
+[2025-11-04 23:10:33] [INFO] ⏸️  Batch complete (50/55). Waiting 60s...
+[2025-11-04 23:11:05] [ERROR] ❌ FAILED to send to souradipbabay2000@gmail.com: please run connect() first
+[2025-11-04 23:11:07] [ERROR] ❌ FAILED to send to sumitkohar280@gmail.com: please run connect() first
+[2025-11-04 23:11:09] [ERROR] ❌ FAILED to send to thrishaboreda06@gmail.com: please run connect() first
+[2025-11-04 23:11:11] [ERROR] ❌ FAILED to send to uditashukla2003@gmail.com: please run connect() first
+[2025-11-04 23:11:13] [ERROR] ❌ FAILED to send to yashth19@gmail.com: please run connect() first
+[2025-11-04 23:11:39] [ERROR] ❌ FAILED to send to souradipbabay2000@gmail.com: please run connect() first
+[2025-11-04 23:11:41] [ERROR] ❌ FAILED to send to sumitkohar280@gmail.com: please run connect() first
+[2025-11-04 23:11:43] [ERROR] ❌ FAILED to send to thrishaboreda06@gmail.com: please run connect() first
+[2025-11-04 23:11:45] [ERROR] ❌ FAILED to send to uditashukla2003@gmail.com: please run connect() first
+[2025-11-04 23:11:47] [ERROR] ❌ FAILED to send to yashth19@gmail.com: please run connect() first
+[2025-11-04 23:11:53] [INFO] ================================================================================
+[2025-11-04 23:11:53] [INFO] 📧 STARTING AUTOMATED EMAIL CAMPAIGN
+[2025-11-04 23:11:53] [INFO] ================================================================================
+[2025-11-04 23:11:53] [INFO] ✅ Loaded 55 candidates from candidates.csv
+[2025-11-04 23:11:53] [INFO] 📊 Total candidates: 55
+[2025-11-04 23:11:53] [INFO] ✅ Already sent: 21
+[2025-11-04 23:11:53] [INFO] 📤 Pending to send: 35
+[2025-11-04 23:11:53] [INFO] 
+[2025-11-04 23:11:53] [INFO] 🔌 Connecting to smtp.hostinger.com:587...
+[2025-11-04 23:11:54] [INFO] 🔐 Starting TLS encryption...
+[2025-11-04 23:11:54] [INFO] 🔑 Logging in as careers@semanticdataservices.com...
+[2025-11-04 23:11:54] [INFO] ✅ SMTP connection established
+[2025-11-04 23:11:54] [INFO] 
+[2025-11-04 23:11:55] [INFO] ✅ Sent to: Uma Maheswara Reddy Molakala <umamahesh8838@gmail.com>
+[2025-11-04 23:11:57] [INFO] ✅ Sent to: Vishal Tiwari <visutiwari93@gmail.com>
+[2025-11-04 23:12:00] [INFO] ✅ Sent to: Anish Anish <anishdewat@gmail.com>
+[2025-11-04 23:15:24] [INFO] ================================================================================
+[2025-11-04 23:15:24] [INFO] 🧪 SENDING TEST EMAIL
+[2025-11-04 23:15:24] [INFO] ================================================================================
+[2025-11-04 23:15:24] [INFO] 🔐 Starting TLS encryption...
+[2025-11-04 23:15:25] [INFO] 🔑 Logging in as careers@semanticdataservices.com...
+[2025-11-04 23:15:25] [INFO] ✅ Sent to: Test Candidate <vinodyellagonda@paragroup.com>
+[2025-11-04 23:15:25] [INFO] 
+[2025-11-04 23:15:25] [INFO] ✅ Test email sent successfully!
+[2025-11-04 23:15:25] [INFO] 📬 Check your inbox at: vinodyellagonda@paragroup.com
+[2025-11-04 23:15:25] [INFO] 
+[2025-11-04 23:15:25] [INFO] If the email looks good, run: python3 send_with_company_email.py --send-all
+[2025-11-04 23:18:19] [INFO] ================================================================================
+[2025-11-04 23:18:19] [INFO] 🧪 SENDING TEST EMAIL
+[2025-11-04 23:18:19] [INFO] ================================================================================
+[2025-11-04 23:18:19] [INFO] 🔐 Starting TLS encryption...
+[2025-11-04 23:18:19] [INFO] 🔑 Logging in as careers@semanticdataservices.com...
+[2025-11-04 23:18:20] [INFO] ✅ Sent to: Test Candidate <vinodyellagonda@paragroup.com>
+[2025-11-04 23:18:20] [INFO] 
+[2025-11-04 23:18:20] [INFO] ✅ Test email sent successfully!
+[2025-11-04 23:18:20] [INFO] 📬 Check your inbox at: vinodyellagonda@paragroup.com
+[2025-11-04 23:18:20] [INFO] 
+[2025-11-04 23:18:20] [INFO] If the email looks good, run: python3 send_with_company_email.py --send-all
+[2025-11-04 23:22:09] [INFO] ================================================================================
+[2025-11-04 23:22:09] [INFO] 🧪 SENDING TEST EMAIL
+[2025-11-04 23:22:09] [INFO] ================================================================================
+[2025-11-04 23:22:10] [INFO] 🔐 Starting TLS encryption...
+[2025-11-04 23:22:10] [INFO] 🔑 Logging in as careers@semanticdataservices.com...
+[2025-11-04 23:22:11] [INFO] ✅ Sent to: Test Candidate <vinodyellagonda@paragroup.com>
+[2025-11-04 23:22:11] [INFO] 
+[2025-11-04 23:22:11] [INFO] ✅ Test email sent successfully!
+[2025-11-04 23:22:11] [INFO] 📬 Check your inbox at: vinodyellagonda@paragroup.com
+[2025-11-04 23:22:11] [INFO] 
+[2025-11-04 23:22:11] [INFO] If the email looks good, run: python3 send_with_company_email.py --send-all
+[2025-11-04 23:24:19] [INFO] ================================================================================
+[2025-11-04 23:24:19] [INFO] 🧪 SENDING TEST EMAIL
+[2025-11-04 23:24:19] [INFO] ================================================================================
+[2025-11-04 23:24:19] [INFO] 🔐 Starting TLS encryption...
+[2025-11-04 23:24:19] [INFO] 🔑 Logging in as careers@semanticdataservices.com...
+[2025-11-04 23:24:20] [INFO] ✅ Sent to: Test Candidate <vinodyellagonda@paragroup.com>
+[2025-11-04 23:24:20] [INFO] 
+[2025-11-04 23:24:20] [INFO] ✅ Test email sent successfully!
+[2025-11-04 23:24:20] [INFO] 📬 Check your inbox at: vinodyellagonda@paragroup.com
+[2025-11-04 23:24:20] [INFO] 
+[2025-11-04 23:24:20] [INFO] If the email looks good, run: python3 send_with_company_email.py --send-all
+[2025-11-04 23:25:50] [INFO] ================================================================================
+[2025-11-04 23:25:50] [INFO] 📧 STARTING AUTOMATED EMAIL CAMPAIGN
+[2025-11-04 23:25:50] [INFO] ================================================================================
+[2025-11-04 23:25:50] [INFO] ✅ Loaded 55 candidates from candidates.csv
+[2025-11-04 23:25:50] [INFO] 📊 Total candidates: 55
+[2025-11-04 23:25:50] [INFO] ✅ Already sent: 24
+[2025-11-04 23:25:50] [INFO] 📤 Pending to send: 32
+[2025-11-04 23:25:50] [INFO] 
+[2025-11-04 23:25:50] [INFO] 🔌 Connecting to smtp.hostinger.com:587...
+[2025-11-04 23:25:50] [INFO] 🔐 Starting TLS encryption...
+[2025-11-04 23:25:50] [INFO] 🔑 Logging in as careers@semanticdataservices.com...
+[2025-11-04 23:25:50] [INFO] ✅ SMTP connection established
+[2025-11-04 23:25:50] [INFO] 
+[2025-11-04 23:25:51] [INFO] ✅ Sent to: Lakshay Bedi <lakshaybedi19@gmail.com>
+[2025-11-04 23:25:53] [INFO] ✅ Sent to: Amardeep Kumar <amardeepkr1962003@gmail.com>
+[2025-11-04 23:25:56] [INFO] ✅ Sent to: Ansh Batra <batraa333@gmail.com>
+[2025-11-04 23:25:58] [INFO] ✅ Sent to: Aryan Chauhan <romi.chauhan2275@gmail.com>
+[2025-11-04 23:26:01] [INFO] ✅ Sent to: Ayushi Bhatia <ayushibhatia2000@gmail.com>
+[2025-11-04 23:26:03] [INFO] ✅ Sent to: Chirag Taneja <chiragtaneja138@gmail.com>
+[2025-11-04 23:26:06] [INFO] ✅ Sent to: Deepali Verma <deepaliverma.2604@gmail.com>
+[2025-11-04 23:26:08] [INFO] ✅ Sent to: Deepanshu Satija <deepanshusatija06@gmail.com>
+[2025-11-04 23:26:11] [INFO] ✅ Sent to: Dhiraj Kumar <dhiraj9693279@gmail.com>
+[2025-11-04 23:26:16] [INFO] ✅ Sent to: Gaurav Mishra <gauravmishra92812@gmail.com>
+[2025-11-04 23:26:16] [INFO] ⏸️  Batch complete (10/32). Waiting 60s...
+[2025-11-04 23:27:20] [INFO] 🔌 Reconnecting to smtp.hostinger.com:587...
+[2025-11-04 23:27:21] [INFO] ✅ Reconnected successfully
+[2025-11-04 23:27:22] [INFO] ✅ Sent to: Harsh Malik <harshmalik00011@gmail.com>
+[2025-11-04 23:27:28] [INFO] ✅ Sent to: Janya Pandey <janyapandey03636@gmail.com>
+[2025-11-04 23:27:30] [INFO] ✅ Sent to: Kartik Sajwan <kartiksajwan105@gmail.com>
+[2025-11-04 23:27:33] [INFO] ✅ Sent to: Khushi Panwar <khushi.panwar989@gmail.com>
+[2025-11-04 23:27:35] [INFO] ✅ Sent to: Kratika Jain <kratikajain8708@gmail.com>
+[2025-11-04 23:27:37] [INFO] ✅ Sent to: Lakshita Joshi <jlakshita2002@gmail.com>
+[2025-11-04 23:27:40] [INFO] ✅ Sent to: Mahenoor Ashraf <mahenoorashraf9934@gmail.com>
+[2025-11-04 23:27:42] [INFO] ✅ Sent to: Mayank <mayankrohilla301@gmail.com>
+[2025-11-04 23:27:45] [INFO] ✅ Sent to: Meghna Gera <gerameghna@gmail.com>
+[2025-11-04 23:27:47] [INFO] ✅ Sent to: Mohd Anas <mohdanasshaikh67@gmail.com>
+[2025-11-04 23:27:47] [INFO] ⏸️  Batch complete (20/32). Waiting 60s...
+[2025-11-04 23:28:24] [INFO] ================================================================================
+[2025-11-04 23:28:24] [INFO] 🧪 SENDING TEST EMAIL
+[2025-11-04 23:28:24] [INFO] ================================================================================
+[2025-11-04 23:28:24] [INFO] 🔐 Starting TLS encryption...
+[2025-11-04 23:28:25] [INFO] 🔑 Logging in as careers@semanticdataservices.com...
+[2025-11-04 23:28:25] [INFO] ✅ Sent to: Test Candidate <yvinodreddy@gmail.com>
+[2025-11-04 23:28:25] [INFO] 
+[2025-11-04 23:28:25] [INFO] ✅ Test email sent successfully!
+[2025-11-04 23:28:25] [INFO] 📬 Check your inbox at: yvinodreddy@gmail.com
+[2025-11-04 23:28:25] [INFO] 
+[2025-11-04 23:28:25] [INFO] If the email looks good, run: python3 send_with_company_email.py --send-all
+[2025-11-04 23:29:42] [INFO] ================================================================================
+[2025-11-04 23:29:42] [INFO] 📧 STARTING AUTOMATED EMAIL CAMPAIGN
+[2025-11-04 23:29:42] [INFO] ================================================================================
+[2025-11-04 23:29:42] [INFO] ✅ Loaded 55 candidates from candidates.csv
+[2025-11-04 23:29:42] [INFO] 📊 Total candidates: 55
+[2025-11-04 23:29:42] [INFO] ✅ Already sent: 45
+[2025-11-04 23:29:42] [INFO] 📤 Pending to send: 12
+[2025-11-04 23:29:42] [INFO] 
+[2025-11-04 23:29:42] [INFO] 🔌 Connecting to smtp.hostinger.com:587...
+[2025-11-04 23:29:43] [INFO] 🔐 Starting TLS encryption...
+[2025-11-04 23:29:43] [INFO] 🔑 Logging in as careers@semanticdataservices.com...
+[2025-11-04 23:29:43] [INFO] ✅ SMTP connection established
+[2025-11-04 23:29:43] [INFO] 
+[2025-11-04 23:29:44] [INFO] ✅ Sent to: Mohit Dagar <dagarmohit94@gmail.com>
+[2025-11-04 23:29:46] [INFO] ✅ Sent to: Nipun Goyal <nipungoyal83909@gmail.com>
+[2025-11-04 23:29:52] [INFO] ✅ Sent to: Pooja Rajput <pooja.rajput62002@gmail.com>
+[2025-11-04 23:29:54] [INFO] ✅ Sent to: Priyam Sharma <sharmapriyam1608@gmail.com>
+[2025-11-04 23:29:57] [INFO] ✅ Sent to: Radhika Agarwal <radhikaagarwal372@gmail.com>
+[2025-11-04 23:29:59] [INFO] ✅ Sent to: Riya Phagna <phagnariya@gmail.com>
+[2025-11-04 23:30:02] [INFO] ✅ Sent to: Shivam Verma <shivamverma.rhs@gmail.com>
+[2025-11-04 23:30:04] [INFO] ✅ Sent to: Souradip Biswas <souradipbabay2000@gmail.com>
+[2025-11-04 23:30:07] [INFO] ✅ Sent to: Sumit <sumitkohar280@gmail.com>
+[2025-11-04 23:30:10] [INFO] ================================================================================
+[2025-11-04 23:30:10] [INFO] 📧 STARTING AUTOMATED EMAIL CAMPAIGN
+[2025-11-04 23:30:10] [INFO] ================================================================================
+[2025-11-04 23:30:10] [INFO] ✅ Loaded 55 candidates from candidates.csv
+[2025-11-04 23:30:10] [INFO] 📊 Total candidates: 55
+[2025-11-04 23:30:10] [INFO] ✅ Already sent: 54
+[2025-11-04 23:30:10] [INFO] 📤 Pending to send: 3
+[2025-11-04 23:30:10] [INFO] 
+[2025-11-04 23:30:10] [INFO] 🔌 Connecting to smtp.hostinger.com:587...
+[2025-11-04 23:30:10] [INFO] 🔐 Starting TLS encryption...
+[2025-11-04 23:30:11] [INFO] 🔑 Logging in as careers@semanticdataservices.com...
+[2025-11-04 23:30:11] [INFO] ✅ SMTP connection established
+[2025-11-04 23:30:11] [INFO] 
+[2025-11-04 23:30:11] [INFO] ✅ Sent to: Thrisha Boreda <thrishaboreda06@gmail.com>
+[2025-11-04 23:30:14] [INFO] ✅ Sent to: Udita Shukla <uditashukla2003@gmail.com>
+[2025-11-04 23:30:16] [INFO] ✅ Sent to: Yash Thakur <yashth19@gmail.com>
+[2025-11-04 23:30:18] [INFO] 
+[2025-11-04 23:30:18] [INFO] ================================================================================
+[2025-11-04 23:30:18] [INFO] 📧 EMAIL CAMPAIGN COMPLETE
+[2025-11-04 23:30:18] [INFO] ================================================================================
+[2025-11-04 23:30:18] [INFO] ✅ Successfully sent: 3
+[2025-11-04 23:30:18] [INFO] ❌ Failed: 0
+[2025-11-04 23:30:18] [INFO] 📊 Total processed: 3
+[2025-11-04 23:30:18] [INFO] 
+[2025-11-04 23:30:18] [INFO] 📝 Full log saved to: email_sending_log.txt
+[2025-11-04 23:30:18] [INFO] ✅ Sent emails log: sent_emails.txt
+[2025-11-04 23:34:53] [INFO] ================================================================================
+[2025-11-04 23:34:53] [INFO] 📧 STARTING AUTOMATED EMAIL CAMPAIGN
+[2025-11-04 23:34:53] [INFO] ================================================================================
+[2025-11-04 23:34:53] [INFO] ✅ Loaded 55 candidates from candidates.csv
+[2025-11-04 23:34:53] [INFO] 📊 Total candidates: 55
+[2025-11-04 23:34:53] [INFO] ✅ Already sent: 0
+[2025-11-04 23:34:53] [INFO] 📤 Pending to send: 55
+[2025-11-04 23:34:53] [INFO] 
+[2025-11-04 23:34:53] [INFO] 🔌 Connecting to smtp.hostinger.com:587...
+[2025-11-04 23:34:53] [INFO] 🔐 Starting TLS encryption...
+[2025-11-04 23:34:53] [INFO] 🔑 Logging in as careers@semanticdataservices.com...
+[2025-11-04 23:34:53] [INFO] ✅ SMTP connection established
+[2025-11-04 23:34:53] [INFO] 
+[2025-11-04 23:34:54] [INFO] ✅ Sent to: Anoushka Malik <anoushka22m@gmail.com>
+[2025-11-04 23:34:56] [INFO] ✅ Sent to: Abhishek Kumar Shukla <abhishekkumarshukla.official@gmail.com>
+[2025-11-04 23:35:12] [ERROR] ❌ FAILED to send to ayushsaini2308@gmail.com: Connection unexpectedly closed: The read operation timed out
+[2025-11-04 23:35:14] [ERROR] ❌ FAILED to send to adidiwakar1316@gmail.com: please run connect() first
+[2025-11-04 23:35:16] [ERROR] ❌ FAILED to send to as9.arshdeepsingh9@gmail.com: please run connect() first
+[2025-11-04 23:35:18] [ERROR] ❌ FAILED to send to aryan.sharma6428@gmail.com: please run connect() first
+[2025-11-04 23:35:20] [ERROR] ❌ FAILED to send to parasharbhawna51@gmail.com: please run connect() first
+[2025-11-04 23:35:22] [ERROR] ❌ FAILED to send to khanijoharshita@gmail.com: please run connect() first
+[2025-11-04 23:35:24] [ERROR] ❌ FAILED to send to jayprakashdirisala@gmail.com: please run connect() first
+[2025-11-04 23:35:26] [ERROR] ❌ FAILED to send to juturuyaswanthreddyreddy@gmail.com: please run connect() first
+[2025-11-04 23:35:26] [INFO] ⏸️  Batch complete (10/55). Waiting 60s...
+[2025-11-04 23:36:32] [INFO] 🔌 Reconnecting to smtp.hostinger.com:587...
+[2025-11-04 23:36:33] [INFO] ✅ Reconnected successfully
+[2025-11-04 23:36:34] [INFO] ✅ Sent to: Ketan Mittal <ketanmittal3000@gmail.com>
+[2025-11-04 23:36:36] [INFO] ✅ Sent to: Nageli Thirumala Naidu <nagelithirumalanaidu0@gmail.com>
+[2025-11-04 23:36:39] [INFO] ✅ Sent to: Nitin Johri <nitinjohri12@gmail.com>
+[2025-11-04 23:36:41] [INFO] ✅ Sent to: Rachita Kothiyal <rachitakothiyal4@gmail.com>
+[2025-11-04 23:36:44] [INFO] ✅ Sent to: Rishab Arora <rishab2104@gmail.com>
+[2025-11-04 23:36:46] [INFO] ✅ Sent to: Rohit Sharma <rohitsharma46100@gmail.com>
+[2025-11-04 23:36:48] [INFO] ✅ Sent to: Sangeeta Mittal <msangeeta2222@gmail.com>
+[2025-11-04 23:36:51] [INFO] ✅ Sent to: Sumi Tiwari <sumitiwari70@gmail.com>
+[2025-11-04 23:36:56] [INFO] ✅ Sent to: Suryansh Goyal <goyalsuryansh30@gmail.com>
+[2025-11-04 23:36:58] [INFO] ✅ Sent to: Swastik Bainsla <bainslaswastik@gmail.com>
+[2025-11-04 23:36:58] [INFO] ⏸️  Batch complete (20/55). Waiting 60s...
+[2025-11-04 23:38:02] [INFO] 🔌 Reconnecting to smtp.hostinger.com:587...
+[2025-11-04 23:38:03] [INFO] ✅ Reconnected successfully
+[2025-11-04 23:38:03] [INFO] ✅ Sent to: Uma Maheswara Reddy Molakala <umamahesh8838@gmail.com>
+[2025-11-04 23:38:08] [INFO] ✅ Sent to: Vishal Tiwari <visutiwari93@gmail.com>
+[2025-11-04 23:38:11] [INFO] ✅ Sent to: Anish Anish <anishdewat@gmail.com>
+[2025-11-04 23:38:13] [INFO] ✅ Sent to: Lakshay Bedi <lakshaybedi19@gmail.com>
+[2025-11-04 23:38:16] [INFO] ✅ Sent to: Amardeep Kumar <amardeepkr1962003@gmail.com>
+[2025-11-04 23:38:28] [ERROR] ❌ FAILED to send to batraa333@gmail.com: Connection unexpectedly closed: The read operation timed out
+[2025-11-04 23:38:30] [ERROR] ❌ FAILED to send to romi.chauhan2275@gmail.com: please run connect() first
+[2025-11-04 23:38:32] [ERROR] ❌ FAILED to send to ayushibhatia2000@gmail.com: please run connect() first
+[2025-11-04 23:38:34] [ERROR] ❌ FAILED to send to chiragtaneja138@gmail.com: please run connect() first
+[2025-11-04 23:38:36] [ERROR] ❌ FAILED to send to deepaliverma.2604@gmail.com: please run connect() first
+[2025-11-04 23:38:36] [INFO] ⏸️  Batch complete (30/55). Waiting 60s...
+[2025-11-04 23:39:43] [INFO] 🔌 Reconnecting to smtp.hostinger.com:587...
+[2025-11-04 23:39:43] [INFO] ✅ Reconnected successfully
+[2025-11-04 23:39:44] [INFO] ✅ Sent to: Deepanshu Satija <deepanshusatija06@gmail.com>
+[2025-11-04 23:39:46] [INFO] ✅ Sent to: Dhiraj Kumar <dhiraj9693279@gmail.com>
+[2025-11-04 23:39:49] [INFO] ✅ Sent to: Gaurav Mishra <gauravmishra92812@gmail.com>
+[2025-11-04 23:39:54] [INFO] ✅ Sent to: Harsh Malik <harshmalik00011@gmail.com>
+[2025-11-04 23:39:57] [INFO] ✅ Sent to: Janya Pandey <janyapandey03636@gmail.com>
+[2025-11-04 23:39:59] [INFO] ✅ Sent to: Kartik Sajwan <kartiksajwan105@gmail.com>
+[2025-11-04 23:40:02] [INFO] ✅ Sent to: Khushi Panwar <khushi.panwar989@gmail.com>
+[2025-11-04 23:40:04] [INFO] ✅ Sent to: Kratika Jain <kratikajain8708@gmail.com>
+[2025-11-04 23:40:07] [INFO] ✅ Sent to: Lakshita Joshi <jlakshita2002@gmail.com>
+[2025-11-04 23:40:09] [INFO] ✅ Sent to: Mahenoor Ashraf <mahenoorashraf9934@gmail.com>
+[2025-11-04 23:40:09] [INFO] ⏸️  Batch complete (40/55). Waiting 60s...
+[2025-11-04 23:41:16] [INFO] 🔌 Reconnecting to smtp.hostinger.com:587...
+[2025-11-04 23:41:17] [INFO] ✅ Reconnected successfully
+[2025-11-04 23:41:17] [INFO] ✅ Sent to: Mayank <mayankrohilla301@gmail.com>
+[2025-11-04 23:41:20] [INFO] ✅ Sent to: Meghna Gera <gerameghna@gmail.com>
+[2025-11-04 23:41:22] [INFO] ✅ Sent to: Mohd Anas <mohdanasshaikh67@gmail.com>
+[2025-11-04 23:41:25] [INFO] ✅ Sent to: Mohit Dagar <dagarmohit94@gmail.com>
+[2025-11-04 23:41:28] [INFO] ✅ Sent to: Nipun Goyal <nipungoyal83909@gmail.com>
+[2025-11-04 23:41:30] [INFO] ✅ Sent to: Pooja Rajput <pooja.rajput62002@gmail.com>
+[2025-11-04 23:41:33] [INFO] ✅ Sent to: Priyam Sharma <sharmapriyam1608@gmail.com>
+[2025-11-04 23:41:35] [INFO] ✅ Sent to: Radhika Agarwal <radhikaagarwal372@gmail.com>
+[2025-11-04 23:41:41] [INFO] ✅ Sent to: Riya Phagna <phagnariya@gmail.com>
+[2025-11-04 23:41:44] [INFO] ✅ Sent to: Shivam Verma <shivamverma.rhs@gmail.com>
+[2025-11-04 23:41:44] [INFO] ⏸️  Batch complete (50/55). Waiting 60s...
+[2025-11-04 23:42:47] [INFO] 🔌 Reconnecting to smtp.hostinger.com:587...
+[2025-11-04 23:42:51] [INFO] ✅ Reconnected successfully
+[2025-11-04 23:42:51] [INFO] ✅ Sent to: Souradip Biswas <souradipbabay2000@gmail.com>
+[2025-11-04 23:42:54] [INFO] ✅ Sent to: Sumit <sumitkohar280@gmail.com>
+[2025-11-04 23:42:56] [INFO] ✅ Sent to: Thrisha Boreda <thrishaboreda06@gmail.com>
+[2025-11-04 23:42:59] [INFO] ✅ Sent to: Udita Shukla <uditashukla2003@gmail.com>
+[2025-11-04 23:43:01] [INFO] ✅ Sent to: Yash Thakur <yashth19@gmail.com>
+[2025-11-04 23:43:03] [INFO] 
+[2025-11-04 23:43:03] [INFO] ================================================================================
+[2025-11-04 23:43:03] [INFO] 📧 EMAIL CAMPAIGN COMPLETE
+[2025-11-04 23:43:03] [INFO] ================================================================================
+[2025-11-04 23:43:03] [INFO] ✅ Successfully sent: 42
+[2025-11-04 23:43:03] [INFO] ❌ Failed: 13
+[2025-11-04 23:43:03] [INFO] 📊 Total processed: 55
+[2025-11-04 23:43:03] [INFO] 
+[2025-11-04 23:43:03] [INFO] 📝 Full log saved to: email_sending_log.txt
+[2025-11-04 23:43:03] [INFO] ✅ Sent emails log: sent_emails.txt
+[2025-11-04 23:43:39] [INFO] ================================================================================
+[2025-11-04 23:43:39] [INFO] 📧 STARTING AUTOMATED EMAIL CAMPAIGN
+[2025-11-04 23:43:39] [INFO] ================================================================================
+[2025-11-04 23:43:39] [INFO] ✅ Loaded 55 candidates from candidates.csv
+[2025-11-04 23:43:39] [INFO] 📊 Total candidates: 55
+[2025-11-04 23:43:39] [INFO] ✅ Already sent: 42
+[2025-11-04 23:43:39] [INFO] 📤 Pending to send: 13
+[2025-11-04 23:43:39] [INFO] 
+[2025-11-04 23:43:39] [INFO] 🔌 Connecting to smtp.hostinger.com:587...
+[2025-11-04 23:43:40] [INFO] 🔐 Starting TLS encryption...
+[2025-11-04 23:43:40] [INFO] 🔑 Logging in as careers@semanticdataservices.com...
+[2025-11-04 23:43:40] [INFO] ✅ SMTP connection established
+[2025-11-04 23:43:40] [INFO] 
+[2025-11-04 23:43:41] [INFO] ✅ Sent to: Aayush Saini <ayushsaini2308@gmail.com>
+[2025-11-04 23:43:43] [INFO] ✅ Sent to: Aditya Anand <adidiwakar1316@gmail.com>
+[2025-11-04 23:43:55] [ERROR] ❌ FAILED to send to as9.arshdeepsingh9@gmail.com: Connection unexpectedly closed: The read operation timed out
+[2025-11-04 23:43:57] [ERROR] ❌ FAILED to send to aryan.sharma6428@gmail.com: please run connect() first
+[2025-11-04 23:44:02] [ERROR] ❌ FAILED to send to parasharbhawna51@gmail.com: please run connect() first
+[2025-11-04 23:44:04] [ERROR] ❌ FAILED to send to khanijoharshita@gmail.com: please run connect() first
+[2025-11-04 23:44:06] [ERROR] ❌ FAILED to send to jayprakashdirisala@gmail.com: please run connect() first
+[2025-11-04 23:44:08] [ERROR] ❌ FAILED to send to juturuyaswanthreddyreddy@gmail.com: please run connect() first
+[2025-11-04 23:44:10] [ERROR] ❌ FAILED to send to batraa333@gmail.com: please run connect() first
+[2025-11-04 23:44:12] [ERROR] ❌ FAILED to send to romi.chauhan2275@gmail.com: please run connect() first
+[2025-11-04 23:44:12] [INFO] ⏸️  Batch complete (10/13). Waiting 60s...
+[2025-11-04 23:45:18] [INFO] 🔌 Reconnecting to smtp.hostinger.com:587...
+[2025-11-04 23:45:19] [INFO] ✅ Reconnected successfully
+[2025-11-04 23:45:20] [INFO] ✅ Sent to: Ayushi Bhatia <ayushibhatia2000@gmail.com>
+[2025-11-04 23:45:22] [INFO] ✅ Sent to: Chirag Taneja <chiragtaneja138@gmail.com>
+[2025-11-04 23:45:25] [INFO] ✅ Sent to: Deepali Verma <deepaliverma.2604@gmail.com>
+[2025-11-04 23:45:27] [INFO] 
+[2025-11-04 23:45:27] [INFO] ================================================================================
+[2025-11-04 23:45:27] [INFO] 📧 EMAIL CAMPAIGN COMPLETE
+[2025-11-04 23:45:27] [INFO] ================================================================================
+[2025-11-04 23:45:27] [INFO] ✅ Successfully sent: 5
+[2025-11-04 23:45:27] [INFO] ❌ Failed: 8
+[2025-11-04 23:45:27] [INFO] 📊 Total processed: 13
+[2025-11-04 23:45:27] [INFO] 
+[2025-11-04 23:45:27] [INFO] 📝 Full log saved to: email_sending_log.txt
+[2025-11-04 23:45:27] [INFO] ✅ Sent emails log: sent_emails.txt
+[2025-11-04 23:46:12] [INFO] ================================================================================
+[2025-11-04 23:46:12] [INFO] 📧 STARTING AUTOMATED EMAIL CAMPAIGN
+[2025-11-04 23:46:12] [INFO] ================================================================================
+[2025-11-04 23:46:12] [INFO] ✅ Loaded 55 candidates from candidates.csv
+[2025-11-04 23:46:12] [INFO] 📊 Total candidates: 55
+[2025-11-04 23:46:12] [INFO] ✅ Already sent: 47
+[2025-11-04 23:46:12] [INFO] 📤 Pending to send: 8
+[2025-11-04 23:46:12] [INFO] 
+[2025-11-04 23:46:12] [INFO] 🔌 Connecting to smtp.hostinger.com:587...
+[2025-11-04 23:46:12] [INFO] 🔐 Starting TLS encryption...
+[2025-11-04 23:46:13] [INFO] 🔑 Logging in as careers@semanticdataservices.com...
+[2025-11-04 23:46:13] [INFO] ✅ SMTP connection established
+[2025-11-04 23:46:13] [INFO] 
+[2025-11-04 23:46:13] [INFO] ✅ Sent to: Arshdeep Singh <as9.arshdeepsingh9@gmail.com>
+[2025-11-04 23:46:16] [ERROR] ❌ FAILED to send to aryan.sharma6428@gmail.com: (451, b'4.7.1 Ratelimit "hostinger_out_ratelimit" exceeded')
+[2025-11-04 23:46:18] [ERROR] ❌ FAILED to send to parasharbhawna51@gmail.com: (451, b'4.7.1 Ratelimit "hostinger_out_ratelimit" exceeded')
+[2025-11-04 23:46:18] [INFO] 🔄 Multiple failures detected - reconnecting...
+[2025-11-04 23:46:22] [INFO] ✅ Reconnected after failures
+[2025-11-04 23:46:25] [ERROR] ❌ FAILED to send to khanijoharshita@gmail.com: (451, b'4.7.1 Ratelimit "hostinger_out_ratelimit" exceeded')
+[2025-11-04 23:46:27] [ERROR] ❌ FAILED to send to jayprakashdirisala@gmail.com: (451, b'4.7.1 Ratelimit "hostinger_out_ratelimit" exceeded')
+[2025-11-04 23:46:27] [INFO] 🔄 Multiple failures detected - reconnecting...
+[2025-11-04 23:46:29] [INFO] ✅ Reconnected after failures
+[2025-11-04 23:46:31] [ERROR] ❌ FAILED to send to juturuyaswanthreddyreddy@gmail.com: (451, b'4.7.1 Ratelimit "hostinger_out_ratelimit" exceeded')
+[2025-11-04 23:46:34] [ERROR] ❌ FAILED to send to batraa333@gmail.com: (451, b'4.7.1 Ratelimit "hostinger_out_ratelimit" exceeded')
+[2025-11-04 23:46:34] [INFO] 🔄 Multiple failures detected - reconnecting...
+[2025-11-04 23:46:35] [INFO] ✅ Reconnected after failures
+[2025-11-04 23:46:37] [ERROR] ❌ FAILED to send to romi.chauhan2275@gmail.com: (451, b'4.7.1 Ratelimit "hostinger_out_ratelimit" exceeded')
+[2025-11-04 23:46:39] [INFO] 
+[2025-11-04 23:46:39] [INFO] ================================================================================
+[2025-11-04 23:46:39] [INFO] 📧 EMAIL CAMPAIGN COMPLETE
+[2025-11-04 23:46:39] [INFO] ================================================================================
+[2025-11-04 23:46:39] [INFO] ✅ Successfully sent: 1
+[2025-11-04 23:46:39] [INFO] ❌ Failed: 7
+[2025-11-04 23:46:39] [INFO] 📊 Total processed: 8
+[2025-11-04 23:46:39] [INFO] 
+[2025-11-04 23:46:39] [INFO] 📝 Full log saved to: email_sending_log.txt
+[2025-11-04 23:46:39] [INFO] ✅ Sent emails log: sent_emails.txt
+[2025-11-04 23:48:26] [INFO] ================================================================================
+[2025-11-04 23:48:26] [INFO] 📧 STARTING AUTOMATED EMAIL CAMPAIGN
+[2025-11-04 23:48:26] [INFO] ================================================================================
+[2025-11-04 23:48:26] [INFO] ✅ Loaded 55 candidates from candidates.csv
+[2025-11-04 23:48:26] [INFO] 📊 Total candidates: 55
+[2025-11-04 23:48:26] [INFO] ✅ Already sent: 48
+[2025-11-04 23:48:26] [INFO] 📤 Pending to send: 7
+[2025-11-04 23:48:26] [INFO] 
+[2025-11-04 23:48:26] [INFO] 🔌 Connecting to smtp.hostinger.com:587...
+[2025-11-04 23:48:26] [INFO] 🔐 Starting TLS encryption...
+[2025-11-04 23:48:27] [INFO] 🔑 Logging in as careers@semanticdataservices.com...
+[2025-11-04 23:48:27] [INFO] ✅ SMTP connection established
+[2025-11-04 23:48:27] [INFO] 
+[2025-11-04 23:48:37] [ERROR] ❌ FAILED to send to aryan.sharma6428@gmail.com: Connection unexpectedly closed: The read operation timed out
+[2025-11-04 23:48:39] [ERROR] ❌ FAILED to send to parasharbhawna51@gmail.com: please run connect() first
+[2025-11-04 23:48:39] [INFO] 🔄 Multiple failures detected - reconnecting...
+[2025-11-04 23:48:40] [INFO] ✅ Reconnected after failures
+[2025-11-04 23:48:45] [INFO] ✅ Sent to: Harshita Khanijo <khanijoharshita@gmail.com>
+[2025-11-04 23:48:48] [INFO] ✅ Sent to: Jayaprakash Dirisala <jayprakashdirisala@gmail.com>
+[2025-11-04 23:48:50] [ERROR] ❌ FAILED to send to juturuyaswanthreddyreddy@gmail.com: (451, b'4.7.1 Ratelimit "hostinger_out_ratelimit" exceeded')
+[2025-11-04 23:48:53] [ERROR] ❌ FAILED to send to batraa333@gmail.com: (451, b'4.7.1 Ratelimit "hostinger_out_ratelimit" exceeded')
+[2025-11-04 23:48:53] [INFO] 🔄 Multiple failures detected - reconnecting...
+[2025-11-04 23:48:54] [INFO] ✅ Reconnected after failures
+[2025-11-04 23:48:56] [ERROR] ❌ FAILED to send to romi.chauhan2275@gmail.com: (451, b'4.7.1 Ratelimit "hostinger_out_ratelimit" exceeded')
+[2025-11-04 23:48:58] [INFO] 
+[2025-11-04 23:48:58] [INFO] ================================================================================
+[2025-11-04 23:48:58] [INFO] 📧 EMAIL CAMPAIGN COMPLETE
+[2025-11-04 23:48:58] [INFO] ================================================================================
+[2025-11-04 23:48:58] [INFO] ✅ Successfully sent: 2
+[2025-11-04 23:48:58] [INFO] ❌ Failed: 5
+[2025-11-04 23:48:58] [INFO] 📊 Total processed: 7
+[2025-11-04 23:48:58] [INFO] 
+[2025-11-04 23:48:58] [INFO] 📝 Full log saved to: email_sending_log.txt
+[2025-11-04 23:48:58] [INFO] ✅ Sent emails log: sent_emails.txt
+[2025-11-04 23:51:42] [INFO] ================================================================================
+[2025-11-04 23:51:42] [INFO] 📧 STARTING AUTOMATED EMAIL CAMPAIGN
+[2025-11-04 23:51:42] [INFO] ================================================================================
+[2025-11-04 23:51:42] [INFO] ✅ Loaded 55 candidates from candidates.csv
+[2025-11-04 23:51:42] [INFO] 📊 Total candidates: 55
+[2025-11-04 23:51:42] [INFO] ✅ Already sent: 50
+[2025-11-04 23:51:42] [INFO] 📤 Pending to send: 5
+[2025-11-04 23:51:42] [INFO] 
+[2025-11-04 23:51:42] [INFO] 🔌 Connecting to smtp.hostinger.com:587...
+[2025-11-04 23:51:43] [INFO] 🔐 Starting TLS encryption...
+[2025-11-04 23:51:43] [INFO] 🔑 Logging in as careers@semanticdataservices.com...
+[2025-11-04 23:51:43] [INFO] ✅ SMTP connection established
+[2025-11-04 23:51:43] [INFO] 
+[2025-11-04 23:51:44] [ERROR] ❌ FAILED to send to aryan.sharma6428@gmail.com: (451, b'4.7.1 Ratelimit "hostinger_out_ratelimit" exceeded')
+[2025-11-04 23:51:46] [ERROR] ❌ FAILED to send to parasharbhawna51@gmail.com: (451, b'4.7.1 Ratelimit "hostinger_out_ratelimit" exceeded')
+[2025-11-04 23:51:46] [INFO] 🔄 Multiple failures detected - reconnecting...
+[2025-11-04 23:51:47] [INFO] ✅ Reconnected after failures
+[2025-11-04 23:51:50] [ERROR] ❌ FAILED to send to juturuyaswanthreddyreddy@gmail.com: (451, b'4.7.1 Ratelimit "hostinger_out_ratelimit" exceeded')
+[2025-11-04 23:51:52] [ERROR] ❌ FAILED to send to batraa333@gmail.com: (451, b'4.7.1 Ratelimit "hostinger_out_ratelimit" exceeded')
+[2025-11-04 23:51:52] [INFO] 🔄 Multiple failures detected - reconnecting...
+[2025-11-04 23:51:53] [INFO] ✅ Reconnected after failures
+[2025-11-04 23:51:55] [ERROR] ❌ FAILED to send to romi.chauhan2275@gmail.com: (451, b'4.7.1 Ratelimit "hostinger_out_ratelimit" exceeded')
+[2025-11-04 23:51:57] [INFO] 
+[2025-11-04 23:51:57] [INFO] ================================================================================
+[2025-11-04 23:51:57] [INFO] 📧 EMAIL CAMPAIGN COMPLETE
+[2025-11-04 23:51:57] [INFO] ================================================================================
+[2025-11-04 23:51:57] [INFO] ✅ Successfully sent: 0
+[2025-11-04 23:51:57] [INFO] ❌ Failed: 5
+[2025-11-04 23:51:57] [INFO] 📊 Total processed: 5
+[2025-11-04 23:51:57] [INFO] 
+[2025-11-04 23:51:57] [INFO] 📝 Full log saved to: email_sending_log.txt
+[2025-11-04 23:51:57] [INFO] ✅ Sent emails log: sent_emails.txt
+[2025-11-04 23:53:48] [INFO] ================================================================================
+[2025-11-04 23:53:48] [INFO] 🧪 SENDING TEST EMAIL
+[2025-11-04 23:53:48] [INFO] ================================================================================
+[2025-11-04 23:53:49] [INFO] 🔐 Starting TLS encryption...
+[2025-11-04 23:53:49] [INFO] 🔑 Logging in as careers@semanticdataservices.com...
+[2025-11-04 23:53:50] [ERROR] ❌ FAILED to send to vinodyellagonda@paragroup.com: (451, b'4.7.1 Ratelimit "hostinger_out_ratelimit" exceeded')
+[2025-11-04 23:53:52] [INFO] ================================================================================
+[2025-11-04 23:53:52] [INFO] 🧪 SENDING TEST EMAIL
+[2025-11-04 23:53:52] [INFO] ================================================================================
+[2025-11-04 23:53:53] [INFO] 🔐 Starting TLS encryption...
+[2025-11-04 23:53:53] [INFO] 🔑 Logging in as careers@semanticdataservices.com...
+[2025-11-04 23:53:53] [ERROR] ❌ FAILED to send to yvinodreddy@gmail.com: (451, b'4.7.1 Ratelimit "hostinger_out_ratelimit" exceeded')
+[2025-11-05 00:06:52] [INFO] ================================================================================
+[2025-11-05 00:06:52] [INFO] 📧 STARTING AUTOMATED EMAIL CAMPAIGN
+[2025-11-05 00:06:52] [INFO] ================================================================================
+[2025-11-05 00:06:52] [INFO] ✅ Loaded 55 candidates from candidates.csv
+[2025-11-05 00:06:52] [INFO] 📊 Total candidates: 55
+[2025-11-05 00:06:52] [INFO] ✅ Already sent: 50
+[2025-11-05 00:06:52] [INFO] 📤 Pending to send: 5
+[2025-11-05 00:06:52] [INFO] 
+[2025-11-05 00:06:52] [INFO] 🔌 Connecting to smtp.hostinger.com:587...
+[2025-11-05 00:06:52] [INFO] 🔐 Starting TLS encryption...
+[2025-11-05 00:06:53] [INFO] 🔑 Logging in as careers@semanticdataservices.com...
+[2025-11-05 00:06:53] [INFO] ✅ SMTP connection established
+[2025-11-05 00:06:53] [INFO] 
+[2025-11-05 00:06:53] [ERROR] ❌ FAILED to send to aryan.sharma6428@gmail.com: (451, b'4.7.1 Ratelimit "hostinger_out_ratelimit" exceeded')
+[2025-11-05 00:06:56] [ERROR] ❌ FAILED to send to parasharbhawna51@gmail.com: (451, b'4.7.1 Ratelimit "hostinger_out_ratelimit" exceeded')
+[2025-11-05 00:06:56] [INFO] 🔄 Multiple failures detected - reconnecting...
+[2025-11-05 00:06:57] [INFO] ✅ Reconnected after failures
+[2025-11-05 00:07:02] [INFO] ✅ Sent to: Juturu Yaswanth Reddy <juturuyaswanthreddyreddy@gmail.com>
+[2025-11-05 00:07:05] [ERROR] ❌ FAILED to send to batraa333@gmail.com: (451, b'4.7.1 Ratelimit "hostinger_out_ratelimit" exceeded')
+[2025-11-05 00:07:07] [ERROR] ❌ FAILED to send to romi.chauhan2275@gmail.com: (451, b'4.7.1 Ratelimit "hostinger_out_ratelimit" exceeded')
+[2025-11-05 00:07:07] [INFO] 🔄 Multiple failures detected - reconnecting...
+[2025-11-05 00:07:08] [INFO] ✅ Reconnected after failures
+[2025-11-05 00:07:10] [INFO] 
+[2025-11-05 00:07:10] [INFO] ================================================================================
+[2025-11-05 00:07:10] [INFO] 📧 EMAIL CAMPAIGN COMPLETE
+[2025-11-05 00:07:10] [INFO] ================================================================================
+[2025-11-05 00:07:10] [INFO] ✅ Successfully sent: 1
+[2025-11-05 00:07:10] [INFO] ❌ Failed: 4
+[2025-11-05 00:07:10] [INFO] 📊 Total processed: 5
+[2025-11-05 00:07:10] [INFO] 
+[2025-11-05 00:07:10] [INFO] 📝 Full log saved to: email_sending_log.txt
+[2025-11-05 00:07:10] [INFO] ✅ Sent emails log: sent_emails.txt
+[2025-11-05 00:08:03] [INFO] ================================================================================
+[2025-11-05 00:08:03] [INFO] 📧 STARTING AUTOMATED EMAIL CAMPAIGN
+[2025-11-05 00:08:03] [INFO] ================================================================================
+[2025-11-05 00:08:03] [INFO] ✅ Loaded 55 candidates from candidates.csv
+[2025-11-05 00:08:03] [INFO] 📊 Total candidates: 55
+[2025-11-05 00:08:03] [INFO] ✅ Already sent: 51
+[2025-11-05 00:08:03] [INFO] 📤 Pending to send: 4
+[2025-11-05 00:08:03] [INFO] 
+[2025-11-05 00:08:03] [INFO] 🔌 Connecting to smtp.hostinger.com:587...
+[2025-11-05 00:08:04] [INFO] 🔐 Starting TLS encryption...
+[2025-11-05 00:08:04] [INFO] 🔑 Logging in as careers@semanticdataservices.com...
+[2025-11-05 00:08:04] [INFO] ✅ SMTP connection established
+[2025-11-05 00:08:04] [INFO] 
+[2025-11-05 00:08:05] [ERROR] ❌ FAILED to send to aryan.sharma6428@gmail.com: (451, b'4.7.1 Ratelimit "hostinger_out_ratelimit" exceeded')
+[2025-11-05 00:08:07] [ERROR] ❌ FAILED to send to parasharbhawna51@gmail.com: (451, b'4.7.1 Ratelimit "hostinger_out_ratelimit" exceeded')
+[2025-11-05 00:08:07] [INFO] 🔄 Multiple failures detected - reconnecting...
+[2025-11-05 00:08:08] [INFO] ✅ Reconnected after failures
+[2025-11-05 00:08:13] [ERROR] ❌ FAILED to send to batraa333@gmail.com: (451, b'4.7.1 Ratelimit "hostinger_out_ratelimit" exceeded')
+[2025-11-05 00:08:16] [ERROR] ❌ FAILED to send to romi.chauhan2275@gmail.com: (451, b'4.7.1 Ratelimit "hostinger_out_ratelimit" exceeded')
+[2025-11-05 00:08:16] [INFO] 🔄 Multiple failures detected - reconnecting...
+[2025-11-05 00:08:17] [INFO] ✅ Reconnected after failures
+[2025-11-05 00:08:19] [INFO] 
+[2025-11-05 00:08:19] [INFO] ================================================================================
+[2025-11-05 00:08:19] [INFO] 📧 EMAIL CAMPAIGN COMPLETE
+[2025-11-05 00:08:19] [INFO] ================================================================================
+[2025-11-05 00:08:19] [INFO] ✅ Successfully sent: 0
+[2025-11-05 00:08:19] [INFO] ❌ Failed: 4
+[2025-11-05 00:08:19] [INFO] 📊 Total processed: 4
+[2025-11-05 00:08:19] [INFO] 
+[2025-11-05 00:08:19] [INFO] 📝 Full log saved to: email_sending_log.txt
+[2025-11-05 00:08:19] [INFO] ✅ Sent emails log: sent_emails.txt
+[2025-11-05 00:15:24] [INFO] ================================================================================
+[2025-11-05 00:15:24] [INFO] 📧 STARTING AUTOMATED EMAIL CAMPAIGN
+[2025-11-05 00:15:24] [INFO] ================================================================================
+[2025-11-05 00:15:24] [INFO] ✅ Loaded 55 candidates from candidates.csv
+[2025-11-05 00:15:24] [INFO] 📊 Total candidates: 55
+[2025-11-05 00:15:24] [INFO] ✅ Already sent: 51
+[2025-11-05 00:15:24] [INFO] 📤 Pending to send: 4
+[2025-11-05 00:15:24] [INFO] 
+[2025-11-05 00:15:24] [INFO] 🔌 Connecting to smtp.hostinger.com:587...
+[2025-11-05 00:15:25] [INFO] 🔐 Starting TLS encryption...
+[2025-11-05 00:15:25] [INFO] 🔑 Logging in as careers@semanticdataservices.com...
+[2025-11-05 00:15:25] [INFO] ✅ SMTP connection established
+[2025-11-05 00:15:25] [INFO] 
+[2025-11-05 00:15:26] [ERROR] ❌ FAILED to send to aryan.sharma6428@gmail.com: (451, b'4.7.1 Ratelimit "hostinger_out_ratelimit" exceeded')
+[2025-11-05 00:15:28] [ERROR] ❌ FAILED to send to parasharbhawna51@gmail.com: (451, b'4.7.1 Ratelimit "hostinger_out_ratelimit" exceeded')
+[2025-11-05 00:15:28] [INFO] 🔄 Multiple failures detected - reconnecting...
+[2025-11-05 00:15:29] [INFO] ✅ Reconnected after failures
+[2025-11-05 00:15:31] [ERROR] ❌ FAILED to send to batraa333@gmail.com: (451, b'4.7.1 Ratelimit "hostinger_out_ratelimit" exceeded')
+[2025-11-05 00:15:34] [ERROR] ❌ FAILED to send to romi.chauhan2275@gmail.com: (451, b'4.7.1 Ratelimit "hostinger_out_ratelimit" exceeded')
+[2025-11-05 00:15:34] [INFO] 🔄 Multiple failures detected - reconnecting...
+[2025-11-05 00:15:35] [INFO] ✅ Reconnected after failures
+[2025-11-05 00:15:37] [INFO] 
+[2025-11-05 00:15:37] [INFO] ================================================================================
+[2025-11-05 00:15:37] [INFO] 📧 EMAIL CAMPAIGN COMPLETE
+[2025-11-05 00:15:37] [INFO] ================================================================================
+[2025-11-05 00:15:37] [INFO] ✅ Successfully sent: 0
+[2025-11-05 00:15:37] [INFO] ❌ Failed: 4
+[2025-11-05 00:15:37] [INFO] 📊 Total processed: 4
+[2025-11-05 00:15:37] [INFO] 
+[2025-11-05 00:15:37] [INFO] 📝 Full log saved to: email_sending_log.txt
+[2025-11-05 00:15:37] [INFO] ✅ Sent emails log: sent_emails.txt
+[2025-11-05 00:35:58] [INFO] ================================================================================
+[2025-11-05 00:35:58] [INFO] 📧 STARTING AUTOMATED EMAIL CAMPAIGN
+[2025-11-05 00:35:58] [INFO] ================================================================================
+[2025-11-05 00:35:58] [INFO] ✅ Loaded 55 candidates from candidates.csv
+[2025-11-05 00:35:58] [INFO] 📊 Total candidates: 55
+[2025-11-05 00:35:58] [INFO] ✅ Already sent: 51
+[2025-11-05 00:35:58] [INFO] 📤 Pending to send: 4
+[2025-11-05 00:35:58] [INFO] 
+[2025-11-05 00:35:58] [INFO] 🔌 Connecting to smtp.hostinger.com:587...
+[2025-11-05 00:35:59] [INFO] 🔐 Starting TLS encryption...
+[2025-11-05 00:36:00] [INFO] 🔑 Logging in as careers@semanticdataservices.com...
+[2025-11-05 00:36:00] [INFO] ✅ SMTP connection established
+[2025-11-05 00:36:00] [INFO] 
+[2025-11-05 00:36:00] [INFO] ✅ Sent to: Aryan Sharma <aryan.sharma6428@gmail.com>
+[2025-11-05 00:36:03] [INFO] ✅ Sent to: Bhawna Parashar <parasharbhawna51@gmail.com>
+[2025-11-05 00:36:10] [ERROR] ❌ FAILED to send to batraa333@gmail.com: (451, b'4.7.1 Ratelimit "hostinger_out_ratelimit" exceeded')
+[2025-11-05 00:36:15] [ERROR] ❌ FAILED to send to romi.chauhan2275@gmail.com: (451, b'4.7.1 Ratelimit "hostinger_out_ratelimit" exceeded')
+[2025-11-05 00:36:15] [INFO] 🔄 Multiple failures detected - reconnecting...
+[2025-11-05 00:36:16] [INFO] ✅ Reconnected after failures
+[2025-11-05 00:36:18] [INFO] 
+[2025-11-05 00:36:18] [INFO] ================================================================================
+[2025-11-05 00:36:18] [INFO] 📧 EMAIL CAMPAIGN COMPLETE
+[2025-11-05 00:36:18] [INFO] ================================================================================
+[2025-11-05 00:36:18] [INFO] ✅ Successfully sent: 2
+[2025-11-05 00:36:18] [INFO] ❌ Failed: 2
+[2025-11-05 00:36:18] [INFO] 📊 Total processed: 4
+[2025-11-05 00:36:18] [INFO] 
+[2025-11-05 00:36:18] [INFO] 📝 Full log saved to: email_sending_log.txt
+[2025-11-05 00:36:18] [INFO] ✅ Sent emails log: sent_emails.txt
+[2025-11-05 00:51:41] [INFO] ================================================================================
+[2025-11-05 00:51:41] [INFO] 📧 STARTING AUTOMATED EMAIL CAMPAIGN
+[2025-11-05 00:51:41] [INFO] ================================================================================
+[2025-11-05 00:51:41] [INFO] ✅ Loaded 55 candidates from candidates.csv
+[2025-11-05 00:51:41] [INFO] 📊 Total candidates: 55
+[2025-11-05 00:51:41] [INFO] ✅ Already sent: 53
+[2025-11-05 00:51:41] [INFO] 📤 Pending to send: 2
+[2025-11-05 00:51:41] [INFO] 
+[2025-11-05 00:51:41] [INFO] 🔌 Connecting to smtp.hostinger.com:587...
+[2025-11-05 00:51:42] [INFO] 🔐 Starting TLS encryption...
+[2025-11-05 00:51:42] [INFO] 🔑 Logging in as careers@semanticdataservices.com...
+[2025-11-05 00:51:42] [INFO] ✅ SMTP connection established
+[2025-11-05 00:51:42] [INFO] 
+[2025-11-05 00:51:43] [INFO] ✅ Sent to: Ansh Batra <batraa333@gmail.com>
+[2025-11-05 00:51:46] [ERROR] ❌ FAILED to send to romi.chauhan2275@gmail.com: (451, b'4.7.1 Ratelimit "hostinger_out_ratelimit" exceeded')
+[2025-11-05 00:51:48] [INFO] 
+[2025-11-05 00:51:48] [INFO] ================================================================================
+[2025-11-05 00:51:48] [INFO] 📧 EMAIL CAMPAIGN COMPLETE
+[2025-11-05 00:51:48] [INFO] ================================================================================
+[2025-11-05 00:51:48] [INFO] ✅ Successfully sent: 1
+[2025-11-05 00:51:48] [INFO] ❌ Failed: 1
+[2025-11-05 00:51:48] [INFO] 📊 Total processed: 2
+[2025-11-05 00:51:48] [INFO] 
+[2025-11-05 00:51:48] [INFO] 📝 Full log saved to: email_sending_log.txt
+[2025-11-05 00:51:48] [INFO] ✅ Sent emails log: sent_emails.txt
+[2025-11-05 00:54:55] [INFO] ================================================================================
+[2025-11-05 00:54:55] [INFO] 📧 STARTING AUTOMATED EMAIL CAMPAIGN
+[2025-11-05 00:54:55] [INFO] ================================================================================
+[2025-11-05 00:54:55] [INFO] ✅ Loaded 55 candidates from candidates.csv
+[2025-11-05 00:54:55] [INFO] 📊 Total candidates: 55
+[2025-11-05 00:54:55] [INFO] ✅ Already sent: 54
+[2025-11-05 00:54:55] [INFO] 📤 Pending to send: 1
+[2025-11-05 00:54:55] [INFO] 
+[2025-11-05 00:54:55] [INFO] 🔌 Connecting to smtp.hostinger.com:587...
+[2025-11-05 00:54:55] [INFO] 🔐 Starting TLS encryption...
+[2025-11-05 00:54:56] [INFO] 🔑 Logging in as careers@semanticdataservices.com...
+[2025-11-05 00:54:56] [INFO] ✅ SMTP connection established
+[2025-11-05 00:54:56] [INFO] 
+[2025-11-05 00:54:56] [ERROR] ❌ FAILED to send to romi.chauhan2275@gmail.com: (451, b'4.7.1 Ratelimit "hostinger_out_ratelimit" exceeded')
+[2025-11-05 00:54:58] [INFO] 
+[2025-11-05 00:54:58] [INFO] ================================================================================
+[2025-11-05 00:54:58] [INFO] 📧 EMAIL CAMPAIGN COMPLETE
+[2025-11-05 00:54:58] [INFO] ================================================================================
+[2025-11-05 00:54:58] [INFO] ✅ Successfully sent: 0
+[2025-11-05 00:54:58] [INFO] ❌ Failed: 1
+[2025-11-05 00:54:58] [INFO] 📊 Total processed: 1
+[2025-11-05 00:54:58] [INFO] 
+[2025-11-05 00:54:58] [INFO] 📝 Full log saved to: email_sending_log.txt
+[2025-11-05 00:54:58] [INFO] ✅ Sent emails log: sent_emails.txt
+[2025-11-05 00:59:11] [INFO] ================================================================================
+[2025-11-05 00:59:11] [INFO] 📧 STARTING AUTOMATED EMAIL CAMPAIGN
+[2025-11-05 00:59:11] [INFO] ================================================================================
+[2025-11-05 00:59:11] [INFO] ✅ Loaded 55 candidates from candidates.csv
+[2025-11-05 00:59:11] [INFO] 📊 Total candidates: 55
+[2025-11-05 00:59:11] [INFO] ✅ Already sent: 54
+[2025-11-05 00:59:11] [INFO] 📤 Pending to send: 1
+[2025-11-05 00:59:11] [INFO] 
+[2025-11-05 00:59:11] [INFO] 🔌 Connecting to smtp.hostinger.com:587...
+[2025-11-05 00:59:11] [INFO] 🔐 Starting TLS encryption...
+[2025-11-05 00:59:12] [INFO] 🔑 Logging in as careers@semanticdataservices.com...
+[2025-11-05 00:59:12] [INFO] ✅ SMTP connection established
+[2025-11-05 00:59:12] [INFO] 
+[2025-11-05 00:59:12] [ERROR] ❌ FAILED to send to romi.chauhan2275@gmail.com: (451, b'4.7.1 Ratelimit "hostinger_out_ratelimit" exceeded')
+[2025-11-05 00:59:14] [INFO] 
+[2025-11-05 00:59:14] [INFO] ================================================================================
+[2025-11-05 00:59:14] [INFO] 📧 EMAIL CAMPAIGN COMPLETE
+[2025-11-05 00:59:14] [INFO] ================================================================================
+[2025-11-05 00:59:14] [INFO] ✅ Successfully sent: 0
+[2025-11-05 00:59:14] [INFO] ❌ Failed: 1
+[2025-11-05 00:59:14] [INFO] 📊 Total processed: 1
+[2025-11-05 00:59:14] [INFO] 
+[2025-11-05 00:59:14] [INFO] 📝 Full log saved to: email_sending_log.txt
+[2025-11-05 00:59:14] [INFO] ✅ Sent emails log: sent_emails.txt
+[2025-11-05 01:01:11] [INFO] ================================================================================
+[2025-11-05 01:01:11] [INFO] 📧 STARTING AUTOMATED EMAIL CAMPAIGN
+[2025-11-05 01:01:11] [INFO] ================================================================================
+[2025-11-05 01:01:11] [INFO] ✅ Loaded 55 candidates from candidates.csv
+[2025-11-05 01:01:11] [INFO] 📊 Total candidates: 55
+[2025-11-05 01:01:11] [INFO] ✅ Already sent: 54
+[2025-11-05 01:01:11] [INFO] 📤 Pending to send: 1
+[2025-11-05 01:01:11] [INFO] 
+[2025-11-05 01:01:11] [INFO] 🔌 Connecting to smtp.hostinger.com:587...
+[2025-11-05 01:01:11] [INFO] 🔐 Starting TLS encryption...
+[2025-11-05 01:01:12] [INFO] 🔑 Logging in as careers@semanticdataservices.com...
+[2025-11-05 01:01:12] [INFO] ✅ SMTP connection established
+[2025-11-05 01:01:12] [INFO] 
+[2025-11-05 01:01:12] [INFO] ✅ Sent to: Aryan Chauhan <romi.chauhan2275@gmail.com>
+[2025-11-05 01:01:14] [INFO] 
+[2025-11-05 01:01:14] [INFO] ================================================================================
+[2025-11-05 01:01:14] [INFO] 📧 EMAIL CAMPAIGN COMPLETE
+[2025-11-05 01:01:14] [INFO] ================================================================================
+[2025-11-05 01:01:14] [INFO] ✅ Successfully sent: 1
+[2025-11-05 01:01:14] [INFO] ❌ Failed: 0
+[2025-11-05 01:01:14] [INFO] 📊 Total processed: 1
+[2025-11-05 01:01:14] [INFO] 
+[2025-11-05 01:01:14] [INFO] 📝 Full log saved to: email_sending_log.txt
+[2025-11-05 01:01:14] [INFO] ✅ Sent emails log: sent_emails.txt

@@ -1,0 +1,153 @@
+# Pod Security Standards for SwarmCare
+# Enforcing secure pod configurations
+
+---
+apiVersion: policy/v1beta1
+kind: PodSecurityPolicy
+metadata:
+  name: swarmcare-restricted
+  annotations:
+    seccomp.security.alpha.kubernetes.io/allowedProfileNames: 'runtime/default'
+    apparmor.security.beta.kubernetes.io/allowedProfileNames: 'runtime/default'
+spec:
+  privileged: false
+  allowPrivilegeEscalation: false
+  requiredDropCapabilities:
+    - ALL
+  volumes:
+    - 'configMap'
+    - 'emptyDir'
+    - 'projected'
+    - 'secret'
+    - 'downwardAPI'
+    - 'persistentVolumeClaim'
+  hostNetwork: false
+  hostIPC: false
+  hostPID: false
+  runAsUser:
+    rule: 'MustRunAsNonRoot'
+  seLinux:
+    rule: 'RunAsAny'
+  supplementalGroups:
+    rule: 'RunAsAny'
+  fsGroup:
+    rule: 'RunAsAny'
+  readOnlyRootFilesystem: true
+
+---
+# Pod Security Admission (PSA) - Namespace labels
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: swarmcare
+  labels:
+    pod-security.kubernetes.io/enforce: restricted
+    pod-security.kubernetes.io/audit: restricted
+    pod-security.kubernetes.io/warn: restricted
+
+---
+# Security Context Constraints (for compliance verification)
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: security-standards
+  namespace: swarmcare
+data:
+  standards.yaml: |
+    # SwarmCare Pod Security Standards
+
+    required_security_context:
+      runAsNonRoot: true
+      runAsUser: 1000
+      fsGroup: 1000
+      seccompProfile:
+        type: RuntimeDefault
+      capabilities:
+        drop:
+          - ALL
+      readOnlyRootFilesystem: true
+      allowPrivilegeEscalation: false
+
+    prohibited_configurations:
+      - privileged: true
+      - hostNetwork: true
+      - hostPID: true
+      - hostIPC: true
+      - hostPath_volumes: true
+
+    required_resource_limits:
+      cpu:
+        min: "100m"
+        max: "2000m"
+      memory:
+        min: "128Mi"
+        max: "4Gi"
+
+    image_policy:
+      allowed_registries:
+        - "swarmcare.azurecr.io"
+        - "mcr.microsoft.com"
+        - "docker.io/library"  # Only official images
+      required_image_pull_policy: "IfNotPresent"
+      scan_required: true
+      max_critical_vulnerabilities: 0
+      max_high_vulnerabilities: 0
+
+    network_policy:
+      default_deny: true
+      egress_whitelist:
+        - port: 443  # HTTPS
+        - port: 53   # DNS
+        - port: 5432 # PostgreSQL
+        - port: 6379 # Redis
+
+    secrets_management:
+      use_external_secrets: true
+      rotate_secrets_days: 90
+      encrypt_at_rest: true
+      use_sealed_secrets: true
+
+---
+# OPA Gatekeeper Constraints
+apiVersion: templates.gatekeeper.sh/v1
+kind: ConstraintTemplate
+metadata:
+  name: k8srequiredsecuritycontext
+spec:
+  crd:
+    spec:
+      names:
+        kind: K8sRequiredSecurityContext
+  targets:
+    - target: admission.k8s.gatekeeper.sh
+      rego: |
+        package k8srequiredsecuritycontext
+
+        violation[{"msg": msg}] {
+          not input.review.object.spec.securityContext.runAsNonRoot
+          msg := "Pods must run as non-root"
+        }
+
+        violation[{"msg": msg}] {
+          not input.review.object.spec.securityContext.readOnlyRootFilesystem
+          msg := "Root filesystem must be read-only"
+        }
+
+        violation[{"msg": msg}] {
+          container := input.review.object.spec.containers[_]
+          container.securityContext.allowPrivilegeEscalation
+          msg := sprintf("Container %v allows privilege escalation", [container.name])
+        }
+
+---
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sRequiredSecurityContext
+metadata:
+  name: must-have-security-context
+spec:
+  match:
+    kinds:
+      - apiGroups: [""]
+        kinds: ["Pod"]
+    namespaces:
+      - swarmcare

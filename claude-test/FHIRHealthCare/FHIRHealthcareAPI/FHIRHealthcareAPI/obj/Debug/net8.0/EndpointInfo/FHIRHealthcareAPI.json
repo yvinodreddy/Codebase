@@ -1,0 +1,1996 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Advanced FHIR Healthcare API",
+    "description": "Enterprise-grade FHIR healthcare API with clinical decision support, care plan management, and live medical terminology validation",
+    "version": "v1"
+  },
+  "paths": {
+    "/api/Auth/login": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Auth/register": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Auth/debug-headers": {
+      "get": {
+        "tags": [
+          "Auth"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Auth/test-no-auth": {
+      "get": {
+        "tags": [
+          "Auth"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Auth/simple-test": {
+      "get": {
+        "tags": [
+          "Auth"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Auth/test-auth": {
+      "get": {
+        "tags": [
+          "Auth"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Auth/me": {
+      "get": {
+        "tags": [
+          "Auth"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/care-plan/diabetes": {
+      "post": {
+        "tags": [
+          "CarePlan"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateDiabetesCarePlanRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateDiabetesCarePlanRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateDiabetesCarePlanRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/care-plan/hypertension": {
+      "post": {
+        "tags": [
+          "CarePlan"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateHypertensionCarePlanRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateHypertensionCarePlanRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateHypertensionCarePlanRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/care-plan/{carePlanId}/activity/{activityIndex}": {
+      "put": {
+        "tags": [
+          "CarePlan"
+        ],
+        "parameters": [
+          {
+            "name": "carePlanId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "activityIndex",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateActivityRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateActivityRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateActivityRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/care-plan/{carePlanId}/progress": {
+      "get": {
+        "tags": [
+          "CarePlan"
+        ],
+        "parameters": [
+          {
+            "name": "carePlanId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/clinical-decision-support/analysis/{patientId}": {
+      "get": {
+        "tags": [
+          "ClinicalDecisionSupport"
+        ],
+        "parameters": [
+          {
+            "name": "patientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/clinical-decision-support/alerts/{patientId}": {
+      "get": {
+        "tags": [
+          "ClinicalDecisionSupport"
+        ],
+        "parameters": [
+          {
+            "name": "patientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/fhir/Condition": {
+      "post": {
+        "tags": [
+          "Condition"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DiagnosisRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DiagnosisRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DiagnosisRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/fhir/Condition/diabetes": {
+      "post": {
+        "tags": [
+          "Condition"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DiabetesRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DiabetesRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DiabetesRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/fhir/Condition/hypertension": {
+      "post": {
+        "tags": [
+          "Condition"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HypertensionRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HypertensionRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/HypertensionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/fhir/Condition/patient/{patientId}/active": {
+      "get": {
+        "tags": [
+          "Condition"
+        ],
+        "parameters": [
+          {
+            "name": "patientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/fhir/Condition/patient/{patientId}/history": {
+      "get": {
+        "tags": [
+          "Condition"
+        ],
+        "parameters": [
+          {
+            "name": "patientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/fhir/decision-support/check-interactions": {
+      "post": {
+        "tags": [
+          "DecisionSupport"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InteractionCheckRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InteractionCheckRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/InteractionCheckRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/fhir/decision-support/check-duplicate": {
+      "post": {
+        "tags": [
+          "DecisionSupport"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DuplicateCheckRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DuplicateCheckRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DuplicateCheckRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/fhir/decision-support/check-contraindications": {
+      "post": {
+        "tags": [
+          "DecisionSupport"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContraindicationCheckRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContraindicationCheckRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContraindicationCheckRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/fhir/decision-support/critical-values/{patientId}": {
+      "get": {
+        "tags": [
+          "DecisionSupport"
+        ],
+        "parameters": [
+          {
+            "name": "patientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/fhir/decision-support/care-gaps/{patientId}": {
+      "get": {
+        "tags": [
+          "DecisionSupport"
+        ],
+        "parameters": [
+          {
+            "name": "patientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/fhir/decision-support/comprehensive-check": {
+      "post": {
+        "tags": [
+          "DecisionSupport"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PrescriptionCheckRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PrescriptionCheckRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PrescriptionCheckRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/test/graphdb/health": {
+      "get": {
+        "tags": [
+          "GraphDBTest"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/test/graphdb/test-connection": {
+      "get": {
+        "tags": [
+          "GraphDBTest"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/monitoring/performance": {
+      "get": {
+        "tags": [
+          "HealthMonitoring"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/monitoring/health": {
+      "get": {
+        "tags": [
+          "HealthMonitoring"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/monitoring/status": {
+      "get": {
+        "tags": [
+          "HealthMonitoring"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/knowledge-graph/patient/{patientId}/convert": {
+      "post": {
+        "tags": [
+          "KnowledgeGraph"
+        ],
+        "parameters": [
+          {
+            "name": "patientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/knowledge-graph/conditions/{snomedCode}/related": {
+      "get": {
+        "tags": [
+          "KnowledgeGraph"
+        ],
+        "parameters": [
+          {
+            "name": "snomedCode",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/knowledge-graph/patient/{patientId}/summary": {
+      "get": {
+        "tags": [
+          "KnowledgeGraph"
+        ],
+        "parameters": [
+          {
+            "name": "patientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/knowledge-graph/patient/{patientId}/conditions/sync": {
+      "post": {
+        "tags": [
+          "KnowledgeGraph"
+        ],
+        "parameters": [
+          {
+            "name": "patientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/knowledge-graph/medications/{rxNormCui}/related": {
+      "get": {
+        "tags": [
+          "KnowledgeGraph"
+        ],
+        "parameters": [
+          {
+            "name": "rxNormCui",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/knowledge-graph/medications/check-interactions": {
+      "post": {
+        "tags": [
+          "KnowledgeGraph"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DrugInteractionCheckRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DrugInteractionCheckRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DrugInteractionCheckRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/knowledge-graph/patient/{patientId}/medication/add": {
+      "post": {
+        "tags": [
+          "KnowledgeGraph"
+        ],
+        "parameters": [
+          {
+            "name": "patientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddMedicationRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddMedicationRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddMedicationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/knowledge-graph/patient/{patientId}/medications/sync": {
+      "post": {
+        "tags": [
+          "KnowledgeGraph"
+        ],
+        "parameters": [
+          {
+            "name": "patientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/loinc-current/{loincCode}": {
+      "get": {
+        "tags": [
+          "LoincCurrent"
+        ],
+        "parameters": [
+          {
+            "name": "loincCode",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/loinc-test/validate/{loincCode}": {
+      "get": {
+        "tags": [
+          "LoincTest"
+        ],
+        "parameters": [
+          {
+            "name": "loincCode",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/loinc-test/details/{loincCode}": {
+      "get": {
+        "tags": [
+          "LoincTest"
+        ],
+        "parameters": [
+          {
+            "name": "loincCode",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/loinc-test/debug/{loincCode}": {
+      "get": {
+        "tags": [
+          "LoincTest"
+        ],
+        "parameters": [
+          {
+            "name": "loincCode",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/loinc-test/test-common": {
+      "get": {
+        "tags": [
+          "LoincTest"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/fhir/Medication/prescribe-validated": {
+      "post": {
+        "tags": [
+          "Medication"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PrescriptionRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PrescriptionRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PrescriptionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/fhir/Medication/prescribe": {
+      "post": {
+        "tags": [
+          "Medication"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PrescriptionRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PrescriptionRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PrescriptionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/fhir/Medication/patient/{patientId}": {
+      "get": {
+        "tags": [
+          "Medication"
+        ],
+        "parameters": [
+          {
+            "name": "patientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/fhir/Medication/statement": {
+      "post": {
+        "tags": [
+          "Medication"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MedicationStatementRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MedicationStatementRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/MedicationStatementRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/fhir/Observation/glucose": {
+      "post": {
+        "tags": [
+          "Observation"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GlucoseRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GlucoseRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/GlucoseRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/fhir/Observation/blood-pressure": {
+      "post": {
+        "tags": [
+          "Observation"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BloodPressureRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BloodPressureRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/BloodPressureRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/fhir/Observation/hba1c": {
+      "post": {
+        "tags": [
+          "Observation"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HbA1cRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HbA1cRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/HbA1cRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/fhir/Observation/patient/{patientId}": {
+      "get": {
+        "tags": [
+          "Observation"
+        ],
+        "parameters": [
+          {
+            "name": "patientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/fhir/Patient/test-create": {
+      "get": {
+        "tags": [
+          "Patient"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/fhir/Patient/search": {
+      "get": {
+        "tags": [
+          "Patient"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/fhir/Patient/{id}": {
+      "get": {
+        "tags": [
+          "Patient"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/rxnorm-live/drug/{rxcui}": {
+      "get": {
+        "tags": [
+          "RxNormLive"
+        ],
+        "parameters": [
+          {
+            "name": "rxcui",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/rxnorm-live/interactions": {
+      "post": {
+        "tags": [
+          "RxNormLive"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RxNormInteractionRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RxNormInteractionRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RxNormInteractionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/rxnorm-live/search": {
+      "get": {
+        "tags": [
+          "RxNormLive"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "maxResults",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 10
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/snomed-test/validate/{snomedCode}": {
+      "get": {
+        "tags": [
+          "SnomedTest"
+        ],
+        "parameters": [
+          {
+            "name": "snomedCode",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/snomed-test/test-common": {
+      "get": {
+        "tags": [
+          "SnomedTest"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/test/terminology/drug/{rxcui}": {
+      "get": {
+        "tags": [
+          "TestTerminology"
+        ],
+        "parameters": [
+          {
+            "name": "rxcui",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/test/terminology/interactions": {
+      "post": {
+        "tags": [
+          "TestTerminology"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InteractionRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InteractionRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/InteractionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/test/terminology/loinc/{code}": {
+      "get": {
+        "tags": [
+          "TestTerminology"
+        ],
+        "parameters": [
+          {
+            "name": "code",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/validated-lab/record": {
+      "post": {
+        "tags": [
+          "ValidatedLab"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LabResultRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LabResultRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LabResultRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AddMedicationRequest": {
+        "type": "object",
+        "properties": {
+          "medicationId": {
+            "type": "string",
+            "nullable": true
+          },
+          "rxNormCui": {
+            "type": "string",
+            "nullable": true
+          },
+          "medicationName": {
+            "type": "string",
+            "nullable": true
+          },
+          "dosageInstructions": {
+            "type": "string",
+            "nullable": true
+          },
+          "doseValue": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "doseUnit": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "BloodPressureRequest": {
+        "type": "object",
+        "properties": {
+          "patientId": {
+            "type": "string",
+            "nullable": true
+          },
+          "systolic": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "diastolic": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "measuredAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CarePlanActivityStatus": {
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "ContraindicationCheckRequest": {
+        "type": "object",
+        "properties": {
+          "patientId": {
+            "type": "string",
+            "nullable": true
+          },
+          "medicationCode": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateDiabetesCarePlanRequest": {
+        "type": "object",
+        "properties": {
+          "patientId": {
+            "type": "string",
+            "nullable": true
+          },
+          "conditionId": {
+            "type": "string",
+            "nullable": true
+          },
+          "practitionerId": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateHypertensionCarePlanRequest": {
+        "type": "object",
+        "properties": {
+          "patientId": {
+            "type": "string",
+            "nullable": true
+          },
+          "conditionId": {
+            "type": "string",
+            "nullable": true
+          },
+          "practitionerId": {
+            "type": "string",
+            "nullable": true
+          },
+          "currentSystolic": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "currentDiastolic": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DiabetesRequest": {
+        "type": "object",
+        "properties": {
+          "patientId": {
+            "type": "string",
+            "nullable": true
+          },
+          "onsetDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "withComplications": {
+            "type": "boolean"
+          },
+          "supportingObservationIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DiagnosisRequest": {
+        "type": "object",
+        "properties": {
+          "patientId": {
+            "type": "string",
+            "nullable": true
+          },
+          "conditionName": {
+            "type": "string",
+            "nullable": true
+          },
+          "snomedCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "icd10Code": {
+            "type": "string",
+            "nullable": true
+          },
+          "onsetDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "clinicalStatus": {
+            "type": "string",
+            "nullable": true
+          },
+          "severity": {
+            "type": "string",
+            "nullable": true
+          },
+          "supportingObservationIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DrugInteractionCheckRequest": {
+        "type": "object",
+        "properties": {
+          "rxNormCui1": {
+            "type": "string",
+            "nullable": true
+          },
+          "rxNormCui2": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DuplicateCheckRequest": {
+        "type": "object",
+        "properties": {
+          "patientId": {
+            "type": "string",
+            "nullable": true
+          },
+          "medicationCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "medicationName": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "GlucoseRequest": {
+        "type": "object",
+        "properties": {
+          "patientId": {
+            "type": "string",
+            "nullable": true
+          },
+          "glucoseValue": {
+            "type": "number",
+            "format": "double"
+          },
+          "isFasting": {
+            "type": "boolean"
+          },
+          "measuredAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "HbA1cRequest": {
+        "type": "object",
+        "properties": {
+          "patientId": {
+            "type": "string",
+            "nullable": true
+          },
+          "hbA1cPercentage": {
+            "type": "number",
+            "format": "double"
+          },
+          "measuredAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "HypertensionRequest": {
+        "type": "object",
+        "properties": {
+          "patientId": {
+            "type": "string",
+            "nullable": true
+          },
+          "stage": {
+            "type": "string",
+            "nullable": true
+          },
+          "onsetDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "supportingObservationIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "InteractionCheckRequest": {
+        "type": "object",
+        "properties": {
+          "patientId": {
+            "type": "string",
+            "nullable": true
+          },
+          "medicationCode": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "InteractionRequest": {
+        "type": "object",
+        "properties": {
+          "rxCuis": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "LabResultRequest": {
+        "type": "object",
+        "properties": {
+          "patientId": {
+            "type": "string",
+            "nullable": true
+          },
+          "loincCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "value": {
+            "type": "number",
+            "format": "double"
+          },
+          "unit": {
+            "type": "string",
+            "nullable": true
+          },
+          "interpretation": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "LoginRequest": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "nullable": true
+          },
+          "password": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "MedicationStatementRequest": {
+        "type": "object",
+        "properties": {
+          "patientId": {
+            "type": "string",
+            "nullable": true
+          },
+          "medicationName": {
+            "type": "string",
+            "nullable": true
+          },
+          "rxNormCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "isCurrentlyTaking": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PrescriptionCheckRequest": {
+        "type": "object",
+        "properties": {
+          "patientId": {
+            "type": "string",
+            "nullable": true
+          },
+          "medicationCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "medicationName": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PrescriptionRequest": {
+        "type": "object",
+        "properties": {
+          "patientId": {
+            "type": "string",
+            "nullable": true
+          },
+          "medicationName": {
+            "type": "string",
+            "nullable": true
+          },
+          "rxNormCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "dosageInstructions": {
+            "type": "string",
+            "nullable": true
+          },
+          "refills": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RegisterRequest": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "password": {
+            "type": "string",
+            "nullable": true
+          },
+          "firstName": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastName": {
+            "type": "string",
+            "nullable": true
+          },
+          "role": {
+            "type": "string",
+            "nullable": true
+          },
+          "licenseNumber": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RxNormInteractionRequest": {
+        "type": "object",
+        "properties": {
+          "rxCuis": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateActivityRequest": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "$ref": "#/components/schemas/CarePlanActivityStatus"
+          },
+          "notes": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "apiKey",
+        "description": "JWT Authorization header using the Bearer scheme. Enter 'Bearer' [space] and then your token",
+        "name": "Authorization",
+        "in": "header"
+      }
+    }
+  },
+  "security": [
+    {
+      "Bearer": [ ]
+    }
+  ]
+}

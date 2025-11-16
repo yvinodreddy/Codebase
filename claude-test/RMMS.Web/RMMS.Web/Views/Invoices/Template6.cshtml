@@ -1,0 +1,765 @@
+@model RMMS.Models.RiceSales
+@{
+    ViewData["Title"] = "Invoice - Detailed GST Format Template 6";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GST Tax Invoice - Detailed Format</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+
+    <style>
+        @@media print {
+            .no-print { display: none !important; }
+            body { margin: 0; }
+            @@page { margin: 0.8cm; size: A4; }
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            color: #000;
+            background: #f5f5f5;
+            font-size: 13px;
+        }
+
+        .invoice-container {
+            max-width: 950px;
+            margin: 15px auto;
+            background: white;
+            border: 2px solid #000;
+        }
+
+        .invoice-header {
+            border-bottom: 2px solid #000;
+            padding: 15px 20px;
+            background: #f9f9f9;
+        }
+
+        .company-section {
+            text-align: center;
+            border-bottom: 1px solid #666;
+            padding-bottom: 12px;
+            margin-bottom: 12px;
+        }
+
+        .company-name {
+            font-size: 22px;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .company-details {
+            font-size: 11px;
+            line-height: 1.6;
+        }
+
+        .doc-title {
+            text-align: center;
+            background: #000;
+            color: white;
+            padding: 8px;
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin: 10px 0;
+        }
+
+        .gst-info-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0;
+            border: 1px solid #000;
+            margin: 10px 0;
+        }
+
+        .gst-info-item {
+            border: 1px solid #000;
+            padding: 8px;
+            font-size: 11px;
+        }
+
+        .gst-info-item strong {
+            display: block;
+            font-weight: 700;
+            margin-bottom: 3px;
+        }
+
+        .invoice-body {
+            padding: 15px 20px;
+        }
+
+        .party-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            margin-bottom: 15px;
+        }
+
+        .party-box {
+            border: 1px solid #000;
+            padding: 12px;
+        }
+
+        .party-box h6 {
+            font-size: 11px;
+            font-weight: 700;
+            background: #000;
+            color: white;
+            padding: 5px 8px;
+            margin: -12px -12px 10px -12px;
+        }
+
+        .party-box p {
+            margin: 4px 0;
+            font-size: 11px;
+            line-height: 1.5;
+        }
+
+        .party-box .company-name-field {
+            font-weight: 700;
+            font-size: 12px;
+            margin-bottom: 6px;
+        }
+
+        .items-table {
+            width: 100%;
+            border-collapse: collapse;
+            border: 1px solid #000;
+            margin: 15px 0;
+            font-size: 10px;
+        }
+
+        .items-table th,
+        .items-table td {
+            border: 1px solid #000;
+            padding: 6px;
+            text-align: left;
+        }
+
+        .items-table thead th {
+            background: #000;
+            color: white;
+            font-weight: 700;
+            text-align: center;
+            font-size: 9px;
+            text-transform: uppercase;
+        }
+
+        .items-table tbody td {
+            vertical-align: top;
+        }
+
+        .items-table .text-center {
+            text-align: center;
+        }
+
+        .items-table .text-right {
+            text-align: right;
+        }
+
+        .product-desc {
+            font-weight: 600;
+            margin-bottom: 3px;
+        }
+
+        .product-spec {
+            font-size: 9px;
+            color: #666;
+        }
+
+        .tax-summary-section {
+            border: 1px solid #000;
+            margin: 15px 0;
+        }
+
+        .tax-summary-title {
+            background: #000;
+            color: white;
+            padding: 6px 10px;
+            font-weight: 700;
+            font-size: 11px;
+        }
+
+        .tax-summary-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .tax-summary-table th,
+        .tax-summary-table td {
+            border: 1px solid #000;
+            padding: 6px;
+            font-size: 10px;
+            text-align: center;
+        }
+
+        .tax-summary-table thead th {
+            background: #e0e0e0;
+            font-weight: 700;
+            font-size: 9px;
+        }
+
+        .totals-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 15px;
+            margin: 15px 0;
+        }
+
+        .amount-words {
+            border: 1px solid #000;
+            padding: 12px;
+        }
+
+        .amount-words h6 {
+            font-size: 10px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .amount-words p {
+            font-size: 11px;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .totals-table-container {
+            border: 1px solid #000;
+        }
+
+        .totals-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .totals-table tr {
+            border-bottom: 1px solid #000;
+        }
+
+        .totals-table tr:last-child {
+            border-bottom: none;
+        }
+
+        .totals-table td {
+            padding: 6px 10px;
+            font-size: 11px;
+        }
+
+        .totals-table td:last-child {
+            text-align: right;
+            font-weight: 600;
+        }
+
+        .totals-table .grand-total {
+            background: #000;
+            color: white;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .bank-declaration-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 15px 0;
+        }
+
+        .bank-box,
+        .declaration-box {
+            border: 1px solid #000;
+            padding: 12px;
+        }
+
+        .bank-box h6,
+        .declaration-box h6 {
+            font-size: 10px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .bank-detail {
+            font-size: 10px;
+            margin: 4px 0;
+        }
+
+        .bank-detail strong {
+            display: inline-block;
+            min-width: 100px;
+        }
+
+        .declaration-box p {
+            font-size: 9px;
+            line-height: 1.6;
+            margin: 4px 0;
+        }
+
+        .signature-section {
+            border-top: 1px solid #000;
+            padding-top: 15px;
+            margin-top: 15px;
+        }
+
+        .signatures-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .signature-box {
+            text-align: center;
+        }
+
+        .signature-line {
+            border-top: 1px solid #000;
+            margin-top: 50px;
+            padding-top: 8px;
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        .footer-section {
+            border-top: 2px solid #000;
+            padding: 10px 20px;
+            background: #f9f9f9;
+            text-align: center;
+            font-size: 9px;
+        }
+
+        .print-buttons {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .print-buttons .btn {
+            margin-left: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .highlight-box {
+            background: #fffacd;
+            border: 1px dashed #000;
+            padding: 6px;
+            margin: 5px 0;
+            font-size: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="print-buttons no-print">
+        <button class="btn btn-secondary" onclick="window.history.back()">
+            <i class="fas fa-arrow-left me-2"></i>Back
+        </button>
+        <button class="btn btn-dark" onclick="window.print()">
+            <i class="fas fa-print me-2"></i>Print Invoice
+        </button>
+        <button class="btn btn-primary" onclick="downloadPDF()">
+            <i class="fas fa-download me-2"></i>Download PDF
+        </button>
+    </div>
+
+    <div class="invoice-container" id="invoice">
+        <!-- Header -->
+        <div class="invoice-header">
+            <div class="company-section">
+                <div class="company-name">
+                    <i class="fas fa-industry"></i> RMMS RICE MILL PRIVATE LIMITED
+                </div>
+                <div class="company-details">
+                    Regd. Office: 123 Mill Road, Rice Processing District, Agricultural Zone, State - 560001, INDIA<br>
+                    Factory: 456 Industrial Area, Manufacturing Zone, State - 560010<br>
+                    Tel: +91 98765 43210 | Email: accounts@@rmmsricemill.com | Website: www.rmmsricemill.com
+                </div>
+            </div>
+
+            <div class="doc-title">TAX INVOICE</div>
+
+            <div class="gst-info-grid">
+                <div class="gst-info-item">
+                    <strong>GSTIN:</strong>
+                    29ABCDE1234F1Z5
+                </div>
+                <div class="gst-info-item">
+                    <strong>State:</strong>
+                    Karnataka (Code: 29)
+                </div>
+                <div class="gst-info-item">
+                    <strong>PAN:</strong>
+                    ABCDE1234F
+                </div>
+                <div class="gst-info-item">
+                    <strong>Invoice No:</strong>
+                    GST-2024-006
+                </div>
+                <div class="gst-info-item">
+                    <strong>Invoice Date:</strong>
+                    21-Oct-2025
+                </div>
+                <div class="gst-info-item">
+                    <strong>Place of Supply:</strong>
+                    Karnataka (29)
+                </div>
+                <div class="gst-info-item">
+                    <strong>Reverse Charge:</strong>
+                    No
+                </div>
+                <div class="gst-info-item">
+                    <strong>Due Date:</strong>
+                    05-Nov-2025
+                </div>
+                <div class="gst-info-item">
+                    <strong>Transport Mode:</strong>
+                    Road
+                </div>
+            </div>
+        </div>
+
+        <!-- Body -->
+        <div class="invoice-body">
+            <!-- Party Details -->
+            <div class="party-section">
+                <div class="party-box">
+                    <h6>BILL TO PARTY</h6>
+                    <div class="company-name-field">ABC RICE TRADERS PRIVATE LIMITED</div>
+                    <p>456 Trading Complex, Market Street</p>
+                    <p>Commercial Zone, City - 560002</p>
+                    <p>State: Karnataka, State Code: 29</p>
+                    <p style="margin-top: 8px;">
+                        <strong>GSTIN:</strong> 29XYZAB5678G1H9<br>
+                        <strong>Contact:</strong> +91 98765 12345<br>
+                        <strong>Email:</strong> accounts@@abctraders.com
+                    </p>
+                </div>
+                <div class="party-box">
+                    <h6>SHIP TO PARTY</h6>
+                    <div class="company-name-field">ABC WAREHOUSE DIVISION</div>
+                    <p>789 Storage Complex, Warehouse Area</p>
+                    <p>Industrial Zone, City - 560003</p>
+                    <p>State: Karnataka, State Code: 29</p>
+                    <p style="margin-top: 8px;">
+                        <strong>Contact Person:</strong> Mr. Ramesh Kumar<br>
+                        <strong>Mobile:</strong> +91 98765 67890<br>
+                        <strong>Delivery Note:</strong> DN-2024-123
+                    </p>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <strong>Transport Details:</strong> Vehicle No: KA-01-AB-1234 | Driver: Rajesh Singh | LR No: LR-2024-456 | E-Way Bill: 123456789012
+            </div>
+
+            <!-- Items Table with GST Details -->
+            <table class="items-table">
+                <thead>
+                    <tr>
+                        <th rowspan="2" style="width: 3%">S.No</th>
+                        <th rowspan="2" style="width: 25%">Description of Goods</th>
+                        <th rowspan="2" style="width: 8%">HSN/SAC Code</th>
+                        <th rowspan="2" style="width: 6%">Qty</th>
+                        <th rowspan="2" style="width: 6%">Unit</th>
+                        <th rowspan="2" style="width: 9%">Rate<br>(₹)</th>
+                        <th rowspan="2" style="width: 9%">Taxable Value<br>(₹)</th>
+                        <th colspan="2" style="width: 12%">CGST</th>
+                        <th colspan="2" style="width: 12%">SGST</th>
+                        <th rowspan="2" style="width: 10%">Total<br>(₹)</th>
+                    </tr>
+                    <tr>
+                        <th>Rate</th>
+                        <th>Amt</th>
+                        <th>Rate</th>
+                        <th>Amt</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="text-center">1</td>
+                        <td>
+                            <div class="product-desc">Premium Basmati Rice - 1121 Variety</div>
+                            <div class="product-spec">Grade A, Extra Long Grain, 5% Broken, Steam Processed</div>
+                            <div class="product-spec">Packing: 25 kg PP Bags with Inner Liner</div>
+                        </td>
+                        <td class="text-center">1006 30 10</td>
+                        <td class="text-center">100</td>
+                        <td class="text-center">Bags</td>
+                        <td class="text-right">1,500.00</td>
+                        <td class="text-right">1,50,000.00</td>
+                        <td class="text-center">2.5%</td>
+                        <td class="text-right">3,750.00</td>
+                        <td class="text-center">2.5%</td>
+                        <td class="text-right">3,750.00</td>
+                        <td class="text-right">1,57,500.00</td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">2</td>
+                        <td>
+                            <div class="product-desc">Sona Masoori Rice - Premium Grade</div>
+                            <div class="product-spec">Medium Grain, Raw Processed, 5% Broken</div>
+                            <div class="product-spec">Packing: 25 kg PP Bags</div>
+                        </td>
+                        <td class="text-center">1006 30 90</td>
+                        <td class="text-center">50</td>
+                        <td class="text-center">Bags</td>
+                        <td class="text-right">1,100.00</td>
+                        <td class="text-right">55,000.00</td>
+                        <td class="text-center">2.5%</td>
+                        <td class="text-right">1,375.00</td>
+                        <td class="text-center">2.5%</td>
+                        <td class="text-right">1,375.00</td>
+                        <td class="text-right">57,750.00</td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">3</td>
+                        <td>
+                            <div class="product-desc">Parboiled Rice - IR64 Variety</div>
+                            <div class="product-spec">Standard Grade, Parboiled & Dried, 5% Broken</div>
+                            <div class="product-spec">Packing: 25 kg HDPE Bags</div>
+                        </td>
+                        <td class="text-center">1006 30 20</td>
+                        <td class="text-center">30</td>
+                        <td class="text-center">Bags</td>
+                        <td class="text-right">950.00</td>
+                        <td class="text-right">28,500.00</td>
+                        <td class="text-center">2.5%</td>
+                        <td class="text-right">712.50</td>
+                        <td class="text-center">2.5%</td>
+                        <td class="text-right">712.50</td>
+                        <td class="text-right">29,925.00</td>
+                    </tr>
+                    <tr style="font-weight: 700; background: #f0f0f0;">
+                        <td colspan="6" class="text-right">TOTAL:</td>
+                        <td class="text-right">2,33,500.00</td>
+                        <td colspan="1"></td>
+                        <td class="text-right">5,837.50</td>
+                        <td colspan="1"></td>
+                        <td class="text-right">5,837.50</td>
+                        <td class="text-right">2,45,175.00</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Tax Summary -->
+            <div class="tax-summary-section">
+                <div class="tax-summary-title">TAX SUMMARY (GST Breakup)</div>
+                <table class="tax-summary-table">
+                    <thead>
+                        <tr>
+                            <th rowspan="2">HSN/SAC Code</th>
+                            <th rowspan="2">Taxable Value (₹)</th>
+                            <th colspan="2">CGST</th>
+                            <th colspan="2">SGST</th>
+                            <th colspan="2">IGST</th>
+                            <th rowspan="2">Total Tax (₹)</th>
+                        </tr>
+                        <tr>
+                            <th>Rate</th>
+                            <th>Amount</th>
+                            <th>Rate</th>
+                            <th>Amount</th>
+                            <th>Rate</th>
+                            <th>Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1006 30 10</td>
+                            <td>1,50,000.00</td>
+                            <td>2.5%</td>
+                            <td>3,750.00</td>
+                            <td>2.5%</td>
+                            <td>3,750.00</td>
+                            <td>0%</td>
+                            <td>0.00</td>
+                            <td>7,500.00</td>
+                        </tr>
+                        <tr>
+                            <td>1006 30 90</td>
+                            <td>55,000.00</td>
+                            <td>2.5%</td>
+                            <td>1,375.00</td>
+                            <td>2.5%</td>
+                            <td>1,375.00</td>
+                            <td>0%</td>
+                            <td>0.00</td>
+                            <td>2,750.00</td>
+                        </tr>
+                        <tr>
+                            <td>1006 30 20</td>
+                            <td>28,500.00</td>
+                            <td>2.5%</td>
+                            <td>712.50</td>
+                            <td>2.5%</td>
+                            <td>712.50</td>
+                            <td>0%</td>
+                            <td>0.00</td>
+                            <td>1,425.00</td>
+                        </tr>
+                        <tr style="font-weight: 700; background: #e0e0e0;">
+                            <td>TOTAL</td>
+                            <td>2,33,500.00</td>
+                            <td></td>
+                            <td>5,837.50</td>
+                            <td></td>
+                            <td>5,837.50</td>
+                            <td></td>
+                            <td>0.00</td>
+                            <td>11,675.00</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Amount in Words and Totals -->
+            <div class="totals-grid">
+                <div class="amount-words">
+                    <h6>Total Invoice Amount in Words:</h6>
+                    <p>Indian Rupees Two Lakh Forty Five Thousand One Hundred Seventy Five Only</p>
+                    <div style="margin-top: 10px; padding-top: 10px; border-top: 1px solid #ccc;">
+                        <strong>Total Quantity:</strong> 180 Bags (4,500 Kg)<br>
+                        <strong>Total Items:</strong> 3 Items
+                    </div>
+                </div>
+                <div class="totals-table-container">
+                    <table class="totals-table">
+                        <tr>
+                            <td>Taxable Amount:</td>
+                            <td>₹2,33,500.00</td>
+                        </tr>
+                        <tr>
+                            <td>CGST @@2.5%:</td>
+                            <td>₹5,837.50</td>
+                        </tr>
+                        <tr>
+                            <td>SGST @@2.5%:</td>
+                            <td>₹5,837.50</td>
+                        </tr>
+                        <tr>
+                            <td>IGST @@0%:</td>
+                            <td>₹0.00</td>
+                        </tr>
+                        <tr>
+                            <td>Round Off:</td>
+                            <td>₹0.00</td>
+                        </tr>
+                        <tr class="grand-total">
+                            <td>GRAND TOTAL:</td>
+                            <td>₹2,45,175.00</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Bank Details and Declaration -->
+            <div class="bank-declaration-grid">
+                <div class="bank-box">
+                    <h6>Bank Details for Payment:</h6>
+                    <div class="bank-detail">
+                        <strong>Bank Name:</strong> State Bank of India
+                    </div>
+                    <div class="bank-detail">
+                        <strong>Branch:</strong> Agricultural Zone Branch
+                    </div>
+                    <div class="bank-detail">
+                        <strong>Account Name:</strong> RMMS Rice Mill Pvt. Ltd.
+                    </div>
+                    <div class="bank-detail">
+                        <strong>Account No:</strong> 1234567890123456
+                    </div>
+                    <div class="bank-detail">
+                        <strong>IFSC Code:</strong> SBIN0001234
+                    </div>
+                    <div class="bank-detail">
+                        <strong>Account Type:</strong> Current Account
+                    </div>
+                </div>
+                <div class="declaration-box">
+                    <h6>Declaration & Terms:</h6>
+                    <p>
+                        1. Certified that the particulars given above are true and correct.<br>
+                        2. Payment due within 15 days from invoice date.<br>
+                        3. Interest @@18% p.a. on delayed payments.<br>
+                        4. Goods once sold will not be taken back.<br>
+                        5. Subject to Karnataka jurisdiction.<br>
+                        6. All disputes subject to arbitration.<br>
+                        7. E&OE (Errors & Omissions Excepted)
+                    </p>
+                </div>
+            </div>
+
+            <!-- Signature Section -->
+            <div class="signature-section">
+                <div class="signatures-grid">
+                    <div class="signature-box">
+                        <div style="font-size: 10px; margin-bottom: 5px;">Customer's Signature</div>
+                        <div class="signature-line">
+                            (Authorized Signatory with Stamp)
+                        </div>
+                    </div>
+                    <div class="signature-box">
+                        <div style="font-size: 10px; margin-bottom: 5px;">For RMMS RICE MILL PRIVATE LIMITED</div>
+                        <div class="signature-line">
+                            (Authorized Signatory)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer-section">
+            <p><strong>This is a computer-generated invoice and does not require a physical signature.</strong></p>
+            <p>Subject to Karnataka Jurisdiction | Registered Office: 123 Mill Road, Agricultural Zone, State - 560001</p>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+    <script>
+        function downloadPDF() {
+            const { jsPDF } = window.jspdf;
+
+            $('.print-buttons').hide();
+
+            html2canvas(document.querySelector('#invoice'), {
+                scale: 2,
+                useCORS: true,
+                backgroundColor: '#ffffff'
+            }).then(canvas => {
+                const imgData = canvas.toDataURL('image/png');
+                const pdf = new jsPDF('p', 'mm', 'a4');
+
+                const imgWidth = 210;
+                const pageHeight = 297;
+                const imgHeight = (canvas.height * imgWidth) / canvas.width;
+                let heightLeft = imgHeight;
+                let position = 0;
+
+                pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                heightLeft -= pageHeight;
+
+                while (heightLeft >= 0) {
+                    position = heightLeft - imgHeight;
+                    pdf.addPage();
+                    pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                    heightLeft -= pageHeight;
+                }
+
+                pdf.save('gst-invoice-GST-2024-006.pdf');
+                $('.print-buttons').show();
+            });
+        }
+    </script>
+</body>
+</html>

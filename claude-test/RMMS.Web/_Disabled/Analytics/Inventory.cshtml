@@ -1,0 +1,271 @@
+@model RMMS.Services.Services.Analytics.InventoryDashboardDto
+@{
+    ViewData["Title"] = "Inventory Analytics";
+}
+
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <h2>Inventory Analytics Dashboard</h2>
+            <p class="text-muted">Real-time inventory insights, ABC classification, and stock alerts</p>
+        </div>
+        <div class="col-md-4 text-end">
+            <a href="@Url.Action("Index", "Analytics")" class="btn btn-secondary">
+                <i class="bi bi-arrow-left"></i> Back to Analytics
+            </a>
+        </div>
+    </div>
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+    }
+
+    @if (Model != null)
+    {
+        <!-- Key Metrics -->
+        <div class="row mb-4">
+            <div class="col-md-3">
+                <div class="card bg-primary text-white">
+                    <div class="card-body">
+                        <h6>Total Inventory Value</h6>
+                        <h3>$@Model.TotalInventoryValue.ToString("N2")</h3>
+                        <small>Current valuation</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card bg-success text-white">
+                    <div class="card-body">
+                        <h6>Total SKUs</h6>
+                        <h3>@Model.TotalSKUs</h3>
+                        <small>Unique products</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card bg-info text-white">
+                    <div class="card-body">
+                        <h6>Turnover Ratio</h6>
+                        <h3>@Model.InventoryTurnoverRatio.ToString("N2")</h3>
+                        <small>Annual turnover</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card bg-warning">
+                    <div class="card-body">
+                        <h6>Days Outstanding</h6>
+                        <h3>@Model.DaysInventoryOutstanding</h3>
+                        <small>Average days</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stock Alerts -->
+        <div class="row mb-4">
+            <div class="col-md-3">
+                <div class="card border-warning">
+                    <div class="card-body">
+                        <i class="bi bi-exclamation-triangle text-warning" style="font-size: 2rem;"></i>
+                        <h3 class="mt-2">@Model.LowStockItems</h3>
+                        <p class="mb-0">Low Stock Items</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card border-danger">
+                    <div class="card-body">
+                        <i class="bi bi-x-circle text-danger" style="font-size: 2rem;"></i>
+                        <h3 class="mt-2">@Model.OutOfStockItems</h3>
+                        <p class="mb-0">Out of Stock</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card border-info">
+                    <div class="card-body">
+                        <i class="bi bi-box-seam text-info" style="font-size: 2rem;"></i>
+                        <h3 class="mt-2">@Model.OverstockItems</h3>
+                        <p class="mb-0">Overstock Items</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card border-secondary">
+                    <div class="card-body">
+                        <i class="bi bi-archive text-secondary" style="font-size: 2rem;"></i>
+                        <h3 class="mt-2">@Model.DeadStockItems</h3>
+                        <p class="mb-0">Dead Stock (90+ days)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reorder Alerts -->
+        @if (Model.ReorderAlerts != null && Model.ReorderAlerts.Any())
+        {
+            <div class="row mb-4">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header bg-warning">
+                            <h5 class="mb-0">Top Priority Reorder Alerts</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th>Product</th>
+                                            <th>Current Stock</th>
+                                            <th>Reorder Point</th>
+                                            <th>Days to Stockout</th>
+                                            <th>EOQ</th>
+                                            <th>Urgency</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var alert in Model.ReorderAlerts.Take(10))
+                                        {
+                                            var urgencyClass = alert.UrgencyLevel switch
+                                            {
+                                                "Critical" => "danger",
+                                                "High" => "warning",
+                                                "Medium" => "info",
+                                                _ => "secondary"
+                                            };
+
+                                            <tr>
+                                                <td>@alert.ProductName</td>
+                                                <td>@alert.CurrentStock.ToString("N2")</td>
+                                                <td>@alert.ReorderPoint.ToString("N2")</td>
+                                                <td>@alert.DaysUntilStockout</td>
+                                                <td>@alert.EconomicOrderQuantity.ToString("N2")</td>
+                                                <td><span class="badge bg-@urgencyClass">@alert.UrgencyLevel</span></td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                            <a href="@Url.Action("StockAlerts", "Analytics")" class="btn btn-warning">
+                                View All Alerts
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+        <!-- ABC Classification Summary -->
+        @if (Model.ABCAnalysis != null && Model.ABCAnalysis.Any())
+        {
+            var classA = Model.ABCAnalysis.Count(a => a.ABCClass == "A");
+            var classB = Model.ABCAnalysis.Count(a => a.ABCClass == "B");
+            var classC = Model.ABCAnalysis.Count(a => a.ABCClass == "C");
+
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header bg-info text-white">
+                            <h5 class="mb-0">ABC Classification</h5>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="abcChart" height="150"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header bg-success text-white">
+                            <h5 class="mb-0">Stock Aging Distribution</h5>
+                        </div>
+                        <div class="card-body">
+                            @if (Model.AgingAnalysis != null && Model.AgingAnalysis.Any())
+                            {
+                                var aging = Model.AgingAnalysis.GroupBy(a => a.AgingBucket).Select(g => new { Bucket = g.Key, Count = g.Count() });
+                                <canvas id="agingChart" height="150"></canvas>
+                            }
+                            else
+                            {
+                                <p>No aging data available</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+
+    <!-- Quick Links -->
+    <div class="row">
+        <div class="col-md-3">
+            <a href="@Url.Action("StockAging", "Analytics")" class="btn btn-outline-primary w-100 mb-2">
+                <i class="bi bi-clock-history"></i> Stock Aging Analysis
+            </a>
+        </div>
+        <div class="col-md-3">
+            <a href="@Url.Action("ABCClassification", "Analytics")" class="btn btn-outline-success w-100 mb-2">
+                <i class="bi bi-bar-chart"></i> ABC Classification
+            </a>
+        </div>
+        <div class="col-md-3">
+            <a href="@Url.Action("StockMovement", "Analytics")" class="btn btn-outline-info w-100 mb-2">
+                <i class="bi bi-arrow-left-right"></i> Stock Movement
+            </a>
+        </div>
+        <div class="col-md-3">
+            <a href="@Url.Action("StockAlerts", "Analytics")" class="btn btn-outline-warning w-100 mb-2">
+                <i class="bi bi-bell"></i> All Stock Alerts
+            </a>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        @if (Model != null && Model.ABCAnalysis != null && Model.ABCAnalysis.Any())
+        {
+            var classA = Model.ABCAnalysis.Count(a => a.ABCClass == "A");
+            var classB = Model.ABCAnalysis.Count(a => a.ABCClass == "B");
+            var classC = Model.ABCAnalysis.Count(a => a.ABCClass == "C");
+
+            <text>
+            // ABC Classification Chart
+            const abcCtx = document.getElementById('abcChart').getContext('2d');
+            new Chart(abcCtx, {
+                type: 'pie',
+                data: {
+                    labels: ['Class A (High Value)', 'Class B (Medium Value)', 'Class C (Low Value)'],
+                    datasets: [{
+                        data: [@classA, @classB, @classC],
+                        backgroundColor: ['#dc3545', '#ffc107', '#28a745']
+                    }]
+                }
+            });
+            </text>
+
+            if (Model.AgingAnalysis != null && Model.AgingAnalysis.Any())
+            {
+                var aging = Model.AgingAnalysis.GroupBy(a => a.AgingBucket).OrderBy(g => g.Key).ToList();
+                <text>
+                // Aging Chart
+                const agingCtx = document.getElementById('agingChart').getContext('2d');
+                new Chart(agingCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: [@Html.Raw(string.Join(",", aging.Select(g => $"'{g.Key}'")))],
+                        datasets: [{
+                            label: 'Number of Items',
+                            data: [@Html.Raw(string.Join(",", aging.Select(g => g.Count())))],
+                            backgroundColor: '#17a2b8'
+                        }]
+                    }
+                });
+                </text>
+            }
+        }
+    </script>
+}

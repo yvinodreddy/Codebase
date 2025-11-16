@@ -1,0 +1,187 @@
+@model RMMS.Models.Inventory.Warehouse
+@{
+    ViewData["Title"] = "Create Warehouse";
+}
+
+<div class="container-fluid">
+    <h2><i class="fas fa-warehouse"></i> Create New Warehouse</h2>
+    <hr />
+
+    <form asp-action="Create" method="post">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Warehouse Information</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label asp-for="WarehouseCode" class="form-label"></label>
+                                <input asp-for="WarehouseCode" class="form-control" readonly />
+                                <span asp-validation-for="WarehouseCode" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="WarehouseName" class="form-label"></label>
+                                <input asp-for="WarehouseName" class="form-control" required />
+                                <span asp-validation-for="WarehouseName" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label asp-for="WarehouseType" class="form-label"></label>
+                                <select asp-for="WarehouseType" class="form-select">
+                                    <option value="">Select Type</option>
+                                    <option value="Main Godown">Main Godown</option>
+                                    <option value="Sub Godown">Sub Godown</option>
+                                    <option value="Open Storage">Open Storage</option>
+                                    <option value="Cold Storage">Cold Storage</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="Status" class="form-label"></label>
+                                <select asp-for="Status" class="form-select">
+                                    <option value="Active">Active</option>
+                                    <option value="Inactive">Inactive</option>
+                                    <option value="Maintenance">Maintenance</option>
+                                    <option value="Full">Full</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Location" class="form-label"></label>
+                            <input asp-for="Location" class="form-control" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Address" class="form-label"></label>
+                            <textarea asp-for="Address" class="form-control" rows="2"></textarea>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <label asp-for="City" class="form-label"></label>
+                                <input asp-for="City" class="form-control" />
+                            </div>
+                            <div class="col-md-4">
+                                <label asp-for="State" class="form-label"></label>
+                                <input asp-for="State" class="form-control" />
+                            </div>
+                            <div class="col-md-4">
+                                <label asp-for="Pincode" class="form-label"></label>
+                                <input asp-for="Pincode" class="form-control" maxlength="10" />
+                            </div>
+                        </div>
+
+                        <h6 class="mt-4 mb-3">Capacity Information</h6>
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <label asp-for="TotalCapacity" class="form-label"></label>
+                                <input asp-for="TotalCapacity" class="form-control" type="number" step="0.01" required />
+                                <span asp-validation-for="TotalCapacity" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-4">
+                                <label asp-for="UsedCapacity" class="form-label"></label>
+                                <input asp-for="UsedCapacity" class="form-control" type="number" step="0.01" value="0" />
+                            </div>
+                            <div class="col-md-4">
+                                <label asp-for="AvailableCapacity" class="form-label"></label>
+                                <input asp-for="AvailableCapacity" class="form-control" type="number" step="0.01" readonly />
+                                <small class="text-muted">Auto-calculated</small>
+                            </div>
+                        </div>
+
+                        <h6 class="mt-4 mb-3">Contact Information</h6>
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <label asp-for="ContactPerson" class="form-label"></label>
+                                <input asp-for="ContactPerson" class="form-control" />
+                            </div>
+                            <div class="col-md-4">
+                                <label asp-for="Mobile" class="form-label"></label>
+                                <input asp-for="Mobile" class="form-control" maxlength="15" />
+                            </div>
+                            <div class="col-md-4">
+                                <label asp-for="Email" class="form-label"></label>
+                                <input asp-for="Email" class="form-control" type="email" />
+                            </div>
+                        </div>
+
+                        <h6 class="mt-4 mb-3">Environmental Controls</h6>
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input asp-for="IsTemperatureControlled" class="form-check-input" type="checkbox" />
+                                <label asp-for="IsTemperatureControlled" class="form-check-label"></label>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label asp-for="Temperature" class="form-label"></label>
+                                <input asp-for="Temperature" class="form-control" type="number" step="0.01" />
+                                <small class="text-muted">Current temperature in °C</small>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="Humidity" class="form-label"></label>
+                                <input asp-for="Humidity" class="form-control" type="number" step="0.01" />
+                                <small class="text-muted">Current humidity in %</small>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Remarks" class="form-label"></label>
+                            <textarea asp-for="Remarks" class="form-control" rows="3"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h5>Actions</h5>
+                    </div>
+                    <div class="card-body">
+                        <button type="submit" class="btn btn-success w-100 mb-2">
+                            <i class="fas fa-save"></i> Save Warehouse
+                        </button>
+                        <a asp-action="Index" class="btn btn-secondary w-100">
+                            <i class="fas fa-times"></i> Cancel
+                        </a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Help</h5>
+                    </div>
+                    <div class="card-body">
+                        <small class="text-muted">
+                            <ul class="mb-0">
+                                <li>Warehouse Code is auto-generated</li>
+                                <li>Total Capacity is in Metric Tons (MT)</li>
+                                <li>Available capacity is automatically calculated</li>
+                                <li>Temperature is optional unless temperature-controlled</li>
+                            </ul>
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        // Auto-calculate available capacity
+        $('#TotalCapacity, #UsedCapacity').on('input', function() {
+            var total = parseFloat($('#TotalCapacity').val()) || 0;
+            var used = parseFloat($('#UsedCapacity').val()) || 0;
+            var available = total - used;
+            $('#AvailableCapacity').val(available.toFixed(2));
+        });
+    </script>
+}

@@ -1,0 +1,367 @@
+# SWARMCARE Agents Configuration
+# Phase 02: Production-Ready Agent Configuration
+# Version: 2.1
+# Last Updated: 2025-10-28
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: swarmcare-agents-config
+  namespace: swarmcare-production
+  labels:
+    app: swarmcare
+    component: agents
+    phase: "02"
+    version: "2.1"
+data:
+  # Global Agent Configuration
+  agent_framework_version: "100%"
+  max_parallel_agents: "6"
+  enable_monitoring: "true"
+  enable_logging: "true"
+  log_level: "INFO"
+
+  # Knowledge Agent Configuration
+  knowledge_agent.yaml: |
+    name: "Knowledge Agent"
+    type: "knowledge_retrieval"
+    enabled: true
+    priority: "high"
+    performance_sla: "2000ms"
+    retry_attempts: 3
+    timeout: 5000
+
+    capabilities:
+      - medical_literature_search
+      - evidence_based_medicine
+      - clinical_guidelines
+      - drug_information
+      - differential_diagnosis
+
+    integrations:
+      neo4j:
+        enabled: true
+        connection_string: "${NEO4J_URI}"
+        database: "medical_ontologies"
+        ontology_count: 13
+
+      rag_heat:
+        enabled: true
+        endpoint: "${RAG_HEAT_ENDPOINT}"
+        api_key: "${RAG_HEAT_API_KEY}"
+
+      medical_databases:
+        pubmed: true
+        medline: true
+        cochrane: true
+
+    guardrails:
+      - medical_accuracy
+      - evidence_verification
+      - source_citation
+
+    resource_limits:
+      cpu: "2"
+      memory: "4Gi"
+
+    resource_requests:
+      cpu: "1"
+      memory: "2Gi"
+
+  # Case Agent Configuration
+  case_agent.yaml: |
+    name: "Case Agent"
+    type: "case_analysis"
+    enabled: true
+    priority: "critical"
+    performance_sla: "3000ms"
+    retry_attempts: 3
+    timeout: 10000
+
+    capabilities:
+      - patient_case_summarization
+      - medical_history_analysis
+      - clinical_note_generation
+      - ehr_data_extraction
+      - care_plan_recommendations
+
+    integrations:
+      ehr_systems:
+        epic:
+          enabled: true
+          endpoint: "${EPIC_FHIR_ENDPOINT}"
+        cerner:
+          enabled: true
+          endpoint: "${CERNER_FHIR_ENDPOINT}"
+
+      hl7_fhir:
+        version: "R4"
+        enabled: true
+
+      coding_systems:
+        icd10: true
+        cpt: true
+        snomed: true
+
+    guardrails:
+      - hipaa_compliance
+      - phi_protection
+      - audit_logging
+
+    security:
+      encryption_at_rest: true
+      encryption_in_transit: true
+      audit_all_access: true
+
+    resource_limits:
+      cpu: "3"
+      memory: "6Gi"
+
+    resource_requests:
+      cpu: "1.5"
+      memory: "3Gi"
+
+  # Conversation Agent Configuration
+  conversation_agent.yaml: |
+    name: "Conversation Agent"
+    type: "natural_language"
+    enabled: true
+    priority: "high"
+    performance_sla: "1000ms"
+    retry_attempts: 2
+    timeout: 3000
+
+    capabilities:
+      - natural_language_understanding
+      - multi_turn_conversation
+      - context_aware_responses
+      - medical_terminology_translation
+      - patient_education
+
+    integrations:
+      voice_ai:
+        enabled: true
+        provider: "azure_speech"
+        languages: ["en-US", "es-US"]
+
+      chat_interface:
+        enabled: true
+        websocket_endpoint: "${CHAT_WS_ENDPOINT}"
+
+      patient_portal:
+        enabled: true
+        portal_api: "${PORTAL_API_ENDPOINT}"
+
+    guardrails:
+      - content_safety
+      - medical_disclaimer
+      - empathy_checks
+
+    nlp_models:
+      intent_recognition: "bert-medical-v2"
+      sentiment_analysis: "roberta-clinical"
+      entity_extraction: "biobert"
+
+    resource_limits:
+      cpu: "2"
+      memory: "4Gi"
+
+    resource_requests:
+      cpu: "1"
+      memory: "2Gi"
+
+  # Compliance Agent Configuration
+  compliance_agent.yaml: |
+    name: "Compliance Agent"
+    type: "regulatory_compliance"
+    enabled: true
+    priority: "critical"
+    performance_sla: "100ms"
+    retry_attempts: 1
+    timeout: 1000
+
+    capabilities:
+      - hipaa_compliance_verification
+      - phi_detection
+      - audit_trail_generation
+      - security_policy_enforcement
+      - regulatory_reporting
+
+    integrations:
+      security_monitoring:
+        splunk:
+          enabled: true
+          endpoint: "${SPLUNK_HEC_ENDPOINT}"
+        siem:
+          enabled: true
+          provider: "azure_sentinel"
+
+      audit_logging:
+        enabled: true
+        retention_days: 2555  # 7 years
+        backend: "elasticsearch"
+
+      encryption:
+        kms_provider: "azure_key_vault"
+        key_rotation_days: 90
+
+    guardrails:
+      - strict_phi_protection
+      - access_control
+      - audit_all_actions
+
+    compliance_frameworks:
+      - HIPAA
+      - HITECH
+      - GDPR
+      - SOC2
+
+    resource_limits:
+      cpu: "1"
+      memory: "2Gi"
+
+    resource_requests:
+      cpu: "500m"
+      memory: "1Gi"
+
+  # Podcast Agent Configuration
+  podcast_agent.yaml: |
+    name: "Podcast Agent"
+    type: "content_generation"
+    enabled: true
+    priority: "medium"
+    performance_sla: "30000ms"
+    retry_attempts: 2
+    timeout: 60000
+
+    capabilities:
+      - ehr_to_narrative_conversion
+      - medical_content_scripting
+      - multi_voice_dialogue
+      - clinical_insight_summarization
+      - patient_friendly_explanations
+
+    integrations:
+      tts_systems:
+        azure_tts:
+          enabled: true
+          voice_models: ["neural", "premium"]
+        elevenlabs:
+          enabled: false
+
+      audio_processing:
+        ffmpeg_enabled: true
+        normalize_audio: true
+        bitrate: "192k"
+
+      cdn:
+        provider: "azure_cdn"
+        cache_ttl: 86400
+
+    guardrails:
+      - content_accuracy
+      - patient_privacy
+      - medical_appropriateness
+
+    content_settings:
+      max_duration_minutes: 30
+      language: "en-US"
+      style: "professional"
+      include_medical_disclaimer: true
+
+    resource_limits:
+      cpu: "4"
+      memory: "8Gi"
+
+    resource_requests:
+      cpu: "2"
+      memory: "4Gi"
+
+  # QA Agent Configuration
+  qa_agent.yaml: |
+    name: "QA Agent"
+    type: "quality_assurance"
+    enabled: true
+    priority: "critical"
+    performance_sla: "500ms"
+    retry_attempts: 1
+    timeout: 2000
+
+    capabilities:
+      - ai_output_validation
+      - medical_accuracy_verification
+      - clinical_guideline_compliance
+      - error_detection
+      - performance_monitoring
+
+    integrations:
+      verification_system:
+        multi_method_verifier: true
+        rules_engine: true
+        ml_validation: true
+
+      clinical_decision_support:
+        enabled: true
+        guideline_databases:
+          - uptodate
+          - clinical_key
+          - dynamed
+
+      monitoring:
+        prometheus:
+          enabled: true
+          port: 9090
+        grafana:
+          enabled: true
+          dashboards: ["agent_performance", "medical_accuracy"]
+
+    guardrails:
+      - comprehensive_validation
+      - error_detection
+      - continuous_monitoring
+
+    validation_rules:
+      medical_accuracy_threshold: 0.95
+      completeness_threshold: 0.90
+      consistency_threshold: 0.85
+
+    resource_limits:
+      cpu: "2"
+      memory: "4Gi"
+
+    resource_requests:
+      cpu: "1"
+      memory: "2Gi"
+
+  # Shared Configuration
+  shared_config.yaml: |
+    environment: "production"
+    region: "us-east-1"
+
+    monitoring:
+      enabled: true
+      prometheus_endpoint: "${PROMETHEUS_ENDPOINT}"
+      grafana_endpoint: "${GRAFANA_ENDPOINT}"
+      alert_manager: "${ALERT_MANAGER_ENDPOINT}"
+
+    logging:
+      level: "INFO"
+      format: "json"
+      destination: "elasticsearch"
+      elasticsearch_endpoint: "${ES_ENDPOINT}"
+
+    security:
+      tls_enabled: true
+      mutual_tls: true
+      cert_manager: "cert-manager"
+
+    networking:
+      service_mesh: "istio"
+      load_balancer: "azure_lb"
+      ingress_controller: "nginx"
+
+    storage:
+      persistent_volume: true
+      storage_class: "azure-disk-premium"
+      backup_enabled: true
+      backup_retention_days: 30

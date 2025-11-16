@@ -1,0 +1,152 @@
+[
+  {
+    "patient_id": "P1001",
+    "prediction": "High Risk",
+    "probability": 0.87,
+    "lime_explanation": {
+      "age > 70": 0.31,
+      "bp_systolic > 160": 0.24,
+      "oxygen_sat < 92": 0.22,
+      "comorbidities >= 3": 0.19,
+      "heart_rate > 100": -0.08
+    },
+    "local_model_r2": 0.92,
+    "intercept": 0.15,
+    "timestamp": "2025-10-31T10:15:23Z"
+  },
+  {
+    "patient_id": "P1002",
+    "prediction": "Low Risk",
+    "probability": 0.22,
+    "lime_explanation": {
+      "age <= 50": -0.28,
+      "bp_systolic <= 130": -0.21,
+      "oxygen_sat >= 96": -0.19,
+      "comorbidities == 0": -0.16,
+      "heart_rate <= 80": -0.12
+    },
+    "local_model_r2": 0.89,
+    "intercept": 0.48,
+    "timestamp": "2025-10-31T10:16:45Z"
+  },
+  {
+    "patient_id": "P1003",
+    "prediction": "Medium Risk",
+    "probability": 0.58,
+    "lime_explanation": {
+      "age > 60": 0.18,
+      "bp_systolic > 140": 0.14,
+      "oxygen_sat < 94": 0.11,
+      "comorbidities == 2": 0.09,
+      "heart_rate > 85": 0.06
+    },
+    "local_model_r2": 0.91,
+    "intercept": 0.32,
+    "timestamp": "2025-10-31T10:18:12Z"
+  },
+  {
+    "patient_id": "P1004",
+    "prediction": "High Risk",
+    "probability": 0.91,
+    "lime_explanation": {
+      "age > 75": 0.35,
+      "bp_systolic > 170": 0.28,
+      "oxygen_sat < 90": 0.26,
+      "comorbidities >= 4": 0.23,
+      "heart_rate > 110": 0.11
+    },
+    "local_model_r2": 0.94,
+    "intercept": 0.12,
+    "timestamp": "2025-10-31T10:19:34Z"
+  },
+  {
+    "patient_id": "P1005",
+    "prediction": "Low Risk",
+    "probability": 0.18,
+    "lime_explanation": {
+      "age <= 45": -0.32,
+      "bp_systolic <= 125": -0.25,
+      "oxygen_sat >= 97": -0.22,
+      "comorbidities == 0": -0.19,
+      "heart_rate <= 75": -0.14
+    },
+    "local_model_r2": 0.88,
+    "intercept": 0.51,
+    "timestamp": "2025-10-31T10:21:08Z"
+  },
+  {
+    "patient_id": "P1006",
+    "prediction": "Medium Risk",
+    "probability": 0.62,
+    "lime_explanation": {
+      "age > 65": 0.21,
+      "bp_systolic > 145": 0.17,
+      "oxygen_sat < 93": 0.13,
+      "comorbidities == 2": 0.11,
+      "heart_rate > 90": 0.08
+    },
+    "local_model_r2": 0.90,
+    "intercept": 0.29,
+    "timestamp": "2025-10-31T10:22:41Z"
+  },
+  {
+    "patient_id": "P1007",
+    "prediction": "High Risk",
+    "probability": 0.84,
+    "lime_explanation": {
+      "age > 72": 0.29,
+      "bp_systolic > 165": 0.25,
+      "oxygen_sat < 91": 0.24,
+      "comorbidities >= 3": 0.21,
+      "heart_rate > 105": 0.09
+    },
+    "local_model_r2": 0.93,
+    "intercept": 0.14,
+    "timestamp": "2025-10-31T10:24:15Z"
+  },
+  {
+    "patient_id": "P1008",
+    "prediction": "Low Risk",
+    "probability": 0.25,
+    "lime_explanation": {
+      "age <= 52": -0.24,
+      "bp_systolic <= 132": -0.19,
+      "oxygen_sat >= 96": -0.17,
+      "comorbidities == 1": -0.14,
+      "heart_rate <= 78": -0.11
+    },
+    "local_model_r2": 0.87,
+    "intercept": 0.46,
+    "timestamp": "2025-10-31T10:25:52Z"
+  },
+  {
+    "patient_id": "P1009",
+    "prediction": "Medium Risk",
+    "probability": 0.55,
+    "lime_explanation": {
+      "age > 58": 0.16,
+      "bp_systolic > 138": 0.13,
+      "oxygen_sat < 95": 0.10,
+      "comorbidities == 1": 0.08,
+      "heart_rate > 83": 0.05
+    },
+    "local_model_r2": 0.89,
+    "intercept": 0.35,
+    "timestamp": "2025-10-31T10:27:29Z"
+  },
+  {
+    "patient_id": "P1010",
+    "prediction": "High Risk",
+    "probability": 0.89,
+    "lime_explanation": {
+      "age > 74": 0.33,
+      "bp_systolic > 168": 0.27,
+      "oxygen_sat < 91": 0.25,
+      "comorbidities >= 4": 0.22,
+      "heart_rate > 108": 0.10
+    },
+    "local_model_r2": 0.95,
+    "intercept": 0.13,
+    "timestamp": "2025-10-31T10:29:03Z"
+  }
+]

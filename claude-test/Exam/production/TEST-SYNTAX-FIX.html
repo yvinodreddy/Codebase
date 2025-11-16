@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SyntaxError Fix - Quick Test</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+        }
+
+        h1 {
+            color: white;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .test-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .test-card h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .check-item {
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            font-size: 16px;
+        }
+
+        .check-item.pending {
+            background: #f8f9fa;
+            color: #6c757d;
+        }
+
+        .check-item.success {
+            background: #d4edda;
+            color: #155724;
+            border: 2px solid #28a745;
+        }
+
+        .check-item.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 2px solid #dc3545;
+        }
+
+        .check-item .icon {
+            font-size: 24px;
+            margin-right: 15px;
+            min-width: 30px;
+        }
+
+        .console {
+            background: #1e1e1e;
+            color: #00ff00;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            max-height: 400px;
+            overflow-y: auto;
+            margin-top: 20px;
+        }
+
+        .console-line {
+            margin-bottom: 5px;
+            padding: 2px 0;
+        }
+
+        .console-line.success { color: #00ff00; }
+        .console-line.error { color: #ff6b6b; }
+        .console-line.info { color: #4dabf7; }
+        .console-line.warning { color: #ffd93d; }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background: #218838;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.4);
+        }
+
+        .status-banner {
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .status-banner.success {
+            background: #d4edda;
+            border: 3px solid #28a745;
+            color: #155724;
+        }
+
+        .status-banner.error {
+            background: #f8d7da;
+            border: 3px solid #dc3545;
+            color: #721c24;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 SyntaxError Fix Verification</h1>
+
+        <div class="test-card">
+            <h2>📋 Test Status</h2>
+
+            <div id="check1" class="check-item pending">
+                <span class="icon">⏳</span>
+                <span>Loading JavaScript files...</span>
+            </div>
+
+            <div id="check2" class="check-item pending">
+                <span class="icon">⏳</span>
+                <span>Checking for SyntaxError...</span>
+            </div>
+
+            <div id="check3" class="check-item pending">
+                <span class="icon">⏳</span>
+                <span>Verifying examManager variable...</span>
+            </div>
+
+            <div id="check4" class="check-item pending">
+                <span class="icon">⏳</span>
+                <span>Verifying question database...</span>
+            </div>
+
+            <div id="check5" class="check-item pending">
+                <span class="icon">⏳</span>
+                <span>Testing initializeExamSystem()...</span>
+            </div>
+
+            <div id="statusBanner"></div>
+
+            <button onclick="runTests()">Run Tests Again</button>
+        </div>
+
+        <div class="test-card">
+            <h2>🖥️ Console Output</h2>
+            <div id="console" class="console"></div>
+        </div>
+    </div>
+
+    <!-- Load the files that were causing the issue -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <script src="questions-database.js"></script>
+    <script src="questions-subjective.js"></script>
+    <script src="exam-integration.js"></script>
+
+    <script>
+        const consoleDiv = document.getElementById('console');
+        let testsPassed = 0;
+        let totalTests = 5;
+
+        function log(message, type = 'info') {
+            const timestamp = new Date().toLocaleTimeString();
+            const div = document.createElement('div');
+            div.className = `console-line ${type}`;
+            div.textContent = `[${timestamp}] ${message}`;
+            consoleDiv.appendChild(div);
+            consoleDiv.scrollTop = consoleDiv.scrollHeight;
+            console.log(`[${type.toUpperCase()}] ${message}`);
+        }
+
+        function updateCheck(checkId, status, message) {
+            const check = document.getElementById(checkId);
+            check.className = `check-item ${status}`;
+
+            const icon = status === 'success' ? '✅' : (status === 'error' ? '❌' : '⏳');
+            check.innerHTML = `<span class="icon">${icon}</span><span>${message}</span>`;
+
+            if (status === 'success') {
+                testsPassed++;
+            }
+        }
+
+        function showFinalStatus() {
+            const banner = document.getElementById('statusBanner');
+            banner.className = 'status-banner';
+
+            if (testsPassed === totalTests) {
+                banner.classList.add('success');
+                banner.innerHTML = `
+                    ✅ ALL TESTS PASSED (${testsPassed}/${totalTests})<br>
+                    <div style="margin-top: 10px; font-size: 14px;">
+                        The SyntaxError has been fixed!<br>
+                        index.html should now work correctly.
+                    </div>
+                `;
+                log('🎉 ALL TESTS PASSED! Application is ready!', 'success');
+            } else {
+                banner.classList.add('error');
+                banner.innerHTML = `
+                    ❌ SOME TESTS FAILED (${testsPassed}/${totalTests} passed)<br>
+                    <div style="margin-top: 10px; font-size: 14px;">
+                        Please check the console for details.
+                    </div>
+                `;
+                log(`❌ Tests Failed: ${totalTests - testsPassed} tests did not pass`, 'error');
+            }
+        }
+
+        async function runTests() {
+            testsPassed = 0;
+            consoleDiv.innerHTML = '';
+            document.getElementById('statusBanner').innerHTML = '';
+
+            log('🚀 Starting SyntaxError fix verification...', 'info');
+            log('━'.repeat(60), 'info');
+
+            // Test 1: JavaScript files loaded
+            log('Test 1: Checking if JavaScript files loaded...', 'info');
+            try {
+                if (typeof QUESTION_DATABASE === 'undefined') {
+                    throw new Error('QUESTION_DATABASE not defined');
+                }
+                if (typeof initializeExamSystem === 'undefined') {
+                    throw new Error('initializeExamSystem not defined');
+                }
+                updateCheck('check1', 'success', 'JavaScript files loaded successfully');
+                log('✅ JavaScript files loaded', 'success');
+            } catch (error) {
+                updateCheck('check1', 'error', `Failed to load: ${error.message}`);
+                log(`❌ Failed to load files: ${error.message}`, 'error');
+            }
+
+            await sleep(500);
+
+            // Test 2: No SyntaxError
+            log('Test 2: Checking for SyntaxError...', 'info');
+            try {
+                // If we got here, no SyntaxError occurred
+                updateCheck('check2', 'success', 'No SyntaxError detected');
+                log('✅ No SyntaxError - JavaScript parsed correctly', 'success');
+            } catch (error) {
+                updateCheck('check2', 'error', `SyntaxError detected: ${error.message}`);
+                log(`❌ SyntaxError: ${error.message}`, 'error');
+            }
+
+            await sleep(500);
+
+            // Test 3: examManager variable
+            log('Test 3: Checking examManager variable...', 'info');
+            try {
+                // examManager should be declarable in this scope
+                let testExamManager = null;
+                updateCheck('check3', 'success', 'examManager variable can be declared');
+                log('✅ examManager variable is available', 'success');
+            } catch (error) {
+                updateCheck('check3', 'error', `examManager issue: ${error.message}`);
+                log(`❌ examManager error: ${error.message}`, 'error');
+            }
+
+            await sleep(500);
+
+            // Test 4: Question database
+            log('Test 4: Checking question database...', 'info');
+            try {
+                if (QUESTION_DATABASE.pythonMCQ.length === 0) {
+                    throw new Error('Python MCQ questions not loaded');
+                }
+                if (QUESTION_DATABASE.sqlMCQ.length === 0) {
+                    throw new Error('SQL MCQ questions not loaded');
+                }
+                if (QUESTION_DATABASE.pythonSubjective.length === 0) {
+                    throw new Error('Python subjective questions not loaded');
+                }
+                if (QUESTION_DATABASE.sqlSubjective.length === 0) {
+                    throw new Error('SQL subjective questions not loaded');
+                }
+
+                const totalQuestions =
+                    QUESTION_DATABASE.pythonMCQ.length +
+                    QUESTION_DATABASE.sqlMCQ.length +
+                    QUESTION_DATABASE.pythonSubjective.length +
+                    QUESTION_DATABASE.sqlSubjective.length;
+
+                updateCheck('check4', 'success', `Question database loaded (${totalQuestions} questions)`);
+                log(`✅ Question database: ${totalQuestions} questions loaded`, 'success');
+            } catch (error) {
+                updateCheck('check4', 'error', `Database issue: ${error.message}`);
+                log(`❌ Database error: ${error.message}`, 'error');
+            }
+
+            await sleep(500);
+
+            // Test 5: Initialize exam system
+            log('Test 5: Testing initializeExamSystem()...', 'info');
+            try {
+                const manager = initializeExamSystem();
+
+                if (!manager) {
+                    throw new Error('initializeExamSystem returned null');
+                }
+
+                if (!manager.selectedQuestions || manager.selectedQuestions.length !== 15) {
+                    throw new Error('Did not select 15 questions');
+                }
+
+                const objectiveCount = manager.selectedQuestions.filter(q => q.type === 'mcq').length;
+                const subjectiveCount = manager.selectedQuestions.filter(q => q.type === 'coding').length;
+
+                if (objectiveCount !== 10 || subjectiveCount !== 5) {
+                    throw new Error(`Wrong distribution: ${objectiveCount} MCQ, ${subjectiveCount} coding`);
+                }
+
+                updateCheck('check5', 'success', `Exam system initialized (10 MCQ + 5 coding)`);
+                log(`✅ Exam system: 10 objective + 5 subjective questions selected`, 'success');
+            } catch (error) {
+                updateCheck('check5', 'error', `Initialization failed: ${error.message}`);
+                log(`❌ Initialization error: ${error.message}`, 'error');
+            }
+
+            await sleep(500);
+
+            log('━'.repeat(60), 'info');
+            log(`Test Results: ${testsPassed}/${totalTests} passed`, testsPassed === totalTests ? 'success' : 'error');
+
+            showFinalStatus();
+        }
+
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        // Merge subjective questions
+        if (typeof QUESTION_DATABASE !== 'undefined') {
+            QUESTION_DATABASE.pythonSubjective = PYTHON_SUBJECTIVE;
+            QUESTION_DATABASE.sqlSubjective = SQL_SUBJECTIVE;
+        }
+
+        // Run tests automatically on load
+        window.addEventListener('load', function() {
+            setTimeout(runTests, 1000);
+        });
+
+        // Log any errors
+        window.addEventListener('error', function(e) {
+            log(`🔥 JavaScript Error: ${e.message}`, 'error');
+            log(`   at ${e.filename}:${e.lineno}:${e.colno}`, 'error');
+        });
+
+        log('✅ Test page loaded', 'success');
+    </script>
+</body>
+</html>

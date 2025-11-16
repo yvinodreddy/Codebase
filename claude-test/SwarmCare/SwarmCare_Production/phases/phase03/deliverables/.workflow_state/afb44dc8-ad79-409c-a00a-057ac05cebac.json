@@ -1,0 +1,64 @@
+{
+  "execution_id": "afb44dc8-ad79-409c-a00a-057ac05cebac",
+  "workflow_id": "status_workflow",
+  "state": "COMPLETED",
+  "tasks": {
+    "status": {
+      "task_id": "status",
+      "name": "Status Task",
+      "action": "status_task",
+      "dependencies": [],
+      "max_retries": 3,
+      "timeout_seconds": 300,
+      "state": "COMPLETED",
+      "result": {
+        "status": "ok"
+      },
+      "error": null,
+      "start_time": 1761651198.091455,
+      "end_time": 1761651198.0915942,
+      "retry_count": 0
+    }
+  },
+  "context": {},
+  "start_time": 1761651198.0907273,
+  "end_time": 1761651198.0917673,
+  "error": null,
+  "audit_log": [
+    {
+      "timestamp": "2025-10-28T07:33:18.090793",
+      "execution_id": "afb44dc8-ad79-409c-a00a-057ac05cebac",
+      "event": "WORKFLOW_STARTED",
+      "details": {
+        "workflow_id": "status_workflow"
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:33:18.091563",
+      "execution_id": "afb44dc8-ad79-409c-a00a-057ac05cebac",
+      "event": "TASK_STARTED",
+      "details": {
+        "task_id": "status",
+        "task_name": "Status Task"
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:33:18.091732",
+      "execution_id": "afb44dc8-ad79-409c-a00a-057ac05cebac",
+      "event": "TASK_COMPLETED",
+      "details": {
+        "task_id": "status",
+        "duration_seconds": 0.0001392364501953125,
+        "attempt": 1
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:33:18.092194",
+      "execution_id": "afb44dc8-ad79-409c-a00a-057ac05cebac",
+      "event": "WORKFLOW_COMPLETED",
+      "details": {
+        "duration_seconds": 0.0010399818420410156
+      }
+    }
+  ]
+}

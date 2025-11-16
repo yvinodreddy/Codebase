@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <RestoreSuccess Condition=" '$(RestoreSuccess)' == '' ">True</RestoreSuccess>
+    <RestoreTool Condition=" '$(RestoreTool)' == '' ">NuGet</RestoreTool>
+    <ProjectAssetsFile Condition=" '$(ProjectAssetsFile)' == '' ">$(MSBuildThisFileDirectory)project.assets.json</ProjectAssetsFile>
+    <NuGetPackageRoot Condition=" '$(NuGetPackageRoot)' == '' ">/home/user01/.nuget/packages/</NuGetPackageRoot>
+    <NuGetPackageFolders Condition=" '$(NuGetPackageFolders)' == '' ">/home/user01/.nuget/packages/</NuGetPackageFolders>
+    <NuGetProjectStyle Condition=" '$(NuGetProjectStyle)' == '' ">PackageReference</NuGetProjectStyle>
+    <NuGetToolVersion Condition=" '$(NuGetToolVersion)' == '' ">6.8.1</NuGetToolVersion>
+  </PropertyGroup>
+  <ItemGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <SourceRoot Include="/home/user01/.nuget/packages/" />
+  </ItemGroup>
+  <ItemGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <Content Include="$(NuGetPackageRoot)hl7.fhir.specification.data.r4/5.12.2/contentFiles/any/any/specification.zip" Condition="Exists('$(NuGetPackageRoot)hl7.fhir.specification.data.r4/5.12.2/contentFiles/any/any/specification.zip')">
+      <NuGetPackageId>Hl7.Fhir.Specification.Data.R4</NuGetPackageId>
+      <NuGetPackageVersion>5.12.2</NuGetPackageVersion>
+      <NuGetItemType>Content</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>specification.zip</TargetPath>
+      <Private>True</Private>
+      <Link>specification.zip</Link>
+    </Content>
+  </ItemGroup>
+  <ImportGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <Import Project="$(NuGetPackageRoot)microsoft.extensions.apidescription.server/6.0.5/build/Microsoft.Extensions.ApiDescription.Server.props" Condition="Exists('$(NuGetPackageRoot)microsoft.extensions.apidescription.server/6.0.5/build/Microsoft.Extensions.ApiDescription.Server.props')" />
+    <Import Project="$(NuGetPackageRoot)swashbuckle.aspnetcore/6.6.2/build/Swashbuckle.AspNetCore.props" Condition="Exists('$(NuGetPackageRoot)swashbuckle.aspnetcore/6.6.2/build/Swashbuckle.AspNetCore.props')" />
+    <Import Project="$(NuGetPackageRoot)microsoft.ml/4.0.2/build/netstandard2.0/Microsoft.ML.props" Condition="Exists('$(NuGetPackageRoot)microsoft.ml/4.0.2/build/netstandard2.0/Microsoft.ML.props')" />
+    <Import Project="$(NuGetPackageRoot)microsoft.ml.fasttree/4.0.2/build/netstandard2.0/Microsoft.ML.FastTree.props" Condition="Exists('$(NuGetPackageRoot)microsoft.ml.fasttree/4.0.2/build/netstandard2.0/Microsoft.ML.FastTree.props')" />
+    <Import Project="$(NuGetPackageRoot)hotchocolate.aspnetcore/15.1.10/build/HotChocolate.AspNetCore.props" Condition="Exists('$(NuGetPackageRoot)hotchocolate.aspnetcore/15.1.10/build/HotChocolate.AspNetCore.props')" />
+  </ImportGroup>
+  <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <PkgMicrosoft_Extensions_ApiDescription_Server Condition=" '$(PkgMicrosoft_Extensions_ApiDescription_Server)' == '' ">/home/user01/.nuget/packages/microsoft.extensions.apidescription.server/6.0.5</PkgMicrosoft_Extensions_ApiDescription_Server>
+    <PkgLucene_Net Condition=" '$(PkgLucene_Net)' == '' ">/home/user01/.nuget/packages/lucene.net/4.8.0-beta00017</PkgLucene_Net>
+  </PropertyGroup>
+</Project>

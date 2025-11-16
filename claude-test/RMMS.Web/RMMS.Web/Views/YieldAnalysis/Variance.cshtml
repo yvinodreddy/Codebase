@@ -1,0 +1,280 @@
+@model List<RMMS.Services.Interfaces.Production.YieldVarianceData>
+@{
+    ViewData["Title"] = "Yield Variance Analysis";
+    var fromDate = ViewBag.FromDate as DateTime?;
+    var toDate = ViewBag.ToDate as DateTime?;
+}
+
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2><i class="fas fa-chart-bar"></i> Yield Variance Analysis</h2>
+        <a asp-action="Index" class="btn btn-outline-secondary">
+            <i class="fas fa-arrow-left"></i> Back to Dashboard
+        </a>
+    </div>
+
+    <!-- Date Filter -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <form method="get" class="row g-3">
+                <div class="col-md-4">
+                    <label class="form-label">From Date</label>
+                    <input type="date" name="fromDate" class="form-control" value="@fromDate?.ToString("yyyy-MM-dd")" />
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">To Date</label>
+                    <input type="date" name="toDate" class="form-control" value="@toDate?.ToString("yyyy-MM-dd")" />
+                </div>
+                <div class="col-md-4 d-flex align-items-end">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-filter"></i> Apply Filter
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    @if (Model != null && Model.Any())
+    {
+        <!-- Summary Cards -->
+        <div class="row mb-4">
+            <div class="col-md-3">
+                <div class="card border-success">
+                    <div class="card-body text-center">
+                        <h6 class="text-muted">Positive Variances</h6>
+                        <h3 class="text-success">@Model.Count(v => v.Variance >= 0)</h3>
+                        <small class="text-muted">Above Standard</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card border-danger">
+                    <div class="card-body text-center">
+                        <h6 class="text-muted">Negative Variances</h6>
+                        <h3 class="text-danger">@Model.Count(v => v.Variance < 0)</h3>
+                        <small class="text-muted">Below Standard</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card border-primary">
+                    <div class="card-body text-center">
+                        <h6 class="text-muted">Avg Variance</h6>
+                        <h3 class="@(Model.Average(v => v.Variance) >= 0 ? "text-success" : "text-danger")">
+                            @(Model.Average(v => v.Variance) >= 0 ? "+" : "")@Model.Average(v => v.Variance).ToString("F2")%
+                        </h3>
+                        <small class="text-muted">Overall</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card border-warning">
+                    <div class="card-body text-center">
+                        <h6 class="text-muted">Max Variance</h6>
+                        <h3 class="text-warning">
+                            @Model.Max(v => Math.Abs(v.Variance)).ToString("F2")%
+                        </h3>
+                        <small class="text-muted">Absolute</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Variance Chart -->
+        <div class="card mb-4">
+            <div class="card-header bg-light">
+                <h5 class="mb-0"><i class="fas fa-chart-line"></i> Yield Variance Distribution</h5>
+            </div>
+            <div class="card-body">
+                <canvas id="varianceChart" height="80"></canvas>
+            </div>
+        </div>
+
+        <!-- Variance Table -->
+        <div class="card">
+            <div class="card-header bg-light">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0"><i class="fas fa-table"></i> Detailed Variance Data</h5>
+                    <div>
+                        <button class="btn btn-sm btn-outline-success" onclick="filterVariance('positive')">
+                            <i class="fas fa-arrow-up"></i> Positive
+                        </button>
+                        <button class="btn btn-sm btn-outline-danger" onclick="filterVariance('negative')">
+                            <i class="fas fa-arrow-down"></i> Negative
+                        </button>
+                        <button class="btn btn-sm btn-outline-secondary" onclick="filterVariance('all')">
+                            <i class="fas fa-list"></i> All
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="ms-datatable table table-striped table-hover" id="varianceTable" data-export="true" data-page-length="16">
+                        <thead>
+                            <tr>
+                                <th>Batch Number</th>
+                                <th>Date</th>
+                                <th>Paddy Variety</th>
+                                <th>Actual Yield %</th>
+                                <th>Standard Yield %</th>
+                                <th>Variance</th>
+                                <th>Variance %</th>
+                                <th>Type</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var variance in Model)
+                            {
+                                <tr class="variance-row @(variance.VarianceType.ToLower())-variance">
+                                    <td>
+                                        <strong>@variance.BatchNumber</strong>
+                                    </td>
+                                    <td>@variance.BatchDate.ToString("dd-MMM-yyyy")</td>
+                                    <td>@variance.PaddyVariety</td>
+                                    <td>
+                                        <span class="badge @(variance.ActualYield >= 65 ? "bg-success" : variance.ActualYield >= 55 ? "bg-warning" : "bg-danger")">
+                                            @variance.ActualYield.ToString("F2")%
+                                        </span>
+                                    </td>
+                                    <td>@variance.StandardYield.ToString("F2")%</td>
+                                    <td>
+                                        <strong class="@(variance.Variance >= 0 ? "text-success" : "text-danger")">
+                                            @(variance.Variance >= 0 ? "+" : "")@variance.Variance.ToString("F2")%
+                                        </strong>
+                                    </td>
+                                    <td>
+                                        <div class="progress" style="height: 20px;">
+                                            @if (variance.VariancePercent >= 0)
+                                            {
+                                                <div class="progress-bar bg-success" style="width: @Math.Min(Math.Abs(variance.VariancePercent), 100)%">
+                                                    +@variance.VariancePercent.ToString("F1")%
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="progress-bar bg-danger" style="width: @Math.Min(Math.Abs(variance.VariancePercent), 100)%">
+                                                    @variance.VariancePercent.ToString("F1")%
+                                                </div>
+                                            }
+                                        </div>
+                                    </td>
+                                    <td>
+                                        @if (variance.VarianceType == "Positive")
+                                        {
+                                            <span class="badge bg-success"><i class="fas fa-arrow-up"></i> Positive</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge bg-danger"><i class="fas fa-arrow-down"></i> Negative</span>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Insights -->
+        <div class="alert alert-info mt-4">
+            <h5><i class="fas fa-lightbulb"></i> Key Insights</h5>
+            <ul class="mb-0">
+                <li>
+                    <strong>@Model.Count(v => v.Variance >= 0)</strong> batches (@((Model.Count(v => v.Variance >= 0) * 100.0 / Model.Count).ToString("F1"))%)
+                    exceeded the standard yield target.
+                </li>
+                <li>
+                    The average variance is <strong>@(Model.Average(v => v.Variance) >= 0 ? "+" : "")@Model.Average(v => v.Variance).ToString("F2")%</strong>,
+                    indicating overall @(Model.Average(v => v.Variance) >= 0 ? "above-standard" : "below-standard") performance.
+                </li>
+                @if (Model.Where(v => v.Variance < -5).Any())
+                {
+                    <li class="text-danger">
+                        <strong>@Model.Count(v => v.Variance < -5)</strong> batches have significant negative variance (&lt; -5%).
+                        These require immediate investigation.
+                    </li>
+                }
+            </ul>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info">
+            <i class="fas fa-info-circle"></i> No variance data available for the selected period.
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    @if (Model != null && Model.Any())
+    {
+        <script>
+            // Variance Chart
+            var ctx = document.getElementById('varianceChart').getContext('2d');
+            var varianceChart = new Chart(ctx, {
+                type: 'scatter',
+                data: {
+                    datasets: [{
+                        label: 'Positive Variance',
+                        data: @Html.Raw(Json.Serialize(Model.Where(v => v.Variance >= 0).Select(v => new { x = v.BatchDate.ToString("yyyy-MM-dd"), y = v.Variance }))),
+                        backgroundColor: 'rgba(75, 192, 192, 0.8)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        pointRadius: 5
+                    }, {
+                        label: 'Negative Variance',
+                        data: @Html.Raw(Json.Serialize(Model.Where(v => v.Variance < 0).Select(v => new { x = v.BatchDate.ToString("yyyy-MM-dd"), y = v.Variance }))),
+                        backgroundColor: 'rgba(255, 99, 132, 0.8)',
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        pointRadius: 5
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Yield Variance Over Time'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Variance %'
+                            }
+                        },
+                        x: {
+                            type: 'time',
+                            time: {
+                                unit: 'day'
+                            },
+                            title: {
+                                display: true,
+                                text: 'Date'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Filter function
+            function filterVariance(type) {
+                var rows = document.querySelectorAll('.variance-row');
+                rows.forEach(function(row) {
+                    if (type === 'all') {
+                        row.style.display = '';
+                    } else if (type === 'positive' && row.classList.contains('positive-variance')) {
+                        row.style.display = '';
+                    } else if (type === 'negative' && row.classList.contains('negative-variance')) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+            }
+        </script>
+    }
+}

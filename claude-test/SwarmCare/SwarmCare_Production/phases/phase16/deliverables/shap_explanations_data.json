@@ -1,0 +1,172 @@
+[
+  {
+    "patient_id": "P1001",
+    "prediction": "High Risk",
+    "probability": 0.87,
+    "shap_values": {
+      "age": 0.23,
+      "blood_pressure_systolic": 0.18,
+      "heart_rate": -0.05,
+      "respiratory_rate": 0.15,
+      "oxygen_saturation": -0.12,
+      "temperature": 0.08,
+      "comorbidity_count": 0.21,
+      "medication_count": 0.06
+    },
+    "base_value": 0.45,
+    "timestamp": "2025-10-31T10:15:23Z"
+  },
+  {
+    "patient_id": "P1002",
+    "prediction": "Low Risk",
+    "probability": 0.22,
+    "shap_values": {
+      "age": -0.08,
+      "blood_pressure_systolic": -0.11,
+      "heart_rate": 0.03,
+      "respiratory_rate": -0.06,
+      "oxygen_saturation": 0.15,
+      "temperature": -0.02,
+      "comorbidity_count": -0.09,
+      "medication_count": -0.04
+    },
+    "base_value": 0.45,
+    "timestamp": "2025-10-31T10:16:45Z"
+  },
+  {
+    "patient_id": "P1003",
+    "prediction": "Medium Risk",
+    "probability": 0.58,
+    "shap_values": {
+      "age": 0.12,
+      "blood_pressure_systolic": 0.08,
+      "heart_rate": 0.05,
+      "respiratory_rate": 0.09,
+      "oxygen_saturation": -0.06,
+      "temperature": 0.04,
+      "comorbidity_count": 0.11,
+      "medication_count": 0.03
+    },
+    "base_value": 0.45,
+    "timestamp": "2025-10-31T10:18:12Z"
+  },
+  {
+    "patient_id": "P1004",
+    "prediction": "High Risk",
+    "probability": 0.91,
+    "shap_values": {
+      "age": 0.28,
+      "blood_pressure_systolic": 0.22,
+      "heart_rate": 0.07,
+      "respiratory_rate": 0.19,
+      "oxygen_saturation": -0.18,
+      "temperature": 0.11,
+      "comorbidity_count": 0.24,
+      "medication_count": 0.08
+    },
+    "base_value": 0.45,
+    "timestamp": "2025-10-31T10:19:34Z"
+  },
+  {
+    "patient_id": "P1005",
+    "prediction": "Low Risk",
+    "probability": 0.18,
+    "shap_values": {
+      "age": -0.11,
+      "blood_pressure_systolic": -0.14,
+      "heart_rate": -0.02,
+      "respiratory_rate": -0.09,
+      "oxygen_saturation": 0.19,
+      "temperature": -0.04,
+      "comorbidity_count": -0.12,
+      "medication_count": -0.06
+    },
+    "base_value": 0.45,
+    "timestamp": "2025-10-31T10:21:08Z"
+  },
+  {
+    "patient_id": "P1006",
+    "prediction": "Medium Risk",
+    "probability": 0.62,
+    "shap_values": {
+      "age": 0.14,
+      "blood_pressure_systolic": 0.10,
+      "heart_rate": 0.06,
+      "respiratory_rate": 0.11,
+      "oxygen_saturation": -0.08,
+      "temperature": 0.05,
+      "comorbidity_count": 0.13,
+      "medication_count": 0.04
+    },
+    "base_value": 0.45,
+    "timestamp": "2025-10-31T10:22:41Z"
+  },
+  {
+    "patient_id": "P1007",
+    "prediction": "High Risk",
+    "probability": 0.84,
+    "shap_values": {
+      "age": 0.21,
+      "blood_pressure_systolic": 0.16,
+      "heart_rate": 0.04,
+      "respiratory_rate": 0.14,
+      "oxygen_saturation": -0.14,
+      "temperature": 0.09,
+      "comorbidity_count": 0.19,
+      "medication_count": 0.07
+    },
+    "base_value": 0.45,
+    "timestamp": "2025-10-31T10:24:15Z"
+  },
+  {
+    "patient_id": "P1008",
+    "prediction": "Low Risk",
+    "probability": 0.25,
+    "shap_values": {
+      "age": -0.06,
+      "blood_pressure_systolic": -0.09,
+      "heart_rate": 0.01,
+      "respiratory_rate": -0.04,
+      "oxygen_saturation": 0.13,
+      "temperature": -0.01,
+      "comorbidity_count": -0.07,
+      "medication_count": -0.03
+    },
+    "base_value": 0.45,
+    "timestamp": "2025-10-31T10:25:52Z"
+  },
+  {
+    "patient_id": "P1009",
+    "prediction": "Medium Risk",
+    "probability": 0.55,
+    "shap_values": {
+      "age": 0.10,
+      "blood_pressure_systolic": 0.07,
+      "heart_rate": 0.03,
+      "respiratory_rate": 0.08,
+      "oxygen_saturation": -0.05,
+      "temperature": 0.03,
+      "comorbidity_count": 0.09,
+      "medication_count": 0.02
+    },
+    "base_value": 0.45,
+    "timestamp": "2025-10-31T10:27:29Z"
+  },
+  {
+    "patient_id": "P1010",
+    "prediction": "High Risk",
+    "probability": 0.89,
+    "shap_values": {
+      "age": 0.25,
+      "blood_pressure_systolic": 0.20,
+      "heart_rate": 0.06,
+      "respiratory_rate": 0.17,
+      "oxygen_saturation": -0.16,
+      "temperature": 0.10,
+      "comorbidity_count": 0.22,
+      "medication_count": 0.08
+    },
+    "base_value": 0.45,
+    "timestamp": "2025-10-31T10:29:03Z"
+  }
+]

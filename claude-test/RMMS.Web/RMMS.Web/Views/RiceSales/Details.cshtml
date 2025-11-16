@@ -1,0 +1,298 @@
+@model RMMS.Models.RiceSales
+@{
+    ViewData["Title"] = "Rice Sales Invoice Details";
+}
+
+<div class="container-fluid">
+    <div class="card shadow">
+        <div class="card-header bg-info text-white">
+            <h3><i class="fas fa-file-invoice"></i> Rice Sales Invoice Details</h3>
+        </div>
+
+        <div class="card-body">
+            <div class="row mb-4">
+                <div class="col-md-12">
+                    <a asp-action="Index" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Back to List
+                    </a>
+                    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">
+                        <i class="fas fa-edit"></i> Edit
+                    </a>
+                    <button type="button" class="btn btn-primary" onclick="window.print();">
+                        <i class="fas fa-print"></i> Print Invoice
+                    </button>
+                </div>
+            </div>
+
+            <!-- Invoice Details -->
+            <fieldset class="border p-3 mb-3">
+                <legend class="w-auto px-2">Invoice Details</legend>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="font-weight-bold">@Html.DisplayNameFor(model => model.InvoiceNumber):</label>
+                            <p class="form-control-plaintext h5 text-primary">@Model.InvoiceNumber</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="font-weight-bold">@Html.DisplayNameFor(model => model.SaleDate):</label>
+                            <p class="form-control-plaintext">@Model.SaleDate.ToString("dd-MMM-yyyy")</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="font-weight-bold">@Html.DisplayNameFor(model => model.DueDate):</label>
+                            <p class="form-control-plaintext">@(Model.DueDate?.ToString("dd-MMM-yyyy") ?? "N/A")</p>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- Buyer Information -->
+            <fieldset class="border p-3 mb-3">
+                <legend class="w-auto px-2">Buyer Information</legend>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="font-weight-bold">@Html.DisplayNameFor(model => model.BuyerName):</label>
+                            <p class="form-control-plaintext">@Model.BuyerName</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="font-weight-bold">@Html.DisplayNameFor(model => model.BuyerGSTIN):</label>
+                            <p class="form-control-plaintext">@(Model.BuyerGSTIN ?? "N/A")</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="font-weight-bold">@Html.DisplayNameFor(model => model.BuyerAddress):</label>
+                            <p class="form-control-plaintext">@(Model.BuyerAddress ?? "N/A")</p>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- Product Details -->
+            <fieldset class="border p-3 mb-3">
+                <legend class="w-auto px-2">Product Details</legend>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="font-weight-bold">@Html.DisplayNameFor(model => model.RiceGrade):</label>
+                            <p class="form-control-plaintext">@Model.RiceGrade</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="font-weight-bold">@Html.DisplayNameFor(model => model.Quantity):</label>
+                            <p class="form-control-plaintext">@Model.Quantity.ToString("N3") kg</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="font-weight-bold">@Html.DisplayNameFor(model => model.UnitPrice):</label>
+                            <p class="form-control-plaintext">₹ @Model.UnitPrice.ToString("N2") / kg</p>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- Pricing & Tax Calculation -->
+            <fieldset class="border p-3 mb-3">
+                <legend class="w-auto px-2">Pricing & Tax Calculation</legend>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="font-weight-bold">@Html.DisplayNameFor(model => model.TotalInvoiceValue):</label>
+                            <p class="form-control-plaintext">₹ @Model.TotalInvoiceValue.ToString("N2")</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="font-weight-bold">@Html.DisplayNameFor(model => model.Discount):</label>
+                            <p class="form-control-plaintext">₹ @Model.Discount.ToString("N2")</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="font-weight-bold">@Html.DisplayNameFor(model => model.TaxableValue):</label>
+                            <p class="form-control-plaintext h5 text-success">₹ @Model.TaxableValue.ToString("N2")</p>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- Tax Details -->
+            <fieldset class="border p-3 mb-3">
+                <legend class="w-auto px-2">Tax Details</legend>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="font-weight-bold">@Html.DisplayNameFor(model => model.CGSTAmount):</label>
+                            <p class="form-control-plaintext">₹ @Model.CGSTAmount.ToString("N2")</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="font-weight-bold">@Html.DisplayNameFor(model => model.SGSTAmount):</label>
+                            <p class="form-control-plaintext">₹ @Model.SGSTAmount.ToString("N2")</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="font-weight-bold">@Html.DisplayNameFor(model => model.IGSTAmount):</label>
+                            <p class="form-control-plaintext">₹ @Model.IGSTAmount.ToString("N2")</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="font-weight-bold">@Html.DisplayNameFor(model => model.TotalTaxAmount):</label>
+                            <p class="form-control-plaintext h5 text-warning">₹ @Model.TotalTaxAmount.ToString("N2")</p>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- Additional Charges -->
+            <fieldset class="border p-3 mb-3">
+                <legend class="w-auto px-2">Additional Charges</legend>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="font-weight-bold">@Html.DisplayNameFor(model => model.FreightCharges):</label>
+                            <p class="form-control-plaintext">₹ @Model.FreightCharges.ToString("N2")</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="font-weight-bold">@Html.DisplayNameFor(model => model.OtherCharges):</label>
+                            <p class="form-control-plaintext">₹ @Model.OtherCharges.ToString("N2")</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="font-weight-bold h4">@Html.DisplayNameFor(model => model.GrossInvoiceAmount):</label>
+                            <p class="form-control-plaintext h3 text-success">₹ @Model.GrossInvoiceAmount.ToString("N2")</p>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- Payment Information -->
+            <fieldset class="border p-3 mb-3">
+                <legend class="w-auto px-2">Payment Information</legend>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="font-weight-bold">@Html.DisplayNameFor(model => model.PaymentMode):</label>
+                            <p class="form-control-plaintext">@(Model.PaymentMode ?? "N/A")</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="font-weight-bold">@Html.DisplayNameFor(model => model.PaymentStatus):</label>
+                            <p class="form-control-plaintext">
+                                @if (Model.PaymentStatus == "Paid")
+                                {
+                                    <span class="badge bg-success">@Model.PaymentStatus</span>
+                                }
+                                else if (Model.PaymentStatus == "Pending")
+                                {
+                                    <span class="badge bg-warning">@Model.PaymentStatus</span>
+                                }
+                                else if (Model.PaymentStatus == "Partial")
+                                {
+                                    <span class="badge bg-info">@Model.PaymentStatus</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-secondary">@(Model.PaymentStatus ?? "N/A")</span>
+                                }
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="font-weight-bold">@Html.DisplayNameFor(model => model.Remarks):</label>
+                            <p class="form-control-plaintext">@(Model.Remarks ?? "N/A")</p>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- Audit Information -->
+            <fieldset class="border p-3 mb-3 bg-light">
+                <legend class="w-auto px-2">Audit Information</legend>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="font-weight-bold">Created Date:</label>
+                            <p class="form-control-plaintext">@Model.CreatedDate.ToString("dd-MMM-yyyy HH:mm")</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="font-weight-bold">Created By:</label>
+                            <p class="form-control-plaintext">@(Model.CreatedBy ?? "System")</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="font-weight-bold">Modified Date:</label>
+                            <p class="form-control-plaintext">@(Model.ModifiedDate?.ToString("dd-MMM-yyyy HH:mm") ?? "N/A")</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="font-weight-bold">Modified By:</label>
+                            <p class="form-control-plaintext">@(Model.ModifiedBy ?? "N/A")</p>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+            <div class="mt-4">
+                <a asp-action="Index" class="btn btn-secondary btn-lg">
+                    <i class="fas fa-arrow-left"></i> Back to List
+                </a>
+                <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning btn-lg">
+                    <i class="fas fa-edit"></i> Edit
+                </a>
+                <button type="button" class="btn btn-primary btn-lg" onclick="window.print();">
+                    <i class="fas fa-print"></i> Print Invoice
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    fieldset {
+        border: 1px solid #dee2e6 !important;
+        background: #f8f9fa;
+    }
+    legend {
+        font-size: 1rem;
+        font-weight: bold;
+        background: white;
+        padding: 0 10px;
+    }
+    .font-weight-bold {
+        font-weight: 600;
+        color: #495057;
+    }
+
+    @@media print {
+        .btn, .card-header h3 i {
+            display: none;
+        }
+    }
+</style>

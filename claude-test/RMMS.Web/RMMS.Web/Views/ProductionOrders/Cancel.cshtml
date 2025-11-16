@@ -1,0 +1,90 @@
+@model RMMS.Models.Production.ProductionOrder
+
+@{
+    ViewData["Title"] = "Cancel Production Order";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h2 class="text-danger"><i class="fas fa-times-circle"></i> Cancel Production Order</h2>
+            <hr />
+
+            <div class="alert alert-warning">
+                <i class="fas fa-exclamation-triangle"></i>
+                <strong>Warning!</strong> You are about to cancel this production order. The order will be marked as cancelled but will remain in the system for record keeping.
+            </div>
+
+            <div class="card mb-3">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0">Order Information</h5>
+                </div>
+                <div class="card-body">
+                    <dl class="row">
+                        <dt class="col-sm-4">Order Number:</dt>
+                        <dd class="col-sm-8"><strong>@Model.OrderNumber</strong></dd>
+
+                        <dt class="col-sm-4">Scheduled Date:</dt>
+                        <dd class="col-sm-8">@Model.ScheduledDate.ToString("yyyy-MM-dd")</dd>
+
+                        <dt class="col-sm-4">Paddy Variety:</dt>
+                        <dd class="col-sm-8">@(Model.PaddyVariety ?? "Not specified")</dd>
+
+                        <dt class="col-sm-4">Quantity:</dt>
+                        <dd class="col-sm-8">@Model.PaddyQuantity.ToString("N2") @Model.PaddyUOM</dd>
+
+                        <dt class="col-sm-4">Current Status:</dt>
+                        <dd class="col-sm-8">
+                            <span class="badge @Model.StatusBadgeClass">@Model.Status</span>
+                        </dd>
+
+                        <dt class="col-sm-4">Assigned Machine:</dt>
+                        <dd class="col-sm-8">@(Model.AssignedMachine?.MachineName ?? "Not assigned")</dd>
+                    </dl>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header bg-danger text-white">
+                    <h5 class="mb-0"><i class="fas fa-ban"></i> Cancellation Details</h5>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Cancel" method="post">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="id" value="@Model.Id" />
+
+                        <div class="mb-3">
+                            <label for="reason" class="form-label">Cancellation Reason <span class="text-danger">*</span></label>
+                            <textarea class="form-control" id="reason" name="reason" rows="3" required placeholder="Please provide a reason for cancelling this order..."></textarea>
+                            <small class="form-text text-muted">This will be recorded in the order remarks</small>
+                        </div>
+
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle"></i>
+                            <strong>Note:</strong> Cancelling this order will:
+                            <ul class="mb-0">
+                                <li>Mark the order status as "Cancelled"</li>
+                                <li>Record the cancellation reason</li>
+                                <li>Free up the assigned machine (if any)</li>
+                                <li>Keep the order in the system for reference</li>
+                            </ul>
+                        </div>
+
+                        <div class="d-flex justify-content-between mt-4">
+                            <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-secondary">
+                                <i class="fas fa-arrow-left"></i> Go Back
+                            </a>
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to cancel this production order?')">
+                                <i class="fas fa-times-circle"></i> Cancel Order
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

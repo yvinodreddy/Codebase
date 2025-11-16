@@ -1,0 +1,1025 @@
+================================================================================
+    PATIENT MANAGEMENT SYSTEM - UI WIREFRAME DESIGN GUIDE
+    From Sketch to React-Ready Designs - 100% Success Guaranteed
+================================================================================
+
+OBJECTIVE: Build wireframes for a Patient Management System that N number of
+patients can use, with designs that React JS developers can directly implement.
+
+
+================================================================================
+SECTION 1: BEST FREE TOOLS (Hand-Drawn → Wireframe → React Code)
+================================================================================
+
+TOOL TIER 1: AI-POWERED (Sketch to Wireframe Conversion)
+---------------------------------------------------------
+
+🏆 TOOL #1: UIZARD (RECOMMENDED FOR YOU)
+----------------------------------------
+What it does: Converts hand-drawn sketches to digital wireframes using AI
+Perfect for: Quick sketch → professional wireframe conversion
+React export: YES (generates code snippets)
+
+✅ FREE TIER: Yes (3 projects, unlimited screens)
+🔗 LINK: https://uizard.io
+📱 ACCESS: Web-based + Mobile app
+
+HOW TO USE:
+1. Draw your UI on paper or tablet
+2. Take a photo with phone
+3. Upload to Uizard
+4. AI converts to digital wireframe
+5. Edit and refine
+6. Export design + code snippets for React team
+
+FEATURES:
+✓ Hand-drawn sketch recognition
+✓ Screenshot to design conversion
+✓ Pre-built healthcare templates
+✓ Real-time collaboration
+✓ Export to code (React, HTML, CSS)
+✓ Design handoff for developers
+
+PERFECT FOR: Non-designers who sketch on paper
+
+
+🥈 TOOL #2: EXCALIDRAW (BEST FOR QUICK SKETCHES)
+-------------------------------------------------
+What it does: Collaborative whiteboard with hand-drawn style
+Perfect for: Quick wireframes, flowcharts, system diagrams
+React export: YES (via libraries)
+
+✅ FREE TIER: 100% Free and open source
+🔗 LINK: https://excalidraw.com
+📱 ACCESS: Web-based (no signup required)
+
+HOW TO USE:
+1. Open excalidraw.com
+2. Draw UI components with mouse/pen
+3. Use built-in shapes (rectangles, text, arrows)
+4. Collaborate in real-time
+5. Export as PNG, SVG, or Excalidraw file
+6. Developers can use Excalidraw React library
+
+FEATURES:
+✓ No account needed
+✓ Hand-drawn aesthetic
+✓ Real-time collaboration
+✓ Export to multiple formats
+✓ React library available (@excalidraw/excalidraw)
+✓ Infinite canvas
+
+PERFECT FOR: Developers who want quick, informal wireframes
+
+
+TOOL TIER 2: PROFESSIONAL DESIGN TOOLS (Industry Standard)
+----------------------------------------------------------
+
+🥇 TOOL #3: FIGMA (INDUSTRY STANDARD - HIGHLY RECOMMENDED)
+----------------------------------------------------------
+What it does: Professional design tool with full prototyping
+Perfect for: Complete design system, high-fidelity wireframes
+React export: YES (multiple plugins available)
+
+✅ FREE TIER: Yes (3 files, unlimited personal projects)
+🔗 LINK: https://www.figma.com
+📱 ACCESS: Web-based + Desktop app
+
+HOW TO USE:
+1. Sign up for free account
+2. Create new design file
+3. Use shapes, components, auto-layout
+4. Build complete patient management screens
+5. Install React export plugins
+6. Hand off to developers with inspect mode
+
+FEATURES:
+✓ Component libraries
+✓ Auto-layout (responsive design)
+✓ Design systems
+✓ Prototyping and interactions
+✓ Developer handoff (CSS, React code)
+✓ Plugins: Anima (React code export), Figma to React
+✓ Version history
+✓ Comments and collaboration
+
+PLUGINS FOR REACT EXPORT:
+- Anima: https://www.animaapp.com (exports React components)
+- Figma to React: Direct component export
+- html.to.design: Import HTML to Figma
+- Locofy: Design to React code
+
+PERFECT FOR: Professional-looking designs with full React export
+
+
+🥈 TOOL #4: PENPOT (OPEN SOURCE FIGMA ALTERNATIVE)
+--------------------------------------------------
+What it does: Open-source design and prototyping platform
+Perfect for: Privacy-focused, no vendor lock-in
+React export: YES (CSS, SVG export)
+
+✅ FREE TIER: 100% Free and open source
+🔗 LINK: https://penpot.app
+📱 ACCESS: Web-based + Self-hosted option
+
+HOW TO USE:
+1. Sign up at penpot.app
+2. Create design project
+3. Use similar interface to Figma
+4. Design patient management screens
+5. Export code and assets
+6. Share with developers
+
+FEATURES:
+✓ Fully open source
+✓ No file limits
+✓ SVG-based (web-native)
+✓ Prototyping
+✓ Design tokens
+✓ CSS code export
+✓ Self-hosting option
+
+PERFECT FOR: Privacy-conscious teams, unlimited projects
+
+
+TOOL TIER 3: SIMPLE WIREFRAMING (Low-Fidelity Focus)
+----------------------------------------------------
+
+TOOL #5: WIREFRAME.CC (SIMPLEST OPTION)
+---------------------------------------
+What it does: Minimalist wireframe tool
+Perfect for: Super fast, basic wireframes
+React export: NO (but exports image/PDF)
+
+✅ FREE TIER: Yes (basic features)
+🔗 LINK: https://wireframe.cc
+📱 ACCESS: Web-based
+
+PERFECT FOR: Quick mockups, initial concepts
+
+
+TOOL #6: DRAW.IO / DIAGRAMS.NET (VERSATILE)
+-------------------------------------------
+What it does: Diagramming tool with wireframe templates
+Perfect for: Flowcharts, system architecture, basic wireframes
+React export: NO (exports images, XML)
+
+✅ FREE TIER: 100% Free
+🔗 LINK: https://app.diagrams.net
+📱 ACCESS: Web-based + Desktop app
+
+FEATURES:
+✓ Completely free
+✓ No account required
+✓ Wireframe templates included
+✓ Export to PNG, SVG, PDF
+✓ Save to Google Drive, OneDrive
+
+PERFECT FOR: System diagrams + basic wireframes
+
+
+TOOL #7: MIRO (COLLABORATIVE WHITEBOARD)
+----------------------------------------
+What it does: Infinite whiteboard with templates
+Perfect for: Team collaboration, brainstorming, wireframes
+React export: NO (but exports images)
+
+✅ FREE TIER: Yes (3 editable boards)
+🔗 LINK: https://miro.com
+📱 ACCESS: Web-based + Desktop app
+
+FEATURES:
+✓ Patient management templates
+✓ Real-time collaboration
+✓ Wireframe templates
+✓ Sticky notes, voting
+✓ Integrations with other tools
+
+PERFECT FOR: Team workshops and planning
+
+
+================================================================================
+SECTION 2: RECOMMENDED TOOL COMBINATION FOR YOUR NEEDS
+================================================================================
+
+🎯 BEST WORKFLOW FOR YOU:
+
+OPTION A: PROFESSIONAL (Recommended for Production)
+---------------------------------------------------
+1. SKETCH: Draw on paper/tablet
+2. DIGITIZE: Use Uizard (AI conversion) OR directly design in Figma
+3. REFINE: Polish in Figma
+4. EXPORT: Use Anima plugin to generate React code
+5. HANDOFF: Share Figma link with developers (inspect mode)
+
+TOOLS NEEDED:
+- Uizard (optional, if you sketch on paper)
+- Figma (main design tool)
+- Anima plugin (React code export)
+
+COST: 100% FREE
+TIME: 2-3 hours for complete patient management system
+
+
+OPTION B: QUICK & SIMPLE (Recommended for MVP/Prototype)
+--------------------------------------------------------
+1. DESIGN: Use Excalidraw directly
+2. EXPORT: PNG/SVG wireframes
+3. HANDOFF: Developers recreate in React using wireframes as reference
+
+TOOLS NEEDED:
+- Excalidraw only
+
+COST: 100% FREE
+TIME: 1-2 hours for basic wireframes
+
+
+OPTION C: SKETCH-FIRST (If You Prefer Drawing)
+----------------------------------------------
+1. SKETCH: Draw on paper
+2. CONVERT: Upload to Uizard (AI conversion)
+3. REFINE: Edit in Uizard or export to Figma
+4. EXPORT: Generate code snippets
+5. HANDOFF: Share with developers
+
+TOOLS NEEDED:
+- Paper + pen
+- Uizard (conversion + export)
+
+COST: 100% FREE
+TIME: 1 hour drawing + 1 hour digitizing
+
+
+================================================================================
+SECTION 3: PATIENT MANAGEMENT SYSTEM - SCREENS TO DESIGN
+================================================================================
+
+For N number of patients, you'll need these core screens:
+
+SCREEN 1: LOGIN / AUTHENTICATION
+---------------------------------
+Components:
+□ Logo
+□ Username/Email field
+□ Password field
+□ "Remember me" checkbox
+□ Login button
+□ "Forgot password?" link
+□ Role selection (Admin, Doctor, Nurse, Patient)
+
+
+SCREEN 2: DASHBOARD (ROLE-BASED)
+---------------------------------
+ADMIN DASHBOARD:
+□ Total patients count
+□ Today's appointments
+□ Total doctors/nurses
+□ System statistics (charts)
+□ Quick actions (Add patient, Schedule appointment)
+
+DOCTOR DASHBOARD:
+□ Today's appointments list
+□ Patient queue
+□ Pending tasks
+□ Recent patient records
+□ Quick search
+
+PATIENT DASHBOARD:
+□ Upcoming appointments
+□ Medical records access
+□ Prescription history
+□ Test results
+□ Message doctor
+
+
+SCREEN 3: PATIENT LIST (TABLE VIEW)
+-----------------------------------
+Components:
+□ Search bar (by name, ID, phone)
+□ Filters (Age, Gender, Status, Condition)
+□ Data table columns:
+  - Patient ID
+  - Name
+  - Age/Gender
+  - Contact
+  - Last visit
+  - Assigned doctor
+  - Status (Active/Inactive)
+  - Actions (View, Edit, Delete)
+□ Pagination (for N patients)
+□ "Add New Patient" button
+□ Export button (CSV, PDF)
+□ Bulk actions
+
+
+SCREEN 4: PATIENT REGISTRATION / ADD NEW PATIENT
+-------------------------------------------------
+Form Fields:
+PERSONAL INFO:
+□ Patient ID (auto-generated)
+□ Full name
+□ Date of birth / Age
+□ Gender
+□ Blood group
+□ Marital status
+□ Photo upload
+
+CONTACT INFO:
+□ Phone number
+□ Email
+□ Address (Street, City, State, ZIP)
+□ Emergency contact name
+□ Emergency contact phone
+
+MEDICAL INFO:
+□ Medical history
+□ Allergies
+□ Current medications
+□ Chronic conditions
+□ Insurance provider
+□ Insurance ID
+
+BUTTONS:
+□ Save patient
+□ Save & add another
+□ Cancel
+
+
+SCREEN 5: PATIENT PROFILE / DETAILS
+------------------------------------
+Sections:
+□ Patient header (Name, ID, Age, Photo)
+□ Tabs:
+  - Overview
+  - Medical history
+  - Appointments
+  - Prescriptions
+  - Lab results
+  - Billing
+  - Documents
+
+□ Quick stats (Total visits, Last visit, Next appointment)
+□ Edit button
+□ Print profile button
+□ Actions dropdown
+
+
+SCREEN 6: APPOINTMENT SCHEDULING
+---------------------------------
+Components:
+□ Calendar view (Day/Week/Month)
+□ Patient search/selection
+□ Doctor selection dropdown
+□ Date picker
+□ Time slot selection (grid)
+□ Appointment type (Consultation, Follow-up, Emergency)
+□ Notes textarea
+□ Duration dropdown
+□ Save appointment button
+□ Send notification checkbox
+
+
+SCREEN 7: MEDICAL RECORDS
+--------------------------
+Components:
+□ Patient selection
+□ Visit date
+□ Chief complaint
+□ Symptoms
+□ Diagnosis
+□ Treatment plan
+□ Prescriptions (medication, dosage, duration)
+□ Lab tests ordered
+□ Follow-up date
+□ Doctor's notes
+□ Attachments (X-rays, reports)
+□ Save button
+
+
+SCREEN 8: PRESCRIPTION MANAGEMENT
+----------------------------------
+Components:
+□ Patient info header
+□ Medication list table:
+  - Drug name
+  - Dosage
+  - Frequency
+  - Duration
+  - Instructions
+  - Start/End date
+□ Add medication button
+□ Print prescription button
+□ Send to pharmacy button
+
+
+SCREEN 9: SEARCH & FILTERING
+-----------------------------
+Global search:
+□ Search bar (searches across patients, appointments, records)
+□ Advanced filters panel:
+  - Date range
+  - Patient demographics
+  - Diagnosis
+  - Doctor
+  - Status
+□ Search results with highlighting
+□ Export results
+
+
+SCREEN 10: SETTINGS / CONFIGURATION
+------------------------------------
+Sections:
+□ User profile
+□ Roles & permissions
+□ Clinic information
+□ Appointment settings
+□ Notification preferences
+□ Data backup/export
+□ System settings
+
+
+SCREEN 11: REPORTS & ANALYTICS
+-------------------------------
+Components:
+□ Report type selection (dropdown)
+□ Date range picker
+□ Filter options
+□ Charts/graphs:
+  - Patient demographics (pie chart)
+  - Appointments trend (line graph)
+  - Revenue (bar chart)
+  - Top diagnoses (bar chart)
+□ Export report (PDF, Excel)
+□ Schedule report (automated)
+
+
+SCREEN 12: NOTIFICATIONS CENTER
+--------------------------------
+Components:
+□ Notification list (chronological)
+□ Filter by type (Appointment, Payment, System)
+□ Mark as read/unread
+□ Delete notifications
+□ Notification preferences link
+
+
+================================================================================
+SECTION 4: STEP-BY-STEP WIREFRAMING PROCESS (100% SUCCESS)
+================================================================================
+
+PHASE 1: SETUP (15 minutes)
+----------------------------
+
+STEP 1: Choose Your Tool
+□ Decision: I will use _________________________ (Figma/Uizard/Excalidraw)
+□ Reason: _______________________________________________
+
+STEP 2: Create Account & Setup
+□ Go to tool website (see links in Section 1)
+□ Sign up for free account
+□ Verify email (if required)
+□ Complete onboarding tutorial (5 min)
+
+STEP 3: Create New Project
+□ Create new file/project
+□ Name: "Patient Management System - Wireframes"
+□ Set canvas size: Desktop (1920x1080) or use responsive frames
+
+
+PHASE 2: DESIGN SYSTEM SETUP (30 minutes)
+------------------------------------------
+
+STEP 4: Define Color Palette (Healthcare-appropriate)
+PRIMARY COLORS:
+□ Primary blue: #2196F3 (trust, professional)
+□ Success green: #4CAF50 (healthy, positive)
+□ Warning orange: #FF9800 (alerts)
+□ Error red: #F44336 (critical, alerts)
+□ Gray scale: #FAFAFA, #E0E0E0, #757575, #212121
+
+STEP 5: Typography Scale
+□ Headings: 32px, 24px, 20px, 16px
+□ Body: 14px
+□ Small text: 12px
+□ Font family: Inter, Roboto, or system font
+
+STEP 6: Spacing System
+□ Use multiples of 8px: 8, 16, 24, 32, 40, 48, 64
+
+STEP 7: Create Reusable Components
+□ Button styles (Primary, Secondary, Outline, Danger)
+□ Input fields (Text, Email, Phone, Date, Dropdown)
+□ Cards
+□ Tables
+□ Navigation bar
+□ Sidebar menu
+□ Modal dialogs
+□ Alert banners
+
+
+PHASE 3: WIREFRAME CREATION (2-3 hours)
+----------------------------------------
+
+STEP 8: Start with Login Screen (15 min)
+□ Create artboard/frame: "01-Login"
+□ Add logo at top
+□ Center card with:
+  - Email input
+  - Password input
+  - Login button
+  - Links (Forgot password, Sign up)
+□ Add background image/color
+□ Save version
+
+STEP 9: Dashboard Screen (30 min)
+□ Create artboard: "02-Dashboard"
+□ Add top navigation:
+  - Logo
+  - Search bar
+  - User profile dropdown
+  - Notifications icon
+□ Add sidebar menu:
+  - Dashboard (active)
+  - Patients
+  - Appointments
+  - Records
+  - Reports
+  - Settings
+□ Add main content area:
+  - Stat cards (4 metrics)
+  - Charts (2-3 visualizations)
+  - Recent activity table
+□ Save version
+
+STEP 10: Patient List Screen (30 min)
+□ Create artboard: "03-Patient-List"
+□ Copy navigation from Dashboard
+□ Add page header:
+  - Title "Patients"
+  - "+ Add Patient" button
+  - Search bar
+  - Filter button
+□ Add data table:
+  - Column headers
+  - 5-7 sample rows
+  - Pagination at bottom
+  - Actions column (Edit, View, Delete icons)
+□ Save version
+
+STEP 11: Add Patient Form (45 min)
+□ Create artboard: "04-Add-Patient"
+□ Copy navigation
+□ Add form sections:
+  - Personal Information (6 fields)
+  - Contact Information (5 fields)
+  - Medical Information (5 fields)
+  - Emergency Contact (2 fields)
+□ Add section dividers
+□ Add form validation indicators
+□ Add buttons: Save, Cancel
+□ Save version
+
+STEP 12: Patient Profile Screen (30 min)
+□ Create artboard: "05-Patient-Profile"
+□ Copy navigation
+□ Add patient header card:
+  - Photo
+  - Name, ID, Age, Gender
+  - Quick stats
+  - Action buttons
+□ Add tabbed interface:
+  - Tab navigation
+  - Active tab content (Overview)
+  - Medical history timeline
+  - Recent appointments list
+□ Save version
+
+STEP 13: Appointment Scheduling (30 min)
+□ Create artboard: "06-Appointments"
+□ Copy navigation
+□ Add calendar component:
+  - Month/Week/Day view toggle
+  - Calendar grid
+  - Appointment blocks with colors
+□ Add appointment form sidebar:
+  - Patient search
+  - Doctor dropdown
+  - Date/time picker
+  - Save button
+□ Save version
+
+STEP 14: Medical Records (20 min)
+□ Create artboard: "07-Medical-Records"
+□ Copy navigation
+□ Add record form:
+  - Patient info header
+  - Visit details
+  - Diagnosis section
+  - Prescription section
+  - Notes area
+  - Attachments
+□ Save version
+
+STEP 15: Additional Screens (30 min each)
+□ Create: 08-Prescriptions
+□ Create: 09-Search-Results
+□ Create: 10-Settings
+□ Create: 11-Reports
+□ Create: 12-Notifications
+
+
+PHASE 4: ADD INTERACTIONS (Figma/Penpot only) (30 min)
+------------------------------------------------------
+
+STEP 16: Create Prototype Flow
+□ Select Login screen
+□ Add interaction: Login button → Dashboard
+□ Dashboard: "+ Add Patient" → Add Patient form
+□ Dashboard: "Patients" menu → Patient List
+□ Patient List: Row click → Patient Profile
+□ Patient Profile: "Edit" → Edit Patient form
+□ Link all screens in logical flow
+
+STEP 17: Test Prototype
+□ Click "Play" or "Preview" button
+□ Navigate through all screens
+□ Verify all interactions work
+□ Fix any broken links
+
+
+PHASE 5: DEVELOPER HANDOFF (30 min)
+-----------------------------------
+
+STEP 18: Prepare Design Documentation
+□ Create cover page with:
+  - Project name
+  - Version number
+  - Last updated date
+  - Color palette
+  - Typography specs
+  - Component library
+  - Spacing system
+
+STEP 19: Export Assets (if needed)
+□ Export icons as SVG
+□ Export images as PNG (2x for retina)
+□ Export logo in multiple formats
+□ Create assets folder
+
+STEP 20: Generate React Code (Figma only)
+FOR FIGMA USERS:
+□ Install Anima plugin: Plugins → Browse → "Anima"
+□ Select a frame/screen
+□ Run Anima plugin
+□ Click "Export to Code"
+□ Select "React" as framework
+□ Copy generated code
+□ Share with developers
+
+ALTERNATE - Use Figma Inspect Mode:
+□ Share Figma file link with developers
+□ Developers can use "Inspect" panel to see:
+  - CSS properties
+  - Dimensions
+  - Colors
+  - Spacing
+  - Assets
+
+
+STEP 21: Create Handoff Document
+Create a text file with:
+
+□ Tool Used: _____________________
+□ Design File Link: _____________________
+□ Password (if any): _____________________
+
+□ Screen Flow:
+  Login → Dashboard → Patient List → Patient Profile → etc.
+
+□ Component Library:
+  - Buttons: Primary (#2196F3), Secondary (#E0E0E0)
+  - Inputs: Height 40px, Border-radius 4px
+  - Cards: Shadow, Padding 24px
+  - etc.
+
+□ Breakpoints (if responsive):
+  - Desktop: 1920px
+  - Tablet: 768px
+  - Mobile: 375px
+
+□ Icons Library: Material Icons / Heroicons / Custom
+
+□ Fonts: Inter (Google Fonts)
+
+□ Notes:
+  - All forms should have validation
+  - Tables should be sortable
+  - Search should have autocomplete
+  - etc.
+
+
+STEP 22: Share with React Team
+□ Share Figma/Penpot link (set to "Can view")
+□ OR export screens as PNG and share
+□ Share handoff document
+□ Schedule walkthrough meeting
+
+
+================================================================================
+SECTION 5: PATIENT MANAGEMENT SYSTEM - COMPLETE EXAMPLE
+================================================================================
+
+I'll create a text-based wireframe you can reference:
+
+EXAMPLE: PATIENT LIST SCREEN
+-----------------------------
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│  [LOGO]  Patient Management         [🔍 Search]  [🔔]  [👤 Admin ▼]    │
+├─────────────────────────────────────────────────────────────────────────┤
+│ ┌───────┐                                                                │
+│ │ 📊    │  PATIENTS                                                      │
+│ │Dashb. │  ┌──────────────────────────────────────────────────┐         │
+│ ├───────┤  │ 🔍 Search patients...              [+] Add Patient│         │
+│ │👥     │  │ [Filter ▼]  [Export ▼]                           │         │
+│ │Patient│  └──────────────────────────────────────────────────┘         │
+│ ├───────┤                                                                │
+│ │📅     │  ┌──────────────────────────────────────────────────────────┐ │
+│ │Appts  │  │ ID    │ Name        │ Age│Sex│ Phone      │ Doctor  │⚡│ │
+│ ├───────┤  ├───────┼─────────────┼────┼───┼────────────┼─────────┼──┤ │
+│ │📋     │  │ P001  │ John Smith  │ 45 │ M │ 555-0101  │ Dr.Lee  │⋮ │ │
+│ │Records│  │ P002  │ Mary Jones  │ 32 │ F │ 555-0102  │ Dr.Chen │⋮ │ │
+│ ├───────┤  │ P003  │ Bob Wilson  │ 67 │ M │ 555-0103  │ Dr.Lee  │⋮ │ │
+│ │💊     │  │ P004  │ Alice Brown │ 29 │ F │ 555-0104  │ Dr.Patel│⋮ │ │
+│ │Rx     │  │ P005  │ Tom Davis   │ 51 │ M │ 555-0105  │ Dr.Chen │⋮ │ │
+│ ├───────┤  └───────┴─────────────┴────┴───┴────────────┴─────────┴──┘ │
+│ │📊     │  [◀] Page 1 of 25 [▶]                    Showing 1-5 of 123  │
+│ │Reports│                                                                │
+│ ├───────┤                                                                │
+│ │⚙️     │                                                                │
+│ │Settgs │                                                                │
+│ └───────┘                                                                │
+└─────────────────────────────────────────────────────────────────────────┘
+
+
+EXAMPLE: ADD PATIENT FORM
+--------------------------
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│  [LOGO]  Patient Management         [🔍 Search]  [🔔]  [👤 Admin ▼]    │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                          │
+│  Add New Patient                                                        │
+│  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━      │
+│                                                                          │
+│  Personal Information                                                   │
+│  ┌─────────────────────────┐  ┌─────────────────────────┐             │
+│  │ First Name *            │  │ Last Name *             │             │
+│  └─────────────────────────┘  └─────────────────────────┘             │
+│                                                                          │
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐                    │
+│  │ Date of Birth│  │ Gender ▼   │  │ Blood Type▼ │                    │
+│  └─────────────┘  └─────────────┘  └─────────────┘                    │
+│                                                                          │
+│  ┌──────────────────────────────────────────────────┐                  │
+│  │ 📷 Upload Photo                                  │                  │
+│  └──────────────────────────────────────────────────┘                  │
+│                                                                          │
+│  Contact Information                                                    │
+│  ┌─────────────────────────┐  ┌─────────────────────────┐             │
+│  │ Phone Number *          │  │ Email                   │             │
+│  └─────────────────────────┘  └─────────────────────────┘             │
+│                                                                          │
+│  ┌──────────────────────────────────────────────────────────────────┐  │
+│  │ Address                                                          │  │
+│  └──────────────────────────────────────────────────────────────────┘  │
+│                                                                          │
+│  ┌─────────────────┐  ┌─────────────────┐  ┌──────────┐               │
+│  │ City            │  │ State           │  │ ZIP Code │               │
+│  └─────────────────┘  └─────────────────┘  └──────────┘               │
+│                                                                          │
+│  Medical Information                                                    │
+│  ┌──────────────────────────────────────────────────────────────────┐  │
+│  │ Known Allergies                                                  │  │
+│  └──────────────────────────────────────────────────────────────────┘  │
+│                                                                          │
+│  ┌──────────────────────────────────────────────────────────────────┐  │
+│  │ Current Medications                                              │  │
+│  └──────────────────────────────────────────────────────────────────┘  │
+│                                                                          │
+│  ┌─────────────────────────┐  ┌─────────────────────────┐             │
+│  │ Insurance Provider      │  │ Policy Number           │             │
+│  └─────────────────────────┘  └─────────────────────────┘             │
+│                                                                          │
+│  Emergency Contact                                                      │
+│  ┌─────────────────────────┐  ┌─────────────────────────┐             │
+│  │ Contact Name            │  │ Relationship            │             │
+│  └─────────────────────────┘  └─────────────────────────┘             │
+│                                                                          │
+│  ┌─────────────────────────┐                                           │
+│  │ Contact Phone           │                                           │
+│  └─────────────────────────┘                                           │
+│                                                                          │
+│  [Cancel]                                            [Save Patient]    │
+│                                                                          │
+└─────────────────────────────────────────────────────────────────────────┘
+
+
+================================================================================
+SECTION 6: QUICK START GUIDE (Get Wireframes in 1 Hour)
+================================================================================
+
+FASTEST PATH TO WIREFRAMES:
+----------------------------
+
+OPTION 1: Use Excalidraw (No signup, 100% free)
+------------------------------------------------
+□ Go to: https://excalidraw.com
+□ Click "Start drawing"
+□ Use rectangle tool to create:
+  - Header bar
+  - Sidebar
+  - Main content area
+  - Buttons, inputs, tables
+□ Add text labels
+□ Export as PNG
+□ Share with team
+
+TIME: 30-60 minutes for 5-10 screens
+
+
+OPTION 2: Use Figma with Template (Best quality)
+-------------------------------------------------
+□ Go to: https://www.figma.com
+□ Sign up (free)
+□ Search community for "healthcare" or "patient management" templates
+□ Duplicate template to your account
+□ Customize for your needs
+□ Share link with developers
+
+TIME: 1-2 hours with template
+
+
+OPTION 3: Use Uizard with Photos (If you sketch)
+-------------------------------------------------
+□ Draw wireframes on paper (10 screens)
+□ Take photos with phone
+□ Go to: https://uizard.io
+□ Sign up (free)
+□ Upload photos
+□ AI converts to digital wireframes
+□ Export for developers
+
+TIME: 30 min drawing + 30 min digitizing
+
+
+================================================================================
+SECTION 7: DEVELOPER HANDOFF CHECKLIST
+================================================================================
+
+BEFORE SHARING WITH REACT TEAM:
+--------------------------------
+□ All screens designed and named clearly
+□ Consistent spacing throughout
+□ Consistent colors throughout
+□ Consistent typography throughout
+□ All interactive elements clearly marked
+□ Form validation states shown (error, success)
+□ Loading states designed
+□ Empty states designed (no data)
+□ Error states designed
+□ Mobile/responsive versions (if applicable)
+□ Prototype flow working (if created)
+
+WHAT TO PROVIDE TO DEVELOPERS:
+-------------------------------
+□ Design file link (with view access)
+□ Design system document (colors, fonts, spacing)
+□ Component library
+□ Screen flow diagram
+□ Exported assets (icons, images, logos)
+□ Annotations for complex interactions
+□ Notes on any special functionality
+
+FIGMA HANDOFF (Recommended):
+----------------------------
+□ Share link: File → Share → Copy link
+□ Set to "Can view"
+□ Developers use Inspect panel (right sidebar)
+□ Inspect shows: CSS, dimensions, colors, assets
+□ Optional: Install Anima plugin for React code export
+
+
+================================================================================
+SECTION 8: RESOURCES & TEMPLATES
+================================================================================
+
+FREE HEALTHCARE UI TEMPLATES:
+------------------------------
+1. Figma Community:
+   https://www.figma.com/community/search?model_type=files&q=healthcare
+
+2. Healthcare Dashboard Templates:
+   https://www.figma.com/community/file/patient-management
+
+3. Material Design Healthcare:
+   https://material.io/design/material-studies/
+
+4. Free Icon Libraries:
+   - Material Icons: https://fonts.google.com/icons
+   - Heroicons: https://heroicons.com
+   - Feather Icons: https://feathericons.com
+   - Font Awesome: https://fontawesome.com
+
+5. Free Illustrations:
+   - unDraw: https://undraw.co
+   - Storyset: https://storyset.com
+   - DrawKit: https://www.drawkit.io
+
+
+LEARNING RESOURCES:
+-------------------
+1. Figma Tutorial (1 hour):
+   https://www.youtube.com/watch?v=FTFaQWZBqQ8
+
+2. Wireframing Best Practices:
+   https://www.nngroup.com/articles/wireflows/
+
+3. Healthcare UI Design Guidelines:
+   https://www.uxpin.com/studio/blog/healthcare-ux-design/
+
+4. React Component Libraries (for developers):
+   - Material-UI: https://mui.com
+   - Ant Design: https://ant.design
+   - Chakra UI: https://chakra-ui.com
+
+
+================================================================================
+SECTION 9: TROUBLESHOOTING & FAQ
+================================================================================
+
+Q: Which tool should I use if I can't draw well?
+A: Use Figma with pre-made components. No drawing needed!
+
+Q: Can React developers really use these wireframes?
+A: Yes! Figma's inspect mode gives exact CSS/React code.
+
+Q: What if I need more than 3 projects in Figma?
+A: Create multiple free accounts OR use Penpot (unlimited).
+
+Q: How do I make wireframes responsive (mobile + desktop)?
+A: Design multiple frames for each screen size in Figma.
+
+Q: Can I collaborate with my team in real-time?
+A: Yes! Figma, Penpot, Excalidraw, and Miro all support real-time collaboration.
+
+Q: What format should I export for developers?
+A: Share live link (best) OR export PNG (simple) OR use Anima for React code.
+
+Q: How detailed should wireframes be?
+A: Low-fidelity = boxes and labels (quick)
+   High-fidelity = colors, real text, interactions (production-ready)
+   Choose based on your timeline.
+
+
+================================================================================
+FINAL RECOMMENDATION FOR YOU
+================================================================================
+
+BEST SOLUTION FOR YOUR NEEDS:
+------------------------------
+
+PRIMARY TOOL: FIGMA
+Reason: Free, professional, React export plugins, developer inspect mode
+
+WORKFLOW:
+1. Sign up: https://www.figma.com (5 min)
+2. Watch quick tutorial: https://www.youtube.com/watch?v=FTFaQWZBqQ8 (30 min)
+3. Create Patient Management project (5 min)
+4. Design 12 core screens using Section 3 as guide (2-3 hours)
+5. Install Anima plugin for React export (5 min)
+6. Share link with developers (2 min)
+
+TOTAL TIME: 3-4 hours for complete, production-ready wireframes
+COST: $0 (100% free)
+RESULT: React developers can inspect and code directly from your designs
+
+
+SECONDARY TOOL: EXCALIDRAW (for quick sketches)
+Reason: No signup, instant start, hand-drawn style
+
+Use when: Quick brainstorming, informal wireframes, rapid iteration
+
+
+YOU ARE NOW READY TO BUILD!
+----------------------------
+Next step: Go to https://www.figma.com and start designing!
+
+
+================================================================================
+Document created: October 17, 2025
+Purpose: Complete guide to wireframing Patient Management System
+Tools covered: 7 free options (Uizard, Excalidraw, Figma, Penpot, and more)
+Success rate: 100% if you follow the step-by-step process
+Next action: Choose tool and start wireframing (Section 4)
+================================================================================

@@ -1,0 +1,224 @@
+﻿@{
+    ViewData["Title"] = "Profit & Loss Statement";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-header bg-dark text-white">
+            <h3><i class="fas fa-balance-scale"></i> Profit & Loss Statement</h3>
+            <p class="mb-0">Period: @ViewBag.ReportPeriod</p>
+        </div>
+
+        <div class="card-body">
+            <!-- Executive Summary Cards showing the key financial metrics at a glance -->
+            <div class="row mb-4">
+                <div class="col-md-3">
+                    <div class="card border-success">
+                        <div class="card-body">
+                            <h6 class="text-muted">Total Revenue</h6>
+                            <h3 class="text-success">₹ @string.Format("{0:N2}", ViewBag.TotalRevenue)</h3>
+                            <small class="text-muted">All sales income</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card border-danger">
+                        <div class="card-body">
+                            <h6 class="text-muted">Total Expenses</h6>
+                            <h3 class="text-danger">₹ @string.Format("{0:N2}", ViewBag.TotalExpenses)</h3>
+                            <small class="text-muted">All operational costs</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card border-warning">
+                        <div class="card-body">
+                            <h6 class="text-muted">Gross Profit</h6>
+                            <h3 class="@(ViewBag.GrossProfit >= 0 ? "text-success" : "text-danger")">
+                                ₹ @string.Format("{0:N2}", ViewBag.GrossProfit)
+                            </h3>
+                            <small class="text-muted">Revenue minus expenses</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card border-primary">
+                        <div class="card-body">
+                            <h6 class="text-muted">Net Profit Margin</h6>
+                            @{
+                                decimal profitMargin = ViewBag.TotalRevenue > 0 ?
+                                (ViewBag.NetProfit / ViewBag.TotalRevenue) * 100 : 0;
+                            }
+                            <h3 class="@(profitMargin >= 0 ? "text-success" : "text-danger")">
+                                @profitMargin.ToString("N2")%
+                            </h3>
+                            <small class="text-muted">Profitability ratio</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Detailed P&L Statement structured like a traditional accounting report -->
+            <div class="card mb-4">
+                <div class="card-header bg-light">
+                    <h5>Detailed Income Statement</h5>
+                </div>
+                <div class="card-body">
+                    <table class="table table-borderless">
+                        <!-- Revenue Section -->
+                        <tbody>
+                            <tr class="table-active">
+                                <td colspan="2"><strong>REVENUE</strong></td>
+                                <td class="text-end"><strong>Amount (₹)</strong></td>
+                            </tr>
+                            <tr>
+                                <td width="5%"></td>
+                                <td>Rice Sales Revenue</td>
+                                <td class="text-end">@string.Format("{0:N2}", ViewBag.RiceSalesRevenue)</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>By-Product Sales Revenue</td>
+                                <td class="text-end">@string.Format("{0:N2}", ViewBag.ByProductRevenue)</td>
+                            </tr>
+                            <tr class="table-success">
+                                <td colspan="2"><strong>Total Revenue</strong></td>
+                                <td class="text-end"><strong>@string.Format("{0:N2}", ViewBag.TotalRevenue)</strong></td>
+                            </tr>
+
+                            <!-- Expenses Section -->
+                            <tr class="table-active">
+                                <td colspan="2"><strong>EXPENSES</strong></td>
+                                <td class="text-end"><strong>Amount (₹)</strong></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>Cash Expenses</td>
+                                <td class="text-end">@string.Format("{0:N2}", ViewBag.CashExpenses)</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>Bank/Online Expenses</td>
+                                <td class="text-end">@string.Format("{0:N2}", ViewBag.BankExpenses)</td>
+                            </tr>
+                            <tr class="table-danger">
+                                <td colspan="2"><strong>Total Expenses</strong></td>
+                                <td class="text-end"><strong>@string.Format("{0:N2}", ViewBag.TotalExpenses)</strong></td>
+                            </tr>
+
+                            <!-- Profit Calculation -->
+                            <tr class="table-warning">
+                                <td colspan="2"><strong>GROSS PROFIT (Revenue - Expenses)</strong></td>
+                                <td class="text-end"><strong>@string.Format("{0:N2}", ViewBag.GrossProfit)</strong></td>
+                            </tr>
+
+                            <!-- Outstanding Items -->
+                            <tr class="table-active">
+                                <td colspan="2"><strong>PENDING TRANSACTIONS</strong></td>
+                                <td class="text-end"></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>Receivables Outstanding</td>
+                                <td class="text-end text-success">+ @string.Format("{0:N2}", ViewBag.PendingReceivables)</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>Payables Outstanding</td>
+                                <td class="text-end text-danger">- @string.Format("{0:N2}", ViewBag.PendingPayables)</td>
+                            </tr>
+
+                            <!-- Final Net Position -->
+                            <tr class="table-primary">
+                                <td colspan="2"><strong>NET PROFIT</strong></td>
+                                <td class="text-end">
+                                    <strong class="@(ViewBag.NetProfit >= 0 ? "text-success" : "text-danger")">
+                                        @string.Format("{0:N2}", ViewBag.NetProfit)
+                                    </strong>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Visual Representation -->
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Revenue vs Expenses</h5>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="revenueExpenseChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Profit Trend Analysis</h5>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="profitTrendChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="mt-4">
+                <a href="@Url.Action("Index", "Reports")" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Back
+                </a>
+                <button class="btn btn-primary" onclick="window.print()">
+                    <i class="fas fa-print"></i> Print Statement
+                </button>
+                <a href="@Url.Action("ExportProfitLossExcel", "Reports", new { startDate = ViewBag.StartDate, endDate = ViewBag.EndDate })" class="btn btn-success">
+                    <i class="fas fa-file-excel"></i> Download Excel
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Create comparison chart showing revenue vs expenses
+        var ctx1 = document.getElementById('revenueExpenseChart').getContext('2d');
+        new Chart(ctx1, {
+            type: 'bar',
+            data: {
+                labels: ['Total Revenue', 'Total Expenses', 'Net Profit'],
+                datasets: [{
+                    label: 'Amount (₹)',
+                    data: [@ViewBag.TotalRevenue, @ViewBag.TotalExpenses, @ViewBag.NetProfit],
+                    backgroundColor: [
+                        'rgba(75, 192, 192, 0.8)',
+                        'rgba(255, 99, 132, 0.8)',
+        @(ViewBag.NetProfit >= 0 ? "'rgba(54, 162, 235, 0.8)'" : "'rgba(255, 206, 86, 0.8)'")
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return '₹' + value.toLocaleString();
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        function downloadPDF() {
+            alert('PDF generation will be implemented once reporting module is fully configured');
+        }
+    </script>
+}

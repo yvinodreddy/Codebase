@@ -1,0 +1,143 @@
+# RBAC Configuration for SwarmCare
+# Production-ready role-based access control
+
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: swarmcare-sa
+  namespace: swarmcare
+  annotations:
+    azure.workload.identity/client-id: "00000000-0000-0000-0000-000000000000"
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: swarmcare-role
+  namespace: swarmcare
+rules:
+  # ConfigMap access
+  - apiGroups: [""]
+    resources: ["configmaps"]
+    verbs: ["get", "list", "watch"]
+    resourceNames: ["swarmcare-config"]
+
+  # Secret access (limited)
+  - apiGroups: [""]
+    resources: ["secrets"]
+    verbs: ["get"]
+    resourceNames: ["swarmcare-secrets", "database-secret", "redis-secret"]
+
+  # Pod info access
+  - apiGroups: [""]
+    resources: ["pods"]
+    verbs: ["get", "list"]
+
+  # Service info access
+  - apiGroups: [""]
+    resources: ["services"]
+    verbs: ["get", "list"]
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: swarmcare-rolebinding
+  namespace: swarmcare
+subjects:
+  - kind: ServiceAccount
+    name: swarmcare-sa
+    namespace: swarmcare
+roleRef:
+  kind: Role
+  name: swarmcare-role
+  apiGroup: rbac.authorization.k8s.io
+
+---
+# Cluster-level role for monitoring
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: swarmcare-metrics-reader
+rules:
+  - apiGroups: ["metrics.k8s.io"]
+    resources: ["pods", "nodes"]
+    verbs: ["get", "list"]
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: swarmcare-metrics-reader-binding
+subjects:
+  - kind: ServiceAccount
+    name: swarmcare-sa
+    namespace: swarmcare
+roleRef:
+  kind: ClusterRole
+  name: swarmcare-metrics-reader
+  apiGroup: rbac.authorization.k8s.io
+
+---
+# Admin role for deployment operations
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: swarmcare-deployer
+  namespace: swarmcare
+rules:
+  - apiGroups: ["apps"]
+    resources: ["deployments", "replicasets"]
+    verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+
+  - apiGroups: [""]
+    resources: ["pods", "services", "configmaps"]
+    verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+
+  - apiGroups: [""]
+    resources: ["pods/log"]
+    verbs: ["get", "list"]
+
+  - apiGroups: [""]
+    resources: ["pods/exec"]
+    verbs: ["create"]
+
+  - apiGroups: ["batch"]
+    resources: ["jobs", "cronjobs"]
+    verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+
+---
+# Read-only role for developers
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: swarmcare-viewer
+  namespace: swarmcare
+rules:
+  - apiGroups: ["", "apps", "batch"]
+    resources: ["*"]
+    verbs: ["get", "list", "watch"]
+
+  - apiGroups: [""]
+    resources: ["pods/log"]
+    verbs: ["get", "list"]
+
+---
+# Security audit role
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: swarmcare-security-auditor
+rules:
+  - apiGroups: ["policy"]
+    resources: ["podsecuritypolicies"]
+    verbs: ["get", "list"]
+
+  - apiGroups: ["networking.k8s.io"]
+    resources: ["networkpolicies"]
+    verbs: ["get", "list"]
+
+  - apiGroups: ["rbac.authorization.k8s.io"]
+    resources: ["roles", "rolebindings", "clusterroles", "clusterrolebindings"]
+    verbs: ["get", "list"]

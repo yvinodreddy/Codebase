@@ -1,0 +1,224 @@
+---
+# SwarmCare Phase 0: Foundation & Infrastructure
+# Kubernetes Deployment Configuration
+# Story Points: 37 | Generated: 2025-10-27
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: swarmcare-production
+  labels:
+    app: swarmcare
+    environment: production
+    version: "2.1"
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: swarmcare-config
+  namespace: swarmcare-production
+data:
+  environment: "production"
+  log_level: "INFO"
+  max_workers: "10"
+  database_type: "neo4j"
+
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: swarmcare-secrets
+  namespace: swarmcare-production
+type: Opaque
+stringData:
+  neo4j-password: "CHANGE_ME_IN_PRODUCTION"
+  api-key: "CHANGE_ME_IN_PRODUCTION"
+  content-safety-key: "CHANGE_ME_IN_PRODUCTION"
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: swarmcare-api
+  namespace: swarmcare-production
+  labels:
+    app: swarmcare
+    component: api
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: swarmcare
+      component: api
+  template:
+    metadata:
+      labels:
+        app: swarmcare
+        component: api
+    spec:
+      containers:
+      - name: swarmcare-api
+        image: swarmcare/api:2.1.0
+        ports:
+        - containerPort: 8000
+          name: http
+        - containerPort: 8001
+          name: metrics
+        env:
+        - name: ENVIRONMENT
+          valueFrom:
+            configMapKeyRef:
+              name: swarmcare-config
+              key: environment
+        - name: LOG_LEVEL
+          valueFrom:
+            configMapKeyRef:
+              name: swarmcare-config
+              key: log_level
+        - name: NEO4J_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: swarmcare-secrets
+              key: neo4j-password
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "500m"
+          limits:
+            memory: "2Gi"
+            cpu: "2000m"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 8000
+          initialDelaySeconds: 10
+          periodSeconds: 5
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: swarmcare-api
+  namespace: swarmcare-production
+spec:
+  selector:
+    app: swarmcare
+    component: api
+  ports:
+  - name: http
+    port: 80
+    targetPort: 8000
+  - name: metrics
+    port: 8001
+    targetPort: 8001
+  type: LoadBalancer
+
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: neo4j
+  namespace: swarmcare-production
+spec:
+  serviceName: neo4j
+  replicas: 1
+  selector:
+    matchLabels:
+      app: neo4j
+  template:
+    metadata:
+      labels:
+        app: neo4j
+    spec:
+      containers:
+      - name: neo4j
+        image: neo4j:5.13-enterprise
+        ports:
+        - containerPort: 7474
+          name: http
+        - containerPort: 7687
+          name: bolt
+        env:
+        - name: NEO4J_AUTH
+          valueFrom:
+            secretKeyRef:
+              name: swarmcare-secrets
+              key: neo4j-password
+        - name: NEO4J_ACCEPT_LICENSE_AGREEMENT
+          value: "yes"
+        volumeMounts:
+        - name: neo4j-data
+          mountPath: /data
+        - name: neo4j-logs
+          mountPath: /logs
+        resources:
+          requests:
+            memory: "4Gi"
+            cpu: "2000m"
+          limits:
+            memory: "8Gi"
+            cpu: "4000m"
+  volumeClaimTemplates:
+  - metadata:
+      name: neo4j-data
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 100Gi
+  - metadata:
+      name: neo4j-logs
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 10Gi
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: neo4j
+  namespace: swarmcare-production
+spec:
+  clusterIP: None
+  selector:
+    app: neo4j
+  ports:
+  - name: http
+    port: 7474
+  - name: bolt
+    port: 7687
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: swarmcare-ingress
+  namespace: swarmcare-production
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+spec:
+  tls:
+  - hosts:
+    - api.swarmcare.example.com
+    secretName: swarmcare-tls
+  rules:
+  - host: api.swarmcare.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: swarmcare-api
+            port:
+              number: 80

@@ -1,0 +1,63 @@
+#!/bin/bash
+################################################################################
+# CPP with Real-Time Tracking Integration
+# Wrapper script that runs cpp command with live dashboard tracking
+#
+# ZERO BREAKING CHANGES:
+# - New script (cpp_with_tracking) - does not replace cpp
+# - Original cpp command continues to work unchanged
+# - Optional feature - user can choose to use this or regular cpp
+################################################################################
+
+# Get the directory where this script is located
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# Check if real-time tracking is enabled
+ENABLE_TRACKING=${ENABLE_CPP_TRACKING:-true}
+
+# Get output file path
+OUTPUT_FILE=$(python3 "$SCRIPT_DIR/get_output_path.py" 2>/dev/null)
+if [ $? -ne 0 ]; then
+    # Fallback if get_output_path.py fails
+    OUTPUT_FILE="$SCRIPT_DIR/tmp/cppultrathink_output_$(date +%Y%m%d_%H%M%S)_$RANDOM.txt"
+fi
+
+# Get the prompt (all arguments)
+PROMPT_TEXT="$*"
+
+# Initialize tracking if enabled
+TRACK_ID=""
+if [ "$ENABLE_TRACKING" = "true" ] && [ -f "$SCRIPT_DIR/realtime-tracking/cpp_integration.py" ]; then
+    # Start tracking in background
+    python3 "$SCRIPT_DIR/realtime-tracking/cpp_integration.py" "$PROMPT_TEXT" "$OUTPUT_FILE" &
+    TRACKER_PID=$!
+
+    # Give tracker time to initialize
+    sleep 0.5
+fi
+
+# Run the actual cpp command
+"$SCRIPT_DIR/cpp" "$@" --verbose 2>&1 > "$OUTPUT_FILE"
+CPP_EXIT_CODE=$?
+
+# Update tracking with completion status
+if [ "$ENABLE_TRACKING" = "true" ] && [ -n "$TRACKER_PID" ]; then
+    # Tracker will automatically detect completion by monitoring the output file
+    # Just wait for it to finish
+    wait "$TRACKER_PID" 2>/dev/null || true
+fi
+
+# Output the result file location
+echo ""
+echo "================================================================================"
+echo "📄 CPP Execution Complete"
+echo "================================================================================"
+echo "Output file: $OUTPUT_FILE"
+echo ""
+if [ "$ENABLE_TRACKING" = "true" ]; then
+    echo "📊 View live dashboard: http://localhost:8000/dashboard.html"
+    echo ""
+fi
+echo "================================================================================"
+
+exit $CPP_EXIT_CODE

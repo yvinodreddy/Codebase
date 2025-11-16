@@ -1,0 +1,4169 @@
+{
+  "generated_at": "2025-10-31T19:52:05.597837",
+  "total_codes": 505,
+  "codes": [
+    {
+      "code": "E11.9",
+      "description": "Type 2 diabetes mellitus without complications",
+      "category": "Endocrine",
+      "keywords": [
+        "type 2 diabetes",
+        "diabetes mellitus",
+        "t2dm",
+        "dm2",
+        "niddm"
+      ]
+    },
+    {
+      "code": "E11.65",
+      "description": "Type 2 diabetes mellitus with hyperglycemia",
+      "category": "Endocrine",
+      "keywords": [
+        "diabetes hyperglycemia",
+        "elevated glucose",
+        "high blood sugar"
+      ]
+    },
+    {
+      "code": "E11.22",
+      "description": "Type 2 diabetes mellitus with diabetic chronic kidney disease",
+      "category": "Endocrine",
+      "keywords": [
+        "diabetic nephropathy",
+        "diabetic kidney disease"
+      ]
+    },
+    {
+      "code": "E11.36",
+      "description": "Type 2 diabetes mellitus with diabetic cataract",
+      "category": "Endocrine",
+      "keywords": [
+        "diabetic cataract",
+        "diabetes eye complications"
+      ]
+    },
+    {
+      "code": "E11.42",
+      "description": "Type 2 diabetes mellitus with diabetic polyneuropathy",
+      "category": "Endocrine",
+      "keywords": [
+        "diabetic neuropathy",
+        "peripheral neuropathy"
+      ]
+    },
+    {
+      "code": "E11.51",
+      "description": "Type 2 diabetes mellitus with diabetic peripheral angiopathy without gangrene",
+      "category": "Endocrine",
+      "keywords": [
+        "diabetic peripheral vascular disease"
+      ]
+    },
+    {
+      "code": "E11.52",
+      "description": "Type 2 diabetes mellitus with diabetic peripheral angiopathy with gangrene",
+      "category": "Endocrine",
+      "keywords": [
+        "diabetic gangrene"
+      ]
+    },
+    {
+      "code": "E11.59",
+      "description": "Type 2 diabetes mellitus with other circulatory complications",
+      "category": "Endocrine",
+      "keywords": [
+        "diabetes circulation problems"
+      ]
+    },
+    {
+      "code": "E11.618",
+      "description": "Type 2 diabetes mellitus with other diabetic arthropathy",
+      "category": "Endocrine",
+      "keywords": [
+        "diabetic arthropathy"
+      ]
+    },
+    {
+      "code": "E11.621",
+      "description": "Type 2 diabetes mellitus with foot ulcer",
+      "category": "Endocrine",
+      "keywords": [
+        "diabetic foot ulcer"
+      ]
+    },
+    {
+      "code": "E11.622",
+      "description": "Type 2 diabetes mellitus with other skin ulcer",
+      "category": "Endocrine",
+      "keywords": [
+        "diabetic skin ulcer"
+      ]
+    },
+    {
+      "code": "E11.628",
+      "description": "Type 2 diabetes mellitus with other skin complications",
+      "category": "Endocrine",
+      "keywords": [
+        "diabetic skin complications"
+      ]
+    },
+    {
+      "code": "E11.630",
+      "description": "Type 2 diabetes mellitus with periodontal disease",
+      "category": "Endocrine",
+      "keywords": [
+        "diabetic periodontal disease"
+      ]
+    },
+    {
+      "code": "E11.638",
+      "description": "Type 2 diabetes mellitus with other oral complications",
+      "category": "Endocrine",
+      "keywords": [
+        "diabetic oral complications"
+      ]
+    },
+    {
+      "code": "E11.641",
+      "description": "Type 2 diabetes mellitus with hypoglycemia with coma",
+      "category": "Endocrine",
+      "keywords": [
+        "diabetic hypoglycemic coma"
+      ]
+    },
+    {
+      "code": "E11.649",
+      "description": "Type 2 diabetes mellitus with hypoglycemia without coma",
+      "category": "Endocrine",
+      "keywords": [
+        "diabetic hypoglycemia"
+      ]
+    },
+    {
+      "code": "E11.69",
+      "description": "Type 2 diabetes mellitus with other specified complication",
+      "category": "Endocrine",
+      "keywords": [
+        "diabetes other complications"
+      ]
+    },
+    {
+      "code": "E11.8",
+      "description": "Type 2 diabetes mellitus with unspecified complications",
+      "category": "Endocrine",
+      "keywords": [
+        "diabetes complications unspecified"
+      ]
+    },
+    {
+      "code": "E10.9",
+      "description": "Type 1 diabetes mellitus without complications",
+      "category": "Endocrine",
+      "keywords": [
+        "type 1 diabetes",
+        "t1dm",
+        "dm1",
+        "iddm",
+        "juvenile diabetes"
+      ]
+    },
+    {
+      "code": "E10.10",
+      "description": "Type 1 diabetes mellitus with ketoacidosis without coma",
+      "category": "Endocrine",
+      "keywords": [
+        "diabetic ketoacidosis",
+        "dka"
+      ]
+    },
+    {
+      "code": "E10.11",
+      "description": "Type 1 diabetes mellitus with ketoacidosis with coma",
+      "category": "Endocrine",
+      "keywords": [
+        "dka with coma",
+        "diabetic coma"
+      ]
+    },
+    {
+      "code": "E10.21",
+      "description": "Type 1 diabetes mellitus with diabetic nephropathy",
+      "category": "Endocrine",
+      "keywords": [
+        "type 1 diabetic kidney disease"
+      ]
+    },
+    {
+      "code": "E10.22",
+      "description": "Type 1 diabetes mellitus with diabetic chronic kidney disease",
+      "category": "Endocrine",
+      "keywords": [
+        "type 1 diabetic ckd"
+      ]
+    },
+    {
+      "code": "E10.29",
+      "description": "Type 1 diabetes mellitus with other diabetic kidney complication",
+      "category": "Endocrine",
+      "keywords": [
+        "type 1 diabetes kidney"
+      ]
+    },
+    {
+      "code": "E10.36",
+      "description": "Type 1 diabetes mellitus with diabetic cataract",
+      "category": "Endocrine",
+      "keywords": [
+        "type 1 diabetic cataract"
+      ]
+    },
+    {
+      "code": "E10.39",
+      "description": "Type 1 diabetes mellitus with other diabetic ophthalmic complication",
+      "category": "Endocrine",
+      "keywords": [
+        "type 1 diabetes eye"
+      ]
+    },
+    {
+      "code": "E10.40",
+      "description": "Type 1 diabetes mellitus with diabetic neuropathy, unspecified",
+      "category": "Endocrine",
+      "keywords": [
+        "type 1 diabetic neuropathy"
+      ]
+    },
+    {
+      "code": "E10.42",
+      "description": "Type 1 diabetes mellitus with diabetic polyneuropathy",
+      "category": "Endocrine",
+      "keywords": [
+        "type 1 diabetic polyneuropathy"
+      ]
+    },
+    {
+      "code": "E10.43",
+      "description": "Type 1 diabetes mellitus with diabetic autonomic neuropathy",
+      "category": "Endocrine",
+      "keywords": [
+        "type 1 diabetic autonomic neuropathy"
+      ]
+    },
+    {
+      "code": "E10.44",
+      "description": "Type 1 diabetes mellitus with diabetic amyotrophy",
+      "category": "Endocrine",
+      "keywords": [
+        "type 1 diabetic amyotrophy"
+      ]
+    },
+    {
+      "code": "E05.00",
+      "description": "Thyrotoxicosis with diffuse goiter without thyrotoxic crisis",
+      "category": "Endocrine",
+      "keywords": [
+        "graves disease",
+        "hyperthyroidism"
+      ]
+    },
+    {
+      "code": "E05.01",
+      "description": "Thyrotoxicosis with diffuse goiter with thyrotoxic crisis",
+      "category": "Endocrine",
+      "keywords": [
+        "graves crisis",
+        "thyroid storm"
+      ]
+    },
+    {
+      "code": "E05.10",
+      "description": "Thyrotoxicosis with toxic single thyroid nodule without thyrotoxic crisis",
+      "category": "Endocrine",
+      "keywords": [
+        "toxic adenoma"
+      ]
+    },
+    {
+      "code": "E05.11",
+      "description": "Thyrotoxicosis with toxic single thyroid nodule with thyrotoxic crisis",
+      "category": "Endocrine",
+      "keywords": [
+        "toxic nodule crisis"
+      ]
+    },
+    {
+      "code": "E05.20",
+      "description": "Thyrotoxicosis with toxic multinodular goiter without thyrotoxic crisis",
+      "category": "Endocrine",
+      "keywords": [
+        "toxic multinodular goiter"
+      ]
+    },
+    {
+      "code": "E05.21",
+      "description": "Thyrotoxicosis with toxic multinodular goiter with thyrotoxic crisis",
+      "category": "Endocrine",
+      "keywords": [
+        "toxic goiter crisis"
+      ]
+    },
+    {
+      "code": "E05.30",
+      "description": "Thyrotoxicosis from ectopic thyroid tissue without thyrotoxic crisis",
+      "category": "Endocrine",
+      "keywords": [
+        "ectopic thyroid"
+      ]
+    },
+    {
+      "code": "E05.31",
+      "description": "Thyrotoxicosis from ectopic thyroid tissue with thyrotoxic crisis",
+      "category": "Endocrine",
+      "keywords": [
+        "ectopic thyroid crisis"
+      ]
+    },
+    {
+      "code": "E05.40",
+      "description": "Thyrotoxicosis factitia without thyrotoxic crisis",
+      "category": "Endocrine",
+      "keywords": [
+        "thyrotoxicosis factitia"
+      ]
+    },
+    {
+      "code": "E05.41",
+      "description": "Thyrotoxicosis factitia with thyrotoxic crisis",
+      "category": "Endocrine",
+      "keywords": [
+        "factitious thyrotoxicosis crisis"
+      ]
+    },
+    {
+      "code": "E05.80",
+      "description": "Other thyrotoxicosis without thyrotoxic crisis",
+      "category": "Endocrine",
+      "keywords": [
+        "thyrotoxicosis other"
+      ]
+    },
+    {
+      "code": "E05.81",
+      "description": "Other thyrotoxicosis with thyrotoxic crisis",
+      "category": "Endocrine",
+      "keywords": [
+        "thyrotoxicosis crisis other"
+      ]
+    },
+    {
+      "code": "E05.90",
+      "description": "Thyrotoxicosis, unspecified without thyrotoxic crisis",
+      "category": "Endocrine",
+      "keywords": [
+        "hyperthyroidism unspecified"
+      ]
+    },
+    {
+      "code": "E05.91",
+      "description": "Thyrotoxicosis, unspecified with thyrotoxic crisis",
+      "category": "Endocrine",
+      "keywords": [
+        "thyroid crisis unspecified"
+      ]
+    },
+    {
+      "code": "E03.0",
+      "description": "Congenital hypothyroidism with diffuse goiter",
+      "category": "Endocrine",
+      "keywords": [
+        "congenital hypothyroidism"
+      ]
+    },
+    {
+      "code": "E03.1",
+      "description": "Congenital hypothyroidism without goiter",
+      "category": "Endocrine",
+      "keywords": [
+        "athyreotic cretinism"
+      ]
+    },
+    {
+      "code": "E03.2",
+      "description": "Hypothyroidism due to medicaments and other exogenous substances",
+      "category": "Endocrine",
+      "keywords": [
+        "drug-induced hypothyroidism"
+      ]
+    },
+    {
+      "code": "E03.3",
+      "description": "Postinfectious hypothyroidism",
+      "category": "Endocrine",
+      "keywords": [
+        "hypothyroidism post infection"
+      ]
+    },
+    {
+      "code": "E03.4",
+      "description": "Atrophy of thyroid (acquired)",
+      "category": "Endocrine",
+      "keywords": [
+        "thyroid atrophy"
+      ]
+    },
+    {
+      "code": "E03.5",
+      "description": "Myxedema coma",
+      "category": "Endocrine",
+      "keywords": [
+        "myxedema coma"
+      ]
+    },
+    {
+      "code": "E03.8",
+      "description": "Other specified hypothyroidism",
+      "category": "Endocrine",
+      "keywords": [
+        "hypothyroidism other"
+      ]
+    },
+    {
+      "code": "E03.9",
+      "description": "Hypothyroidism, unspecified",
+      "category": "Endocrine",
+      "keywords": [
+        "hypothyroidism",
+        "underactive thyroid"
+      ]
+    },
+    {
+      "code": "E06.0",
+      "description": "Acute thyroiditis",
+      "category": "Endocrine",
+      "keywords": [
+        "acute thyroiditis"
+      ]
+    },
+    {
+      "code": "E06.1",
+      "description": "Subacute thyroiditis",
+      "category": "Endocrine",
+      "keywords": [
+        "subacute thyroiditis",
+        "de quervain thyroiditis"
+      ]
+    },
+    {
+      "code": "E06.2",
+      "description": "Chronic thyroiditis with transient thyrotoxicosis",
+      "category": "Endocrine",
+      "keywords": [
+        "hashitoxicosis"
+      ]
+    },
+    {
+      "code": "E78.0",
+      "description": "Pure hypercholesterolemia",
+      "category": "Endocrine",
+      "keywords": [
+        "hypercholesterolemia",
+        "high cholesterol",
+        "high ldl"
+      ]
+    },
+    {
+      "code": "E78.00",
+      "description": "Pure hypercholesterolemia, unspecified",
+      "category": "Endocrine",
+      "keywords": [
+        "familial hypercholesterolemia"
+      ]
+    },
+    {
+      "code": "E78.01",
+      "description": "Familial hypercholesterolemia",
+      "category": "Endocrine",
+      "keywords": [
+        "familial hypercholesterolemia"
+      ]
+    },
+    {
+      "code": "E78.1",
+      "description": "Pure hypertriglyceridemia",
+      "category": "Endocrine",
+      "keywords": [
+        "hypertriglyceridemia",
+        "high triglycerides"
+      ]
+    },
+    {
+      "code": "E78.2",
+      "description": "Mixed hyperlipidemia",
+      "category": "Endocrine",
+      "keywords": [
+        "mixed hyperlipidemia",
+        "combined hyperlipidemia"
+      ]
+    },
+    {
+      "code": "E78.3",
+      "description": "Hyperchylomicronemia",
+      "category": "Endocrine",
+      "keywords": [
+        "hyperchylomicronemia",
+        "chylomicronemia"
+      ]
+    },
+    {
+      "code": "E78.4",
+      "description": "Other hyperlipidemia",
+      "category": "Endocrine",
+      "keywords": [
+        "hyperlipidemia other"
+      ]
+    },
+    {
+      "code": "E78.41",
+      "description": "Elevated Lipoprotein(a)",
+      "category": "Endocrine",
+      "keywords": [
+        "elevated lp(a)",
+        "lipoprotein a"
+      ]
+    },
+    {
+      "code": "E78.49",
+      "description": "Other hyperlipidemia",
+      "category": "Endocrine",
+      "keywords": [
+        "hyperlipidemia nos"
+      ]
+    },
+    {
+      "code": "E78.5",
+      "description": "Hyperlipidemia, unspecified",
+      "category": "Endocrine",
+      "keywords": [
+        "hyperlipidemia",
+        "dyslipidemia"
+      ]
+    },
+    {
+      "code": "E78.6",
+      "description": "Lipoprotein deficiency",
+      "category": "Endocrine",
+      "keywords": [
+        "hypolipoproteinemia"
+      ]
+    },
+    {
+      "code": "E78.70",
+      "description": "Disorder of bile acid and cholesterol metabolism, unspecified",
+      "category": "Endocrine",
+      "keywords": [
+        "cholesterol disorder"
+      ]
+    },
+    {
+      "code": "E78.71",
+      "description": "Barth syndrome",
+      "category": "Endocrine",
+      "keywords": [
+        "barth syndrome"
+      ]
+    },
+    {
+      "code": "E78.72",
+      "description": "Smith-Lemli-Opitz syndrome",
+      "category": "Endocrine",
+      "keywords": [
+        "smith-lemli-opitz"
+      ]
+    },
+    {
+      "code": "E78.79",
+      "description": "Other disorders of bile acid and cholesterol metabolism",
+      "category": "Endocrine",
+      "keywords": [
+        "bile acid disorder"
+      ]
+    },
+    {
+      "code": "E66.01",
+      "description": "Morbid (severe) obesity due to excess calories",
+      "category": "Endocrine",
+      "keywords": [
+        "morbid obesity",
+        "severe obesity"
+      ]
+    },
+    {
+      "code": "E66.09",
+      "description": "Other obesity due to excess calories",
+      "category": "Endocrine",
+      "keywords": [
+        "obesity",
+        "overweight"
+      ]
+    },
+    {
+      "code": "E66.1",
+      "description": "Drug-induced obesity",
+      "category": "Endocrine",
+      "keywords": [
+        "medication-induced obesity"
+      ]
+    },
+    {
+      "code": "E66.2",
+      "description": "Morbid (severe) obesity with alveolar hypoventilation",
+      "category": "Endocrine",
+      "keywords": [
+        "obesity hypoventilation syndrome",
+        "pickwickian syndrome"
+      ]
+    },
+    {
+      "code": "E66.3",
+      "description": "Overweight",
+      "category": "Endocrine",
+      "keywords": [
+        "overweight",
+        "increased body weight"
+      ]
+    },
+    {
+      "code": "E66.8",
+      "description": "Other obesity",
+      "category": "Endocrine",
+      "keywords": [
+        "obesity other type"
+      ]
+    },
+    {
+      "code": "E66.9",
+      "description": "Obesity, unspecified",
+      "category": "Endocrine",
+      "keywords": [
+        "obesity nos"
+      ]
+    },
+    {
+      "code": "E88.0",
+      "description": "Disorders of plasma-protein metabolism, not elsewhere classified",
+      "category": "Endocrine",
+      "keywords": [
+        "plasma protein disorder"
+      ]
+    },
+    {
+      "code": "E88.1",
+      "description": "Lipodystrophy, not elsewhere classified",
+      "category": "Endocrine",
+      "keywords": [
+        "lipodystrophy"
+      ]
+    },
+    {
+      "code": "E88.2",
+      "description": "Lipomatosis, not elsewhere classified",
+      "category": "Endocrine",
+      "keywords": [
+        "lipomatosis"
+      ]
+    },
+    {
+      "code": "E88.3",
+      "description": "Tumor lysis syndrome",
+      "category": "Endocrine",
+      "keywords": [
+        "tumor lysis syndrome"
+      ]
+    },
+    {
+      "code": "E88.40",
+      "description": "Mitochondrial metabolism disorder, unspecified",
+      "category": "Endocrine",
+      "keywords": [
+        "mitochondrial disorder"
+      ]
+    },
+    {
+      "code": "E88.41",
+      "description": "MELAS syndrome",
+      "category": "Endocrine",
+      "keywords": [
+        "melas syndrome",
+        "mitochondrial encephalomyopathy"
+      ]
+    },
+    {
+      "code": "E88.42",
+      "description": "MERRF syndrome",
+      "category": "Endocrine",
+      "keywords": [
+        "merrf syndrome"
+      ]
+    },
+    {
+      "code": "E88.49",
+      "description": "Other mitochondrial metabolism disorders",
+      "category": "Endocrine",
+      "keywords": [
+        "mitochondrial disease"
+      ]
+    },
+    {
+      "code": "E88.81",
+      "description": "Metabolic syndrome",
+      "category": "Endocrine",
+      "keywords": [
+        "metabolic syndrome",
+        "syndrome x"
+      ]
+    },
+    {
+      "code": "E22.0",
+      "description": "Acromegaly and pituitary gigantism",
+      "category": "Endocrine",
+      "keywords": [
+        "acromegaly",
+        "gigantism"
+      ]
+    },
+    {
+      "code": "E22.1",
+      "description": "Hyperprolactinemia",
+      "category": "Endocrine",
+      "keywords": [
+        "hyperprolactinemia",
+        "elevated prolactin"
+      ]
+    },
+    {
+      "code": "E22.2",
+      "description": "Syndrome of inappropriate secretion of antidiuretic hormone",
+      "category": "Endocrine",
+      "keywords": [
+        "siadh"
+      ]
+    },
+    {
+      "code": "E23.0",
+      "description": "Hypopituitarism",
+      "category": "Endocrine",
+      "keywords": [
+        "hypopituitarism",
+        "panhypopituitarism"
+      ]
+    },
+    {
+      "code": "E23.2",
+      "description": "Diabetes insipidus",
+      "category": "Endocrine",
+      "keywords": [
+        "diabetes insipidus"
+      ]
+    },
+    {
+      "code": "E24.0",
+      "description": "Pituitary-dependent Cushing disease",
+      "category": "Endocrine",
+      "keywords": [
+        "cushing disease"
+      ]
+    },
+    {
+      "code": "E24.2",
+      "description": "Drug-induced Cushing syndrome",
+      "category": "Endocrine",
+      "keywords": [
+        "iatrogenic cushing"
+      ]
+    },
+    {
+      "code": "E24.3",
+      "description": "Ectopic ACTH syndrome",
+      "category": "Endocrine",
+      "keywords": [
+        "ectopic acth"
+      ]
+    },
+    {
+      "code": "E24.9",
+      "description": "Cushing syndrome, unspecified",
+      "category": "Endocrine",
+      "keywords": [
+        "cushing syndrome"
+      ]
+    },
+    {
+      "code": "E27.1",
+      "description": "Primary adrenocortical insufficiency",
+      "category": "Endocrine",
+      "keywords": [
+        "addison disease",
+        "adrenal insufficiency"
+      ]
+    },
+    {
+      "code": "E27.2",
+      "description": "Addisonian crisis",
+      "category": "Endocrine",
+      "keywords": [
+        "addisonian crisis",
+        "adrenal crisis"
+      ]
+    },
+    {
+      "code": "E27.40",
+      "description": "Unspecified adrenocortical insufficiency",
+      "category": "Endocrine",
+      "keywords": [
+        "adrenal insufficiency"
+      ]
+    },
+    {
+      "code": "E27.49",
+      "description": "Other adrenocortical insufficiency",
+      "category": "Endocrine",
+      "keywords": [
+        "secondary adrenal insufficiency"
+      ]
+    },
+    {
+      "code": "E28.0",
+      "description": "Estrogen excess",
+      "category": "Endocrine",
+      "keywords": [
+        "estrogen excess",
+        "hyperestrogenism"
+      ]
+    },
+    {
+      "code": "E28.2",
+      "description": "Polycystic ovarian syndrome",
+      "category": "Endocrine",
+      "keywords": [
+        "pcos",
+        "polycystic ovary syndrome"
+      ]
+    },
+    {
+      "code": "I10",
+      "description": "Essential (primary) hypertension",
+      "category": "Cardiovascular",
+      "keywords": [
+        "hypertension",
+        "high blood pressure",
+        "htn",
+        "elevated bp"
+      ]
+    },
+    {
+      "code": "I11.0",
+      "description": "Hypertensive heart disease with heart failure",
+      "category": "Cardiovascular",
+      "keywords": [
+        "hypertensive heart disease",
+        "htn heart failure"
+      ]
+    },
+    {
+      "code": "I11.9",
+      "description": "Hypertensive heart disease without heart failure",
+      "category": "Cardiovascular",
+      "keywords": [
+        "hypertensive heart disease"
+      ]
+    },
+    {
+      "code": "I12.0",
+      "description": "Hypertensive chronic kidney disease with stage 5 chronic kidney disease",
+      "category": "Cardiovascular",
+      "keywords": [
+        "hypertensive nephropathy esrd"
+      ]
+    },
+    {
+      "code": "I12.9",
+      "description": "Hypertensive chronic kidney disease with stage 1 through stage 4",
+      "category": "Cardiovascular",
+      "keywords": [
+        "hypertensive nephropathy"
+      ]
+    },
+    {
+      "code": "I13.0",
+      "description": "Hypertensive heart and chronic kidney disease with heart failure",
+      "category": "Cardiovascular",
+      "keywords": [
+        "hypertensive heart kidney disease"
+      ]
+    },
+    {
+      "code": "I13.10",
+      "description": "Hypertensive heart and chronic kidney disease without heart failure, with stage 1 through stage 4",
+      "category": "Cardiovascular",
+      "keywords": [
+        "htn heart kidney"
+      ]
+    },
+    {
+      "code": "I13.11",
+      "description": "Hypertensive heart and chronic kidney disease without heart failure, with stage 5",
+      "category": "Cardiovascular",
+      "keywords": [
+        "htn heart kidney esrd"
+      ]
+    },
+    {
+      "code": "I13.2",
+      "description": "Hypertensive heart and chronic kidney disease with heart failure and with stage 5",
+      "category": "Cardiovascular",
+      "keywords": [
+        "htn heart kidney failure"
+      ]
+    },
+    {
+      "code": "I15.0",
+      "description": "Renovascular hypertension",
+      "category": "Cardiovascular",
+      "keywords": [
+        "renovascular hypertension",
+        "renal artery stenosis"
+      ]
+    },
+    {
+      "code": "I15.1",
+      "description": "Hypertension secondary to other renal disorders",
+      "category": "Cardiovascular",
+      "keywords": [
+        "secondary hypertension renal"
+      ]
+    },
+    {
+      "code": "I15.2",
+      "description": "Hypertension secondary to endocrine disorders",
+      "category": "Cardiovascular",
+      "keywords": [
+        "secondary hypertension endocrine"
+      ]
+    },
+    {
+      "code": "I15.8",
+      "description": "Other secondary hypertension",
+      "category": "Cardiovascular",
+      "keywords": [
+        "secondary hypertension"
+      ]
+    },
+    {
+      "code": "I15.9",
+      "description": "Secondary hypertension, unspecified",
+      "category": "Cardiovascular",
+      "keywords": [
+        "secondary htn"
+      ]
+    },
+    {
+      "code": "I16.0",
+      "description": "Hypertensive urgency",
+      "category": "Cardiovascular",
+      "keywords": [
+        "hypertensive urgency"
+      ]
+    },
+    {
+      "code": "I16.1",
+      "description": "Hypertensive emergency",
+      "category": "Cardiovascular",
+      "keywords": [
+        "hypertensive emergency",
+        "malignant hypertension"
+      ]
+    },
+    {
+      "code": "I16.9",
+      "description": "Hypertensive crisis, unspecified",
+      "category": "Cardiovascular",
+      "keywords": [
+        "hypertensive crisis"
+      ]
+    },
+    {
+      "code": "I27.0",
+      "description": "Primary pulmonary hypertension",
+      "category": "Cardiovascular",
+      "keywords": [
+        "pulmonary arterial hypertension",
+        "pah"
+      ]
+    },
+    {
+      "code": "I27.2",
+      "description": "Other secondary pulmonary hypertension",
+      "category": "Cardiovascular",
+      "keywords": [
+        "secondary pulmonary hypertension"
+      ]
+    },
+    {
+      "code": "I27.20",
+      "description": "Pulmonary hypertension, unspecified",
+      "category": "Cardiovascular",
+      "keywords": [
+        "pulmonary hypertension"
+      ]
+    },
+    {
+      "code": "I20.0",
+      "description": "Unstable angina",
+      "category": "Cardiovascular",
+      "keywords": [
+        "unstable angina",
+        "acute coronary syndrome"
+      ]
+    },
+    {
+      "code": "I20.1",
+      "description": "Angina pectoris with documented spasm",
+      "category": "Cardiovascular",
+      "keywords": [
+        "vasospastic angina",
+        "prinzmetal angina"
+      ]
+    },
+    {
+      "code": "I20.8",
+      "description": "Other forms of angina pectoris",
+      "category": "Cardiovascular",
+      "keywords": [
+        "angina pectoris"
+      ]
+    },
+    {
+      "code": "I20.9",
+      "description": "Angina pectoris, unspecified",
+      "category": "Cardiovascular",
+      "keywords": [
+        "angina"
+      ]
+    },
+    {
+      "code": "I21.01",
+      "description": "ST elevation (STEMI) myocardial infarction involving left main coronary artery",
+      "category": "Cardiovascular",
+      "keywords": [
+        "stemi left main"
+      ]
+    },
+    {
+      "code": "I21.02",
+      "description": "ST elevation (STEMI) myocardial infarction involving left anterior descending coronary artery",
+      "category": "Cardiovascular",
+      "keywords": [
+        "stemi lad"
+      ]
+    },
+    {
+      "code": "I21.09",
+      "description": "ST elevation (STEMI) myocardial infarction involving other coronary artery",
+      "category": "Cardiovascular",
+      "keywords": [
+        "stemi"
+      ]
+    },
+    {
+      "code": "I21.11",
+      "description": "ST elevation (STEMI) myocardial infarction involving right coronary artery",
+      "category": "Cardiovascular",
+      "keywords": [
+        "stemi rca",
+        "inferior stemi"
+      ]
+    },
+    {
+      "code": "I21.19",
+      "description": "ST elevation (STEMI) myocardial infarction involving other sites",
+      "category": "Cardiovascular",
+      "keywords": [
+        "stemi other"
+      ]
+    },
+    {
+      "code": "I21.21",
+      "description": "ST elevation (STEMI) myocardial infarction involving left circumflex coronary artery",
+      "category": "Cardiovascular",
+      "keywords": [
+        "stemi lcx"
+      ]
+    },
+    {
+      "code": "I21.29",
+      "description": "ST elevation (STEMI) myocardial infarction involving other sites",
+      "category": "Cardiovascular",
+      "keywords": [
+        "stemi lateral"
+      ]
+    },
+    {
+      "code": "I21.3",
+      "description": "ST elevation (STEMI) myocardial infarction of unspecified site",
+      "category": "Cardiovascular",
+      "keywords": [
+        "stemi unspecified"
+      ]
+    },
+    {
+      "code": "I21.4",
+      "description": "Non-ST elevation (NSTEMI) myocardial infarction",
+      "category": "Cardiovascular",
+      "keywords": [
+        "nstemi",
+        "non-stemi"
+      ]
+    },
+    {
+      "code": "I21.9",
+      "description": "Acute myocardial infarction, unspecified",
+      "category": "Cardiovascular",
+      "keywords": [
+        "acute mi",
+        "heart attack"
+      ]
+    },
+    {
+      "code": "I21.A1",
+      "description": "Myocardial infarction type 2",
+      "category": "Cardiovascular",
+      "keywords": [
+        "type 2 mi",
+        "demand ischemia"
+      ]
+    },
+    {
+      "code": "I21.A9",
+      "description": "Other myocardial infarction type",
+      "category": "Cardiovascular",
+      "keywords": [
+        "mi other type"
+      ]
+    },
+    {
+      "code": "I22.0",
+      "description": "Subsequent ST elevation (STEMI) myocardial infarction of anterior wall",
+      "category": "Cardiovascular",
+      "keywords": [
+        "subsequent stemi anterior"
+      ]
+    },
+    {
+      "code": "I22.1",
+      "description": "Subsequent ST elevation (STEMI) myocardial infarction of inferior wall",
+      "category": "Cardiovascular",
+      "keywords": [
+        "subsequent stemi inferior"
+      ]
+    },
+    {
+      "code": "I22.2",
+      "description": "Subsequent non-ST elevation (NSTEMI) myocardial infarction",
+      "category": "Cardiovascular",
+      "keywords": [
+        "subsequent nstemi"
+      ]
+    },
+    {
+      "code": "I22.8",
+      "description": "Subsequent ST elevation (STEMI) myocardial infarction of other sites",
+      "category": "Cardiovascular",
+      "keywords": [
+        "subsequent stemi"
+      ]
+    },
+    {
+      "code": "I22.9",
+      "description": "Subsequent ST elevation (STEMI) myocardial infarction of unspecified site",
+      "category": "Cardiovascular",
+      "keywords": [
+        "recurrent mi"
+      ]
+    },
+    {
+      "code": "I23.0",
+      "description": "Hemopericardium as current complication following acute myocardial infarction",
+      "category": "Cardiovascular",
+      "keywords": [
+        "post-mi hemopericardium"
+      ]
+    },
+    {
+      "code": "I23.1",
+      "description": "Atrial septal defect as current complication following acute myocardial infarction",
+      "category": "Cardiovascular",
+      "keywords": [
+        "post-mi asd"
+      ]
+    },
+    {
+      "code": "I23.2",
+      "description": "Ventricular septal defect as current complication following acute myocardial infarction",
+      "category": "Cardiovascular",
+      "keywords": [
+        "post-mi vsd"
+      ]
+    },
+    {
+      "code": "I23.3",
+      "description": "Rupture of cardiac wall without hemopericardium as current complication following acute myocardial infarction",
+      "category": "Cardiovascular",
+      "keywords": [
+        "post-mi cardiac rupture"
+      ]
+    },
+    {
+      "code": "I50.1",
+      "description": "Left ventricular failure, unspecified",
+      "category": "Cardiovascular",
+      "keywords": [
+        "left heart failure",
+        "lvf"
+      ]
+    },
+    {
+      "code": "I50.20",
+      "description": "Unspecified systolic (congestive) heart failure",
+      "category": "Cardiovascular",
+      "keywords": [
+        "systolic heart failure"
+      ]
+    },
+    {
+      "code": "I50.21",
+      "description": "Acute systolic (congestive) heart failure",
+      "category": "Cardiovascular",
+      "keywords": [
+        "acute systolic hf"
+      ]
+    },
+    {
+      "code": "I50.22",
+      "description": "Chronic systolic (congestive) heart failure",
+      "category": "Cardiovascular",
+      "keywords": [
+        "chronic systolic hf"
+      ]
+    },
+    {
+      "code": "I50.23",
+      "description": "Acute on chronic systolic (congestive) heart failure",
+      "category": "Cardiovascular",
+      "keywords": [
+        "acute on chronic systolic hf"
+      ]
+    },
+    {
+      "code": "I50.30",
+      "description": "Unspecified diastolic (congestive) heart failure",
+      "category": "Cardiovascular",
+      "keywords": [
+        "diastolic heart failure"
+      ]
+    },
+    {
+      "code": "I50.31",
+      "description": "Acute diastolic (congestive) heart failure",
+      "category": "Cardiovascular",
+      "keywords": [
+        "acute diastolic hf"
+      ]
+    },
+    {
+      "code": "I50.32",
+      "description": "Chronic diastolic (congestive) heart failure",
+      "category": "Cardiovascular",
+      "keywords": [
+        "chronic diastolic hf"
+      ]
+    },
+    {
+      "code": "I50.33",
+      "description": "Acute on chronic diastolic (congestive) heart failure",
+      "category": "Cardiovascular",
+      "keywords": [
+        "acute on chronic diastolic hf"
+      ]
+    },
+    {
+      "code": "I50.40",
+      "description": "Unspecified combined systolic (congestive) and diastolic (congestive) heart failure",
+      "category": "Cardiovascular",
+      "keywords": [
+        "combined heart failure"
+      ]
+    },
+    {
+      "code": "I50.41",
+      "description": "Acute combined systolic (congestive) and diastolic (congestive) heart failure",
+      "category": "Cardiovascular",
+      "keywords": [
+        "acute combined hf"
+      ]
+    },
+    {
+      "code": "I50.42",
+      "description": "Chronic combined systolic (congestive) and diastolic (congestive) heart failure",
+      "category": "Cardiovascular",
+      "keywords": [
+        "chronic combined hf"
+      ]
+    },
+    {
+      "code": "I50.43",
+      "description": "Acute on chronic combined systolic (congestive) and diastolic (congestive) heart failure",
+      "category": "Cardiovascular",
+      "keywords": [
+        "acute on chronic combined hf"
+      ]
+    },
+    {
+      "code": "I50.810",
+      "description": "Right heart failure, unspecified",
+      "category": "Cardiovascular",
+      "keywords": [
+        "right heart failure",
+        "cor pulmonale"
+      ]
+    },
+    {
+      "code": "I50.811",
+      "description": "Acute right heart failure",
+      "category": "Cardiovascular",
+      "keywords": [
+        "acute right hf"
+      ]
+    },
+    {
+      "code": "I50.812",
+      "description": "Chronic right heart failure",
+      "category": "Cardiovascular",
+      "keywords": [
+        "chronic right hf"
+      ]
+    },
+    {
+      "code": "I50.813",
+      "description": "Acute on chronic right heart failure",
+      "category": "Cardiovascular",
+      "keywords": [
+        "acute on chronic right hf"
+      ]
+    },
+    {
+      "code": "I50.814",
+      "description": "Right heart failure due to left heart failure",
+      "category": "Cardiovascular",
+      "keywords": [
+        "biventricular failure"
+      ]
+    },
+    {
+      "code": "I50.82",
+      "description": "Biventricular heart failure",
+      "category": "Cardiovascular",
+      "keywords": [
+        "biventricular heart failure"
+      ]
+    },
+    {
+      "code": "I50.9",
+      "description": "Heart failure, unspecified",
+      "category": "Cardiovascular",
+      "keywords": [
+        "heart failure",
+        "chf",
+        "congestive heart failure"
+      ]
+    },
+    {
+      "code": "I47.0",
+      "description": "Re-entry ventricular arrhythmia",
+      "category": "Cardiovascular",
+      "keywords": [
+        "ventricular tachycardia",
+        "vt"
+      ]
+    },
+    {
+      "code": "I47.1",
+      "description": "Supraventricular tachycardia",
+      "category": "Cardiovascular",
+      "keywords": [
+        "svt",
+        "supraventricular tachycardia"
+      ]
+    },
+    {
+      "code": "I47.2",
+      "description": "Ventricular tachycardia",
+      "category": "Cardiovascular",
+      "keywords": [
+        "vt",
+        "ventricular tachycardia"
+      ]
+    },
+    {
+      "code": "I47.9",
+      "description": "Paroxysmal tachycardia, unspecified",
+      "category": "Cardiovascular",
+      "keywords": [
+        "paroxysmal tachycardia"
+      ]
+    },
+    {
+      "code": "I48.0",
+      "description": "Paroxysmal atrial fibrillation",
+      "category": "Cardiovascular",
+      "keywords": [
+        "paroxysmal afib",
+        "paf"
+      ]
+    },
+    {
+      "code": "I48.1",
+      "description": "Persistent atrial fibrillation",
+      "category": "Cardiovascular",
+      "keywords": [
+        "persistent afib"
+      ]
+    },
+    {
+      "code": "I48.2",
+      "description": "Chronic atrial fibrillation",
+      "category": "Cardiovascular",
+      "keywords": [
+        "chronic afib",
+        "permanent afib"
+      ]
+    },
+    {
+      "code": "I48.3",
+      "description": "Typical atrial flutter",
+      "category": "Cardiovascular",
+      "keywords": [
+        "atrial flutter",
+        "aflutter"
+      ]
+    },
+    {
+      "code": "I48.4",
+      "description": "Atypical atrial flutter",
+      "category": "Cardiovascular",
+      "keywords": [
+        "atypical flutter"
+      ]
+    },
+    {
+      "code": "I48.91",
+      "description": "Unspecified atrial fibrillation",
+      "category": "Cardiovascular",
+      "keywords": [
+        "atrial fibrillation",
+        "afib"
+      ]
+    },
+    {
+      "code": "I48.92",
+      "description": "Unspecified atrial flutter",
+      "category": "Cardiovascular",
+      "keywords": [
+        "flutter"
+      ]
+    },
+    {
+      "code": "I49.01",
+      "description": "Ventricular fibrillation",
+      "category": "Cardiovascular",
+      "keywords": [
+        "ventricular fibrillation",
+        "vfib",
+        "vf"
+      ]
+    },
+    {
+      "code": "I49.02",
+      "description": "Ventricular flutter",
+      "category": "Cardiovascular",
+      "keywords": [
+        "ventricular flutter"
+      ]
+    },
+    {
+      "code": "I49.1",
+      "description": "Atrial premature depolarization",
+      "category": "Cardiovascular",
+      "keywords": [
+        "premature atrial contractions",
+        "pac"
+      ]
+    },
+    {
+      "code": "I49.2",
+      "description": "Junctional premature depolarization",
+      "category": "Cardiovascular",
+      "keywords": [
+        "junctional premature beats"
+      ]
+    },
+    {
+      "code": "I49.3",
+      "description": "Ventricular premature depolarization",
+      "category": "Cardiovascular",
+      "keywords": [
+        "premature ventricular contractions",
+        "pvc"
+      ]
+    },
+    {
+      "code": "I49.40",
+      "description": "Unspecified premature depolarization",
+      "category": "Cardiovascular",
+      "keywords": [
+        "premature beats"
+      ]
+    },
+    {
+      "code": "I49.5",
+      "description": "Sick sinus syndrome",
+      "category": "Cardiovascular",
+      "keywords": [
+        "sick sinus syndrome",
+        "sss",
+        "bradycardia-tachycardia syndrome"
+      ]
+    },
+    {
+      "code": "I49.8",
+      "description": "Other specified cardiac arrhythmias",
+      "category": "Cardiovascular",
+      "keywords": [
+        "arrhythmia other"
+      ]
+    },
+    {
+      "code": "I49.9",
+      "description": "Cardiac arrhythmia, unspecified",
+      "category": "Cardiovascular",
+      "keywords": [
+        "arrhythmia",
+        "dysrhythmia"
+      ]
+    },
+    {
+      "code": "I34.0",
+      "description": "Nonrheumatic mitral (valve) insufficiency",
+      "category": "Cardiovascular",
+      "keywords": [
+        "mitral regurgitation",
+        "mitral insufficiency"
+      ]
+    },
+    {
+      "code": "I34.1",
+      "description": "Nonrheumatic mitral (valve) prolapse",
+      "category": "Cardiovascular",
+      "keywords": [
+        "mitral valve prolapse",
+        "mvp"
+      ]
+    },
+    {
+      "code": "I34.2",
+      "description": "Nonrheumatic mitral (valve) stenosis",
+      "category": "Cardiovascular",
+      "keywords": [
+        "mitral stenosis"
+      ]
+    },
+    {
+      "code": "I34.8",
+      "description": "Other nonrheumatic mitral valve disorders",
+      "category": "Cardiovascular",
+      "keywords": [
+        "mitral valve disorder"
+      ]
+    },
+    {
+      "code": "I34.9",
+      "description": "Nonrheumatic mitral valve disorder, unspecified",
+      "category": "Cardiovascular",
+      "keywords": [
+        "mitral valve disease"
+      ]
+    },
+    {
+      "code": "I35.0",
+      "description": "Nonrheumatic aortic (valve) stenosis",
+      "category": "Cardiovascular",
+      "keywords": [
+        "aortic stenosis",
+        "as"
+      ]
+    },
+    {
+      "code": "I35.1",
+      "description": "Nonrheumatic aortic (valve) insufficiency",
+      "category": "Cardiovascular",
+      "keywords": [
+        "aortic regurgitation",
+        "aortic insufficiency",
+        "ar"
+      ]
+    },
+    {
+      "code": "I35.2",
+      "description": "Nonrheumatic aortic (valve) stenosis with insufficiency",
+      "category": "Cardiovascular",
+      "keywords": [
+        "mixed aortic valve disease"
+      ]
+    },
+    {
+      "code": "I35.8",
+      "description": "Other nonrheumatic aortic valve disorders",
+      "category": "Cardiovascular",
+      "keywords": [
+        "aortic valve disorder"
+      ]
+    },
+    {
+      "code": "I35.9",
+      "description": "Nonrheumatic aortic valve disorder, unspecified",
+      "category": "Cardiovascular",
+      "keywords": [
+        "aortic valve disease"
+      ]
+    },
+    {
+      "code": "I36.0",
+      "description": "Nonrheumatic tricuspid (valve) stenosis",
+      "category": "Cardiovascular",
+      "keywords": [
+        "tricuspid stenosis"
+      ]
+    },
+    {
+      "code": "I36.1",
+      "description": "Nonrheumatic tricuspid (valve) insufficiency",
+      "category": "Cardiovascular",
+      "keywords": [
+        "tricuspid regurgitation",
+        "tr"
+      ]
+    },
+    {
+      "code": "I36.2",
+      "description": "Nonrheumatic tricuspid (valve) stenosis with insufficiency",
+      "category": "Cardiovascular",
+      "keywords": [
+        "mixed tricuspid disease"
+      ]
+    },
+    {
+      "code": "I36.8",
+      "description": "Other nonrheumatic tricuspid valve disorders",
+      "category": "Cardiovascular",
+      "keywords": [
+        "tricuspid valve disorder"
+      ]
+    },
+    {
+      "code": "I36.9",
+      "description": "Nonrheumatic tricuspid valve disorder, unspecified",
+      "category": "Cardiovascular",
+      "keywords": [
+        "tricuspid valve disease"
+      ]
+    },
+    {
+      "code": "J44.0",
+      "description": "Chronic obstructive pulmonary disease with acute lower respiratory infection",
+      "category": "Respiratory",
+      "keywords": [
+        "copd exacerbation",
+        "acute copd"
+      ]
+    },
+    {
+      "code": "J44.1",
+      "description": "Chronic obstructive pulmonary disease with (acute) exacerbation",
+      "category": "Respiratory",
+      "keywords": [
+        "copd exacerbation"
+      ]
+    },
+    {
+      "code": "J44.9",
+      "description": "Chronic obstructive pulmonary disease, unspecified",
+      "category": "Respiratory",
+      "keywords": [
+        "copd",
+        "chronic obstructive pulmonary disease"
+      ]
+    },
+    {
+      "code": "J43.0",
+      "description": "Unilateral pulmonary emphysema [MacLeod syndrome]",
+      "category": "Respiratory",
+      "keywords": [
+        "macleod syndrome"
+      ]
+    },
+    {
+      "code": "J43.1",
+      "description": "Panlobular emphysema",
+      "category": "Respiratory",
+      "keywords": [
+        "panlobular emphysema"
+      ]
+    },
+    {
+      "code": "J43.2",
+      "description": "Centrilobular emphysema",
+      "category": "Respiratory",
+      "keywords": [
+        "centrilobular emphysema"
+      ]
+    },
+    {
+      "code": "J43.8",
+      "description": "Other emphysema",
+      "category": "Respiratory",
+      "keywords": [
+        "emphysema"
+      ]
+    },
+    {
+      "code": "J43.9",
+      "description": "Emphysema, unspecified",
+      "category": "Respiratory",
+      "keywords": [
+        "pulmonary emphysema"
+      ]
+    },
+    {
+      "code": "J42",
+      "description": "Unspecified chronic bronchitis",
+      "category": "Respiratory",
+      "keywords": [
+        "chronic bronchitis"
+      ]
+    },
+    {
+      "code": "J41.0",
+      "description": "Simple chronic bronchitis",
+      "category": "Respiratory",
+      "keywords": [
+        "simple chronic bronchitis"
+      ]
+    },
+    {
+      "code": "J41.1",
+      "description": "Mucopurulent chronic bronchitis",
+      "category": "Respiratory",
+      "keywords": [
+        "mucopurulent bronchitis"
+      ]
+    },
+    {
+      "code": "J41.8",
+      "description": "Mixed simple and mucopurulent chronic bronchitis",
+      "category": "Respiratory",
+      "keywords": [
+        "mixed chronic bronchitis"
+      ]
+    },
+    {
+      "code": "J45.20",
+      "description": "Mild intermittent asthma, uncomplicated",
+      "category": "Respiratory",
+      "keywords": [
+        "mild intermittent asthma"
+      ]
+    },
+    {
+      "code": "J45.21",
+      "description": "Mild intermittent asthma with (acute) exacerbation",
+      "category": "Respiratory",
+      "keywords": [
+        "mild asthma exacerbation"
+      ]
+    },
+    {
+      "code": "J45.22",
+      "description": "Mild intermittent asthma with status asthmaticus",
+      "category": "Respiratory",
+      "keywords": [
+        "mild asthma status asthmaticus"
+      ]
+    },
+    {
+      "code": "J45.30",
+      "description": "Mild persistent asthma, uncomplicated",
+      "category": "Respiratory",
+      "keywords": [
+        "mild persistent asthma"
+      ]
+    },
+    {
+      "code": "J45.31",
+      "description": "Mild persistent asthma with (acute) exacerbation",
+      "category": "Respiratory",
+      "keywords": [
+        "mild persistent asthma exacerbation"
+      ]
+    },
+    {
+      "code": "J45.32",
+      "description": "Mild persistent asthma with status asthmaticus",
+      "category": "Respiratory",
+      "keywords": [
+        "mild persistent asthma status"
+      ]
+    },
+    {
+      "code": "J45.40",
+      "description": "Moderate persistent asthma, uncomplicated",
+      "category": "Respiratory",
+      "keywords": [
+        "moderate asthma"
+      ]
+    },
+    {
+      "code": "J45.41",
+      "description": "Moderate persistent asthma with (acute) exacerbation",
+      "category": "Respiratory",
+      "keywords": [
+        "moderate asthma exacerbation"
+      ]
+    },
+    {
+      "code": "J45.42",
+      "description": "Moderate persistent asthma with status asthmaticus",
+      "category": "Respiratory",
+      "keywords": [
+        "moderate asthma status"
+      ]
+    },
+    {
+      "code": "J45.50",
+      "description": "Severe persistent asthma, uncomplicated",
+      "category": "Respiratory",
+      "keywords": [
+        "severe asthma"
+      ]
+    },
+    {
+      "code": "J45.51",
+      "description": "Severe persistent asthma with (acute) exacerbation",
+      "category": "Respiratory",
+      "keywords": [
+        "severe asthma exacerbation"
+      ]
+    },
+    {
+      "code": "J45.52",
+      "description": "Severe persistent asthma with status asthmaticus",
+      "category": "Respiratory",
+      "keywords": [
+        "severe asthma status asthmaticus"
+      ]
+    },
+    {
+      "code": "J45.901",
+      "description": "Unspecified asthma with (acute) exacerbation",
+      "category": "Respiratory",
+      "keywords": [
+        "asthma exacerbation",
+        "asthma attack"
+      ]
+    },
+    {
+      "code": "J18.9",
+      "description": "Pneumonia, unspecified organism",
+      "category": "Respiratory",
+      "keywords": [
+        "pneumonia",
+        "pneumonitis"
+      ]
+    },
+    {
+      "code": "J18.0",
+      "description": "Bronchopneumonia, unspecified organism",
+      "category": "Respiratory",
+      "keywords": [
+        "bronchopneumonia"
+      ]
+    },
+    {
+      "code": "J18.1",
+      "description": "Lobar pneumonia, unspecified organism",
+      "category": "Respiratory",
+      "keywords": [
+        "lobar pneumonia"
+      ]
+    },
+    {
+      "code": "J18.8",
+      "description": "Other pneumonia, unspecified organism",
+      "category": "Respiratory",
+      "keywords": [
+        "atypical pneumonia"
+      ]
+    },
+    {
+      "code": "J15.0",
+      "description": "Pneumonia due to Klebsiella pneumoniae",
+      "category": "Respiratory",
+      "keywords": [
+        "klebsiella pneumonia"
+      ]
+    },
+    {
+      "code": "J15.1",
+      "description": "Pneumonia due to Pseudomonas",
+      "category": "Respiratory",
+      "keywords": [
+        "pseudomonas pneumonia"
+      ]
+    },
+    {
+      "code": "J15.20",
+      "description": "Pneumonia due to staphylococcus, unspecified",
+      "category": "Respiratory",
+      "keywords": [
+        "staph pneumonia"
+      ]
+    },
+    {
+      "code": "J15.211",
+      "description": "Pneumonia due to Methicillin susceptible Staphylococcus aureus",
+      "category": "Respiratory",
+      "keywords": [
+        "mssa pneumonia"
+      ]
+    },
+    {
+      "code": "J15.212",
+      "description": "Pneumonia due to Methicillin resistant Staphylococcus aureus",
+      "category": "Respiratory",
+      "keywords": [
+        "mrsa pneumonia"
+      ]
+    },
+    {
+      "code": "J15.29",
+      "description": "Pneumonia due to other staphylococcus",
+      "category": "Respiratory",
+      "keywords": [
+        "staphylococcal pneumonia"
+      ]
+    },
+    {
+      "code": "J15.3",
+      "description": "Pneumonia due to streptococcus, group B",
+      "category": "Respiratory",
+      "keywords": [
+        "group b strep pneumonia"
+      ]
+    },
+    {
+      "code": "J15.4",
+      "description": "Pneumonia due to other streptococci",
+      "category": "Respiratory",
+      "keywords": [
+        "streptococcal pneumonia"
+      ]
+    },
+    {
+      "code": "J15.5",
+      "description": "Pneumonia due to Escherichia coli",
+      "category": "Respiratory",
+      "keywords": [
+        "e coli pneumonia"
+      ]
+    },
+    {
+      "code": "J15.6",
+      "description": "Pneumonia due to other Gram-negative bacteria",
+      "category": "Respiratory",
+      "keywords": [
+        "gram negative pneumonia"
+      ]
+    },
+    {
+      "code": "J15.7",
+      "description": "Pneumonia due to Mycoplasma pneumoniae",
+      "category": "Respiratory",
+      "keywords": [
+        "mycoplasma pneumonia",
+        "walking pneumonia"
+      ]
+    },
+    {
+      "code": "J15.8",
+      "description": "Pneumonia due to other specified bacteria",
+      "category": "Respiratory",
+      "keywords": [
+        "bacterial pneumonia"
+      ]
+    },
+    {
+      "code": "J15.9",
+      "description": "Unspecified bacterial pneumonia",
+      "category": "Respiratory",
+      "keywords": [
+        "bacterial pneumonia unspecified"
+      ]
+    },
+    {
+      "code": "J12.0",
+      "description": "Adenoviral pneumonia",
+      "category": "Respiratory",
+      "keywords": [
+        "adenovirus pneumonia"
+      ]
+    },
+    {
+      "code": "J12.1",
+      "description": "Respiratory syncytial virus pneumonia",
+      "category": "Respiratory",
+      "keywords": [
+        "rsv pneumonia"
+      ]
+    },
+    {
+      "code": "J12.2",
+      "description": "Parainfluenza virus pneumonia",
+      "category": "Respiratory",
+      "keywords": [
+        "parainfluenza pneumonia"
+      ]
+    },
+    {
+      "code": "J12.3",
+      "description": "Human metapneumovirus pneumonia",
+      "category": "Respiratory",
+      "keywords": [
+        "metapneumovirus pneumonia"
+      ]
+    },
+    {
+      "code": "J12.81",
+      "description": "Pneumonia due to SARS-associated coronavirus",
+      "category": "Respiratory",
+      "keywords": [
+        "sars pneumonia"
+      ]
+    },
+    {
+      "code": "J12.82",
+      "description": "Pneumonia due to coronavirus disease 2019",
+      "category": "Respiratory",
+      "keywords": [
+        "covid-19 pneumonia",
+        "covid pneumonia"
+      ]
+    },
+    {
+      "code": "J12.89",
+      "description": "Other viral pneumonia",
+      "category": "Respiratory",
+      "keywords": [
+        "viral pneumonia"
+      ]
+    },
+    {
+      "code": "J12.9",
+      "description": "Viral pneumonia, unspecified",
+      "category": "Respiratory",
+      "keywords": [
+        "viral pneumonia unspecified"
+      ]
+    },
+    {
+      "code": "J13",
+      "description": "Pneumonia due to Streptococcus pneumoniae",
+      "category": "Respiratory",
+      "keywords": [
+        "pneumococcal pneumonia",
+        "strep pneumoniae"
+      ]
+    },
+    {
+      "code": "J14",
+      "description": "Pneumonia due to Hemophilus influenzae",
+      "category": "Respiratory",
+      "keywords": [
+        "h influenzae pneumonia",
+        "haemophilus pneumonia"
+      ]
+    },
+    {
+      "code": "J16.0",
+      "description": "Chlamydial pneumonia",
+      "category": "Respiratory",
+      "keywords": [
+        "chlamydia pneumonia"
+      ]
+    },
+    {
+      "code": "J16.8",
+      "description": "Pneumonia due to other specified infectious organisms",
+      "category": "Respiratory",
+      "keywords": [
+        "pneumonia infectious"
+      ]
+    },
+    {
+      "code": "J17",
+      "description": "Pneumonia in diseases classified elsewhere",
+      "category": "Respiratory",
+      "keywords": [
+        "secondary pneumonia"
+      ]
+    },
+    {
+      "code": "J20.0",
+      "description": "Acute bronchitis due to Mycoplasma pneumoniae",
+      "category": "Respiratory",
+      "keywords": [
+        "mycoplasma bronchitis"
+      ]
+    },
+    {
+      "code": "J20.1",
+      "description": "Acute bronchitis due to Hemophilus influenzae",
+      "category": "Respiratory",
+      "keywords": [
+        "h flu bronchitis"
+      ]
+    },
+    {
+      "code": "J20.2",
+      "description": "Acute bronchitis due to streptococcus",
+      "category": "Respiratory",
+      "keywords": [
+        "strep bronchitis"
+      ]
+    },
+    {
+      "code": "J20.3",
+      "description": "Acute bronchitis due to coxsackievirus",
+      "category": "Respiratory",
+      "keywords": [
+        "coxsackie bronchitis"
+      ]
+    },
+    {
+      "code": "J20.4",
+      "description": "Acute bronchitis due to parainfluenza virus",
+      "category": "Respiratory",
+      "keywords": [
+        "parainfluenza bronchitis"
+      ]
+    },
+    {
+      "code": "J20.5",
+      "description": "Acute bronchitis due to respiratory syncytial virus",
+      "category": "Respiratory",
+      "keywords": [
+        "rsv bronchitis"
+      ]
+    },
+    {
+      "code": "J20.6",
+      "description": "Acute bronchitis due to rhinovirus",
+      "category": "Respiratory",
+      "keywords": [
+        "rhinovirus bronchitis"
+      ]
+    },
+    {
+      "code": "J20.7",
+      "description": "Acute bronchitis due to echovirus",
+      "category": "Respiratory",
+      "keywords": [
+        "echovirus bronchitis"
+      ]
+    },
+    {
+      "code": "J20.8",
+      "description": "Acute bronchitis due to other specified organisms",
+      "category": "Respiratory",
+      "keywords": [
+        "acute bronchitis"
+      ]
+    },
+    {
+      "code": "J20.9",
+      "description": "Acute bronchitis, unspecified",
+      "category": "Respiratory",
+      "keywords": [
+        "bronchitis"
+      ]
+    },
+    {
+      "code": "J81.0",
+      "description": "Acute pulmonary edema",
+      "category": "Respiratory",
+      "keywords": [
+        "acute pulmonary edema",
+        "flash pulmonary edema"
+      ]
+    },
+    {
+      "code": "J81.1",
+      "description": "Chronic pulmonary edema",
+      "category": "Respiratory",
+      "keywords": [
+        "chronic pulmonary edema"
+      ]
+    },
+    {
+      "code": "J84.10",
+      "description": "Pulmonary fibrosis, unspecified",
+      "category": "Respiratory",
+      "keywords": [
+        "pulmonary fibrosis",
+        "idiopathic pulmonary fibrosis"
+      ]
+    },
+    {
+      "code": "J84.112",
+      "description": "Idiopathic pulmonary fibrosis",
+      "category": "Respiratory",
+      "keywords": [
+        "ipf"
+      ]
+    },
+    {
+      "code": "J84.170",
+      "description": "Interstitial lung disease with progressive fibrotic phenotype in diseases classified elsewhere",
+      "category": "Respiratory",
+      "keywords": [
+        "progressive fibrotic ild"
+      ]
+    },
+    {
+      "code": "J84.178",
+      "description": "Other interstitial pulmonary diseases with fibrosis in diseases classified elsewhere",
+      "category": "Respiratory",
+      "keywords": [
+        "fibrotic ild"
+      ]
+    },
+    {
+      "code": "J84.81",
+      "description": "Lymphangioleiomyomatosis",
+      "category": "Respiratory",
+      "keywords": [
+        "lam",
+        "lymphangioleiomyomatosis"
+      ]
+    },
+    {
+      "code": "J84.82",
+      "description": "Adult pulmonary Langerhans cell histiocytosis",
+      "category": "Respiratory",
+      "keywords": [
+        "pulmonary langerhans"
+      ]
+    },
+    {
+      "code": "J84.83",
+      "description": "Surfactant mutations of the lung",
+      "category": "Respiratory",
+      "keywords": [
+        "surfactant mutation"
+      ]
+    },
+    {
+      "code": "J84.84",
+      "description": "Other interstitial lung diseases of childhood",
+      "category": "Respiratory",
+      "keywords": [
+        "childhood ild"
+      ]
+    },
+    {
+      "code": "J84.89",
+      "description": "Other specified interstitial pulmonary diseases",
+      "category": "Respiratory",
+      "keywords": [
+        "interstitial lung disease",
+        "ild"
+      ]
+    },
+    {
+      "code": "J93.0",
+      "description": "Spontaneous tension pneumothorax",
+      "category": "Respiratory",
+      "keywords": [
+        "tension pneumothorax"
+      ]
+    },
+    {
+      "code": "J93.11",
+      "description": "Primary spontaneous pneumothorax",
+      "category": "Respiratory",
+      "keywords": [
+        "primary pneumothorax"
+      ]
+    },
+    {
+      "code": "J93.12",
+      "description": "Secondary spontaneous pneumothorax",
+      "category": "Respiratory",
+      "keywords": [
+        "secondary pneumothorax"
+      ]
+    },
+    {
+      "code": "J93.81",
+      "description": "Chronic pneumothorax",
+      "category": "Respiratory",
+      "keywords": [
+        "chronic pneumothorax"
+      ]
+    },
+    {
+      "code": "J93.82",
+      "description": "Other air leak",
+      "category": "Respiratory",
+      "keywords": [
+        "air leak"
+      ]
+    },
+    {
+      "code": "J93.83",
+      "description": "Other pneumothorax",
+      "category": "Respiratory",
+      "keywords": [
+        "pneumothorax"
+      ]
+    },
+    {
+      "code": "J93.9",
+      "description": "Pneumothorax, unspecified",
+      "category": "Respiratory",
+      "keywords": [
+        "pneumothorax unspecified"
+      ]
+    },
+    {
+      "code": "J94.0",
+      "description": "Chylous effusion",
+      "category": "Respiratory",
+      "keywords": [
+        "chylothorax"
+      ]
+    },
+    {
+      "code": "J94.2",
+      "description": "Hemothorax",
+      "category": "Respiratory",
+      "keywords": [
+        "hemothorax"
+      ]
+    },
+    {
+      "code": "J94.8",
+      "description": "Other specified pleural conditions",
+      "category": "Respiratory",
+      "keywords": [
+        "pleural disease"
+      ]
+    },
+    {
+      "code": "J94.9",
+      "description": "Pleural condition, unspecified",
+      "category": "Respiratory",
+      "keywords": [
+        "pleural effusion"
+      ]
+    },
+    {
+      "code": "J95.1",
+      "description": "Acute pulmonary insufficiency following thoracic surgery",
+      "category": "Respiratory",
+      "keywords": [
+        "post-op respiratory failure"
+      ]
+    },
+    {
+      "code": "J95.2",
+      "description": "Acute pulmonary insufficiency following nonthoracic surgery",
+      "category": "Respiratory",
+      "keywords": [
+        "postoperative respiratory failure"
+      ]
+    },
+    {
+      "code": "J95.3",
+      "description": "Chronic pulmonary insufficiency following surgery",
+      "category": "Respiratory",
+      "keywords": [
+        "chronic post-op respiratory failure"
+      ]
+    },
+    {
+      "code": "J95.811",
+      "description": "Postprocedural pneumothorax",
+      "category": "Respiratory",
+      "keywords": [
+        "iatrogenic pneumothorax"
+      ]
+    },
+    {
+      "code": "J95.821",
+      "description": "Acute postprocedural respiratory failure",
+      "category": "Respiratory",
+      "keywords": [
+        "post-procedure respiratory failure"
+      ]
+    },
+    {
+      "code": "J95.822",
+      "description": "Acute and chronic postprocedural respiratory failure",
+      "category": "Respiratory",
+      "keywords": [
+        "chronic post-procedure respiratory failure"
+      ]
+    },
+    {
+      "code": "J96.00",
+      "description": "Acute respiratory failure, unspecified whether with hypoxia or hypercapnia",
+      "category": "Respiratory",
+      "keywords": [
+        "acute respiratory failure",
+        "arf"
+      ]
+    },
+    {
+      "code": "J96.01",
+      "description": "Acute respiratory failure with hypoxia",
+      "category": "Respiratory",
+      "keywords": [
+        "arf with hypoxia"
+      ]
+    },
+    {
+      "code": "J96.02",
+      "description": "Acute respiratory failure with hypercapnia",
+      "category": "Respiratory",
+      "keywords": [
+        "arf with hypercapnia"
+      ]
+    },
+    {
+      "code": "J96.10",
+      "description": "Chronic respiratory failure, unspecified whether with hypoxia or hypercapnia",
+      "category": "Respiratory",
+      "keywords": [
+        "chronic respiratory failure"
+      ]
+    },
+    {
+      "code": "J96.11",
+      "description": "Chronic respiratory failure with hypoxia",
+      "category": "Respiratory",
+      "keywords": [
+        "chronic respiratory failure hypoxia"
+      ]
+    },
+    {
+      "code": "J96.12",
+      "description": "Chronic respiratory failure with hypercapnia",
+      "category": "Respiratory",
+      "keywords": [
+        "chronic respiratory failure hypercapnia"
+      ]
+    },
+    {
+      "code": "J96.20",
+      "description": "Acute and chronic respiratory failure, unspecified whether with hypoxia or hypercapnia",
+      "category": "Respiratory",
+      "keywords": [
+        "acute on chronic respiratory failure"
+      ]
+    },
+    {
+      "code": "J96.21",
+      "description": "Acute and chronic respiratory failure with hypoxia",
+      "category": "Respiratory",
+      "keywords": [
+        "acute on chronic rf hypoxia"
+      ]
+    },
+    {
+      "code": "J96.22",
+      "description": "Acute and chronic respiratory failure with hypercapnia",
+      "category": "Respiratory",
+      "keywords": [
+        "acute on chronic rf hypercapnia"
+      ]
+    },
+    {
+      "code": "I63.00",
+      "description": "Cerebral infarction due to thrombosis of unspecified precerebral artery",
+      "category": "Neurological",
+      "keywords": [
+        "stroke",
+        "cerebral infarction"
+      ]
+    },
+    {
+      "code": "I63.011",
+      "description": "Cerebral infarction due to thrombosis of right vertebral artery",
+      "category": "Neurological",
+      "keywords": [
+        "vertebral artery stroke"
+      ]
+    },
+    {
+      "code": "I63.012",
+      "description": "Cerebral infarction due to thrombosis of left vertebral artery",
+      "category": "Neurological",
+      "keywords": [
+        "left vertebral stroke"
+      ]
+    },
+    {
+      "code": "I63.019",
+      "description": "Cerebral infarction due to thrombosis of unspecified vertebral artery",
+      "category": "Neurological",
+      "keywords": [
+        "vertebral stroke"
+      ]
+    },
+    {
+      "code": "I63.02",
+      "description": "Cerebral infarction due to thrombosis of basilar artery",
+      "category": "Neurological",
+      "keywords": [
+        "basilar artery stroke"
+      ]
+    },
+    {
+      "code": "I63.031",
+      "description": "Cerebral infarction due to thrombosis of right carotid artery",
+      "category": "Neurological",
+      "keywords": [
+        "right carotid stroke"
+      ]
+    },
+    {
+      "code": "I63.032",
+      "description": "Cerebral infarction due to thrombosis of left carotid artery",
+      "category": "Neurological",
+      "keywords": [
+        "left carotid stroke"
+      ]
+    },
+    {
+      "code": "I63.039",
+      "description": "Cerebral infarction due to thrombosis of unspecified carotid artery",
+      "category": "Neurological",
+      "keywords": [
+        "carotid stroke"
+      ]
+    },
+    {
+      "code": "I63.09",
+      "description": "Cerebral infarction due to thrombosis of other precerebral artery",
+      "category": "Neurological",
+      "keywords": [
+        "precerebral artery stroke"
+      ]
+    },
+    {
+      "code": "I63.10",
+      "description": "Cerebral infarction due to embolism of unspecified precerebral artery",
+      "category": "Neurological",
+      "keywords": [
+        "embolic stroke"
+      ]
+    },
+    {
+      "code": "I63.111",
+      "description": "Cerebral infarction due to embolism of right vertebral artery",
+      "category": "Neurological",
+      "keywords": [
+        "vertebral embolism"
+      ]
+    },
+    {
+      "code": "I63.112",
+      "description": "Cerebral infarction due to embolism of left vertebral artery",
+      "category": "Neurological",
+      "keywords": [
+        "left vertebral embolism"
+      ]
+    },
+    {
+      "code": "I63.119",
+      "description": "Cerebral infarction due to embolism of unspecified vertebral artery",
+      "category": "Neurological",
+      "keywords": [
+        "vertebral embolism unspecified"
+      ]
+    },
+    {
+      "code": "I63.12",
+      "description": "Cerebral infarction due to embolism of basilar artery",
+      "category": "Neurological",
+      "keywords": [
+        "basilar embolism"
+      ]
+    },
+    {
+      "code": "I63.131",
+      "description": "Cerebral infarction due to embolism of right carotid artery",
+      "category": "Neurological",
+      "keywords": [
+        "right carotid embolism"
+      ]
+    },
+    {
+      "code": "I63.132",
+      "description": "Cerebral infarction due to embolism of left carotid artery",
+      "category": "Neurological",
+      "keywords": [
+        "left carotid embolism"
+      ]
+    },
+    {
+      "code": "I63.139",
+      "description": "Cerebral infarction due to embolism of unspecified carotid artery",
+      "category": "Neurological",
+      "keywords": [
+        "carotid embolism"
+      ]
+    },
+    {
+      "code": "I63.19",
+      "description": "Cerebral infarction due to embolism of other precerebral artery",
+      "category": "Neurological",
+      "keywords": [
+        "precerebral embolism"
+      ]
+    },
+    {
+      "code": "I63.20",
+      "description": "Cerebral infarction due to unspecified occlusion or stenosis of unspecified precerebral arteries",
+      "category": "Neurological",
+      "keywords": [
+        "stroke occlusion"
+      ]
+    },
+    {
+      "code": "I63.30",
+      "description": "Cerebral infarction due to thrombosis of unspecified cerebral artery",
+      "category": "Neurological",
+      "keywords": [
+        "cerebral thrombosis"
+      ]
+    },
+    {
+      "code": "I63.311",
+      "description": "Cerebral infarction due to thrombosis of right middle cerebral artery",
+      "category": "Neurological",
+      "keywords": [
+        "right mca stroke"
+      ]
+    },
+    {
+      "code": "I63.312",
+      "description": "Cerebral infarction due to thrombosis of left middle cerebral artery",
+      "category": "Neurological",
+      "keywords": [
+        "left mca stroke"
+      ]
+    },
+    {
+      "code": "I63.319",
+      "description": "Cerebral infarction due to thrombosis of unspecified middle cerebral artery",
+      "category": "Neurological",
+      "keywords": [
+        "mca stroke"
+      ]
+    },
+    {
+      "code": "I63.321",
+      "description": "Cerebral infarction due to thrombosis of right anterior cerebral artery",
+      "category": "Neurological",
+      "keywords": [
+        "right aca stroke"
+      ]
+    },
+    {
+      "code": "I63.322",
+      "description": "Cerebral infarction due to thrombosis of left anterior cerebral artery",
+      "category": "Neurological",
+      "keywords": [
+        "left aca stroke"
+      ]
+    },
+    {
+      "code": "I63.329",
+      "description": "Cerebral infarction due to thrombosis of unspecified anterior cerebral artery",
+      "category": "Neurological",
+      "keywords": [
+        "aca stroke"
+      ]
+    },
+    {
+      "code": "I63.331",
+      "description": "Cerebral infarction due to thrombosis of right posterior cerebral artery",
+      "category": "Neurological",
+      "keywords": [
+        "right pca stroke"
+      ]
+    },
+    {
+      "code": "I63.332",
+      "description": "Cerebral infarction due to thrombosis of left posterior cerebral artery",
+      "category": "Neurological",
+      "keywords": [
+        "left pca stroke"
+      ]
+    },
+    {
+      "code": "I63.339",
+      "description": "Cerebral infarction due to thrombosis of unspecified posterior cerebral artery",
+      "category": "Neurological",
+      "keywords": [
+        "pca stroke"
+      ]
+    },
+    {
+      "code": "I63.50",
+      "description": "Cerebral infarction due to unspecified occlusion or stenosis of unspecified cerebral artery",
+      "category": "Neurological",
+      "keywords": [
+        "cerebral infarction unspecified"
+      ]
+    },
+    {
+      "code": "G40.001",
+      "description": "Localization-related (focal) (partial) idiopathic epilepsy and epileptic syndromes with seizures of localized onset, not intractable, with status epilepticus",
+      "category": "Neurological",
+      "keywords": [
+        "focal epilepsy status"
+      ]
+    },
+    {
+      "code": "G40.009",
+      "description": "Localization-related (focal) (partial) idiopathic epilepsy and epileptic syndromes with seizures of localized onset, not intractable, without status epilepticus",
+      "category": "Neurological",
+      "keywords": [
+        "focal epilepsy"
+      ]
+    },
+    {
+      "code": "G40.101",
+      "description": "Localization-related (focal) (partial) symptomatic epilepsy and epileptic syndromes with simple partial seizures, not intractable, with status epilepticus",
+      "category": "Neurological",
+      "keywords": [
+        "simple partial status"
+      ]
+    },
+    {
+      "code": "G40.109",
+      "description": "Localization-related (focal) (partial) symptomatic epilepsy and epileptic syndromes with simple partial seizures, not intractable, without status epilepticus",
+      "category": "Neurological",
+      "keywords": [
+        "simple partial seizures"
+      ]
+    },
+    {
+      "code": "G40.201",
+      "description": "Localization-related (focal) (partial) symptomatic epilepsy and epileptic syndromes with complex partial seizures, not intractable, with status epilepticus",
+      "category": "Neurological",
+      "keywords": [
+        "complex partial status"
+      ]
+    },
+    {
+      "code": "G40.209",
+      "description": "Localization-related (focal) (partial) symptomatic epilepsy and epileptic syndromes with complex partial seizures, not intractable, without status epilepticus",
+      "category": "Neurological",
+      "keywords": [
+        "complex partial seizures"
+      ]
+    },
+    {
+      "code": "G40.301",
+      "description": "Generalized idiopathic epilepsy and epileptic syndromes, not intractable, with status epilepticus",
+      "category": "Neurological",
+      "keywords": [
+        "generalized epilepsy status"
+      ]
+    },
+    {
+      "code": "G40.309",
+      "description": "Generalized idiopathic epilepsy and epileptic syndromes, not intractable, without status epilepticus",
+      "category": "Neurological",
+      "keywords": [
+        "generalized epilepsy"
+      ]
+    },
+    {
+      "code": "G40.A01",
+      "description": "Absence epileptic syndrome, not intractable, with status epilepticus",
+      "category": "Neurological",
+      "keywords": [
+        "absence status"
+      ]
+    },
+    {
+      "code": "G40.A09",
+      "description": "Absence epileptic syndrome, not intractable, without status epilepticus",
+      "category": "Neurological",
+      "keywords": [
+        "absence seizures",
+        "petit mal"
+      ]
+    },
+    {
+      "code": "G40.A11",
+      "description": "Absence epileptic syndrome, intractable, with status epilepticus",
+      "category": "Neurological",
+      "keywords": [
+        "intractable absence status"
+      ]
+    },
+    {
+      "code": "G40.A19",
+      "description": "Absence epileptic syndrome, intractable, without status epilepticus",
+      "category": "Neurological",
+      "keywords": [
+        "intractable absence epilepsy"
+      ]
+    },
+    {
+      "code": "G40.B01",
+      "description": "Juvenile myoclonic epilepsy, not intractable, with status epilepticus",
+      "category": "Neurological",
+      "keywords": [
+        "jme status"
+      ]
+    },
+    {
+      "code": "G40.B09",
+      "description": "Juvenile myoclonic epilepsy, not intractable, without status epilepticus",
+      "category": "Neurological",
+      "keywords": [
+        "juvenile myoclonic epilepsy",
+        "jme"
+      ]
+    },
+    {
+      "code": "G40.401",
+      "description": "Other generalized epilepsy and epileptic syndromes, not intractable, with status epilepticus",
+      "category": "Neurological",
+      "keywords": [
+        "generalized seizure status"
+      ]
+    },
+    {
+      "code": "G40.409",
+      "description": "Other generalized epilepsy and epileptic syndromes, not intractable, without status epilepticus",
+      "category": "Neurological",
+      "keywords": [
+        "generalized seizures"
+      ]
+    },
+    {
+      "code": "G40.801",
+      "description": "Other epilepsy, not intractable, with status epilepticus",
+      "category": "Neurological",
+      "keywords": [
+        "epilepsy status epilepticus"
+      ]
+    },
+    {
+      "code": "G40.802",
+      "description": "Other epilepsy, not intractable, without status epilepticus",
+      "category": "Neurological",
+      "keywords": [
+        "epilepsy",
+        "seizure disorder"
+      ]
+    },
+    {
+      "code": "G40.803",
+      "description": "Other epilepsy, intractable, with status epilepticus",
+      "category": "Neurological",
+      "keywords": [
+        "intractable epilepsy status"
+      ]
+    },
+    {
+      "code": "G40.804",
+      "description": "Other epilepsy, intractable, without status epilepticus",
+      "category": "Neurological",
+      "keywords": [
+        "intractable epilepsy",
+        "refractory epilepsy"
+      ]
+    },
+    {
+      "code": "G40.901",
+      "description": "Epilepsy, unspecified, not intractable, with status epilepticus",
+      "category": "Neurological",
+      "keywords": [
+        "status epilepticus"
+      ]
+    },
+    {
+      "code": "G40.909",
+      "description": "Epilepsy, unspecified, not intractable, without status epilepticus",
+      "category": "Neurological",
+      "keywords": [
+        "seizures unspecified"
+      ]
+    },
+    {
+      "code": "G40.911",
+      "description": "Epilepsy, unspecified, intractable, with status epilepticus",
+      "category": "Neurological",
+      "keywords": [
+        "unspecified intractable status"
+      ]
+    },
+    {
+      "code": "G40.919",
+      "description": "Epilepsy, unspecified, intractable, without status epilepticus",
+      "category": "Neurological",
+      "keywords": [
+        "unspecified intractable epilepsy"
+      ]
+    },
+    {
+      "code": "R56.9",
+      "description": "Unspecified convulsions",
+      "category": "Neurological",
+      "keywords": [
+        "seizure",
+        "convulsion"
+      ]
+    },
+    {
+      "code": "G20",
+      "description": "Parkinson disease",
+      "category": "Neurological",
+      "keywords": [
+        "parkinson disease",
+        "parkinsons",
+        "parkinsonism"
+      ]
+    },
+    {
+      "code": "G21.0",
+      "description": "Malignant neuroleptic syndrome",
+      "category": "Neurological",
+      "keywords": [
+        "neuroleptic malignant syndrome",
+        "nms"
+      ]
+    },
+    {
+      "code": "G21.11",
+      "description": "Neuroleptic induced parkinsonism",
+      "category": "Neurological",
+      "keywords": [
+        "drug-induced parkinsonism"
+      ]
+    },
+    {
+      "code": "G21.19",
+      "description": "Other drug induced secondary parkinsonism",
+      "category": "Neurological",
+      "keywords": [
+        "medication-induced parkinsonism"
+      ]
+    },
+    {
+      "code": "G21.2",
+      "description": "Secondary parkinsonism due to other external agents",
+      "category": "Neurological",
+      "keywords": [
+        "secondary parkinsonism"
+      ]
+    },
+    {
+      "code": "G21.3",
+      "description": "Postencephalitic parkinsonism",
+      "category": "Neurological",
+      "keywords": [
+        "postencephalitic parkinsonism"
+      ]
+    },
+    {
+      "code": "G21.4",
+      "description": "Vascular parkinsonism",
+      "category": "Neurological",
+      "keywords": [
+        "vascular parkinsonism"
+      ]
+    },
+    {
+      "code": "G21.8",
+      "description": "Other secondary parkinsonism",
+      "category": "Neurological",
+      "keywords": [
+        "parkinsonism secondary"
+      ]
+    },
+    {
+      "code": "G21.9",
+      "description": "Secondary parkinsonism, unspecified",
+      "category": "Neurological",
+      "keywords": [
+        "parkinsonism"
+      ]
+    },
+    {
+      "code": "G23.0",
+      "description": "Hallervorden-Spatz disease",
+      "category": "Neurological",
+      "keywords": [
+        "hallervorden-spatz"
+      ]
+    },
+    {
+      "code": "G23.1",
+      "description": "Progressive supranuclear ophthalmoplegia [Steele-Richardson-Olszewski]",
+      "category": "Neurological",
+      "keywords": [
+        "progressive supranuclear palsy",
+        "psp"
+      ]
+    },
+    {
+      "code": "G23.2",
+      "description": "Striatonigral degeneration",
+      "category": "Neurological",
+      "keywords": [
+        "striatonigral degeneration",
+        "multiple system atrophy"
+      ]
+    },
+    {
+      "code": "G23.8",
+      "description": "Other specified degenerative diseases of basal ganglia",
+      "category": "Neurological",
+      "keywords": [
+        "basal ganglia degeneration"
+      ]
+    },
+    {
+      "code": "G23.9",
+      "description": "Degenerative disease of basal ganglia, unspecified",
+      "category": "Neurological",
+      "keywords": [
+        "basal ganglia disease"
+      ]
+    },
+    {
+      "code": "G24.01",
+      "description": "Drug induced subacute dyskinesia",
+      "category": "Neurological",
+      "keywords": [
+        "drug-induced dyskinesia"
+      ]
+    },
+    {
+      "code": "G24.02",
+      "description": "Drug induced acute dystonia",
+      "category": "Neurological",
+      "keywords": [
+        "acute dystonia"
+      ]
+    },
+    {
+      "code": "G24.09",
+      "description": "Other drug induced dystonia",
+      "category": "Neurological",
+      "keywords": [
+        "drug-induced dystonia"
+      ]
+    },
+    {
+      "code": "G24.1",
+      "description": "Genetic torsion dystonia",
+      "category": "Neurological",
+      "keywords": [
+        "genetic dystonia"
+      ]
+    },
+    {
+      "code": "G24.2",
+      "description": "Idiopathic nonfamilial dystonia",
+      "category": "Neurological",
+      "keywords": [
+        "idiopathic dystonia"
+      ]
+    },
+    {
+      "code": "G24.3",
+      "description": "Spasmodic torticollis",
+      "category": "Neurological",
+      "keywords": [
+        "torticollis",
+        "cervical dystonia"
+      ]
+    },
+    {
+      "code": "G30.0",
+      "description": "Alzheimer disease with early onset",
+      "category": "Neurological",
+      "keywords": [
+        "early onset alzheimer",
+        "alzheimer disease"
+      ]
+    },
+    {
+      "code": "G30.1",
+      "description": "Alzheimer disease with late onset",
+      "category": "Neurological",
+      "keywords": [
+        "late onset alzheimer",
+        "alzheimers"
+      ]
+    },
+    {
+      "code": "G30.8",
+      "description": "Other Alzheimer disease",
+      "category": "Neurological",
+      "keywords": [
+        "alzheimer disease other"
+      ]
+    },
+    {
+      "code": "G30.9",
+      "description": "Alzheimer disease, unspecified",
+      "category": "Neurological",
+      "keywords": [
+        "alzheimer",
+        "ad"
+      ]
+    },
+    {
+      "code": "G31.01",
+      "description": "Pick disease",
+      "category": "Neurological",
+      "keywords": [
+        "pick disease",
+        "frontotemporal dementia"
+      ]
+    },
+    {
+      "code": "G31.09",
+      "description": "Other frontotemporal dementia",
+      "category": "Neurological",
+      "keywords": [
+        "ftd",
+        "frontotemporal dementia"
+      ]
+    },
+    {
+      "code": "G31.1",
+      "description": "Senile degeneration of brain, not elsewhere classified",
+      "category": "Neurological",
+      "keywords": [
+        "senile dementia"
+      ]
+    },
+    {
+      "code": "G31.2",
+      "description": "Degeneration of nervous system due to alcohol",
+      "category": "Neurological",
+      "keywords": [
+        "alcoholic dementia"
+      ]
+    },
+    {
+      "code": "G31.83",
+      "description": "Dementia with Lewy bodies",
+      "category": "Neurological",
+      "keywords": [
+        "lewy body dementia",
+        "dlb"
+      ]
+    },
+    {
+      "code": "G31.84",
+      "description": "Mild cognitive impairment, so stated",
+      "category": "Neurological",
+      "keywords": [
+        "mild cognitive impairment",
+        "mci"
+      ]
+    },
+    {
+      "code": "G31.85",
+      "description": "Corticobasal degeneration",
+      "category": "Neurological",
+      "keywords": [
+        "corticobasal degeneration",
+        "cbd"
+      ]
+    },
+    {
+      "code": "G31.9",
+      "description": "Degenerative disease of nervous system, unspecified",
+      "category": "Neurological",
+      "keywords": [
+        "neurodegeneration"
+      ]
+    },
+    {
+      "code": "F01.50",
+      "description": "Vascular dementia without behavioral disturbance",
+      "category": "Neurological",
+      "keywords": [
+        "vascular dementia"
+      ]
+    },
+    {
+      "code": "F01.51",
+      "description": "Vascular dementia with behavioral disturbance",
+      "category": "Neurological",
+      "keywords": [
+        "vascular dementia behavioral"
+      ]
+    },
+    {
+      "code": "F02.80",
+      "description": "Dementia in other diseases classified elsewhere without behavioral disturbance",
+      "category": "Neurological",
+      "keywords": [
+        "dementia secondary"
+      ]
+    },
+    {
+      "code": "F02.81",
+      "description": "Dementia in other diseases classified elsewhere with behavioral disturbance",
+      "category": "Neurological",
+      "keywords": [
+        "dementia behavioral"
+      ]
+    },
+    {
+      "code": "F03.90",
+      "description": "Unspecified dementia without behavioral disturbance",
+      "category": "Neurological",
+      "keywords": [
+        "dementia"
+      ]
+    },
+    {
+      "code": "F03.91",
+      "description": "Unspecified dementia with behavioral disturbance",
+      "category": "Neurological",
+      "keywords": [
+        "dementia with agitation"
+      ]
+    },
+    {
+      "code": "F03.A0",
+      "description": "Dementia, unspecified severity, without behavioral disturbance, psychotic disturbance, mood disturbance, and anxiety",
+      "category": "Neurological",
+      "keywords": [
+        "dementia unspecified"
+      ]
+    },
+    {
+      "code": "F03.A1",
+      "description": "Dementia, unspecified severity, without behavioral disturbance, with psychotic disturbance",
+      "category": "Neurological",
+      "keywords": [
+        "dementia with psychosis"
+      ]
+    },
+    {
+      "code": "F03.A2",
+      "description": "Dementia, unspecified severity, without behavioral disturbance, with mood disturbance",
+      "category": "Neurological",
+      "keywords": [
+        "dementia with depression"
+      ]
+    },
+    {
+      "code": "F03.A3",
+      "description": "Dementia, unspecified severity, without behavioral disturbance, with anxiety",
+      "category": "Neurological",
+      "keywords": [
+        "dementia with anxiety"
+      ]
+    },
+    {
+      "code": "F03.A4",
+      "description": "Dementia, unspecified severity, without behavioral disturbance, with mood disturbance and anxiety",
+      "category": "Neurological",
+      "keywords": [
+        "dementia mood anxiety"
+      ]
+    },
+    {
+      "code": "F03.B0",
+      "description": "Dementia, unspecified severity, with behavioral disturbance",
+      "category": "Neurological",
+      "keywords": [
+        "dementia agitation"
+      ]
+    },
+    {
+      "code": "F03.C0",
+      "description": "Dementia, unspecified severity, with other behavioral or psychological disturbances",
+      "category": "Neurological",
+      "keywords": [
+        "dementia bpsd"
+      ]
+    },
+    {
+      "code": "K21.0",
+      "description": "Gastro-esophageal reflux disease with esophagitis",
+      "category": "Digestive",
+      "keywords": [
+        "gerd with esophagitis",
+        "reflux esophagitis"
+      ]
+    },
+    {
+      "code": "K21.9",
+      "description": "Gastro-esophageal reflux disease without esophagitis",
+      "category": "Digestive",
+      "keywords": [
+        "gerd",
+        "acid reflux",
+        "heartburn"
+      ]
+    },
+    {
+      "code": "K22.0",
+      "description": "Achalasia of cardia",
+      "category": "Digestive",
+      "keywords": [
+        "achalasia",
+        "esophageal achalasia"
+      ]
+    },
+    {
+      "code": "K22.10",
+      "description": "Ulcer of esophagus without bleeding",
+      "category": "Digestive",
+      "keywords": [
+        "esophageal ulcer"
+      ]
+    },
+    {
+      "code": "K22.11",
+      "description": "Ulcer of esophagus with bleeding",
+      "category": "Digestive",
+      "keywords": [
+        "bleeding esophageal ulcer"
+      ]
+    },
+    {
+      "code": "K22.2",
+      "description": "Esophageal obstruction",
+      "category": "Digestive",
+      "keywords": [
+        "esophageal obstruction"
+      ]
+    },
+    {
+      "code": "K22.3",
+      "description": "Perforation of esophagus",
+      "category": "Digestive",
+      "keywords": [
+        "esophageal perforation"
+      ]
+    },
+    {
+      "code": "K22.4",
+      "description": "Dyskinesia of esophagus",
+      "category": "Digestive",
+      "keywords": [
+        "esophageal dysmotility"
+      ]
+    },
+    {
+      "code": "K22.5",
+      "description": "Diverticulum of esophagus, acquired",
+      "category": "Digestive",
+      "keywords": [
+        "esophageal diverticulum"
+      ]
+    },
+    {
+      "code": "K22.6",
+      "description": "Gastro-esophageal laceration-hemorrhage syndrome",
+      "category": "Digestive",
+      "keywords": [
+        "mallory-weiss tear"
+      ]
+    },
+    {
+      "code": "K22.70",
+      "description": "Barrett esophagus without dysplasia",
+      "category": "Digestive",
+      "keywords": [
+        "barrett esophagus",
+        "barretts"
+      ]
+    },
+    {
+      "code": "K22.710",
+      "description": "Barrett esophagus with low grade dysplasia",
+      "category": "Digestive",
+      "keywords": [
+        "barrett low grade dysplasia"
+      ]
+    },
+    {
+      "code": "K22.711",
+      "description": "Barrett esophagus with high grade dysplasia",
+      "category": "Digestive",
+      "keywords": [
+        "barrett high grade dysplasia"
+      ]
+    },
+    {
+      "code": "K22.719",
+      "description": "Barrett esophagus with dysplasia, unspecified",
+      "category": "Digestive",
+      "keywords": [
+        "barrett dysplasia"
+      ]
+    },
+    {
+      "code": "K22.8",
+      "description": "Other specified diseases of esophagus",
+      "category": "Digestive",
+      "keywords": [
+        "esophageal disease"
+      ]
+    },
+    {
+      "code": "K22.9",
+      "description": "Disease of esophagus, unspecified",
+      "category": "Digestive",
+      "keywords": [
+        "esophageal disorder"
+      ]
+    },
+    {
+      "code": "K20.0",
+      "description": "Eosinophilic esophagitis",
+      "category": "Digestive",
+      "keywords": [
+        "eosinophilic esophagitis",
+        "eoe"
+      ]
+    },
+    {
+      "code": "K20.80",
+      "description": "Other esophagitis without bleeding",
+      "category": "Digestive",
+      "keywords": [
+        "esophagitis"
+      ]
+    },
+    {
+      "code": "K20.81",
+      "description": "Other esophagitis with bleeding",
+      "category": "Digestive",
+      "keywords": [
+        "esophagitis with bleeding"
+      ]
+    },
+    {
+      "code": "K20.90",
+      "description": "Esophagitis, unspecified without bleeding",
+      "category": "Digestive",
+      "keywords": [
+        "esophagitis unspecified"
+      ]
+    },
+    {
+      "code": "K29.00",
+      "description": "Acute gastritis without bleeding",
+      "category": "Digestive",
+      "keywords": [
+        "acute gastritis"
+      ]
+    },
+    {
+      "code": "K29.01",
+      "description": "Acute gastritis with bleeding",
+      "category": "Digestive",
+      "keywords": [
+        "acute gastritis bleeding"
+      ]
+    },
+    {
+      "code": "K29.20",
+      "description": "Alcoholic gastritis without bleeding",
+      "category": "Digestive",
+      "keywords": [
+        "alcoholic gastritis"
+      ]
+    },
+    {
+      "code": "K29.21",
+      "description": "Alcoholic gastritis with bleeding",
+      "category": "Digestive",
+      "keywords": [
+        "alcoholic gastritis bleeding"
+      ]
+    },
+    {
+      "code": "K29.30",
+      "description": "Chronic superficial gastritis without bleeding",
+      "category": "Digestive",
+      "keywords": [
+        "chronic superficial gastritis"
+      ]
+    },
+    {
+      "code": "K29.31",
+      "description": "Chronic superficial gastritis with bleeding",
+      "category": "Digestive",
+      "keywords": [
+        "chronic superficial gastritis bleeding"
+      ]
+    },
+    {
+      "code": "K29.40",
+      "description": "Chronic atrophic gastritis without bleeding",
+      "category": "Digestive",
+      "keywords": [
+        "chronic atrophic gastritis"
+      ]
+    },
+    {
+      "code": "K29.41",
+      "description": "Chronic atrophic gastritis with bleeding",
+      "category": "Digestive",
+      "keywords": [
+        "chronic atrophic gastritis bleeding"
+      ]
+    },
+    {
+      "code": "K29.50",
+      "description": "Unspecified chronic gastritis without bleeding",
+      "category": "Digestive",
+      "keywords": [
+        "chronic gastritis"
+      ]
+    },
+    {
+      "code": "K29.51",
+      "description": "Unspecified chronic gastritis with bleeding",
+      "category": "Digestive",
+      "keywords": [
+        "chronic gastritis bleeding"
+      ]
+    },
+    {
+      "code": "K29.60",
+      "description": "Other gastritis without bleeding",
+      "category": "Digestive",
+      "keywords": [
+        "gastritis"
+      ]
+    },
+    {
+      "code": "K29.61",
+      "description": "Other gastritis with bleeding",
+      "category": "Digestive",
+      "keywords": [
+        "gastritis bleeding"
+      ]
+    },
+    {
+      "code": "K29.70",
+      "description": "Gastritis, unspecified, without bleeding",
+      "category": "Digestive",
+      "keywords": [
+        "gastritis unspecified"
+      ]
+    },
+    {
+      "code": "K29.71",
+      "description": "Gastritis, unspecified, with bleeding",
+      "category": "Digestive",
+      "keywords": [
+        "gastritis with hemorrhage"
+      ]
+    },
+    {
+      "code": "K25.0",
+      "description": "Acute gastric ulcer with hemorrhage",
+      "category": "Digestive",
+      "keywords": [
+        "bleeding gastric ulcer"
+      ]
+    },
+    {
+      "code": "K25.1",
+      "description": "Acute gastric ulcer with perforation",
+      "category": "Digestive",
+      "keywords": [
+        "perforated gastric ulcer"
+      ]
+    },
+    {
+      "code": "K25.2",
+      "description": "Acute gastric ulcer with both hemorrhage and perforation",
+      "category": "Digestive",
+      "keywords": [
+        "complicated gastric ulcer"
+      ]
+    },
+    {
+      "code": "K25.3",
+      "description": "Acute gastric ulcer without hemorrhage or perforation",
+      "category": "Digestive",
+      "keywords": [
+        "acute gastric ulcer"
+      ]
+    },
+    {
+      "code": "K25.4",
+      "description": "Chronic or unspecified gastric ulcer with hemorrhage",
+      "category": "Digestive",
+      "keywords": [
+        "chronic gastric ulcer bleeding"
+      ]
+    },
+    {
+      "code": "K25.5",
+      "description": "Chronic or unspecified gastric ulcer with perforation",
+      "category": "Digestive",
+      "keywords": [
+        "chronic perforated gastric ulcer"
+      ]
+    },
+    {
+      "code": "K25.6",
+      "description": "Chronic or unspecified gastric ulcer with both hemorrhage and perforation",
+      "category": "Digestive",
+      "keywords": [
+        "chronic complicated gastric ulcer"
+      ]
+    },
+    {
+      "code": "K25.7",
+      "description": "Chronic gastric ulcer without hemorrhage or perforation",
+      "category": "Digestive",
+      "keywords": [
+        "chronic gastric ulcer"
+      ]
+    },
+    {
+      "code": "K25.9",
+      "description": "Gastric ulcer, unspecified as acute or chronic, without hemorrhage or perforation",
+      "category": "Digestive",
+      "keywords": [
+        "gastric ulcer",
+        "stomach ulcer"
+      ]
+    },
+    {
+      "code": "K26.0",
+      "description": "Acute duodenal ulcer with hemorrhage",
+      "category": "Digestive",
+      "keywords": [
+        "bleeding duodenal ulcer"
+      ]
+    },
+    {
+      "code": "K26.1",
+      "description": "Acute duodenal ulcer with perforation",
+      "category": "Digestive",
+      "keywords": [
+        "perforated duodenal ulcer"
+      ]
+    },
+    {
+      "code": "K26.2",
+      "description": "Acute duodenal ulcer with both hemorrhage and perforation",
+      "category": "Digestive",
+      "keywords": [
+        "complicated duodenal ulcer"
+      ]
+    },
+    {
+      "code": "K26.3",
+      "description": "Acute duodenal ulcer without hemorrhage or perforation",
+      "category": "Digestive",
+      "keywords": [
+        "acute duodenal ulcer"
+      ]
+    },
+    {
+      "code": "K26.4",
+      "description": "Chronic or unspecified duodenal ulcer with hemorrhage",
+      "category": "Digestive",
+      "keywords": [
+        "chronic duodenal ulcer bleeding"
+      ]
+    },
+    {
+      "code": "K26.5",
+      "description": "Chronic or unspecified duodenal ulcer with perforation",
+      "category": "Digestive",
+      "keywords": [
+        "chronic perforated duodenal ulcer"
+      ]
+    },
+    {
+      "code": "K26.6",
+      "description": "Chronic or unspecified duodenal ulcer with both hemorrhage and perforation",
+      "category": "Digestive",
+      "keywords": [
+        "chronic complicated duodenal ulcer"
+      ]
+    },
+    {
+      "code": "K26.7",
+      "description": "Chronic duodenal ulcer without hemorrhage or perforation",
+      "category": "Digestive",
+      "keywords": [
+        "chronic duodenal ulcer"
+      ]
+    },
+    {
+      "code": "K70.0",
+      "description": "Alcoholic fatty liver",
+      "category": "Digestive",
+      "keywords": [
+        "alcoholic fatty liver",
+        "alcoholic steatosis"
+      ]
+    },
+    {
+      "code": "K70.10",
+      "description": "Alcoholic hepatitis without ascites",
+      "category": "Digestive",
+      "keywords": [
+        "alcoholic hepatitis"
+      ]
+    },
+    {
+      "code": "K70.11",
+      "description": "Alcoholic hepatitis with ascites",
+      "category": "Digestive",
+      "keywords": [
+        "alcoholic hepatitis with ascites"
+      ]
+    },
+    {
+      "code": "K70.2",
+      "description": "Alcoholic fibrosis and sclerosis of liver",
+      "category": "Digestive",
+      "keywords": [
+        "alcoholic liver fibrosis"
+      ]
+    },
+    {
+      "code": "K70.30",
+      "description": "Alcoholic cirrhosis of liver without ascites",
+      "category": "Digestive",
+      "keywords": [
+        "alcoholic cirrhosis"
+      ]
+    },
+    {
+      "code": "K70.31",
+      "description": "Alcoholic cirrhosis of liver with ascites",
+      "category": "Digestive",
+      "keywords": [
+        "alcoholic cirrhosis with ascites"
+      ]
+    },
+    {
+      "code": "K70.40",
+      "description": "Alcoholic hepatic failure without coma",
+      "category": "Digestive",
+      "keywords": [
+        "alcoholic liver failure"
+      ]
+    },
+    {
+      "code": "K70.41",
+      "description": "Alcoholic hepatic failure with coma",
+      "category": "Digestive",
+      "keywords": [
+        "alcoholic liver failure with coma"
+      ]
+    },
+    {
+      "code": "K70.9",
+      "description": "Alcoholic liver disease, unspecified",
+      "category": "Digestive",
+      "keywords": [
+        "alcoholic liver disease"
+      ]
+    },
+    {
+      "code": "K71.0",
+      "description": "Toxic liver disease with cholestasis",
+      "category": "Digestive",
+      "keywords": [
+        "drug-induced cholestasis"
+      ]
+    },
+    {
+      "code": "K71.10",
+      "description": "Toxic liver disease with hepatic necrosis, without coma",
+      "category": "Digestive",
+      "keywords": [
+        "drug-induced hepatic necrosis"
+      ]
+    },
+    {
+      "code": "K71.11",
+      "description": "Toxic liver disease with hepatic necrosis, with coma",
+      "category": "Digestive",
+      "keywords": [
+        "drug-induced liver failure"
+      ]
+    },
+    {
+      "code": "K71.2",
+      "description": "Toxic liver disease with acute hepatitis",
+      "category": "Digestive",
+      "keywords": [
+        "drug-induced hepatitis"
+      ]
+    },
+    {
+      "code": "K71.3",
+      "description": "Toxic liver disease with chronic persistent hepatitis",
+      "category": "Digestive",
+      "keywords": [
+        "drug-induced chronic hepatitis"
+      ]
+    },
+    {
+      "code": "K71.4",
+      "description": "Toxic liver disease with chronic lobular hepatitis",
+      "category": "Digestive",
+      "keywords": [
+        "toxic lobular hepatitis"
+      ]
+    },
+    {
+      "code": "K71.50",
+      "description": "Toxic liver disease with chronic active hepatitis without ascites",
+      "category": "Digestive",
+      "keywords": [
+        "drug-induced chronic active hepatitis"
+      ]
+    },
+    {
+      "code": "K71.51",
+      "description": "Toxic liver disease with chronic active hepatitis with ascites",
+      "category": "Digestive",
+      "keywords": [
+        "drug hepatitis with ascites"
+      ]
+    },
+    {
+      "code": "K71.6",
+      "description": "Toxic liver disease with hepatitis, not elsewhere classified",
+      "category": "Digestive",
+      "keywords": [
+        "toxic hepatitis"
+      ]
+    },
+    {
+      "code": "K71.7",
+      "description": "Toxic liver disease with fibrosis and cirrhosis of liver",
+      "category": "Digestive",
+      "keywords": [
+        "drug-induced cirrhosis"
+      ]
+    },
+    {
+      "code": "K71.8",
+      "description": "Toxic liver disease with other disorders of liver",
+      "category": "Digestive",
+      "keywords": [
+        "toxic liver disease"
+      ]
+    },
+    {
+      "code": "K71.9",
+      "description": "Toxic liver disease, unspecified",
+      "category": "Digestive",
+      "keywords": [
+        "drug-induced liver disease"
+      ]
+    },
+    {
+      "code": "K74.0",
+      "description": "Hepatic fibrosis",
+      "category": "Digestive",
+      "keywords": [
+        "liver fibrosis"
+      ]
+    },
+    {
+      "code": "K74.1",
+      "description": "Hepatic sclerosis",
+      "category": "Digestive",
+      "keywords": [
+        "liver sclerosis"
+      ]
+    },
+    {
+      "code": "K74.2",
+      "description": "Hepatic fibrosis with hepatic sclerosis",
+      "category": "Digestive",
+      "keywords": [
+        "hepatic fibrosis and sclerosis"
+      ]
+    },
+    {
+      "code": "K74.3",
+      "description": "Primary biliary cirrhosis",
+      "category": "Digestive",
+      "keywords": [
+        "primary biliary cirrhosis",
+        "pbc"
+      ]
+    },
+    {
+      "code": "K74.4",
+      "description": "Secondary biliary cirrhosis",
+      "category": "Digestive",
+      "keywords": [
+        "secondary biliary cirrhosis"
+      ]
+    },
+    {
+      "code": "K74.5",
+      "description": "Biliary cirrhosis, unspecified",
+      "category": "Digestive",
+      "keywords": [
+        "biliary cirrhosis"
+      ]
+    },
+    {
+      "code": "K74.60",
+      "description": "Unspecified cirrhosis of liver",
+      "category": "Digestive",
+      "keywords": [
+        "cirrhosis",
+        "liver cirrhosis"
+      ]
+    },
+    {
+      "code": "K74.69",
+      "description": "Other cirrhosis of liver",
+      "category": "Digestive",
+      "keywords": [
+        "cirrhosis other"
+      ]
+    },
+    {
+      "code": "K75.0",
+      "description": "Abscess of liver",
+      "category": "Digestive",
+      "keywords": [
+        "liver abscess",
+        "hepatic abscess"
+      ]
+    },
+    {
+      "code": "K75.1",
+      "description": "Phlebitis of portal vein",
+      "category": "Digestive",
+      "keywords": [
+        "portal vein thrombosis"
+      ]
+    },
+    {
+      "code": "K50.00",
+      "description": "Crohn disease of small intestine without complications",
+      "category": "Digestive",
+      "keywords": [
+        "crohn disease",
+        "crohns",
+        "regional enteritis"
+      ]
+    },
+    {
+      "code": "K50.011",
+      "description": "Crohn disease of small intestine with rectal bleeding",
+      "category": "Digestive",
+      "keywords": [
+        "crohn with bleeding"
+      ]
+    },
+    {
+      "code": "K50.012",
+      "description": "Crohn disease of small intestine with intestinal obstruction",
+      "category": "Digestive",
+      "keywords": [
+        "crohn with obstruction"
+      ]
+    },
+    {
+      "code": "K50.013",
+      "description": "Crohn disease of small intestine with fistula",
+      "category": "Digestive",
+      "keywords": [
+        "crohn with fistula"
+      ]
+    },
+    {
+      "code": "K50.014",
+      "description": "Crohn disease of small intestine with abscess",
+      "category": "Digestive",
+      "keywords": [
+        "crohn with abscess"
+      ]
+    },
+    {
+      "code": "K50.018",
+      "description": "Crohn disease of small intestine with other complication",
+      "category": "Digestive",
+      "keywords": [
+        "crohn complications"
+      ]
+    },
+    {
+      "code": "K50.019",
+      "description": "Crohn disease of small intestine with unspecified complications",
+      "category": "Digestive",
+      "keywords": [
+        "crohn complicated"
+      ]
+    },
+    {
+      "code": "K50.10",
+      "description": "Crohn disease of large intestine without complications",
+      "category": "Digestive",
+      "keywords": [
+        "crohn colitis"
+      ]
+    },
+    {
+      "code": "K50.111",
+      "description": "Crohn disease of large intestine with rectal bleeding",
+      "category": "Digestive",
+      "keywords": [
+        "crohn colitis bleeding"
+      ]
+    },
+    {
+      "code": "K50.112",
+      "description": "Crohn disease of large intestine with intestinal obstruction",
+      "category": "Digestive",
+      "keywords": [
+        "crohn colitis obstruction"
+      ]
+    },
+    {
+      "code": "K51.00",
+      "description": "Ulcerative (chronic) pancolitis without complications",
+      "category": "Digestive",
+      "keywords": [
+        "ulcerative colitis",
+        "uc"
+      ]
+    },
+    {
+      "code": "K51.011",
+      "description": "Ulcerative (chronic) pancolitis with rectal bleeding",
+      "category": "Digestive",
+      "keywords": [
+        "uc with bleeding"
+      ]
+    },
+    {
+      "code": "K51.012",
+      "description": "Ulcerative (chronic) pancolitis with intestinal obstruction",
+      "category": "Digestive",
+      "keywords": [
+        "uc with obstruction"
+      ]
+    },
+    {
+      "code": "K51.013",
+      "description": "Ulcerative (chronic) pancolitis with fistula",
+      "category": "Digestive",
+      "keywords": [
+        "uc with fistula"
+      ]
+    },
+    {
+      "code": "K51.014",
+      "description": "Ulcerative (chronic) pancolitis with abscess",
+      "category": "Digestive",
+      "keywords": [
+        "uc with abscess"
+      ]
+    },
+    {
+      "code": "K51.018",
+      "description": "Ulcerative (chronic) pancolitis with other complication",
+      "category": "Digestive",
+      "keywords": [
+        "uc complications"
+      ]
+    },
+    {
+      "code": "K51.019",
+      "description": "Ulcerative (chronic) pancolitis with unspecified complications",
+      "category": "Digestive",
+      "keywords": [
+        "uc complicated"
+      ]
+    },
+    {
+      "code": "K51.20",
+      "description": "Ulcerative (chronic) proctitis without complications",
+      "category": "Digestive",
+      "keywords": [
+        "ulcerative proctitis"
+      ]
+    },
+    {
+      "code": "K51.30",
+      "description": "Ulcerative (chronic) rectosigmoiditis without complications",
+      "category": "Digestive",
+      "keywords": [
+        "ulcerative rectosigmoiditis"
+      ]
+    },
+    {
+      "code": "K51.40",
+      "description": "Inflammatory polyps of colon without complications",
+      "category": "Digestive",
+      "keywords": [
+        "inflammatory polyps"
+      ]
+    }
+  ]
+}

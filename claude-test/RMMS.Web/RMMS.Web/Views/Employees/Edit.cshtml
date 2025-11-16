@@ -1,0 +1,175 @@
+@model RMMS.Models.Masters.Employee
+@{
+    ViewData["Title"] = "Edit Employee";
+}
+
+<div class="container-fluid">
+    <h2><i class="fas fa-user-edit"></i> Edit Employee</h2>
+    <hr />
+
+    <form asp-action="Edit" method="post">
+        <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="CreatedDate" />
+        <input type="hidden" asp-for="CreatedBy" />
+
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h5>Personal Information</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label asp-for="EmployeeCode" class="form-label"></label>
+                                <input asp-for="EmployeeCode" class="form-control" readonly />
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="EmployeeName" class="form-label"></label>
+                                <input asp-for="EmployeeName" class="form-control" required />
+                                <span asp-validation-for="EmployeeName" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label asp-for="Mobile" class="form-label"></label>
+                                <input asp-for="Mobile" class="form-control" required />
+                                <span asp-validation-for="Mobile" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="Email" class="form-label"></label>
+                                <input asp-for="Email" class="form-control" type="email" />
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label asp-for="DateOfBirth" class="form-label"></label>
+                                <input asp-for="DateOfBirth" class="form-control" type="date" />
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="DateOfJoining" class="form-label"></label>
+                                <input asp-for="DateOfJoining" class="form-control" type="date" />
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Address" class="form-label"></label>
+                            <input asp-for="Address" class="form-control" />
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <label asp-for="City" class="form-label"></label>
+                                <input asp-for="City" class="form-control" />
+                            </div>
+                            <div class="col-md-4">
+                                <label asp-for="State" class="form-label"></label>
+                                <input asp-for="State" class="form-control" />
+                            </div>
+                            <div class="col-md-4">
+                                <label asp-for="Pincode" class="form-label"></label>
+                                <input asp-for="Pincode" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h5>Employment Details</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label asp-for="Department" class="form-label"></label>
+                                <select asp-for="Department" class="form-select">
+                                    <option value="">Select Department</option>
+                                    <option value="Production">Production</option>
+                                    <option value="Quality Control">Quality Control</option>
+                                    <option value="Admin">Admin</option>
+                                    <option value="Sales">Sales</option>
+                                    <option value="Accounts">Accounts</option>
+                                    <option value="Warehouse">Warehouse</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="Designation" class="form-label"></label>
+                                <input asp-for="Designation" class="form-control" />
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label asp-for="EmploymentType" class="form-label"></label>
+                                <select asp-for="EmploymentType" class="form-select">
+                                    <option value="">Select Type</option>
+                                    <option value="Permanent">Permanent</option>
+                                    <option value="Contract">Contract</option>
+                                    <option value="Daily Wage">Daily Wage</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="BasicSalary" class="form-label"></label>
+                                <input asp-for="BasicSalary" class="form-control" type="number" step="0.01" />
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label asp-for="AadharNumber" class="form-label"></label>
+                                <input asp-for="AadharNumber" class="form-control" maxlength="12" />
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="PAN" class="form-label"></label>
+                                <input asp-for="PAN" class="form-control" maxlength="10" />
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label asp-for="BankAccountNumber" class="form-label"></label>
+                                <input asp-for="BankAccountNumber" class="form-control" />
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="IFSCCode" class="form-label"></label>
+                                <input asp-for="IFSCCode" class="form-control" maxlength="11" />
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Status" class="form-label"></label>
+                            <select asp-for="Status" class="form-select">
+                                <option value="Active">Active</option>
+                                <option value="Inactive">Inactive</option>
+                                <option value="Resigned">Resigned</option>
+                                <option value="Terminated">Terminated</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Actions</h5>
+                    </div>
+                    <div class="card-body">
+                        <button type="submit" class="btn btn-success w-100 mb-2">
+                            <i class="fas fa-save"></i> Update Employee
+                        </button>
+                        <a asp-action="Index" class="btn btn-secondary w-100">
+                            <i class="fas fa-times"></i> Cancel
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

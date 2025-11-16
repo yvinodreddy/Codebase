@@ -1,0 +1,263 @@
+@model RMMS.Models.Inventory.Warehouse
+@{
+    ViewData["Title"] = "Warehouse Details";
+}
+
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2><i class="fas fa-warehouse"></i> Warehouse Details</h2>
+        <div>
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">
+                <i class="fas fa-edit"></i> Edit
+            </a>
+            <a asp-action="Index" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i> Back to List
+            </a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h5>Basic Information</h5>
+                </div>
+                <div class="card-body">
+                    <dl class="row">
+                        <dt class="col-sm-4">Warehouse Code</dt>
+                        <dd class="col-sm-8">@Model.WarehouseCode</dd>
+
+                        <dt class="col-sm-4">Warehouse Name</dt>
+                        <dd class="col-sm-8">@Model.WarehouseName</dd>
+
+                        <dt class="col-sm-4">Type</dt>
+                        <dd class="col-sm-8">@Model.WarehouseType</dd>
+
+                        <dt class="col-sm-4">Status</dt>
+                        <dd class="col-sm-8">
+                            <span class="badge bg-@(Model.Status == "Active" ? "success" : Model.Status == "Full" ? "danger" : Model.Status == "Maintenance" ? "warning" : "secondary")">
+                                @Model.Status
+                            </span>
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h5>Location Information</h5>
+                </div>
+                <div class="card-body">
+                    <dl class="row">
+                        <dt class="col-sm-4">Location</dt>
+                        <dd class="col-sm-8">@Model.Location</dd>
+
+                        <dt class="col-sm-4">Address</dt>
+                        <dd class="col-sm-8">@Model.Address</dd>
+
+                        <dt class="col-sm-4">City</dt>
+                        <dd class="col-sm-8">@Model.City</dd>
+
+                        <dt class="col-sm-4">State</dt>
+                        <dd class="col-sm-8">@Model.State</dd>
+
+                        <dt class="col-sm-4">Pincode</dt>
+                        <dd class="col-sm-8">@Model.Pincode</dd>
+                    </dl>
+                </div>
+            </div>
+
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h5>Capacity Information</h5>
+                </div>
+                <div class="card-body">
+                    <dl class="row">
+                        <dt class="col-sm-4">Total Capacity</dt>
+                        <dd class="col-sm-8">@Model.TotalCapacity.ToString("N2") MT</dd>
+
+                        <dt class="col-sm-4">Used Capacity</dt>
+                        <dd class="col-sm-8">
+                            @Model.UsedCapacity.ToString("N2") MT
+                            <div class="progress mt-2" style="height: 25px;">
+                                @{
+                                    var usagePercent = Model.TotalCapacity > 0 ? (Model.UsedCapacity / Model.TotalCapacity * 100) : 0;
+                                    var progressColor = usagePercent > 90 ? "danger" : usagePercent > 70 ? "warning" : "success";
+                                }
+                                <div class="progress-bar bg-@progressColor" role="progressbar"
+                                     style="width: @usagePercent%"
+                                     aria-valuenow="@usagePercent" aria-valuemin="0" aria-valuemax="100">
+                                    @usagePercent.ToString("N1")%
+                                </div>
+                            </div>
+                        </dd>
+
+                        <dt class="col-sm-4">Available Capacity</dt>
+                        <dd class="col-sm-8">@Model.AvailableCapacity.ToString("N2") MT</dd>
+                    </dl>
+                </div>
+            </div>
+
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h5>Contact Information</h5>
+                </div>
+                <div class="card-body">
+                    <dl class="row">
+                        <dt class="col-sm-4">Contact Person</dt>
+                        <dd class="col-sm-8">@Model.ContactPerson</dd>
+
+                        <dt class="col-sm-4">Mobile</dt>
+                        <dd class="col-sm-8">@Model.Mobile</dd>
+
+                        <dt class="col-sm-4">Email</dt>
+                        <dd class="col-sm-8">@Model.Email</dd>
+                    </dl>
+                </div>
+            </div>
+
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h5>Environmental Controls</h5>
+                </div>
+                <div class="card-body">
+                    <dl class="row">
+                        <dt class="col-sm-4">Temperature Controlled</dt>
+                        <dd class="col-sm-8">
+                            @if (Model.IsTemperatureControlled)
+                            {
+                                <span class="badge bg-info">Yes</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-secondary">No</span>
+                            }
+                        </dd>
+
+                        @if (Model.Temperature.HasValue)
+                        {
+                            <dt class="col-sm-4">Temperature</dt>
+                            <dd class="col-sm-8">@Model.Temperature.Value.ToString("N2")°C</dd>
+                        }
+
+                        @if (Model.Humidity.HasValue)
+                        {
+                            <dt class="col-sm-4">Humidity</dt>
+                            <dd class="col-sm-8">@Model.Humidity.Value.ToString("N2")%</dd>
+                        }
+                    </dl>
+                </div>
+            </div>
+
+            @if (!string.IsNullOrEmpty(Model.Remarks))
+            {
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h5>Remarks</h5>
+                    </div>
+                    <div class="card-body">
+                        <p>@Model.Remarks</p>
+                    </div>
+                </div>
+            }
+
+            @if (Model.Zones != null && Model.Zones.Any())
+            {
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h5>Storage Zones (@Model.Zones.Count)</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-sm table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Zone Code</th>
+                                        <th>Zone Name</th>
+                                        <th>Type</th>
+                                        <th>Capacity (MT)</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var zone in Model.Zones.Where(z => z.IsActive))
+                                    {
+                                        <tr>
+                                            <td>@zone.ZoneCode</td>
+                                            <td>@zone.ZoneName</td>
+                                            <td>@zone.ZoneType</td>
+                                            <td>@zone.Capacity.ToString("N2")</td>
+                                            <td>
+                                                <span class="badge bg-@(zone.Status == "Active" ? "success" : "secondary")">
+                                                    @zone.Status
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <div class="col-md-4">
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h5>Quick Actions</h5>
+                </div>
+                <div class="card-body">
+                    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning w-100 mb-2">
+                        <i class="fas fa-edit"></i> Edit Warehouse
+                    </a>
+                    <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger w-100 mb-2">
+                        <i class="fas fa-trash"></i> Delete Warehouse
+                    </a>
+                    <a asp-action="Index" class="btn btn-secondary w-100">
+                        <i class="fas fa-list"></i> Back to List
+                    </a>
+                </div>
+            </div>
+
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h5>Audit Information</h5>
+                </div>
+                <div class="card-body">
+                    <small class="text-muted">
+                        <strong>Created:</strong><br />
+                        @Model.CreatedDate.ToString("dd MMM yyyy HH:mm")<br />
+                        <strong>By:</strong> @Model.CreatedBy<br /><br />
+
+                        @if (Model.ModifiedDate.HasValue)
+                        {
+                            <strong>Modified:</strong><br />
+                            @Model.ModifiedDate.Value.ToString("dd MMM yyyy HH:mm")<br />
+                            <strong>By:</strong> @Model.ModifiedBy<br />
+                        }
+
+                        <strong>Status:</strong> @(Model.IsActive ? "Active" : "Inactive")
+                    </small>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h5>Statistics</h5>
+                </div>
+                <div class="card-body">
+                    @{
+                        var utilizationPercent = Model.TotalCapacity > 0 ? (Model.UsedCapacity / Model.TotalCapacity * 100) : 0;
+                    }
+                    <p class="mb-2">
+                        <strong>Utilization:</strong> @utilizationPercent.ToString("N1")%
+                    </p>
+                    <p class="mb-2">
+                        <strong>Storage Zones:</strong> @(Model.Zones?.Count(z => z.IsActive) ?? 0)
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

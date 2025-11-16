@@ -1,0 +1,158 @@
+@model RMMS.Models.Inventory.StockAdjustment
+@{
+    ViewData["Title"] = "New Stock Adjustment";
+}
+
+<div class="container">
+    <h2>
+        <i class="fas fa-adjust"></i>
+        @ViewData["Title"]
+    </h2>
+    <hr />
+
+    <div class="row">
+        <div class="col-md-8">
+            <form asp-action="Create" method="post">
+                <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+                <div class="card mb-3">
+                    <div class="card-header bg-primary text-white">
+                        <h5>Adjustment Information</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="AdjustmentCode" class="form-label"></label>
+                                <input asp-for="AdjustmentCode" class="form-control" readonly />
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="AdjustmentDate" class="form-label"></label>
+                                <input asp-for="AdjustmentDate" class="form-control" type="datetime-local" />
+                                <span asp-validation-for="AdjustmentDate" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="AdjustmentType" class="form-label"></label>
+                                <select asp-for="AdjustmentType" class="form-select" asp-items="ViewBag.AdjustmentTypes">
+                                </select>
+                                <span asp-validation-for="AdjustmentType" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Reason" class="form-label"></label>
+                                <select asp-for="Reason" class="form-select" asp-items="ViewBag.Reasons">
+                                    <option value="">-- Select Reason --</option>
+                                </select>
+                                <span asp-validation-for="Reason" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-3">
+                    <div class="card-header bg-info text-white">
+                        <h5>Product & Location</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="ProductId" class="form-label"></label>
+                                <select asp-for="ProductId" class="form-select" asp-items="ViewBag.Products">
+                                    <option value="">-- Select Product --</option>
+                                </select>
+                                <span asp-validation-for="ProductId" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="WarehouseId" class="form-label"></label>
+                                <select asp-for="WarehouseId" class="form-select" asp-items="ViewBag.Warehouses">
+                                    <option value="">-- Select Warehouse --</option>
+                                </select>
+                                <span asp-validation-for="WarehouseId" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-3">
+                    <div class="card-header bg-warning">
+                        <h5>Adjustment Quantity</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label asp-for="Quantity" class="form-label"></label>
+                            <input asp-for="Quantity" class="form-control" type="number" step="0.001" />
+                            <span asp-validation-for="Quantity" class="text-danger"></span>
+                            <small class="text-muted">
+                                Enter the quantity to adjust. System will calculate before and after quantities automatically.
+                            </small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h5>Approval & Remarks</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3 form-check">
+                            <input asp-for="RequiresApproval" class="form-check-input" type="checkbox" />
+                            <label asp-for="RequiresApproval" class="form-check-label"></label>
+                            <small class="text-muted d-block">
+                                If checked, adjustment will be pending approval before affecting inventory.
+                            </small>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="Remarks" class="form-label"></label>
+                            <textarea asp-for="Remarks" class="form-control" rows="3"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-between">
+                    <a asp-action="Index" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Back to List
+                    </a>
+                    <button type="submit" class="btn btn-success">
+                        <i class="fas fa-save"></i> Create Adjustment
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card bg-light">
+                <div class="card-header">
+                    <h5><i class="fas fa-info-circle"></i> Stock Adjustment Guide</h5>
+                </div>
+                <div class="card-body">
+                    <h6>Adjustment Types:</h6>
+                    <ul>
+                        <li><strong>Increase:</strong> Add quantity to existing stock</li>
+                        <li><strong>Decrease:</strong> Reduce quantity from existing stock</li>
+                        <li><strong>Transfer:</strong> Set exact quantity (override)</li>
+                    </ul>
+
+                    <h6 class="mt-3">Common Reasons:</h6>
+                    <ul>
+                        <li><strong>Damage:</strong> Damaged goods write-off</li>
+                        <li><strong>Spoilage:</strong> Spoiled/expired items</li>
+                        <li><strong>Counting Error:</strong> Inventory count corrections</li>
+                        <li><strong>Physical Verification:</strong> Stock take adjustments</li>
+                        <li><strong>Moisture Loss:</strong> Weight loss due to moisture</li>
+                    </ul>
+
+                    <div class="alert alert-warning mt-3">
+                        <small>
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <strong>Note:</strong> Adjustments requiring approval will not update inventory until approved.
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

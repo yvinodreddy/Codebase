@@ -1,0 +1,74 @@
+@{
+    ViewData["Title"] = "Seed Test Data";
+}
+
+<div class="container-fluid mt-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h4><i class="fas fa-database"></i> Seed Test Data</h4>
+                </div>
+                <div class="card-body">
+                    @if (ViewBag.Success == true)
+                    {
+                        <div class="alert alert-success">
+                            <h5><i class="fas fa-check-circle"></i> Success!</h5>
+                            <pre>@ViewBag.Message</pre>
+                        </div>
+
+                        <div class="mt-4">
+                            <h5>Next Steps:</h5>
+                            <ul>
+                                <li><a href="/YieldAnalysis" class="btn btn-sm btn-primary">View Yield Analysis <i class="fas fa-chart-line"></i></a></li>
+                                <li class="mt-2"><a href="/Reports/ProductionSummary" class="btn btn-sm btn-info">View Production Reports <i class="fas fa-file-alt"></i></a></li>
+                                <li class="mt-2"><a href="/ProductionBatches" class="btn btn-sm btn-success">View Production Batches <i class="fas fa-industry"></i></a></li>
+                            </ul>
+                        </div>
+                    }
+                    else if (ViewBag.Success == false)
+                    {
+                        <div class="alert alert-danger">
+                            <h5><i class="fas fa-exclamation-triangle"></i> Error!</h5>
+                            <pre>@ViewBag.Message</pre>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle"></i> @ViewBag.Message
+                        </div>
+                    }
+
+                    <div class="card mt-3">
+                        <div class="card-header">
+                            <h5>What will be seeded:</h5>
+                        </div>
+                        <div class="card-body">
+                            <ul>
+                                <li><strong>8 Products</strong> - Paddy varieties, rice products, and by-products</li>
+                                <li><strong>3 Machines</strong> - Husker, Polisher, Grader</li>
+                                <li><strong>10 Production Orders</strong> - Test production orders</li>
+                                <li><strong>10 Production Batches</strong> - Completed batches with varying yields</li>
+                                <li><strong>10 Yield Records</strong> - Yield data for analytics</li>
+                            </ul>
+
+                            <div class="alert alert-warning mt-3">
+                                <i class="fas fa-exclamation-circle"></i> <strong>Note:</strong> This will only add data if it doesn't already exist. Safe to run multiple times.
+                            </div>
+                        </div>
+                    </div>
+
+                    <form method="post" asp-action="SeedData" class="mt-4">
+                        <button type="submit" class="btn btn-lg btn-success">
+                            <i class="fas fa-play-circle"></i> Seed Data Now
+                        </button>
+                        <a href="/" class="btn btn-lg btn-secondary">
+                            <i class="fas fa-home"></i> Back to Dashboard
+                        </a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

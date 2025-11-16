@@ -1,0 +1,235 @@
+﻿@{
+    ViewData["Title"] = "Monthly Sales Report";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var riceSales = ViewBag.RiceSales as List<RMMS.Models.RiceSales> ?? new List<RMMS.Models.RiceSales>();
+    var byProductSales = ViewBag.ByProductSales as List<RMMS.Models.ByProductSales> ?? new List<RMMS.Models.ByProductSales>();
+    var dailyBreakdown = ViewBag.DailyBreakdown as Dictionary<int, decimal> ?? new Dictionary<int, decimal>();
+}
+
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-header bg-success text-white">
+            <h3><i class="fas fa-calendar-alt"></i> Monthly Sales Report - @ViewBag.MonthName @ViewBag.Year</h3>
+        </div>
+
+        <div class="card-body">
+            <!-- Monthly Summary Cards -->
+            <div class="row mb-4">
+                <div class="col-md-3">
+                    <div class="card border-success">
+                        <div class="card-body">
+                            <h6 class="text-muted">Total Monthly Sales</h6>
+                            <h3 class="text-success">₹ @string.Format("{0:N2}", ViewBag.TotalMonthlySales)</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card border-info">
+                        <div class="card-body">
+                            <h6 class="text-muted">Average Daily Sales</h6>
+                            <h3 class="text-info">₹ @string.Format("{0:N2}", ViewBag.AverageDailySales)</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card border-warning">
+                        <div class="card-body">
+                            <h6 class="text-muted">Best Selling Day</h6>
+                            <h3 class="text-warning">Day @ViewBag.BestSellingDay</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card border-primary">
+                        <div class="card-body">
+                            <h6 class="text-muted">Total Transactions</h6>
+                            <h3 class="text-primary">@(riceSales.Count + byProductSales.Count)</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Daily Sales Chart Area -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5>Daily Sales Trend</h5>
+                </div>
+                <div class="card-body">
+                    <canvas id="dailySalesChart" height="80"></canvas>
+                </div>
+            </div>
+
+            <!-- Category-wise Breakdown -->
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header bg-info text-white">
+                            <h5>Rice Sales Summary</h5>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Rice Grade</th>
+                                        <th>Quantity (kg)</th>
+                                        <th>Amount (₹)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var grade in riceSales.GroupBy(s => s.RiceGrade))
+                                    {
+                                        <tr>
+                                            <td>@grade.Key</td>
+                                            <td>@grade.Sum(s => s.Quantity).ToString("N2")</td>
+                                            <td>@grade.Sum(s => s.GrossInvoiceAmount).ToString("N2")</td>
+                                        </tr>
+                                    }
+                                    <tr class="fw-bold">
+                                        <td>Total</td>
+                                        <td>@riceSales.Sum(s => s.Quantity).ToString("N2")</td>
+                                        <td>@riceSales.Sum(s => s.GrossInvoiceAmount).ToString("N2")</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header bg-warning text-dark">
+                            <h5>By-Product Sales Summary</h5>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Product Type</th>
+                                        <th>Quantity (kg)</th>
+                                        <th>Amount (₹)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var type in byProductSales.GroupBy(s => s.ProductType))
+                                    {
+                                        <tr>
+                                            <td>@type.Key</td>
+                                            <td>@type.Sum(s => s.Quantity).ToString("N2")</td>
+                                            <td>@type.Sum(s => s.TotalAmount).ToString("N2")</td>
+                                        </tr>
+                                    }
+                                    <tr class="fw-bold">
+                                        <td>Total</td>
+                                        <td>@byProductSales.Sum(s => s.Quantity).ToString("N2")</td>
+                                        <td>@byProductSales.Sum(s => s.TotalAmount).ToString("N2")</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Top Customers of the Month -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5>Top 10 Customers</h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Rank</th>
+                                    <th>Customer Name</th>
+                                    <th>Total Purchases</th>
+                                    <th>Number of Orders</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    var topCustomers = riceSales
+                                    .GroupBy(s => s.BuyerName)
+                                    .Select(g => new
+                                    {
+                                        Name = g.Key,
+                                        Total = g.Sum(s => s.GrossInvoiceAmount),
+                                        Count = g.Count()
+                                    })
+                                    .OrderByDescending(c => c.Total)
+                                    .Take(10)
+                                    .ToList();
+
+                                    int rank = 1;
+                                    foreach (var customer in topCustomers)
+                                    {
+                                        <tr>
+                                            <td>@rank</td>
+                                            <td>@customer.Name</td>
+                                            <td>₹ @customer.Total.ToString("N2")</td>
+                                            <td>@customer.Count</td>
+                                        </tr>
+                                        rank++;
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="mt-4">
+                <a href="@Url.Action("Index", "Reports")" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Back
+                </a>
+                <button class="btn btn-primary" onclick="window.print()">
+                    <i class="fas fa-print"></i> Print Report
+                </button>
+                <button class="btn btn-success" onclick="exportToExcel()">
+                    <i class="fas fa-file-excel"></i> Export to Excel
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Create the daily sales chart using the data from controller
+        var ctx = document.getElementById('dailySalesChart').getContext('2d');
+        var dailyData = @Html.Raw(Json.Serialize(dailyBreakdown));
+
+        var chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: Object.keys(dailyData).map(d => 'Day ' + d),
+                datasets: [{
+                    label: 'Daily Sales (₹)',
+                    data: Object.values(dailyData),
+                    borderColor: 'rgb(75, 192, 192)',
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    tension: 0.1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return '₹' + value.toLocaleString();
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        function exportToExcel() {
+            alert('Export functionality will be implemented with database connection');
+        }
+    </script>
+}

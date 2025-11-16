@@ -1,0 +1,277 @@
+@model List<RMMS.Models.API.ApiAnalytic>
+@{
+    ViewData["Title"] = "API Analytics & Performance";
+}
+
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col-12">
+            <h2><i class="fas fa-chart-line"></i> API Analytics & Performance</h2>
+            <p class="text-muted">Monitor API requests, response times, and error rates in real-time</p>
+        </div>
+    </div>
+
+    <!-- MAIN STATISTICS DASHBOARD -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card bg-primary text-white">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="fas fa-exchange-alt"></i> Total Requests</h5>
+                    <h2>@ViewBag.TotalRequests.ToString("N0")</h2>
+                    <small>Last 1000 requests</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-success text-white">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="fas fa-check-circle"></i> Success Rate</h5>
+                    <h2>@ViewBag.SuccessRate%</h2>
+                    <small>@ViewBag.SuccessCount.ToString("N0") successful</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-info text-white">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="fas fa-clock"></i> Avg Response Time</h5>
+                    <h2>@ViewBag.AverageResponseTime ms</h2>
+                    <small>Median: @ViewBag.MedianResponseTime ms</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-danger text-white">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="fas fa-exclamation-triangle"></i> Error Rate</h5>
+                    <h2>@ViewBag.ErrorRate%</h2>
+                    <small>@ViewBag.ErrorCount errors</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TIME-BASED STATISTICS -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="text-muted">Requests This Hour</h6>
+                    <h3>@ViewBag.TotalThisHour.ToString("N0")</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="text-muted">Requests Today</h6>
+                    <h3>@ViewBag.TotalToday.ToString("N0")</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="text-muted">Requests This Week</h6>
+                    <h3>@ViewBag.TotalThisWeek.ToString("N0")</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="text-muted">Requests This Month</h6>
+                    <h3>@ViewBag.TotalThisMonth.ToString("N0")</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PERFORMANCE INSIGHTS -->
+    <div class="row mb-4">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="text-muted">Top Endpoint</h6>
+                    <h5 class="text-primary">@ViewBag.TopEndpoint</h5>
+                    <small>@ViewBag.TopEndpointRequests.ToString("N0") requests</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="text-muted">Slowest Endpoint</h6>
+                    <h5 class="text-danger">@ViewBag.SlowestEndpoint</h5>
+                    <small>@ViewBag.SlowestEndpointTime ms average</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="text-muted">Response Time Range</h6>
+                    <h5>@ViewBag.MinResponseTime - @ViewBag.MaxResponseTime ms</h5>
+                    <small>Min - Max</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ERROR & TRAFFIC INSIGHTS -->
+    <div class="row mb-4">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="text-muted">Top Error Code</h6>
+                    <h3 class="text-danger">@(ViewBag.TopErrorCode > 0 ? ViewBag.TopErrorCode.ToString() : "None")</h3>
+                    <small>@ViewBag.TopErrorCount occurrences</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="text-muted">Peak Hour</h6>
+                    <h3 class="text-success">@ViewBag.PeakHour:00</h3>
+                    <small>@ViewBag.PeakHourRequests.ToString("N0") requests</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="text-muted">Top Consumer</h6>
+                    <h5 class="text-info">@ViewBag.TopConsumerIP</h5>
+                    <small>@ViewBag.TopConsumerRequests.ToString("N0") requests</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TREND INDICATOR -->
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="text-muted">Traffic Trend (Today vs Yesterday)</h6>
+                    <h3>
+                        @if (ViewBag.TrendDirection == "up")
+                        {
+                            <span class="text-success">
+                                <i class="fas fa-arrow-up"></i> +@ViewBag.RequestTrend%
+                            </span>
+                        }
+                        else
+                        {
+                            <span class="text-danger">
+                                <i class="fas fa-arrow-down"></i> @ViewBag.RequestTrend%
+                            </span>
+                        }
+                    </h3>
+                    <small>@(ViewBag.TrendDirection == "up" ? "Increased" : "Decreased") traffic compared to yesterday</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ACTION BUTTONS -->
+    <div class="row mb-3">
+        <div class="col-12">
+            <a href="@Url.Action("GetUsageStats", "ApiAnalytics")" class="btn btn-info" target="_blank">
+                <i class="fas fa-download"></i> Export Usage Stats
+            </a>
+            <a href="@Url.Action("GetEndpointStats", "ApiAnalytics")" class="btn btn-primary" target="_blank">
+                <i class="fas fa-list"></i> Endpoint Statistics
+            </a>
+            <a href="@Url.Action("GetHourlyStats", "ApiAnalytics")" class="btn btn-success" target="_blank">
+                <i class="fas fa-chart-bar"></i> Hourly Stats
+            </a>
+            <form method="post" asp-action="ClearOldRecords" style="display: inline;" onsubmit="return confirm('Clear records older than 90 days?');">
+                <button type="submit" class="btn btn-warning">
+                    <i class="fas fa-trash"></i> Clear Old Records
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- RECENT REQUESTS TABLE -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header bg-light">
+                    <h5 class="mb-0"><i class="fas fa-list"></i> Recent API Requests (@Model.Count)</h5>
+                </div>
+                <div class="card-body">
+                    @if (Model.Any())
+                    {
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Endpoint</th>
+                                        <th>Method</th>
+                                        <th>Status</th>
+                                        <th>Response Time</th>
+                                        <th>IP Address</th>
+                                        <th>Timestamp</th>
+                                        <th>Error</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var analytic in Model)
+                                    {
+                                        var statusClass = analytic.StatusCode >= 200 && analytic.StatusCode < 300 ? "success"
+                                                        : analytic.StatusCode >= 400 ? "danger"
+                                                        : "warning";
+                                        var responseClass = analytic.ResponseTime < 100 ? "success"
+                                                          : analytic.ResponseTime < 500 ? "warning"
+                                                          : "danger";
+                                        <tr>
+                                            <td><code>@analytic.Endpoint</code></td>
+                                            <td><span class="badge bg-primary">@analytic.Method</span></td>
+                                            <td><span class="badge bg-@statusClass">@analytic.StatusCode</span></td>
+                                            <td><span class="badge bg-@responseClass">@analytic.ResponseTime ms</span></td>
+                                            <td>@analytic.IpAddress</td>
+                                            <td>@analytic.CreatedDate.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                                            <td>
+                                                @if (!string.IsNullOrEmpty(analytic.ErrorMessage))
+                                                {
+                                                    <span class="text-danger" title="@analytic.ErrorMessage">
+                                                        <i class="fas fa-exclamation-circle"></i>
+                                                    </span>
+                                                }
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle"></i> No API analytics data found.
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["Success"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        @TempData["Error"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}

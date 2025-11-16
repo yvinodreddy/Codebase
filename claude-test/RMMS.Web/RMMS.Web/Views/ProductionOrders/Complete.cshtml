@@ -1,0 +1,106 @@
+@model RMMS.Models.Production.ProductionOrder
+
+@{
+    ViewData["Title"] = "Complete Production";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h2 class="text-success"><i class="fas fa-check-circle"></i> Complete Production</h2>
+            <hr />
+
+            <div class="card mb-3">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0">Order Information</h5>
+                </div>
+                <div class="card-body">
+                    <dl class="row">
+                        <dt class="col-sm-4">Order Number:</dt>
+                        <dd class="col-sm-8"><strong>@Model.OrderNumber</strong></dd>
+
+                        <dt class="col-sm-4">Paddy Variety:</dt>
+                        <dd class="col-sm-8">@(Model.PaddyVariety ?? "Not specified")</dd>
+
+                        <dt class="col-sm-4">Input Quantity:</dt>
+                        <dd class="col-sm-8">@Model.PaddyQuantity.ToString("N2") Quintals</dd>
+
+                        <dt class="col-sm-4">Expected Yield:</dt>
+                        <dd class="col-sm-8">@(Model.ExpectedYieldPercent?.ToString("N2") ?? "N/A")%</dd>
+
+                        <dt class="col-sm-4">Expected Output:</dt>
+                        <dd class="col-sm-8">
+                            @if (Model.ExpectedYieldPercent.HasValue)
+                            {
+                                var expectedOutput = Model.PaddyQuantity * (Model.ExpectedYieldPercent.Value / 100);
+                                <text>~@expectedOutput.ToString("N2") Quintals</text>
+                            }
+                            else
+                            {
+                                <text>N/A</text>
+                            }
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0"><i class="fas fa-clipboard-check"></i> Production Completion Details</h5>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Complete" method="post">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="id" value="@Model.Id" />
+
+                        <div class="mb-3">
+                            <label for="actualQuantity" class="form-label">Actual Quantity Produced (Quintals) <span class="text-danger">*</span></label>
+                            <input type="number" step="0.001" class="form-control" id="actualQuantity" name="actualQuantity" required />
+                            <small class="form-text text-muted">Total rice output from this production run</small>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="actualYield" class="form-label">Actual Yield Percentage <span class="text-danger">*</span></label>
+                            <input type="number" step="0.01" class="form-control" id="actualYield" name="actualYield" required />
+                            <small class="form-text text-muted">Actual yield percentage achieved (e.g., 65.50)</small>
+                        </div>
+
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle"></i>
+                            <strong>Note:</strong> Completing this order will:
+                            <ul class="mb-0">
+                                <li>Mark the order as "Completed"</li>
+                                <li>Record the actual production quantities</li>
+                                <li>Calculate yield variance from expected</li>
+                            </ul>
+                        </div>
+
+                        <div class="d-flex justify-content-between mt-4">
+                            <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-secondary">
+                                <i class="fas fa-arrow-left"></i> Cancel
+                            </a>
+                            <button type="submit" class="btn btn-success">
+                                <i class="fas fa-check-circle"></i> Complete Production
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        // Auto-calculate yield percentage
+        document.getElementById('actualQuantity').addEventListener('input', function() {
+            const inputQty = @Model.PaddyQuantity;
+            const outputQty = parseFloat(this.value) || 0;
+            if (outputQty > 0) {
+                const yieldPercent = (outputQty / inputQty) * 100;
+                document.getElementById('actualYield').value = yieldPercent.toFixed(2);
+            }
+        });
+    </script>
+}

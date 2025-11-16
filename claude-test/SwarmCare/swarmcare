@@ -1,0 +1,6 @@
+#!/bin/bash
+# SwarmCare CLI Wrapper
+# Makes it easy to run commands with just: ./swarmcare <command>
+
+cd "$(dirname "$0")"
+python3 scripts/swarmcare_cli.py "$@"

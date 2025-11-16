@@ -1,0 +1,329 @@
+extract_patient_clinical_profile:
+  description: >
+    Analyze the provided EHR knowledge graph and extract comprehensive clinical information for {patient_identifier} ({patient_name}).
+    
+    Focus on:
+    - Patient demographics and contact information from {patient_data_source}
+    - Active medical conditions ({primary_conditions}) with SNOMED codes
+    - Current medications ({medication_list}) with dosages and RxNorm codes
+    - Recent observations and vital signs with LOINC codes from {observation_timeframe}
+    - Medical devices and monitoring equipment: {device_list}
+    - Care team members and their roles: {care_team_roles}
+    - Active care plans and goals related to {care_focus_areas}
+    - Allergies and family history relevant to {genetic_risk_factors}
+    - Current alerts and their clinical significance for {alert_categories}
+    
+    Use {data_extraction_method} to process {knowledge_graph_format} data.
+    Apply {clinical_filtering_criteria} and focus on {priority_clinical_elements}.
+    
+    Output a structured clinical summary that identifies key medical relationships and care coordination patterns
+    specific to {patient_population_type} with {complexity_level} cases.
+  expected_output: >
+    A comprehensive clinical profile document containing:
+    1. Patient overview with key demographics for {patient_demographic_category}
+    2. Active condition summary with clinical status for {condition_categories}
+    3. Current medication regimen with therapeutic goals targeting {treatment_objectives}
+    4. Recent clinical measurements and trends from {measurement_sources}
+    5. Care team composition and responsibilities for {care_coordination_model}
+    6. Active monitoring and alert systems focusing on {monitoring_priorities}
+    7. Family history and risk factors relevant to {risk_assessment_focus}
+    8. Current care goals and treatment targets for {outcome_measures}
+    
+    Format: {output_format}
+    Length: {content_length_requirement}
+    Clinical depth: {clinical_detail_level}
+  agent: medical_knowledge_extractor
+  context: []
+  output_file: "{patient_id}_clinical_profile.{file_extension}"
+  human_input: {require_human_validation}
+
+synthesize_clinical_case_presentation:
+  description: >
+    Transform the extracted clinical data into a structured medical case presentation suitable for {educational_target} education.
+    
+    Create a case that highlights:
+    - The complexity of managing {disease_complexity_type} ({primary_disease_focus})
+    - Care coordination between {care_provider_types}
+    - Use of technology in {technology_integration_focus} ({device_technologies})
+    - Clinical decision-making around {decision_making_areas}
+    - Patient education and self-management strategies for {self_care_focus}
+    - Alert management and clinical response protocols for {alert_management_scope}
+    - {additional_case_elements}
+    
+    Structure the case as a {presentation_format} with {clinical_reasoning_depth}, 
+    {differential_consideration_level}, and {management_approach_detail}.
+    
+    Target audience: {case_audience}
+    Educational level: {education_complexity}
+    Case duration: {case_timeline}
+    Learning objectives: {specific_learning_goals}
+  expected_output: >
+    A formal clinical case presentation including:
+    1. Chief complaint and history of present illness for {presenting_symptoms}
+    2. Past medical history and family history relevant to {historical_focus}
+    3. Current medications and allergies with {medication_detail_level}
+    4. Physical examination findings ({examination_components})
+    5. Laboratory and diagnostic results from {diagnostic_timeframe}
+    6. Assessment and clinical reasoning using {reasoning_framework}
+    7. Treatment plan and care coordination for {treatment_scope}
+    8. Follow-up and monitoring strategy covering {monitoring_duration}
+    9. Discussion points for {educational_discussion_focus}
+    
+    Case complexity: {case_difficulty_level}
+    Teaching points: {key_teaching_elements}
+    Duration: {presentation_length}
+  agent: patient_case_synthesizer
+  context: [extract_patient_clinical_profile]
+  output_file: "{patient_id}_{case_type}_presentation.{file_extension}"
+  human_input: {require_case_review}
+
+create_doctor_patient_dialogue:
+  description: >
+    Generate an authentic {provider_type}-{patient_type} conversation based on the clinical case, 
+    focusing on {communication_focus} and {care_coordination_type}.
+    
+    Create a realistic dialogue that demonstrates:
+    - Effective communication about {primary_topic_focus}
+    - Explanation of {diagnostic_results} and {target_parameters}
+    - Discussion of {medication_topics} and {adherence_factors}
+    - Technology integration ({technology_discussion_points})
+    - Lifestyle modifications and self-care education for {lifestyle_focus_areas}
+    - Care team coordination and follow-up planning involving {follow_up_elements}
+    - {cultural_communication_considerations}
+    
+    The conversation should be educational for {conversation_audience}, showing best practices in 
+    {communication_best_practices} and addressing {patient_concerns_categories}.
+    
+    Conversation setting: {clinical_setting}
+    Duration: {conversation_length}
+    Language level: {language_complexity}
+    Cultural context: {cultural_background}
+  expected_output: >
+    A natural, educational {provider_type}-{patient_type} dialogue script containing:
+    1. Opening and relationship building using {rapport_building_approach}
+    2. Review of current health status and concerns about {health_status_topics}
+    3. Discussion of recent test results ({specific_test_results})
+    4. Medication review and adherence discussion covering {medication_review_scope}
+    5. Technology and device data review for {device_data_topics}
+    6. Lifestyle and self-management education about {lifestyle_education_topics}
+    7. Care plan updates and goal setting for {goal_setting_areas}
+    8. Follow-up scheduling and care coordination involving {coordination_elements}
+    9. Closing with patient questions and summary of {summary_key_points}
+    
+    Dialogue style: {conversation_style}
+    Emotional tone: {emotional_context}
+    Educational depth: {patient_education_level}
+  agent: medical_conversation_writer
+  context: [synthesize_clinical_case_presentation]
+  output_file: "{patient_id}_{provider_type}_patient_dialogue.{file_extension}"
+  human_input: {require_dialogue_review}
+
+create_doctor_doctor_consultation:
+  description: >
+    Generate a professional consultation dialogue between {primary_provider_role} and {consulting_provider_role} 
+    regarding the patient's {consultation_focus} management.
+    
+    Focus on:
+    - Clinical case review and {decision_complexity_type} decision-making
+    - Interpretation of {diagnostic_data_types} and {monitoring_data_sources}
+    - {treatment_optimization_areas} optimization strategies
+    - Care coordination and shared decision-making for {shared_decision_topics}
+    - Technology integration in {technology_care_integration}
+    - Patient adherence and behavioral factors affecting {behavioral_focus_areas}
+    - Risk stratification and {complication_prevention_focus} prevention
+    - {specialty_specific_considerations}
+    
+    Demonstrate {clinical_reasoning_level} clinical reasoning and {collaboration_model} collaboration.
+    
+    Consultation type: {consultation_format}
+    Professional setting: {professional_context}
+    Case complexity: {consultation_complexity}
+    Decision urgency: {decision_timeline}
+  expected_output: >
+    A professional medical consultation dialogue featuring:
+    1. Case presentation by {presenting_provider} covering {presentation_scope}
+    2. Specialist assessment and clinical questions about {assessment_focus_areas}
+    3. Review of current management and outcomes for {management_review_scope}
+    4. Discussion of optimization opportunities in {optimization_categories}
+    5. Collaborative treatment planning for {treatment_planning_scope}
+    6. Technology utilization strategies covering {technology_strategy_areas}
+    7. Patient education and engagement approaches for {engagement_focus}
+    8. Follow-up and monitoring protocols spanning {monitoring_protocol_scope}
+    9. Clear action items and responsibilities for {responsibility_distribution}
+    
+    Professional tone: {professional_communication_style}
+    Clinical depth: {clinical_discussion_depth}
+    Consultation outcome: {consultation_goals}
+  agent: medical_conversation_writer
+  context: [synthesize_clinical_case_presentation]
+  output_file: "{patient_id}_{provider_specialty}_consultation_dialogue.{file_extension}"
+  human_input: {require_consultation_review}
+
+validate_medical_compliance:
+  description: >
+    Review all generated medical content for {compliance_framework} compliance, clinical accuracy, 
+    and ethical standards applicable to {content_jurisdiction}.
+    
+    Ensure:
+    - Patient privacy protection and de-identification according to {privacy_standards}
+    - Clinical accuracy of all medical information using {accuracy_verification_method}
+    - Appropriate use of medical terminology for {terminology_audience}
+    - Compliance with {educational_standards} education standards
+    - Ethical presentation of patient information following {ethics_framework}
+    - Proper medical disclaimers and limitations for {disclaimer_scope}
+    - Professional communication standards meeting {professional_standards}
+    - {additional_compliance_requirements}
+    
+    Apply {risk_assessment_framework} and generate necessary disclaimers and compliance documentation.
+    
+    Compliance scope: {compliance_coverage}
+    Risk tolerance: {acceptable_risk_level}
+    Validation method: {validation_approach}
+    Documentation level: {documentation_requirements}
+  expected_output: >
+    A comprehensive compliance report including:
+    1. {privacy_compliance_framework} compliance verification checklist
+    2. Clinical accuracy assessment using {accuracy_standards}
+    3. Privacy protection measures implemented for {privacy_protection_scope}
+    4. Required medical disclaimers for {disclaimer_categories}
+    5. Educational use permissions covering {educational_permission_scope}
+    6. Ethical considerations addressed per {ethical_guidelines}
+    7. Professional standards compliance for {professional_compliance_areas}
+    8. Risk mitigation recommendations for {risk_mitigation_scope}
+    9. Final approval status for content use in {intended_use_context}
+    
+    Compliance level: {compliance_grade}
+    Risk assessment: {risk_evaluation_outcome}
+    Approval status: {final_approval_decision}
+  agent: compliance_validator
+  context: [create_doctor_patient_dialogue, create_doctor_doctor_consultation]
+  output_file: "{patient_id}_{content_type}_compliance_report.{file_extension}"
+  human_input: {require_compliance_review}
+
+generate_podcast_script_patient_education:
+  description: >
+    Create a comprehensive podcast script focused on {patient_education_focus} using the 
+    {provider_type}-{patient_type} dialogue as foundation.
+    
+    Structure the podcast to include:
+    - Introduction to {topic_introduction_focus} topics
+    - Patient story and case background (anonymized per {anonymization_level})
+    - {provider_type}-{patient_type} conversation with {commentary_style} commentary
+    - Expert insights on {expert_topic_focus}
+    - Practical tips for {practical_tips_audience}
+    - Resources and follow-up information about {resource_categories}
+    - Call-to-action for {call_to_action_focus}
+    - {additional_podcast_segments}
+    
+    Make it engaging and accessible for {target_patient_audience} while maintaining clinical accuracy.
+    
+    Podcast format: {podcast_format_style}
+    Episode length: {target_episode_duration}
+    Audience level: {audience_medical_literacy}
+    Production style: {production_approach}
+    Language: {podcast_language}
+  expected_output: >
+    A complete podcast script with:
+    1. Episode introduction and objectives for {episode_goal_focus}
+    2. Host introduction and credentials covering {host_credential_areas}
+    3. Patient case introduction (anonymized per {case_anonymization_standard})
+    4. {provider_type}-{patient_type} dialogue with natural flow for {dialogue_duration}
+    5. Educational segments and commentary about {educational_segment_topics}
+    6. Technology discussion and benefits covering {technology_benefit_areas}
+    7. Actionable advice for listeners focusing on {actionable_advice_categories}
+    8. Resource recommendations for {resource_recommendation_scope}
+    9. Medical disclaimers and call-to-action for {disclaimer_call_to_action}
+    10. Episode conclusion and next steps covering {conclusion_elements}
+    11. Timing cues and production notes for {production_timing}
+    
+    Script length: {script_word_count}
+    Audio duration: {estimated_audio_length}
+    Engagement level: {audience_engagement_target}
+  agent: podcast_script_generator
+  context: [create_doctor_patient_dialogue, validate_medical_compliance]
+  output_file: "{patient_id}_{podcast_type}_education_script.{file_extension}"
+  human_input: {require_script_review}
+
+generate_podcast_script_professional_education:
+  description: >
+    Create a professional medical education podcast script using the {provider_specialty} consultation as foundation.
+    
+    Design for {healthcare_professional_audience} with focus on:
+    - Complex case management and {clinical_reasoning_focus}
+    - {collaboration_type} collaboration best practices
+    - Technology integration in {technology_integration_domain}
+    - Evidence-based treatment optimization for {optimization_focus_areas}
+    - Patient-centered care coordination covering {coordination_focus}
+    - Quality improvement and outcomes measurement for {quality_metrics_focus}
+    - {professional_development_elements}
+    
+    Include learning objectives and {continuing_education_type} elements.
+    
+    Target audience: {professional_audience_level}
+    Educational format: {professional_education_format}
+    CME category: {cme_category}
+    Learning level: {professional_learning_level}
+  expected_output: >
+    A professional medical education podcast script featuring:
+    1. Learning objectives and {continuing_education_credits} information
+    2. Expert host introductions and credentials for {expert_credential_areas}
+    3. Case-based learning introduction covering {case_learning_focus}
+    4. {provider_type}-{provider_type} consultation dialogue for {dialogue_duration}
+    5. Clinical pearl segments about {clinical_pearl_topics}
+    6. Evidence-based practice discussions covering {evidence_discussion_scope}
+    7. Technology integration insights for {technology_insight_areas}
+    8. Care coordination strategies covering {coordination_strategy_scope}
+    9. Quality metrics and outcomes for {quality_outcome_measures}
+    10. Key takeaways and action items for {takeaway_categories}
+    11. {continuing_education_assessment} quiz questions
+    12. Professional development resources covering {development_resource_areas}
+    
+    Educational rigor: {professional_education_depth}
+    CME compliance: {cme_compliance_level}
+    Target duration: {professional_podcast_length}
+  agent: podcast_script_generator
+  context: [create_doctor_doctor_consultation, validate_medical_compliance]
+  output_file: "{patient_id}_{professional_podcast_type}_education_script.{file_extension}"
+  human_input: {require_professional_review}
+
+final_quality_review:
+  description: >
+    Conduct comprehensive final review of all generated medical podcast content for clinical accuracy, 
+    educational value, and professional standards applicable to {quality_review_scope}.
+    
+    Perform:
+    - Clinical fact-checking against {clinical_guideline_sources}
+    - Educational content assessment using {educational_assessment_criteria}
+    - Professional communication review per {professional_review_standards}
+    - Technical accuracy verification for {technical_verification_scope}
+    - Audience appropriateness evaluation for {audience_appropriateness_criteria}
+    - Content flow and engagement analysis using {engagement_analysis_method}
+    - Final compliance confirmation for {final_compliance_scope}
+    - {additional_quality_checks}
+    
+    Provide final approval and recommendations for content publication in {publication_context}.
+    
+    Review standards: {quality_review_framework}
+    Approval criteria: {approval_criteria_set}
+    Quality benchmarks: {quality_benchmark_standards}
+    Publication readiness: {publication_readiness_requirements}
+  expected_output: >
+    A final quality assurance report containing:
+    1. Clinical accuracy verification results for {accuracy_verification_scope}
+    2. Educational value assessment scores using {educational_scoring_method}
+    3. Professional standards compliance check for {professional_standards_scope}
+    4. Content engagement and flow evaluation per {engagement_evaluation_criteria}
+    5. Technical medical accuracy confirmation for {technical_accuracy_scope}
+    6. Audience appropriateness ratings for {audience_rating_categories}
+    7. Identified areas for improvement in {improvement_categories}
+    8. Final publication recommendations for {publication_recommendation_scope}
+    9. Quality score and approval status using {quality_scoring_system}
+    10. Post-publication monitoring suggestions for {monitoring_suggestion_areas}
+    
+    Overall quality score: {final_quality_rating}
+    Publication approval: {publication_approval_status}
+    Recommended improvements: {improvement_recommendation_list}
+  agent: quality_assurance_reviewer
+  context: [generate_podcast_script_patient_education, generate_podcast_script_professional_education]
+  output_file: "{patient_id}_{content_category}_final_quality_report.{file_extension}"
+  human_input: {require_final_approval}

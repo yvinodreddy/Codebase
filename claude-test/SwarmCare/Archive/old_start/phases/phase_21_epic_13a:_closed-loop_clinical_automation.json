@@ -1,0 +1,31 @@
+{
+  "phase_id": 21,
+  "name": "Epic 13A: Closed-Loop Clinical Automation",
+  "epic": "Epic 13A",
+  "story_points": 13,
+  "priority": "P0",
+  "dependencies": [
+    12
+  ],
+  "version": "v2.1",
+  "user_stories": [
+    {
+      "story_id": "13A.1",
+      "title": "Automated Order Suggestions (CPOE Integration)",
+      "story_points": 5,
+      "priority": "P0"
+    },
+    {
+      "story_id": "13A.2",
+      "title": "Automated Medication Dose Adjustments",
+      "story_points": 5,
+      "priority": "P0"
+    },
+    {
+      "story_id": "13A.3",
+      "title": "Automated Alert Mitigation Actions",
+      "story_points": 3,
+      "priority": "P0"
+    }
+  ]
+}

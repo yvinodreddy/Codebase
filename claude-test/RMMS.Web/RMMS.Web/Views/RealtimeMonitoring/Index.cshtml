@@ -1,0 +1,242 @@
+@model List<RMMS.Models.Monitoring.RealtimeMetric>
+@{
+    ViewData["Title"] = "Real-time System Monitoring";
+}
+
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col-12">
+            <h2><i class="fas fa-tachometer-alt"></i> Real-time System Monitoring</h2>
+            <p class="text-muted">Monitor system performance, connections, and real-time metrics</p>
+        </div>
+    </div>
+
+    <!-- SYSTEM HEALTH OVERVIEW -->
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card bg-@ViewBag.HealthStatusClass text-white">
+                <div class="card-body text-center">
+                    <h3>
+                        <i class="fas fa-heartbeat"></i> System Status: @ViewBag.HealthStatus
+                    </h3>
+                    <p class="mb-0">
+                        Uptime: @ViewBag.Uptime | Load: @ViewBag.LoadLevel | Avg Latency: @ViewBag.AverageLatency ms
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONNECTION & PERFORMANCE METRICS -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card bg-primary text-white">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="fas fa-network-wired"></i> Active Connections</h5>
+                    <h2>@ViewBag.ActiveConnections</h2>
+                    <small>Peak: @ViewBag.PeakConnections</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-info text-white">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="fas fa-memory"></i> Memory Usage</h5>
+                    <h2>@ViewBag.CurrentMemoryMB MB</h2>
+                    <small>Working set</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-success text-white">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="fas fa-clock"></i> Uptime</h5>
+                    <h2>@ViewBag.Uptime</h2>
+                    <small>Since start</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-warning text-white">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="fas fa-microchip"></i> CPU Time</h5>
+                    <h2>@ViewBag.TotalProcessorTime s</h2>
+                    <small>Total processor time</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- LATENCY METRICS -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="text-muted">Average Latency</h6>
+                    <h3 class="text-primary">@ViewBag.AverageLatency ms</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="text-muted">Min Latency</h6>
+                    <h3 class="text-success">@ViewBag.MinLatency ms</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="text-muted">Max Latency</h6>
+                    <h3 class="text-danger">@ViewBag.MaxLatency ms</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="text-muted">Load Level</h6>
+                    <h3 class="@(ViewBag.LoadLevel == "Low" ? "text-success" : ViewBag.LoadLevel == "Medium" ? "text-warning" : "text-danger")">
+                        @ViewBag.LoadLevel
+                    </h3>
+                    <small>@ViewBag.RequestsPerMinute req/min</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ACTIVITY METRICS -->
+    <div class="row mb-4">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="text-muted">Recent Metrics (5 min)</h6>
+                    <h3 class="text-info">@ViewBag.RecentMetricsCount</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="text-muted">Hourly Metrics</h6>
+                    <h3 class="text-primary">@ViewBag.HourlyMetricsCount</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="text-muted">Total Metrics</h6>
+                    <h3 class="text-success">@ViewBag.TotalMetrics</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- METRIC TYPE BREAKDOWN -->
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="text-muted">Metric Type Breakdown</h6>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5>Metric Types: <span class="badge bg-primary">@ViewBag.MetricTypes</span></h5>
+                        </div>
+                        <div class="col-md-6">
+                            <h5>Top Type: <span class="badge bg-success">@ViewBag.TopMetricType</span> (@ViewBag.TopMetricTypeCount)</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ACTION BUTTONS -->
+    <div class="row mb-3">
+        <div class="col-12">
+            <a href="@Url.Action("GetConnectionStats", "RealtimeMonitoring")" class="btn btn-primary" target="_blank">
+                <i class="fas fa-network-wired"></i> Connection Stats
+            </a>
+            <a href="@Url.Action("GetPerformanceMetrics", "RealtimeMonitoring")" class="btn btn-info" target="_blank">
+                <i class="fas fa-chart-line"></i> Performance Metrics
+            </a>
+            <a href="@Url.Action("GetRealtimeData", "RealtimeMonitoring")" class="btn btn-success" target="_blank">
+                <i class="fas fa-stream"></i> Realtime Data
+            </a>
+            <a href="@Url.Action("GetSystemHealth", "RealtimeMonitoring")" class="btn btn-warning" target="_blank">
+                <i class="fas fa-heartbeat"></i> System Health
+            </a>
+            <form method="post" asp-action="ClearOldMetrics" style="display: inline;">
+                <button type="submit" class="btn btn-secondary" onclick="return confirm('Clear metrics older than 60 minutes?');">
+                    <i class="fas fa-trash"></i> Clear Old Metrics
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- METRICS TABLE -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header bg-light">
+                    <h5 class="mb-0"><i class="fas fa-list"></i> Recent Metrics (@Model.Count)</h5>
+                </div>
+                <div class="card-body">
+                    @if (Model.Any())
+                    {
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Metric Type</th>
+                                        <th>Value</th>
+                                        <th>Timestamp</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var metric in Model)
+                                    {
+                                        var valueClass = metric.Value < 100 ? "success"
+                                                       : metric.Value < 500 ? "warning"
+                                                       : "danger";
+                                        <tr>
+                                            <td><span class="badge bg-primary">@metric.MetricType</span></td>
+                                            <td><span class="badge bg-@valueClass">@metric.Value.ToString("F2")</span></td>
+                                            <td>@metric.CreatedDate.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                                            <td><span class="badge bg-@(metric.IsActive ? "success" : "secondary")">@(metric.IsActive ? "Active" : "Inactive")</span></td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle"></i> No metrics recorded yet.
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["Success"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        @TempData["Error"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}

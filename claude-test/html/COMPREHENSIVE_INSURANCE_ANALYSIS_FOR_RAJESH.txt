@@ -1,0 +1,630 @@
+================================================================================
+        COMPREHENSIVE HEALTH INSURANCE ANALYSIS FOR RAJESH GUPTA
+          Paragroup LLC - October 2025 Coverage Options Analysis
+================================================================================
+
+EXECUTIVE SUMMARY
+================================================================================
+After extensive research and quotes from 3 insurance agents (Chuck Hackel,
+Jolly Luthra, Adriana Molina), we have identified significant cost savings
+opportunities. The BEST option can save up to $5,600-$20,000 per year compared
+to small group insurance.
+
+KEY FINDING: Individual Marketplace insurance is SIGNIFICANTLY CHEAPER than
+small group business insurance, even without subsidies.
+
+EMPLOYEE INFORMATION
+================================================================================
+Employee:       Rajesh Kumar Gupta
+DOB:            June 21, 1981 (Age 44)
+Status:         H-1B visa (sponsored by Paragroup LLC)
+Spouse:         Sonali Kiran, DOB: Nov 11, 1992 (Age 32, H-4 visa)
+Child 1:        Hridhaan Gupta, DOB: Apr 16, 2016 (Age 9, H-4 visa)
+Child 2:        Kevit Gupta, DOB: Jul 3, 2024 (Age 1, US citizen)
+Location:       Basking Ridge, NJ 07920
+Annual Income:  $132,000
+
+Current Plan:   Anthem BCBS PPO - $645/month (ending Oct 31, 2025)
+                Employer contribution: $210/month (33%)
+                Employee pays: $435/month (67%)
+
+CRITICAL DISCOVERY: H-1B AFFORDABILITY RULE
+================================================================================
+Since Paragroup LLC sponsors Rajesh's H-1B visa, he MAY qualify for Marketplace
+premium tax credits if employer-sponsored coverage is "unaffordable."
+
+ACA Affordability Threshold: 9.12% of household income
+For Rajesh: $132,000 × 9.12% = $12,038/year = $1,003/month
+
+If Rajesh's share of group insurance costs MORE than $1,003/month, he qualifies
+for subsidies even though he is H-1B!
+
+
+================================================================================
+OPTION 1: INDIVIDUAL MARKETPLACE WITH SUBSIDIES (BEST VALUE IF QUALIFIED)
+================================================================================
+
+Plan:           AmeriHealth Silver EPO
+Monthly Premium: $1,586 (full price without subsidy)
+Subsidy Amount: $866/month (IF qualified due to unaffordable employer coverage)
+Net Cost:       $720/month
+
+COVERAGE DETAILS:
+    Deductible:             $2,500 individual / $5,000 family
+    Out-of-Pocket Maximum:  $9,000 individual / $18,000 family
+    Primary Care Copay:     $25
+    Specialist Copay:       $60
+    Coinsurance:            80/20
+    Plan Type:              EPO (in-network only)
+
+COST BREAKDOWN WITH SUBSIDY:
+    Total Premium:          $720/month
+    Company Contribution:   $0 (not required)
+    Rajesh Pays:            $720/month
+
+ANNUAL COST WITH SUBSIDY: $8,640/year
+
+DOCTORS ACCEPTED:
+    ✓ Dr. Mary Catherine Lare (IF in AmeriHealth network)
+    ✓ UnitedHealthcare network doctors
+    ✓ AmeriHealth network doctors
+    ✗ Oscar, Horizon, Aetna doctors (outside network)
+
+
+================================================================================
+OPTION 2: INDIVIDUAL MARKETPLACE WITHOUT SUBSIDIES (GOOD VALUE)
+================================================================================
+
+Plan:           AmeriHealth Silver EPO
+Monthly Premium: $1,586 (no subsidies available for H-1B)
+Subsidy:        $0 (does not qualify)
+Net Cost:       $1,586/month
+
+COVERAGE DETAILS:
+    Deductible:             $2,500 individual / $5,000 family
+    Out-of-Pocket Maximum:  $9,000 individual / $18,000 family
+    Primary Care Copay:     $25
+    Specialist Copay:       $60
+    Coinsurance:            80/20
+    Plan Type:              EPO (in-network only)
+
+COST BREAKDOWN WITHOUT SUBSIDY:
+    Total Premium:          $1,586/month
+    Company Contribution:   $0-159/month (optional ICHRA*)
+    Rajesh Pays:            $1,427-1,586/month
+
+ANNUAL COST WITHOUT SUBSIDY: $19,032/year
+
+*ICHRA = Individual Coverage Health Reimbursement Arrangement
+ Allows company to reimburse employee's premium tax-free
+
+DOCTORS ACCEPTED:
+    ✓ Dr. Mary Catherine Lare (IF in AmeriHealth network)
+    ✓ UnitedHealthcare network doctors
+    ✓ AmeriHealth network doctors
+
+
+================================================================================
+OPTION 3: SMALL GROUP BUSINESS INSURANCE (MOST EXPENSIVE)
+================================================================================
+
+Source: Chuck Hackel (Northwestern Mutual)
+
+PLAN A - AmeriHealth Silver EPO (Lowest Cost Small Group)
+Monthly Premium: $2,053/month
+Employer (10%):  $205/month
+Employee (90%):  $1,848/month
+
+COVERAGE DETAILS:
+    Deductible:             $2,500 individual / $5,000 family
+    Out-of-Pocket Maximum:  $9,200 individual / $18,400 family
+    Primary Care Copay:     Tier 1: $30 | Tier 2: $50 (after deductible)
+    Specialist Copay:       Tier 1: $60 | Tier 2: $75 (after deductible)
+    Coinsurance:            80/20
+    Plan Type:              EPO (in-network only)
+    Network:                AmeriHealth Advantage RP EPO
+
+ANNUAL COST: $24,636/year ($205 × 12 for company + $1,848 × 12 for employee)
+
+
+PLAN B - UHC Oxford Metro EPO
+Monthly Premium: $2,198/month
+Employer (10%):  $220/month
+Employee (90%):  $1,978/month
+
+COVERAGE DETAILS:
+    Deductible:             $3,000 individual / $6,000 family
+    Out-of-Pocket Maximum:  $8,700 individual / $17,400 family
+    Primary Care Copay:     $40
+    Specialist Copay:       $70
+    Coinsurance:            80/20
+    Plan Type:              EPO (in-network only)
+
+ANNUAL COST: $26,376/year
+
+
+PLAN C - Horizon OMNIA Silver Value
+Monthly Premium: $2,213/month
+Employer (10%):  $221/month
+Employee (90%):  $1,992/month
+
+COVERAGE DETAILS:
+    Deductible:             $2,500 individual / $5,000 family
+    Out-of-Pocket Maximum:  $9,100 individual / $18,200 family
+    Primary Care Copay:     $35
+    Specialist Copay:       $65
+    Coinsurance:            80/20
+    Plan Type:              EPO (in-network only)
+
+ANNUAL COST: $26,556/year
+
+
+PLAN D - Horizon OMNIA Silver (Standard)
+Monthly Premium: $2,454/month
+Employer (10%):  $245/month
+Employee (90%):  $2,209/month
+
+COVERAGE DETAILS:
+    Deductible:             $2,000 individual / $4,000 family
+    Out-of-Pocket Maximum:  $8,500 individual / $17,000 family
+    Primary Care Copay:     $30
+    Specialist Copay:       $60
+    Coinsurance:            80/20
+    Plan Type:              EPO (in-network only)
+
+ANNUAL COST: $29,448/year
+
+
+PLAN E - AmeriHealth Gold Local Value
+Monthly Premium: $2,484/month
+Employer (10%):  $248/month
+Employee (90%):  $2,236/month
+
+COVERAGE DETAILS:
+    Deductible:             $1,500 individual / $3,000 family
+    Out-of-Pocket Maximum:  $7,900 individual / $15,800 family
+    Primary Care Copay:     $25
+    Specialist Copay:       $50
+    Coinsurance:            80/20
+    Plan Type:              EPO (in-network only)
+
+ANNUAL COST: $29,808/year
+
+
+PLAN F - Horizon Advantage EPO Silver
+Monthly Premium: $2,797/month
+Employer (10%):  $280/month
+Employee (90%):  $2,517/month
+
+COVERAGE DETAILS:
+    Deductible:             $2,750 individual / $5,500 family
+    Out-of-Pocket Maximum:  $9,200 individual / $18,400 family
+    Primary Care Copay:     $40
+    Specialist Copay:       $70
+    Coinsurance:            80/20
+    Plan Type:              EPO (in-network only)
+
+ANNUAL COST: $33,564/year
+
+
+PLAN G - Horizon OMNIA Gold
+Monthly Premium: $2,838/month
+Employer (10%):  $284/month
+Employee (90%):  $2,554/month
+
+COVERAGE DETAILS:
+    Deductible:             $1,500 individual / $3,000 family
+    Out-of-Pocket Maximum:  $7,900 individual / $15,800 family
+    Primary Care Copay:     $25
+    Specialist Copay:       $50
+    Coinsurance:            80/20
+    Plan Type:              EPO (in-network only)
+
+ANNUAL COST: $34,056/year
+
+
+================================================================================
+COST COMPARISON TABLE - ALL OPTIONS
+================================================================================
+
+Plan                        Monthly    Company    Employee   Annual
+                            Premium    Pays(10%)  Pays(90%)  Cost
+--------------------------------------------------------------------------------
+Individual w/ Subsidy       $1,586     $0         $720       $8,640   ⭐BEST
+Individual No Subsidy       $1,586     $0-159     $1,427     $17,124-19,032
+Small Group: AmeriHealth    $2,053     $205       $1,848     $24,636
+Small Group: UHC Oxford     $2,198     $220       $1,978     $26,376
+Small Group: Horizon Value  $2,213     $221       $1,992     $26,556
+Small Group: Horizon OMNIA  $2,454     $245       $2,209     $29,448
+Small Group: AmeriHealth Gold $2,484   $248       $2,236     $29,808
+Small Group: Horizon Adv    $2,797     $280       $2,517     $33,564
+Small Group: Horizon Gold   $2,838     $284       $2,554     $34,056
+
+
+ANNUAL SAVINGS COMPARISON:
+--------------------------------------------------------------------------------
+vs. Current Anthem ($645/month × 12 = $7,740/year):
+    Individual w/ Subsidy:     +$900 MORE per year
+    Individual No Subsidy:     +$9,284-11,292 MORE per year
+    Small Group (cheapest):    +$16,896 MORE per year
+
+vs. Small Group Insurance (cheapest at $24,636/year):
+    Individual w/ Subsidy:     SAVES $15,996 per year ⭐
+    Individual No Subsidy:     SAVES $5,604-7,512 per year
+
+
+================================================================================
+IMPORTANT CONSIDERATIONS
+================================================================================
+
+1. DOCTOR NETWORK STATUS
+--------------------------------------------------------------------------------
+   Dr. Mary Catherine Lare, DO
+   Address: 18 Lyons Rd, Suite 101, Basking Ridge, NJ 07920
+   Phone: 973-379-2111
+
+   Network Acceptance (per Jolly Luthra):
+   ✓ UnitedHealthcare - IN NETWORK
+   ✓ AmeriHealth - IN NETWORK
+   ✗ Oscar - NOT IN NETWORK
+   ✗ Horizon BCBS - NOT IN NETWORK (database shows "permanently closed")
+   ✗ Aetna CVS - NOT IN NETWORK
+
+   NOTE: Chuck Hackel's system shows Dr. Lare's office as "permanently closed"
+   but she may have moved or database is outdated. VERIFY BEFORE CHOOSING PLAN.
+
+   **RECOMMENDATION IF DR. LARE IS NOT MANDATORY:**
+   You have more carrier options available. Consider:
+   - Horizon plans (often competitive pricing)
+   - Oscar plans (tech-forward, good reviews)
+
+   If willing to change doctors, this opens up more competitive options.
+
+
+2. H-1B VISA CONSIDERATIONS
+--------------------------------------------------------------------------------
+   ✓ H-1B visa holders CAN get group or individual insurance
+   ✓ Pre-existing conditions are covered (ACA protection)
+   ✓ H-1B visa holders USUALLY cannot get subsidies
+
+   ✗ EXCEPTION: If employer coverage is "unaffordable" (>9.12% of income)
+                 AND the employer sponsors the H-1B visa
+                 THEN the H-1B holder may qualify for subsidies
+
+   For Rajesh:
+   - Income: $132,000
+   - Affordability threshold: $1,003/month
+   - Cheapest small group employee cost: $1,848/month
+   - Since $1,848 > $1,003, employer coverage is "UNAFFORDABLE"
+   - Therefore: Rajesh MAY qualify for $866/month subsidy!
+
+   **ACTION REQUIRED:** Adriana Molina is verifying this. Await her confirmation.
+
+
+3. TAX BENEFITS COMPARISON
+--------------------------------------------------------------------------------
+   Small Group Insurance:
+   ✓ Employee pays premium PRE-TAX through payroll
+   ✓ Saves ~30% in taxes ($554/month on $1,848 premium)
+   ✓ Net cost to Rajesh: ~$1,294/month after tax savings
+   ✓ Company contribution is tax-deductible
+
+   Individual Marketplace (without ICHRA):
+   ✗ Employee pays premium AFTER-TAX
+   ✗ No payroll deduction benefit
+   ✓ May still be cheaper overall due to lower premium
+
+   Individual Marketplace (with ICHRA):
+   ✓ Company reimburses employee TAX-FREE
+   ✓ Employee gets lower premium + tax benefit
+   ✓ Company gets business tax deduction
+   ✓ BEST OF BOTH WORLDS
+
+   **RECOMMENDATION:** If going individual route, set up ICHRA to get tax benefits.
+
+
+4. ICHRA (Individual Coverage HRA) OPTION
+--------------------------------------------------------------------------------
+   What is ICHRA?
+   - Allows company to reimburse employee's individual insurance premium
+   - Reimbursement is TAX-FREE to employee
+   - Reimbursement is TAX-DEDUCTIBLE for company
+   - Legal for H-1B visa holders
+   - No minimum or maximum reimbursement amount
+
+   How it works for Rajesh:
+   1. Rajesh buys individual insurance: $1,586/month
+   2. Company reimburses him: $159/month (10%)
+   3. Rajesh's net cost: $1,427/month
+   4. Company's cost: $159/month
+
+   Benefits:
+   ✓ Lower premium than small group
+   ✓ Tax-free reimbursement for Rajesh
+   ✓ Tax deduction for company
+   ✓ Saves ~$46/month vs. small group ($552/year)
+
+   **ACTION REQUIRED:** Consult with accountant to set up ICHRA correctly.
+
+
+5. PROS AND CONS OF EACH APPROACH
+--------------------------------------------------------------------------------
+   INDIVIDUAL MARKETPLACE WITH SUBSIDIES:
+   Pros:
+   ✓ CHEAPEST option ($720/month vs $1,848+ for group)
+   ✓ Saves $1,128+ per month vs. small group
+   ✓ Same quality coverage (Silver tier, AmeriHealth)
+   ✓ No company contribution required
+
+   Cons:
+   ✗ Must verify Rajesh qualifies for subsidy (affordability rule)
+   ✗ Employee pays after-tax (unless ICHRA set up)
+   ✗ Less "professional" employer benefit image
+
+
+   INDIVIDUAL MARKETPLACE WITHOUT SUBSIDIES:
+   Pros:
+   ✓ Still $467/month cheaper than small group
+   ✓ Better copays ($25 PCP vs $30-50 for group)
+   ✓ Lower out-of-pocket max ($9,000 vs $9,200+ for group)
+   ✓ Can add ICHRA for tax benefits
+   ✓ No doctor restriction if not in network
+
+   Cons:
+   ✗ Employee pays after-tax (unless ICHRA set up)
+   ✗ More expensive than subsidized option
+   ✗ Less "professional" benefit image
+
+
+   SMALL GROUP BUSINESS INSURANCE:
+   Pros:
+   ✓ Professional employer benefit
+   ✓ Pre-tax payroll deduction for employee
+   ✓ Good for H-1B visa documentation
+   ✓ Easier administration through payroll
+   ✓ Multiple carrier options
+
+   Cons:
+   ✗ MUCH MORE EXPENSIVE ($467-1,128/month more)
+   ✗ Company MUST contribute 10% minimum ($205+/month)
+   ✗ Higher out-of-pocket maximums
+   ✗ Worse copays (after deductible on some plans)
+   ✗ Limited doctor network per plan
+
+
+================================================================================
+RECOMMENDATIONS
+================================================================================
+
+OPTION 1 (BEST): INDIVIDUAL MARKETPLACE WITH SUBSIDIES - IF QUALIFIED
+--------------------------------------------------------------------------------
+Monthly Cost:  $720 for Rajesh | $0 for company
+Annual Cost:   $8,640 total
+Annual Savings: $15,996 vs. small group | -$900 vs. current Anthem
+
+STEPS TO IMPLEMENT:
+1. ✓ Confirm with Adriana Molina that Rajesh qualifies for subsidies
+     (employer coverage is unaffordable + Paragroup sponsors H-1B)
+2. ✓ Have Rajesh enroll in AmeriHealth Silver EPO via GetCoveredNJ marketplace
+3. ✓ Verify Dr. Mary Lare is in AmeriHealth network (call 973-379-2111)
+4. ✓ Coverage effective: November 1, 2025
+5. ✓ Set up ICHRA if you want to contribute (optional, not required)
+
+PROS: Lowest cost, good coverage, saves most money
+CONS: Must verify subsidy eligibility, less professional image
+
+
+OPTION 2 (GOOD): INDIVIDUAL MARKETPLACE WITHOUT SUBSIDIES + ICHRA
+--------------------------------------------------------------------------------
+Monthly Cost:  $1,427 for Rajesh | $159 for company (optional ICHRA)
+Annual Cost:   $19,032 total ($17,124 if Rajesh pays all, $19,032 with ICHRA)
+Annual Savings: $5,604 vs. small group | -$11,292 vs. current Anthem
+
+STEPS TO IMPLEMENT:
+1. ✓ Have Rajesh enroll in AmeriHealth Silver EPO via GetCoveredNJ marketplace
+2. ✓ Set up ICHRA with accountant (reimbursement agreement)
+3. ✓ Reimburse Rajesh $159/month tax-free through ICHRA
+4. ✓ Verify Dr. Mary Lare is in AmeriHealth network
+5. ✓ Coverage effective: November 1, 2025
+
+PROS: Significant savings, tax benefits with ICHRA, good coverage
+CONS: More expensive than subsidized option
+
+
+OPTION 3 (ACCEPTABLE): SMALL GROUP - AmeriHealth Silver EPO
+--------------------------------------------------------------------------------
+Monthly Cost:  $1,848 for Rajesh | $205 for company
+Annual Cost:   $24,636 total
+Annual Savings: $0 (baseline) | -$16,896 vs. current Anthem
+
+STEPS TO IMPLEMENT:
+1. ✓ Contact Chuck Hackel to start application
+2. ✓ Complete enrollment paperwork through Northwestern Mutual
+3. ✓ Set up payroll deduction for Rajesh's $1,848/month contribution
+4. ✓ Verify Dr. Mary Lare is in network (may not be per Chuck's search)
+5. ✓ Coverage effective: November 1, 2025
+
+PROS: Professional benefit, pre-tax payroll deduction, easier administration
+CONS: MOST EXPENSIVE option by far ($15,996/year more than subsidized)
+
+
+================================================================================
+DOCTOR FLEXIBILITY ANALYSIS (WITHOUT DR. LARE CONSTRAINT)
+================================================================================
+
+If Dr. Mary Catherine Lare is NOT mandatory, you have MORE options:
+
+ADDITIONAL INDIVIDUAL MARKETPLACE OPTIONS:
+--------------------------------------------------------------------------------
+1. Oscar Bronze Classic - $1,431/month (no subsidy) or $565/month (with subsidy)
+   - Lowest premium option
+   - Higher deductibles/copays
+   - Good for healthy families
+
+2. Horizon OMNIA Bronze - $1,504/month (no subsidy) or $638/month (with subsidy)
+   - New Jersey's largest insurer
+   - Extensive provider network
+   - Higher deductibles
+
+3. Oscar Silver Classic - $1,702/month (no subsidy) or $836/month (with subsidy)
+   - Tech-forward company (telemedicine, app-based)
+   - Good customer reviews
+   - Similar coverage to AmeriHealth
+
+ADDITIONAL SMALL GROUP OPTIONS:
+--------------------------------------------------------------------------------
+All 7 Chuck Hackel options are available if doctor flexibility exists.
+
+RECOMMENDATION WITHOUT DOCTOR CONSTRAINT:
+If willing to switch doctors, consider:
+- Individual: Oscar Silver Classic (subsidized: $836/month, tech-forward)
+- Small Group: Horizon OMNIA Silver Value ($2,213/month, extensive network)
+
+
+================================================================================
+IMPLEMENTATION TIMELINE
+================================================================================
+
+IMMEDIATE (Today):
+□ Confirm with Adriana whether Rajesh qualifies for subsidies
+□ Verify Dr. Mary Lare network status (call 973-379-2111)
+□ Decide: Individual vs. Small Group
+□ Consult accountant about ICHRA setup (if going individual route)
+
+WITHIN 3 DAYS (by Oct 20):
+□ Enroll Rajesh in chosen plan
+□ Complete application and submit all documents
+□ Pay first month's premium
+□ Set up ICHRA if applicable
+
+BY OCT 27:
+□ Receive approval and policy documents
+□ Obtain insurance cards (or temporary cards)
+□ Brief Rajesh on new coverage details
+
+NOV 1, 2025:
+□ New coverage effective
+□ No gap in insurance
+□ Start new premium payments
+
+
+================================================================================
+FREQUENTLY ASKED QUESTIONS
+================================================================================
+
+Q: Why is individual insurance cheaper than small group?
+A: Individual marketplace is competitive due to:
+   - Community rating (can't adjust for health)
+   - Administrative costs for employer plans
+   - Larger risk pool in individual market
+   - ACA marketplace competition
+
+Q: Can H-1B visa holders get marketplace subsidies?
+A: Usually NO, but YES if employer coverage is "unaffordable" (>9.12% of income)
+   and the employer sponsors their H-1B visa. Rajesh may qualify!
+
+Q: What is ICHRA and why should we use it?
+A: ICHRA = Individual Coverage Health Reimbursement Arrangement
+   Allows company to reimburse employee's individual insurance TAX-FREE
+   Benefits: Lower premiums + tax advantages = best of both worlds
+
+Q: Do we have to contribute if Rajesh buys individual insurance?
+A: NO. There's no legal requirement. But you can if you want to help:
+   - Option 1: No contribution ($0/month)
+   - Option 2: ICHRA contribution ($159/month = 10%)
+   - Option 3: Higher ICHRA ($300-500/month if you want to help more)
+
+Q: What if we decide not to offer health insurance at all?
+A: Legal options:
+   - You're not required to offer insurance (only 2 employees)
+   - Rajesh would buy individual insurance himself (no subsidy if not H-1B sponsored)
+   - Cost to Rajesh: $1,586/month (no employer help)
+   - Not recommended: Rajesh needs insurance and you'd likely lose him as employee
+
+Q: Which plan has the best coverage regardless of cost?
+A: Small Group: Horizon OMNIA Gold ($2,838/month)
+   - Lowest deductible: $1,500/$3,000
+   - Lowest OOP max: $7,900/$15,800
+   - Best copays: $25 PCP / $50 specialist
+   - But costs $25,416 MORE per year than subsidized individual!
+
+
+================================================================================
+FINAL RECOMMENDATION SUMMARY
+================================================================================
+
+PRIORITY 1: VERIFY SUBSIDY ELIGIBILITY
+Contact Adriana Molina immediately to confirm:
+- Does Rajesh qualify for subsidies? (affordability rule)
+- Can we officially confirm Paragroup sponsors his H-1B?
+- What documentation is needed?
+
+IF RAJESH QUALIFIES FOR SUBSIDIES (most likely):
+✅ CHOOSE: Individual Marketplace with Subsidies (AmeriHealth Silver EPO)
+✅ COST: $720/month for Rajesh, $0 for company
+✅ SAVINGS: $15,996/year vs. small group
+✅ ACTION: Enroll via GetCoveredNJ marketplace
+
+IF RAJESH DOES NOT QUALIFY FOR SUBSIDIES:
+✅ CHOOSE: Individual Marketplace + ICHRA (AmeriHealth Silver EPO)
+✅ COST: $1,427/month for Rajesh, $159/month for company (optional)
+✅ SAVINGS: $5,604/year vs. small group
+✅ ACTION: Enroll via marketplace + set up ICHRA with accountant
+
+ONLY IF INDIVIDUAL IS NOT POSSIBLE:
+✅ CHOOSE: Small Group (AmeriHealth Silver EPO)
+✅ COST: $1,848/month for Rajesh, $205/month for company
+✅ SAVINGS: $0 (most expensive option)
+✅ ACTION: Work with Chuck Hackel to enroll
+
+
+================================================================================
+CONTACTS FOR NEXT STEPS
+================================================================================
+
+Adriana Molina (Subsidy Verification & Enrollment):
+Phone: 732-915-0307
+Email: amolina.asesores@gmail.com
+Scheduled call: Friday 3:15 PM
+
+Chuck Hackel (Small Group Insurance):
+Phone: 908-997-0907
+Email: chuck.hackel@nm.com
+Company: Northwestern Mutual
+
+Jolly Luthra (Individual Marketplace):
+Phone: 732-318-5770
+Email: luthrafinancialllc@gmail.com
+Company: Luthra Financial LLC
+
+Your Accountant (ICHRA Setup):
+[Contact your accountant about Individual Coverage HRA setup]
+
+
+================================================================================
+CONCLUSION
+================================================================================
+
+The data clearly shows that INDIVIDUAL MARKETPLACE INSURANCE is significantly
+cheaper than small group insurance for Rajesh's situation, even without
+subsidies. With potential subsidies (if qualified), the savings are enormous.
+
+BEST CASE SCENARIO (with subsidies):
+Save $15,996 per year vs. small group
+Rajesh pays $720/month (vs. $1,848/month for group)
+Company pays $0/month (vs. $205/month for group)
+
+REALISTIC SCENARIO (no subsidies + ICHRA):
+Save $5,604 per year vs. small group
+Rajesh pays $1,427/month (vs. $1,848/month for group)
+Company pays $159/month (vs. $205/month for group)
+
+NEXT STEP: Confirm subsidy eligibility with Adriana Molina, then enroll
+immediately to ensure November 1 coverage.
+
+
+================================================================================
+Document prepared: October 17, 2025
+For: Vinod Yellagonda, Paragroup LLC
+Re: Health Insurance Options for Rajesh Kumar Gupta
+================================================================================

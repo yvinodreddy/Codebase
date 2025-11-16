@@ -1,0 +1,18 @@
+{
+  "instance_id": "instance_05",
+  "status": "READY",
+  "assigned_phases": [
+    1,
+    5,
+    8,
+    13,
+    15,
+    17,
+    19
+  ],
+  "total_story_points": 331,
+  "completed_story_points": 0,
+  "overall_progress": 0,
+  "phase_count": 7,
+  "percent_of_total": 30.0
+}

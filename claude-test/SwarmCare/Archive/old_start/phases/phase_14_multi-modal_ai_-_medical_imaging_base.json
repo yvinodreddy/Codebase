@@ -1,0 +1,44 @@
+{
+  "phase_id": 14,
+  "name": "Multi-modal AI - Medical Imaging (Base)",
+  "epic": "Epic 15",
+  "story_points": 76,
+  "priority": "P0",
+  "dependencies": [
+    0,
+    1
+  ],
+  "version": "v2.0",
+  "user_stories": [
+    {
+      "story_id": "15.1",
+      "title": "Chest X-Ray Analysis (Pneumonia, TB, COVID)",
+      "story_points": 21,
+      "priority": "P0"
+    },
+    {
+      "story_id": "15.2",
+      "title": "CT/MRI Brain Scan Analysis (Stroke, Hemorrhage)",
+      "story_points": 21,
+      "priority": "P0"
+    },
+    {
+      "story_id": "15.3",
+      "title": "Retinal Fundus Analysis (Diabetic Retinopathy)",
+      "story_points": 13,
+      "priority": "P1"
+    },
+    {
+      "story_id": "15.4",
+      "title": "Pathology Slide Analysis (Cancer Detection)",
+      "story_points": 13,
+      "priority": "P1"
+    },
+    {
+      "story_id": "15.5",
+      "title": "Medical Image Storage & DICOM Integration",
+      "story_points": 8,
+      "priority": "P0"
+    }
+  ]
+}

@@ -1,0 +1,203 @@
+@model List<RMMS.Models.PaddyProcurement>
+@{
+    ViewData["Title"] = "Paddy Stock Summary";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="card shadow">
+        <div class="card-header bg-info text-white">
+            <div class="row">
+                <div class="col-md-6">
+                    <h3><i class="fas fa-chart-bar"></i> Paddy Stock Summary Report</h3>
+                </div>
+                <div class="col-md-6 text-right">
+                    <button class="btn btn-light" onclick="window.print()">
+                        <i class="fas fa-print"></i> Print Report
+                    </button>
+                    <a asp-action="Index" asp-controller="PaddyProcurement" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Back to Stock Summary
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <div class="row mb-4">
+                <div class="col-md-12">
+                    <h5>Report Date: @DateTime.Now.ToString("dd-MMM-yyyy")</h5>
+                </div>
+            </div>
+
+            @if (Model != null && Model.Any())
+            {
+                var groupedByVariety = Model.GroupBy(x => x.PaddyVariety);
+                decimal totalStock = Model.Sum(x => x.ClosingStock ?? 0);
+                decimal totalReceived = Model.Sum(x => x.QuantityReceived);
+                decimal totalIssues = Model.Sum(x => x.Issues ?? 0);
+
+                <!-- Summary Cards -->
+                <div class="row mb-4">
+                    <div class="col-md-4">
+                        <div class="card bg-success text-white">
+                            <div class="card-body">
+                                <h6><i class="fas fa-arrow-down"></i> Total Received</h6>
+                                <h3>@totalReceived.ToString("N2") kg</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card bg-warning text-white">
+                            <div class="card-body">
+                                <h6><i class="fas fa-arrow-up"></i> Total Issues</h6>
+                                <h3>@totalIssues.ToString("N2") kg</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card bg-primary text-white">
+                            <div class="card-body">
+                                <h6><i class="fas fa-warehouse"></i> Current Stock</h6>
+                                <h3>@totalStock.ToString("N2") kg</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Variety-wise Stock Summary -->
+                <h4 class="mb-3">Variety-wise Stock Summary</h4>
+                <div class="table-responsive mb-4">
+                    <table class="table table-bordered table-striped">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Paddy Variety</th>
+                                <th>Total Received (kg)</th>
+                                <th>Total Issues (kg)</th>
+                                <th>Current Stock (kg)</th>
+                                <th>Number of Entries</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var varietyGroup in groupedByVariety.OrderBy(g => g.Key))
+                            {
+                                var varietyReceived = varietyGroup.Sum(x => x.QuantityReceived);
+                                var varietyIssues = varietyGroup.Sum(x => x.Issues ?? 0);
+                                var varietyStock = varietyGroup.Sum(x => x.ClosingStock ?? 0);
+                                var entryCount = varietyGroup.Count();
+
+                                <tr>
+                                    <td><strong>@varietyGroup.Key</strong></td>
+                                    <td class="text-success">@varietyReceived.ToString("N2")</td>
+                                    <td class="text-warning">@varietyIssues.ToString("N2")</td>
+                                    <td class="text-primary"><strong>@varietyStock.ToString("N2")</strong></td>
+                                    <td>@entryCount</td>
+                                </tr>
+                            }
+                        </tbody>
+                        <tfoot class="table-secondary">
+                            <tr>
+                                <th>TOTAL</th>
+                                <th class="text-success">@totalReceived.ToString("N2")</th>
+                                <th class="text-warning">@totalIssues.ToString("N2")</th>
+                                <th class="text-primary"><strong>@totalStock.ToString("N2")</strong></th>
+                                <th>@Model.Count</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+
+                <!-- Storage Location Summary -->
+                var groupedByLocation = Model.Where(x => !string.IsNullOrEmpty(x.StorageLocation))
+                                              .GroupBy(x => x.StorageLocation);
+
+                if (groupedByLocation.Any())
+                {
+                    <h4 class="mb-3">Storage Location Summary</h4>
+                    <div class="table-responsive mb-4">
+                        <table class="table table-bordered table-striped">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>Storage Location</th>
+                                    <th>Total Stock (kg)</th>
+                                    <th>Number of Varieties</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var locationGroup in groupedByLocation.OrderBy(g => g.Key))
+                                {
+                                    var locationStock = locationGroup.Sum(x => x.ClosingStock ?? 0);
+                                    var varietyCount = locationGroup.Select(x => x.PaddyVariety).Distinct().Count();
+
+                                    <tr>
+                                        <td><strong>@locationGroup.Key</strong></td>
+                                        <td class="text-primary">@locationStock.ToString("N2")</td>
+                                        <td>@varietyCount</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+
+                <!-- Detailed Stock Ledger -->
+                <h4 class="mb-3">Detailed Stock Ledger</h4>
+                <div class="table-responsive">
+                    <table class="table table-sm table-bordered table-hover">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Date</th>
+                                <th>Voucher No</th>
+                                <th>Supplier</th>
+                                <th>Variety</th>
+                                <th>Grade</th>
+                                <th>Opening</th>
+                                <th>Received</th>
+                                <th>Issues</th>
+                                <th>Closing</th>
+                                <th>Location</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.OrderBy(x => x.ReceiptDate))
+                            {
+                                <tr>
+                                    <td>@item.ReceiptDate.ToString("dd-MMM-yyyy")</td>
+                                    <td>@item.VoucherNumber</td>
+                                    <td>@item.SupplierName</td>
+                                    <td>@item.PaddyVariety</td>
+                                    <td>@(item.Grade ?? "-")</td>
+                                    <td>@(item.OpeningStock?.ToString("N2") ?? "0.00")</td>
+                                    <td class="text-success">@item.QuantityReceived.ToString("N2")</td>
+                                    <td class="text-danger">@(item.Issues?.ToString("N2") ?? "0.00")</td>
+                                    <td class="text-primary"><strong>@(item.ClosingStock?.ToString("N2") ?? "0.00")</strong></td>
+                                    <td>@(item.StorageLocation ?? "-")</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-info text-center">
+                    <i class="fas fa-info-circle fa-3x mb-3"></i>
+                    <h5>No Stock Data Available</h5>
+                    <p>There are no paddy procurement records to generate the stock summary.</p>
+                    <a asp-action="Create" class="btn btn-primary">Add First Procurement</a>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<style>
+    @@media print {
+        .btn, .card-header .col-md-6:last-child {
+            display: none;
+        }
+        .card {
+            border: none;
+            box-shadow: none;
+        }
+    }
+</style>

@@ -1,0 +1,103 @@
+@model List<RMMS.Models.PaddyProcurement>
+@{
+    ViewData["Title"] = "Paddy Procurement Records";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="ms-card">
+    <div class="ms-card-header" style="display: flex; justify-content: space-between; align-items: center;">
+        <h2 class="ms-card-title" style="margin: 0;">
+            <i class="fas fa-wheat"></i> Paddy Procurement Records
+        </h2>
+        <div style="display: flex; gap: 8px;">
+            <a asp-action="Create" class="ms-btn ms-btn-primary">
+                <i class="fas fa-plus"></i> New Procurement
+            </a>
+            <a asp-action="StockSummary" asp-controller="PaddyProcurement" class="ms-btn ms-btn-secondary">
+                <i class="fas fa-chart-bar"></i> Stock Summary
+            </a>
+        </div>
+    </div>
+
+    <div class="ms-card-body">
+        <div class="table-responsive">
+            <table class="ms-datatable table table-striped table-hover" data-export="true" data-page-length="25">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Receipt Date</th>
+                        <th>Supplier Name</th>
+                        <th>Paddy Variety</th>
+                        <th>Grade</th>
+                        <th>Quantity Received (Kg)</th>
+                        <th>Net Weight (Kg)</th>
+                        <th>Storage Location</th>
+                        <th>Moisture %</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.Any())
+                    {
+                        foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.Id</td>
+                                <td data-order="@item.ReceiptDate.ToString("yyyyMMdd")">
+                                    @item.ReceiptDate.ToString("dd-MMM-yyyy")
+                                </td>
+                                <td><strong>@item.SupplierName</strong></td>
+                                <td>@item.PaddyVariety</td>
+                                <td>
+                                    @if (!string.IsNullOrEmpty(item.Grade))
+                                    {
+                                        <span class="ms-badge @(item.Grade == "A" ? "ms-badge-success" : item.Grade == "B" ? "ms-badge-warning" : "ms-badge-secondary")">
+                                            Grade @item.Grade
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="text-muted">-</span>
+                                    }
+                                </td>
+                                <td class="text-end">@item.QuantityReceived.ToString("N2")</td>
+                                <td class="text-end"><strong>@item.TotalNetWeight.ToString("N2")</strong></td>
+                                <td>@(item.StorageLocation ?? "-")</td>
+                                <td class="text-end">@(item.MoistureContent?.ToString("N1") ?? "-")%</td>
+                                <td>
+                                    <div class="ms-action-buttons">
+                                        <a asp-action="Details" asp-route-id="@item.Id"
+                                           class="ms-action-btn btn-view" title="View Details"
+                                           data-bs-toggle="tooltip">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                        <a asp-action="Edit" asp-route-id="@item.Id"
+                                           class="ms-action-btn btn-edit" title="Edit"
+                                           data-bs-toggle="tooltip">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a asp-action="Delete" asp-route-id="@item.Id"
+                                           class="ms-action-btn btn-delete" title="Delete"
+                                           data-bs-toggle="tooltip"
+                                           data-confirm="Are you sure you want to delete this procurement record?">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            // DataTables will be automatically initialized by site-enhanced.js
+            // Export buttons (Excel, PDF, CSV, Print) are enabled via data-export="true"
+        });
+    </script>
+}

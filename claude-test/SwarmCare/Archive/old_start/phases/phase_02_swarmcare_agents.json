@@ -1,0 +1,56 @@
+{
+  "phase_id": 2,
+  "name": "SWARMCARE Agents",
+  "epic": "Epic 3",
+  "story_points": 94,
+  "priority": "P0",
+  "dependencies": [
+    0,
+    1
+  ],
+  "version": "v1.0",
+  "user_stories": [
+    {
+      "story_id": "3.1",
+      "title": "Agent Framework Setup",
+      "story_points": 21,
+      "priority": "P0"
+    },
+    {
+      "story_id": "3.2",
+      "title": "Medical Knowledge Extractor Agent",
+      "story_points": 13,
+      "priority": "P0"
+    },
+    {
+      "story_id": "3.3",
+      "title": "Patient Case Synthesizer Agent",
+      "story_points": 13,
+      "priority": "P0"
+    },
+    {
+      "story_id": "3.4",
+      "title": "Medical Conversation Writer Agent",
+      "story_points": 13,
+      "priority": "P0"
+    },
+    {
+      "story_id": "3.5",
+      "title": "Compliance Validator Agent",
+      "story_points": 13,
+      "priority": "P0"
+    },
+    {
+      "story_id": "3.6",
+      "title": "Podcast Script Generator Agent",
+      "story_points": 13,
+      "priority": "P1"
+    },
+    {
+      "story_id": "3.7",
+      "title": "Quality Assurance Reviewer Agent",
+      "story_points": 8,
+      "priority": "P1"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+@hostname = localhost:5079
+
+### Login - Get Token First
+# @name login
+POST http://{{hostname}}/api/auth/login
+Content-Type: application/json
+
+{
+  "username": "dr.smith",
+  "password": "Doctor123!"
+}
+
+### Extract token from login response
+@token = {{login.response.body.token}}
+
+### Debug Headers
+GET http://{{hostname}}/api/auth/debug-headers
+Authorization: Bearer {{token}} 
+
+### Test Auth Endpoint
+GET http://{{hostname}}/api/auth/test-auth
+Authorization: Bearer {{token}}
+
+### Test Patient Search
+GET http://{{hostname}}/api/fhir/patient/search?name=Smith
+Authorization: Bearer {{token}}

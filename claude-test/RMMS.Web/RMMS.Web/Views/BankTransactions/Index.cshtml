@@ -1,0 +1,178 @@
+@model List<RMMS.Models.BankTransaction>
+@{
+    ViewData["Title"] = "Bank Book";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var totalDeposits = Model?.Sum(x => x.Deposits) ?? 0;
+    var totalWithdrawals = Model?.Sum(x => x.Withdrawals) ?? 0;
+    var currentBalance = totalDeposits - totalWithdrawals;
+    var transactionCount = Model?.Count ?? 0;
+}
+
+<!-- Summary Cards -->
+<div class="row mb-4">
+    <div class="col-md-3 col-sm-6 mb-3">
+        <div class="ms-card ms-stat-card">
+            <div class="ms-card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="ms-text-muted mb-2">Total Deposits</h6>
+                        <h3 class="ms-text-success mb-0">₹@totalDeposits.ToString("N0")</h3>
+                    </div>
+                    <div class="ms-stat-icon" style="background: #E8F5E9;">
+                        <i class="fas fa-arrow-down" style="color: #107C10;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6 mb-3">
+        <div class="ms-card ms-stat-card">
+            <div class="ms-card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="ms-text-muted mb-2">Total Withdrawals</h6>
+                        <h3 class="ms-text-danger mb-0">₹@totalWithdrawals.ToString("N0")</h3>
+                    </div>
+                    <div class="ms-stat-icon" style="background: #FDE7E9;">
+                        <i class="fas fa-arrow-up" style="color: #D13438;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6 mb-3">
+        <div class="ms-card ms-stat-card">
+            <div class="ms-card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="ms-text-muted mb-2">Current Balance</h6>
+                        <h3 class="ms-text-primary mb-0">₹@currentBalance.ToString("N0")</h3>
+                    </div>
+                    <div class="ms-stat-icon" style="background: #E3F2FD;">
+                        <i class="fas fa-university" style="color: #0078D4;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6 mb-3">
+        <div class="ms-card ms-stat-card">
+            <div class="ms-card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="ms-text-muted mb-2">Total Transactions</h6>
+                        <h3 class="ms-text-primary mb-0">@transactionCount</h3>
+                    </div>
+                    <div class="ms-stat-icon" style="background: #E3F2FD;">
+                        <i class="fas fa-exchange-alt" style="color: #0078D4;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Main Data Table -->
+<div class="ms-card">
+    <div class="ms-card-header" style="display: flex; justify-content: space-between; align-items: center;">
+        <h2 class="ms-card-title" style="margin: 0;">
+            <i class="fas fa-university"></i> Bank Book Register
+        </h2>
+        <div style="display: flex; gap: 8px;">
+            <a asp-action="Create" class="ms-btn ms-btn-primary">
+                <i class="fas fa-plus"></i> New Transaction
+            </a>
+        </div>
+    </div>
+
+    <div class="ms-card-body">
+        <div class="table-responsive">
+            <table class="ms-datatable table table-striped table-hover" data-export="true" data-page-length="25">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Date</th>
+                        <th>Cheque/UTR</th>
+                        <th>Bank Name</th>
+                        <th>Account No</th>
+                        <th>Particulars</th>
+                        <th>Deposits (₹)</th>
+                        <th>Withdrawals (₹)</th>
+                        <th>Balance (₹)</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.Any())
+                    {
+                        decimal runningBalance = 0;
+                        foreach (var item in Model.OrderBy(x => x.TransactionDate))
+                        {
+                            runningBalance += (item.Deposits - item.Withdrawals);
+                            <tr>
+                                <td>@item.Id</td>
+                                <td data-order="@item.TransactionDate.ToString("yyyyMMdd")">
+                                    @item.TransactionDate.ToString("dd-MMM-yyyy")
+                                </td>
+                                <td>@item.ChequeUtrNumber</td>
+                                <td><strong>@item.BankName</strong></td>
+                                <td>@item.AccountNumber</td>
+                                <td>@item.Particulars</td>
+                                <td class="text-end">
+                                    @if (item.Deposits > 0)
+                                    {
+                                        <span class="ms-text-success"><strong>₹@item.Deposits.ToString("N2")</strong></span>
+                                    }
+                                    else
+                                    {
+                                        <span class="text-muted">-</span>
+                                    }
+                                </td>
+                                <td class="text-end">
+                                    @if (item.Withdrawals > 0)
+                                    {
+                                        <span class="ms-text-danger"><strong>₹@item.Withdrawals.ToString("N2")</strong></span>
+                                    }
+                                    else
+                                    {
+                                        <span class="text-muted">-</span>
+                                    }
+                                </td>
+                                <td class="text-end"><strong>₹@runningBalance.ToString("N2")</strong></td>
+                                <td>
+                                    <div class="ms-action-buttons">
+                                        <a asp-action="Details" asp-route-id="@item.Id"
+                                           class="ms-action-btn btn-view" title="View Details"
+                                           data-bs-toggle="tooltip">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                        <a asp-action="Edit" asp-route-id="@item.Id"
+                                           class="ms-action-btn btn-edit" title="Edit"
+                                           data-bs-toggle="tooltip">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a asp-action="Delete" asp-route-id="@item.Id"
+                                           class="ms-action-btn btn-delete" title="Delete"
+                                           data-bs-toggle="tooltip"
+                                           data-confirm="Are you sure you want to delete this bank transaction?">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            // DataTables will be automatically initialized by site-enhanced.js
+            // Export buttons (Excel, PDF, CSV, Print) are enabled via data-export="true"
+        });
+    </script>
+}

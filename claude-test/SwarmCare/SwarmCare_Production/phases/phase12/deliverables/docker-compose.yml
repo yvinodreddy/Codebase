@@ -1,0 +1,131 @@
+# Phase 12: Clinical Decision Support - Docker Compose Configuration
+# Production-ready multi-service deployment
+
+version: '3.8'
+
+services:
+  # Clinical Decision Support Service
+  clinical-decision-support:
+    build:
+      context: ..
+      dockerfile: deliverables/Dockerfile
+    container_name: clinical-decision-support
+    restart: unless-stopped
+
+    environment:
+      # Optional: Azure Content Safety (for guardrails)
+      - CONTENT_SAFETY_ENDPOINT=${CONTENT_SAFETY_ENDPOINT:-}
+      - CONTENT_SAFETY_KEY=${CONTENT_SAFETY_KEY:-}
+
+      # Logging configuration
+      - LOG_LEVEL=${LOG_LEVEL:-INFO}
+      - AUDIT_LOG_PATH=/var/log/cds/audit.log
+
+      # Performance tuning
+      - MAX_WORKERS=4
+      - REQUEST_TIMEOUT=30
+
+      # HIPAA compliance
+      - ENCRYPT_AUDIT_LOGS=true
+      - PHI_DEIDENTIFICATION=true
+
+    volumes:
+      # Persistent audit logs
+      - audit-logs:/var/log/cds
+      # Configuration
+      - ./config:/app/config:ro
+      # Data persistence
+      - cds-data:/app/data
+
+    ports:
+      - "8080:8080"
+
+    networks:
+      - clinical-network
+
+    healthcheck:
+      test: ["CMD", "python3", "-c", "from code.clinical_decision_support import assess_patient"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 4G
+        reservations:
+          cpus: '1.0'
+          memory: 2G
+
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  # Monitoring - Prometheus (optional)
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: cds-prometheus
+    restart: unless-stopped
+
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus-data:/prometheus
+
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/usr/share/prometheus/console_libraries'
+      - '--web.console.templates=/usr/share/prometheus/consoles'
+
+    ports:
+      - "9090:9090"
+
+    networks:
+      - clinical-network
+
+    profiles:
+      - monitoring
+
+  # Grafana Dashboard (optional)
+  grafana:
+    image: grafana/grafana:latest
+    container_name: cds-grafana
+    restart: unless-stopped
+
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD:-admin}
+      - GF_USERS_ALLOW_SIGN_UP=false
+
+    volumes:
+      - grafana-data:/var/lib/grafana
+      - ./grafana-dashboards:/etc/grafana/provisioning/dashboards:ro
+
+    ports:
+      - "3000:3000"
+
+    networks:
+      - clinical-network
+
+    depends_on:
+      - prometheus
+
+    profiles:
+      - monitoring
+
+volumes:
+  audit-logs:
+    driver: local
+  cds-data:
+    driver: local
+  prometheus-data:
+    driver: local
+  grafana-data:
+    driver: local
+
+networks:
+  clinical-network:
+    driver: bridge

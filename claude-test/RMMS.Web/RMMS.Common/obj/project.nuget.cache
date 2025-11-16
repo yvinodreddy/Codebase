@@ -1,0 +1,20 @@
+{
+  "version": 2,
+  "dgSpecHash": "8Flm20hMvRo1kyZBYzIqbDl8fuN4iLRqeTtKWPZK2oK2nH3l4bZU1BV+H2qmkgU54HehYmzqQe7lWFGAdX7keg==",
+  "success": true,
+  "projectFilePath": "/home/user01/claude-test/RMMS.Web/RMMS.Common/RMMS.Common.csproj",
+  "expectedPackageFiles": [
+    "/home/user01/.nuget/packages/bcrypt.net-next/4.0.3/bcrypt.net-next.4.0.3.nupkg.sha512",
+    "/home/user01/.nuget/packages/bouncycastle.cryptography/2.4.0/bouncycastle.cryptography.2.4.0.nupkg.sha512",
+    "/home/user01/.nuget/packages/closedxml/0.105.0/closedxml.0.105.0.nupkg.sha512",
+    "/home/user01/.nuget/packages/closedxml.parser/2.0.0/closedxml.parser.2.0.0.nupkg.sha512",
+    "/home/user01/.nuget/packages/documentformat.openxml/3.1.1/documentformat.openxml.3.1.1.nupkg.sha512",
+    "/home/user01/.nuget/packages/documentformat.openxml.framework/3.1.1/documentformat.openxml.framework.3.1.1.nupkg.sha512",
+    "/home/user01/.nuget/packages/excelnumberformat/1.1.0/excelnumberformat.1.1.0.nupkg.sha512",
+    "/home/user01/.nuget/packages/itextsharp/5.5.13.4/itextsharp.5.5.13.4.nupkg.sha512",
+    "/home/user01/.nuget/packages/rbush.signed/4.0.0/rbush.signed.4.0.0.nupkg.sha512",
+    "/home/user01/.nuget/packages/sixlabors.fonts/1.0.0/sixlabors.fonts.1.0.0.nupkg.sha512",
+    "/home/user01/.nuget/packages/system.io.packaging/8.0.1/system.io.packaging.8.0.1.nupkg.sha512"
+  ],
+  "logs": []
+}

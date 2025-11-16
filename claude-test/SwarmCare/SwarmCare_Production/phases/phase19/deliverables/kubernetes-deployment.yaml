@@ -1,0 +1,238 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: swarmcare-voice-ai
+  labels:
+    name: swarmcare-voice-ai
+    phase: "19"
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: voice-ai-config
+  namespace: swarmcare-voice-ai
+data:
+  ENVIRONMENT: "production"
+  LOG_LEVEL: "INFO"
+  HIPAA_COMPLIANCE: "true"
+  RETENTION_DAYS: "2555"
+
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: voice-ai-secrets
+  namespace: swarmcare-voice-ai
+type: Opaque
+stringData:
+  # Add secrets here (encryption keys, API keys, etc.)
+  ENCRYPTION_KEY: "CHANGE_ME_IN_PRODUCTION"
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: voice-ai-deployment
+  namespace: swarmcare-voice-ai
+  labels:
+    app: voice-ai
+    phase: "19"
+    version: "1.0"
+spec:
+  replicas: 3
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: voice-ai
+  template:
+    metadata:
+      labels:
+        app: voice-ai
+        phase: "19"
+        version: "1.0"
+    spec:
+      serviceAccountName: voice-ai-sa
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        fsGroup: 1000
+      containers:
+      - name: voice-ai
+        image: swarmcare/voice-ai:1.0
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
+          name: http
+          protocol: TCP
+        envFrom:
+        - configMapRef:
+            name: voice-ai-config
+        - secretRef:
+            name: voice-ai-secrets
+        resources:
+          requests:
+            cpu: 100m
+            memory: 256Mi
+          limits:
+            cpu: 500m
+            memory: 512Mi
+        livenessProbe:
+          exec:
+            command:
+            - python3
+            - verify_phase19.py
+            - --quick
+          initialDelaySeconds: 30
+          periodSeconds: 30
+          timeoutSeconds: 10
+          failureThreshold: 3
+        readinessProbe:
+          exec:
+            command:
+            - python3
+            - -c
+            - "from code.voice_ai_system import VoiceAISystem; VoiceAISystem()"
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+        volumeMounts:
+        - name: voice-data
+          mountPath: /app/data
+        - name: audit-logs
+          mountPath: /app/logs
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: false
+          capabilities:
+            drop:
+            - ALL
+      volumes:
+      - name: voice-data
+        persistentVolumeClaim:
+          claimName: voice-data-pvc
+      - name: audit-logs
+        persistentVolumeClaim:
+          claimName: audit-logs-pvc
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: voice-ai-service
+  namespace: swarmcare-voice-ai
+  labels:
+    app: voice-ai
+spec:
+  type: LoadBalancer
+  selector:
+    app: voice-ai
+  ports:
+  - port: 80
+    targetPort: 8080
+    protocol: TCP
+    name: http
+  sessionAffinity: ClientIP
+
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: voice-ai-sa
+  namespace: swarmcare-voice-ai
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: voice-data-pvc
+  namespace: swarmcare-voice-ai
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 10Gi
+  storageClassName: standard
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: audit-logs-pvc
+  namespace: swarmcare-voice-ai
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 5Gi
+  storageClassName: standard
+
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: voice-ai-hpa
+  namespace: swarmcare-voice-ai
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: voice-ai-deployment
+  minReplicas: 2
+  maxReplicas: 10
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 70
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: 80
+
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: voice-ai-pdb
+  namespace: swarmcare-voice-ai
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: voice-ai
+
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: voice-ai-network-policy
+  namespace: swarmcare-voice-ai
+spec:
+  podSelector:
+    matchLabels:
+      app: voice-ai
+  policyTypes:
+  - Ingress
+  - Egress
+  ingress:
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          name: swarmcare-ingress
+    ports:
+    - protocol: TCP
+      port: 8080
+  egress:
+  - to:
+    - namespaceSelector: {}
+    ports:
+    - protocol: TCP
+      port: 443

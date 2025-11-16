@@ -1,0 +1,161 @@
+@{
+    ViewData["Title"] = "Financial Analytics";
+    var data = ViewBag.Data as dynamic;
+    var startDate = ViewBag.StartDate as DateTime?;
+    var endDate = ViewBag.EndDate as DateTime?;
+}
+
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <h2><i class="bi bi-currency-dollar"></i> Financial Analytics</h2>
+            <p class="text-muted">Cash flow, bank transactions, and financial insights</p>
+        </div>
+        <div class="col-md-4 text-end">
+            <a href="@Url.Action("Index", "Analytics")" class="btn btn-secondary">
+                <i class="bi bi-arrow-left"></i> Back
+            </a>
+        </div>
+    </div>
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+    }
+
+    <div class="card mb-4">
+        <div class="card-body">
+            <form method="get" class="row g-3">
+                <div class="col-md-4">
+                    <label class="form-label">Start Date</label>
+                    <input type="date" name="startDate" class="form-control"
+                           value="@(startDate?.ToString("yyyy-MM-dd") ?? DateTime.Today.AddDays(-30).ToString("yyyy-MM-dd"))">
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">End Date</label>
+                    <input type="date" name="endDate" class="form-control"
+                           value="@(endDate?.ToString("yyyy-MM-dd") ?? DateTime.Today.ToString("yyyy-MM-dd"))">
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">&nbsp;</label>
+                    <button type="submit" class="btn btn-primary w-100"><i class="bi bi-search"></i> Filter</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    @if (data != null)
+    {
+        <div class="row mb-4">
+            <div class="col-md-3 mb-3">
+                <div class="card bg-success text-white">
+                    <div class="card-body">
+                        <h6>Cash Receipts</h6>
+                        <h2>₹@data.TotalCashReceipts.ToString("N0")</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="card bg-danger text-white">
+                    <div class="card-body">
+                        <h6>Cash Payments</h6>
+                        <h2>₹@data.TotalCashPayments.ToString("N0")</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="card bg-primary text-white">
+                    <div class="card-body">
+                        <h6>Cash Balance</h6>
+                        <h2>₹@data.CashBalance.ToString("N0")</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="card bg-info text-white">
+                    <div class="card-body">
+                        <h6>Bank Balance</h6>
+                        <h2>₹@data.BankBalance.ToString("N0")</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header"><h5>Recent Cash Transactions</h5></div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="ms-datatable table table-striped table-hover table-sm" data-export="true" data-page-length="16">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Particulars</th>
+                                        <th>Receipts</th>
+                                        <th>Payments</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (data.CashTransactions != null && data.CashTransactions.Count > 0)
+                                    {
+                                        @foreach (var tx in data.CashTransactions)
+                                        {
+                                            <tr>
+                                                <td>@tx.TransactionDate.ToString("dd-MMM")</td>
+                                                <td>@tx.Particulars</td>
+                                                <td class="text-success">@(tx.Receipts > 0 ? tx.Receipts.ToString("N0") : "-")</td>
+                                                <td class="text-danger">@(tx.Payments > 0 ? tx.Payments.ToString("N0") : "-")</td>
+                                            </tr>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <tr><td colspan="4" class="text-center text-muted">No transactions found</td></tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header"><h5>Recent Bank Transactions</h5></div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="ms-datatable table table-striped table-hover table-sm" data-export="true" data-page-length="16">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Bank</th>
+                                        <th>Deposits</th>
+                                        <th>Withdrawals</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (data.BankTransactions != null && data.BankTransactions.Count > 0)
+                                    {
+                                        @foreach (var tx in data.BankTransactions)
+                                        {
+                                            <tr>
+                                                <td>@tx.TransactionDate.ToString("dd-MMM")</td>
+                                                <td>@tx.BankName</td>
+                                                <td class="text-success">@(tx.Deposits > 0 ? tx.Deposits.ToString("N0") : "-")</td>
+                                                <td class="text-danger">@(tx.Withdrawals > 0 ? tx.Withdrawals.ToString("N0") : "-")</td>
+                                            </tr>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <tr><td colspan="4" class="text-center text-muted">No transactions found</td></tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

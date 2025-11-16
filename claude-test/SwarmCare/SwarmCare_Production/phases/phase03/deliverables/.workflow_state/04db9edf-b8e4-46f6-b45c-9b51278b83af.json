@@ -1,0 +1,204 @@
+{
+  "execution_id": "04db9edf-b8e4-46f6-b45c-9b51278b83af",
+  "workflow_id": "cardiac_assessment",
+  "state": "COMPLETED",
+  "tasks": {
+    "gather_cardiac_data": {
+      "task_id": "gather_cardiac_data",
+      "name": "Gather Cardiac Assessment Data",
+      "action": "gather_cardiac_data",
+      "dependencies": [],
+      "max_retries": 3,
+      "timeout_seconds": 300,
+      "state": "COMPLETED",
+      "result": {
+        "status": "success"
+      },
+      "error": null,
+      "start_time": 1761650941.6822534,
+      "end_time": 1761650941.6824927,
+      "retry_count": 0
+    },
+    "calculate_heart_score": {
+      "task_id": "calculate_heart_score",
+      "name": "Calculate HEART Score",
+      "action": "calculate_heart_score",
+      "dependencies": [
+        "gather_cardiac_data"
+      ],
+      "max_retries": 3,
+      "timeout_seconds": 300,
+      "state": "COMPLETED",
+      "result": {
+        "status": "success",
+        "heart_score": 3
+      },
+      "error": null,
+      "start_time": 1761650941.6825695,
+      "end_time": 1761650941.6827016,
+      "retry_count": 0
+    },
+    "assess_cardiac_risk": {
+      "task_id": "assess_cardiac_risk",
+      "name": "Assess Cardiac Risk Level",
+      "action": "assess_cardiac_risk",
+      "dependencies": [
+        "calculate_heart_score"
+      ],
+      "max_retries": 3,
+      "timeout_seconds": 300,
+      "state": "COMPLETED",
+      "result": {
+        "status": "success",
+        "risk_level": "LOW"
+      },
+      "error": null,
+      "start_time": 1761650941.6827533,
+      "end_time": 1761650941.683098,
+      "retry_count": 0
+    },
+    "cardiac_recommendations": {
+      "task_id": "cardiac_recommendations",
+      "name": "Generate Cardiac Recommendations",
+      "action": "generate_cardiac_recommendations",
+      "dependencies": [
+        "assess_cardiac_risk"
+      ],
+      "max_retries": 3,
+      "timeout_seconds": 300,
+      "state": "COMPLETED",
+      "result": {
+        "status": "success",
+        "recommendation_count": 4
+      },
+      "error": null,
+      "start_time": 1761650941.6834419,
+      "end_time": 1761650941.6836586,
+      "retry_count": 0
+    }
+  },
+  "context": {
+    "patient_id": "PATIENT_004",
+    "cardiac_data": {
+      "history": "moderately_suspicious",
+      "ecg": "normal",
+      "age": 55,
+      "risk_factors": 2,
+      "troponin": "normal"
+    },
+    "heart_score": {
+      "score": 3,
+      "max_score": 10,
+      "interpretation": "Low risk (1.7% MACE risk)"
+    },
+    "cardiac_assessment": {
+      "risk_level": "LOW",
+      "heart_score": 3,
+      "requires_admission": false,
+      "requires_cardiology_consult": false
+    },
+    "cardiac_recommendations": [
+      "Safe for discharge with outpatient follow-up",
+      "Primary care follow-up within 72 hours",
+      "Return precautions for worsening symptoms",
+      "Consider outpatient stress testing"
+    ]
+  },
+  "start_time": 1761650941.6820247,
+  "end_time": 1761650941.6837199,
+  "error": null,
+  "audit_log": [
+    {
+      "timestamp": "2025-10-28T07:29:01.682059",
+      "execution_id": "04db9edf-b8e4-46f6-b45c-9b51278b83af",
+      "event": "WORKFLOW_STARTED",
+      "details": {
+        "workflow_id": "cardiac_assessment"
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:29:01.682321",
+      "execution_id": "04db9edf-b8e4-46f6-b45c-9b51278b83af",
+      "event": "TASK_STARTED",
+      "details": {
+        "task_id": "gather_cardiac_data",
+        "task_name": "Gather Cardiac Assessment Data"
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:29:01.682550",
+      "execution_id": "04db9edf-b8e4-46f6-b45c-9b51278b83af",
+      "event": "TASK_COMPLETED",
+      "details": {
+        "task_id": "gather_cardiac_data",
+        "duration_seconds": 0.00023937225341796875,
+        "attempt": 1
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:29:01.682611",
+      "execution_id": "04db9edf-b8e4-46f6-b45c-9b51278b83af",
+      "event": "TASK_STARTED",
+      "details": {
+        "task_id": "calculate_heart_score",
+        "task_name": "Calculate HEART Score"
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:29:01.682737",
+      "execution_id": "04db9edf-b8e4-46f6-b45c-9b51278b83af",
+      "event": "TASK_COMPLETED",
+      "details": {
+        "task_id": "calculate_heart_score",
+        "duration_seconds": 0.00013208389282226562,
+        "attempt": 1
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:29:01.682786",
+      "execution_id": "04db9edf-b8e4-46f6-b45c-9b51278b83af",
+      "event": "TASK_STARTED",
+      "details": {
+        "task_id": "assess_cardiac_risk",
+        "task_name": "Assess Cardiac Risk Level"
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:29:01.683423",
+      "execution_id": "04db9edf-b8e4-46f6-b45c-9b51278b83af",
+      "event": "TASK_COMPLETED",
+      "details": {
+        "task_id": "assess_cardiac_risk",
+        "duration_seconds": 0.0003447532653808594,
+        "attempt": 1
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:29:01.683482",
+      "execution_id": "04db9edf-b8e4-46f6-b45c-9b51278b83af",
+      "event": "TASK_STARTED",
+      "details": {
+        "task_id": "cardiac_recommendations",
+        "task_name": "Generate Cardiac Recommendations"
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:29:01.683708",
+      "execution_id": "04db9edf-b8e4-46f6-b45c-9b51278b83af",
+      "event": "TASK_COMPLETED",
+      "details": {
+        "task_id": "cardiac_recommendations",
+        "duration_seconds": 0.0002167224884033203,
+        "attempt": 1
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:29:01.683798",
+      "execution_id": "04db9edf-b8e4-46f6-b45c-9b51278b83af",
+      "event": "WORKFLOW_COMPLETED",
+      "details": {
+        "duration_seconds": 0.0016951560974121094
+      }
+    }
+  ]
+}

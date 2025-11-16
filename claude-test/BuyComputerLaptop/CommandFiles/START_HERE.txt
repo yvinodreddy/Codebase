@@ -1,0 +1,95 @@
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                                                                              ║
+║                   VISIBLE COMMAND FILES - START HERE                         ║
+║                                                                              ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+📁 YOU ARE HERE:
+   \\wsl.localhost\Ubuntu\home\user01\claude-test\BuyComputerLaptop\CommandFiles\
+
+This folder contains COPIES of the Claude Code command files from the hidden
+.claude folder. You can view and edit these files directly in Windows!
+
+════════════════════════════════════════════════════════════════════════════════
+
+📄 FILES IN THIS FOLDER:
+
+1. laptop-comparison.md (33KB)
+   ↳ The complete reusable command for laptop comparisons
+   ↳ Contains ALL mobile-responsive fixes
+   ↳ Open with Notepad or VS Code to view
+
+2. README.md (2.5KB)
+   ↳ Documentation on how the command works
+   ↳ Quick reference guide
+
+3. QUICK_START.txt (9.3KB)
+   ↳ Step-by-step instructions on using the command
+   ↳ Example usage scenarios
+
+4. START_HERE.txt (this file)
+   ↳ You're reading it now!
+
+════════════════════════════════════════════════════════════════════════════════
+
+🎯 WHAT TO DO:
+
+STEP 1: Open laptop-comparison.md
+   • This is the main command file
+   • Shows you exactly what gets generated
+   • Contains the complete HTML template with all mobile fixes
+
+STEP 2: Read QUICK_START.txt
+   • Learn how to use the /laptop-comparison command
+   • See example usage
+   • Understand what you'll get
+
+STEP 3: Use the command next time you need laptop comparison!
+   • Navigate to: /home/user01/claude-test
+   • Type: /laptop-comparison
+   • Paste your requirements
+   • Get instant comprehensive guide
+
+════════════════════════════════════════════════════════════════════════════════
+
+💡 HOW TO OPEN THESE FILES IN WINDOWS:
+
+Option 1: Double-click (opens in default text editor)
+Option 2: Right-click → "Open with" → Notepad
+Option 3: Right-click → "Open with" → VS Code (if installed)
+Option 4: Right-click → "Open with" → Notepad++
+
+════════════════════════════════════════════════════════════════════════════════
+
+🔧 IMPORTANT NOTES:
+
+• These are COPIES - the original files are in .claude/commands/
+• You can edit these copies to customize the command
+• To make changes active, copy them back to .claude/commands/
+• OR just use these as reference and edit the originals
+
+════════════════════════════════════════════════════════════════════════════════
+
+📍 ORIGINAL LOCATION (Hidden):
+   \\wsl.localhost\Ubuntu\home\user01\claude-test\.claude\commands\
+
+📍 VISIBLE COPY (This folder):
+   \\wsl.localhost\Ubuntu\home\user01\claude-test\BuyComputerLaptop\CommandFiles\
+
+Both locations work the same way!
+
+════════════════════════════════════════════════════════════════════════════════
+
+🎓 NEXT STEPS:
+
+1. Open laptop-comparison.md to see the complete command
+2. Review the mobile-responsive template (lines 32-491)
+3. Read the verification checklist (lines 647-693)
+4. Try using /laptop-comparison next time you need laptop advice!
+
+════════════════════════════════════════════════════════════════════════════════
+
+Questions? The command is self-documented!
+Everything you need to know is in laptop-comparison.md
+
+Happy laptop shopping! 🎉

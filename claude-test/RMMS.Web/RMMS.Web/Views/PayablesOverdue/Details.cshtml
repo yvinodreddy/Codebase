@@ -1,0 +1,222 @@
+@model RMMS.Models.PayableOverdue
+@{
+    ViewData["Title"] = "Payable Overdue Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="card shadow">
+        <div class="card-header bg-danger text-white">
+            <h3><i class="fas fa-file-invoice-dollar"></i> Payable Overdue Details</h3>
+        </div>
+
+        <div class="card-body">
+            <div class="row mb-4">
+                <div class="col-md-12">
+                    <a asp-action="Index" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Back to List
+                    </a>
+                    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">
+                        <i class="fas fa-edit"></i> Edit
+                    </a>
+                    <a asp-action="RecordPayment" asp-route-id="@Model.Id" class="btn btn-success">
+                        <i class="fas fa-money-bill-wave"></i> Record Payment
+                    </a>
+                    <form asp-action="SendReminder" asp-route-id="@Model.Id" method="post" style="display:inline;">
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="btn btn-info">
+                            <i class="fas fa-bell"></i> Send Reminder
+                        </button>
+                    </form>
+                    <form asp-action="Delete" asp-route-id="@Model.Id" method="post" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this record?');">
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="btn btn-danger">
+                            <i class="fas fa-trash"></i> Delete
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Invoice Information -->
+            <fieldset class="border p-3 mb-3">
+                <legend class="w-auto px-2">Invoice Information</legend>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="font-weight-bold">@Html.DisplayNameFor(model => model.InvoiceNumber):</label>
+                            <p class="form-control-plaintext h5 text-primary">@Model.InvoiceNumber</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="font-weight-bold">@Html.DisplayNameFor(model => model.PurchaseDate):</label>
+                            <p class="form-control-plaintext">@Model.PurchaseDate.ToString("dd-MMM-yyyy")</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="font-weight-bold">@Html.DisplayNameFor(model => model.DueDate):</label>
+                            <p class="form-control-plaintext">
+                                @Model.DueDate.ToString("dd-MMM-yyyy")
+                                @if (Model.DaysOverdue > 0)
+                                {
+                                    <span class="badge bg-danger ms-2">@Model.DaysOverdue days overdue</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-success ms-2">On time</span>
+                                }
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- Supplier Information -->
+            <fieldset class="border p-3 mb-3">
+                <legend class="w-auto px-2">Supplier Information</legend>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="font-weight-bold">@Html.DisplayNameFor(model => model.SupplierName):</label>
+                            <p class="form-control-plaintext">@Model.SupplierName</p>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- Purchase Details -->
+            <fieldset class="border p-3 mb-3">
+                <legend class="w-auto px-2">Purchase Details</legend>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="font-weight-bold">@Html.DisplayNameFor(model => model.ItemPurchased):</label>
+                            <p class="form-control-plaintext">@Model.ItemPurchased</p>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- Payment Information -->
+            <fieldset class="border p-3 mb-3">
+                <legend class="w-auto px-2">Payment Information</legend>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="font-weight-bold">@Html.DisplayNameFor(model => model.InvoiceAmount):</label>
+                            <p class="form-control-plaintext h5">₹ @Model.InvoiceAmount.ToString("N2")</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="font-weight-bold">@Html.DisplayNameFor(model => model.AmountPaid):</label>
+                            <p class="form-control-plaintext h5 text-success">₹ @Model.AmountPaid.ToString("N2")</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="font-weight-bold">@Html.DisplayNameFor(model => model.BalancePayable):</label>
+                            <p class="form-control-plaintext h4 text-danger">₹ @Model.BalancePayable.ToString("N2")</p>
+                        </div>
+                    </div>
+                </div>
+                @if (Model.BalancePayable > 0)
+                {
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="alert alert-warning">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                <strong>Outstanding Balance:</strong> ₹ @Model.BalancePayable.ToString("N2") is pending payment.
+                            </div>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="alert alert-success">
+                                <i class="fas fa-check-circle"></i>
+                                <strong>Fully Paid:</strong> This invoice has been completely settled.
+                            </div>
+                        </div>
+                    </div>
+                }
+            </fieldset>
+
+            <!-- Remarks -->
+            @if (!string.IsNullOrWhiteSpace(Model.Remarks))
+            {
+                <fieldset class="border p-3 mb-3">
+                    <legend class="w-auto px-2">Remarks</legend>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p class="form-control-plaintext">@Model.Remarks</p>
+                        </div>
+                    </div>
+                </fieldset>
+            }
+
+            <!-- Audit Information -->
+            <fieldset class="border p-3 mb-3 bg-light">
+                <legend class="w-auto px-2">Audit Information</legend>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="font-weight-bold">Created Date:</label>
+                            <p class="form-control-plaintext">@Model.CreatedDate.ToString("dd-MMM-yyyy HH:mm")</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="font-weight-bold">Status:</label>
+                            <p class="form-control-plaintext">
+                                @if (Model.IsActive)
+                                {
+                                    <span class="badge bg-success">Active</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-secondary">Inactive</span>
+                                }
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+            <div class="mt-4">
+                <a asp-action="Index" class="btn btn-secondary btn-lg">
+                    <i class="fas fa-arrow-left"></i> Back to List
+                </a>
+                <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning btn-lg">
+                    <i class="fas fa-edit"></i> Edit
+                </a>
+                @if (Model.BalancePayable > 0)
+                {
+                    <a asp-action="RecordPayment" asp-route-id="@Model.Id" class="btn btn-success btn-lg">
+                        <i class="fas fa-money-bill-wave"></i> Record Payment
+                    </a>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    fieldset {
+        border: 1px solid #dee2e6 !important;
+        background: #f8f9fa;
+    }
+    legend {
+        font-size: 1rem;
+        font-weight: bold;
+        background: white;
+        padding: 0 10px;
+    }
+    .font-weight-bold {
+        font-weight: 600;
+        color: #495057;
+    }
+</style>

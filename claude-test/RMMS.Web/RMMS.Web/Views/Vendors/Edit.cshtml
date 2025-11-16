@@ -1,0 +1,133 @@
+@model RMMS.Models.Masters.Vendor
+@{
+    ViewData["Title"] = "Edit Vendor";
+}
+
+<div class="container-fluid">
+    <h2><i class="fas fa-truck-loading"></i> Edit Vendor</h2>
+    <hr />
+
+    <form asp-action="Edit" method="post">
+        <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="CreatedDate" />
+        <input type="hidden" asp-for="CreatedBy" />
+
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Vendor Information</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label asp-for="VendorCode" class="form-label"></label>
+                                <input asp-for="VendorCode" class="form-control" readonly />
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="VendorName" class="form-label"></label>
+                                <input asp-for="VendorName" class="form-control" required />
+                                <span asp-validation-for="VendorName" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label asp-for="VendorType" class="form-label"></label>
+                                <select asp-for="VendorType" class="form-select">
+                                    <option value="">Select Type</option>
+                                    <option value="Farmer">Farmer</option>
+                                    <option value="Trader">Trader</option>
+                                    <option value="Commission Agent">Commission Agent</option>
+                                    <option value="Supplier">Supplier</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="Category" class="form-label"></label>
+                                <select asp-for="Category" class="form-select">
+                                    <option value="">Select Category</option>
+                                    <option value="A">A - Premium</option>
+                                    <option value="B">B - Standard</option>
+                                    <option value="C">C - Basic</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label asp-for="GSTIN" class="form-label"></label>
+                                <input asp-for="GSTIN" class="form-control" maxlength="15" />
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="PAN" class="form-label"></label>
+                                <input asp-for="PAN" class="form-control" maxlength="10" />
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label asp-for="PaymentTerms" class="form-label"></label>
+                                <input asp-for="PaymentTerms" class="form-control" />
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="Rating" class="form-label"></label>
+                                <select asp-for="Rating" class="form-select">
+                                    <option value="">Not Rated</option>
+                                    <option value="1">⭐ - Poor</option>
+                                    <option value="2">⭐⭐ - Fair</option>
+                                    <option value="3">⭐⭐⭐ - Good</option>
+                                    <option value="4">⭐⭐⭐⭐ - Very Good</option>
+                                    <option value="5">⭐⭐⭐⭐⭐ - Excellent</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <label asp-for="BankName" class="form-label"></label>
+                                <input asp-for="BankName" class="form-control" />
+                            </div>
+                            <div class="col-md-4">
+                                <label asp-for="BankAccountNumber" class="form-label"></label>
+                                <input asp-for="BankAccountNumber" class="form-control" />
+                            </div>
+                            <div class="col-md-4">
+                                <label asp-for="IFSCCode" class="form-label"></label>
+                                <input asp-for="IFSCCode" class="form-control" maxlength="11" />
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Status" class="form-label"></label>
+                            <select asp-for="Status" class="form-select">
+                                <option value="Active">Active</option>
+                                <option value="Inactive">Inactive</option>
+                                <option value="Blocked">Blocked</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Actions</h5>
+                    </div>
+                    <div class="card-body">
+                        <button type="submit" class="btn btn-success w-100 mb-2">
+                            <i class="fas fa-save"></i> Update Vendor
+                        </button>
+                        <a asp-action="Index" class="btn btn-secondary w-100">
+                            <i class="fas fa-times"></i> Cancel
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,38 @@
+{
+  "phase_id": 18,
+  "name": "Clinical Trial Matching & Research (Base)",
+  "epic": "Epic 19",
+  "story_points": 38,
+  "priority": "P1",
+  "dependencies": [
+    1,
+    2
+  ],
+  "version": "v2.0",
+  "user_stories": [
+    {
+      "story_id": "19.1",
+      "title": "ClinicalTrials.gov Integration",
+      "story_points": 13,
+      "priority": "P1"
+    },
+    {
+      "story_id": "19.2",
+      "title": "Patient-Trial Matching Algorithm",
+      "story_points": 13,
+      "priority": "P1"
+    },
+    {
+      "story_id": "19.3",
+      "title": "Trial Enrollment Workflow",
+      "story_points": 8,
+      "priority": "P2"
+    },
+    {
+      "story_id": "19.4",
+      "title": "Research Cohort Builder",
+      "story_points": 4,
+      "priority": "P2"
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+version: '3.8'
+
+services:
+  voice-ai:
+    build:
+      context: ..
+      dockerfile: deliverables/Dockerfile
+    container_name: swarmcare-voice-ai
+    restart: unless-stopped
+    environment:
+      - TARGET_LATENCY_MS=500
+      - CACHE_TTL_SECONDS=300
+      - MODEL_PATH=/app/models
+      - LOG_LEVEL=INFO
+    ports:
+      - "8080:8080"
+    volumes:
+      - voice-models:/app/models
+      - voice-cache:/app/cache
+      - voice-logs:/app/logs
+    networks:
+      - swarmcare-network
+    healthcheck:
+      test: ["CMD", "python3", "-c", "from code.voice_ai_system import VoiceAIOrchestrator; VoiceAIOrchestrator()"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    labels:
+      - "com.swarmcare.phase=28"
+      - "com.swarmcare.service=voice-ai"
+      - "com.swarmcare.version=1.0"
+      - "com.swarmcare.latency_target=500ms"
+      - "com.swarmcare.ehr_systems=11"
+      - "com.swarmcare.market_coverage=100%"
+
+  redis:
+    image: redis:7-alpine
+    container_name: swarmcare-voice-cache
+    restart: unless-stopped
+    command: redis-server --appendonly yes --maxmemory 2gb --maxmemory-policy allkeys-lru
+    volumes:
+      - redis-data:/data
+    networks:
+      - swarmcare-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+volumes:
+  voice-models:
+    driver: local
+  voice-cache:
+    driver: local
+  voice-logs:
+    driver: local
+  redis-data:
+    driver: local
+
+networks:
+  swarmcare-network:
+    driver: bridge

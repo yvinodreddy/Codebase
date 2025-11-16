@@ -1,0 +1,186 @@
+﻿@model List<RMMS.Models.PayableOverdue>
+@{
+    ViewData["Title"] = "Payables Overdue";
+    var totalPayable = Model?.Sum(x => x.BalancePayable) ?? 0;
+    var totalOverdue = Model?.Where(x => x.DaysOverdue > 0).Sum(x => x.BalancePayable) ?? 0;
+    var overdueCount = Model?.Count(x => x.DaysOverdue > 0) ?? 0;
+    var criticalCount = Model?.Count(x => x.DaysOverdue > 30) ?? 0;
+}
+
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col-md-3 col-sm-6 mb-3">
+            <div class="ms-card ms-stat-card">
+                <div class="ms-card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="ms-text-muted mb-2">Total Payables</h6>
+                            <h3 class="ms-text-primary mb-0">@(Model?.Count ?? 0)</h3>
+                        </div>
+                        <div class="ms-stat-icon" style="background: #E3F2FD;">
+                            <i class="fas fa-file-invoice-dollar" style="color: #0078D4;"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-3">
+            <div class="ms-card ms-stat-card">
+                <div class="ms-card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="ms-text-muted mb-2">Total Outstanding</h6>
+                            <h3 class="ms-text-warning mb-0">₹@totalPayable.ToString("N0")</h3>
+                        </div>
+                        <div class="ms-stat-icon" style="background: #FFF3E0;">
+                            <i class="fas fa-exclamation-triangle" style="color: #FFC107;"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-3">
+            <div class="ms-card ms-stat-card">
+                <div class="ms-card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="ms-text-muted mb-2">Overdue Amount</h6>
+                            <h3 class="ms-text-danger mb-0">₹@totalOverdue.ToString("N0")</h3>
+                            <small class="ms-text-muted">@overdueCount items</small>
+                        </div>
+                        <div class="ms-stat-icon" style="background: #FFEBEE;">
+                            <i class="fas fa-clock" style="color: #DC3545;"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-3">
+            <div class="ms-card ms-stat-card">
+                <div class="ms-card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="ms-text-muted mb-2">Critical (>30 days)</h6>
+                            <h3 class="ms-text-danger mb-0">@criticalCount</h3>
+                        </div>
+                        <div class="ms-stat-icon" style="background: #FFEBEE;">
+                            <i class="fas fa-exclamation-circle" style="color: #DC3545;"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="ms-card">
+        <div class="ms-card-header" style="display: flex; justify-content: space-between; align-items: center;">
+            <h2 class="ms-card-title" style="margin: 0;">
+                <i class="fas fa-file-invoice-dollar"></i> Payables Overdue Register
+            </h2>
+            <div style="display: flex; gap: 8px;">
+                <a asp-action="Create" class="ms-btn ms-btn-primary">
+                    <i class="fas fa-plus"></i> Add Payable
+                </a>
+                <button class="ms-btn ms-btn-warning" onclick="sendReminders()">
+                    <i class="fas fa-bell"></i> Send Reminders
+                </button>
+            </div>
+        </div>
+        <div class="ms-card-body">
+            @if (Model != null && Model.Any())
+            {
+                <div class="table-responsive">
+                    <table class="ms-datatable table table-striped table-hover" data-export="true" data-page-length="25">
+                        <thead>
+                            <tr>
+                                <th>Sl.No</th>
+                                <th>Purchase Date</th>
+                                <th>Invoice No</th>
+                                <th>Supplier Name</th>
+                                <th>Item Purchased</th>
+                                <th>Invoice Amount</th>
+                                <th>Amount Paid</th>
+                                <th>Balance Payable</th>
+                                <th>Due Date</th>
+                                <th>Days Overdue</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.OrderByDescending(x => x.DaysOverdue))
+                            {
+                                <tr>
+                                    <td>@item.Id</td>
+                                    <td>@item.PurchaseDate.ToString("dd-MMM-yyyy")</td>
+                                    <td>@item.InvoiceNumber</td>
+                                    <td>@item.SupplierName</td>
+                                    <td>@item.ItemPurchased</td>
+                                    <td>₹ @item.InvoiceAmount.ToString("N2")</td>
+                                    <td>₹ @item.AmountPaid.ToString("N2")</td>
+                                    <td class="fw-bold">₹ @item.BalancePayable.ToString("N2")</td>
+                                    <td>@item.DueDate.ToString("dd-MMM-yyyy")</td>
+                                    <td>
+                                        @if (item.DaysOverdue > 0)
+                                        {
+                                            <span class="ms-badge ms-badge-danger">@item.DaysOverdue days</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="ms-badge ms-badge-success">Current</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        <div class="ms-action-buttons">
+                                            <a asp-action="MakePayment" asp-route-id="@item.Id" class="ms-action-btn ms-action-btn-success" title="Make Payment">
+                                                <i class="fas fa-rupee-sign"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-success text-center">
+                    <i class="fas fa-check-circle fa-3x mb-3"></i>
+                    <h5>No Outstanding Payables</h5>
+                    <p>All payments are up to date!</p>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // DataTable initialization is handled by site-enhanced.js globally
+
+        function sendReminders() {
+            if (confirm('Send payment reminders to all overdue suppliers? This will send reminders to all suppliers with overdue payments.')) {
+                // Create a form and submit it
+                var form = document.createElement('form');
+                form.method = 'POST';
+                form.action = '@Url.Action("SendBulkReminders", "PayablesOverdue")';
+
+                // Add anti-forgery token
+                var token = document.querySelector('input[name="__RequestVerificationToken"]');
+                if (token) {
+                    var hiddenField = document.createElement('input');
+                    hiddenField.type = 'hidden';
+                    hiddenField.name = '__RequestVerificationToken';
+                    hiddenField.value = token.value;
+                    form.appendChild(hiddenField);
+                }
+
+                document.body.appendChild(form);
+                form.submit();
+            }
+        }
+    </script>
+    <form style="display:none;">
+        @Html.AntiForgeryToken()
+    </form>
+}

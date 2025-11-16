@@ -1,0 +1,89 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: clinical-trials
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: clinical-trial-system
+  namespace: clinical-trials
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: clinical-trial
+  template:
+    metadata:
+      labels:
+        app: clinical-trial
+    spec:
+      containers:
+      - name: clinical-trial
+        image: clinical-trial-system:latest
+        ports:
+        - containerPort: 8000
+        env:
+        - name: HIPAA_COMPLIANCE
+          value: "true"
+        - name: AUDIT_LOG_ENABLED
+          value: "true"
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        livenessProbe:
+          exec:
+            command:
+            - python3
+            - -c
+            - "print('healthy')"
+          initialDelaySeconds: 30
+          periodSeconds: 30
+        readinessProbe:
+          exec:
+            command:
+            - python3
+            - -c
+            - "print('ready')"
+          initialDelaySeconds: 10
+          periodSeconds: 10
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: clinical-trial-service
+  namespace: clinical-trials
+spec:
+  selector:
+    app: clinical-trial
+  ports:
+  - port: 80
+    targetPort: 8000
+  type: LoadBalancer
+
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: clinical-trial-hpa
+  namespace: clinical-trials
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: clinical-trial-system
+  minReplicas: 3
+  maxReplicas: 10
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 70

@@ -1,0 +1,250 @@
+---
+# SwarmCare Phase 01: RAG Heat System Kubernetes Deployment
+# Production-ready deployment with vector database and API
+# Story Points: 60 | Generated: 2025-10-28
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: swarmcare-rag
+  labels:
+    app: swarmcare
+    component: rag-system
+    version: "1.0"
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: rag-config
+  namespace: swarmcare-rag
+data:
+  ENVIRONMENT: "production"
+  LOG_LEVEL: "INFO"
+  CHUNK_SIZE: "512"
+  CHUNK_OVERLAP: "128"
+  EMBEDDING_MODEL: "all-MiniLM-L6-v2"
+  NEO4J_URI: "bolt://neo4j.swarmcare-production:7687"
+  API_PORT: "8000"
+  MAX_WORKERS: "4"
+
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: rag-secrets
+  namespace: swarmcare-rag
+type: Opaque
+stringData:
+  neo4j-password: "CHANGE_ME_IN_PRODUCTION"
+  api-key: "CHANGE_ME_IN_PRODUCTION"
+  jwt-secret: "CHANGE_ME_IN_PRODUCTION"
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rag-api
+  namespace: swarmcare-rag
+  labels:
+    app: swarmcare
+    component: rag-api
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: swarmcare
+      component: rag-api
+  template:
+    metadata:
+      labels:
+        app: swarmcare
+        component: rag-api
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8000"
+        prometheus.io/path: "/metrics"
+    spec:
+      containers:
+      - name: rag-api
+        image: swarmcare/rag-api:1.0.0
+        ports:
+        - containerPort: 8000
+          name: http
+          protocol: TCP
+        env:
+        - name: ENVIRONMENT
+          valueFrom:
+            configMapKeyRef:
+              name: rag-config
+              key: ENVIRONMENT
+        - name: LOG_LEVEL
+          valueFrom:
+            configMapKeyRef:
+              name: rag-config
+              key: LOG_LEVEL
+        - name: CHUNK_SIZE
+          valueFrom:
+            configMapKeyRef:
+              name: rag-config
+              key: CHUNK_SIZE
+        - name: CHUNK_OVERLAP
+          valueFrom:
+            configMapKeyRef:
+              name: rag-config
+              key: CHUNK_OVERLAP
+        - name: EMBEDDING_MODEL
+          valueFrom:
+            configMapKeyRef:
+              name: rag-config
+              key: EMBEDDING_MODEL
+        - name: NEO4J_URI
+          valueFrom:
+            configMapKeyRef:
+              name: rag-config
+              key: NEO4J_URI
+        - name: NEO4J_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: rag-secrets
+              key: neo4j-password
+        resources:
+          requests:
+            memory: "2Gi"
+            cpu: "1000m"
+          limits:
+            memory: "4Gi"
+            cpu: "2000m"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 8000
+          initialDelaySeconds: 10
+          periodSeconds: 5
+          timeoutSeconds: 3
+          failureThreshold: 3
+        volumeMounts:
+        - name: models-cache
+          mountPath: /models
+      volumes:
+      - name: models-cache
+        emptyDir:
+          sizeLimit: 5Gi
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rag-api
+  namespace: swarmcare-rag
+  labels:
+    app: swarmcare
+    component: rag-api
+spec:
+  type: ClusterIP
+  selector:
+    app: swarmcare
+    component: rag-api
+  ports:
+  - name: http
+    port: 80
+    targetPort: 8000
+    protocol: TCP
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: rag-api-ingress
+  namespace: swarmcare-rag
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/rate-limit: "100"
+    nginx.ingress.kubernetes.io/cors-allow-origin: "*"
+spec:
+  tls:
+  - hosts:
+    - rag.swarmcare.example.com
+    secretName: rag-api-tls
+  rules:
+  - host: rag.swarmcare.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: rag-api
+            port:
+              number: 80
+
+---
+# Horizontal Pod Autoscaler for automatic scaling
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: rag-api-hpa
+  namespace: swarmcare-rag
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: rag-api
+  minReplicas: 3
+  maxReplicas: 10
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 70
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: 80
+
+---
+# PodDisruptionBudget for high availability
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: rag-api-pdb
+  namespace: swarmcare-rag
+spec:
+  minAvailable: 2
+  selector:
+    matchLabels:
+      app: swarmcare
+      component: rag-api
+
+---
+# ServiceMonitor for Prometheus monitoring
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: rag-api-metrics
+  namespace: swarmcare-rag
+  labels:
+    app: swarmcare
+    component: rag-api
+spec:
+  selector:
+    matchLabels:
+      app: swarmcare
+      component: rag-api
+  endpoints:
+  - port: http
+    interval: 30s
+    path: /metrics

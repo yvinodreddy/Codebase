@@ -1,0 +1,82 @@
+﻿@{
+    ViewData["Title"] = "Rice Stock Report";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var stockByGrade = ViewBag.StockByGrade ?? new List<dynamic>();
+}
+
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-header bg-info text-white">
+            <h3><i class="fas fa-bowl-rice"></i> Rice Stock Report</h3>
+            <p class="mb-0">As of: @ViewBag.ReportDate</p>
+        </div>
+
+        <div class="card-body">
+            <!-- Rice Stock Summary -->
+            <div class="alert alert-info">
+                <h4>Total Rice Stock: @string.Format("{0:N2}", ViewBag.TotalRiceStock) kg</h4>
+                <p class="mb-0">Ready for sale inventory across all grades.</p>
+            </div>
+
+            <!-- Grade-wise Stock Details -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5>Rice Stock by Grade/Variety</h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>Grade/Variety</th>
+                                    <th>Available Stock (kg)</th>
+                                    <th>Reserved Stock (kg)</th>
+                                    <th>Total Stock (kg)</th>
+                                    <th>Average Rate (₹/kg)</th>
+                                    <th>Stock Value (₹)</th>
+                                    <th>Days in Stock</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (stockByGrade?.Count > 0)
+                                {
+                                    foreach (var grade in stockByGrade!)
+                                    {
+                                        <tr>
+                                            <td>@(grade?.Grade ?? "Unknown")</td>
+                                            <td>@(grade?.TotalQuantity.ToString("N2") ?? "0.00")</td>
+                                            <td>0.00</td>
+                                            <td>@(grade?.TotalQuantity.ToString("N2") ?? "0.00")</td>
+                                            <td>₹ 0.00</td>
+                                            <td>₹ 0.00</td>
+                                            <td>0</td>
+                                            <td><span class="badge bg-success">Available</span></td>
+                                        </tr>
+                                    }
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td colspan="8" class="text-center">
+                                            <p class="mb-0">No rice stock data available. Stock will appear as sales are recorded.</p>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-4">
+                <a href="@Url.Action("Index", "Reports")" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Back
+                </a>
+                <button class="btn btn-primary" onclick="window.print()">
+                    <i class="fas fa-print"></i> Print
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

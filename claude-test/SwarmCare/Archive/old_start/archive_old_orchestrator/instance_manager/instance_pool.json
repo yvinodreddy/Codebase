@@ -1,0 +1,51 @@
+{
+  "total_instances": 5,
+  "instances": [
+    {
+      "instance_id": "instance_01",
+      "status": "INITIALIZED",
+      "assigned_phases": [],
+      "current_phase": null,
+      "total_story_points": 0,
+      "completed_story_points": 0,
+      "overall_progress": 0
+    },
+    {
+      "instance_id": "instance_02",
+      "status": "INITIALIZED",
+      "assigned_phases": [],
+      "current_phase": null,
+      "total_story_points": 0,
+      "completed_story_points": 0,
+      "overall_progress": 0
+    },
+    {
+      "instance_id": "instance_03",
+      "status": "INITIALIZED",
+      "assigned_phases": [],
+      "current_phase": null,
+      "total_story_points": 0,
+      "completed_story_points": 0,
+      "overall_progress": 0
+    },
+    {
+      "instance_id": "instance_04",
+      "status": "INITIALIZED",
+      "assigned_phases": [],
+      "current_phase": null,
+      "total_story_points": 0,
+      "completed_story_points": 0,
+      "overall_progress": 0
+    },
+    {
+      "instance_id": "instance_05",
+      "status": "INITIALIZED",
+      "assigned_phases": [],
+      "current_phase": null,
+      "total_story_points": 0,
+      "completed_story_points": 0,
+      "overall_progress": 0
+    }
+  ],
+  "created_at": "2025-10-26T04:04:52.534778"
+}

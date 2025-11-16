@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phase 24: 100% Automated Coding & EHR Integration Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: white;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .card-icon {
+            font-size: 2rem;
+            margin-right: 15px;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .status-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            background: #f8f9fa;
+        }
+
+        .status-running {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+        }
+
+        .status-stopped {
+            background: #f8d7da;
+            border-left: 4px solid #dc3545;
+        }
+
+        .status-label {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .status-value {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .status-badge {
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .badge-running {
+            background: #28a745;
+            color: white;
+        }
+
+        .badge-stopped {
+            background: #dc3545;
+            color: white;
+        }
+
+        button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 5px;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-success {
+            background: #28a745;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #218838;
+        }
+
+        .btn-danger {
+            background: #dc3545;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #c82333;
+        }
+
+        .btn-warning {
+            background: #ffc107;
+            color: #333;
+        }
+
+        .btn-warning:hover {
+            background: #e0a800;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+
+        .test-results {
+            margin-top: 15px;
+        }
+
+        .test-item {
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .test-passed {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+        }
+
+        .test-failed {
+            background: #f8d7da;
+            border-left: 4px solid #dc3545;
+        }
+
+        .test-name {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .test-duration {
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .requirements-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .story-item {
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .story-item:hover {
+            background: #e9ecef;
+            transform: translateX(5px);
+        }
+
+        .story-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .story-id {
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        .story-title {
+            font-weight: 600;
+            color: #333;
+            margin: 5px 0;
+        }
+
+        .story-meta {
+            display: flex;
+            gap: 10px;
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .metric-item {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            border-radius: 10px;
+            color: white;
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .metric-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .log-container {
+            background: #1e1e1e;
+            color: #00ff00;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            max-height: 300px;
+            overflow-y: auto;
+            font-size: 0.85rem;
+        }
+
+        .log-entry {
+            margin: 3px 0;
+            padding: 3px 0;
+        }
+
+        .log-info {
+            color: #00ff00;
+        }
+
+        .log-success {
+            color: #00ff00;
+            font-weight: bold;
+        }
+
+        .log-error {
+            color: #ff4444;
+            font-weight: bold;
+        }
+
+        .files-list {
+            max-height: 250px;
+            overflow-y: auto;
+        }
+
+        .file-item {
+            padding: 10px;
+            margin: 5px 0;
+            background: #f8f9fa;
+            border-radius: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .file-name {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .file-size {
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 15px;
+            width: 80%;
+            max-width: 600px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .close {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #999;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .close:hover {
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .form-input, .form-textarea, .form-select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-input:focus, .form-textarea:focus, .form-select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: #999;
+        }
+
+        .empty-state-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 Phase 24: 100% Automated Coding & EHR Integration Dashboard</h1>
+
+        <div class="dashboard">
+            <!-- Services Status -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">⚡</div>
+                    <div class="card-title">Services Status</div>
+                </div>
+                <div class="button-group">
+                    <button class="btn-primary" onclick="refreshServices()">Refresh Status</button>
+                </div>
+                <div id="servicesStatus" style="margin-top: 20px;">
+                    <div class="spinner"></div>
+                </div>
+            </div>
+
+            <!-- Testing -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">🧪</div>
+                    <div class="card-title">Testing</div>
+                </div>
+                <div class="button-group">
+                    <button class="btn-success" onclick="runTests()">Run All Tests</button>
+                    <button class="btn-secondary" onclick="viewResults()">View Results</button>
+                </div>
+                <div id="testResults" class="test-results"></div>
+            </div>
+
+            <!-- Requirements -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">📋</div>
+                    <div class="card-title">Requirements</div>
+                </div>
+                <div class="button-group">
+                    <button class="btn-primary" onclick="loadStories()">Load Requirements</button>
+                    <button class="btn-success" onclick="showAddStoryModal()">Add New Story</button>
+                    <button class="btn-warning" onclick="syncDocumentation()">Sync Docs</button>
+                </div>
+                <div id="storiesList" class="requirements-list"></div>
+            </div>
+
+            <!-- Metrics -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">📊</div>
+                    <div class="card-title">Metrics</div>
+                </div>
+                <div id="metricsDisplay" class="metrics-grid">
+                    <div class="spinner"></div>
+                </div>
+            </div>
+
+            <!-- Generated Files -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">📁</div>
+                    <div class="card-title">Generated Files</div>
+                </div>
+                <div class="button-group">
+                    <button class="btn-success" onclick="generateFiles()">Generate Files</button>
+                    <button class="btn-secondary" onclick="refreshFiles()">Refresh Files</button>
+                </div>
+                <div id="filesList" class="files-list"></div>
+            </div>
+
+            <!-- Execution Log -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">📝</div>
+                    <div class="card-title">Execution Log</div>
+                </div>
+                <div class="button-group">
+                    <button class="btn-secondary" onclick="refreshLog()">Refresh Log</button>
+                    <button class="btn-danger" onclick="clearLog()">Clear</button>
+                </div>
+                <div id="executionLog" class="log-container"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add/Edit Story Modal -->
+    <div id="storyModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title" id="modalTitle">Add New User Story</div>
+                <span class="close" onclick="closeModal()">&times;</span>
+            </div>
+            <form id="storyForm">
+                <div class="form-group">
+                    <label class="form-label">Story ID</label>
+                    <input type="text" class="form-input" id="storyId" placeholder="US-XXX" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Title</label>
+                    <input type="text" class="form-input" id="storyTitle" placeholder="Story title" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Description</label>
+                    <textarea class="form-textarea" id="storyDescription" placeholder="As a [role], I want [feature] so that [benefit]" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Story Points (1-13)</label>
+                    <input type="number" class="form-input" id="storyPoints" min="1" max="13" value="3" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Priority</label>
+                    <select class="form-select" id="storyPriority" required>
+                        <option value="P0">P0 - Critical</option>
+                        <option value="P1">P1 - High</option>
+                        <option value="P2">P2 - Medium</option>
+                        <option value="P3">P3 - Low</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Status</label>
+                    <select class="form-select" id="storyStatus" required>
+                        <option value="pending">Pending</option>
+                        <option value="in_progress">In Progress</option>
+                        <option value="completed">Completed</option>
+                        <option value="blocked">Blocked</option>
+                    </select>
+                </div>
+                <div class="button-group">
+                    <button type="submit" class="btn-success">Save Story</button>
+                    <button type="button" class="btn-secondary" onclick="closeModal()">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        let currentEditingStoryId = null;
+
+        // Initialize dashboard
+        document.addEventListener('DOMContentLoaded', function() {
+            refreshServices();
+            loadStories();
+            loadMetrics();
+            refreshFiles();
+            refreshLog();
+
+            // Auto-refresh every 10 seconds
+            setInterval(() => {
+                refreshServices();
+                refreshLog();
+            }, 10000);
+        });
+
+        // Services Status
+        async function refreshServices() {
+            try {
+                const response = await fetch('/api/services/status');
+                const data = await response.json();
+
+                const html = `
+                    <div class="status-item ${data.neo4j.status === 'running' ? 'status-running' : 'status-stopped'}">
+                        <div>
+                            <div class="status-label">NEO4J</div>
+                            <div class="status-value">${data.neo4j.url || 'http://localhost:7474'}</div>
+                        </div>
+                        <span class="status-badge ${data.neo4j.status === 'running' ? 'badge-running' : 'badge-stopped'}">
+                            ${data.neo4j.status}
+                        </span>
+                    </div>
+                    <div class="status-item ${data.redis.status === 'running' ? 'status-running' : 'status-stopped'}">
+                        <div>
+                            <div class="status-label">REDIS</div>
+                            <div class="status-value">${data.redis.url || 'http://localhost:6379'}</div>
+                        </div>
+                        <span class="status-badge ${data.redis.status === 'running' ? 'badge-running' : 'badge-stopped'}">
+                            ${data.redis.status}
+                        </span>
+                    </div>
+                `;
+
+                document.getElementById('servicesStatus').innerHTML = html;
+            } catch (error) {
+                console.error('Error refreshing services:', error);
+                document.getElementById('servicesStatus').innerHTML = '<div class="empty-state">Error loading services</div>';
+            }
+        }
+
+        // Testing
+        async function runTests() {
+            const resultsDiv = document.getElementById('testResults');
+            resultsDiv.innerHTML = '<div class="spinner"></div>';
+
+            try {
+                const response = await fetch('/api/tests/run', { method: 'POST' });
+                const data = await response.json();
+
+                let passed = 0;
+                let failed = 0;
+
+                const html = data.results.map(test => {
+                    if (test.status === 'passed') passed++;
+                    else failed++;
+
+                    return `
+                        <div class="test-item ${test.status === 'passed' ? 'test-passed' : 'test-failed'}">
+                            <div>
+                                <div class="test-name">${test.test_name}</div>
+                                ${test.error ? `<div style="font-size: 0.85rem; color: #dc3545; margin-top: 5px;">${test.error}</div>` : ''}
+                            </div>
+                            <div class="test-duration">${test.duration_ms}ms</div>
+                        </div>
+                    `;
+                }).join('');
+
+                resultsDiv.innerHTML = `
+                    <div style="text-align: center; margin: 15px 0; font-weight: 600;">
+                        Total: ${data.results.length} |
+                        <span style="color: #28a745;">Passed: ${passed}</span> |
+                        <span style="color: #dc3545;">Failed: ${failed}</span>
+                    </div>
+                    ${html}
+                `;
+            } catch (error) {
+                console.error('Error running tests:', error);
+                resultsDiv.innerHTML = '<div class="empty-state">Error running tests</div>';
+            }
+        }
+
+        async function viewResults() {
+            runTests();
+        }
+
+        // User Stories
+        async function loadStories() {
+            const listDiv = document.getElementById('storiesList');
+            listDiv.innerHTML = '<div class="spinner"></div>';
+
+            try {
+                const response = await fetch('/api/stories');
+                const data = await response.json();
+
+                if (!data.stories || data.stories.length === 0) {
+                    listDiv.innerHTML = `
+                        <div class="empty-state">
+                            <div class="empty-state-icon">📋</div>
+                            <div>No user stories yet</div>
+                            <div style="margin-top: 10px;">
+                                <button class="btn-success" onclick="showAddStoryModal()">Add Your First Story</button>
+                            </div>
+                        </div>
+                    `;
+                    return;
+                }
+
+                const html = data.stories.map(story => `
+                    <div class="story-item" onclick="editStory('${story.id}')">
+                        <div class="story-header">
+                            <span class="story-id">${story.id}</span>
+                            <button class="btn-danger btn-sm" onclick="event.stopPropagation(); deleteStory('${story.id}')">Delete</button>
+                        </div>
+                        <div class="story-title">${story.title}</div>
+                        <div class="story-meta">
+                            <span>${story.story_points} SP</span>
+                            <span>•</span>
+                            <span>${story.priority}</span>
+                            <span>•</span>
+                            <span style="color: ${story.status === 'completed' ? '#28a745' : '#667eea'}">${story.status}</span>
+                        </div>
+                    </div>
+                `).join('');
+
+                listDiv.innerHTML = html;
+            } catch (error) {
+                console.error('Error loading stories:', error);
+                listDiv.innerHTML = '<div class="empty-state">Error loading stories</div>';
+            }
+        }
+
+        function showAddStoryModal() {
+            currentEditingStoryId = null;
+            document.getElementById('modalTitle').textContent = 'Add New User Story';
+            document.getElementById('storyForm').reset();
+            document.getElementById('storyModal').style.display = 'block';
+        }
+
+        async function editStory(storyId) {
+            try {
+                const response = await fetch(`/api/stories/${storyId}`);
+                const story = await response.json();
+
+                currentEditingStoryId = storyId;
+                document.getElementById('modalTitle').textContent = 'Edit User Story';
+                document.getElementById('storyId').value = story.id;
+                document.getElementById('storyTitle').value = story.title;
+                document.getElementById('storyDescription').value = story.description;
+                document.getElementById('storyPoints').value = story.story_points;
+                document.getElementById('storyPriority').value = story.priority;
+                document.getElementById('storyStatus').value = story.status;
+
+                document.getElementById('storyModal').style.display = 'block';
+            } catch (error) {
+                console.error('Error loading story:', error);
+                alert('Error loading story');
+            }
+        }
+
+        async function deleteStory(storyId) {
+            if (!confirm(`Delete story ${storyId}?`)) return;
+
+            try {
+                await fetch(`/api/stories/${storyId}`, { method: 'DELETE' });
+                loadStories();
+                loadMetrics();
+                refreshLog();
+            } catch (error) {
+                console.error('Error deleting story:', error);
+                alert('Error deleting story');
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('storyModal').style.display = 'none';
+        }
+
+        document.getElementById('storyForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const storyData = {
+                id: document.getElementById('storyId').value,
+                title: document.getElementById('storyTitle').value,
+                description: document.getElementById('storyDescription').value,
+                story_points: parseInt(document.getElementById('storyPoints').value),
+                priority: document.getElementById('storyPriority').value,
+                status: document.getElementById('storyStatus').value,
+                acceptance_criteria: [],
+                implementation_notes: "",
+                test_scenarios: [],
+                dependencies: [],
+                tags: []
+            };
+
+            try {
+                if (currentEditingStoryId) {
+                    // Update existing story
+                    await fetch(`/api/stories/${currentEditingStoryId}`, {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(storyData)
+                    });
+                } else {
+                    // Create new story
+                    await fetch('/api/stories', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(storyData)
+                    });
+                }
+
+                closeModal();
+                loadStories();
+                loadMetrics();
+                refreshLog();
+            } catch (error) {
+                console.error('Error saving story:', error);
+                alert('Error saving story');
+            }
+        });
+
+        // Metrics
+        async function loadMetrics() {
+            const metricsDiv = document.getElementById('metricsDisplay');
+
+            try {
+                const response = await fetch('/api/metrics');
+                const data = await response.json();
+
+                metricsDiv.innerHTML = `
+                    <div class="metric-item">
+                        <div class="metric-value">${data.total_story_points}/${data.completed_story_points}</div>
+                        <div class="metric-label">Story Points Completed</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-value">${data.completion_percentage}%</div>
+                        <div class="metric-label">Completion Rate</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-value">${data.total_stories}</div>
+                        <div class="metric-label">Total Stories</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-value">${data.stories_by_status.completed}</div>
+                        <div class="metric-label">Stories Completed</div>
+                    </div>
+                `;
+            } catch (error) {
+                console.error('Error loading metrics:', error);
+                metricsDiv.innerHTML = '<div class="empty-state">Error loading metrics</div>';
+            }
+        }
+
+        // Generated Files
+        async function generateFiles() {
+            const filesDiv = document.getElementById('filesList');
+            filesDiv.innerHTML = '<div class="spinner"></div>';
+
+            try {
+                const response = await fetch('/api/generate', { method: 'POST' });
+                const data = await response.json();
+
+                alert(`Generated ${data.count} files successfully!`);
+                refreshFiles();
+                refreshLog();
+            } catch (error) {
+                console.error('Error generating files:', error);
+                alert('Error generating files');
+                refreshFiles();
+            }
+        }
+
+        async function refreshFiles() {
+            const filesDiv = document.getElementById('filesList');
+
+            try {
+                const response = await fetch('/api/generated/files');
+                const data = await response.json();
+
+                if (!data.files || data.files.length === 0) {
+                    filesDiv.innerHTML = `
+                        <div class="empty-state">
+                            <div class="empty-state-icon">📁</div>
+                            <div>No files generated yet</div>
+                        </div>
+                    `;
+                    return;
+                }
+
+                const html = data.files.map(file => `
+                    <div class="file-item">
+                        <span class="file-name">${file.name}</span>
+                        <span class="file-size">${(file.size / 1024).toFixed(2)} KB</span>
+                    </div>
+                `).join('');
+
+                filesDiv.innerHTML = html;
+            } catch (error) {
+                console.error('Error refreshing files:', error);
+                filesDiv.innerHTML = '<div class="empty-state">Error loading files</div>';
+            }
+        }
+
+        // Execution Log
+        async function refreshLog() {
+            const logDiv = document.getElementById('executionLog');
+
+            try {
+                const response = await fetch('/api/logs');
+                const data = await response.json();
+
+                if (!data.logs || data.logs.length === 0) {
+                    logDiv.innerHTML = '<div style="color: #999;">Log cleared</div>';
+                    return;
+                }
+
+                const html = data.logs.map(log => `
+                    <div class="log-entry log-${log.level}">
+                        [${new Date(log.timestamp).toLocaleTimeString()}] ${log.message}
+                    </div>
+                `).join('');
+
+                logDiv.innerHTML = html;
+                logDiv.scrollTop = logDiv.scrollHeight;
+            } catch (error) {
+                console.error('Error refreshing log:', error);
+            }
+        }
+
+        async function clearLog() {
+            try {
+                await fetch('/api/logs/clear', { method: 'POST' });
+                refreshLog();
+            } catch (error) {
+                console.error('Error clearing log:', error);
+            }
+        }
+
+        // Documentation Sync
+        async function syncDocumentation() {
+            try {
+                const response = await fetch('/api/documentation/sync', { method: 'POST' });
+                const data = await response.json();
+
+                alert(`Documentation synced!\n${data.changes.join('\n')}`);
+                refreshLog();
+            } catch (error) {
+                console.error('Error syncing documentation:', error);
+                alert('Error syncing documentation');
+            }
+        }
+    </script>
+</body>
+</html>

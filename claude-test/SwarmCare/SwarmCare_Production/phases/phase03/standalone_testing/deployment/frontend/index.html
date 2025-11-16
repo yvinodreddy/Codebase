@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phase 3: Workflow Orchestration Testing UI</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: white;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .card h2 {
+            color: #667eea;
+            margin-bottom: 16px;
+            font-size: 1.5rem;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 8px;
+        }
+
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            margin: 4px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102,126,234,0.4);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .button-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            margin: 4px;
+        }
+
+        .status-running {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .status-healthy {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .status-stopped {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .test-result {
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 6px;
+            border-left: 4px solid;
+        }
+
+        .test-pass {
+            background: #d1fae5;
+            border-left-color: #10b981;
+        }
+
+        .test-fail {
+            background: #fee2e2;
+            border-left-color: #ef4444;
+        }
+
+        .log-entry {
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            padding: 8px;
+            background: #f9fafb;
+            border-radius: 4px;
+            margin: 4px 0;
+            overflow-x: auto;
+        }
+
+        .metric-card {
+            background: #f9fafb;
+            padding: 16px;
+            border-radius: 8px;
+            margin: 8px 0;
+        }
+
+        .metric-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        .metric-label {
+            font-size: 14px;
+            color: #6b7280;
+            margin-top: 4px;
+        }
+
+        #services-status, #test-results, #execution-log, #files-list, #requirements-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #6b7280;
+        }
+
+        .file-item {
+            padding: 8px;
+            background: #f9fafb;
+            border-radius: 4px;
+            margin: 4px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .download-btn {
+            background: #10b981;
+            padding: 6px 12px;
+            font-size: 12px;
+        }
+
+        .requirement-item {
+            padding: 12px;
+            background: #f9fafb;
+            border-radius: 6px;
+            margin: 8px 0;
+        }
+
+        .requirement-title {
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 4px;
+        }
+
+        .requirement-meta {
+            font-size: 12px;
+            color: #6b7280;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🏗️ Phase 3: Workflow Orchestration Testing Dashboard</h1>
+
+        <div class="grid">
+            <!-- Services Status -->
+            <div class="card">
+                <h2>🔧 Services Status</h2>
+                <div class="button-group">
+                    <button onclick="checkServices()">Refresh Status</button>
+                </div>
+                <div id="services-status">
+                    <div class="loading">Loading...</div>
+                </div>
+            </div>
+
+            <!-- Testing -->
+            <div class="card">
+                <h2>🧪 Testing</h2>
+                <div class="button-group">
+                    <button onclick="runAllTests()">Run All Tests</button>
+                    <button onclick="getTestResults()">View Results</button>
+                </div>
+                <div id="test-results">
+                    <div class="loading">No tests run yet</div>
+                </div>
+            </div>
+
+            <!-- Requirements -->
+            <div class="card">
+                <h2>📋 Requirements</h2>
+                <div class="button-group">
+                    <button onclick="loadRequirements()">Load Requirements</button>
+                    <button onclick="viewBRD()">View BRD</button>
+                </div>
+                <div id="requirements-list">
+                    <div class="loading">Click to load requirements</div>
+                </div>
+            </div>
+
+            <!-- Metrics -->
+            <div class="card">
+                <h2>📊 Metrics</h2>
+                <div id="metrics-display">
+                    <div class="metric-card">
+                        <div class="metric-value" id="metric-sp">-</div>
+                        <div class="metric-label">Story Points Completed</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value" id="metric-coverage">-</div>
+                        <div class="metric-label">Test Coverage</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Generated Files -->
+            <div class="card">
+                <h2>📁 Generated Files</h2>
+                <div class="button-group">
+                    <button onclick="listFiles()">Refresh Files</button>
+                </div>
+                <div id="files-list">
+                    <div class="loading">Click to load files</div>
+                </div>
+            </div>
+
+            <!-- Execution Log -->
+            <div class="card">
+                <h2>📝 Execution Log</h2>
+                <div class="button-group">
+                    <button onclick="getExecutionLog()">Refresh Log</button>
+                    <button onclick="clearLog()">Clear</button>
+                </div>
+                <div id="execution-log">
+                    <div class="loading">No log entries</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = '';
+
+        // Check services status
+        async function checkServices() {
+            const container = document.getElementById('services-status');
+            container.innerHTML = '<div class="loading">Checking...</div>';
+
+            try {
+                const response = await fetch(`${API_BASE}/api/services/status`);
+                const data = await response.json();
+
+                let html = '';
+                for (const [service, status] of Object.entries(data)) {
+                    const statusClass = status.status === 'running' ? 'status-healthy' : 'status-stopped';
+                    html += `
+                        <div class="metric-card">
+                            <strong>${service.toUpperCase()}</strong>
+                            <span class="status-badge ${statusClass}">${status.status}</span>
+                            <div style="font-size: 12px; color: #6b7280; margin-top: 4px;">
+                                ${status.url || ''}
+                            </div>
+                        </div>
+                    `;
+                }
+
+                container.innerHTML = html;
+            } catch (error) {
+                container.innerHTML = `<div class="test-fail">Error: ${error.message}</div>`;
+            }
+        }
+
+        // Run all tests
+        async function runAllTests() {
+            const container = document.getElementById('test-results');
+            container.innerHTML = '<div class="loading">Running tests...</div>';
+
+            try {
+                const response = await fetch(`${API_BASE}/api/test/run-all`, { method: 'POST' });
+                const data = await response.json();
+
+                container.innerHTML = `<div class="test-pass">${data.message}</div>`;
+
+                // Poll for results
+                setTimeout(getTestResults, 2000);
+            } catch (error) {
+                container.innerHTML = `<div class="test-fail">Error: ${error.message}</div>`;
+            }
+        }
+
+        // Get test results
+        async function getTestResults() {
+            const container = document.getElementById('test-results');
+
+            try {
+                const response = await fetch(`${API_BASE}/api/test/results`);
+                const data = await response.json();
+
+                if (data.total_tests === 0) {
+                    container.innerHTML = '<div class="loading">No tests run yet</div>';
+                    return;
+                }
+
+                let html = `
+                    <div class="metric-card">
+                        <strong>Total: ${data.total_tests}</strong> |
+                        <span style="color: #10b981;">Passed: ${data.passed}</span> |
+                        <span style="color: #ef4444;">Failed: ${data.failed}</span>
+                    </div>
+                `;
+
+                data.results.forEach(result => {
+                    const cssClass = result.status === 'pass' ? 'test-pass' : 'test-fail';
+                    html += `
+                        <div class="test-result ${cssClass}">
+                            <strong>${result.test_name}</strong>
+                            <div style="font-size: 12px; margin-top: 4px;">
+                                ${result.message} (${result.duration_ms.toFixed(2)}ms)
+                            </div>
+                        </div>
+                    `;
+                });
+
+                container.innerHTML = html;
+            } catch (error) {
+                container.innerHTML = `<div class="test-fail">Error: ${error.message}</div>`;
+            }
+        }
+
+        // Load requirements
+        async function loadRequirements() {
+            const container = document.getElementById('requirements-list');
+            container.innerHTML = '<div class="loading">Loading...</div>';
+
+            try {
+                const response = await fetch(`${API_BASE}/api/requirements`);
+                const data = await response.json();
+
+                let html = `<div class="metric-card">
+                    <strong>${data.phase_name}</strong> - ${data.total_story_points} SP
+                </div>`;
+
+                data.stories.forEach(story => {
+                    const statusClass = story.status === 'completed' ? 'status-healthy' : 'status-running';
+                    html += `
+                        <div class="requirement-item">
+                            <div class="requirement-title">${story.id}: ${story.title}</div>
+                            <div class="requirement-meta">
+                                ${story.story_points} SP | ${story.priority}
+                                <span class="status-badge ${statusClass}">${story.status}</span>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                container.innerHTML = html;
+
+                // Load metrics
+                loadMetrics(data.metrics);
+            } catch (error) {
+                container.innerHTML = `<div class="test-fail">Error: ${error.message}</div>`;
+            }
+        }
+
+        // Load metrics
+        function loadMetrics(metrics) {
+            if (!metrics) return;
+
+            document.getElementById('metric-sp').textContent =
+                `${metrics.completed_story_points}/${metrics.planned_story_points}`;
+            document.getElementById('metric-coverage').textContent =
+                `${metrics.test_coverage_percentage}%`;
+        }
+
+        // View BRD
+        async function viewBRD() {
+            try {
+                const response = await fetch(`${API_BASE}/api/requirements/brd`);
+                const data = await response.json();
+
+                const newWindow = window.open('', 'BRD', 'width=800,height=600');
+                newWindow.document.write(`
+                    <html>
+                    <head>
+                        <title>Business Requirements Document</title>
+                        <style>
+                            body { font-family: sans-serif; padding: 20px; max-width: 800px; margin: 0 auto; }
+                            pre { background: #f5f5f5; padding: 10px; border-radius: 4px; }
+                        </style>
+                    </head>
+                    <body>
+                        <pre>${data.content}</pre>
+                    </body>
+                    </html>
+                `);
+            } catch (error) {
+                alert(`Error loading BRD: ${error.message}`);
+            }
+        }
+
+        // List files
+        async function listFiles() {
+            const container = document.getElementById('files-list');
+            container.innerHTML = '<div class="loading">Loading...</div>';
+
+            try {
+                const response = await fetch(`${API_BASE}/api/files/list`);
+                const data = await response.json();
+
+                if (data.files.length === 0) {
+                    container.innerHTML = '<div class="loading">No files generated yet</div>';
+                    return;
+                }
+
+                let html = '';
+                data.files.forEach(file => {
+                    html += `
+                        <div class="file-item">
+                            <div>
+                                <strong>${file.path}</strong>
+                                <div style="font-size: 12px; color: #6b7280;">
+                                    ${(file.size / 1024).toFixed(2)} KB | ${new Date(file.modified).toLocaleString()}
+                                </div>
+                            </div>
+                            <button class="download-btn" onclick="downloadFile('${file.path}')">Download</button>
+                        </div>
+                    `;
+                });
+
+                container.innerHTML = html;
+            } catch (error) {
+                container.innerHTML = `<div class="test-fail">Error: ${error.message}</div>`;
+            }
+        }
+
+        // Download file
+        function downloadFile(path) {
+            window.open(`${API_BASE}/api/files/download/${path}`, '_blank');
+        }
+
+        // Get execution log
+        async function getExecutionLog() {
+            const container = document.getElementById('execution-log');
+
+            try {
+                const response = await fetch(`${API_BASE}/api/test/execution-log`);
+                const data = await response.json();
+
+                if (data.log.length === 0) {
+                    container.innerHTML = '<div class="loading">No log entries</div>';
+                    return;
+                }
+
+                let html = '';
+                data.log.forEach(entry => {
+                    html += `<div class="log-entry">${entry}</div>`;
+                });
+
+                container.innerHTML = html;
+                container.scrollTop = container.scrollHeight;
+            } catch (error) {
+                container.innerHTML = `<div class="test-fail">Error: ${error.message}</div>`;
+            }
+        }
+
+        // Clear log
+        function clearLog() {
+            document.getElementById('execution-log').innerHTML = '<div class="loading">Log cleared</div>';
+        }
+
+        // Auto-load on page load
+        window.onload = function() {
+            checkServices();
+            loadRequirements();
+        };
+
+        // Auto-refresh services every 10 seconds
+        setInterval(checkServices, 10000);
+    </script>
+</body>
+</html>

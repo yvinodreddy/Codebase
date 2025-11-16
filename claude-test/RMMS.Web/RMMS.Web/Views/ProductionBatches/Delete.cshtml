@@ -1,0 +1,85 @@
+@model RMMS.Models.Production.ProductionBatch
+@{
+    ViewData["Title"] = "Delete Batch";
+}
+
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2><i class="fas fa-trash"></i> Delete Production Batch</h2>
+        <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-secondary">
+            <i class="fas fa-arrow-left"></i> Back to Details
+        </a>
+    </div>
+
+    <div class="alert alert-danger">
+        <h4><i class="fas fa-exclamation-triangle"></i> Are you sure you want to delete this batch?</h4>
+        <p>This action will soft-delete the batch. The data will be marked as inactive but retained in the database.</p>
+    </div>
+
+    <div class="card">
+        <div class="card-header bg-danger text-white">
+            <h5 class="mb-0">Batch Information</h5>
+        </div>
+        <div class="card-body">
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label class="text-muted">Batch Number</label>
+                    <p class="fs-5"><strong>@Model.BatchNumber</strong></p>
+                </div>
+                <div class="col-md-6">
+                    <label class="text-muted">Status</label>
+                    <p>
+                        <span class="badge @Model.StatusBadgeClass">
+                            <i class="fas @Model.StatusIcon"></i> @Model.Status
+                        </span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label class="text-muted">Production Order</label>
+                    <p>@(Model.ProductionOrder?.OrderNumber ?? "N/A")</p>
+                </div>
+                <div class="col-md-6">
+                    <label class="text-muted">Batch Date</label>
+                    <p>@Model.BatchDate.ToString("dd-MMM-yyyy")</p>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label class="text-muted">Shift</label>
+                    <p>
+                        <span class="badge @Model.ShiftBadgeClass">@Model.ShiftType</span>
+                    </p>
+                </div>
+                <div class="col-md-6">
+                    <label class="text-muted">Operator</label>
+                    <p>@(Model.Operator?.EmployeeName ?? "Unassigned")</p>
+                </div>
+            </div>
+
+            @if (!string.IsNullOrWhiteSpace(Model.Remarks))
+            {
+                <div class="mb-3">
+                    <label class="text-muted">Remarks</label>
+                    <p>@Model.Remarks</p>
+                </div>
+            }
+        </div>
+    </div>
+
+    <form asp-action="Delete" method="post" class="mt-4">
+        @Html.AntiForgeryToken()
+        <input type="hidden" asp-for="Id" />
+        <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-danger btn-lg">
+                <i class="fas fa-trash"></i> Yes, Delete This Batch
+            </button>
+            <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-secondary btn-lg">
+                <i class="fas fa-times"></i> No, Keep This Batch
+            </a>
+        </div>
+    </form>
+</div>

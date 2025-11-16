@@ -1,0 +1,424 @@
+@{
+    ViewData["Title"] = "Professional Features Demo";
+}
+
+<div class="container-fluid">
+    <!-- Page Header -->
+    <div class="row mb-4" data-aos="fade-down">
+        <div class="col-12">
+            <h1 class="display-4 fw-bold text-primary mb-2">
+                <i class="fas fa-rocket me-3"></i>RMMS Professional Features
+            </h1>
+            <p class="lead text-muted">Production-Grade UI/UX Enhancements - Phase 1 Implementation</p>
+        </div>
+    </div>
+
+    <!-- Feature Showcase Tabs -->
+    <ul class="nav nav-pills mb-4" id="featureTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="alerts-tab" data-bs-toggle="tab" data-bs-target="#alerts" type="button">
+                <i class="fas fa-bell"></i> Alerts & Notifications
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="buttons-tab" data-bs-toggle="tab" data-bs-target="#buttons" type="button">
+                <i class="fas fa-hand-pointer"></i> Buttons
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="forms-tab" data-bs-toggle="tab" data-bs-target="#forms" type="button">
+                <i class="fas fa-keyboard"></i> Forms
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="cards-tab" data-bs-toggle="tab" data-bs-target="#cards" type="button">
+                <i class="fas fa-square"></i> Cards
+            </button>
+        </li>
+    </ul>
+
+    <!-- Tab Content -->
+    <div class="tab-content" id="featureTabsContent">
+
+        <!-- ALERTS & NOTIFICATIONS TAB -->
+        <div class="tab-pane fade show active" id="alerts" role="tabpanel">
+            <div class="row">
+                <!-- SweetAlert2 Demos -->
+                <div class="col-lg-6 mb-4" data-aos="fade-right">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="mb-0"><i class="fas fa-exclamation-circle me-2"></i>SweetAlert2 Confirmations</h4>
+                        </div>
+                        <div class="card-body">
+                            <p class="mb-3">Professional, beautiful alerts replacing standard JavaScript alerts.</p>
+
+                            <div class="d-grid gap-2">
+                                <button type="button" class="btn btn-danger" onclick="demoDeleteConfirm()">
+                                    <i class="fas fa-trash"></i> Delete Confirmation
+                                </button>
+                                <button type="button" class="btn btn-success" onclick="demoSuccess()">
+                                    <i class="fas fa-check"></i> Success Alert
+                                </button>
+                                <button type="button" class="btn btn-warning" onclick="demoWarning()">
+                                    <i class="fas fa-exclamation-triangle"></i> Warning Alert
+                                </button>
+                                <button type="button" class="btn btn-danger" onclick="demoError()">
+                                    <i class="fas fa-times"></i> Error Alert
+                                </button>
+                                <button type="button" class="btn btn-info" onclick="demoInfo()">
+                                    <i class="fas fa-info-circle"></i> Info Alert
+                                </button>
+                                <button type="button" class="btn btn-secondary" onclick="demoLoading()">
+                                    <i class="fas fa-spinner"></i> Loading Indicator
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Toast Notifications -->
+                <div class="col-lg-6 mb-4" data-aos="fade-left">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="mb-0"><i class="fas fa-comment-dots me-2"></i>Toast Notifications</h4>
+                        </div>
+                        <div class="card-body">
+                            <p class="mb-3">Non-intrusive notifications for quick feedback.</p>
+
+                            <div class="d-grid gap-2">
+                                <button type="button" class="btn btn-success" onclick="RMMS.Toast.success('Operation completed successfully!')">
+                                    <i class="fas fa-check"></i> Success Toast
+                                </button>
+                                <button type="button" class="btn btn-info" onclick="RMMS.Toast.info('Processing your request...')">
+                                    <i class="fas fa-info"></i> Info Toast
+                                </button>
+                                <button type="button" class="btn btn-warning" onclick="RMMS.Toast.warning('Low stock alert!')">
+                                    <i class="fas fa-exclamation"></i> Warning Toast
+                                </button>
+                                <button type="button" class="btn btn-danger" onclick="RMMS.Toast.error('Failed to save record')">
+                                    <i class="fas fa-times"></i> Error Toast
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BUTTONS TAB -->
+        <div class="tab-pane fade" id="buttons" role="tabpanel">
+            <div class="row">
+                <div class="col-lg-6 mb-4" data-aos="fade-up">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="mb-0"><i class="fas fa-square me-2"></i>Button Styles</h4>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="mb-3">Standard Buttons</h5>
+                            <div class="d-flex flex-wrap gap-2 mb-4">
+                                <button class="btn btn-primary"><i class="fas fa-save"></i> Primary</button>
+                                <button class="btn btn-success"><i class="fas fa-check"></i> Success</button>
+                                <button class="btn btn-warning"><i class="fas fa-exclamation"></i> Warning</button>
+                                <button class="btn btn-danger"><i class="fas fa-trash"></i> Danger</button>
+                                <button class="btn btn-info"><i class="fas fa-info"></i> Info</button>
+                                <button class="btn btn-secondary"><i class="fas fa-times"></i> Secondary</button>
+                            </div>
+
+                            <h5 class="mb-3">Pill Buttons</h5>
+                            <div class="d-flex flex-wrap gap-2 mb-4">
+                                <button class="btn btn-primary btn-pill"><i class="fas fa-save"></i> Save Changes</button>
+                                <button class="btn btn-success btn-pill"><i class="fas fa-check"></i> Approve</button>
+                                <button class="btn btn-danger btn-pill"><i class="fas fa-trash"></i> Delete</button>
+                            </div>
+
+                            <h5 class="mb-3">Button Sizes</h5>
+                            <div class="d-flex align-items-center flex-wrap gap-2">
+                                <button class="btn btn-primary btn-sm">Small</button>
+                                <button class="btn btn-primary">Regular</button>
+                                <button class="btn btn-primary btn-lg">Large</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 mb-4" data-aos="fade-up">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="mb-0"><i class="fas fa-cog me-2"></i>Button States</h4>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="mb-3">Loading State</h5>
+                            <button class="btn btn-primary" id="demoLoadingBtn" onclick="demoButtonLoading()">
+                                <i class="fas fa-save"></i> Click to see loading state
+                            </button>
+
+                            <h5 class="mt-4 mb-3">Disabled State</h5>
+                            <div class="d-flex flex-wrap gap-2">
+                                <button class="btn btn-primary" disabled>Disabled Primary</button>
+                                <button class="btn btn-success" disabled>Disabled Success</button>
+                            </div>
+
+                            <h5 class="mt-4 mb-3">Action Buttons (for tables)</h5>
+                            <div class="action-buttons">
+                                <button class="btn btn-sm btn-info" title="View">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn btn-sm btn-warning" title="Edit">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-sm btn-danger" title="Delete">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FORMS TAB -->
+        <div class="tab-pane fade" id="forms" role="tabpanel">
+            <div class="row">
+                <div class="col-lg-6 mb-4" data-aos="fade-up">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="mb-0"><i class="fas fa-keyboard me-2"></i>Form Elements</h4>
+                        </div>
+                        <div class="card-body">
+                            <form class="needs-validation" novalidate>
+                                <div class="mb-3">
+                                    <label class="form-label">
+                                        Farmer Name <span class="required">*</span>
+                                    </label>
+                                    <input type="text" class="form-control" required placeholder="Enter farmer name">
+                                    <div class="invalid-feedback">Please enter farmer name</div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">
+                                        Select Rice Variety <span class="required">*</span>
+                                    </label>
+                                    <select class="form-select select2" required>
+                                        <option value="">Choose variety...</option>
+                                        <option>Basmati</option>
+                                        <option>Sona Masuri</option>
+                                        <option>Ponni</option>
+                                        <option>Samba</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Quantity (kg) <span class="required">*</span></label>
+                                    <input type="number" class="form-control" required placeholder="0.00">
+                                    <div class="invalid-feedback">Please enter quantity</div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Notes</label>
+                                    <textarea class="form-control" rows="3" placeholder="Optional notes..."></textarea>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary btn-pill">
+                                    <i class="fas fa-save"></i> Submit Form
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 mb-4" data-aos="fade-up">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="mb-0"><i class="fas fa-tasks me-2"></i>Advanced Inputs</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label class="form-label">Select2 Searchable Dropdown</label>
+                                <select class="form-select select2" multiple>
+                                    <option>Option 1</option>
+                                    <option>Option 2</option>
+                                    <option>Option 3</option>
+                                    <option>Option 4</option>
+                                    <option>Option 5</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Progress Example</label>
+                                <div class="progress">
+                                    <div class="progress-bar" role="progressbar" style="width: 75%">75%</div>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Switch Toggle</label>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="switch1">
+                                    <label class="form-check-label" for="switch1">Enable notifications</label>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Radio Buttons</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="paymentMethod" id="cash" checked>
+                                    <label class="form-check-label" for="cash">Cash</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="paymentMethod" id="online">
+                                    <label class="form-check-label" for="online">Online</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CARDS TAB -->
+        <div class="tab-pane fade" id="cards" role="tabpanel">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 mb-4" data-aos="zoom-in">
+                    <div class="card stat-card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <div>
+                                    <div class="stat-value">1,234</div>
+                                    <div class="stat-label">Total Farmers</div>
+                                </div>
+                                <div class="stat-icon bg-gradient-primary text-white">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 mb-4" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="card stat-card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <div>
+                                    <div class="stat-value">5,678</div>
+                                    <div class="stat-label">Production (kg)</div>
+                                </div>
+                                <div class="stat-icon bg-gradient-success text-white">
+                                    <i class="fas fa-industry"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 mb-4" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="card stat-card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <div>
+                                    <div class="stat-value">₹45,890</div>
+                                    <div class="stat-label">Revenue</div>
+                                </div>
+                                <div class="stat-icon bg-gradient-danger text-white">
+                                    <i class="fas fa-rupee-sign"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 mb-4" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="card stat-card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <div>
+                                    <div class="stat-value">892</div>
+                                    <div class="stat-label">Orders</div>
+                                </div>
+                                <div class="stat-icon" style="background: linear-gradient(135deg, #ffc107 0%, #e0a800 100%); color: white;">
+                                    <i class="fas fa-shopping-cart"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Demo Functions for SweetAlert2
+        function demoDeleteConfirm() {
+            RMMS.Alert.confirmDelete({
+                title: 'Delete Farmer Record?',
+                text: 'This will permanently delete Farmer John Doe and all associated records.'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    RMMS.Toast.success('Farmer record deleted successfully!');
+                }
+            });
+        }
+
+        function demoSuccess() {
+            RMMS.Alert.success({
+                title: 'Production Batch Created!',
+                text: 'Batch #PB-2024-001 has been created successfully'
+            });
+        }
+
+        function demoWarning() {
+            RMMS.Alert.warning({
+                title: 'Low Stock Alert',
+                text: 'Basmati rice stock is below minimum level (500 kg remaining)'
+            });
+        }
+
+        function demoError() {
+            RMMS.Alert.error({
+                title: 'Failed to Save',
+                text: 'Unable to save production batch. Please check all fields and try again.'
+            });
+        }
+
+        function demoInfo() {
+            RMMS.Alert.info({
+                title: 'System Maintenance',
+                text: 'Scheduled maintenance will occur tonight from 2 AM to 4 AM'
+            });
+        }
+
+        function demoLoading() {
+            RMMS.Alert.loading('Processing your request...');
+
+            // Simulate API call
+            setTimeout(() => {
+                RMMS.Alert.close();
+                RMMS.Toast.success('Process completed!');
+            }, 3000);
+        }
+
+        function demoButtonLoading() {
+            var $btn = $('#demoLoadingBtn');
+            RMMS.Form.showLoading($btn);
+
+            setTimeout(() => {
+                RMMS.Form.hideLoading($btn);
+                RMMS.Toast.success('Action completed!');
+            }, 3000);
+        }
+
+        // Form validation demo
+        $('form.needs-validation').on('submit', function(e) {
+            e.preventDefault();
+
+            if (this.checkValidity()) {
+                RMMS.Toast.success('Form submitted successfully!');
+                this.classList.add('was-validated');
+            } else {
+                RMMS.Toast.error('Please fill all required fields');
+                this.classList.add('was-validated');
+            }
+        });
+    </script>
+}

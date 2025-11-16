@@ -1,0 +1,17 @@
+/home/user01/claude-test/RMMS.Web/RMMS.DataAccess/bin/Release/net8.0/RMMS.DataAccess.deps.json
+/home/user01/claude-test/RMMS.Web/RMMS.DataAccess/bin/Release/net8.0/RMMS.DataAccess.dll
+/home/user01/claude-test/RMMS.Web/RMMS.DataAccess/bin/Release/net8.0/RMMS.DataAccess.pdb
+/home/user01/claude-test/RMMS.Web/RMMS.DataAccess/bin/Release/net8.0/RMMS.Common.dll
+/home/user01/claude-test/RMMS.Web/RMMS.DataAccess/bin/Release/net8.0/RMMS.Models.dll
+/home/user01/claude-test/RMMS.Web/RMMS.DataAccess/bin/Release/net8.0/RMMS.Common.pdb
+/home/user01/claude-test/RMMS.Web/RMMS.DataAccess/bin/Release/net8.0/RMMS.Models.pdb
+/home/user01/claude-test/RMMS.Web/RMMS.DataAccess/obj/Release/net8.0/RMMS.DataAccess.csproj.AssemblyReference.cache
+/home/user01/claude-test/RMMS.Web/RMMS.DataAccess/obj/Release/net8.0/RMMS.DataAccess.GeneratedMSBuildEditorConfig.editorconfig
+/home/user01/claude-test/RMMS.Web/RMMS.DataAccess/obj/Release/net8.0/RMMS.DataAccess.AssemblyInfoInputs.cache
+/home/user01/claude-test/RMMS.Web/RMMS.DataAccess/obj/Release/net8.0/RMMS.DataAccess.AssemblyInfo.cs
+/home/user01/claude-test/RMMS.Web/RMMS.DataAccess/obj/Release/net8.0/RMMS.DataAccess.csproj.CoreCompileInputs.cache
+/home/user01/claude-test/RMMS.Web/RMMS.DataAccess/obj/Release/net8.0/RMMS.DataAccess.csproj.CopyComplete
+/home/user01/claude-test/RMMS.Web/RMMS.DataAccess/obj/Release/net8.0/RMMS.DataAccess.dll
+/home/user01/claude-test/RMMS.Web/RMMS.DataAccess/obj/Release/net8.0/refint/RMMS.DataAccess.dll
+/home/user01/claude-test/RMMS.Web/RMMS.DataAccess/obj/Release/net8.0/RMMS.DataAccess.pdb
+/home/user01/claude-test/RMMS.Web/RMMS.DataAccess/obj/Release/net8.0/ref/RMMS.DataAccess.dll

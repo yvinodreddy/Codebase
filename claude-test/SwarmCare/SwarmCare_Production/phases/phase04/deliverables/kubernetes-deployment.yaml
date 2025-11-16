@@ -1,0 +1,509 @@
+#  Phase 04: Frontend Application - Kubernetes Deployment Manifests
+# Production-ready K8s configuration for RAG UI, Dashboard, and Podcast UI
+#
+# Components:
+# - Frontend (React app with Nginx)
+# - Backend API (FastAPI)
+# - Redis (caching)
+# - PostgreSQL (state storage)
+#
+# Apply with: kubectl apply -f kubernetes-deployment.yaml
+
+---
+# ============================================================================
+# NAMESPACE
+# ============================================================================
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: swarmcare-frontend
+  labels:
+    name: swarmcare-frontend
+    env: production
+
+---
+# ============================================================================
+# CONFIGMAPS
+# ============================================================================
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: frontend-config
+  namespace: swarmcare-frontend
+data:
+  REACT_APP_API_URL: "http://backend-service:8000"
+  REACT_APP_WS_URL: "ws://backend-service:8000"
+  NGINX_PORT: "80"
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: backend-config
+  namespace: swarmcare-frontend
+data:
+  API_HOST: "0.0.0.0"
+  API_PORT: "8000"
+  REDIS_HOST: "redis-service"
+  REDIS_PORT: "6379"
+  POSTGRES_HOST: "postgres-service"
+  POSTGRES_PORT: "5432"
+  LOG_LEVEL: "info"
+
+---
+# ============================================================================
+# SECRETS
+# ============================================================================
+apiVersion: v1
+kind: Secret
+metadata:
+  name: api-secrets
+  namespace: swarmcare-frontend
+type: Opaque
+stringData:
+  JWT_SECRET: "change-me-in-production-very-secret-key"
+  POSTGRES_PASSWORD: "change-me-postgres-password"
+  API_KEY: "change-me-api-key"
+
+---
+# ============================================================================
+# FRONTEND DEPLOYMENT
+# ============================================================================
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-deployment
+  namespace: swarmcare-frontend
+  labels:
+    app: frontend
+    component: ui
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+        component: ui
+    spec:
+      containers:
+      - name: frontend
+        image: swarmcare/frontend:latest
+        ports:
+        - containerPort: 80
+          name: http
+        envFrom:
+        - configMapRef:
+            name: frontend-config
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 5
+
+---
+# ============================================================================
+# BACKEND API DEPLOYMENT
+# ============================================================================
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-deployment
+  namespace: swarmcare-frontend
+  labels:
+    app: backend
+    component: api
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+        component: api
+    spec:
+      containers:
+      - name: backend
+        image: swarmcare/backend-api:latest
+        ports:
+        - containerPort: 8000
+          name: http
+        envFrom:
+        - configMapRef:
+            name: backend-config
+        env:
+        - name: JWT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: api-secrets
+              key: JWT_SECRET
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: api-secrets
+              key: POSTGRES_PASSWORD
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "500m"
+          limits:
+            memory: "1Gi"
+            cpu: "1000m"
+        livenessProbe:
+          httpGet:
+            path: /api/health
+            port: 8000
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /api/health
+            port: 8000
+          initialDelaySeconds: 10
+          periodSeconds: 5
+
+---
+# ============================================================================
+# REDIS DEPLOYMENT
+# ============================================================================
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-deployment
+  namespace: swarmcare-frontend
+  labels:
+    app: redis
+    component: cache
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis
+  template:
+    metadata:
+      labels:
+        app: redis
+        component: cache
+    spec:
+      containers:
+      - name: redis
+        image: redis:7-alpine
+        ports:
+        - containerPort: 6379
+          name: redis
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        volumeMounts:
+        - name: redis-data
+          mountPath: /data
+      volumes:
+      - name: redis-data
+        emptyDir: {}
+
+---
+# ============================================================================
+# POSTGRESQL DEPLOYMENT
+# ============================================================================
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres-deployment
+  namespace: swarmcare-frontend
+  labels:
+    app: postgres
+    component: database
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+        component: database
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:15-alpine
+        ports:
+        - containerPort: 5432
+          name: postgres
+        env:
+        - name: POSTGRES_DB
+          value: "swarmcare_frontend"
+        - name: POSTGRES_USER
+          value: "swarmcare"
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: api-secrets
+              key: POSTGRES_PASSWORD
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "500m"
+          limits:
+            memory: "1Gi"
+            cpu: "1000m"
+        volumeMounts:
+        - name: postgres-data
+          mountPath: /var/lib/postgresql/data
+      volumes:
+      - name: postgres-data
+        persistentVolumeClaim:
+          claimName: postgres-pvc
+
+---
+# ============================================================================
+# PERSISTENT VOLUME CLAIM
+# ============================================================================
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgres-pvc
+  namespace: swarmcare-frontend
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+
+---
+# ============================================================================
+# SERVICES
+# ============================================================================
+
+# Frontend Service (LoadBalancer)
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-service
+  namespace: swarmcare-frontend
+  labels:
+    app: frontend
+spec:
+  type: LoadBalancer
+  selector:
+    app: frontend
+  ports:
+  - name: http
+    protocol: TCP
+    port: 80
+    targetPort: 80
+  - name: https
+    protocol: TCP
+    port: 443
+    targetPort: 80
+
+---
+# Backend Service (ClusterIP)
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-service
+  namespace: swarmcare-frontend
+  labels:
+    app: backend
+spec:
+  type: ClusterIP
+  selector:
+    app: backend
+  ports:
+  - name: http
+    protocol: TCP
+    port: 8000
+    targetPort: 8000
+
+---
+# Redis Service (ClusterIP)
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-service
+  namespace: swarmcare-frontend
+  labels:
+    app: redis
+spec:
+  type: ClusterIP
+  selector:
+    app: redis
+  ports:
+  - name: redis
+    protocol: TCP
+    port: 6379
+    targetPort: 6379
+
+---
+# PostgreSQL Service (ClusterIP)
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-service
+  namespace: swarmcare-frontend
+  labels:
+    app: postgres
+spec:
+  type: ClusterIP
+  selector:
+    app: postgres
+  ports:
+  - name: postgres
+    protocol: TCP
+    port: 5432
+    targetPort: 5432
+
+---
+# ============================================================================
+# HORIZONTAL POD AUTOSCALER
+# ============================================================================
+
+# Frontend HPA
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: frontend-hpa
+  namespace: swarmcare-frontend
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: frontend-deployment
+  minReplicas: 3
+  maxReplicas: 10
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 70
+
+---
+# Backend HPA
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: backend-hpa
+  namespace: swarmcare-frontend
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: backend-deployment
+  minReplicas: 5
+  maxReplicas: 20
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 70
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: 80
+
+---
+# ============================================================================
+# INGRESS (Optional - for production with domain)
+# ============================================================================
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: swarmcare-ingress
+  namespace: swarmcare-frontend
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+spec:
+  tls:
+  - hosts:
+    - swarmcare.example.com
+    secretName: swarmcare-tls
+  rules:
+  - host: swarmcare.example.com
+    http:
+      paths:
+      - path: /api
+        pathType: Prefix
+        backend:
+          service:
+            name: backend-service
+            port:
+              number: 8000
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: frontend-service
+            port:
+              number: 80
+
+---
+# ============================================================================
+# NETWORK POLICY
+# ============================================================================
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: backend-network-policy
+  namespace: swarmcare-frontend
+spec:
+  podSelector:
+    matchLabels:
+      app: backend
+  policyTypes:
+  - Ingress
+  - Egress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: frontend
+    ports:
+    - protocol: TCP
+      port: 8000
+  egress:
+  - to:
+    - podSelector:
+        matchLabels:
+          app: redis
+    ports:
+    - protocol: TCP
+      port: 6379
+  - to:
+    - podSelector:
+        matchLabels:
+          app: postgres
+    ports:
+    - protocol: TCP
+      port: 5432

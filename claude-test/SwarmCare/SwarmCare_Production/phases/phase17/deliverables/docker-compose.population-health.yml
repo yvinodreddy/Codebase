@@ -1,0 +1,63 @@
+version: '3.8'
+
+services:
+  population-health:
+    build:
+      context: ..
+      dockerfile: deliverables/Dockerfile
+    container_name: population-health
+    ports:
+      - "8080:8080"
+      - "9090:9090"
+    environment:
+      - HIPAA_MODE=enabled
+      - LOG_LEVEL=INFO
+      - PROMETHEUS_PORT=9090
+    volumes:
+      - ./data:/app/data
+      - ./logs:/app/logs
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python3", "-c", "import sys; sys.exit(0)"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  redis:
+    image: redis:7-alpine
+    container_name: population-health-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    restart: unless-stopped
+
+  postgres:
+    image: postgres:15-alpine
+    container_name: population-health-db
+    environment:
+      - POSTGRES_DB=population_health
+      - POSTGRES_USER=phm_user
+      - POSTGRES_PASSWORD=changeme
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: population-health-prometheus
+    ports:
+      - "9091:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus-data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+    restart: unless-stopped
+
+volumes:
+  redis-data:
+  postgres-data:
+  prometheus-data:

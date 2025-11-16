@@ -1,0 +1,185 @@
+@model List<RMMS.Models.FixedAsset>
+@{
+    ViewData["Title"] = "Calculate Depreciation";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="card shadow">
+        <div class="card-header bg-primary text-white">
+            <h3><i class="fas fa-calculator"></i> Calculate Asset Depreciation</h3>
+        </div>
+
+        <div class="card-body">
+            <div class="row mb-4">
+                <div class="col-md-12">
+                    <a asp-action="Index" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Back to Assets List
+                    </a>
+                    <form asp-action="CalculateAllDepreciation" method="post" style="display:inline;">
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="btn btn-success" onclick="return confirm('Calculate depreciation for all active assets?');">
+                            <i class="fas fa-calculator"></i> Calculate All
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            @if (Model == null || !Model.Any())
+            {
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle"></i>
+                    No active assets found. Please add fixed assets first.
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle"></i>
+                    <strong>Depreciation Calculation:</strong> This uses straight-line depreciation method based on the asset's depreciation rate and years since purchase.
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover table-bordered">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Asset ID</th>
+                                <th>Asset Name</th>
+                                <th>Purchase Date</th>
+                                <th>Purchase Value</th>
+                                <th>Depreciation Rate</th>
+                                <th>Accumulated Depreciation</th>
+                                <th>Net Book Value</th>
+                                <th>Years Elapsed</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var asset in Model)
+                            {
+                                var yearsElapsed = DateTime.Now.Year - asset.PurchaseDate.Year;
+                                <tr>
+                                    <td>@asset.AssetId</td>
+                                    <td>
+                                        <strong>@asset.AssetName</strong>
+                                        @if (!string.IsNullOrEmpty(asset.Description))
+                                        {
+                                            <br /><small class="text-muted">@asset.Description</small>
+                                        }
+                                    </td>
+                                    <td>@asset.PurchaseDate.ToString("dd-MMM-yyyy")</td>
+                                    <td class="text-end">₹ @asset.PurchaseValue.ToString("N2")</td>
+                                    <td class="text-center">
+                                        @if (asset.DepreciationRate > 0)
+                                        {
+                                            <span class="badge bg-info">@asset.DepreciationRate.ToString("N2")%</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge bg-secondary">Not Set</span>
+                                        }
+                                    </td>
+                                    <td class="text-end">
+                                        <span class="text-danger">₹ @asset.AccumulatedDepreciation.ToString("N2")</span>
+                                    </td>
+                                    <td class="text-end">
+                                        <strong class="text-success">₹ @asset.NetBookValue.ToString("N2")</strong>
+                                    </td>
+                                    <td class="text-center">
+                                        <span class="badge bg-primary">@yearsElapsed years</span>
+                                    </td>
+                                    <td class="text-center">
+                                        @if (asset.DepreciationRate > 0)
+                                        {
+                                            <form asp-action="CalculateDepreciation" asp-route-id="@asset.Id" method="post" style="display:inline;">
+                                                @Html.AntiForgeryToken()
+                                                <button type="submit" class="btn btn-sm btn-primary">
+                                                    <i class="fas fa-calculator"></i> Calculate
+                                                </button>
+                                            </form>
+                                        }
+                                        else
+                                        {
+                                            <a asp-action="Edit" asp-route-id="@asset.Id" class="btn btn-sm btn-warning">
+                                                <i class="fas fa-edit"></i> Set Rate
+                                            </a>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                        <tfoot class="table-light">
+                            <tr>
+                                <th colspan="3" class="text-end">Total:</th>
+                                <th class="text-end">₹ @Model.Sum(a => a.PurchaseValue).ToString("N2")</th>
+                                <th></th>
+                                <th class="text-end text-danger">₹ @Model.Sum(a => a.AccumulatedDepreciation).ToString("N2")</th>
+                                <th class="text-end text-success"><strong>₹ @Model.Sum(a => a.NetBookValue).ToString("N2")</strong></th>
+                                <th colspan="2"></th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+
+                <!-- Depreciation Summary Cards -->
+                <div class="row mt-4">
+                    <div class="col-md-3">
+                        <div class="card bg-primary text-white">
+                            <div class="card-body">
+                                <h5>Total Assets</h5>
+                                <h2>@Model.Count</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card bg-info text-white">
+                            <div class="card-body">
+                                <h5>Total Purchase Value</h5>
+                                <h2>₹ @Model.Sum(a => a.PurchaseValue).ToString("N0")</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card bg-danger text-white">
+                            <div class="card-body">
+                                <h5>Total Depreciation</h5>
+                                <h2>₹ @Model.Sum(a => a.AccumulatedDepreciation).ToString("N0")</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card bg-success text-white">
+                            <div class="card-body">
+                                <h5>Total Net Book Value</h5>
+                                <h2>₹ @Model.Sum(a => a.NetBookValue).ToString("N0")</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Depreciation Formula Info -->
+                <div class="alert alert-secondary mt-4">
+                    <h5><i class="fas fa-info-circle"></i> Depreciation Calculation Formula</h5>
+                    <p><strong>Straight-Line Depreciation Method:</strong></p>
+                    <ul>
+                        <li>Yearly Depreciation = (Purchase Value × Depreciation Rate) / 100</li>
+                        <li>Accumulated Depreciation = Yearly Depreciation × Years Elapsed</li>
+                        <li>Net Book Value = Purchase Value - Accumulated Depreciation</li>
+                    </ul>
+                    <p class="mb-0"><strong>Note:</strong> The system automatically calculates years elapsed from the purchase date.</p>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<style>
+    .card-body h5 {
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+    }
+    .card-body h2 {
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+</style>

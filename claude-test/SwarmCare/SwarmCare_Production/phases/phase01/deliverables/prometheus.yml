@@ -1,0 +1,54 @@
+# SwarmCare Phase 01: Prometheus Monitoring Configuration
+# Story Points: 60 | Generated: 2025-10-28
+
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+  external_labels:
+    cluster: 'swarmcare-production'
+    environment: 'production'
+
+# Alertmanager configuration
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+          # - alertmanager:9093
+
+# Rule files
+rule_files:
+  # - "alert_rules.yml"
+
+# Scrape configurations
+scrape_configs:
+  # RAG API metrics
+  - job_name: 'rag-api'
+    static_configs:
+      - targets: ['rag-api:8000']
+    metrics_path: '/metrics'
+    scrape_interval: 10s
+
+  # Neo4j metrics
+  - job_name: 'neo4j'
+    static_configs:
+      - targets: ['neo4j:2004']
+    metrics_path: '/metrics'
+    scrape_interval: 30s
+
+  # Weaviate metrics
+  - job_name: 'weaviate'
+    static_configs:
+      - targets: ['weaviate:8080']
+    metrics_path: '/metrics'
+    scrape_interval: 30s
+
+  # Redis metrics
+  - job_name: 'redis'
+    static_configs:
+      - targets: ['redis:6379']
+    scrape_interval: 30s
+
+  # Prometheus self-monitoring
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']

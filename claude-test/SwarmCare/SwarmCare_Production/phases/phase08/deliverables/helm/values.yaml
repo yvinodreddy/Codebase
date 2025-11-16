@@ -1,0 +1,285 @@
+# SwarmCare Production Helm Values
+# Complete production-ready configuration
+
+# Global settings
+global:
+  environment: production
+  domain: swarmcare.example.com
+  imageRegistry: swarmcare.azurecr.io
+  imagePullSecrets:
+    - name: acr-secret
+  storageClass: managed-premium
+
+# Replication and scaling
+replicaCount: 3
+autoscaling:
+  enabled: true
+  minReplicas: 3
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 70
+  targetMemoryUtilizationPercentage: 80
+
+# Image configuration
+image:
+  repository: swarmcare/platform
+  pullPolicy: IfNotPresent
+  tag: "1.0.0"
+
+# Service configuration
+service:
+  type: ClusterIP
+  port: 8000
+  targetPort: 8000
+  annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "8000"
+    prometheus.io/path: "/metrics"
+
+# Ingress configuration
+ingress:
+  enabled: true
+  className: nginx
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/proxy-body-size: "50m"
+    nginx.ingress.kubernetes.io/rate-limit: "100"
+  hosts:
+    - host: swarmcare.example.com
+      paths:
+        - path: /
+          pathType: Prefix
+    - host: api.swarmcare.example.com
+      paths:
+        - path: /
+          pathType: Prefix
+  tls:
+    - secretName: swarmcare-tls
+      hosts:
+        - swarmcare.example.com
+        - api.swarmcare.example.com
+
+# Resource limits
+resources:
+  limits:
+    cpu: 2000m
+    memory: 4Gi
+  requests:
+    cpu: 1000m
+    memory: 2Gi
+
+# Health checks
+livenessProbe:
+  httpGet:
+    path: /health/live
+    port: 8000
+  initialDelaySeconds: 60
+  periodSeconds: 10
+  timeoutSeconds: 5
+  failureThreshold: 3
+  successThreshold: 1
+
+readinessProbe:
+  httpGet:
+    path: /health/ready
+    port: 8000
+  initialDelaySeconds: 30
+  periodSeconds: 5
+  timeoutSeconds: 3
+  failureThreshold: 3
+  successThreshold: 1
+
+startupProbe:
+  httpGet:
+    path: /health/startup
+    port: 8000
+  initialDelaySeconds: 10
+  periodSeconds: 5
+  timeoutSeconds: 3
+  failureThreshold: 30
+
+# Security context
+securityContext:
+  runAsNonRoot: true
+  runAsUser: 1000
+  fsGroup: 1000
+  capabilities:
+    drop:
+      - ALL
+  readOnlyRootFilesystem: true
+  allowPrivilegeEscalation: false
+
+podSecurityContext:
+  seccompProfile:
+    type: RuntimeDefault
+
+# Node affinity and tolerations
+affinity:
+  podAntiAffinity:
+    preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 100
+        podAffinityTerm:
+          labelSelector:
+            matchExpressions:
+              - key: app.kubernetes.io/name
+                operator: In
+                values:
+                  - swarmcare
+          topologyKey: kubernetes.io/hostname
+
+tolerations: []
+
+# Pod Disruption Budget
+podDisruptionBudget:
+  enabled: true
+  minAvailable: 2
+
+# Network Policy
+networkPolicy:
+  enabled: true
+  policyTypes:
+    - Ingress
+    - Egress
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              name: ingress-nginx
+      ports:
+        - protocol: TCP
+          port: 8000
+  egress:
+    - to:
+        - namespaceSelector: {}
+      ports:
+        - protocol: TCP
+          port: 5432  # PostgreSQL
+        - protocol: TCP
+          port: 6379  # Redis
+        - protocol: TCP
+          port: 443   # HTTPS
+
+# Service Account
+serviceAccount:
+  create: true
+  annotations:
+    azure.workload.identity/client-id: "00000000-0000-0000-0000-000000000000"
+  name: swarmcare-sa
+
+# RBAC
+rbac:
+  create: true
+  rules:
+    - apiGroups: [""]
+      resources: ["configmaps", "secrets"]
+      verbs: ["get", "list", "watch"]
+
+# Persistent Volume Claims
+persistence:
+  enabled: true
+  storageClass: managed-premium
+  accessMode: ReadWriteOnce
+  size: 100Gi
+  mountPath: /data
+
+# PostgreSQL configuration
+postgresql:
+  enabled: true
+  auth:
+    username: swarmcare
+    database: swarmcare
+    existingSecret: postgresql-secret
+  primary:
+    persistence:
+      enabled: true
+      size: 100Gi
+      storageClass: managed-premium
+  replication:
+    enabled: true
+    readReplicas: 2
+
+# Redis configuration
+redis:
+  enabled: true
+  architecture: replication
+  auth:
+    enabled: true
+    existingSecret: redis-secret
+  master:
+    persistence:
+      enabled: true
+      size: 10Gi
+  replica:
+    replicaCount: 2
+    persistence:
+      enabled: true
+      size: 10Gi
+
+# Monitoring configuration
+monitoring:
+  enabled: true
+  prometheus:
+    enabled: true
+    serviceMonitor:
+      enabled: true
+      interval: 30s
+      scrapeTimeout: 10s
+  grafana:
+    enabled: true
+    adminPassword: ""  # Set via secret
+    datasources:
+      - name: Prometheus
+        type: prometheus
+        url: http://prometheus-server
+        isDefault: true
+    dashboards:
+      enabled: true
+
+# Logging configuration
+logging:
+  enabled: true
+  fluentbit:
+    enabled: true
+    backend:
+      type: elasticsearch
+      es:
+        host: elasticsearch
+        port: 9200
+
+# Backup configuration
+backup:
+  enabled: true
+  schedule: "0 2 * * *"  # Daily at 2 AM
+  retention: 30
+
+# Environment variables
+env:
+  - name: ENVIRONMENT
+    value: "production"
+  - name: LOG_LEVEL
+    value: "INFO"
+  - name: DATABASE_URL
+    valueFrom:
+      secretKeyRef:
+        name: database-secret
+        key: url
+  - name: REDIS_URL
+    valueFrom:
+      secretKeyRef:
+        name: redis-secret
+        key: url
+
+# Extra volumes
+extraVolumes:
+  - name: tmp
+    emptyDir: {}
+  - name: cache
+    emptyDir:
+      sizeLimit: 1Gi
+
+extraVolumeMounts:
+  - name: tmp
+    mountPath: /tmp
+  - name: cache
+    mountPath: /cache

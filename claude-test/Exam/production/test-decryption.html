@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Decryption Test</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+</head>
+<body>
+    <h1>Question Decryption Test</h1>
+    <div id="results"></div>
+
+    <script>
+        // Load encrypted data
+        const encryptedData = {
+            // Add first few encrypted questions from inline-encrypted.js
+            mcq: []
+        };
+
+        // Read from the inline-encrypted.js file
+        fetch('inline-encrypted.js')
+            .then(response => response.text())
+            .then(text => {
+                // Extract the ENC_DATA
+                eval(text);
+
+                const key = 'ExamSecure2025!@#$%';
+                const results = document.getElementById('results');
+
+                // Test decryption of first 3 MCQ questions
+                results.innerHTML = '<h2>Testing MCQ Decryption:</h2>';
+
+                for (let i = 0; i < Math.min(3, ENC_DATA.mcq.length); i++) {
+                    try {
+                        const decrypted = CryptoJS.AES.decrypt(ENC_DATA.mcq[i], key);
+                        const question = JSON.parse(decrypted.toString(CryptoJS.enc.Utf8));
+
+                        results.innerHTML += `
+                            <div style="border: 1px solid #ccc; padding: 10px; margin: 10px 0;">
+                                <h3>Question ${i + 1}: ${question.id}</h3>
+                                <p><strong>Category:</strong> ${question.category}</p>
+                                <p><strong>Type:</strong> ${question.type}</p>
+                                <p><strong>Points:</strong> ${question.points}</p>
+                                <p><strong>Question:</strong> ${question.question.substring(0, 100)}...</p>
+                                <p style="color: green;">✓ Successfully decrypted</p>
+                            </div>
+                        `;
+                    } catch (e) {
+                        results.innerHTML += `
+                            <div style="border: 1px solid red; padding: 10px; margin: 10px 0;">
+                                <h3>Question ${i + 1}</h3>
+                                <p style="color: red;">✗ Decryption failed: ${e.message}</p>
+                            </div>
+                        `;
+                    }
+                }
+
+                // Test subjective questions
+                results.innerHTML += '<h2>Testing Subjective Question Decryption:</h2>';
+
+                for (let i = 0; i < Math.min(2, ENC_DATA.sub.length); i++) {
+                    try {
+                        const decrypted = CryptoJS.AES.decrypt(ENC_DATA.sub[i], key);
+                        const question = JSON.parse(decrypted.toString(CryptoJS.enc.Utf8));
+
+                        results.innerHTML += `
+                            <div style="border: 1px solid #ccc; padding: 10px; margin: 10px 0;">
+                                <h3>Question ${i + 1}: ${question.id}</h3>
+                                <p><strong>Category:</strong> ${question.category}</p>
+                                <p><strong>Type:</strong> ${question.type}</p>
+                                <p><strong>Points:</strong> ${question.points}</p>
+                                <p><strong>Question:</strong> ${question.question.substring(0, 100)}...</p>
+                                <p style="color: green;">✓ Successfully decrypted</p>
+                            </div>
+                        `;
+                    } catch (e) {
+                        results.innerHTML += `
+                            <div style="border: 1px solid red; padding: 10px; margin: 10px 0;">
+                                <h3>Question ${i + 1}</h3>
+                                <p style="color: red;">✗ Decryption failed: ${e.message}</p>
+                            </div>
+                        `;
+                    }
+                }
+
+                results.innerHTML += `
+                    <h2 style="color: green;">✓ Decryption Test Complete</h2>
+                    <p><strong>Total MCQ Questions:</strong> ${ENC_DATA.mcq.length}</p>
+                    <p><strong>Total Subjective Questions:</strong> ${ENC_DATA.sub.length}</p>
+                `;
+            })
+            .catch(error => {
+                document.getElementById('results').innerHTML = `
+                    <p style="color: red;">Error loading encrypted data: ${error.message}</p>
+                `;
+            });
+    </script>
+</body>
+</html>

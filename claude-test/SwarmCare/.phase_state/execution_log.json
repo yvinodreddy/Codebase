@@ -1,0 +1,10 @@
+{
+  "logs": [
+    {
+      "timestamp": "2025-10-25T20:43:16.293319",
+      "action": "INIT_PROJECT",
+      "message": "Project initialized",
+      "user": "user01"
+    }
+  ]
+}

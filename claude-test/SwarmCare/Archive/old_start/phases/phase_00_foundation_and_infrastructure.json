@@ -1,0 +1,84 @@
+{
+  "phase_id": 0,
+  "name": "Foundation & Infrastructure",
+  "epic": "Epic 1",
+  "story_points": 37,
+  "priority": "P0",
+  "dependencies": [],
+  "version": "v1.0",
+  "user_stories": [
+    {
+      "story_id": "1.1",
+      "title": "Development Environment Setup",
+      "description": "As a Developer, I want a fully configured development environment so that I can start building features immediately",
+      "acceptance_criteria": [
+        "Python 3.11+ installed with virtual environment",
+        "Node.js 20+ installed with npm/pnpm",
+        "Docker Desktop running with all containers",
+        "VS Code with Claude Code extension",
+        "Git configured with SSH keys",
+        "Access to all required repositories"
+      ],
+      "tasks": [
+        "Install Python 3.11 (pyenv recommended)",
+        "Install Node.js 20 (nvm recommended)",
+        "Install Docker Desktop",
+        "Install VS Code + extensions (Python, ESLint, Prettier, Claude Code)",
+        "Configure Git (name, email, SSH key)",
+        "Clone repositories: RAG Heat, SWARMCARE"
+      ],
+      "story_points": 3,
+      "priority": "P0"
+    },
+    {
+      "story_id": "1.2",
+      "title": "Cloud Infrastructure Provisioning",
+      "description": "As a DevOps Engineer, I want production-ready cloud infrastructure so that all services can be deployed and scaled",
+      "acceptance_criteria": [
+        "GCP/AWS account created and configured",
+        "Kubernetes cluster (GKE/EKS) provisioned",
+        "VPC, subnets, security groups configured",
+        "Cloud databases provisioned (PostgreSQL, Redis)",
+        "Monitoring stack deployed (Prometheus, Grafana)",
+        "CI/CD pipeline active (GitHub Actions)"
+      ],
+      "tasks": [
+        "Create GCP project or AWS account",
+        "Provision GKE cluster (3 nodes minimum)",
+        "Set up VPC with public/private subnets",
+        "Deploy PostgreSQL (Cloud SQL or RDS)",
+        "Deploy Redis (Cloud Memorystore or ElastiCache)",
+        "Set up Prometheus + Grafana",
+        "Configure GitHub Actions for CI/CD",
+        "Set up secrets management (GCP Secret Manager or AWS Secrets Manager)"
+      ],
+      "story_points": 13,
+      "priority": "P0"
+    },
+    {
+      "story_id": "1.3",
+      "title": "Neo4j Knowledge Graph Setup",
+      "description": "As a Data Engineer, I want a Neo4j instance with medical ontologies loaded so that the RAG system can perform knowledge graph queries",
+      "acceptance_criteria": [
+        "Neo4j 5.x deployed (cloud or self-hosted)",
+        "13 medical ontologies downloaded",
+        "Ontology loading scripts created",
+        "All ontologies loaded into Neo4j",
+        "Indexes created for performance",
+        "Sample queries validated"
+      ],
+      "tasks": [
+        "Deploy Neo4j (Neo4j Aura or self-hosted on GCP/AWS)",
+        "Download 13 ontologies (SNOMED-CT, ICD-10/11, RxNorm, LOINC, CPT, HL7 FHIR, UMLS, HPO, GO, DO, DrugBank, CQL, OMOP CDM)",
+        "Create Python scripts for ontology parsing",
+        "Transform ontologies to graph format",
+        "Batch load into Neo4j",
+        "Create indexes on common fields",
+        "Write validation queries",
+        "Test query performance (<100ms for simple queries)"
+      ],
+      "story_points": 21,
+      "priority": "P0"
+    }
+  ]
+}

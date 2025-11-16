@@ -1,0 +1,660 @@
+# Kubernetes Deployment for SWARMCARE Agents
+# Phase 02: Production-Ready Kubernetes Manifests
+# Version: 2.1
+# Last Updated: 2025-10-28
+
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: swarmcare-production
+  labels:
+    name: swarmcare-production
+    phase: "02"
+
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: swarmcare-agents-sa
+  namespace: swarmcare-production
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: swarmcare-agents-role
+  namespace: swarmcare-production
+rules:
+  - apiGroups: [""]
+    resources: ["configmaps", "secrets"]
+    verbs: ["get", "list", "watch"]
+  - apiGroups: [""]
+    resources: ["pods"]
+    verbs: ["get", "list"]
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: swarmcare-agents-rolebinding
+  namespace: swarmcare-production
+subjects:
+  - kind: ServiceAccount
+    name: swarmcare-agents-sa
+roleRef:
+  kind: Role
+  name: swarmcare-agents-role
+  apiGroup: rbac.authorization.k8s.io
+
+---
+# Knowledge Agent Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: knowledge-agent
+  namespace: swarmcare-production
+  labels:
+    app: swarmcare
+    component: knowledge-agent
+    phase: "02"
+spec:
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: swarmcare
+      component: knowledge-agent
+  template:
+    metadata:
+      labels:
+        app: swarmcare
+        component: knowledge-agent
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9090"
+    spec:
+      serviceAccountName: swarmcare-agents-sa
+      containers:
+        - name: knowledge-agent
+          image: swarmcare/knowledge-agent:2.1
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+              name: http
+            - containerPort: 9090
+              name: metrics
+          env:
+            - name: AGENT_TYPE
+              value: "knowledge"
+            - name: PERFORMANCE_SLA_MS
+              value: "2000"
+            - name: NEO4J_URI
+              valueFrom:
+                secretKeyRef:
+                  name: swarmcare-secrets
+                  key: neo4j-uri
+            - name: RAG_HEAT_ENDPOINT
+              valueFrom:
+                configMapKeyRef:
+                  name: swarmcare-agents-config
+                  key: rag_heat_endpoint
+          resources:
+            requests:
+              cpu: "1"
+              memory: "2Gi"
+            limits:
+              cpu: "2"
+              memory: "4Gi"
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 5
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: knowledge-agent
+  namespace: swarmcare-production
+spec:
+  selector:
+    app: swarmcare
+    component: knowledge-agent
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8080
+    - name: metrics
+      port: 9090
+      targetPort: 9090
+  type: ClusterIP
+
+---
+# Case Agent Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: case-agent
+  namespace: swarmcare-production
+  labels:
+    app: swarmcare
+    component: case-agent
+    phase: "02"
+spec:
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: swarmcare
+      component: case-agent
+  template:
+    metadata:
+      labels:
+        app: swarmcare
+        component: case-agent
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9090"
+    spec:
+      serviceAccountName: swarmcare-agents-sa
+      containers:
+        - name: case-agent
+          image: swarmcare/case-agent:2.1
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+              name: http
+            - containerPort: 9090
+              name: metrics
+          env:
+            - name: AGENT_TYPE
+              value: "case"
+            - name: PERFORMANCE_SLA_MS
+              value: "3000"
+            - name: EPIC_FHIR_ENDPOINT
+              valueFrom:
+                secretKeyRef:
+                  name: swarmcare-secrets
+                  key: epic-fhir-endpoint
+          resources:
+            requests:
+              cpu: "1.5"
+              memory: "3Gi"
+            limits:
+              cpu: "3"
+              memory: "6Gi"
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 5
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 1000
+            capabilities:
+              drop:
+                - ALL
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: case-agent
+  namespace: swarmcare-production
+spec:
+  selector:
+    app: swarmcare
+    component: case-agent
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8080
+    - name: metrics
+      port: 9090
+      targetPort: 9090
+  type: ClusterIP
+
+---
+# Conversation Agent Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: conversation-agent
+  namespace: swarmcare-production
+  labels:
+    app: swarmcare
+    component: conversation-agent
+    phase: "02"
+spec:
+  replicas: 5
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 2
+      maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: swarmcare
+      component: conversation-agent
+  template:
+    metadata:
+      labels:
+        app: swarmcare
+        component: conversation-agent
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9090"
+    spec:
+      serviceAccountName: swarmcare-agents-sa
+      containers:
+        - name: conversation-agent
+          image: swarmcare/conversation-agent:2.1
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+              name: http
+            - containerPort: 9090
+              name: metrics
+          env:
+            - name: AGENT_TYPE
+              value: "conversation"
+            - name: PERFORMANCE_SLA_MS
+              value: "1000"
+          resources:
+            requests:
+              cpu: "1"
+              memory: "2Gi"
+            limits:
+              cpu: "2"
+              memory: "4Gi"
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 5
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: conversation-agent
+  namespace: swarmcare-production
+spec:
+  selector:
+    app: swarmcare
+    component: conversation-agent
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8080
+    - name: metrics
+      port: 9090
+      targetPort: 9090
+  type: ClusterIP
+
+---
+# Compliance Agent Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: compliance-agent
+  namespace: swarmcare-production
+  labels:
+    app: swarmcare
+    component: compliance-agent
+    phase: "02"
+spec:
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: swarmcare
+      component: compliance-agent
+  template:
+    metadata:
+      labels:
+        app: swarmcare
+        component: compliance-agent
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9090"
+    spec:
+      serviceAccountName: swarmcare-agents-sa
+      containers:
+        - name: compliance-agent
+          image: swarmcare/compliance-agent:2.1
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+              name: http
+            - containerPort: 9090
+              name: metrics
+          env:
+            - name: AGENT_TYPE
+              value: "compliance"
+            - name: PERFORMANCE_SLA_MS
+              value: "100"
+          resources:
+            requests:
+              cpu: "500m"
+              memory: "1Gi"
+            limits:
+              cpu: "1"
+              memory: "2Gi"
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 5
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 1000
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop:
+                - ALL
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: compliance-agent
+  namespace: swarmcare-production
+spec:
+  selector:
+    app: swarmcare
+    component: compliance-agent
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8080
+    - name: metrics
+      port: 9090
+      targetPort: 9090
+  type: ClusterIP
+
+---
+# Podcast Agent Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: podcast-agent
+  namespace: swarmcare-production
+  labels:
+    app: swarmcare
+    component: podcast-agent
+    phase: "02"
+spec:
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: swarmcare
+      component: podcast-agent
+  template:
+    metadata:
+      labels:
+        app: swarmcare
+        component: podcast-agent
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9090"
+    spec:
+      serviceAccountName: swarmcare-agents-sa
+      containers:
+        - name: podcast-agent
+          image: swarmcare/podcast-agent:2.1
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+              name: http
+            - containerPort: 9090
+              name: metrics
+          env:
+            - name: AGENT_TYPE
+              value: "podcast"
+            - name: PERFORMANCE_SLA_MS
+              value: "30000"
+          resources:
+            requests:
+              cpu: "2"
+              memory: "4Gi"
+            limits:
+              cpu: "4"
+              memory: "8Gi"
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 60
+            periodSeconds: 30
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 10
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: podcast-agent
+  namespace: swarmcare-production
+spec:
+  selector:
+    app: swarmcare
+    component: podcast-agent
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8080
+    - name: metrics
+      port: 9090
+      targetPort: 9090
+  type: ClusterIP
+
+---
+# QA Agent Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: qa-agent
+  namespace: swarmcare-production
+  labels:
+    app: swarmcare
+    component: qa-agent
+    phase: "02"
+spec:
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: swarmcare
+      component: qa-agent
+  template:
+    metadata:
+      labels:
+        app: swarmcare
+        component: qa-agent
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9090"
+    spec:
+      serviceAccountName: swarmcare-agents-sa
+      containers:
+        - name: qa-agent
+          image: swarmcare/qa-agent:2.1
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+              name: http
+            - containerPort: 9090
+              name: metrics
+          env:
+            - name: AGENT_TYPE
+              value: "qa"
+            - name: PERFORMANCE_SLA_MS
+              value: "500"
+          resources:
+            requests:
+              cpu: "1"
+              memory: "2Gi"
+            limits:
+              cpu: "2"
+              memory: "4Gi"
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 5
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: qa-agent
+  namespace: swarmcare-production
+spec:
+  selector:
+    app: swarmcare
+    component: qa-agent
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8080
+    - name: metrics
+      port: 9090
+      targetPort: 9090
+  type: ClusterIP
+
+---
+# Horizontal Pod Autoscaler for Conversation Agent (high traffic)
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: conversation-agent-hpa
+  namespace: swarmcare-production
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: conversation-agent
+  minReplicas: 3
+  maxReplicas: 10
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 70
+    - type: Resource
+      resource:
+        name: memory
+        target:
+          type: Utilization
+          averageUtilization: 80
+
+---
+# Network Policy for Agent Security
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: swarmcare-agents-network-policy
+  namespace: swarmcare-production
+spec:
+  podSelector:
+    matchLabels:
+      app: swarmcare
+  policyTypes:
+    - Ingress
+    - Egress
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              name: swarmcare-production
+      ports:
+        - protocol: TCP
+          port: 8080
+        - protocol: TCP
+          port: 9090
+  egress:
+    - to:
+        - namespaceSelector: {}
+      ports:
+        - protocol: TCP
+          port: 443
+        - protocol: TCP
+          port: 80
+
+---
+# Pod Disruption Budget for High Availability
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: swarmcare-agents-pdb
+  namespace: swarmcare-production
+spec:
+  minAvailable: 2
+  selector:
+    matchLabels:
+      app: swarmcare

@@ -1,0 +1,86 @@
+{
+  "execution_id": "6b4131e7-4d9c-473e-b21a-4ece9275f33e",
+  "workflow_id": "retry_workflow",
+  "state": "COMPLETED",
+  "tasks": {
+    "retry_task": {
+      "task_id": "retry_task",
+      "name": "Retry Task",
+      "action": "failing_task",
+      "dependencies": [],
+      "max_retries": 3,
+      "timeout_seconds": 300,
+      "state": "COMPLETED",
+      "result": {
+        "success": true
+      },
+      "error": "Attempt 2 failed",
+      "start_time": 1761650890.6717677,
+      "end_time": 1761650893.674575,
+      "retry_count": 2
+    }
+  },
+  "context": {},
+  "start_time": 1761650890.6716971,
+  "end_time": 1761650893.6749642,
+  "error": null,
+  "audit_log": [
+    {
+      "timestamp": "2025-10-28T07:28:10.671707",
+      "execution_id": "6b4131e7-4d9c-473e-b21a-4ece9275f33e",
+      "event": "WORKFLOW_STARTED",
+      "details": {
+        "workflow_id": "retry_workflow"
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:28:10.671802",
+      "execution_id": "6b4131e7-4d9c-473e-b21a-4ece9275f33e",
+      "event": "TASK_STARTED",
+      "details": {
+        "task_id": "retry_task",
+        "task_name": "Retry Task"
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:28:10.671871",
+      "execution_id": "6b4131e7-4d9c-473e-b21a-4ece9275f33e",
+      "event": "TASK_RETRY",
+      "details": {
+        "task_id": "retry_task",
+        "error": "Attempt 1 failed",
+        "attempt": 1,
+        "backoff_seconds": 1
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:28:11.672421",
+      "execution_id": "6b4131e7-4d9c-473e-b21a-4ece9275f33e",
+      "event": "TASK_RETRY",
+      "details": {
+        "task_id": "retry_task",
+        "error": "Attempt 2 failed",
+        "attempt": 2,
+        "backoff_seconds": 2
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:28:13.674925",
+      "execution_id": "6b4131e7-4d9c-473e-b21a-4ece9275f33e",
+      "event": "TASK_COMPLETED",
+      "details": {
+        "task_id": "retry_task",
+        "duration_seconds": 3.002807378768921,
+        "attempt": 3
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:28:13.675116",
+      "execution_id": "6b4131e7-4d9c-473e-b21a-4ece9275f33e",
+      "event": "WORKFLOW_COMPLETED",
+      "details": {
+        "duration_seconds": 3.0032670497894287
+      }
+    }
+  ]
+}

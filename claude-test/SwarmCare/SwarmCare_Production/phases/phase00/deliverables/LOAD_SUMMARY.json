@@ -1,0 +1,11 @@
+{
+  "timestamp": "2025-11-08T13:40:31.450691",
+  "success": true,
+  "nodes": 7050,
+  "relationships": 151,
+  "labels": 13,
+  "relationship_types": 4,
+  "property_keys": 24,
+  "constraints": 13,
+  "indexes": 26
+}

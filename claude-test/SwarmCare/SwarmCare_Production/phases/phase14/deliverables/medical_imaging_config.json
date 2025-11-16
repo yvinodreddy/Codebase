@@ -1,0 +1,206 @@
+{
+  "version": "1.0.0",
+  "application": {
+    "name": "Medical Imaging System",
+    "environment": "production",
+    "port": 8080,
+    "log_level": "INFO",
+    "debug": false
+  },
+  "deployment": {
+    "mode": "production",
+    "replicas": 3,
+    "auto_scaling": {
+      "enabled": true,
+      "min_replicas": 3,
+      "max_replicas": 10,
+      "target_cpu_percent": 70,
+      "target_memory_percent": 80
+    },
+    "health_check": {
+      "enabled": true,
+      "interval_seconds": 30,
+      "timeout_seconds": 10,
+      "retries": 3
+    }
+  },
+  "imaging": {
+    "supported_modalities": [
+      "XRAY",
+      "CT",
+      "MRI",
+      "ULTRASOUND",
+      "MAMMOGRAPHY",
+      "PET"
+    ],
+    "supported_formats": [
+      ".dcm",
+      ".png",
+      ".jpg",
+      ".jpeg",
+      ".tiff",
+      ".bmp"
+    ],
+    "max_image_size_mb": 100,
+    "quality_threshold": 70.0,
+    "confidence_threshold": 0.5,
+    "processing_timeout_ms": 30000
+  },
+  "abnormality_detection": {
+    "enabled_types": [
+      "Fracture",
+      "Mass/Lesion",
+      "Nodule",
+      "Pneumonia",
+      "Edema",
+      "Atelectasis",
+      "Cardiomegaly",
+      "Effusion",
+      "Hemorrhage",
+      "Tumor",
+      "Normal"
+    ],
+    "min_confidence": 0.5,
+    "auto_priority_routing": true,
+    "evidence_based_recommendations": true
+  },
+  "hipaa_compliance": {
+    "enabled": true,
+    "phi_detection": true,
+    "auto_anonymization": true,
+    "audit_logging": true,
+    "encryption_at_rest": false,
+    "encryption_in_transit": true,
+    "phi_patterns": [
+      "patient_name",
+      "patient_birth_date",
+      "patient_address",
+      "patient_phone",
+      "ssn",
+      "medical_record_number",
+      "email",
+      "account_number",
+      "ip_address",
+      "url",
+      "zip_code"
+    ],
+    "anonymization": {
+      "patient_id_prefix": "ANON_",
+      "institution_value": "ANONYMIZED",
+      "device_value": "ANONYMIZED",
+      "hash_algorithm": "SHA256"
+    }
+  },
+  "performance": {
+    "max_concurrent_analysis": 10,
+    "worker_threads": 4,
+    "cache": {
+      "enabled": true,
+      "ttl_seconds": 3600,
+      "max_size_mb": 1024
+    },
+    "batch_processing": {
+      "enabled": true,
+      "max_batch_size": 100,
+      "parallel_workers": 5
+    }
+  },
+  "storage": {
+    "image_storage_path": "/data/medical-images",
+    "results_storage_path": "/data/results",
+    "temp_storage_path": "/tmp/medical-imaging",
+    "max_storage_gb": 500,
+    "cleanup": {
+      "enabled": true,
+      "retention_days": 30
+    }
+  },
+  "guardrails": {
+    "enabled": false,
+    "require_azure_credentials": false,
+    "content_safety_threshold": 2,
+    "max_retries": 5
+  },
+  "monitoring": {
+    "metrics": {
+      "enabled": true,
+      "port": 9090,
+      "path": "/metrics",
+      "interval_seconds": 15
+    },
+    "logging": {
+      "enabled": true,
+      "level": "INFO",
+      "format": "json",
+      "output": [
+        "stdout",
+        "/var/log/medical-imaging/application.log"
+      ],
+      "max_size_mb": 100,
+      "max_files": 10
+    },
+    "tracing": {
+      "enabled": false,
+      "endpoint": "",
+      "sample_rate": 0.1
+    }
+  },
+  "security": {
+    "authentication": {
+      "enabled": false,
+      "method": "oauth2",
+      "provider": "auth0"
+    },
+    "authorization": {
+      "enabled": false,
+      "rbac": true
+    },
+    "rate_limiting": {
+      "enabled": true,
+      "requests_per_minute": 60,
+      "burst": 100
+    },
+    "cors": {
+      "enabled": true,
+      "allowed_origins": ["*"],
+      "allowed_methods": ["GET", "POST"],
+      "allowed_headers": ["Content-Type", "Authorization"]
+    }
+  },
+  "clinical_integration": {
+    "pacs": {
+      "enabled": false,
+      "endpoint": "",
+      "dicom_port": 11112
+    },
+    "ehr": {
+      "enabled": false,
+      "endpoint": "",
+      "system": "epic"
+    },
+    "priority_routing": {
+      "enabled": true,
+      "thresholds": {
+        "emergency": ["Hemorrhage", "Critical"],
+        "urgent": ["Fracture", "Pneumonia", "High"],
+        "priority": ["Medium"],
+        "routine": ["Low", "Normal"]
+      }
+    },
+    "reporting": {
+      "enabled": true,
+      "format": "hl7",
+      "auto_send": false
+    }
+  },
+  "features": {
+    "real_time_analysis": true,
+    "batch_processing": true,
+    "quality_scoring": true,
+    "clinical_priority": true,
+    "evidence_based_recommendations": true,
+    "multi_modal_support": true,
+    "hipaa_compliance": true,
+    "audit_trail": true
+  }
+}

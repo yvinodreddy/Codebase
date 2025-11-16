@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  continuous-learning:
+    build:
+      context: ..
+      dockerfile: deliverables/Dockerfile
+    container_name: swarmcare-continuous-learning
+    restart: unless-stopped
+    environment:
+      - MODEL_TYPE=diagnosis_predictor
+      - PRIVACY_EPSILON=1.0
+      - ENABLE_FEDERATED=true
+      - LOG_LEVEL=INFO
+    ports:
+      - "8080:8080"
+    volumes:
+      - model-data:/app/models
+      - audit-logs:/app/logs
+    networks:
+      - swarmcare-network
+    healthcheck:
+      test: ["CMD", "python3", "verify_phase22.py", "--quick"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    labels:
+      - "com.swarmcare.phase=22"
+      - "com.swarmcare.service=continuous-learning"
+      - "com.swarmcare.version=1.0"
+
+  redis:
+    image: redis:7-alpine
+    container_name: swarmcare-redis
+    restart: unless-stopped
+    command: redis-server --appendonly yes
+    volumes:
+      - redis-data:/data
+    networks:
+      - swarmcare-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+volumes:
+  model-data:
+    driver: local
+  audit-logs:
+    driver: local
+  redis-data:
+    driver: local
+
+networks:
+  swarmcare-network:
+    driver: bridge

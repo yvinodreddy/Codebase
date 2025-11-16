@@ -1,0 +1,191 @@
+@model IEnumerable<RMMS.Models.DataManagement.BulkOperation>
+
+@{
+    ViewData["Title"] = "Bulk Import/Export";
+}
+
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h2><i class="fas fa-exchange-alt me-2"></i>Bulk Import/Export</h2>
+                    <p class="text-muted">Perform bulk data import and export operations</p>
+                </div>
+                <a href="@Url.Action("Create")" class="btn btn-primary">
+                    <i class="fas fa-plus me-2"></i>Create New
+                </a>
+            </div>
+        </div>
+    </div>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="fas fa-check-circle me-2"></i>@TempData["Success"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="fas fa-exclamation-circle me-2"></i>@TempData["Error"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    <!-- Statistics Cards -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card stat-card">
+                <div class="card-body">
+                    <h3 class="card-title">@Model.Count()</h3>
+                    <p class="card-text text-muted">Total Items</p>
+                    <i class="fas fa-exchange-alt fa-2x text-primary opacity-25 position-absolute end-0 bottom-0 m-3"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card stat-card">
+                <div class="card-body">
+                    <h3 class="card-title">@Model.Count(r => r.IsActive)</h3>
+                    <p class="card-text text-muted">Active</p>
+                    <i class="fas fa-check-circle fa-2x text-success opacity-25 position-absolute end-0 bottom-0 m-3"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card stat-card">
+                <div class="card-body">
+                    <h3 class="card-title">@Model.Count(r => r.CreatedDate >= DateTime.Now.AddDays(-7))</h3>
+                    <p class="card-text text-muted">This Week</p>
+                    <i class="fas fa-calendar-week fa-2x text-info opacity-25 position-absolute end-0 bottom-0 m-3"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card stat-card">
+                <div class="card-body">
+                    <h3 class="card-title">@Model.Count(r => r.CreatedDate >= DateTime.Now.AddDays(-30))</h3>
+                    <p class="card-text text-muted">This Month</p>
+                    <i class="fas fa-calendar fa-2x text-warning opacity-25 position-absolute end-0 bottom-0 m-3"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content Card -->
+    <div class="card">
+        <div class="card-header">
+            <h5 class="mb-0"><i class="fas fa-table me-2"></i>Bulk Import/Export List</h5>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table id="dataTable" class="table table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Status</th>
+                            <th>Created Date</th>
+                            <th>Modified Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.Id</td>
+                                <td><strong>@item.Name</strong></td>
+                                <td>@item.Description</td>
+                                <td>
+                                    @if (item.IsActive)
+                                    {
+                                        <span class="badge bg-success">Active</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-secondary">Inactive</span>
+                                    }
+                                </td>
+                                <td>@item.CreatedDate.ToString("yyyy-MM-dd HH:mm")</td>
+                                <td>@(item.ModifiedDate?.ToString("yyyy-MM-dd HH:mm") ?? "N/A")</td>
+                                <td>
+                                    <div class="btn-group" role="group">
+                                        <a href="@Url.Action("Details", new { id = item.Id })"
+                                           class="btn btn-sm btn-info"
+                                           title="View Details">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                        <a href="@Url.Action("Edit", new { id = item.Id })"
+                                           class="btn btn-sm btn-primary"
+                                           title="Edit">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <button onclick="deleteItem(@item.Id, '@item.Name')"
+                                                class="btn btn-sm btn-danger"
+                                                title="Delete">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#dataTable').DataTable({
+                responsive: true,
+                pageLength: 25,
+                order: [[4, 'desc']], // Sort by created date
+                dom: 'Bfrtip',
+                buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
+            });
+
+            // Auto-dismiss alerts after 5 seconds
+            setTimeout(function () {
+                $('.alert').fadeOut('slow');
+            }, 5000);
+        });
+
+        function deleteItem(id, name) {
+            Swal.fire({
+                title: 'Delete Item?',
+                text: `Are you sure you want to delete "${name}"? This action cannot be undone.`,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.post('@Url.Action("Delete")', { id: id }, function (response) {
+                        Swal.fire(
+                            'Deleted!',
+                            'Item has been deleted.',
+                            'success'
+                        ).then(() => {
+                            location.reload();
+                        });
+                    }).fail(function () {
+                        Swal.fire(
+                            'Error!',
+                            'Failed to delete item.',
+                            'error'
+                        );
+                    });
+                }
+            });
+        }
+    </script>
+}

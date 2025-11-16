@@ -1,0 +1,137 @@
+# Phase 06: HIPAA Compliance - Kubernetes Deployment
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: swarmcare-hipaa
+  labels:
+    name: swarmcare-hipaa
+    compliance: hipaa
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: hipaa-config
+  namespace: swarmcare-hipaa
+data:
+  LOG_LEVEL: "INFO"
+  REDIS_URL: "redis://redis-service:6379"
+
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: hipaa-secrets
+  namespace: swarmcare-hipaa
+type: Opaque
+stringData:
+  ENCRYPTION_KEY: "change-me-in-production-32-byte-key"
+  JWT_SECRET: "change-me-in-production-jwt-secret"
+  REDIS_PASSWORD: "change-me-redis-password"
+  DB_PASSWORD: "change-me-db-password"
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hipaa-compliance-deployment
+  namespace: swarmcare-hipaa
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: hipaa-compliance
+  template:
+    metadata:
+      labels:
+        app: hipaa-compliance
+    spec:
+      containers:
+      - name: hipaa-compliance
+        image: swarmcare/hipaa-compliance:latest
+        ports:
+        - containerPort: 8443
+          name: https
+        envFrom:
+        - configMapRef:
+            name: hipaa-config
+        - secretRef:
+            name: hipaa-secrets
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "500m"
+          limits:
+            memory: "1Gi"
+            cpu: "1000m"
+        livenessProbe:
+          exec:
+            command:
+            - python
+            - -c
+            - "from hipaa_compliance_system import HIPAAComplianceSystem; HIPAAComplianceSystem()"
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        volumeMounts:
+        - name: audit-logs
+          mountPath: /var/log/hipaa
+        - name: certs
+          mountPath: /etc/ssl/certs
+          readOnly: true
+      volumes:
+      - name: audit-logs
+        persistentVolumeClaim:
+          claimName: audit-logs-pvc
+      - name: certs
+        secret:
+          secretName: tls-certs
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hipaa-compliance-service
+  namespace: swarmcare-hipaa
+spec:
+  type: LoadBalancer
+  selector:
+    app: hipaa-compliance
+  ports:
+  - protocol: TCP
+    port: 443
+    targetPort: 8443
+    name: https
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: audit-logs-pvc
+  namespace: swarmcare-hipaa
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 10Gi
+
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: hipaa-compliance-hpa
+  namespace: swarmcare-hipaa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: hipaa-compliance-deployment
+  minReplicas: 3
+  maxReplicas: 10
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 70

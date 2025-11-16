@@ -1,0 +1,83 @@
+# Simple Dockerfile for SwarmCare (Learning/Development)
+# This is intentionally simple for beginners to understand
+
+FROM python:3.11-slim
+
+# Set working directory
+WORKDIR /app
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy requirements file
+COPY requirements.txt .
+
+# Install Python dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy application code
+COPY . .
+
+# Expose port
+EXPOSE 8000
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+  CMD curl -f http://localhost:8000/ || exit 1
+
+# Run application
+CMD ["python3", "-m", "http.server", "8000"]
+
+# ==============================================================================
+# WHAT EACH LINE DOES (for beginners):
+# ==============================================================================
+#
+# FROM python:3.11-slim
+#   → Start with Python 3.11 (slim version = smaller size)
+#
+# WORKDIR /app
+#   → All commands run in /app directory
+#
+# RUN apt-get update && apt-get install -y curl
+#   → Install curl tool (for health checks)
+#
+# COPY requirements.txt .
+#   → Copy requirements.txt from your computer to container
+#
+# RUN pip install --no-cache-dir -r requirements.txt
+#   → Install all Python packages listed in requirements.txt
+#
+# COPY . .
+#   → Copy all your code into the container
+#
+# EXPOSE 8000
+#   → Tell Docker this container uses port 8000
+#
+# HEALTHCHECK ...
+#   → Docker checks if container is healthy by calling http://localhost:8000
+#
+# CMD ["python3", "-m", "http.server", "8000"]
+#   → Run this command when container starts (simple web server)
+#
+# ==============================================================================
+# HOW TO USE:
+# ==============================================================================
+#
+# BUILD IMAGE:
+#   docker build -t swarmcare:dev -f Dockerfile.simple .
+#
+# RUN CONTAINER:
+#   docker run -d -p 8000:8000 --name swarmcare swarmcare:dev
+#
+# VIEW LOGS:
+#   docker logs swarmcare
+#
+# STOP CONTAINER:
+#   docker stop swarmcare
+#
+# REMOVE CONTAINER:
+#   docker rm swarmcare
+#
+# ==============================================================================

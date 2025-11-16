@@ -1,0 +1,249 @@
+@model RMMS.Common.Pagination.PagedResult<RMMS.Models.Production.ProductionBatch>
+@{
+    ViewData["Title"] = "Production Batches";
+    string GetSortIcon(string columnName)
+    {
+        if (ViewBag.CurrentSort != columnName)
+            return "<i class='fas fa-sort text-muted'></i>";
+
+        return ViewBag.CurrentOrder == "asc"
+            ? "<i class='fas fa-sort-up'></i>"
+            : "<i class='fas fa-sort-down'></i>";
+    }
+
+    string GetSortUrl(string columnName)
+    {
+        var order = ViewBag.CurrentSort == columnName && ViewBag.CurrentOrder == "asc" ? "desc" : "asc";
+        return $"?searchTerm={ViewBag.SearchTerm}&status={ViewBag.Status}&sortBy={columnName}&sortOrder={order}&page=1";
+    }
+}
+
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2><i class="fas fa-industry"></i> Production Batches</h2>
+        <a asp-action="Create" class="btn btn-success">
+            <i class="fas fa-plus"></i> New Batch
+        </a>
+    </div>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show">
+            @TempData["Success"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show">
+            @TempData["Error"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    @if (TempData["Warning"] != null)
+    {
+        <div class="alert alert-warning alert-dismissible fade show">
+            @TempData["Warning"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    <!-- Summary Cards -->
+    <div class="row mb-4">
+        <div class="col-md-2">
+            <div class="card bg-primary text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Total Batches</h5>
+                    <h3>@(ViewBag.TotalBatches ?? 0)</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="card bg-warning text-white">
+                <div class="card-body">
+                    <h5 class="card-title">In Progress</h5>
+                    <h3>@(ViewBag.InProgressCount ?? 0)</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="card bg-success text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Completed</h5>
+                    <h3>@(ViewBag.CompletedCount ?? 0)</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="card bg-info text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Today's Batches</h5>
+                    <h3>@(ViewBag.TodayCount ?? 0)</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="card bg-danger text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Pending Verification</h5>
+                    <h3>@(ViewBag.PendingVerificationCount ?? 0)</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filter Form -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <form method="get" asp-action="Index" class="row g-3">
+                <div class="col-md-5">
+                    <label class="form-label">Search</label>
+                    <input type="text" name="searchTerm" value="@ViewBag.SearchTerm" class="form-control" placeholder="Batch #, Order #, Operator...">
+                    <input type="hidden" name="sortBy" value="@ViewBag.CurrentSort" />
+                    <input type="hidden" name="sortOrder" value="@ViewBag.CurrentOrder" />
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Status</label>
+                    <select name="status" class="form-select">
+                        <option value="">All Statuses</option>
+                        <option value="Planned" selected="@(ViewBag.Status == "Planned")">Planned</option>
+                        <option value="In Progress" selected="@(ViewBag.Status == "In Progress")">In Progress</option>
+                        <option value="Completed" selected="@(ViewBag.Status == "Completed")">Completed</option>
+                        <option value="Verified" selected="@(ViewBag.Status == "Verified")">Verified</option>
+                        <option value="Cancelled" selected="@(ViewBag.Status == "Cancelled")">Cancelled</option>
+                    </select>
+                </div>
+                <div class="col-md-2 d-flex align-items-end">
+                    <button type="submit" class="btn btn-primary w-100">
+                        <i class="fas fa-search"></i> Filter
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Batches Table -->
+    <div class="card">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead class="table-light">
+                        <tr>
+                            <th>
+                                <a href="@GetSortUrl("BatchNumber")" class="text-decoration-none text-dark">
+                                    Batch Number @Html.Raw(GetSortIcon("BatchNumber"))
+                                </a>
+                            </th>
+                            <th>Production Order</th>
+                            <th>
+                                <a href="@GetSortUrl("BatchDate")" class="text-decoration-none text-dark">
+                                    Date @Html.Raw(GetSortIcon("BatchDate"))
+                                </a>
+                            </th>
+                            <th>Shift</th>
+                            <th>Operator</th>
+                            <th>
+                                <a href="@GetSortUrl("Status")" class="text-decoration-none text-dark">
+                                    Status @Html.Raw(GetSortIcon("Status"))
+                                </a>
+                            </th>
+                            <th>Progress</th>
+                            <th>Duration</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.Items != null && Model.Items.Any())
+                        {
+                            @foreach (var batch in Model.Items)
+                            {
+                                <tr>
+                                    <td>
+                                        <strong>@batch.BatchNumber</strong>
+                                    </td>
+                                    <td>@(batch.ProductionOrder?.OrderNumber ?? "N/A")</td>
+                                    <td>@batch.BatchDate.ToString("dd-MMM-yyyy")</td>
+                                    <td>
+                                        <span class="badge @batch.ShiftBadgeClass">
+                                            @batch.ShiftType
+                                        </span>
+                                    </td>
+                                    <td>@(batch.Operator?.EmployeeName ?? "Unassigned")</td>
+                                    <td>
+                                        <span class="badge @batch.StatusBadgeClass">
+                                            <i class="fas @batch.StatusIcon"></i> @batch.Status
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <div class="progress" style="height: 20px;">
+                                            <div class="progress-bar" role="progressbar"
+                                                 style="width: @batch.CompletionPercent%"
+                                                 aria-valuenow="@batch.CompletionPercent"
+                                                 aria-valuemin="0" aria-valuemax="100">
+                                                @batch.CompletionPercent%
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        @if (batch.DurationHours.HasValue)
+                                        {
+                                            <text>@batch.DurationHours.Value.ToString("F1") hrs</text>
+                                        }
+                                        else if (batch.StartTime.HasValue)
+                                        {
+                                            <text>In Progress</text>
+                                        }
+                                        else
+                                        {
+                                            <text>-</text>
+                                        }
+                                    </td>
+                                    <td>
+                                        <div class="btn-group btn-group-sm">
+                                            <a asp-action="Details" asp-route-id="@batch.Id" class="btn btn-info" title="Details">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+                                            @if (batch.Status == "Planned" || batch.Status == "In Progress")
+                                            {
+                                                <a asp-action="Edit" asp-route-id="@batch.Id" class="btn btn-warning" title="Edit">
+                                                    <i class="fas fa-edit"></i>
+                                                </a>
+                                            }
+                                            @if (batch.Status == "Planned")
+                                            {
+                                                <a asp-action="Delete" asp-route-id="@batch.Id" class="btn btn-danger" title="Delete">
+                                                    <i class="fas fa-trash"></i>
+                                                </a>
+                                            }
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="9" class="text-center text-muted">
+                                    <i class="fas fa-inbox fa-3x mb-3 mt-3"></i>
+                                    <p>No production batches found</p>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="card-footer">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <strong>Showing @(Model.Items?.Count ?? 0) of @(Model?.TotalItems ?? 0) batches</strong>
+                </div>
+                <div class="col-md-6">
+                    @await Html.PartialAsync("_PaginationPartial", Model)
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

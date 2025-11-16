@@ -1,0 +1,31 @@
+# Phase 14: Medical Imaging System
+# Python Dependencies
+
+# Core Dependencies
+numpy>=1.21.0
+pillow>=9.0.0
+
+# DICOM Support (Optional)
+pydicom>=2.3.0
+
+# Advanced Imaging (Optional)
+scikit-image>=0.19.0
+opencv-python>=4.5.0
+
+# Web Framework (Optional, for API server)
+flask>=2.3.0
+flask-cors>=4.0.0
+
+# Database (Optional)
+sqlalchemy>=2.0.0
+psycopg2-binary>=2.9.0
+
+# Cache (Optional)
+redis>=4.5.0
+
+# Monitoring
+prometheus-client>=0.17.0
+
+# Utilities
+python-dotenv>=1.0.0
+pyyaml>=6.0

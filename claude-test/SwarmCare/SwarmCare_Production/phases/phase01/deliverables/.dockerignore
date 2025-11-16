@@ -1,0 +1,55 @@
+# SwarmCare Phase 01: Docker ignore file
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.venv
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+*.cover
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Documentation
+docs/
+*.md
+
+# Git
+.git/
+.gitignore
+
+# Docker
+Dockerfile
+docker-compose*.yml
+.dockerignore
+
+# Logs
+*.log
+logs/
+
+# Data
+data/
+*.db
+*.sqlite
+
+# Kubernetes
+kubernetes*.yaml
+*.yaml
+
+# Misc
+.DS_Store
+*.bak
+*.tmp

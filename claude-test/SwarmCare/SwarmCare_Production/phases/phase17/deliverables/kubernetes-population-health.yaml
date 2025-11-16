@@ -1,0 +1,65 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: population-health
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: population-health-config
+  namespace: population-health
+data:
+  HIPAA_MODE: "enabled"
+  LOG_LEVEL: "INFO"
+  PROMETHEUS_PORT: "9090"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: population-health
+  namespace: population-health
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: population-health
+  template:
+    metadata:
+      labels:
+        app: population-health
+    spec:
+      containers:
+      - name: population-health
+        image: population-health:latest
+        ports:
+        - containerPort: 8080
+        - containerPort: 9090
+        envFrom:
+        - configMapRef:
+            name: population-health-config
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: population-health-service
+  namespace: population-health
+spec:
+  selector:
+    app: population-health
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 8080
+    - name: metrics
+      protocol: TCP
+      port: 9090
+      targetPort: 9090
+  type: LoadBalancer

@@ -1,0 +1,41 @@
+{
+  "verification_time": "2025-10-31T20:06:35.564280",
+  "total_checks": 6,
+  "passed": 6,
+  "failed": 0,
+  "success_rate": 100.0,
+  "total_duration_ms": 6.59,
+  "checks": [
+    {
+      "name": "Module Import",
+      "passed": true,
+      "duration_ms": 0.00095367431640625
+    },
+    {
+      "name": "Engine Initialization",
+      "passed": true,
+      "duration_ms": 0.5257129669189453
+    },
+    {
+      "name": "Sepsis Detection",
+      "passed": true,
+      "duration_ms": 0.7917881011962891
+    },
+    {
+      "name": "Drug Interactions",
+      "passed": true,
+      "duration_ms": 0.5741119384765625
+    },
+    {
+      "name": "Early Warning Scores",
+      "passed": true,
+      "duration_ms": 2.632617950439453
+    },
+    {
+      "name": "No False Positives",
+      "passed": true,
+      "duration_ms": 1.6813278198242188
+    }
+  ],
+  "status": "PASSED"
+}

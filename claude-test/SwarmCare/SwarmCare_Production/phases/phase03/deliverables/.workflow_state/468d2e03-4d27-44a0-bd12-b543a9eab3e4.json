@@ -1,0 +1,73 @@
+{
+  "execution_id": "468d2e03-4d27-44a0-bd12-b543a9eab3e4",
+  "workflow_id": "fail_workflow",
+  "state": "FAILED",
+  "tasks": {
+    "fail_task": {
+      "task_id": "fail_task",
+      "name": "Always Fails",
+      "action": "always_fails",
+      "dependencies": [],
+      "max_retries": 1,
+      "timeout_seconds": 300,
+      "state": "FAILED",
+      "result": null,
+      "error": "This task always fails",
+      "start_time": 1761650925.2184165,
+      "end_time": 1761650926.2189703,
+      "retry_count": 2
+    }
+  },
+  "context": {},
+  "start_time": 1761650925.2182252,
+  "end_time": 1761650926.2194307,
+  "error": "Task fail_task failed after 2 retries",
+  "audit_log": [
+    {
+      "timestamp": "2025-10-28T07:28:45.218259",
+      "execution_id": "468d2e03-4d27-44a0-bd12-b543a9eab3e4",
+      "event": "WORKFLOW_STARTED",
+      "details": {
+        "workflow_id": "fail_workflow"
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:28:45.218550",
+      "execution_id": "468d2e03-4d27-44a0-bd12-b543a9eab3e4",
+      "event": "TASK_STARTED",
+      "details": {
+        "task_id": "fail_task",
+        "task_name": "Always Fails"
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:28:45.218624",
+      "execution_id": "468d2e03-4d27-44a0-bd12-b543a9eab3e4",
+      "event": "TASK_RETRY",
+      "details": {
+        "task_id": "fail_task",
+        "error": "This task always fails",
+        "attempt": 1,
+        "backoff_seconds": 1
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:28:46.219401",
+      "execution_id": "468d2e03-4d27-44a0-bd12-b543a9eab3e4",
+      "event": "TASK_FAILED",
+      "details": {
+        "task_id": "fail_task",
+        "error": "This task always fails",
+        "total_attempts": 2
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:28:46.219621",
+      "execution_id": "468d2e03-4d27-44a0-bd12-b543a9eab3e4",
+      "event": "WORKFLOW_FAILED",
+      "details": {
+        "error": "Task fail_task failed after 2 retries"
+      }
+    }
+  ]
+}

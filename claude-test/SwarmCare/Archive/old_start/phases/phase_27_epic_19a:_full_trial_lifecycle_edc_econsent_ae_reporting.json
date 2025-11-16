@@ -1,0 +1,31 @@
+{
+  "phase_id": 27,
+  "name": "Epic 19A: Full Trial Lifecycle (EDC, eConsent, AE Reporting)",
+  "epic": "Epic 19A",
+  "story_points": 21,
+  "priority": "P1",
+  "dependencies": [
+    18
+  ],
+  "version": "v2.1",
+  "user_stories": [
+    {
+      "story_id": "19A.1",
+      "title": "Electronic Data Capture (EDC) Integration",
+      "story_points": 8,
+      "priority": "P1"
+    },
+    {
+      "story_id": "19A.2",
+      "title": "eConsent Platform with Blockchain",
+      "story_points": 8,
+      "priority": "P1"
+    },
+    {
+      "story_id": "19A.3",
+      "title": "Automated Adverse Event Reporting (FDA MedWatch)",
+      "story_points": 5,
+      "priority": "P1"
+    }
+  ]
+}

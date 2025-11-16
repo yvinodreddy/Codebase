@@ -1,0 +1,165 @@
+﻿@model List<RMMS.Models.Voucher>
+@{
+    ViewData["Title"] = "Voucher File";
+    var totalAmount = Model?.Sum(x => x.Amount) ?? 0;
+    var paymentCount = Model?.Count(x => x.VoucherType == "Payment") ?? 0;
+    var receiptCount = Model?.Count(x => x.VoucherType == "Receipt") ?? 0;
+    var totalPayments = Model?.Where(x => x.VoucherType == "Payment").Sum(x => x.Amount) ?? 0;
+    var totalReceipts = Model?.Where(x => x.VoucherType == "Receipt").Sum(x => x.Amount) ?? 0;
+}
+
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col-md-3 col-sm-6 mb-3">
+            <div class="ms-card ms-stat-card">
+                <div class="ms-card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="ms-text-muted mb-2">Total Vouchers</h6>
+                            <h3 class="ms-text-primary mb-0">@(Model?.Count ?? 0)</h3>
+                        </div>
+                        <div class="ms-stat-icon" style="background: #E3F2FD;">
+                            <i class="fas fa-file-invoice" style="color: #0078D4;"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-3">
+            <div class="ms-card ms-stat-card">
+                <div class="ms-card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="ms-text-muted mb-2">Total Amount</h6>
+                            <h3 class="ms-text-primary mb-0">₹@totalAmount.ToString("N0")</h3>
+                        </div>
+                        <div class="ms-stat-icon" style="background: #F3E5F5;">
+                            <i class="fas fa-rupee-sign" style="color: #8B5CF6;"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-3">
+            <div class="ms-card ms-stat-card">
+                <div class="ms-card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="ms-text-muted mb-2">Payments</h6>
+                            <h3 class="ms-text-danger mb-0">₹@totalPayments.ToString("N0")</h3>
+                            <small class="ms-text-muted">@paymentCount vouchers</small>
+                        </div>
+                        <div class="ms-stat-icon" style="background: #FFEBEE;">
+                            <i class="fas fa-arrow-down" style="color: #DC3545;"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-3">
+            <div class="ms-card ms-stat-card">
+                <div class="ms-card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="ms-text-muted mb-2">Receipts</h6>
+                            <h3 class="ms-text-success mb-0">₹@totalReceipts.ToString("N0")</h3>
+                            <small class="ms-text-muted">@receiptCount vouchers</small>
+                        </div>
+                        <div class="ms-stat-icon" style="background: #E8F5E9;">
+                            <i class="fas fa-arrow-up" style="color: #28A745;"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="ms-card">
+        <div class="ms-card-header" style="display: flex; justify-content: space-between; align-items: center;">
+            <h2 class="ms-card-title" style="margin: 0;">
+                <i class="fas fa-file-invoice"></i> Voucher File (वाउचर फाइल)
+            </h2>
+            <div style="display: flex; gap: 8px;">
+                <a asp-action="Create" class="ms-btn ms-btn-primary">
+                    <i class="fas fa-plus"></i> Create Voucher
+                </a>
+            </div>
+        </div>
+        <div class="ms-card-body">
+            @if (Model != null && Model.Any())
+            {
+                <div class="table-responsive">
+                    <table class="ms-datatable table table-striped table-hover" data-export="true" data-page-length="25">
+                        <thead>
+                            <tr>
+                                <th>Sl. No.</th>
+                                <th>Date</th>
+                                <th>Voucher Number</th>
+                                <th>Particulars/Description</th>
+                                <th>Amount (₹)</th>
+                                <th>Type</th>
+                                <th>Remarks</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                int serialNo = 1;
+                            }
+                            @foreach (var item in Model.OrderByDescending(x => x.VoucherDate))
+                            {
+                                <tr>
+                                    <td>@serialNo</td>
+                                    <td>@item.VoucherDate.ToString("dd-MMM-yyyy")</td>
+                                    <td><strong>@item.VoucherNumber</strong></td>
+                                    <td>@item.Particulars</td>
+                                    <td class="fw-bold">₹ @item.Amount.ToString("N2")</td>
+                                    <td>
+                                        <span class="ms-badge @(item.VoucherType == "Payment" ? "ms-badge-danger" : "ms-badge-success")">
+                                            @item.VoucherType
+                                        </span>
+                                    </td>
+                                    <td>@item.Remarks</td>
+                                    <td>
+                                        <div class="ms-action-buttons">
+                                            <a asp-action="Details" asp-route-id="@item.Id" class="ms-action-btn ms-action-btn-info" title="View Details">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+                                            <a asp-action="Edit" asp-route-id="@item.Id" class="ms-action-btn ms-action-btn-warning" title="Edit">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            <form asp-action="Delete" asp-route-id="@item.Id" method="post" style="display: inline;"
+                                                  onsubmit="return confirm('Are you sure you want to delete this voucher?');">
+                                                @Html.AntiForgeryToken()
+                                                <button type="submit" class="ms-action-btn ms-action-btn-danger" title="Delete">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                                serialNo++;
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-info text-center">
+                    <i class="fas fa-file-invoice fa-3x mb-3"></i>
+                    <h5>No Vouchers Created</h5>
+                    <p>Create vouchers to maintain proper accounting records.</p>
+                    <a asp-action="Create" class="btn btn-primary">Create First Voucher</a>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // DataTable initialization is handled by site-enhanced.js globally
+        // No need to reinitialize here
+    </script>
+}

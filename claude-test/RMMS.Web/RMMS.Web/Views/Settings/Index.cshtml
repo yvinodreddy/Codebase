@@ -1,0 +1,318 @@
+@{
+    ViewData["Title"] = "Settings";
+}
+
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <h2><i class="fas fa-cog"></i> Application Settings</h2>
+            <p class="text-muted">Manage your application preferences and configurations</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- User Profile Settings -->
+        <div class="col-md-6 mb-4">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h4><i class="fas fa-user"></i> User Profile Settings</h4>
+                </div>
+                <div class="card-body">
+                    <form id="profileSettingsForm">
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Username</label>
+                            <input type="text" class="form-control" id="username" value="admin" readonly>
+                            <small class="form-text text-muted">Username cannot be changed</small>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email Address</label>
+                            <input type="email" class="form-control" id="email" placeholder="admin@example.com">
+                        </div>
+                        <div class="mb-3">
+                            <label for="currentPassword" class="form-label">Current Password</label>
+                            <input type="password" class="form-control" id="currentPassword" placeholder="Enter current password">
+                        </div>
+                        <div class="mb-3">
+                            <label for="newPassword" class="form-label">New Password</label>
+                            <input type="password" class="form-control" id="newPassword" placeholder="Enter new password">
+                        </div>
+                        <div class="mb-3">
+                            <label for="confirmPassword" class="form-label">Confirm New Password</label>
+                            <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm new password">
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Update Profile
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Application Settings -->
+        <div class="col-md-6 mb-4">
+            <div class="card shadow">
+                <div class="card-header bg-success text-white">
+                    <h4><i class="fas fa-sliders-h"></i> Application Settings</h4>
+                </div>
+                <div class="card-body">
+                    <form id="appSettingsForm">
+                        <div class="mb-3">
+                            <label for="theme" class="form-label">Theme</label>
+                            <select class="form-select" id="theme">
+                                <option value="light" selected>Light</option>
+                                <option value="dark">Dark</option>
+                                <option value="auto">Auto (System)</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="language" class="form-label">Language</label>
+                            <select class="form-select" id="language">
+                                <option value="en" selected>English</option>
+                                <option value="hi">Hindi</option>
+                                <option value="ta">Tamil</option>
+                                <option value="te">Telugu</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="dateFormat" class="form-label">Date Format</label>
+                            <select class="form-select" id="dateFormat">
+                                <option value="dd-MM-yyyy" selected>DD-MM-YYYY</option>
+                                <option value="MM-dd-yyyy">MM-DD-YYYY</option>
+                                <option value="yyyy-MM-dd">YYYY-MM-DD</option>
+                                <option value="dd/MM/yyyy">DD/MM/YYYY</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="currency" class="form-label">Currency Symbol</label>
+                            <select class="form-select" id="currency">
+                                <option value="INR" selected>₹ (INR)</option>
+                                <option value="USD">$ (USD)</option>
+                                <option value="EUR">€ (EUR)</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="notifications" checked>
+                                <label class="form-check-label" for="notifications">
+                                    Enable Notifications
+                                </label>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-success">
+                            <i class="fas fa-save"></i> Save Settings
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Business Settings -->
+        <div class="col-md-6 mb-4">
+            <div class="card shadow">
+                <div class="card-header bg-warning text-white">
+                    <h4><i class="fas fa-building"></i> Business Settings</h4>
+                </div>
+                <div class="card-body">
+                    <form id="businessSettingsForm">
+                        <div class="mb-3">
+                            <label for="companyName" class="form-label">Company Name</label>
+                            <input type="text" class="form-control" id="companyName" placeholder="Enter company name">
+                        </div>
+                        <div class="mb-3">
+                            <label for="companyAddress" class="form-label">Company Address</label>
+                            <textarea class="form-control" id="companyAddress" rows="3" placeholder="Enter company address"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="gstNumber" class="form-label">GST Number</label>
+                            <input type="text" class="form-control" id="gstNumber" placeholder="Enter GST number">
+                        </div>
+                        <div class="mb-3">
+                            <label for="companyPhone" class="form-label">Phone Number</label>
+                            <input type="tel" class="form-control" id="companyPhone" placeholder="Enter phone number">
+                        </div>
+                        <div class="mb-3">
+                            <label for="companyEmail" class="form-label">Company Email</label>
+                            <input type="email" class="form-control" id="companyEmail" placeholder="Enter company email">
+                        </div>
+                        <div class="mb-3">
+                            <label for="financialYearStart" class="form-label">Financial Year Start</label>
+                            <select class="form-select" id="financialYearStart">
+                                <option value="april" selected>April</option>
+                                <option value="january">January</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-warning">
+                            <i class="fas fa-save"></i> Update Business Info
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- System Information -->
+        <div class="col-md-6 mb-4">
+            <div class="card shadow">
+                <div class="card-header bg-info text-white">
+                    <h4><i class="fas fa-info-circle"></i> System Information</h4>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label class="font-weight-bold">Application Version:</label>
+                        <p class="form-control-plaintext">RMMS v1.0.0</p>
+                    </div>
+                    <div class="mb-3">
+                        <label class="font-weight-bold">Last Backup Date:</label>
+                        <p class="form-control-plaintext">@DateTime.Now.AddDays(-1).ToString("dd-MMM-yyyy HH:mm")</p>
+                    </div>
+                    <div class="mb-3">
+                        <label class="font-weight-bold">Database Status:</label>
+                        <p class="form-control-plaintext">
+                            <span class="badge bg-success">Connected</span>
+                        </p>
+                    </div>
+                    <div class="mb-3">
+                        <label class="font-weight-bold">License Type:</label>
+                        <p class="form-control-plaintext">Standard Edition</p>
+                    </div>
+                    <div class="mb-3">
+                        <label class="font-weight-bold">Server Time:</label>
+                        <p class="form-control-plaintext" id="serverTime">@DateTime.Now.ToString("dd-MMM-yyyy HH:mm:ss")</p>
+                    </div>
+                    <hr>
+                    <div class="d-grid gap-2">
+                        <button type="button" class="btn btn-outline-primary" onclick="alert('Backup functionality to be implemented');">
+                            <i class="fas fa-download"></i> Create Backup
+                        </button>
+                        <button type="button" class="btn btn-outline-secondary" onclick="alert('Export functionality to be implemented');">
+                            <i class="fas fa-file-export"></i> Export Data
+                        </button>
+                        <button type="button" class="btn btn-outline-info" onclick="alert('Log viewer to be implemented');">
+                            <i class="fas fa-list"></i> View System Logs
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Additional Settings Cards -->
+    <div class="row">
+        <div class="col-md-12 mb-4">
+            <div class="card shadow">
+                <div class="card-header bg-secondary text-white">
+                    <h4><i class="fas fa-wrench"></i> Advanced Settings</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5>Data Management</h5>
+                            <ul class="list-unstyled">
+                                <li class="mb-2">
+                                    <button type="button" class="btn btn-sm btn-outline-danger" onclick="return confirm('This will clear all cache. Continue?') ? alert('Cache cleared successfully!') : false;">
+                                        <i class="fas fa-trash"></i> Clear Application Cache
+                                    </button>
+                                </li>
+                                <li class="mb-2">
+                                    <button type="button" class="btn btn-sm btn-outline-warning" onclick="alert('Maintenance mode to be implemented');">
+                                        <i class="fas fa-tools"></i> Enable Maintenance Mode
+                                    </button>
+                                </li>
+                                <li class="mb-2">
+                                    <button type="button" class="btn btn-sm btn-outline-info" onclick="alert('Archive functionality to be implemented');">
+                                        <i class="fas fa-archive"></i> Archive Old Records
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h5>Security Settings</h5>
+                            <div class="form-check form-switch mb-2">
+                                <input class="form-check-input" type="checkbox" id="twoFactorAuth">
+                                <label class="form-check-label" for="twoFactorAuth">
+                                    Enable Two-Factor Authentication
+                                </label>
+                            </div>
+                            <div class="form-check form-switch mb-2">
+                                <input class="form-check-input" type="checkbox" id="sessionTimeout" checked>
+                                <label class="form-check-label" for="sessionTimeout">
+                                    Auto-logout on Inactivity (30 minutes)
+                                </label>
+                            </div>
+                            <div class="form-check form-switch mb-2">
+                                <input class="form-check-input" type="checkbox" id="auditLog" checked>
+                                <label class="form-check-label" for="auditLog">
+                                    Enable Audit Logging
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            // Update server time every second
+            setInterval(function() {
+                var now = new Date();
+                $('#serverTime').text(now.toLocaleString());
+            }, 1000);
+
+            // Profile Settings Form Submit
+            $('#profileSettingsForm').on('submit', function(e) {
+                e.preventDefault();
+
+                var newPassword = $('#newPassword').val();
+                var confirmPassword = $('#confirmPassword').val();
+
+                if (newPassword && newPassword !== confirmPassword) {
+                    alert('New password and confirm password do not match!');
+                    return false;
+                }
+
+                alert('Note: Profile settings are not saved yet. Backend implementation is pending.');
+                return false;
+            });
+
+            // Application Settings Form Submit
+            $('#appSettingsForm').on('submit', function(e) {
+                e.preventDefault();
+                alert('Note: Application settings are not saved yet. Backend implementation is pending.');
+                return false;
+            });
+
+            // Business Settings Form Submit
+            $('#businessSettingsForm').on('submit', function(e) {
+                e.preventDefault();
+                alert('Note: Business settings are not saved yet. Backend implementation is pending.');
+                return false;
+            });
+        });
+    </script>
+
+    <style>
+        .font-weight-bold {
+            font-weight: 600;
+            color: #495057;
+        }
+
+        .card {
+            border: none;
+            border-radius: 10px;
+        }
+
+        .card-header {
+            border-radius: 10px 10px 0 0 !important;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: #80bdff;
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+        }
+    </style>
+}

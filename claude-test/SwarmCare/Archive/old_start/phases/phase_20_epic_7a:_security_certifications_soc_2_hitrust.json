@@ -1,0 +1,25 @@
+{
+  "phase_id": 20,
+  "name": "Epic 7A: Security Certifications (SOC 2, HITRUST)",
+  "epic": "Epic 7A",
+  "story_points": 13,
+  "priority": "P0",
+  "dependencies": [
+    6
+  ],
+  "version": "v2.1",
+  "user_stories": [
+    {
+      "story_id": "7A.1",
+      "title": "SOC 2 Type II Certification",
+      "story_points": 8,
+      "priority": "P0"
+    },
+    {
+      "story_id": "7A.2",
+      "title": "HITRUST CSF Certification",
+      "story_points": 5,
+      "priority": "P0"
+    }
+  ]
+}

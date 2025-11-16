@@ -1,0 +1,367 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: ai-healthcare
+  labels:
+    name: ai-healthcare
+    environment: production
+
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: gcp-credentials
+  namespace: ai-healthcare
+type: Opaque
+data:
+  # Base64 encoded GCP service account key
+  gcp-key.json: <BASE64_ENCODED_GCP_KEY>
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ai-platform-config
+  namespace: ai-healthcare
+data:
+  appsettings.Production.json: |
+    {
+      "GoogleCloudAI": {
+        "ProjectId": "medigenius-ai-health",
+        "Region": "us-central1",
+        "GeminiApiKey": "${GEMINI_API_KEY}",
+        "VertexEndpoint": "https://us-central1-aiplatform.googleapis.com",
+        "BigQueryDataset": "healthcare_ai_data",
+        "ModelBucket": "gs://medigenius-ai-health-models"
+      },
+      "AIFeatures": {
+        "EnableDiagnosis": true,
+        "EnableImageAnalysis": true,
+        "EnablePrescription": true,
+        "EnableChatbot": true,
+        "EnableHealthPrediction": true,
+        "EnableClinicalDecision": true
+      },
+      "JwtSettings": {
+        "SecretKey": "${JWT_SECRET_KEY}",
+        "Issuer": "https://api.medigenius-ai.com",
+        "Audience": "https://medigenius-ai.com"
+      },
+      "ConnectionStrings": {
+        "DefaultConnection": "${DATABASE_CONNECTION_STRING}",
+        "RedisCache": "${REDIS_CONNECTION_STRING}"
+      },
+      "Logging": {
+        "LogLevel": {
+          "Default": "Information",
+          "Microsoft": "Warning",
+          "HealthcareManagement.AI": "Debug"
+        }
+      }
+    }
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ai-healthcare-platform
+  namespace: ai-healthcare
+  labels:
+    app: ai-healthcare
+    version: v1
+    component: backend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: ai-healthcare
+  template:
+    metadata:
+      labels:
+        app: ai-healthcare
+        version: v1
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8080"
+        prometheus.io/path: "/metrics"
+    spec:
+      serviceAccountName: ai-healthcare-sa
+
+      # Node selector for GPU nodes (for AI inference)
+      nodeSelector:
+        cloud.google.com/gke-accelerator: "nvidia-tesla-t4"
+
+      containers:
+      - name: ai-platform
+        image: gcr.io/medigenius-ai-health/ai-healthcare:latest
+        imagePullPolicy: Always
+
+        ports:
+        - containerPort: 8080
+          name: http
+          protocol: TCP
+
+        env:
+        - name: GOOGLE_CLOUD_PROJECT
+          value: "medigenius-ai-health"
+        - name: GOOGLE_APPLICATION_CREDENTIALS
+          value: "/app/credentials/gcp-key.json"
+        - name: GEMINI_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: ai-api-keys
+              key: gemini-key
+        - name: JWT_SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: app-secrets
+              key: jwt-secret
+        - name: DATABASE_CONNECTION_STRING
+          valueFrom:
+            secretKeyRef:
+              name: database-credentials
+              key: connection-string
+        - name: REDIS_CONNECTION_STRING
+          valueFrom:
+            secretKeyRef:
+              name: redis-credentials
+              key: connection-string
+        - name: ENABLE_AI_FEATURES
+          value: "true"
+        - name: AI_MODEL_VERSION
+          value: "v1.0"
+
+        resources:
+          requests:
+            memory: "4Gi"
+            cpu: "2"
+            nvidia.com/gpu: 1
+          limits:
+            memory: "8Gi"
+            cpu: "4"
+            nvidia.com/gpu: 1
+
+        volumeMounts:
+        - name: gcp-credentials
+          mountPath: /app/credentials
+          readOnly: true
+        - name: config
+          mountPath: /app/appsettings.Production.json
+          subPath: appsettings.Production.json
+        - name: ai-models-cache
+          mountPath: /app/models
+        - name: logs
+          mountPath: /app/logs
+
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+
+        readinessProbe:
+          httpGet:
+            path: /health/ready
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 5
+          timeoutSeconds: 3
+          failureThreshold: 3
+
+        startupProbe:
+          httpGet:
+            path: /health/startup
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 30
+
+      - name: ai-inference-sidecar
+        image: gcr.io/medigenius-ai-health/ai-inference:latest
+        ports:
+        - containerPort: 8081
+          name: inference
+        resources:
+          requests:
+            memory: "2Gi"
+            cpu: "1"
+          limits:
+            memory: "4Gi"
+            cpu: "2"
+
+      - name: cloud-sql-proxy
+        image: gcr.io/cloudsql-docker/gce-proxy:latest
+        command:
+          - "/cloud_sql_proxy"
+          - "-instances=medigenius-ai-health:us-central1:healthcare-db=tcp:5432"
+          - "-credential_file=/secrets/gcp-key.json"
+        volumeMounts:
+        - name: gcp-credentials
+          mountPath: /secrets
+          readOnly: true
+
+      volumes:
+      - name: gcp-credentials
+        secret:
+          secretName: gcp-credentials
+      - name: config
+        configMap:
+          name: ai-platform-config
+      - name: ai-models-cache
+        emptyDir: {}
+      - name: logs
+        emptyDir: {}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ai-healthcare-service
+  namespace: ai-healthcare
+  labels:
+    app: ai-healthcare
+  annotations:
+    cloud.google.com/neg: '{"ingress": true}'
+    cloud.google.com/backend-config: '{"default": "ai-backend-config"}'
+spec:
+  type: LoadBalancer
+  selector:
+    app: ai-healthcare
+  ports:
+  - name: http
+    port: 80
+    targetPort: 8080
+    protocol: TCP
+  - name: https
+    port: 443
+    targetPort: 8080
+    protocol: TCP
+
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: ai-platform-hpa
+  namespace: ai-healthcare
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: ai-healthcare-platform
+  minReplicas: 2
+  maxReplicas: 10
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 70
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: 80
+  - type: Pods
+    pods:
+      metric:
+        name: ai_requests_per_second
+      target:
+        type: AverageValue
+        averageValue: "100"
+
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: ai-platform-pdb
+  namespace: ai-healthcare
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: ai-healthcare
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ai-healthcare-ingress
+  namespace: ai-healthcare
+  annotations:
+    kubernetes.io/ingress.class: "gce"
+    kubernetes.io/ingress.global-static-ip-name: "ai-platform-ip"
+    networking.gke.io/managed-certificates: "ai-platform-cert"
+    kubernetes.io/ingress.allow-http: "false"
+spec:
+  rules:
+  - host: api.medigenius-ai.com
+    http:
+      paths:
+      - path: /*
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: ai-healthcare-service
+            port:
+              number: 80
+
+---
+apiVersion: networking.gke.io/v1
+kind: ManagedCertificate
+metadata:
+  name: ai-platform-cert
+  namespace: ai-healthcare
+spec:
+  domains:
+  - api.medigenius-ai.com
+  - www.medigenius-ai.com
+
+---
+apiVersion: cloud.google.com/v1
+kind: BackendConfig
+metadata:
+  name: ai-backend-config
+  namespace: ai-healthcare
+spec:
+  timeoutSec: 60
+  connectionDraining:
+    drainingTimeoutSec: 30
+  healthCheck:
+    checkIntervalSec: 10
+    timeoutSec: 5
+    healthyThreshold: 2
+    unhealthyThreshold: 3
+    type: HTTP
+    requestPath: /health
+    port: 8080
+  cdn:
+    enabled: true
+    cachePolicy:
+      includeHost: true
+      includeProtocol: true
+      includeQueryString: false
+    negativeCaching: true
+    negativeCachingPolicy:
+    - code: 404
+      ttl: 120
+    - code: 410
+      ttl: 120
+  iap:
+    enabled: false
+  securityPolicy:
+    name: "ai-platform-security-policy"
+
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: ai-healthcare-sa
+  namespace: ai-healthcare
+  annotations:
+    iam.gke.io/gcp-service-account: ai-healthcare-sa@medigenius-ai-health.iam.gserviceaccount.com

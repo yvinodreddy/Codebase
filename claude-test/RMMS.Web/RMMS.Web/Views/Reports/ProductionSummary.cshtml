@@ -1,0 +1,341 @@
+@{
+    ViewData["Title"] = "Production Summary Report";
+}
+
+<div class="container-fluid">
+    <div class="row mb-3">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h4 class="mb-0">
+                            <i class="fas fa-industry"></i> Production Summary Report
+                        </h4>
+                        <form method="get" class="form-inline">
+                            <div class="input-group input-group-sm">
+                                <span class="input-group-text">From</span>
+                                <input type="date" name="startDate" class="form-control" value="@Context.Request.Query["startDate"]" />
+                                <span class="input-group-text">To</span>
+                                <input type="date" name="endDate" class="form-control" value="@Context.Request.Query["endDate"]" />
+                                <button type="submit" class="btn btn-light">
+                                    <i class="fas fa-filter"></i> Filter
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- Date Range Display -->
+                    <div class="alert alert-info">
+                        <i class="fas fa-calendar-alt"></i>
+                        Report Period: <strong>@ViewBag.StartDate</strong> to <strong>@ViewBag.EndDate</strong>
+                    </div>
+
+                    <!-- Summary Cards -->
+                    <div class="row mb-4">
+                        <div class="col-md-3">
+                            <div class="card border-primary">
+                                <div class="card-body text-center">
+                                    <h6 class="text-muted">Total Batches</h6>
+                                    <h2 class="text-primary">@ViewBag.TotalBatches</h2>
+                                    <small class="text-muted">Completed Batches</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card border-info">
+                                <div class="card-body text-center">
+                                    <h6 class="text-muted">Total Input</h6>
+                                    <h2 class="text-info">@ViewBag.TotalInput.ToString("N2")</h2>
+                                    <small class="text-muted">Quintals</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card border-success">
+                                <div class="card-body text-center">
+                                    <h6 class="text-muted">Total Output</h6>
+                                    <h2 class="text-success">@ViewBag.TotalOutput.ToString("N2")</h2>
+                                    <small class="text-muted">Quintals</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card border-warning">
+                                <div class="card-body text-center">
+                                    <h6 class="text-muted">Avg Quality</h6>
+                                    <h2 class="text-warning">@ViewBag.AvgQualityScore.ToString("N1")</h2>
+                                    <small class="text-muted">Out of 10</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Shift Breakdown -->
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header bg-secondary text-white">
+                                    <h5 class="mb-0">
+                                        <i class="fas fa-clock"></i> Production by Shift
+                                    </h5>
+                                </div>
+                                <div class="card-body">
+                                    <table class="table table-striped table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Shift</th>
+                                                <th class="text-right">Batches</th>
+                                                <th class="text-right">Input (Q)</th>
+                                                <th class="text-right">Output (Q)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var shift in ViewBag.ShiftBreakdown)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        @if (shift.Shift == "Morning")
+                                                        {
+                                                            <i class="fas fa-sun text-warning"></i>
+                                                        }
+                                                        else if (shift.Shift == "Evening")
+                                                        {
+                                                            <i class="fas fa-cloud-sun text-info"></i>
+                                                        }
+                                                        else
+                                                        {
+                                                            <i class="fas fa-moon text-primary"></i>
+                                                        }
+                                                        <strong>@shift.Shift</strong>
+                                                    </td>
+                                                    <td class="text-right">@shift.Count</td>
+                                                    <td class="text-right">@shift.TotalInput.ToString("N2")</td>
+                                                    <td class="text-right">@shift.TotalOutput.ToString("N2")</td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header bg-secondary text-white">
+                                    <h5 class="mb-0">
+                                        <i class="fas fa-chart-pie"></i> Shift Distribution
+                                    </h5>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="shiftChart" height="200"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Daily Production Trend -->
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header bg-secondary text-white">
+                                    <h5 class="mb-0">
+                                        <i class="fas fa-chart-line"></i> Daily Production Trend
+                                    </h5>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="dailyProductionChart" height="80"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Batches Table -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header bg-secondary text-white">
+                                    <h5 class="mb-0">
+                                        <i class="fas fa-list"></i> Batch Details
+                                    </h5>
+                                </div>
+                                <div class="card-body">
+                                    <table class="table table-striped table-hover" id="batchesTable">
+                                        <thead>
+                                            <tr>
+                                                <th>Batch #</th>
+                                                <th>Date</th>
+                                                <th>Shift</th>
+                                                <th class="text-right">Duration</th>
+                                                <th class="text-right">Quality</th>
+                                                <th>Status</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var batch in ViewBag.Batches)
+                                            {
+                                                <tr>
+                                                    <td><strong>@batch.BatchNumber</strong></td>
+                                                    <td>@batch.BatchDate.ToString("dd-MMM-yyyy")</td>
+                                                    <td>
+                                                        @if (batch.ShiftType == "Morning")
+                                                        {
+                                                            <span class="badge bg-warning"><i class="fas fa-sun"></i> Morning</span>
+                                                        }
+                                                        else if (batch.ShiftType == "Evening")
+                                                        {
+                                                            <span class="badge bg-info"><i class="fas fa-cloud-sun"></i> Evening</span>
+                                                        }
+                                                        else
+                                                        {
+                                                            <span class="badge bg-primary"><i class="fas fa-moon"></i> Night</span>
+                                                        }
+                                                    </td>
+                                                    <td class="text-right">@(batch.DurationHours?.ToString("N1") ?? "N/A") hrs</td>
+                                                    <td class="text-right">
+                                                        @if (batch.QualityScore >= 8)
+                                                        {
+                                                            <span class="badge bg-success">@(batch.QualityScore?.ToString("N1") ?? "N/A")</span>
+                                                        }
+                                                        else if (batch.QualityScore >= 6)
+                                                        {
+                                                            <span class="badge bg-warning">@(batch.QualityScore?.ToString("N1") ?? "N/A")</span>
+                                                        }
+                                                        else
+                                                        {
+                                                            <span class="badge bg-danger">@(batch.QualityScore?.ToString("N1") ?? "N/A")</span>
+                                                        }
+                                                    </td>
+                                                    <td>
+                                                        <span class="badge bg-success">@batch.Status</span>
+                                                    </td>
+                                                    <td>
+                                                        <a href="/ProductionBatches/Details/@batch.Id" class="btn btn-sm btn-info" title="View Details">
+                                                            <i class="fas fa-eye"></i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="row mt-3">
+                        <div class="col-12">
+                            <a href="/Reports" class="btn btn-secondary">
+                                <i class="fas fa-arrow-left"></i> Back to Reports
+                            </a>
+                            <button class="btn btn-success" onclick="window.print()">
+                                <i class="fas fa-print"></i> Print Report
+                            </button>
+                            <button class="btn btn-primary" onclick="exportToExcel()">
+                                <i class="fas fa-file-excel"></i> Export to Excel
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    // Shift Distribution Pie Chart
+    var shiftData = @Html.Raw(Json.Serialize(ViewBag.ShiftBreakdown));
+    var shiftLabels = shiftData.map(s => s.shift);
+    var shiftCounts = shiftData.map(s => s.count);
+
+    var ctx1 = document.getElementById('shiftChart').getContext('2d');
+    new Chart(ctx1, {
+        type: 'pie',
+        data: {
+            labels: shiftLabels,
+            datasets: [{
+                data: shiftCounts,
+                backgroundColor: ['#ffc107', '#17a2b8', '#007bff'],
+                borderWidth: 2
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'bottom'
+                },
+                title: {
+                    display: false
+                }
+            }
+        }
+    });
+
+    // Daily Production Line Chart
+    var dailyData = @Html.Raw(Json.Serialize(ViewBag.DailyProduction));
+    var dailyLabels = dailyData.map(d => new Date(d.date).toLocaleDateString('en-GB', { day: '2-digit', month: 'short' }));
+    var dailyOutputs = dailyData.map(d => d.totalOutput);
+
+    var ctx2 = document.getElementById('dailyProductionChart').getContext('2d');
+    new Chart(ctx2, {
+        type: 'line',
+        data: {
+            labels: dailyLabels,
+            datasets: [{
+                label: 'Daily Output (Quintals)',
+                data: dailyOutputs,
+                borderColor: '#28a745',
+                backgroundColor: 'rgba(40, 167, 69, 0.1)',
+                borderWidth: 2,
+                fill: true,
+                tension: 0.4
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'top'
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Output (Quintals)'
+                    }
+                },
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Date'
+                    }
+                }
+            }
+        }
+    });
+
+    // Initialize DataTable
+    $(document).ready(function() {
+        $('#batchesTable').DataTable({
+            order: [[1, 'desc']],
+            pageLength: 10,
+            responsive: true
+        });
+    });
+
+    // Export to Excel function
+    function exportToExcel() {
+        alert('Excel export functionality will be implemented.');
+        // TODO: Implement Excel export
+    }
+</script>
+}

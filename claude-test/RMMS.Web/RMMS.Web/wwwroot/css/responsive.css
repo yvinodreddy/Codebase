@@ -1,0 +1,791 @@
+/* ================================================================
+   RMMS Web Application - Responsive Design System
+   Version: 1.0
+   Date: 2025-10-01
+   Description: Device-independent responsive styling
+   ================================================================ */
+
+/* ================================================================
+   BREAKPOINTS REFERENCE
+   xs: 0-479px      (Phone portrait)
+   sm: 480-639px    (Phone landscape)
+   md: 640-1023px   (Tablet portrait)
+   lg: 1024-1365px  (Tablet landscape / Small desktop)
+   xl: 1366-1919px  (Desktop)
+   xxl: 1920px+     (Large monitors)
+   ================================================================ */
+
+/* ================================================================
+   BASE RESPONSIVE SETTINGS
+   ================================================================ */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 14px;
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* ================================================================
+   RESPONSIVE TYPOGRAPHY
+   ================================================================ */
+
+.ms-display-1 {
+    font-size: clamp(32px, 4vw, 46px);
+}
+
+.ms-display-2 {
+    font-size: clamp(28px, 3.5vw, 40px);
+}
+
+.ms-display-3 {
+    font-size: clamp(24px, 3vw, 32px);
+}
+
+.ms-headline {
+    font-size: clamp(20px, 2.5vw, 28px);
+}
+
+.ms-headline-small {
+    font-size: clamp(18px, 2.2vw, 24px);
+}
+
+.ms-title {
+    font-size: clamp(16px, 1.8vw, 20px);
+}
+
+.ms-title-small {
+    font-size: clamp(15px, 1.6vw, 18px);
+}
+
+.ms-body-large {
+    font-size: clamp(14px, 1.2vw, 15px);
+}
+
+/* ================================================================
+   CONTAINER SYSTEM
+   ================================================================ */
+
+.ms-container {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+/* Mobile First - xs (0-479px) */
+.ms-container {
+    max-width: 100%;
+}
+
+/* sm (480px+) */
+@media (min-width: 480px) {
+    .ms-container {
+        max-width: 540px;
+    }
+}
+
+/* md (640px+) */
+@media (min-width: 640px) {
+    .ms-container {
+        max-width: 720px;
+    }
+}
+
+/* lg (1024px+) */
+@media (min-width: 1024px) {
+    .ms-container {
+        max-width: 960px;
+    }
+}
+
+/* xl (1366px+) */
+@media (min-width: 1366px) {
+    .ms-container {
+        max-width: 1140px;
+    }
+}
+
+/* xxl (1920px+) */
+@media (min-width: 1920px) {
+    .ms-container {
+        max-width: 1320px;
+    }
+}
+
+/* Fluid Container */
+.ms-container-fluid {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+/* ================================================================
+   GRID SYSTEM
+   ================================================================ */
+
+.ms-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+.ms-col {
+    position: relative;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+/* Column Sizes - Mobile First */
+.ms-col-12 { flex: 0 0 100%; max-width: 100%; }
+.ms-col-11 { flex: 0 0 91.666667%; max-width: 91.666667%; }
+.ms-col-10 { flex: 0 0 83.333333%; max-width: 83.333333%; }
+.ms-col-9 { flex: 0 0 75%; max-width: 75%; }
+.ms-col-8 { flex: 0 0 66.666667%; max-width: 66.666667%; }
+.ms-col-7 { flex: 0 0 58.333333%; max-width: 58.333333%; }
+.ms-col-6 { flex: 0 0 50%; max-width: 50%; }
+.ms-col-5 { flex: 0 0 41.666667%; max-width: 41.666667%; }
+.ms-col-4 { flex: 0 0 33.333333%; max-width: 33.333333%; }
+.ms-col-3 { flex: 0 0 25%; max-width: 25%; }
+.ms-col-2 { flex: 0 0 16.666667%; max-width: 16.666667%; }
+.ms-col-1 { flex: 0 0 8.333333%; max-width: 8.333333%; }
+
+/* sm (480px+) */
+@media (min-width: 480px) {
+    .ms-col-sm-12 { flex: 0 0 100%; max-width: 100%; }
+    .ms-col-sm-6 { flex: 0 0 50%; max-width: 50%; }
+    .ms-col-sm-4 { flex: 0 0 33.333333%; max-width: 33.333333%; }
+    .ms-col-sm-3 { flex: 0 0 25%; max-width: 25%; }
+}
+
+/* md (640px+) */
+@media (min-width: 640px) {
+    .ms-col-md-12 { flex: 0 0 100%; max-width: 100%; }
+    .ms-col-md-6 { flex: 0 0 50%; max-width: 50%; }
+    .ms-col-md-4 { flex: 0 0 33.333333%; max-width: 33.333333%; }
+    .ms-col-md-3 { flex: 0 0 25%; max-width: 25%; }
+}
+
+/* lg (1024px+) */
+@media (min-width: 1024px) {
+    .ms-col-lg-12 { flex: 0 0 100%; max-width: 100%; }
+    .ms-col-lg-6 { flex: 0 0 50%; max-width: 50%; }
+    .ms-col-lg-4 { flex: 0 0 33.333333%; max-width: 33.333333%; }
+    .ms-col-lg-3 { flex: 0 0 25%; max-width: 25%; }
+}
+
+/* xl (1366px+) */
+@media (min-width: 1366px) {
+    .ms-col-xl-12 { flex: 0 0 100%; max-width: 100%; }
+    .ms-col-xl-6 { flex: 0 0 50%; max-width: 50%; }
+    .ms-col-xl-4 { flex: 0 0 33.333333%; max-width: 33.333333%; }
+    .ms-col-xl-3 { flex: 0 0 25%; max-width: 25%; }
+}
+
+/* ================================================================
+   MOBILE SPECIFIC (xs: 0-479px)
+   ================================================================ */
+
+@media (max-width: 479px) {
+    /* Typography adjustments */
+    body {
+        font-size: 14px;
+    }
+
+    /* Touch-friendly buttons */
+    .ms-btn {
+        min-height: 44px;
+        height: auto;
+        padding: 12px 20px;
+        font-size: 15px;
+    }
+
+    .ms-btn-sm {
+        min-height: 40px;
+        padding: 10px 16px;
+    }
+
+    /* Form controls - larger for touch */
+    .ms-form-control,
+    .ms-form-select {
+        height: 44px;
+        font-size: 16px; /* Prevents zoom on iOS */
+        padding: 0 12px;
+    }
+
+    /* Cards - reduce padding */
+    .ms-card {
+        padding: 16px;
+        margin-bottom: 12px;
+    }
+
+    .ms-card-header,
+    .ms-card-footer {
+        padding-bottom: 12px;
+        margin-bottom: 12px;
+    }
+
+    /* Tables - stack or scroll */
+    .ms-table-responsive {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    /* Navigation - mobile menu */
+    .ms-navbar {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 12px 16px;
+    }
+
+    .ms-navbar-nav {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .ms-nav-item {
+        margin: 4px 0;
+    }
+
+    /* Hide on mobile */
+    .ms-hide-xs {
+        display: none !important;
+    }
+
+    /* Full width on mobile */
+    .ms-full-width-xs {
+        width: 100% !important;
+        flex: 0 0 100% !important;
+        max-width: 100% !important;
+    }
+
+    /* Reduce spacing */
+    .ms-container,
+    .ms-container-fluid {
+        padding-right: 12px;
+        padding-left: 12px;
+    }
+}
+
+/* ================================================================
+   PHONE LANDSCAPE (sm: 480-639px)
+   ================================================================ */
+
+@media (min-width: 480px) and (max-width: 639px) {
+    /* Touch-friendly controls */
+    .ms-btn {
+        min-height: 40px;
+        height: auto;
+    }
+
+    .ms-form-control,
+    .ms-form-select {
+        height: 40px;
+        font-size: 15px;
+    }
+
+    /* Two-column layouts possible */
+    .ms-two-col-sm {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+}
+
+/* ================================================================
+   TABLET PORTRAIT (md: 640-1023px)
+   ================================================================ */
+
+@media (min-width: 640px) and (max-width: 1023px) {
+    /* Standard button sizes */
+    .ms-btn {
+        min-height: 36px;
+    }
+
+    .ms-form-control,
+    .ms-form-select {
+        height: 36px;
+    }
+
+    /* Cards - moderate padding */
+    .ms-card {
+        padding: 20px;
+    }
+
+    /* Two/three column grids */
+    .ms-grid-md-2 {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+    }
+
+    .ms-grid-md-3 {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+    }
+
+    /* Hide on tablet */
+    .ms-hide-md {
+        display: none !important;
+    }
+}
+
+/* ================================================================
+   DESKTOP (lg: 1024-1365px)
+   ================================================================ */
+
+@media (min-width: 1024px) {
+    /* Standard desktop sizes */
+    .ms-btn {
+        min-height: 32px;
+    }
+
+    .ms-form-control,
+    .ms-form-select {
+        height: 32px;
+    }
+
+    /* Full card padding */
+    .ms-card {
+        padding: 24px;
+    }
+
+    /* Multi-column layouts */
+    .ms-grid-lg-4 {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+    }
+
+    /* Hover effects enabled */
+    .ms-hover-lift:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--ms-shadow-16);
+    }
+
+    /* Side navigation layouts */
+    .ms-layout-sidebar {
+        display: grid;
+        grid-template-columns: 260px 1fr;
+        gap: 24px;
+    }
+}
+
+/* ================================================================
+   LARGE DESKTOP (xl: 1366-1919px)
+   ================================================================ */
+
+@media (min-width: 1366px) {
+    /* Enhanced spacing */
+    .ms-container {
+        padding-right: 20px;
+        padding-left: 20px;
+    }
+
+    /* Larger cards */
+    .ms-card {
+        padding: 28px;
+    }
+
+    /* Multi-column grids */
+    .ms-grid-xl-5 {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 24px;
+    }
+
+    /* Wider sidebar */
+    .ms-layout-sidebar {
+        grid-template-columns: 300px 1fr;
+        gap: 32px;
+    }
+}
+
+/* ================================================================
+   EXTRA LARGE MONITORS (xxl: 1920px+)
+   ================================================================ */
+
+@media (min-width: 1920px) {
+    /* Constrain max width for readability */
+    .ms-container {
+        max-width: 1600px;
+    }
+
+    /* Enhanced spacing */
+    .ms-card {
+        padding: 32px;
+    }
+
+    /* More columns possible */
+    .ms-grid-xxl-6 {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        gap: 28px;
+    }
+
+    /* Three-column layouts */
+    .ms-layout-three-col {
+        display: grid;
+        grid-template-columns: 260px 1fr 300px;
+        gap: 40px;
+    }
+}
+
+/* ================================================================
+   RESPONSIVE UTILITIES
+   ================================================================ */
+
+/* Display utilities by breakpoint */
+@media (max-width: 479px) {
+    .ms-d-xs-none { display: none !important; }
+    .ms-d-xs-block { display: block !important; }
+    .ms-d-xs-flex { display: flex !important; }
+}
+
+@media (min-width: 480px) and (max-width: 639px) {
+    .ms-d-sm-none { display: none !important; }
+    .ms-d-sm-block { display: block !important; }
+    .ms-d-sm-flex { display: flex !important; }
+}
+
+@media (min-width: 640px) and (max-width: 1023px) {
+    .ms-d-md-none { display: none !important; }
+    .ms-d-md-block { display: block !important; }
+    .ms-d-md-flex { display: flex !important; }
+}
+
+@media (min-width: 1024px) {
+    .ms-d-lg-none { display: none !important; }
+    .ms-d-lg-block { display: block !important; }
+    .ms-d-lg-flex { display: flex !important; }
+}
+
+/* Text alignment by breakpoint */
+@media (max-width: 639px) {
+    .ms-text-center-mobile {
+        text-align: center !important;
+    }
+}
+
+/* Stack on mobile */
+.ms-stack-xs {
+    display: flex;
+    flex-direction: column;
+}
+
+@media (min-width: 640px) {
+    .ms-stack-xs {
+        flex-direction: row;
+    }
+}
+
+/* ================================================================
+   TOUCH OPTIMIZATIONS
+   ================================================================ */
+
+/* Larger touch targets on small screens */
+@media (max-width: 1023px) {
+    /* Minimum touch target size */
+    .ms-btn,
+    .ms-nav-link,
+    .ms-page-link {
+        min-height: 44px;
+        min-width: 44px;
+    }
+
+    /* Checkbox and radio larger */
+    .ms-form-check-input {
+        width: 24px;
+        height: 24px;
+    }
+
+    /* Links with more spacing */
+    a {
+        padding: 4px 0;
+    }
+
+    /* Prevent text selection on buttons */
+    .ms-btn,
+    .ms-nav-link {
+        -webkit-user-select: none;
+        user-select: none;
+        -webkit-touch-callout: none;
+    }
+}
+
+/* ================================================================
+   TABLE RESPONSIVE PATTERNS
+   ================================================================ */
+
+/* Scroll pattern - default */
+.ms-table-responsive {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Stack pattern on mobile */
+@media (max-width: 639px) {
+    .ms-table-stack {
+        border: 0;
+    }
+
+    .ms-table-stack thead {
+        display: none;
+    }
+
+    .ms-table-stack tr {
+        display: block;
+        margin-bottom: 16px;
+        border: 1px solid var(--ms-border-default);
+        border-radius: var(--ms-radius-medium);
+        padding: 12px;
+        background-color: var(--ms-white);
+    }
+
+    .ms-table-stack td {
+        display: flex;
+        justify-content: space-between;
+        padding: 8px 0;
+        border-bottom: 1px solid var(--ms-border-subtle);
+        text-align: right;
+    }
+
+    .ms-table-stack td::before {
+        content: attr(data-label);
+        font-weight: 600;
+        text-align: left;
+        padding-right: 16px;
+    }
+
+    .ms-table-stack td:last-child {
+        border-bottom: 0;
+    }
+}
+
+/* ================================================================
+   FORM LAYOUTS
+   ================================================================ */
+
+/* Stack forms on mobile */
+@media (max-width: 639px) {
+    .ms-form-row {
+        flex-direction: column;
+    }
+
+    .ms-form-row > * {
+        width: 100%;
+        margin-bottom: 12px;
+    }
+}
+
+/* Side-by-side on larger screens */
+@media (min-width: 640px) {
+    .ms-form-row {
+        display: flex;
+        gap: 16px;
+    }
+
+    .ms-form-row > * {
+        flex: 1;
+    }
+}
+
+/* ================================================================
+   NAVIGATION RESPONSIVE
+   ================================================================ */
+
+/* Mobile menu toggle */
+@media (max-width: 1023px) {
+    .ms-navbar-toggle {
+        display: block;
+        padding: 8px;
+        background: none;
+        border: 1px solid var(--ms-border-default);
+        border-radius: var(--ms-radius-small);
+        cursor: pointer;
+    }
+
+    .ms-navbar-collapse {
+        display: none;
+        width: 100%;
+        margin-top: 12px;
+    }
+
+    .ms-navbar-collapse.show {
+        display: block;
+    }
+
+    .ms-navbar-nav {
+        flex-direction: column;
+    }
+
+    .ms-nav-item {
+        margin: 4px 0;
+    }
+}
+
+@media (min-width: 1024px) {
+    .ms-navbar-toggle {
+        display: none;
+    }
+
+    .ms-navbar-collapse {
+        display: flex !important;
+        flex: 1;
+        align-items: center;
+        justify-content: space-between;
+    }
+}
+
+/* ================================================================
+   MODAL RESPONSIVE
+   ================================================================ */
+
+@media (max-width: 639px) {
+    .ms-modal-dialog {
+        margin: 0;
+        width: 100%;
+        max-width: 100%;
+        height: 100vh;
+    }
+
+    .ms-modal-content {
+        border-radius: 0;
+        height: 100%;
+    }
+}
+
+@media (min-width: 640px) {
+    .ms-modal-dialog {
+        max-width: 600px;
+        margin: 32px auto;
+    }
+}
+
+/* ================================================================
+   PRINT STYLES
+   ================================================================ */
+
+@media print {
+    /* Hide non-essential elements */
+    .ms-navbar,
+    .ms-btn,
+    .ms-badge,
+    .no-print {
+        display: none !important;
+    }
+
+    /* Optimize for print */
+    body {
+        background: white;
+        color: black;
+        font-size: 10pt;
+    }
+
+    .ms-card {
+        box-shadow: none;
+        border: 1px solid #ccc;
+        page-break-inside: avoid;
+    }
+
+    .ms-table {
+        border-collapse: collapse;
+    }
+
+    .ms-table th,
+    .ms-table td {
+        border: 1px solid #ccc;
+    }
+
+    /* Force page breaks */
+    .page-break-before {
+        page-break-before: always;
+    }
+
+    .page-break-after {
+        page-break-after: always;
+    }
+}
+
+/* ================================================================
+   DARK MODE SUPPORT (Optional)
+   ================================================================ */
+
+@media (prefers-color-scheme: dark) {
+    .ms-dark-mode-auto {
+        background-color: #1e1e1e;
+        color: #ffffff;
+    }
+
+    .ms-dark-mode-auto .ms-card {
+        background-color: #2d2d2d;
+        border-color: #3d3d3d;
+    }
+
+    .ms-dark-mode-auto .ms-table {
+        background-color: #2d2d2d;
+        color: #ffffff;
+    }
+}
+
+/* ================================================================
+   ACCESSIBILITY
+   ================================================================ */
+
+/* Focus visible for keyboard navigation */
+*:focus-visible {
+    outline: 2px solid var(--ms-primary);
+    outline-offset: 2px;
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Screen reader only */
+.ms-sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ================================================================
+   END OF RESPONSIVE DESIGN SYSTEM
+   ================================================================ */

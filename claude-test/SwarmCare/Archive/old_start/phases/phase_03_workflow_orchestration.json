@@ -1,0 +1,31 @@
+{
+  "phase_id": 3,
+  "name": "Workflow Orchestration",
+  "epic": "Epic 4",
+  "story_points": 76,
+  "priority": "P0",
+  "dependencies": [
+    2
+  ],
+  "version": "v1.0",
+  "user_stories": [
+    {
+      "story_id": "4.1",
+      "title": "Workflow Engine",
+      "story_points": 21,
+      "priority": "P0"
+    },
+    {
+      "story_id": "4.2",
+      "title": "EHR to Podcast Pipeline",
+      "story_points": 21,
+      "priority": "P0"
+    },
+    {
+      "story_id": "4.3",
+      "title": "Diagnostic Workflow Implementation",
+      "story_points": 34,
+      "priority": "P1"
+    }
+  ]
+}

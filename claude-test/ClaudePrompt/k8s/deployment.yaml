@@ -1,0 +1,106 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ultrathink
+  namespace: production
+  labels:
+    app: ultrathink
+    version: v2.0.0
+    tier: application
+spec:
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: ultrathink
+  template:
+    metadata:
+      labels:
+        app: ultrathink
+        version: v2.0.0
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8000"
+        prometheus.io/path: "/metrics"
+    spec:
+      serviceAccountName: ultrathink
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        fsGroup: 1000
+      containers:
+      - name: ultrathink
+        image: ultrathink:v2.0.0
+        imagePullPolicy: IfNotPresent
+        ports:
+        - name: http
+          containerPort: 8000
+          protocol: TCP
+        - name: metrics
+          containerPort: 9090
+          protocol: TCP
+        env:
+        - name: ENVIRONMENT
+          value: "production"
+        - name: LOG_LEVEL
+          value: "INFO"
+        - name: ANTHROPIC_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: ultrathink-secrets
+              key: anthropic-api-key
+        - name: REDIS_HOST
+          value: "redis-service"
+        - name: REDIS_PORT
+          value: "6379"
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "500m"
+          limits:
+            memory: "2Gi"
+            cpu: "2000m"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: http
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /health/ready
+            port: http
+          initialDelaySeconds: 10
+          periodSeconds: 5
+          timeoutSeconds: 3
+          failureThreshold: 2
+        volumeMounts:
+        - name: logs
+          mountPath: /app/logs
+        - name: config
+          mountPath: /app/config
+          readOnly: true
+      volumes:
+      - name: logs
+        emptyDir: {}
+      - name: config
+        configMap:
+          name: ultrathink-config
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                  - ultrathink
+              topologyKey: kubernetes.io/hostname

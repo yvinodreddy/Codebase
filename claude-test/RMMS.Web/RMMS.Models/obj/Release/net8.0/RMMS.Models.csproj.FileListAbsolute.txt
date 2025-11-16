@@ -1,0 +1,15 @@
+/home/user01/claude-test/RMMS.Web/RMMS.Models/bin/Release/net8.0/RMMS.Models.deps.json
+/home/user01/claude-test/RMMS.Web/RMMS.Models/bin/Release/net8.0/RMMS.Models.dll
+/home/user01/claude-test/RMMS.Web/RMMS.Models/bin/Release/net8.0/RMMS.Models.pdb
+/home/user01/claude-test/RMMS.Web/RMMS.Models/bin/Release/net8.0/RMMS.Common.dll
+/home/user01/claude-test/RMMS.Web/RMMS.Models/bin/Release/net8.0/RMMS.Common.pdb
+/home/user01/claude-test/RMMS.Web/RMMS.Models/obj/Release/net8.0/RMMS.Models.csproj.AssemblyReference.cache
+/home/user01/claude-test/RMMS.Web/RMMS.Models/obj/Release/net8.0/RMMS.Models.GeneratedMSBuildEditorConfig.editorconfig
+/home/user01/claude-test/RMMS.Web/RMMS.Models/obj/Release/net8.0/RMMS.Models.AssemblyInfoInputs.cache
+/home/user01/claude-test/RMMS.Web/RMMS.Models/obj/Release/net8.0/RMMS.Models.AssemblyInfo.cs
+/home/user01/claude-test/RMMS.Web/RMMS.Models/obj/Release/net8.0/RMMS.Models.csproj.CoreCompileInputs.cache
+/home/user01/claude-test/RMMS.Web/RMMS.Models/obj/Release/net8.0/RMMS.Models.csproj.CopyComplete
+/home/user01/claude-test/RMMS.Web/RMMS.Models/obj/Release/net8.0/RMMS.Models.dll
+/home/user01/claude-test/RMMS.Web/RMMS.Models/obj/Release/net8.0/refint/RMMS.Models.dll
+/home/user01/claude-test/RMMS.Web/RMMS.Models/obj/Release/net8.0/RMMS.Models.pdb
+/home/user01/claude-test/RMMS.Web/RMMS.Models/obj/Release/net8.0/ref/RMMS.Models.dll

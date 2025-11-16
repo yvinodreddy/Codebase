@@ -1,0 +1,420 @@
+#!/bin/bash
+
+################################################################################
+# SWARMCARE CONTINUATION COMMAND
+# Purpose: Continue development from where you left off
+# Version: 2.1
+# Usage: ./continue
+################################################################################
+
+set -e
+
+# Colors
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
+PURPLE='\033[0;35m'
+CYAN='\033[0;36m'
+NC='\033[0m'
+
+# Paths
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+TRACKER_DIR="$SCRIPT_DIR/.tracker"
+STATE_FILE="$TRACKER_DIR/state.json"
+MANIFEST_FILE="$TRACKER_DIR/phase_manifest.json"
+
+################################################################################
+# FUNCTIONS
+################################################################################
+
+update_tracker() {
+    local key="$1"
+    local value="$2"
+    local timestamp=$(date -Iseconds)
+
+    # Create temporary Python script to update JSON
+    python3 << EOF
+import json
+from datetime import datetime
+
+with open('$STATE_FILE', 'r') as f:
+    state = json.load(f)
+
+state['$key'] = $value
+state['last_updated'] = '$timestamp'
+
+with open('$STATE_FILE', 'w') as f:
+    json.dump(state, f, indent=2)
+EOF
+}
+
+show_progress_bar() {
+    local current=$1
+    local total=$2
+    local width=50
+    local percentage=$((current * 100 / total))
+    local filled=$((width * current / total))
+    local empty=$((width - filled))
+
+    printf "["
+    printf "%${filled}s" | tr ' ' '█'
+    printf "%${empty}s" | tr ' ' '░'
+    printf "] %3d%%" "$percentage"
+}
+
+print_header() {
+    clear
+    echo ""
+    echo "╔════════════════════════════════════════════════════════════════════╗"
+    echo -e "║  ${CYAN}SWARMCARE v2.1 ULTIMATE - CONTINUATION SYSTEM${NC}               ║"
+    echo "╚════════════════════════════════════════════════════════════════════╝"
+    echo ""
+}
+
+show_current_status() {
+    print_header
+
+    # Read state
+    local state=$(cat "$STATE_FILE")
+    local current_phase=$(echo "$state" | python3 -c "import sys, json; print(json.load(sys.stdin)['current_phase'])")
+    local progress=$(echo "$state" | python3 -c "import sys, json; print(json.load(sys.stdin)['progress_percentage'])")
+    local sp_completed=$(echo "$state" | python3 -c "import sys, json; print(json.load(sys.stdin)['story_points_completed'])")
+    local sp_remaining=$(echo "$state" | python3 -c "import sys, json; print(json.load(sys.stdin)['story_points_remaining'])")
+    local status=$(echo "$state" | python3 -c "import sys, json; print(json.load(sys.stdin)['status'])")
+    local last_activity=$(echo "$state" | python3 -c "import sys, json; print(json.load(sys.stdin)['last_activity'])")
+    local machine_id=$(echo "$state" | python3 -c "import sys, json; print(json.load(sys.stdin)['machine_id'])")
+
+    echo -e "${BLUE}📊 PROJECT STATUS${NC}"
+    echo "════════════════════════════════════════════════════════════════════"
+    echo -e "  Project:    ${CYAN}SwarmCare v2.1 Ultimate${NC}"
+    echo -e "  Total:      ${CYAN}29 phases${NC} | ${CYAN}1362 story points${NC}"
+    echo -e "  Machine:    ${CYAN}$machine_id${NC}"
+    echo ""
+
+    echo -e "${BLUE}🎯 CURRENT PROGRESS${NC}"
+    echo "════════════════════════════════════════════════════════════════════"
+    echo -ne "  Overall:    "
+    show_progress_bar "$sp_completed" 1362
+    echo ""
+    echo -e "  Completed:  ${GREEN}$sp_completed${NC} story points"
+    echo -e "  Remaining:  ${YELLOW}$sp_remaining${NC} story points"
+    echo -e "  Status:     ${PURPLE}$status${NC}"
+    echo ""
+
+    if [ "$current_phase" != "null" ] && [ "$current_phase" != "0" ] || [ "$sp_completed" -gt 0 ]; then
+        echo -e "${BLUE}📍 CURRENT LOCATION${NC}"
+        echo "════════════════════════════════════════════════════════════════════"
+
+        # Get phase details
+        local phase_name=$(python3 << EOF
+import json
+with open('$MANIFEST_FILE', 'r') as f:
+    manifest = json.load(f)
+    for phase in manifest['phases']:
+        if phase['phase_id'] == $current_phase:
+            print(phase['name'])
+            break
+EOF
+)
+
+        echo -e "  Phase:      ${CYAN}Phase $current_phase${NC} - $phase_name"
+        echo -e "  Last:       ${YELLOW}$last_activity${NC}"
+        echo ""
+    fi
+
+    echo -e "${BLUE}🎬 COMPLETED PHASES${NC}"
+    echo "════════════════════════════════════════════════════════════════════"
+
+    # Show completed phases
+    local completed_count=$(echo "$state" | python3 -c "import sys, json; print(len(json.load(sys.stdin)['completed_phases']))")
+
+    if [ "$completed_count" -eq 0 ]; then
+        echo "  No phases completed yet"
+    else
+        echo "$state" | python3 << EOF
+import sys, json
+state = json.load(sys.stdin)
+for phase_id in state['completed_phases']:
+    print(f"  ✅ Phase {phase_id:02d}")
+EOF
+    fi
+
+    echo ""
+}
+
+show_next_steps() {
+    local state=$(cat "$STATE_FILE")
+    local status=$(echo "$state" | python3 -c "import sys, json; print(json.load(sys.stdin)['status'])")
+    local current_phase=$(echo "$state" | python3 -c "import sys, json; print(json.load(sys.stdin)['current_phase'])")
+
+    echo -e "${BLUE}⏭️  NEXT STEPS${NC}"
+    echo "════════════════════════════════════════════════════════════════════"
+
+    if [ "$status" == "NOT_STARTED" ]; then
+        echo -e "  ${GREEN}1.${NC} Initialize your machine"
+        echo -e "     ${CYAN}./scripts/init_machine.sh${NC}"
+        echo ""
+        echo -e "  ${GREEN}2.${NC} Start Phase 0 (Foundation)"
+        echo -e "     ${CYAN}cd phases/phase00${NC}"
+        echo ""
+        echo -e "  ${GREEN}3.${NC} Read phase guide"
+        echo -e "     ${CYAN}less docs/PHASE00_GUIDE.md${NC}"
+    elif [ "$status" == "IN_PROGRESS" ]; then
+        echo -e "  ${GREEN}Continue working on:${NC}"
+        echo -e "     ${CYAN}cd phases/phase$(printf "%02d" $current_phase)${NC}"
+        echo ""
+        echo -e "  ${GREEN}Or mark phase complete:${NC}"
+        echo -e "     ${CYAN}./scripts/complete_phase.sh $current_phase${NC}"
+    elif [ "$status" == "COMPLETED" ]; then
+        echo -e "  ${GREEN}✅ All phases complete!${NC}"
+        echo ""
+        echo -e "  ${GREEN}Next: Package your phases${NC}"
+        echo -e "     ${CYAN}./scripts/package_all.sh${NC}"
+    fi
+
+    echo ""
+}
+
+main_menu() {
+    echo -e "${BLUE}❓ WHAT WOULD YOU LIKE TO DO?${NC}"
+    echo "════════════════════════════════════════════════════════════════════"
+    echo ""
+    echo -e "  ${GREEN}1.${NC} Show detailed status"
+    echo -e "  ${GREEN}2.${NC} Start/Continue development"
+    echo -e "  ${GREEN}3.${NC} View phase list"
+    echo -e "  ${GREEN}4.${NC} Update tracker manually"
+    echo -e "  ${GREEN}5.${NC} Reset progress (CAUTION!)"
+    echo -e "  ${GREEN}q.${NC} Quit"
+    echo ""
+    echo -ne "${YELLOW}Your choice:${NC} "
+    read -r choice
+
+    case $choice in
+        1)
+            show_detailed_status
+            ;;
+        2)
+            continue_development
+            ;;
+        3)
+            show_phase_list
+            ;;
+        4)
+            manual_update
+            ;;
+        5)
+            reset_progress
+            ;;
+        q|Q)
+            echo ""
+            echo -e "${GREEN}See you next time! Run ./continue to resume.${NC}"
+            echo ""
+            exit 0
+            ;;
+        *)
+            echo -e "${RED}Invalid choice${NC}"
+            sleep 1
+            main_menu
+            ;;
+    esac
+}
+
+show_detailed_status() {
+    clear
+    print_header
+
+    # Show all phases with status
+    echo -e "${BLUE}📋 ALL 29 PHASES${NC}"
+    echo "════════════════════════════════════════════════════════════════════"
+
+    python3 << EOF
+import json
+
+with open('$STATE_FILE', 'r') as f:
+    state = json.load(f)
+
+with open('$MANIFEST_FILE', 'r') as f:
+    manifest = json.load(f)
+
+completed = state['completed_phases']
+current = state['current_phase']
+
+for phase in manifest['phases']:
+    phase_id = phase['phase_id']
+    name = phase['name']
+    sp = phase['story_points']
+
+    if phase_id in completed:
+        status = "✅ COMPLETE"
+        color_start = ""
+        color_end = ""
+    elif phase_id == current:
+        status = "🔄 IN PROGRESS"
+        color_start = ""
+        color_end = ""
+    else:
+        status = "⏳ PENDING"
+        color_start = ""
+        color_end = ""
+
+    print(f"  {status}  Phase {phase_id:02d}: {name:<50} ({sp:3d} SP)")
+
+EOF
+
+    echo ""
+    echo -ne "${YELLOW}Press Enter to continue...${NC}"
+    read
+    show_current_status
+    show_next_steps
+    main_menu
+}
+
+continue_development() {
+    clear
+    print_header
+
+    echo -e "${GREEN}🚀 CONTINUING DEVELOPMENT...${NC}"
+    echo ""
+
+    local state=$(cat "$STATE_FILE")
+    local status=$(echo "$state" | python3 -c "import sys, json; print(json.load(sys.stdin)['status'])")
+    local current_phase=$(echo "$state" | python3 -c "import sys, json; print(json.load(sys.stdin)['current_phase'])")
+
+    if [ "$status" == "NOT_STARTED" ]; then
+        echo -e "${YELLOW}First time setup required.${NC}"
+        echo ""
+        echo -e "Run: ${CYAN}./scripts/init_machine.sh${NC}"
+        echo ""
+    elif [ "$status" == "IN_PROGRESS" ]; then
+        echo -e "Resuming Phase $current_phase..."
+        echo ""
+        echo -e "Navigate to: ${CYAN}cd phases/phase$(printf "%02d" $current_phase)${NC}"
+        echo ""
+    else
+        echo -e "${GREEN}Ready to start next phase!${NC}"
+        echo ""
+    fi
+
+    echo -ne "${YELLOW}Press Enter to continue...${NC}"
+    read
+    show_current_status
+    show_next_steps
+    main_menu
+}
+
+show_phase_list() {
+    clear
+    print_header
+
+    echo -e "${BLUE}📋 PHASE LIST (29 PHASES, 1362 STORY POINTS)${NC}"
+    echo "════════════════════════════════════════════════════════════════════"
+    echo ""
+
+    python3 << EOF
+import json
+
+with open('$MANIFEST_FILE', 'r') as f:
+    manifest = json.load(f)
+
+total_sp = 0
+for phase in manifest['phases']:
+    phase_id = phase['phase_id']
+    name = phase['name']
+    sp = phase['story_points']
+    total_sp += sp
+    print(f"  Phase {phase_id:02d}: {name:<50} {sp:3d} SP")
+
+print(f"\n  {'TOTAL:':<58} {total_sp:3d} SP")
+EOF
+
+    echo ""
+    echo -ne "${YELLOW}Press Enter to continue...${NC}"
+    read
+    show_current_status
+    show_next_steps
+    main_menu
+}
+
+manual_update() {
+    echo ""
+    echo -e "${YELLOW}Manual update not yet implemented${NC}"
+    sleep 1
+    main_menu
+}
+
+reset_progress() {
+    echo ""
+    echo -e "${RED}⚠️  WARNING: This will reset all progress!${NC}"
+    echo -ne "${YELLOW}Are you sure? (yes/no):${NC} "
+    read -r confirm
+
+    if [ "$confirm" == "yes" ]; then
+        # Reset state
+        cat > "$STATE_FILE" << 'ENDOFSTATE'
+{
+  "version": "2.1",
+  "project": "SwarmCare Ultimate",
+  "total_phases": 29,
+  "total_story_points": 1362,
+  "current_phase": 0,
+  "current_user_story": null,
+  "current_task": null,
+  "progress_percentage": 0,
+  "story_points_completed": 0,
+  "story_points_remaining": 1362,
+  "status": "NOT_STARTED",
+  "machine_id": "unassigned",
+  "developer": "unassigned",
+  "started_at": null,
+  "last_updated": null,
+  "last_activity": "Project reset",
+  "completed_phases": [],
+  "completed_user_stories": [],
+  "in_progress_phase": null,
+  "in_progress_story": null,
+  "next_action": "Run: ./continue to start development",
+  "blockers": [],
+  "notes": "Progress reset - ready to start fresh"
+}
+ENDOFSTATE
+
+        echo -e "${GREEN}✅ Progress reset${NC}"
+        sleep 1
+    else
+        echo -e "${GREEN}Cancelled${NC}"
+        sleep 1
+    fi
+
+    show_current_status
+    show_next_steps
+    main_menu
+}
+
+################################################################################
+# MAIN EXECUTION
+################################################################################
+
+main() {
+    # Check if state file exists
+    if [ ! -f "$STATE_FILE" ]; then
+        echo -e "${RED}Error: Tracker state file not found${NC}"
+        echo "Expected: $STATE_FILE"
+        exit 1
+    fi
+
+    # Check if manifest exists
+    if [ ! -f "$MANIFEST_FILE" ]; then
+        echo -e "${RED}Error: Phase manifest file not found${NC}"
+        echo "Expected: $MANIFEST_FILE"
+        exit 1
+    fi
+
+    # Show status and menu
+    show_current_status
+    show_next_steps
+    main_menu
+}
+
+# Run main
+main "$@"

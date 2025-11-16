@@ -1,0 +1,7 @@
+Build a REST API with the following features:
+1. User authentication with JWT
+2. CRUD operations for products
+3. Rate limiting (100 requests per hour)
+4. Input validation
+5. Error handling with proper HTTP status codes
+6. API documentation with Swagger

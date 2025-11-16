@@ -1,0 +1,289 @@
+{
+  "execution_id": "50501527-10af-4865-864c-90328bf4eefb",
+  "workflow_id": "sepsis_screening",
+  "state": "COMPLETED",
+  "tasks": {
+    "get_vitals": {
+      "task_id": "get_vitals",
+      "name": "Retrieve Patient Vitals",
+      "action": "get_patient_vitals",
+      "dependencies": [],
+      "max_retries": 3,
+      "timeout_seconds": 300,
+      "state": "COMPLETED",
+      "result": {
+        "status": "success",
+        "vitals_retrieved": true
+      },
+      "error": null,
+      "start_time": 1761651230.4851217,
+      "end_time": 1761651230.485755,
+      "retry_count": 0
+    },
+    "calculate_qsofa": {
+      "task_id": "calculate_qsofa",
+      "name": "Calculate qSOFA Score",
+      "action": "calculate_qsofa",
+      "dependencies": [
+        "get_vitals"
+      ],
+      "max_retries": 3,
+      "timeout_seconds": 300,
+      "state": "COMPLETED",
+      "result": {
+        "status": "success",
+        "qsofa_score": 0
+      },
+      "error": null,
+      "start_time": 1761651230.485896,
+      "end_time": 1761651230.4861662,
+      "retry_count": 0
+    },
+    "calculate_sirs": {
+      "task_id": "calculate_sirs",
+      "name": "Calculate SIRS Criteria",
+      "action": "calculate_sirs",
+      "dependencies": [
+        "get_vitals"
+      ],
+      "max_retries": 3,
+      "timeout_seconds": 300,
+      "state": "COMPLETED",
+      "result": {
+        "status": "success",
+        "sirs_score": 0
+      },
+      "error": null,
+      "start_time": 1761651230.4863575,
+      "end_time": 1761651230.4865654,
+      "retry_count": 0
+    },
+    "assess_sepsis_risk": {
+      "task_id": "assess_sepsis_risk",
+      "name": "Assess Sepsis Risk",
+      "action": "assess_sepsis_risk",
+      "dependencies": [
+        "calculate_qsofa",
+        "calculate_sirs"
+      ],
+      "max_retries": 3,
+      "timeout_seconds": 300,
+      "state": "COMPLETED",
+      "result": {
+        "status": "success",
+        "risk_level": "LOW"
+      },
+      "error": null,
+      "start_time": 1761651230.486665,
+      "end_time": 1761651230.4869232,
+      "retry_count": 0
+    },
+    "generate_recommendations": {
+      "task_id": "generate_recommendations",
+      "name": "Generate Clinical Recommendations",
+      "action": "generate_sepsis_recommendations",
+      "dependencies": [
+        "assess_sepsis_risk"
+      ],
+      "max_retries": 3,
+      "timeout_seconds": 300,
+      "state": "COMPLETED",
+      "result": {
+        "status": "success",
+        "recommendation_count": 2
+      },
+      "error": null,
+      "start_time": 1761651230.4870586,
+      "end_time": 1761651230.4874024,
+      "retry_count": 0
+    },
+    "alert_if_critical": {
+      "task_id": "alert_if_critical",
+      "name": "Alert if Critical",
+      "action": "alert_critical_sepsis",
+      "dependencies": [
+        "assess_sepsis_risk"
+      ],
+      "max_retries": 3,
+      "timeout_seconds": 300,
+      "state": "COMPLETED",
+      "result": {
+        "status": "no_alert",
+        "critical": false
+      },
+      "error": null,
+      "start_time": 1761651230.4874887,
+      "end_time": 1761651230.4876437,
+      "retry_count": 0
+    }
+  },
+  "context": {
+    "patient_id": "PATIENT_001",
+    "vitals": {
+      "systolic_bp": 120,
+      "respiratory_rate": 16,
+      "heart_rate": 75,
+      "temperature": 37.0,
+      "gcs": 15,
+      "wbc": 8.0
+    },
+    "qsofa": {
+      "score": 0,
+      "criteria_met": [],
+      "positive": false,
+      "interpretation": "Low risk"
+    },
+    "sirs": {
+      "score": 0,
+      "criteria_met": [],
+      "positive": false,
+      "interpretation": "SIRS negative"
+    },
+    "sepsis_assessment": {
+      "risk_level": "LOW",
+      "qsofa_positive": false,
+      "sirs_positive": false,
+      "requires_immediate_action": false,
+      "assessment_time": "2025-10-28T07:33:50.486838"
+    },
+    "recommendations": [
+      "Continue routine monitoring",
+      "Document assessment"
+    ]
+  },
+  "start_time": 1761651230.483684,
+  "end_time": 1761651230.4877186,
+  "error": null,
+  "audit_log": [
+    {
+      "timestamp": "2025-10-28T07:33:50.483764",
+      "execution_id": "50501527-10af-4865-864c-90328bf4eefb",
+      "event": "WORKFLOW_STARTED",
+      "details": {
+        "workflow_id": "sepsis_screening"
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:33:50.485317",
+      "execution_id": "50501527-10af-4865-864c-90328bf4eefb",
+      "event": "TASK_STARTED",
+      "details": {
+        "task_id": "get_vitals",
+        "task_name": "Retrieve Patient Vitals"
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:33:50.485852",
+      "execution_id": "50501527-10af-4865-864c-90328bf4eefb",
+      "event": "TASK_COMPLETED",
+      "details": {
+        "task_id": "get_vitals",
+        "duration_seconds": 0.00063323974609375,
+        "attempt": 1
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:33:50.485968",
+      "execution_id": "50501527-10af-4865-864c-90328bf4eefb",
+      "event": "TASK_STARTED",
+      "details": {
+        "task_id": "calculate_qsofa",
+        "task_name": "Calculate qSOFA Score"
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:33:50.486344",
+      "execution_id": "50501527-10af-4865-864c-90328bf4eefb",
+      "event": "TASK_COMPLETED",
+      "details": {
+        "task_id": "calculate_qsofa",
+        "duration_seconds": 0.0002701282501220703,
+        "attempt": 1
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:33:50.486425",
+      "execution_id": "50501527-10af-4865-864c-90328bf4eefb",
+      "event": "TASK_STARTED",
+      "details": {
+        "task_id": "calculate_sirs",
+        "task_name": "Calculate SIRS Criteria"
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:33:50.486632",
+      "execution_id": "50501527-10af-4865-864c-90328bf4eefb",
+      "event": "TASK_COMPLETED",
+      "details": {
+        "task_id": "calculate_sirs",
+        "duration_seconds": 0.0002079010009765625,
+        "attempt": 1
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:33:50.486750",
+      "execution_id": "50501527-10af-4865-864c-90328bf4eefb",
+      "event": "TASK_STARTED",
+      "details": {
+        "task_id": "assess_sepsis_risk",
+        "task_name": "Assess Sepsis Risk"
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:33:50.487015",
+      "execution_id": "50501527-10af-4865-864c-90328bf4eefb",
+      "event": "TASK_COMPLETED",
+      "details": {
+        "task_id": "assess_sepsis_risk",
+        "duration_seconds": 0.0002582073211669922,
+        "attempt": 1
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:33:50.487157",
+      "execution_id": "50501527-10af-4865-864c-90328bf4eefb",
+      "event": "TASK_STARTED",
+      "details": {
+        "task_id": "generate_recommendations",
+        "task_name": "Generate Clinical Recommendations"
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:33:50.487475",
+      "execution_id": "50501527-10af-4865-864c-90328bf4eefb",
+      "event": "TASK_COMPLETED",
+      "details": {
+        "task_id": "generate_recommendations",
+        "duration_seconds": 0.0003437995910644531,
+        "attempt": 1
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:33:50.487569",
+      "execution_id": "50501527-10af-4865-864c-90328bf4eefb",
+      "event": "TASK_STARTED",
+      "details": {
+        "task_id": "alert_if_critical",
+        "task_name": "Alert if Critical"
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:33:50.487706",
+      "execution_id": "50501527-10af-4865-864c-90328bf4eefb",
+      "event": "TASK_COMPLETED",
+      "details": {
+        "task_id": "alert_if_critical",
+        "duration_seconds": 0.00015497207641601562,
+        "attempt": 1
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:33:50.487777",
+      "execution_id": "50501527-10af-4865-864c-90328bf4eefb",
+      "event": "WORKFLOW_COMPLETED",
+      "details": {
+        "duration_seconds": 0.004034519195556641
+      }
+    }
+  ]
+}

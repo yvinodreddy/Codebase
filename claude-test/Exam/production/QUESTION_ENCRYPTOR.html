@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question Encryption Tool - SDS Exam System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1ba94c;
+            --dark: #0d1117;
+            --code-bg: #161b22;
+            --border: #30363d;
+        }
+
+        body {
+            background: var(--dark);
+            color: #c9d1d9;
+            font-family: 'Segoe UI', sans-serif;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+        }
+
+        .card-custom {
+            background: var(--code-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            color: #c9d1d9;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .form-control, .form-select {
+            background: var(--dark);
+            border: 1px solid var(--border);
+            color: white;
+            padding: 12px;
+            border-radius: 8px;
+        }
+
+        .form-control:focus, .form-select:focus {
+            background: var(--dark);
+            border-color: var(--primary);
+            color: white;
+            box-shadow: 0 0 0 3px rgba(27,169,76,0.1);
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+
+        .btn-primary:hover {
+            background: #238636;
+        }
+
+        .output-box {
+            background: var(--dark);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 20px;
+            font-family: monospace;
+            font-size: 13px;
+            max-height: 400px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+
+        .alert-custom {
+            background: rgba(27,169,76,0.1);
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .question-item {
+            background: var(--dark);
+            border: 1px solid var(--border);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .badge-custom {
+            background: var(--primary);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1><i class="bi bi-shield-lock-fill"></i> Question Encryption Tool</h1>
+        <p style="color: #8b949e; margin-bottom: 30px;">Encrypt your exam questions for the SDS Assessment System</p>
+
+        <div class="alert-custom">
+            <strong><i class="bi bi-info-circle-fill"></i> Important:</strong> This tool encrypts your questions so they cannot be read in the HTML source code. Use the same encryption key as your exam system.
+        </div>
+
+        <div class="card-custom">
+            <h2>Add Questions</h2>
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label class="form-label">Question Number</label>
+                    <input type="number" id="questionNum" class="form-control" value="1" min="1" max="15">
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Question Type</label>
+                    <select id="questionType" class="form-select">
+                        <option value="mcq">Multiple Choice (MCQ)</option>
+                        <option value="code">Coding Challenge</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Question Text (Optional - if using image)</label>
+                <textarea id="questionText" class="form-control" rows="3" placeholder="Enter question text or leave empty if using image only"></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Image Path</label>
+                <input type="text" id="imagePath" class="form-control" placeholder="issues/Exam_question1.jpg">
+                <small style="color: #8b949e;">Questions 1-10: issues/Exam_question1.jpg | Questions 11-15: issues/Exam_question.jpg</small>
+            </div>
+
+            <div id="mcqOptions" class="mb-3">
+                <label class="form-label">MCQ Options (one per line)</label>
+                <textarea id="options" class="form-control" rows="4" placeholder="[0][1]&#10;01&#10;['0']['1']&#10;Error"></textarea>
+            </div>
+
+            <button onclick="addQuestion()" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i> Add Question
+            </button>
+        </div>
+
+        <div class="card-custom">
+            <h2>Questions Added (<span id="questionCount">0</span>/15)</h2>
+            <div id="questionsList"></div>
+        </div>
+
+        <div class="card-custom">
+            <h2>Encryption Settings</h2>
+            <div class="mb-3">
+                <label class="form-label">Encryption Key</label>
+                <input type="text" id="encryptionKey" class="form-control" value="SDS_SECURE_2025_v2.1_PROD">
+                <small style="color: #8b949e;">This must match the key in your exam HTML file</small>
+            </div>
+
+            <button onclick="generateEncrypted()" class="btn btn-primary">
+                <i class="bi bi-lock-fill"></i> Generate Encrypted Code
+            </button>
+        </div>
+
+        <div class="card-custom">
+            <h2>Encrypted Output</h2>
+            <p style="color: #8b949e; margin-bottom: 15px;">Copy this code and replace the encQuestions array in your exam HTML file</p>
+            <div id="output" class="output-box">
+                // Your encrypted questions will appear here
+            </div>
+            <button onclick="copyOutput()" class="btn btn-primary mt-3">
+                <i class="bi bi-clipboard"></i> Copy to Clipboard
+            </button>
+        </div>
+    </div>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        let questions = [];
+
+        // Update MCQ options visibility
+        document.getElementById('questionType').addEventListener('change', function() {
+            const isCode = this.value === 'code';
+            document.getElementById('mcqOptions').style.display = isCode ? 'none' : 'block';
+        });
+
+        // XOR Encryption
+        function xorEnc(text, key) {
+            let result = '';
+            for (let i = 0; i < text.length; i++) {
+                result += String.fromCharCode(text.charCodeAt(i) ^ key.charCodeAt(i % key.length));
+            }
+            return btoa(result);
+        }
+
+        function addQuestion() {
+            const num = parseInt(document.getElementById('questionNum').value);
+            const type = document.getElementById('questionType').value;
+            const text = document.getElementById('questionText').value.trim();
+            const image = document.getElementById('imagePath').value.trim();
+            const optionsText = document.getElementById('options').value.trim();
+
+            if (num < 1 || num > 15) {
+                alert('Question number must be between 1 and 15');
+                return;
+            }
+
+            if (!image) {
+                alert('Image path is required');
+                return;
+            }
+
+            const options = type === 'mcq'
+                ? optionsText.split('\n').filter(o => o.trim() !== '')
+                : [];
+
+            if (type === 'mcq' && options.length < 2) {
+                alert('MCQ questions need at least 2 options');
+                return;
+            }
+
+            const question = {
+                number: num,
+                type,
+                text: text || `Please solve Question ${num}`,
+                image,
+                options
+            };
+
+            // Replace if exists, otherwise add
+            const existingIndex = questions.findIndex(q => q.number === num);
+            if (existingIndex >= 0) {
+                questions[existingIndex] = question;
+            } else {
+                questions.push(question);
+            }
+
+            // Sort by number
+            questions.sort((a, b) => a.number - b.number);
+
+            updateQuestionsList();
+
+            // Auto-increment question number
+            document.getElementById('questionNum').value = num + 1;
+            document.getElementById('questionText').value = '';
+            document.getElementById('options').value = '';
+        }
+
+        function updateQuestionsList() {
+            const list = document.getElementById('questionsList');
+            document.getElementById('questionCount').textContent = questions.length;
+
+            if (questions.length === 0) {
+                list.innerHTML = '<p style="color: #8b949e; text-align: center;">No questions added yet</p>';
+                return;
+            }
+
+            list.innerHTML = questions.map(q => `
+                <div class="question-item">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                        <div>
+                            <strong style="color: #1ba94c;">Question ${q.number}</strong>
+                            <span class="badge-custom">${q.type.toUpperCase()}</span>
+                        </div>
+                        <button onclick="removeQuestion(${q.number})" class="btn btn-sm btn-danger">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </div>
+                    <div style="color: #8b949e; font-size: 13px;">
+                        <div><strong>Text:</strong> ${q.text.substring(0, 100)}${q.text.length > 100 ? '...' : ''}</div>
+                        <div><strong>Image:</strong> ${q.image}</div>
+                        ${q.type === 'mcq' ? `<div><strong>Options:</strong> ${q.options.join(', ')}</div>` : ''}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function removeQuestion(num) {
+            questions = questions.filter(q => q.number !== num);
+            updateQuestionsList();
+        }
+
+        function generateEncrypted() {
+            if (questions.length === 0) {
+                alert('Please add questions first');
+                return;
+            }
+
+            const key = document.getElementById('encryptionKey').value.trim();
+            if (!key) {
+                alert('Encryption key is required');
+                return;
+            }
+
+            // Ensure we have exactly 15 questions
+            if (questions.length < 15) {
+                if (!confirm(`You have only ${questions.length} questions. Missing questions will use placeholder text. Continue?`)) {
+                    return;
+                }
+            }
+
+            // Fill missing questions
+            const fullQuestions = [];
+            for (let i = 1; i <= 15; i++) {
+                const existing = questions.find(q => q.number === i);
+                if (existing) {
+                    fullQuestions.push(existing);
+                } else {
+                    fullQuestions.push({
+                        number: i,
+                        type: i <= 10 ? 'mcq' : 'code',
+                        text: `Question ${i} - Please update this question`,
+                        image: i <= 10 ? 'issues/Exam_question1.jpg' : 'issues/Exam_question.jpg',
+                        options: i <= 10 ? ['Option A', 'Option B', 'Option C', 'Option D'] : []
+                    });
+                }
+            }
+
+            // Generate encrypted array
+            let output = 'const encQuestions = [\n';
+
+            fullQuestions.forEach((q, idx) => {
+                const encText = xorEnc(q.text, key);
+                const encOptions = q.options.map(opt => xorEnc(opt, key));
+
+                output += `    // Question ${q.number} (${q.type.toUpperCase()})\n`;
+                output += `    {e:"${encText}",i:"${q.image}",t:"${q.type}",o:[`;
+                output += encOptions.map(o => `"${o}"`).join(',');
+                output += `]}`;
+
+                if (idx < fullQuestions.length - 1) {
+                    output += ',\n';
+                }
+            });
+
+            output += '\n];';
+
+            document.getElementById('output').textContent = output;
+        }
+
+        function copyOutput() {
+            const output = document.getElementById('output').textContent;
+            if (output.includes('Your encrypted')) {
+                alert('Please generate encrypted code first');
+                return;
+            }
+
+            navigator.clipboard.writeText(output).then(() => {
+                alert('✓ Copied to clipboard! Paste this into your exam HTML file.');
+            }).catch(err => {
+                console.error('Copy failed:', err);
+                alert('Copy failed. Please select and copy manually.');
+            });
+        }
+
+        // Auto-load demo questions
+        window.addEventListener('load', () => {
+            console.log('Question Encryption Tool Ready');
+        });
+    </script>
+</body>
+</html>

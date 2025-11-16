@@ -1,0 +1,288 @@
+@model RMMS.Models.Production.ProductionOrder
+
+@{
+    ViewData["Title"] = "Production Order Details";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2><i class="fas fa-clipboard-list"></i> Production Order Details</h2>
+                <div>
+                    @if (Model.Status == "Draft" || Model.Status == "Scheduled")
+                    {
+                        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">
+                            <i class="fas fa-edit"></i> Edit
+                        </a>
+                    }
+                    <a asp-action="Index" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Back to List
+                    </a>
+                </div>
+            </div>
+
+            @if (TempData["SuccessMessage"] != null)
+            {
+                <div class="alert alert-success alert-dismissible fade show">
+                    @TempData["SuccessMessage"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            }
+
+            @if (TempData["ErrorMessage"] != null)
+            {
+                <div class="alert alert-danger alert-dismissible fade show">
+                    @TempData["ErrorMessage"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            }
+
+            <!-- Order Information -->
+            <div class="card mb-3">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0"><i class="fas fa-info-circle"></i> Order Information</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <dl class="row">
+                                <dt class="col-sm-5">Order Number:</dt>
+                                <dd class="col-sm-7"><strong>@Model.OrderNumber</strong></dd>
+
+                                <dt class="col-sm-5">Order Date:</dt>
+                                <dd class="col-sm-7">@Model.OrderDate.ToString("yyyy-MM-dd")</dd>
+
+                                <dt class="col-sm-5">Scheduled Date:</dt>
+                                <dd class="col-sm-7">
+                                    @Model.ScheduledDate.ToString("yyyy-MM-dd")
+                                    @if (Model.IsOverdue)
+                                    {
+                                        <span class="badge bg-danger">Overdue</span>
+                                    }
+                                </dd>
+                            </dl>
+                        </div>
+                        <div class="col-md-6">
+                            <dl class="row">
+                                <dt class="col-sm-5">Status:</dt>
+                                <dd class="col-sm-7">
+                                    <span class="badge @Model.StatusBadgeClass">@Model.Status</span>
+                                </dd>
+
+                                <dt class="col-sm-5">Priority:</dt>
+                                <dd class="col-sm-7">
+                                    <span class="badge @Model.PriorityBadgeClass">@Model.Priority</span>
+                                </dd>
+
+                                <dt class="col-sm-5">Source Type:</dt>
+                                <dd class="col-sm-7">@Model.SourceType</dd>
+                            </dl>
+                        </div>
+                    </div>
+                    @if (!string.IsNullOrWhiteSpace(Model.SourceReferenceNumber))
+                    {
+                        <div class="row">
+                            <div class="col-12">
+                                <dt>Source Reference:</dt>
+                                <dd>@Model.SourceReferenceNumber</dd>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <!-- Paddy Information -->
+            <div class="card mb-3">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0"><i class="fas fa-seedling"></i> Paddy Information</h5>
+                </div>
+                <div class="card-body">
+                    <dl class="row">
+                        <dt class="col-sm-4">Paddy Variety:</dt>
+                        <dd class="col-sm-8">@(Model.PaddyVariety ?? "Not specified")</dd>
+
+                        <dt class="col-sm-4">Quantity:</dt>
+                        <dd class="col-sm-8">@Model.PaddyQuantity.ToString("N2") @Model.PaddyUOM</dd>
+                    </dl>
+                </div>
+            </div>
+
+            <!-- Target Rice Information -->
+            <div class="card mb-3">
+                <div class="card-header bg-warning">
+                    <h5 class="mb-0"><i class="fas fa-bullseye"></i> Target Rice Information</h5>
+                </div>
+                <div class="card-body">
+                    <dl class="row">
+                        <dt class="col-sm-4">Target Grade:</dt>
+                        <dd class="col-sm-8">@(Model.TargetRiceGrade ?? "Not specified")</dd>
+
+                        <dt class="col-sm-4">Target Quantity:</dt>
+                        <dd class="col-sm-8">@(Model.TargetQuantity?.ToString("N2") ?? "N/A") Quintals</dd>
+
+                        <dt class="col-sm-4">Expected Yield:</dt>
+                        <dd class="col-sm-8">@(Model.ExpectedYieldPercent?.ToString("N2") ?? "N/A")%</dd>
+                    </dl>
+                </div>
+            </div>
+
+            <!-- Planning & Assignment -->
+            <div class="card mb-3">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0"><i class="fas fa-tasks"></i> Planning & Assignment</h5>
+                </div>
+                <div class="card-body">
+                    <dl class="row">
+                        <dt class="col-sm-4">Assigned Machine:</dt>
+                        <dd class="col-sm-8">
+                            @if (Model.AssignedMachine != null)
+                            {
+                                <a asp-controller="Machines" asp-action="Details" asp-route-id="@Model.AssignedMachineId">
+                                    @Model.AssignedMachine.MachineName (@Model.AssignedMachine.MachineCode)
+                                </a>
+                            }
+                            else
+                            {
+                                <span class="text-muted">Not assigned</span>
+                            }
+                        </dd>
+
+                        <dt class="col-sm-4">Customer Order:</dt>
+                        <dd class="col-sm-8">@(Model.CustomerOrderNumber ?? "N/A")</dd>
+                    </dl>
+                </div>
+            </div>
+
+            <!-- Production Status -->
+            @if (Model.Status == "In Progress" || Model.Status == "Completed" || Model.Status == "Closed")
+            {
+                <div class="card mb-3">
+                    <div class="card-header bg-secondary text-white">
+                        <h5 class="mb-0"><i class="fas fa-chart-line"></i> Production Status</h5>
+                    </div>
+                    <div class="card-body">
+                        <dl class="row">
+                            @if (Model.ActualStartDate.HasValue)
+                            {
+                                <dt class="col-sm-4">Started:</dt>
+                                <dd class="col-sm-8">@Model.ActualStartDate.Value.ToString("yyyy-MM-dd HH:mm")</dd>
+                            }
+
+                            @if (Model.ActualCompletionDate.HasValue)
+                            {
+                                <dt class="col-sm-4">Completed:</dt>
+                                <dd class="col-sm-8">@Model.ActualCompletionDate.Value.ToString("yyyy-MM-dd HH:mm")</dd>
+                            }
+
+                            @if (Model.ActualQuantityProduced.HasValue)
+                            {
+                                <dt class="col-sm-4">Quantity Produced:</dt>
+                                <dd class="col-sm-8">@Model.ActualQuantityProduced.Value.ToString("N2") Quintals</dd>
+                            }
+
+                            @if (Model.ActualYieldPercent.HasValue)
+                            {
+                                <dt class="col-sm-4">Actual Yield:</dt>
+                                <dd class="col-sm-8">
+                                    @Model.ActualYieldPercent.Value.ToString("N2")%
+                                    @if (Model.ExpectedYieldPercent.HasValue)
+                                    {
+                                        var variance = Model.ActualYieldPercent.Value - Model.ExpectedYieldPercent.Value;
+                                        <span class="@(variance >= 0 ? "text-success" : "text-danger")">
+                                            (@(variance > 0 ? "+" : "")@variance.ToString("N2")%)
+                                        </span>
+                                    }
+                                </dd>
+                            }
+                        </dl>
+                    </div>
+                </div>
+            }
+
+            <!-- Remarks & Instructions -->
+            @if (!string.IsNullOrWhiteSpace(Model.SpecialInstructions) || !string.IsNullOrWhiteSpace(Model.Remarks))
+            {
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h5 class="mb-0"><i class="fas fa-clipboard"></i> Additional Information</h5>
+                    </div>
+                    <div class="card-body">
+                        @if (!string.IsNullOrWhiteSpace(Model.SpecialInstructions))
+                        {
+                            <dt>Special Instructions:</dt>
+                            <dd>@Model.SpecialInstructions</dd>
+                        }
+                        @if (!string.IsNullOrWhiteSpace(Model.Remarks))
+                        {
+                            <dt>Remarks:</dt>
+                            <dd>@Model.Remarks</dd>
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+
+        <!-- Sidebar with Actions -->
+        <div class="col-md-4">
+            <div class="card mb-3">
+                <div class="card-header bg-dark text-white">
+                    <h5 class="mb-0"><i class="fas fa-cogs"></i> Actions</h5>
+                </div>
+                <div class="card-body">
+                    @if (Model.Status == "Scheduled")
+                    {
+                        <form asp-action="Start" asp-route-id="@Model.Id" method="post" class="mb-2">
+                            @Html.AntiForgeryToken()
+                            <button type="submit" class="btn btn-success w-100" onclick="return confirm('Start production for this order?')">
+                                <i class="fas fa-play"></i> Start Production
+                            </button>
+                        </form>
+                    }
+
+                    @if (Model.Status == "In Progress")
+                    {
+                        <a asp-action="Complete" asp-route-id="@Model.Id" class="btn btn-primary w-100 mb-2">
+                            <i class="fas fa-check-circle"></i> Complete Production
+                        </a>
+                    }
+
+                    @if (Model.Status != "Completed" && Model.Status != "Closed" && Model.Status != "Cancelled")
+                    {
+                        <a asp-action="Cancel" asp-route-id="@Model.Id" class="btn btn-danger w-100 mb-2">
+                            <i class="fas fa-times-circle"></i> Cancel Order
+                        </a>
+                    }
+
+                    @if (Model.Status == "Draft")
+                    {
+                        <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger w-100">
+                            <i class="fas fa-trash"></i> Delete Order
+                        </a>
+                    }
+                </div>
+            </div>
+
+            <!-- Audit Information -->
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="mb-0"><i class="fas fa-history"></i> Audit Information</h6>
+                </div>
+                <div class="card-body">
+                    <dl class="mb-0">
+                        <dt>Created:</dt>
+                        <dd>@Model.CreatedDate.ToString("yyyy-MM-dd HH:mm")</dd>
+                        <dd class="text-muted">By: @(Model.CreatedBy ?? "System")</dd>
+
+                        @if (Model.ModifiedDate.HasValue)
+                        {
+                            <dt class="mt-2">Last Modified:</dt>
+                            <dd>@Model.ModifiedDate.Value.ToString("yyyy-MM-dd HH:mm")</dd>
+                            <dd class="text-muted">By: @(Model.ModifiedBy ?? "System")</dd>
+                        }
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

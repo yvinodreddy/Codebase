@@ -1,0 +1,37 @@
+════════════════════════════════════════════════════════════
+  READ COMMAND GENERATOR FOR LARGE FILES
+════════════════════════════════════════════════════════════
+
+File: pagesource.txt
+Total Lines: 1791
+Chunk Size: 300 lines
+Number of Chunks: 6
+
+════════════════════════════════════════════════════════════
+  COPY AND PASTE THE COMMANDS BELOW:
+════════════════════════════════════════════════════════════
+
+Read(pagesource.txt, offset=0, limit=300)
+Read(pagesource.txt, offset=300, limit=300)
+Read(pagesource.txt, offset=600, limit=300)
+Read(pagesource.txt, offset=900, limit=300)
+Read(pagesource.txt, offset=1200, limit=300)
+Read(pagesource.txt, offset=1500, limit=291)
+
+════════════════════════════════════════════════════════════
+  SINGLE-LINE FORMAT (for easy copying):
+════════════════════════════════════════════════════════════
+
+Read(pagesource.txt, offset=0, limit=300), then Read(pagesource.txt, offset=300, limit=300), then Read(pagesource.txt, offset=600, limit=300), then Read(pagesource.txt, offset=900, limit=300), then Read(pagesource.txt, offset=1200, limit=300), then Read(pagesource.txt, offset=1500, limit=291)
+
+════════════════════════════════════════════════════════════
+  INSTRUCTIONS:
+════════════════════════════════════════════════════════════
+
+1. Copy the single-line format above
+2. Paste it in your prompt to Claude
+3. Claude will read the file in chunks
+
+Example prompt:
+  Please execute: Read(pagesource.txt, offset=0, limit=300), then Read(pagesource.txt, offset=300, limit=300), then Read(pagesource.txt, offset=600, limit=300), then Read(pagesource.txt, offset=900, limit=300), then Read(pagesource.txt, offset=1200, limit=300), then Read(pagesource.txt, offset=1500, limit=291)
+

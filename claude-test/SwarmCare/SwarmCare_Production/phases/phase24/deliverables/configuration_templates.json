@@ -1,0 +1,200 @@
+{
+  "metadata": {
+    "phase": "Phase 24: 100% Automated Coding & EHR Integration",
+    "description": "Configuration templates for deploying EHR integrations",
+    "generated_at": "2025-10-31T12:00:00Z",
+    "version": "1.0.0"
+  },
+  "ehr_connection_template": {
+    "system_name": "SYSTEM_NAME",
+    "vendor": "VENDOR_NAME",
+    "api_version": "FHIR_R4 | HL7_v2.5",
+    "protocol": "HTTPS | MLLP",
+    "auth_type": "OAuth2.0 | API_Key",
+    "credentials": {
+      "client_id": "YOUR_CLIENT_ID",
+      "client_secret": "YOUR_CLIENT_SECRET",
+      "api_key": "YOUR_API_KEY",
+      "tenant_id": "YOUR_TENANT_ID"
+    },
+    "endpoints": {
+      "base": "https://api.example.com/v1",
+      "fhir": "https://fhir.example.com/r4",
+      "auth": "https://auth.example.com/oauth/token",
+      "metadata": "https://fhir.example.com/r4/metadata"
+    },
+    "oauth_scopes": ["patient/*.read", "launch", "openid"],
+    "rate_limits": {
+      "requests_per_minute": 500,
+      "burst_limit": 100
+    },
+    "retry_config": {
+      "max_retries": 3,
+      "backoff_factor": 2,
+      "timeout_seconds": 30
+    }
+  },
+  "coding_rules_template": {
+    "rule_id": "RULE_ID",
+    "rule_name": "Rule Description",
+    "code_type": "ICD10 | CPT | HCPCS",
+    "conditions": {
+      "diagnosis_contains": ["KEYWORD"],
+      "procedure_contains": ["KEYWORD"],
+      "age_range": {"min": 0, "max": 120},
+      "encounter_type": ["OUTPATIENT", "INPATIENT"]
+    },
+    "actions": {
+      "add_code": "CODE",
+      "add_modifier": "MODIFIER",
+      "set_priority": "HIGH | MEDIUM | LOW",
+      "require_review": false
+    },
+    "validation": {
+      "required_documentation": ["NOTE_TYPE"],
+      "contraindications": ["EXCLUDE_IF"],
+      "confidence_threshold": 0.90
+    }
+  },
+  "billing_workflow_template": {
+    "workflow_id": "WORKFLOW_ID",
+    "workflow_name": "Workflow Description",
+    "trigger": "ENCOUNTER_COMPLETE | DAILY_BATCH",
+    "steps": [
+      {
+        "step": 1,
+        "action": "retrieve_encounter_data",
+        "ehr_system": "SYSTEM_NAME",
+        "data_points": ["patient", "diagnoses", "procedures"]
+      },
+      {
+        "step": 2,
+        "action": "apply_coding_rules",
+        "ruleset": "RULESET_NAME",
+        "auto_approve_threshold": 0.95
+      },
+      {
+        "step": 3,
+        "action": "calculate_charges",
+        "fee_schedule": "MEDICARE | COMMERCIAL",
+        "apply_modifiers": true
+      },
+      {
+        "step": 4,
+        "action": "validate_claim",
+        "checks": ["eligibility", "coverage", "authorization"]
+      },
+      {
+        "step": 5,
+        "action": "submit_claim",
+        "clearinghouse": "CLEARINGHOUSE_NAME",
+        "retry_on_rejection": true
+      }
+    ],
+    "error_handling": {
+      "on_failure": "NOTIFY_USER | QUEUE_FOR_REVIEW",
+      "notification_emails": ["billing@example.com"],
+      "escalation_threshold": 3
+    }
+  },
+  "payer_configuration_template": {
+    "payer_id": "PAYER_ID",
+    "payer_name": "Insurance Company Name",
+    "payer_type": "MEDICARE | MEDICAID | COMMERCIAL",
+    "claim_format": "837P | 837I",
+    "submission_method": "EDI | CLEARINGHOUSE | PORTAL",
+    "clearinghouse": {
+      "name": "CLEARINGHOUSE_NAME",
+      "endpoint": "https://clearinghouse.example.com",
+      "credentials": {
+        "username": "YOUR_USERNAME",
+        "password": "YOUR_PASSWORD"
+      }
+    },
+    "reimbursement_rules": {
+      "fee_schedule": "MEDICARE_2025",
+      "contracted_rate": 1.0,
+      "apply_modifiers": true,
+      "bundling_rules": "CCI_EDITS"
+    },
+    "eligibility_verification": {
+      "required": true,
+      "endpoint": "https://eligibility.example.com",
+      "real_time": true
+    },
+    "authorization_requirements": {
+      "required_for": ["SPECIALTY_PROCEDURES", "DME", "HIGH_COST"],
+      "portal": "https://auth.payer.com"
+    }
+  },
+  "deployment_environments": {
+    "development": {
+      "database_url": "postgresql://localhost:5432/swarmcare_dev",
+      "redis_url": "redis://localhost:6379/0",
+      "log_level": "DEBUG",
+      "enable_mock_ehr": true,
+      "rate_limit_override": 10000
+    },
+    "staging": {
+      "database_url": "postgresql://staging-db:5432/swarmcare_staging",
+      "redis_url": "redis://staging-redis:6379/0",
+      "log_level": "INFO",
+      "enable_mock_ehr": false,
+      "rate_limit_override": 1000
+    },
+    "production": {
+      "database_url": "postgresql://prod-db:5432/swarmcare_prod",
+      "redis_url": "redis://prod-redis:6379/0",
+      "log_level": "WARNING",
+      "enable_mock_ehr": false,
+      "rate_limit_override": null
+    }
+  },
+  "monitoring_configuration": {
+    "health_checks": {
+      "enabled": true,
+      "interval_seconds": 60,
+      "endpoints": ["/health", "/ready", "/metrics"]
+    },
+    "alerts": {
+      "ehr_connection_down": {
+        "threshold": 3,
+        "notification": ["email", "slack"],
+        "severity": "critical"
+      },
+      "coding_accuracy_below_threshold": {
+        "threshold": 0.95,
+        "notification": ["email"],
+        "severity": "warning"
+      },
+      "claim_denial_rate_high": {
+        "threshold": 0.05,
+        "notification": ["email", "slack"],
+        "severity": "warning"
+      }
+    },
+    "metrics": {
+      "enabled": true,
+      "export_format": "prometheus",
+      "port": 9090
+    }
+  },
+  "example_configurations": {
+    "Epic_Production": {
+      "system_name": "Epic",
+      "vendor": "Epic Systems",
+      "api_version": "FHIR R4",
+      "endpoints": {
+        "fhir": "https://fhir.epic.com/interconnect-fhir-oauth/api/FHIR/R4"
+      },
+      "oauth_scopes": ["patient/*.read", "launch", "offline_access"]
+    },
+    "Medicare_Payer": {
+      "payer_id": "MEDICARE",
+      "payer_name": "Centers for Medicare & Medicaid Services",
+      "claim_format": "837P",
+      "fee_schedule": "MEDICARE_2025",
+      "reimbursement_rate": 1.0
+    }
+  }
+}

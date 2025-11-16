@@ -1,0 +1,171 @@
+# ArgoCD Application for SwarmCare
+# GitOps continuous deployment
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: swarmcare-production
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: swarmcare
+
+  source:
+    repoURL: https://github.com/swarmcare/platform.git
+    targetRevision: main
+    path: deliverables/helm
+    helm:
+      valueFiles:
+        - values.yaml
+        - values-production.yaml
+      parameters:
+        - name: image.tag
+          value: latest
+        - name: replicaCount
+          value: "3"
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: swarmcare
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+      allowEmpty: false
+    syncOptions:
+      - CreateNamespace=true
+      - PrunePropagationPolicy=foreground
+      - PruneLast=true
+    retry:
+      limit: 5
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 3m
+
+  revisionHistoryLimit: 10
+
+  info:
+    - name: 'Environment'
+      value: 'production'
+    - name: 'Team'
+      value: 'platform'
+
+---
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: swarmcare
+  namespace: argocd
+spec:
+  description: SwarmCare Medical AI Platform
+
+  sourceRepos:
+    - 'https://github.com/swarmcare/*'
+
+  destinations:
+    - namespace: swarmcare
+      server: https://kubernetes.default.svc
+    - namespace: monitoring
+      server: https://kubernetes.default.svc
+
+  clusterResourceWhitelist:
+    - group: ''
+      kind: Namespace
+    - group: 'rbac.authorization.k8s.io'
+      kind: ClusterRole
+    - group: 'rbac.authorization.k8s.io'
+      kind: ClusterRoleBinding
+
+  namespaceResourceBlacklist:
+    - group: ''
+      kind: ResourceQuota
+    - group: ''
+      kind: LimitRange
+
+  roles:
+    - name: deployer
+      description: Can deploy applications
+      policies:
+        - p, proj:swarmcare:deployer, applications, sync, swarmcare/*, allow
+        - p, proj:swarmcare:deployer, applications, get, swarmcare/*, allow
+      groups:
+        - swarmcare-deployers
+
+    - name: viewer
+      description: Read-only access
+      policies:
+        - p, proj:swarmcare:viewer, applications, get, swarmcare/*, allow
+      groups:
+        - swarmcare-viewers
+
+---
+# Notification configuration
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: argocd-notifications-cm
+  namespace: argocd
+data:
+  service.slack: |
+    token: $slack-token
+  template.app-deployed: |
+    message: |
+      Application {{.app.metadata.name}} deployed successfully!
+      {{if eq .serviceType "slack"}}:white_check_mark:{{end}}
+    slack:
+      attachments: |
+        [{
+          "title": "{{ .app.metadata.name}}",
+          "title_link":"{{.context.argocdUrl}}/applications/{{.app.metadata.name}}",
+          "color": "#18be52",
+          "fields": [
+          {
+            "title": "Sync Status",
+            "value": "{{.app.status.sync.status}}",
+            "short": true
+          },
+          {
+            "title": "Health Status",
+            "value": "{{.app.status.health.status}}",
+            "short": true
+          },
+          {
+            "title": "Revision",
+            "value": "{{.app.status.sync.revision}}",
+            "short": true
+          }
+          ]
+        }]
+  template.app-health-degraded: |
+    message: |
+      Application {{.app.metadata.name}} health is degraded.
+      {{if eq .serviceType "slack"}}:exclamation:{{end}}
+    slack:
+      attachments: |
+        [{
+          "title": "{{ .app.metadata.name}}",
+          "title_link": "{{.context.argocdUrl}}/applications/{{.app.metadata.name}}",
+          "color": "#f4c030",
+          "fields": [
+          {
+            "title": "Health Status",
+            "value": "{{.app.status.health.status}}",
+            "short": true
+          }
+          ]
+        }]
+  trigger.on-deployed: |
+    - when: app.status.sync.status == 'Synced'
+      send: [app-deployed]
+  trigger.on-health-degraded: |
+    - when: app.status.health.status == 'Degraded'
+      send: [app-health-degraded]
+  subscriptions: |
+    - recipients:
+      - slack:deployments
+      triggers:
+      - on-deployed
+      - on-health-degraded

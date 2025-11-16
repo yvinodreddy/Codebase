@@ -1,0 +1,266 @@
+{
+  "execution_id": "67bc04a9-65a2-48d5-a92f-f1d07604d249",
+  "workflow_id": "stroke_assessment",
+  "state": "COMPLETED",
+  "tasks": {
+    "fast_assessment": {
+      "task_id": "fast_assessment",
+      "name": "FAST Protocol Assessment",
+      "action": "fast_assessment",
+      "dependencies": [],
+      "max_retries": 3,
+      "timeout_seconds": 300,
+      "state": "COMPLETED",
+      "result": {
+        "status": "success",
+        "stroke_suspected": true
+      },
+      "error": null,
+      "start_time": 1761651205.8856936,
+      "end_time": 1761651205.8862193,
+      "retry_count": 0
+    },
+    "time_check": {
+      "task_id": "time_check",
+      "name": "Symptom Onset Time Check",
+      "action": "check_symptom_onset_time",
+      "dependencies": [],
+      "max_retries": 3,
+      "timeout_seconds": 300,
+      "state": "COMPLETED",
+      "result": {
+        "status": "success",
+        "hours_since_onset": 5.016666666666667e-07
+      },
+      "error": null,
+      "start_time": 1761651205.8864334,
+      "end_time": 1761651205.8869746,
+      "retry_count": 0
+    },
+    "assess_stroke_risk": {
+      "task_id": "assess_stroke_risk",
+      "name": "Assess Stroke Risk",
+      "action": "assess_stroke_risk",
+      "dependencies": [
+        "fast_assessment",
+        "time_check"
+      ],
+      "max_retries": 3,
+      "timeout_seconds": 300,
+      "state": "COMPLETED",
+      "result": {
+        "status": "success",
+        "risk_level": "CRITICAL"
+      },
+      "error": null,
+      "start_time": 1761651205.8871477,
+      "end_time": 1761651205.8875415,
+      "retry_count": 0
+    },
+    "tpa_eligibility": {
+      "task_id": "tpa_eligibility",
+      "name": "Check tPA Eligibility",
+      "action": "check_tpa_eligibility",
+      "dependencies": [
+        "assess_stroke_risk",
+        "time_check"
+      ],
+      "max_retries": 3,
+      "timeout_seconds": 300,
+      "state": "COMPLETED",
+      "result": {
+        "status": "success",
+        "tpa_eligible": true
+      },
+      "error": null,
+      "start_time": 1761651205.8876953,
+      "end_time": 1761651205.8879333,
+      "retry_count": 0
+    },
+    "stroke_alert": {
+      "task_id": "stroke_alert",
+      "name": "Activate Stroke Alert",
+      "action": "activate_stroke_alert",
+      "dependencies": [
+        "assess_stroke_risk"
+      ],
+      "max_retries": 3,
+      "timeout_seconds": 300,
+      "state": "COMPLETED",
+      "result": {
+        "status": "alert_activated",
+        "critical": true
+      },
+      "error": null,
+      "start_time": 1761651205.8880448,
+      "end_time": 1761651205.8884232,
+      "retry_count": 0
+    }
+  },
+  "context": {
+    "patient_id": "PATIENT_003",
+    "fast": {
+      "face_droop": true,
+      "arm_weakness": true,
+      "speech_difficulty": false,
+      "positive_findings": 2,
+      "stroke_suspected": true
+    },
+    "symptom_onset_time": "2025-10-28T07:33:25.884968",
+    "fast_assessment": {
+      "face_droop": true,
+      "arm_weakness": true,
+      "speech_difficulty": false,
+      "positive_findings": 2,
+      "stroke_suspected": true
+    },
+    "time_check": {
+      "onset_time": "2025-10-28T07:33:25.884968",
+      "current_time": "2025-10-28T07:33:25.886774",
+      "hours_since_onset": 0.0,
+      "within_tpa_window": true
+    },
+    "stroke_assessment": {
+      "risk_level": "CRITICAL",
+      "stroke_suspected": true,
+      "time_sensitive": true,
+      "immediate_action_required": true
+    },
+    "tpa_eligibility": {
+      "eligible": true,
+      "time_window_met": true,
+      "contraindications_checked": true,
+      "recommendation": "Consider tPA administration"
+    },
+    "stroke_alert": {
+      "type": "CODE_STROKE",
+      "patient_id": "PATIENT_003",
+      "fast_positive": 2,
+      "tpa_eligible": true,
+      "time_since_onset": 0.0,
+      "timestamp": "2025-10-28T07:33:25.888386",
+      "recipients": [
+        "STROKE_TEAM",
+        "NEUROLOGY",
+        "CT_SCAN",
+        "PHARMACY"
+      ]
+    }
+  },
+  "start_time": 1761651205.8851027,
+  "end_time": 1761651205.8888862,
+  "error": null,
+  "audit_log": [
+    {
+      "timestamp": "2025-10-28T07:33:25.885178",
+      "execution_id": "67bc04a9-65a2-48d5-a92f-f1d07604d249",
+      "event": "WORKFLOW_STARTED",
+      "details": {
+        "workflow_id": "stroke_assessment"
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:33:25.885894",
+      "execution_id": "67bc04a9-65a2-48d5-a92f-f1d07604d249",
+      "event": "TASK_STARTED",
+      "details": {
+        "task_id": "fast_assessment",
+        "task_name": "FAST Protocol Assessment"
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:33:25.886402",
+      "execution_id": "67bc04a9-65a2-48d5-a92f-f1d07604d249",
+      "event": "TASK_COMPLETED",
+      "details": {
+        "task_id": "fast_assessment",
+        "duration_seconds": 0.0005257129669189453,
+        "attempt": 1
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:33:25.886627",
+      "execution_id": "67bc04a9-65a2-48d5-a92f-f1d07604d249",
+      "event": "TASK_STARTED",
+      "details": {
+        "task_id": "time_check",
+        "task_name": "Symptom Onset Time Check"
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:33:25.887088",
+      "execution_id": "67bc04a9-65a2-48d5-a92f-f1d07604d249",
+      "event": "TASK_COMPLETED",
+      "details": {
+        "task_id": "time_check",
+        "duration_seconds": 0.0005412101745605469,
+        "attempt": 1
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:33:25.887261",
+      "execution_id": "67bc04a9-65a2-48d5-a92f-f1d07604d249",
+      "event": "TASK_STARTED",
+      "details": {
+        "task_id": "assess_stroke_risk",
+        "task_name": "Assess Stroke Risk"
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:33:25.887670",
+      "execution_id": "67bc04a9-65a2-48d5-a92f-f1d07604d249",
+      "event": "TASK_COMPLETED",
+      "details": {
+        "task_id": "assess_stroke_risk",
+        "duration_seconds": 0.00039386749267578125,
+        "attempt": 1
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:33:25.887761",
+      "execution_id": "67bc04a9-65a2-48d5-a92f-f1d07604d249",
+      "event": "TASK_STARTED",
+      "details": {
+        "task_id": "tpa_eligibility",
+        "task_name": "Check tPA Eligibility"
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:33:25.888023",
+      "execution_id": "67bc04a9-65a2-48d5-a92f-f1d07604d249",
+      "event": "TASK_COMPLETED",
+      "details": {
+        "task_id": "tpa_eligibility",
+        "duration_seconds": 0.00023794174194335938,
+        "attempt": 1
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:33:25.888185",
+      "execution_id": "67bc04a9-65a2-48d5-a92f-f1d07604d249",
+      "event": "TASK_STARTED",
+      "details": {
+        "task_id": "stroke_alert",
+        "task_name": "Activate Stroke Alert"
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:33:25.888862",
+      "execution_id": "67bc04a9-65a2-48d5-a92f-f1d07604d249",
+      "event": "TASK_COMPLETED",
+      "details": {
+        "task_id": "stroke_alert",
+        "duration_seconds": 0.0003783702850341797,
+        "attempt": 1
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:33:25.889030",
+      "execution_id": "67bc04a9-65a2-48d5-a92f-f1d07604d249",
+      "event": "WORKFLOW_COMPLETED",
+      "details": {
+        "duration_seconds": 0.0037834644317626953
+      }
+    }
+  ]
+}

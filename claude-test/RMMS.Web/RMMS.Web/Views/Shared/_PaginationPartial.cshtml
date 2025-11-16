@@ -1,0 +1,101 @@
+@using RMMS.Common.Pagination
+@model dynamic
+
+@if (Model?.TotalPages > 1)
+{
+    var model = Model!;
+    <nav aria-label="Page navigation">
+        <ul class="pagination pagination-sm justify-content-center mb-0">
+            <!-- First Page -->
+            <li class="page-item @(model.CurrentPage == 1 ? "disabled" : "")">
+                <a class="page-link" href="@GeneratePaginationUrl(1)" aria-label="First">
+                    <span aria-hidden="true">&laquo;&laquo;</span>
+                </a>
+            </li>
+
+            <!-- Previous Page -->
+            <li class="page-item @(!model.HasPreviousPage ? "disabled" : "")">
+                <a class="page-link" href="@GeneratePaginationUrl(model.CurrentPage - 1)" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+
+            @{
+                int startPage = Math.Max(1, model.CurrentPage - 2);
+                int endPage = Math.Min(model.TotalPages, model.CurrentPage + 2);
+
+                // Adjust if we're at the beginning or end
+                if (model.CurrentPage <= 3)
+                {
+                    endPage = Math.Min(5, model.TotalPages);
+                }
+                else if (model.CurrentPage >= model.TotalPages - 2)
+                {
+                    startPage = Math.Max(1, model.TotalPages - 4);
+                }
+
+                if (startPage > 1)
+                {
+                    <li class="page-item disabled">
+                        <span class="page-link">...</span>
+                    </li>
+                }
+
+                for (int i = startPage; i <= endPage; i++)
+                {
+                    <li class="page-item @(i == model.CurrentPage ? "active" : "")">
+                        <a class="page-link" href="@GeneratePaginationUrl(i)">@i</a>
+                    </li>
+                }
+
+                if (endPage < model.TotalPages)
+                {
+                    <li class="page-item disabled">
+                        <span class="page-link">...</span>
+                    </li>
+                }
+            }
+
+            <!-- Next Page -->
+            <li class="page-item @(!model.HasNextPage ? "disabled" : "")">
+                <a class="page-link" href="@GeneratePaginationUrl(model.CurrentPage + 1)" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+
+            <!-- Last Page -->
+            <li class="page-item @(model.CurrentPage == model.TotalPages ? "disabled" : "")">
+                <a class="page-link" href="@GeneratePaginationUrl(model.TotalPages)" aria-label="Last">
+                    <span aria-hidden="true">&raquo;&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="text-center mt-2">
+        <small class="text-muted">
+            Page @(model.CurrentPage) of @(model.TotalPages) (Total: @(model.TotalItems) items)
+        </small>
+    </div>
+}
+
+@functions {
+    private string GeneratePaginationUrl(int pageNumber)
+    {
+        var routeValues = new RouteValueDictionary(ViewContext.RouteData.Values);
+        var query = Context.Request.Query;
+
+        // Add query string parameters
+        foreach (var key in query.Keys)
+        {
+            if (key != "page")
+            {
+                routeValues[key] = query[key].ToString();
+            }
+        }
+
+        routeValues["page"] = pageNumber;
+
+        return Url.Action(null, null, routeValues) ?? "#";
+    }
+}

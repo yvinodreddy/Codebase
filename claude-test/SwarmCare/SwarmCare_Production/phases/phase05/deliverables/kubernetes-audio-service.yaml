@@ -1,0 +1,269 @@
+# Kubernetes Deployment for Phase 05: Audio Generation Service
+# Production-ready configuration with autoscaling, monitoring, and HIPAA compliance
+
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: swarmcare-audio
+  labels:
+    app: swarmcare
+    component: audio-generation
+    environment: production
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: audio-service-config
+  namespace: swarmcare-audio
+data:
+  LOG_LEVEL: "INFO"
+  MAX_AUDIO_SIZE_MB: "50"
+  CACHE_TTL_SECONDS: "3600"
+  MAX_CONCURRENT_GENERATION: "10"
+  DEFAULT_SAMPLE_RATE: "44100"
+  DEFAULT_BITRATE: "192"
+  ENABLE_METRICS: "true"
+  ENABLE_TRACING: "true"
+
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: audio-service-secrets
+  namespace: swarmcare-audio
+type: Opaque
+stringData:
+  AZURE_SUBSCRIPTION_KEY: "your-azure-key-here"
+  AWS_ACCESS_KEY_ID: "your-aws-key-here"
+  AWS_SECRET_ACCESS_KEY: "your-aws-secret-here"
+  GOOGLE_CREDENTIALS: "your-google-credentials-json"
+  ENCRYPTION_KEY: "your-encryption-key-here"
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: audio-cache-pvc
+  namespace: swarmcare-audio
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Gi
+  storageClassName: managed-premium
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: audio-generation-service
+  namespace: swarmcare-audio
+  labels:
+    app: audio-generation
+    version: v1
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: audio-generation
+  template:
+    metadata:
+      labels:
+        app: audio-generation
+        version: v1
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8005"
+        prometheus.io/path: "/metrics"
+    spec:
+      containers:
+      - name: audio-service
+        image: swarmcare/audio-generation:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8005
+          name: http
+          protocol: TCP
+        env:
+        - name: LOG_LEVEL
+          valueFrom:
+            configMapKeyRef:
+              name: audio-service-config
+              key: LOG_LEVEL
+        - name: MAX_AUDIO_SIZE_MB
+          valueFrom:
+            configMapKeyRef:
+              name: audio-service-config
+              key: MAX_AUDIO_SIZE_MB
+        - name: AZURE_SUBSCRIPTION_KEY
+          valueFrom:
+            secretKeyRef:
+              name: audio-service-secrets
+              key: AZURE_SUBSCRIPTION_KEY
+        - name: AWS_ACCESS_KEY_ID
+          valueFrom:
+            secretKeyRef:
+              name: audio-service-secrets
+              key: AWS_ACCESS_KEY_ID
+        - name: AWS_SECRET_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: audio-service-secrets
+              key: AWS_SECRET_ACCESS_KEY
+        resources:
+          requests:
+            memory: "2Gi"
+            cpu: "1000m"
+          limits:
+            memory: "4Gi"
+            cpu: "2000m"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8005
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 8005
+          initialDelaySeconds: 10
+          periodSeconds: 5
+          timeoutSeconds: 3
+          failureThreshold: 3
+        volumeMounts:
+        - name: audio-cache
+          mountPath: /var/audio/cache
+        - name: temp-storage
+          mountPath: /var/audio/temp
+      volumes:
+      - name: audio-cache
+        persistentVolumeClaim:
+          claimName: audio-cache-pvc
+      - name: temp-storage
+        emptyDir:
+          sizeLimit: 10Gi
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        fsGroup: 1000
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                  - audio-generation
+              topologyKey: kubernetes.io/hostname
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: audio-generation-service
+  namespace: swarmcare-audio
+  labels:
+    app: audio-generation
+spec:
+  type: ClusterIP
+  ports:
+  - port: 8005
+    targetPort: 8005
+    protocol: TCP
+    name: http
+  selector:
+    app: audio-generation
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: audio-generation-lb
+  namespace: swarmcare-audio
+  labels:
+    app: audio-generation
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 8005
+    protocol: TCP
+    name: http
+  selector:
+    app: audio-generation
+
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: audio-generation-hpa
+  namespace: swarmcare-audio
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: audio-generation-service
+  minReplicas: 3
+  maxReplicas: 10
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 70
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: 80
+
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: audio-generation-pdb
+  namespace: swarmcare-audio
+spec:
+  minAvailable: 2
+  selector:
+    matchLabels:
+      app: audio-generation
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: audio-generation-ingress
+  namespace: swarmcare-audio
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/proxy-body-size: "50m"
+spec:
+  tls:
+  - hosts:
+    - audio.swarmcare.example.com
+    secretName: audio-tls-cert
+  rules:
+  - host: audio.swarmcare.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: audio-generation-service
+            port:
+              number: 8005

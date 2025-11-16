@@ -1,0 +1,64 @@
+{
+  "execution_id": "2855a83d-72cf-43f9-ac62-92135ff9df7d",
+  "workflow_id": "metric_workflow",
+  "state": "COMPLETED",
+  "tasks": {
+    "metric": {
+      "task_id": "metric",
+      "name": "Metric Task",
+      "action": "metric_task",
+      "dependencies": [],
+      "max_retries": 3,
+      "timeout_seconds": 300,
+      "state": "COMPLETED",
+      "result": {
+        "metric": true
+      },
+      "error": null,
+      "start_time": 1761650890.6677604,
+      "end_time": 1761650890.667819,
+      "retry_count": 0
+    }
+  },
+  "context": {},
+  "start_time": 1761650890.6676614,
+  "end_time": 1761650890.667877,
+  "error": null,
+  "audit_log": [
+    {
+      "timestamp": "2025-10-28T07:28:10.667676",
+      "execution_id": "2855a83d-72cf-43f9-ac62-92135ff9df7d",
+      "event": "WORKFLOW_STARTED",
+      "details": {
+        "workflow_id": "metric_workflow"
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:28:10.667809",
+      "execution_id": "2855a83d-72cf-43f9-ac62-92135ff9df7d",
+      "event": "TASK_STARTED",
+      "details": {
+        "task_id": "metric",
+        "task_name": "Metric Task"
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:28:10.667868",
+      "execution_id": "2855a83d-72cf-43f9-ac62-92135ff9df7d",
+      "event": "TASK_COMPLETED",
+      "details": {
+        "task_id": "metric",
+        "duration_seconds": 5.8650970458984375e-05,
+        "attempt": 1
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:28:10.667918",
+      "execution_id": "2855a83d-72cf-43f9-ac62-92135ff9df7d",
+      "event": "WORKFLOW_COMPLETED",
+      "details": {
+        "duration_seconds": 0.0002155303955078125
+      }
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "execution_id": "ce5b0987-d713-403f-a788-23593c849b28",
+  "workflow_id": "fail_workflow",
+  "state": "FAILED",
+  "tasks": {
+    "fail_task": {
+      "task_id": "fail_task",
+      "name": "Always Fails",
+      "action": "always_fails",
+      "dependencies": [],
+      "max_retries": 1,
+      "timeout_seconds": 300,
+      "state": "FAILED",
+      "result": null,
+      "error": "This task always fails",
+      "start_time": 1761650893.6935275,
+      "end_time": 1761650894.6987693,
+      "retry_count": 2
+    }
+  },
+  "context": {},
+  "start_time": 1761650893.693422,
+  "end_time": 1761650894.69936,
+  "error": "Task fail_task failed after 2 retries",
+  "audit_log": [
+    {
+      "timestamp": "2025-10-28T07:28:13.693442",
+      "execution_id": "ce5b0987-d713-403f-a788-23593c849b28",
+      "event": "WORKFLOW_STARTED",
+      "details": {
+        "workflow_id": "fail_workflow"
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:28:13.693567",
+      "execution_id": "ce5b0987-d713-403f-a788-23593c849b28",
+      "event": "TASK_STARTED",
+      "details": {
+        "task_id": "fail_task",
+        "task_name": "Always Fails"
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:28:13.693651",
+      "execution_id": "ce5b0987-d713-403f-a788-23593c849b28",
+      "event": "TASK_RETRY",
+      "details": {
+        "task_id": "fail_task",
+        "error": "This task always fails",
+        "attempt": 1,
+        "backoff_seconds": 1
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:28:14.699268",
+      "execution_id": "ce5b0987-d713-403f-a788-23593c849b28",
+      "event": "TASK_FAILED",
+      "details": {
+        "task_id": "fail_task",
+        "error": "This task always fails",
+        "total_attempts": 2
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:28:14.699758",
+      "execution_id": "ce5b0987-d713-403f-a788-23593c849b28",
+      "event": "WORKFLOW_FAILED",
+      "details": {
+        "error": "Task fail_task failed after 2 retries"
+      }
+    }
+  ]
+}

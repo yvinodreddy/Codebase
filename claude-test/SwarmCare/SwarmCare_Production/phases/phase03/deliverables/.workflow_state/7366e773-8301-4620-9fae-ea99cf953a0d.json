@@ -1,0 +1,66 @@
+{
+  "execution_id": "7366e773-8301-4620-9fae-ea99cf953a0d",
+  "workflow_id": "test_workflow",
+  "state": "COMPLETED",
+  "tasks": {
+    "t1": {
+      "task_id": "t1",
+      "name": "Task 1",
+      "action": "sample_task",
+      "dependencies": [],
+      "max_retries": 3,
+      "timeout_seconds": 300,
+      "state": "COMPLETED",
+      "result": {
+        "result": "success"
+      },
+      "error": null,
+      "start_time": 1761651223.098355,
+      "end_time": 1761651223.0989175,
+      "retry_count": 0
+    }
+  },
+  "context": {
+    "executed": true
+  },
+  "start_time": 1761651223.0969417,
+  "end_time": 1761651223.0991786,
+  "error": null,
+  "audit_log": [
+    {
+      "timestamp": "2025-10-28T07:33:43.097362",
+      "execution_id": "7366e773-8301-4620-9fae-ea99cf953a0d",
+      "event": "WORKFLOW_STARTED",
+      "details": {
+        "workflow_id": "test_workflow"
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:33:43.098854",
+      "execution_id": "7366e773-8301-4620-9fae-ea99cf953a0d",
+      "event": "TASK_STARTED",
+      "details": {
+        "task_id": "t1",
+        "task_name": "Task 1"
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:33:43.099161",
+      "execution_id": "7366e773-8301-4620-9fae-ea99cf953a0d",
+      "event": "TASK_COMPLETED",
+      "details": {
+        "task_id": "t1",
+        "duration_seconds": 0.0005624294281005859,
+        "attempt": 1
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:33:43.099258",
+      "execution_id": "7366e773-8301-4620-9fae-ea99cf953a0d",
+      "event": "WORKFLOW_COMPLETED",
+      "details": {
+        "duration_seconds": 0.0022368431091308594
+      }
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+# Phase 06: HIPAA Compliance - Python Dependencies
+
+# Cryptography
+cryptography>=41.0.0
+
+# Authentication
+PyJWT>=2.8.0
+pyotp>=2.9.0
+
+# QR Code generation for MFA
+qrcode>=7.4.2
+Pillow>=10.0.0
+
+# Redis for session management
+redis>=5.0.0
+
+# PostgreSQL
+psycopg2-binary>=2.9.0
+
+# Logging
+python-json-logger>=2.0.0
+
+# Testing
+pytest>=7.4.0
+pytest-cov>=4.1.0

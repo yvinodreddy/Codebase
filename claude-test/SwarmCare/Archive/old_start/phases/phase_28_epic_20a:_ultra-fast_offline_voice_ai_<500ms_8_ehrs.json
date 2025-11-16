@@ -1,0 +1,25 @@
+{
+  "phase_id": 28,
+  "name": "Epic 20A: Ultra-fast Offline Voice AI (<500ms, 8 EHRs)",
+  "epic": "Epic 20A",
+  "story_points": 13,
+  "priority": "P0",
+  "dependencies": [
+    19
+  ],
+  "version": "v2.1",
+  "user_stories": [
+    {
+      "story_id": "20A.1",
+      "title": "Edge Deployment (On-Prem) for Low Latency (<500ms)",
+      "story_points": 5,
+      "priority": "P0"
+    },
+    {
+      "story_id": "20A.2",
+      "title": "8 Major EHR Integrations (Epic, Cerner, Meditech, Allscripts, etc.)",
+      "story_points": 8,
+      "priority": "P0"
+    }
+  ]
+}

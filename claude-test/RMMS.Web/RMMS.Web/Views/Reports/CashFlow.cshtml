@@ -1,0 +1,225 @@
+﻿@{
+    ViewData["Title"] = "Cash Flow Report";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var cashTransactions = ViewBag.CashTransactions as List<RMMS.Models.CashBook> ?? new List<RMMS.Models.CashBook>();
+    var bankTransactions = ViewBag.BankTransactions as List<RMMS.Models.BankTransaction> ?? new List<RMMS.Models.BankTransaction>();
+}
+
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-header bg-info text-white">
+            <h3><i class="fas fa-money-bill-wave"></i> Cash Flow Report</h3>
+            <p class="mb-0">Period: @ViewBag.StartDate to @ViewBag.EndDate</p>
+        </div>
+
+        <div class="card-body">
+            <!-- Cash Flow Summary showing the movement of money through your business -->
+            <div class="row mb-4">
+                <div class="col-md-2">
+                    <div class="card bg-light">
+                        <div class="card-body text-center">
+                            <h6>Opening Balance</h6>
+                            <h4>₹ @string.Format("{0:N2}", ViewBag.OpeningBalance)</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="card bg-success text-white">
+                        <div class="card-body text-center">
+                            <h6>Total Receipts</h6>
+                            <h4>+ ₹ @string.Format("{0:N2}", ViewBag.TotalReceipts)</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="card bg-danger text-white">
+                        <div class="card-body text-center">
+                            <h6>Total Payments</h6>
+                            <h4>- ₹ @string.Format("{0:N2}", ViewBag.TotalPayments)</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="card bg-warning text-dark">
+                        <div class="card-body text-center">
+                            <h6>Net Cash Flow</h6>
+                            <h4 class="@(ViewBag.NetCashFlow >= 0 ? "text-success" : "text-danger")">
+                                @(ViewBag.NetCashFlow >= 0 ? "+" : "") ₹ @string.Format("{0:N2}", ViewBag.NetCashFlow)
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="card bg-primary text-white">
+                        <div class="card-body text-center">
+                            <h6>Closing Balance</h6>
+                            <h4>₹ @string.Format("{0:N2}", ViewBag.ClosingBalance)</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cash Transactions Detail -->
+            <div class="card mb-4">
+                <div class="card-header bg-light">
+                    <h5>Cash Transactions</h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
+                        <table class="table table-sm table-hover">
+                            <thead class="table-secondary sticky-top">
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Particulars</th>
+                                    <th>Receipts (₹)</th>
+                                    <th>Payments (₹)</th>
+                                    <th>Balance (₹)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    decimal runningCashBalance = 0;
+                                    foreach (var trans in cashTransactions)
+                                    {
+                                        runningCashBalance += (trans.Receipts - trans.Payments);
+                                        <tr>
+                                            <td>@trans.TransactionDate.ToString("dd-MMM")</td>
+                                            <td>@trans.Particulars</td>
+                                            <td class="text-success">
+                                                @(trans.Receipts > 0 ? trans.Receipts.ToString("N2") : "-")
+                                            </td>
+                                            <td class="text-danger">
+                                                @(trans.Payments > 0 ? trans.Payments.ToString("N2") : "-")
+                                            </td>
+                                            <td class="fw-bold">@runningCashBalance.ToString("N2")</td>
+                                        </tr>
+                                    }
+                                }
+                                @if (!cashTransactions.Any())
+                                {
+                                    <tr>
+                                        <td colspan="5" class="text-center">No cash transactions in this period</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bank Transactions Detail -->
+            <div class="card mb-4">
+                <div class="card-header bg-light">
+                    <h5>Bank Transactions</h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
+                        <table class="table table-sm table-hover">
+                            <thead class="table-secondary sticky-top">
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Bank</th>
+                                    <th>Particulars</th>
+                                    <th>Deposits (₹)</th>
+                                    <th>Withdrawals (₹)</th>
+                                    <th>Balance (₹)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    decimal runningBankBalance = 0;
+                                    foreach (var trans in bankTransactions)
+                                    {
+                                        runningBankBalance += (trans.Deposits - trans.Withdrawals);
+                                        <tr>
+                                            <td>@trans.TransactionDate.ToString("dd-MMM")</td>
+                                            <td>@trans.BankName</td>
+                                            <td>@trans.Particulars</td>
+                                            <td class="text-success">
+                                                @(trans.Deposits > 0 ? trans.Deposits.ToString("N2") : "-")
+                                            </td>
+                                            <td class="text-danger">
+                                                @(trans.Withdrawals > 0 ? trans.Withdrawals.ToString("N2") : "-")
+                                            </td>
+                                            <td class="fw-bold">@runningBankBalance.ToString("N2")</td>
+                                        </tr>
+                                    }
+                                }
+                                @if (!bankTransactions.Any())
+                                {
+                                    <tr>
+                                        <td colspan="6" class="text-center">No bank transactions in this period</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cash Flow Visualization -->
+            <div class="card">
+                <div class="card-header">
+                    <h5>Cash Flow Trend</h5>
+                </div>
+                <div class="card-body">
+                    <canvas id="cashFlowChart" height="100"></canvas>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="mt-4">
+                <a href="@Url.Action("Index", "Reports")" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Back
+                </a>
+                <button class="btn btn-primary" onclick="window.print()">
+                    <i class="fas fa-print"></i> Print
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Prepare data for cash flow trend chart
+        var cashData = @Html.Raw(Json.Serialize(cashTransactions));
+        var bankData = @Html.Raw(Json.Serialize(bankTransactions));
+
+        // This chart helps visualize the flow of money over time
+        var ctx = document.getElementById('cashFlowChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Opening', 'Week 1', 'Week 2', 'Week 3', 'Week 4', 'Closing'],
+                datasets: [{
+                    label: 'Cash Balance',
+                    data: [@ViewBag.OpeningBalance,
+        @ViewBag.OpeningBalance + @ViewBag.TotalReceipts * 0.25,
+        @ViewBag.OpeningBalance + @ViewBag.TotalReceipts * 0.5,
+        @ViewBag.OpeningBalance + @ViewBag.TotalReceipts * 0.75,
+        @ViewBag.OpeningBalance + @ViewBag.NetCashFlow,
+        @ViewBag.ClosingBalance],
+                    borderColor: 'rgb(75, 192, 192)',
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    tension: 0.1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return '₹' + value.toLocaleString();
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+}

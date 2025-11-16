@@ -1,0 +1,70 @@
+@model RMMS.Models.Voucher
+@{
+    ViewData["Title"] = "Voucher Details";
+}
+
+<div class="container-fluid">
+    <div class="card shadow">
+        <div class="card-header bg-info text-white">
+            <h3><i class="fas fa-file-invoice"></i> Voucher Details</h3>
+        </div>
+
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <dl class="row">
+                        <dt class="col-sm-5">Voucher Date:</dt>
+                        <dd class="col-sm-7">@Model.VoucherDate.ToString("dd-MMM-yyyy")</dd>
+
+                        <dt class="col-sm-5">Voucher Number:</dt>
+                        <dd class="col-sm-7"><strong>@Model.VoucherNumber</strong></dd>
+
+                        <dt class="col-sm-5">Voucher Type:</dt>
+                        <dd class="col-sm-7">
+                            <span class="badge @(Model.VoucherType == "Payment" ? "bg-danger" : "bg-success")">
+                                @Model.VoucherType
+                            </span>
+                        </dd>
+
+                        <dt class="col-sm-5">Amount:</dt>
+                        <dd class="col-sm-7 fw-bold">₹ @Model.Amount.ToString("N2")</dd>
+                    </dl>
+                </div>
+
+                <div class="col-md-6">
+                    <dl class="row">
+                        <dt class="col-sm-5">Particulars:</dt>
+                        <dd class="col-sm-7">@Model.Particulars</dd>
+
+                        <dt class="col-sm-5">Remarks:</dt>
+                        <dd class="col-sm-7">@(Model.Remarks ?? "N/A")</dd>
+
+                        <dt class="col-sm-5">Created By:</dt>
+                        <dd class="col-sm-7">@(Model.CreatedBy ?? "N/A")</dd>
+
+                        <dt class="col-sm-5">Created Date:</dt>
+                        <dd class="col-sm-7">@Model.CreatedDate.ToString("dd-MMM-yyyy HH:mm")</dd>
+                    </dl>
+                </div>
+            </div>
+
+            <hr />
+
+            <div class="mt-4">
+                <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">
+                    <i class="fas fa-edit"></i> Edit
+                </a>
+                <form asp-action="Delete" asp-route-id="@Model.Id" method="post" style="display: inline;"
+                      onsubmit="return confirm('Are you sure you want to delete this voucher?');">
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="btn btn-danger">
+                        <i class="fas fa-trash"></i> Delete
+                    </button>
+                </form>
+                <a asp-action="Index" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Back to List
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

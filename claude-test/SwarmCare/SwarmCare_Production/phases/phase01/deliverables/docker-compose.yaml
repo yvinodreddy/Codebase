@@ -1,0 +1,166 @@
+---
+# SwarmCare Phase 01: RAG Heat System - Docker Compose
+# Local development environment with all services
+# Story Points: 60 | Generated: 2025-10-28
+
+version: '3.8'
+
+services:
+  # RAG API Service
+  rag-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: swarmcare-rag-api
+    ports:
+      - "8000:8000"
+    environment:
+      - ENVIRONMENT=development
+      - LOG_LEVEL=DEBUG
+      - CHUNK_SIZE=512
+      - CHUNK_OVERLAP=128
+      - EMBEDDING_MODEL=all-MiniLM-L6-v2
+      - NEO4J_URI=bolt://neo4j:7687
+      - NEO4J_USER=neo4j
+      - NEO4J_PASSWORD=swarmcare123
+    volumes:
+      - ./:/app
+      - models-cache:/models
+    depends_on:
+      neo4j:
+        condition: service_healthy
+    networks:
+      - swarmcare-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Neo4j Knowledge Graph (from Phase 00)
+  neo4j:
+    image: neo4j:5.13-enterprise
+    container_name: swarmcare-neo4j
+    ports:
+      - "7474:7474"  # HTTP
+      - "7687:7687"  # Bolt
+    environment:
+      - NEO4J_AUTH=neo4j/swarmcare123
+      - NEO4J_ACCEPT_LICENSE_AGREEMENT=yes
+      - NEO4J_dbms_memory_heap_max__size=2G
+      - NEO4J_dbms_memory_pagecache_size=1G
+    volumes:
+      - neo4j-data:/data
+      - neo4j-logs:/logs
+      - ../phase00/deliverables/neo4j-medical-ontologies.cypher:/import/ontologies.cypher
+    networks:
+      - swarmcare-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "cypher-shell -u neo4j -p swarmcare123 'RETURN 1'"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+
+  # Vector Database (Weaviate)
+  weaviate:
+    image: semitechnologies/weaviate:1.22.4
+    container_name: swarmcare-weaviate
+    ports:
+      - "8080:8080"
+    environment:
+      QUERY_DEFAULTS_LIMIT: 25
+      AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED: 'true'
+      PERSISTENCE_DATA_PATH: '/var/lib/weaviate'
+      DEFAULT_VECTORIZER_MODULE: 'none'
+      ENABLE_MODULES: ''
+      CLUSTER_HOSTNAME: 'weaviate'
+    volumes:
+      - weaviate-data:/var/lib/weaviate
+    networks:
+      - swarmcare-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:8080/v1/.well-known/ready"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+
+  # Redis for caching and session management
+  redis:
+    image: redis:7-alpine
+    container_name: swarmcare-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    networks:
+      - swarmcare-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    command: redis-server --appendonly yes --maxmemory 1gb --maxmemory-policy allkeys-lru
+
+  # Prometheus for monitoring
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: swarmcare-prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus-data:/prometheus
+    networks:
+      - swarmcare-network
+    restart: unless-stopped
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/usr/share/prometheus/console_libraries'
+      - '--web.console.templates=/usr/share/prometheus/consoles'
+
+  # Grafana for visualization
+  grafana:
+    image: grafana/grafana:latest
+    container_name: swarmcare-grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=swarmcare123
+      - GF_USERS_ALLOW_SIGN_UP=false
+    volumes:
+      - grafana-data:/var/lib/grafana
+    networks:
+      - swarmcare-network
+    restart: unless-stopped
+    depends_on:
+      - prometheus
+
+networks:
+  swarmcare-network:
+    driver: bridge
+    name: swarmcare-network
+
+volumes:
+  neo4j-data:
+    name: swarmcare-neo4j-data
+  neo4j-logs:
+    name: swarmcare-neo4j-logs
+  weaviate-data:
+    name: swarmcare-weaviate-data
+  redis-data:
+    name: swarmcare-redis-data
+  prometheus-data:
+    name: swarmcare-prometheus-data
+  grafana-data:
+    name: swarmcare-grafana-data
+  models-cache:
+    name: swarmcare-models-cache

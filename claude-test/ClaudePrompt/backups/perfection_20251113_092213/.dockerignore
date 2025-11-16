@@ -1,0 +1,16 @@
+.git
+.github
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache
+.coverage
+htmlcov
+*.log
+.venv
+venv
+*.md
+!README.md
+backups
+execution_logs

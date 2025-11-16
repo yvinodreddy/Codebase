@@ -1,0 +1,130 @@
+@{
+    ViewData["Title"] = "Sales Analytics";
+    var data = ViewBag.Data as dynamic;
+    var startDate = ViewBag.StartDate as DateTime?;
+    var endDate = ViewBag.EndDate as DateTime?;
+}
+
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <h2><i class="bi bi-graph-up"></i> Sales Analytics</h2>
+            <p class="text-muted">Sales orders, quotations, and revenue insights</p>
+        </div>
+        <div class="col-md-4 text-end">
+            <a href="@Url.Action("Index", "Analytics")" class="btn btn-secondary">
+                <i class="bi bi-arrow-left"></i> Back
+            </a>
+        </div>
+    </div>
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+    }
+
+    <div class="card mb-4">
+        <div class="card-body">
+            <form method="get" class="row g-3">
+                <div class="col-md-4">
+                    <label class="form-label">Start Date</label>
+                    <input type="date" name="startDate" class="form-control"
+                           value="@(startDate?.ToString("yyyy-MM-dd") ?? DateTime.Today.AddDays(-30).ToString("yyyy-MM-dd"))">
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">End Date</label>
+                    <input type="date" name="endDate" class="form-control"
+                           value="@(endDate?.ToString("yyyy-MM-dd") ?? DateTime.Today.ToString("yyyy-MM-dd"))">
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">&nbsp;</label>
+                    <button type="submit" class="btn btn-primary w-100"><i class="bi bi-search"></i> Filter</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    @if (data != null)
+    {
+        <div class="row mb-4">
+            <div class="col-md-3 mb-3">
+                <div class="card bg-primary text-white">
+                    <div class="card-body">
+                        <h6>Total Orders</h6>
+                        <h2>@data.TotalSalesOrders</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="card bg-success text-white">
+                    <div class="card-body">
+                        <h6>Sales Value</h6>
+                        <h2>₹@data.TotalSalesAmount.ToString("N0")</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="card bg-info text-white">
+                    <div class="card-body">
+                        <h6>Quotations</h6>
+                        <h2>@data.TotalQuotations</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="card bg-warning text-dark">
+                    <div class="card-body">
+                        <h6>Inquiries</h6>
+                        <h2>@data.TotalInquiries</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header"><h5>Recent Sales Orders</h5></div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="ms-datatable table table-striped table-hover" data-export="true" data-page-length="16">
+                                <thead>
+                                    <tr>
+                                        <th>Order No</th>
+                                        <th>Date</th>
+                                        <th>Customer</th>
+                                        <th>Amount</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (data.SalesOrders != null && data.SalesOrders.Count > 0)
+                                    {
+                                        @foreach (var order in data.SalesOrders)
+                                        {
+                                            <tr>
+                                                <td><strong>@order.OrderNumber</strong></td>
+                                                <td>@order.OrderDate.ToString("dd-MMM-yyyy")</td>
+                                                <td>@order.Customer?.CustomerName</td>
+                                                <td class="text-end">₹@order.TotalAmount.ToString("N2")</td>
+                                                <td>
+                                                    <span class="badge @(order.Status == "Completed" ? "bg-success" : "bg-warning")">
+                                                        @order.Status
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <tr><td colspan="5" class="text-center text-muted">No orders found</td></tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

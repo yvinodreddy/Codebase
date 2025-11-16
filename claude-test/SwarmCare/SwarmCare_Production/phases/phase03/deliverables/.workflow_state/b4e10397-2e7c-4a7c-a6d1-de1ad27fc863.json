@@ -1,0 +1,141 @@
+{
+  "execution_id": "b4e10397-2e7c-4a7c-a6d1-de1ad27fc863",
+  "workflow_id": "parallel_workflow",
+  "state": "COMPLETED",
+  "tasks": {
+    "a": {
+      "task_id": "a",
+      "name": "Task A",
+      "action": "task_a",
+      "dependencies": [],
+      "max_retries": 3,
+      "timeout_seconds": 300,
+      "state": "COMPLETED",
+      "result": {
+        "completed": "a"
+      },
+      "error": null,
+      "start_time": 1761651201.1046913,
+      "end_time": 1761651201.1048748,
+      "retry_count": 0
+    },
+    "b": {
+      "task_id": "b",
+      "name": "Task B",
+      "action": "task_b",
+      "dependencies": [],
+      "max_retries": 3,
+      "timeout_seconds": 300,
+      "state": "COMPLETED",
+      "result": {
+        "completed": "b"
+      },
+      "error": null,
+      "start_time": 1761651201.1050725,
+      "end_time": 1761651201.1052976,
+      "retry_count": 0
+    },
+    "c": {
+      "task_id": "c",
+      "name": "Task C",
+      "action": "task_c",
+      "dependencies": [
+        "a",
+        "b"
+      ],
+      "max_retries": 3,
+      "timeout_seconds": 300,
+      "state": "COMPLETED",
+      "result": {
+        "completed": "c"
+      },
+      "error": null,
+      "start_time": 1761651201.1055365,
+      "end_time": 1761651201.105754,
+      "retry_count": 0
+    }
+  },
+  "context": {
+    "a": true,
+    "b": true,
+    "c": true
+  },
+  "start_time": 1761651201.1045372,
+  "end_time": 1761651201.1059499,
+  "error": null,
+  "audit_log": [
+    {
+      "timestamp": "2025-10-28T07:33:21.104561",
+      "execution_id": "b4e10397-2e7c-4a7c-a6d1-de1ad27fc863",
+      "event": "WORKFLOW_STARTED",
+      "details": {
+        "workflow_id": "parallel_workflow"
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:33:21.104851",
+      "execution_id": "b4e10397-2e7c-4a7c-a6d1-de1ad27fc863",
+      "event": "TASK_STARTED",
+      "details": {
+        "task_id": "a",
+        "task_name": "Task A"
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:33:21.105046",
+      "execution_id": "b4e10397-2e7c-4a7c-a6d1-de1ad27fc863",
+      "event": "TASK_COMPLETED",
+      "details": {
+        "task_id": "a",
+        "duration_seconds": 0.00018358230590820312,
+        "attempt": 1
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:33:21.105265",
+      "execution_id": "b4e10397-2e7c-4a7c-a6d1-de1ad27fc863",
+      "event": "TASK_STARTED",
+      "details": {
+        "task_id": "b",
+        "task_name": "Task B"
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:33:21.105484",
+      "execution_id": "b4e10397-2e7c-4a7c-a6d1-de1ad27fc863",
+      "event": "TASK_COMPLETED",
+      "details": {
+        "task_id": "b",
+        "duration_seconds": 0.000225067138671875,
+        "attempt": 1
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:33:21.105709",
+      "execution_id": "b4e10397-2e7c-4a7c-a6d1-de1ad27fc863",
+      "event": "TASK_STARTED",
+      "details": {
+        "task_id": "c",
+        "task_name": "Task C"
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:33:21.105930",
+      "execution_id": "b4e10397-2e7c-4a7c-a6d1-de1ad27fc863",
+      "event": "TASK_COMPLETED",
+      "details": {
+        "task_id": "c",
+        "duration_seconds": 0.000217437744140625,
+        "attempt": 1
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:33:21.106095",
+      "execution_id": "b4e10397-2e7c-4a7c-a6d1-de1ad27fc863",
+      "event": "WORKFLOW_COMPLETED",
+      "details": {
+        "duration_seconds": 0.0014126300811767578
+      }
+    }
+  ]
+}

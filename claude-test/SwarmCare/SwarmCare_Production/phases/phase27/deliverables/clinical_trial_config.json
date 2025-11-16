@@ -1,0 +1,44 @@
+{
+  "system": {
+    "name": "Clinical Trial Lifecycle System",
+    "version": "1.0.0",
+    "phase_id": 27,
+    "story_points": 45
+  },
+  "trial_management": {
+    "max_sites": 100,
+    "max_participants_per_site": 1000,
+    "enable_randomization": true,
+    "enable_stratification": true
+  },
+  "econsent": {
+    "signature_algorithm": "SHA256",
+    "comprehension_pass_threshold": 0.8,
+    "supported_languages": ["en", "es", "zh", "fr", "de"],
+    "version_control": true
+  },
+  "adverse_events": {
+    "ctcae_version": "5.0",
+    "auto_report_sae": true,
+    "fda_report_grade_5": true,
+    "enable_causality_assessment": true
+  },
+  "edc": {
+    "enable_validation": true,
+    "auto_query_on_fail": true,
+    "enable_sdv": true,
+    "enable_data_locking": true,
+    "cdisc_export": true
+  },
+  "compliance": {
+    "cfr_21_part_11": true,
+    "gcp": true,
+    "hipaa": true,
+    "gdpr": true
+  },
+  "audit": {
+    "enabled": true,
+    "retention_days": 2555,
+    "hash_algorithm": "SHA256"
+  }
+}

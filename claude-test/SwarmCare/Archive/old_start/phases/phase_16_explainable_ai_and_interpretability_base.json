@@ -1,0 +1,32 @@
+{
+  "phase_id": 16,
+  "name": "Explainable AI & Interpretability (Base)",
+  "epic": "Epic 17",
+  "story_points": 34,
+  "priority": "P0",
+  "dependencies": [
+    13,
+    14
+  ],
+  "version": "v2.0",
+  "user_stories": [
+    {
+      "story_id": "17.1",
+      "title": "SHAP/LIME Explanations for ML Models",
+      "story_points": 13,
+      "priority": "P0"
+    },
+    {
+      "story_id": "17.2",
+      "title": "Attention Visualization for NLP",
+      "story_points": 8,
+      "priority": "P1"
+    },
+    {
+      "story_id": "17.3",
+      "title": "Clinical Rationale Generation",
+      "story_points": 13,
+      "priority": "P0"
+    }
+  ]
+}

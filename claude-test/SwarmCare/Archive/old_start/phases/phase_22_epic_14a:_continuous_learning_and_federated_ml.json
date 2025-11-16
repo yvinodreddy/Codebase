@@ -1,0 +1,25 @@
+{
+  "phase_id": 22,
+  "name": "Epic 14A: Continuous Learning & Federated ML",
+  "epic": "Epic 14A",
+  "story_points": 8,
+  "priority": "P0",
+  "dependencies": [
+    13
+  ],
+  "version": "v2.1",
+  "user_stories": [
+    {
+      "story_id": "14A.1",
+      "title": "Federated Learning Infrastructure",
+      "story_points": 5,
+      "priority": "P0"
+    },
+    {
+      "story_id": "14A.2",
+      "title": "Online Learning & Model Updates",
+      "story_points": 3,
+      "priority": "P0"
+    }
+  ]
+}

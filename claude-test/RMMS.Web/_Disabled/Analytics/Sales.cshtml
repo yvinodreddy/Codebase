@@ -1,0 +1,259 @@
+@{
+    ViewData["Title"] = "Sales Analytics";
+    var trends = ViewBag.Trends as List<RMMS.Services.Services.Analytics.SalesTrendDto>;
+    var topProducts = ViewBag.TopProducts as List<RMMS.Services.Services.Analytics.ProductPerformanceDto>;
+    var seasonal = ViewBag.SeasonalPatterns as List<RMMS.Services.Services.Analytics.SeasonalPatternDto>;
+}
+
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <h2>Sales Analytics Dashboard</h2>
+            <p class="text-muted">Sales trends, customer behavior, and performance analysis</p>
+        </div>
+        <div class="col-md-4 text-end">
+            <a href="@Url.Action("Index", "Analytics")" class="btn btn-secondary">
+                <i class="bi bi-arrow-left"></i> Back to Analytics
+            </a>
+        </div>
+    </div>
+
+    <!-- Date Range Filter -->
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <form method="get" class="row g-3">
+                        <div class="col-md-3">
+                            <label class="form-label">Start Date</label>
+                            <input type="date" name="startDate" class="form-control" value="@ViewBag.StartDate?.ToString("yyyy-MM-dd")">
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">End Date</label>
+                            <input type="date" name="endDate" class="form-control" value="@ViewBag.EndDate?.ToString("yyyy-MM-dd")">
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">Period Type</label>
+                            <select name="periodType" class="form-select">
+                                <option value="Daily" @(ViewBag.PeriodType == "Daily" ? "selected" : "")>Daily</option>
+                                <option value="Monthly" @(ViewBag.PeriodType == "Monthly" ? "selected" : "")>Monthly</option>
+                                <option value="Quarterly" @(ViewBag.PeriodType == "Quarterly" ? "selected" : "")>Quarterly</option>
+                                <option value="Yearly" @(ViewBag.PeriodType == "Yearly" ? "selected" : "")>Yearly</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">&nbsp;</label>
+                            <button type="submit" class="btn btn-primary w-100">Apply</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sales Trends -->
+    @if (trends != null && trends.Any())
+    {
+        var latestTrend = trends.LastOrDefault();
+        var totalRevenue = trends.Sum(t => t.Revenue);
+        var avgGrowth = trends.Where(t => t.GrowthRate != 0).Average(t => t.GrowthRate);
+
+        <div class="row mb-4">
+            <div class="col-md-4">
+                <div class="card bg-primary text-white">
+                    <div class="card-body">
+                        <h6>Total Revenue</h6>
+                        <h3>$@totalRevenue.ToString("N2")</h3>
+                        <small>For selected period</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card bg-success text-white">
+                    <div class="card-body">
+                        <h6>Latest Period Revenue</h6>
+                        <h3>$@latestTrend?.Revenue.ToString("N2")</h3>
+                        <small>@latestTrend?.Period.ToString("MMM yyyy")</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card bg-info text-white">
+                    <div class="card-body">
+                        <h6>Average Growth Rate</h6>
+                        <h3>@avgGrowth.ToString("N1")%</h3>
+                        <small>Period over period</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0">Sales Trend Analysis</h5>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="salesTrendChart" height="80"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    <!-- Top Products -->
+    @if (topProducts != null && topProducts.Any())
+    {
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header bg-success text-white">
+                        <h5 class="mb-0">Top 10 Products by Revenue</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Rank</th>
+                                        <th>Product</th>
+                                        <th>Revenue</th>
+                                        <th>Quantity</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var product in topProducts.Take(10))
+                                    {
+                                        <tr>
+                                            <td>@product.Rank</td>
+                                            <td>@product.ProductName</td>
+                                            <td>$@product.TotalRevenue.ToString("N2")</td>
+                                            <td>@product.TotalQuantity.ToString("N0")</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @if (seasonal != null && seasonal.Any())
+            {
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header bg-warning">
+                            <h5 class="mb-0">Seasonal Patterns</h5>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="seasonalChart" height="200"></canvas>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+
+    <!-- Quick Links -->
+    <div class="row">
+        <div class="col-md-4">
+            <a href="@Url.Action("CustomerBehavior", "Analytics")" class="btn btn-outline-primary w-100 mb-2">
+                <i class="bi bi-people"></i> Customer Behavior Analysis
+            </a>
+        </div>
+        <div class="col-md-4">
+            <a href="@Url.Action("CustomerSegmentation", "Analytics")" class="btn btn-outline-success w-100 mb-2">
+                <i class="bi bi-diagram-3"></i> Customer Segmentation
+            </a>
+        </div>
+        <div class="col-md-4">
+            <a href="@Url.Action("Financial", "Analytics")" class="btn btn-outline-info w-100 mb-2">
+                <i class="bi bi-currency-dollar"></i> Profit Analysis
+            </a>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        @if (trends != null && trends.Any())
+        {
+            <text>
+            // Sales Trend Chart
+            const trendCtx = document.getElementById('salesTrendChart').getContext('2d');
+            new Chart(trendCtx, {
+                type: 'line',
+                data: {
+                    labels: [@Html.Raw(string.Join(",", trends.Select(t => $"'{t.Period:MMM yyyy}'")))],
+                    datasets: [{
+                        label: 'Revenue',
+                        data: [@Html.Raw(string.Join(",", trends.Select(t => t.Revenue)))],
+                        borderColor: '#007bff',
+                        backgroundColor: 'rgba(0, 123, 255, 0.1)',
+                        tension: 0.4,
+                        yAxisID: 'y'
+                    }, {
+                        label: 'Growth Rate %',
+                        data: [@Html.Raw(string.Join(",", trends.Select(t => t.GrowthRate)))],
+                        borderColor: '#28a745',
+                        backgroundColor: 'rgba(40, 167, 69, 0.1)',
+                        tension: 0.4,
+                        yAxisID: 'y1'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    interaction: {
+                        mode: 'index',
+                        intersect: false
+                    },
+                    scales: {
+                        y: {
+                            type: 'linear',
+                            display: true,
+                            position: 'left',
+                            title: {
+                                display: true,
+                                text: 'Revenue ($)'
+                            }
+                        },
+                        y1: {
+                            type: 'linear',
+                            display: true,
+                            position: 'right',
+                            title: {
+                                display: true,
+                                text: 'Growth Rate (%)'
+                            },
+                            grid: {
+                                drawOnChartArea: false
+                            }
+                        }
+                    }
+                }
+            });
+            </text>
+        }
+
+        @if (seasonal != null && seasonal.Any())
+        {
+            <text>
+            // Seasonal Chart
+            const seasonalCtx = document.getElementById('seasonalChart').getContext('2d');
+            new Chart(seasonalCtx, {
+                type: 'bar',
+                data: {
+                    labels: [@Html.Raw(string.Join(",", seasonal.Select(s => $"'{s.MonthName}'")))],
+                    datasets: [{
+                        label: 'Average Revenue',
+                        data: [@Html.Raw(string.Join(",", seasonal.Select(s => s.AverageRevenue)))],
+                        backgroundColor: seasonal.map(s => s.IsPeakSeason ? '#dc3545' : '#ffc107')
+                    }]
+                }
+            });
+            </text>
+        }
+    </script>
+}

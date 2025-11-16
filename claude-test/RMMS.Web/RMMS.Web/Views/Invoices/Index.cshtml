@@ -1,0 +1,316 @@
+@{
+    ViewData["Title"] = "Professional Invoice Templates";
+}
+
+<div class="container-fluid" data-aos="fade-down">
+    <!-- Page Header -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <h1 class="display-5 fw-bold text-primary mb-2">
+                <i class="fas fa-file-invoice me-3"></i>Professional Invoice Templates
+            </h1>
+            <p class="lead text-muted">Choose from multiple professional invoice designs - Print-ready & PDF Download</p>
+        </div>
+    </div>
+
+    <!-- Template Selection -->
+    <div class="row">
+        <!-- Template 1 - Modern Blue -->
+        <div class="col-lg-4 col-md-6 mb-4" data-aos="zoom-in">
+            <div class="card h-100 shadow-sm">
+                <div class="card-header bg-gradient-primary text-white">
+                    <h5 class="mb-0"><i class="fas fa-star me-2"></i>Template 1 - Modern Blue</h5>
+                </div>
+                <div class="card-body">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='500'%3E%3Crect fill='%230090d2' width='400' height='100'/%3E%3Crect fill='white' y='100' width='400' height='400'/%3E%3Ctext x='20' y='50' fill='white' font-size='24' font-weight='bold'%3ERMMS RICE MILL%3C/text%3E%3Ctext x='300' y='80' fill='white' font-size='32' font-weight='bold'%3EINVOICE%3C/text%3E%3C/svg%3E"
+                         alt="Template 1 Preview" class="img-fluid mb-3 border">
+
+                    <h6>Features:</h6>
+                    <ul class="small">
+                        <li>Modern gradient header design</li>
+                        <li>Professional blue color scheme</li>
+                        <li>Detailed product descriptions</li>
+                        <li>GST breakdown with CGST/SGST</li>
+                        <li>Bank details & terms included</li>
+                        <li>Print & PDF download ready</li>
+                    </ul>
+
+                    <div class="d-grid gap-2">
+                        <a href="@Url.Action("Template1")" target="_blank" class="btn btn-primary">
+                            <i class="fas fa-eye me-2"></i>Preview Template
+                        </a>
+                        <button class="btn btn-outline-primary" onclick="useTemplate(1)">
+                            <i class="fas fa-check me-2"></i>Use This Template
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Template 2 - Minimalist -->
+        <div class="col-lg-4 col-md-6 mb-4" data-aos="zoom-in" data-aos-delay="100">
+            <div class="card h-100 shadow-sm">
+                <div class="card-header" style="background: #333; color: white;">
+                    <h5 class="mb-0"><i class="fas fa-certificate me-2"></i>Template 2 - Minimalist</h5>
+                </div>
+                <div class="card-body">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='500'%3E%3Crect fill='white' width='400' height='500' stroke='%23ddd' stroke-width='2'/%3E%3Cline x1='0' y1='80' x2='400' y2='80' stroke='%23333' stroke-width='3'/%3E%3Ctext x='20' y='40' fill='%23333' font-size='20' font-weight='bold'%3ERMMS RICE MILL%3C/text%3E%3Ctext x='320' y='60' fill='%23333' font-size='16'%3EINVOICE%3C/text%3E%3C/svg%3E"
+                         alt="Template 2 Preview" class="img-fluid mb-3 border">
+
+                    <h6>Features:</h6>
+                    <ul class="small">
+                        <li>Clean, minimalist black & white design</li>
+                        <li>Professional corporate look</li>
+                        <li>Compact, space-efficient layout</li>
+                        <li>Easy to print on plain paper</li>
+                        <li>Clear itemized billing</li>
+                        <li>Modern typography</li>
+                    </ul>
+
+                    <div class="d-grid gap-2">
+                        <a href="@Url.Action("Template2")" target="_blank" class="btn btn-dark">
+                            <i class="fas fa-eye me-2"></i>Preview Template
+                        </a>
+                        <button class="btn btn-outline-dark" onclick="useTemplate(2)">
+                            <i class="fas fa-check me-2"></i>Use This Template
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Template 3 - Colorful Modern -->
+        <div class="col-lg-4 col-md-6 mb-4" data-aos="zoom-in" data-aos-delay="200">
+            <div class="card h-100 shadow-sm">
+                <div class="card-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                    <h5 class="mb-0"><i class="fas fa-palette me-2"></i>Template 3 - Colorful Modern</h5>
+                </div>
+                <div class="card-body">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='500'%3E%3Cdefs%3E%3ClinearGradient id='grad1' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23667eea;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23764ba2;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect fill='url(%23grad1)' width='400' height='120'/%3E%3Crect fill='white' y='120' width='400' height='380'/%3E%3Ctext x='20' y='60' fill='white' font-size='28' font-weight='bold'%3ERMMS RICE MILL%3C/text%3E%3Ctext x='300' y='100' fill='white' font-size='36' font-weight='bold'%3EINVOICE%3C/text%3E%3C/svg%3E"
+                         alt="Template 3 Preview" class="img-fluid mb-3 border">
+
+                    <h6>Features:</h6>
+                    <ul class="small">
+                        <li>Vibrant gradient color scheme</li>
+                        <li>Modern rounded corners design</li>
+                        <li>Color-coded information sections</li>
+                        <li>Eye-catching visual appeal</li>
+                        <li>Professional yet creative</li>
+                        <li>Perfect for modern businesses</li>
+                    </ul>
+
+                    <div class="d-grid gap-2">
+                        <a href="@Url.Action("Template3")" target="_blank" class="btn" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                            <i class="fas fa-eye me-2"></i>Preview Template
+                        </a>
+                        <button class="btn btn-outline-primary" onclick="useTemplate(3)">
+                            <i class="fas fa-check me-2"></i>Use This Template
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Template 4 - Classic Traditional -->
+        <div class="col-lg-4 col-md-6 mb-4" data-aos="zoom-in" data-aos-delay="300">
+            <div class="card h-100 shadow-sm">
+                <div class="card-header" style="background: #8b4513; color: white;">
+                    <h5 class="mb-0"><i class="fas fa-landmark me-2"></i>Template 4 - Classic Traditional</h5>
+                </div>
+                <div class="card-body">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='500'%3E%3Crect fill='white' width='400' height='500' stroke='%23333' stroke-width='4'/%3E%3Crect fill='%23f9f9f9' x='10' y='10' width='380' height='100' stroke='%23333' stroke-width='2'/%3E%3Ctext x='200' y='40' fill='%23333' font-size='24' font-weight='bold' text-anchor='middle'%3ERMMS RICE MILL%3C/text%3E%3Crect fill='%23333' x='50' y='70' width='300' height='30'/%3E%3Ctext x='200' y='90' fill='white' font-size='18' font-weight='bold' text-anchor='middle'%3ETAX INVOICE%3C/text%3E%3C/svg%3E"
+                         alt="Template 4 Preview" class="img-fluid mb-3 border">
+
+                    <h6>Features:</h6>
+                    <ul class="small">
+                        <li>Traditional formal design</li>
+                        <li>Double-bordered professional look</li>
+                        <li>Decorative corner elements</li>
+                        <li>Classic typography</li>
+                        <li>Established 1985 branding</li>
+                        <li>Perfect for formal transactions</li>
+                    </ul>
+
+                    <div class="d-grid gap-2">
+                        <a href="@Url.Action("Template4")" target="_blank" class="btn" style="background: #8b4513; color: white;">
+                            <i class="fas fa-eye me-2"></i>Preview Template
+                        </a>
+                        <button class="btn btn-outline-primary" onclick="useTemplate(4)">
+                            <i class="fas fa-check me-2"></i>Use This Template
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Template 5 - International Format -->
+        <div class="col-lg-4 col-md-6 mb-4" data-aos="zoom-in" data-aos-delay="400">
+            <div class="card h-100 shadow-sm">
+                <div class="card-header" style="background: linear-gradient(to right, #2c3e50, #34495e); color: white;">
+                    <h5 class="mb-0"><i class="fas fa-globe me-2"></i>Template 5 - International</h5>
+                </div>
+                <div class="card-body">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='500'%3E%3Crect fill='%232c3e50' width='400' height='80'/%3E%3Crect fill='white' y='80' width='400' height='420'/%3E%3Ctext x='20' y='35' fill='white' font-size='18' font-weight='bold'%3ERMMS INTERNATIONAL%3C/text%3E%3Ctext x='300' y='60' fill='white' font-size='24' font-weight='bold'%3ECOMMERCIAL%3C/text%3E%3Crect fill='%2334495e' y='80' width='400' height='30'/%3E%3Ctext x='10' y='100' fill='white' font-size='11'%3EInvoice No: EXP-IN-2024-005 | Date: 21-Oct-2025%3C/text%3E%3C/svg%3E"
+                         alt="Template 5 Preview" class="img-fluid mb-3 border">
+
+                    <h6>Features:</h6>
+                    <ul class="small">
+                        <li>International trade format</li>
+                        <li>HS Code & Incoterms support</li>
+                        <li>Multi-currency display</li>
+                        <li>Shipping & logistics details</li>
+                        <li>Export/import documentation</li>
+                        <li>SWIFT & IEC code fields</li>
+                    </ul>
+
+                    <div class="d-grid gap-2">
+                        <a href="@Url.Action("Template5")" target="_blank" class="btn" style="background: linear-gradient(to right, #2c3e50, #34495e); color: white;">
+                            <i class="fas fa-eye me-2"></i>Preview Template
+                        </a>
+                        <button class="btn btn-outline-primary" onclick="useTemplate(5)">
+                            <i class="fas fa-check me-2"></i>Use This Template
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Template 6 - Detailed GST Format -->
+        <div class="col-lg-4 col-md-6 mb-4" data-aos="zoom-in" data-aos-delay="500">
+            <div class="card h-100 shadow-sm">
+                <div class="card-header bg-dark text-white">
+                    <h5 class="mb-0"><i class="fas fa-file-invoice-dollar me-2"></i>Template 6 - Detailed GST</h5>
+                </div>
+                <div class="card-body">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='500'%3E%3Crect fill='white' width='400' height='500' stroke='%23000' stroke-width='3'/%3E%3Crect fill='%23f9f9f9' x='5' y='5' width='390' height='80' stroke='%23000' stroke-width='1'/%3E%3Ctext x='200' y='30' fill='%23000' font-size='18' font-weight='bold' text-anchor='middle'%3ERMMS RICE MILL PVT LTD%3C/text%3E%3Crect fill='%23000' x='5' y='50' width='390' height='25'/%3E%3Ctext x='200' y='68' fill='white' font-size='14' font-weight='bold' text-anchor='middle'%3ETAX INVOICE%3C/text%3E%3Crect fill='white' x='10' y='90' width='120' height='20' stroke='%23000'/%3E%3Ctext x='15' y='105' font-size='9'%3EGSTIN: 29ABCDE1234F1Z5%3C/text%3E%3C/svg%3E"
+                         alt="Template 6 Preview" class="img-fluid mb-3 border">
+
+                    <h6>Features:</h6>
+                    <ul class="small">
+                        <li>Comprehensive GST compliance</li>
+                        <li>Detailed tax breakdown table</li>
+                        <li>HSN code for each item</li>
+                        <li>CGST/SGST/IGST calculations</li>
+                        <li>Place of supply & state codes</li>
+                        <li>Complete tax summary section</li>
+                    </ul>
+
+                    <div class="d-grid gap-2">
+                        <a href="@Url.Action("Template6")" target="_blank" class="btn btn-dark">
+                            <i class="fas fa-eye me-2"></i>Preview Template
+                        </a>
+                        <button class="btn btn-outline-dark" onclick="useTemplate(6)">
+                            <i class="fas fa-check me-2"></i>Use This Template
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-bolt me-2"></i>Quick Actions</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3 mb-3">
+                            <button class="btn btn-success w-100" onclick="createNewInvoice()">
+                                <i class="fas fa-plus-circle me-2"></i>Create New Invoice
+                            </button>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <a href="@Url.Action("Index", "RiceSales")" class="btn btn-info w-100">
+                                <i class="fas fa-list me-2"></i>View All Invoices
+                            </a>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <button class="btn btn-warning w-100" onclick="RMMS.Toast.info('Email integration coming soon!')">
+                                <i class="fas fa-envelope me-2"></i>Email Invoice
+                            </button>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <button class="btn btn-secondary w-100" onclick="window.history.back()">
+                                <i class="fas fa-arrow-left me-2"></i>Back
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features Overview -->
+    <div class="row mt-4">
+        <div class="col-md-6 mb-4" data-aos="fade-right">
+            <div class="card">
+                <div class="card-header bg-light">
+                    <h5 class="mb-0"><i class="fas fa-check-circle text-success me-2"></i>Invoice Features</h5>
+                </div>
+                <div class="card-body">
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Professional, print-ready designs</li>
+                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i>One-click PDF download</li>
+                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i>GST compliant formatting</li>
+                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Automatic tax calculations</li>
+                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Company branding included</li>
+                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Bank details & terms</li>
+                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Amount in words conversion</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 mb-4" data-aos="fade-left">
+            <div class="card">
+                <div class="card-header bg-light">
+                    <h5 class="mb-0"><i class="fas fa-info-circle text-info me-2"></i>How to Use</h5>
+                </div>
+                <div class="card-body">
+                    <ol>
+                        <li class="mb-2">Choose your preferred invoice template from above</li>
+                        <li class="mb-2">Click "Preview Template" to see how it looks</li>
+                        <li class="mb-2">Use "Print" button to print directly</li>
+                        <li class="mb-2">Use "Download PDF" to save as PDF file</li>
+                        <li class="mb-2">Customize invoice data from Sales module</li>
+                        <li class="mb-2">Email directly to customers (coming soon)</li>
+                    </ol>
+
+                    <div class="alert alert-info mb-0">
+                        <i class="fas fa-lightbulb me-2"></i>
+                        <strong>Tip:</strong> All templates are dynamically populated with your sales data for accurate invoicing.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function useTemplate(templateNumber) {
+            RMMS.Alert.confirm({
+                title: `Use Template ${templateNumber}?`,
+                text: 'This will set Template ' + templateNumber + ' as your default invoice template.',
+                icon: 'question'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Save preference to local storage or backend
+                    localStorage.setItem('preferred_invoice_template', templateNumber);
+
+                    RMMS.Toast.success(`Template ${templateNumber} set as default!`);
+                }
+            });
+        }
+
+        function createNewInvoice() {
+            RMMS.Toast.info('Opening sales order form...');
+            setTimeout(() => {
+                window.location.href = '@Url.Action("Create", "RiceSales")';
+            }, 1000);
+        }
+    </script>
+}

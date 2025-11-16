@@ -1,0 +1,19 @@
+{
+  "phase_id": 11,
+  "name": "Research & Publications",
+  "epic": "Epic 12",
+  "story_points": 21,
+  "priority": "P2",
+  "dependencies": [
+    8
+  ],
+  "version": "v1.0",
+  "user_stories": [
+    {
+      "story_id": "12.1",
+      "title": "Research Paper 1 - RAG Heat Architecture",
+      "story_points": 21,
+      "priority": "P2"
+    }
+  ]
+}

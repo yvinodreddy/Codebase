@@ -1,0 +1,208 @@
+@model RMMS.Models.Sales.Inquiry
+@{
+    ViewData["Title"] = "Edit Inquiry";
+}
+
+<div class="container-fluid">
+    <h2><i class="fas fa-edit"></i> Edit Inquiry</h2>
+    <hr />
+
+    <form asp-action="Edit" method="post">
+        <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="CreatedDate" />
+        <input type="hidden" asp-for="CreatedBy" />
+
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Inquiry Information</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label asp-for="InquiryNumber" class="form-label"></label>
+                                <input asp-for="InquiryNumber" class="form-control" readonly />
+                                <span asp-validation-for="InquiryNumber" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="InquiryDate" class="form-label"></label>
+                                <input asp-for="InquiryDate" class="form-control" type="date" required />
+                                <span asp-validation-for="InquiryDate" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-12">
+                                <label asp-for="CustomerId" class="form-label">Customer</label>
+                                <select asp-for="CustomerId" class="form-select" required>
+                                    <option value="">Select Customer</option>
+                                    @if (ViewBag.Customers != null)
+                                    {
+                                        @foreach (var customer in ViewBag.Customers)
+                                        {
+                                            <option value="@customer.Id">@customer.CustomerName (@customer.CustomerCode)</option>
+                                        }
+                                    }
+                                </select>
+                                <span asp-validation-for="CustomerId" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <label asp-for="Source" class="form-label"></label>
+                                <select asp-for="Source" class="form-select" required>
+                                    <option value="">Select Source</option>
+                                    <option value="Phone">Phone</option>
+                                    <option value="Email">Email</option>
+                                    <option value="Walk-in">Walk-in</option>
+                                    <option value="Website">Website</option>
+                                    <option value="Referral">Referral</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                                <span asp-validation-for="Source" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-4">
+                                <label asp-for="Priority" class="form-label"></label>
+                                <select asp-for="Priority" class="form-select" required>
+                                    <option value="Low">Low</option>
+                                    <option value="Normal">Normal</option>
+                                    <option value="High">High</option>
+                                    <option value="Urgent">Urgent</option>
+                                </select>
+                                <span asp-validation-for="Priority" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-4">
+                                <label asp-for="Status" class="form-label"></label>
+                                <select asp-for="Status" class="form-select">
+                                    <option value="New">New</option>
+                                    <option value="In Progress">In Progress</option>
+                                    <option value="Quoted">Quoted</option>
+                                    <option value="Converted">Converted</option>
+                                    <option value="Lost">Lost</option>
+                                    <option value="Closed">Closed</option>
+                                </select>
+                                <span asp-validation-for="Status" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-8">
+                                <label asp-for="ProductType" class="form-label"></label>
+                                <input asp-for="ProductType" class="form-control" placeholder="e.g., Basmati Rice, Sona Masoori" />
+                                <span asp-validation-for="ProductType" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-4">
+                                <label asp-for="ApproximateQuantity" class="form-label"></label>
+                                <input asp-for="ApproximateQuantity" class="form-control" type="number" step="0.01" placeholder="e.g., 1000" />
+                                <span asp-validation-for="ApproximateQuantity" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label asp-for="AssignedToEmployeeId" class="form-label">Assign To Employee</label>
+                                <select asp-for="AssignedToEmployeeId" class="form-select">
+                                    <option value="">Not Assigned</option>
+                                    @if (ViewBag.Employees != null)
+                                    {
+                                        @foreach (var employee in ViewBag.Employees)
+                                        {
+                                            <option value="@employee.Id">@employee.EmployeeName (@employee.EmployeeCode)</option>
+                                        }
+                                    }
+                                </select>
+                                <span asp-validation-for="AssignedToEmployeeId" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="FollowUpDate" class="form-label">Follow-Up Date</label>
+                                <input asp-for="FollowUpDate" class="form-control" type="date" />
+                                <span asp-validation-for="FollowUpDate" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        @if (Model.Status == "Lost")
+                        {
+                            <div class="mb-3">
+                                <label asp-for="LostReason" class="form-label"></label>
+                                <textarea asp-for="LostReason" class="form-control" rows="2"></textarea>
+                                <span asp-validation-for="LostReason" class="text-danger"></span>
+                            </div>
+                        }
+
+                        <div class="mb-3">
+                            <label asp-for="CustomerRequirements" class="form-label"></label>
+                            <textarea asp-for="CustomerRequirements" class="form-control" rows="3" placeholder="Enter inquiry details, customer requirements..."></textarea>
+                            <span asp-validation-for="CustomerRequirements" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Remarks" class="form-label"></label>
+                            <textarea asp-for="Remarks" class="form-control" rows="2" placeholder="Additional notes..."></textarea>
+                            <span asp-validation-for="Remarks" class="text-danger"></span>
+                        </div>
+
+                        <input type="hidden" asp-for="ConvertedToQuotationId" />
+                        <input type="hidden" asp-for="IsActive" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h5>Actions</h5>
+                    </div>
+                    <div class="card-body">
+                        <button type="submit" class="btn btn-success w-100 mb-2">
+                            <i class="fas fa-save"></i> Update Inquiry
+                        </button>
+                        <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-info w-100 mb-2">
+                            <i class="fas fa-eye"></i> View Details
+                        </a>
+                        <a asp-action="Index" class="btn btn-secondary w-100">
+                            <i class="fas fa-arrow-left"></i> Back to List
+                        </a>
+                    </div>
+                </div>
+
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h5>Audit Information</h5>
+                    </div>
+                    <div class="card-body">
+                        <small>
+                            <strong>Created:</strong> @Model.CreatedDate.ToString("dd MMM yyyy HH:mm")<br />
+                            <strong>By:</strong> @Model.CreatedBy<br />
+                            @if (Model.ModifiedDate.HasValue)
+                            {
+                                <strong>Last Modified:</strong> @Model.ModifiedDate.Value.ToString("dd MMM yyyy HH:mm")<br />
+                                <strong>By:</strong> @Model.ModifiedBy
+                            }
+                        </small>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Instructions</h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="small">
+                            <li>Inquiry Number cannot be changed</li>
+                            <li>Update status as inquiry progresses</li>
+                            <li>Assign to sales team for follow-up</li>
+                            <li>Set Lost Reason if inquiry is lost</li>
+                            <li>Follow-Up Date for reminders</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

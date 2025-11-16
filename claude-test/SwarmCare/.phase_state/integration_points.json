@@ -1,0 +1,37 @@
+{
+  "integration_points": [
+    {
+      "id": "IP1",
+      "name": "RAG Heat API \u2192 SWARMCARE Agents",
+      "phases": [
+        1,
+        2
+      ],
+      "description": "Agents call RAG Heat API for knowledge retrieval",
+      "status": "NOT_STARTED",
+      "validated": false
+    },
+    {
+      "id": "IP2",
+      "name": "SWARMCARE Backend \u2192 Frontend",
+      "phases": [
+        2,
+        4
+      ],
+      "description": "Frontend displays agent status and workflows",
+      "status": "NOT_STARTED",
+      "validated": false
+    },
+    {
+      "id": "IP3",
+      "name": "RAG Heat \u2192 Frontend",
+      "phases": [
+        1,
+        4
+      ],
+      "description": "Frontend query interface for RAG Heat",
+      "status": "NOT_STARTED",
+      "validated": false
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+// Add these repository registrations to Program.cs after line 31:
+
+builder.Services.AddScoped<IRiceProcurementExternalRepository, RiceProcurementExternalRepository>();
+builder.Services.AddScoped<ILoansAdvancesRepository, LoansAdvancesRepository>();
+builder.Services.AddScoped<IFixedAssetsRepository, FixedAssetsRepository>();
+builder.Services.AddScoped<IVouchersRepository, VouchersRepository>();
+builder.Services.AddScoped<IReceivablesOverdueRepository, ReceivablesOverdueRepository>();
+builder.Services.AddScoped<IPayablesOverdueRepository, PayablesOverdueRepository>();
+builder.Services.AddScoped<IBankTransactionsRepository, BankTransactionsRepository>();
+builder.Services.AddScoped<ICashBookRepository, CashBookRepository>();

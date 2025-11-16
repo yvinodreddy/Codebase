@@ -1,0 +1,40 @@
+apiVersion: v2
+name: swarmcare
+description: SwarmCare Medical AI Platform - Production Helm Chart
+type: application
+version: 1.0.0
+appVersion: "1.0.0"
+keywords:
+  - medical-ai
+  - healthcare
+  - kubernetes
+  - production
+home: https://swarmcare.example.com
+sources:
+  - https://github.com/swarmcare/platform
+maintainers:
+  - name: SwarmCare Team
+    email: devops@swarmcare.example.com
+icon: https://swarmcare.example.com/logo.png
+deprecated: false
+annotations:
+  category: Medical AI
+  licenses: Proprietary
+kubeVersion: ">=1.24.0-0"
+dependencies:
+  - name: postgresql
+    version: "12.x.x"
+    repository: "https://charts.bitnami.com/bitnami"
+    condition: postgresql.enabled
+  - name: redis
+    version: "17.x.x"
+    repository: "https://charts.bitnami.com/bitnami"
+    condition: redis.enabled
+  - name: prometheus
+    version: "15.x.x"
+    repository: "https://prometheus-community.github.io/helm-charts"
+    condition: monitoring.prometheus.enabled
+  - name: grafana
+    version: "6.x.x"
+    repository: "https://grafana.github.io/helm-charts"
+    condition: monitoring.grafana.enabled

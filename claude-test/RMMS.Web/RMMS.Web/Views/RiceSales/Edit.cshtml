@@ -1,0 +1,406 @@
+@model RMMS.Models.RiceSales
+@{
+    ViewData["Title"] = "Edit Rice Sales Invoice";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-warning text-white">
+                    <h4><i class="fas fa-edit"></i> @ViewData["Title"]</h4>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Edit" method="post" id="salesForm">
+                        <input type="hidden" asp-for="Id" />
+                        <input type="hidden" asp-for="CreatedBy" />
+                        <input type="hidden" asp-for="CreatedDate" />
+
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+                        <!-- Invoice Details -->
+                        <fieldset class="border p-3 mb-3">
+                            <legend class="w-auto px-2">Invoice Details</legend>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label asp-for="InvoiceNumber" class="form-label required"></label>
+                                        <input asp-for="InvoiceNumber" class="form-control" readonly />
+                                        <span asp-validation-for="InvoiceNumber" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label asp-for="SaleDate" class="form-label required"></label>
+                                        <input asp-for="SaleDate" type="date" class="form-control" />
+                                        <span asp-validation-for="SaleDate" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label asp-for="DueDate" class="form-label"></label>
+                                        <input asp-for="DueDate" type="date" class="form-control" />
+                                        <span asp-validation-for="DueDate" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <!-- Buyer Information -->
+                        <fieldset class="border p-3 mb-3">
+                            <legend class="w-auto px-2">Buyer Information</legend>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="BuyerName" class="form-label required"></label>
+                                        <input asp-for="BuyerName" class="form-control" list="buyerList" />
+                                        <datalist id="buyerList">
+                                            <option value="Retail Store A" />
+                                            <option value="Wholesale Buyer B" />
+                                            <option value="Export Company C" />
+                                        </datalist>
+                                        <span asp-validation-for="BuyerName" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="BuyerGSTIN" class="form-label"></label>
+                                        <input asp-for="BuyerGSTIN" class="form-control" id="buyerGSTIN" />
+                                        <span asp-validation-for="BuyerGSTIN" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="mb-3">
+                                        <label asp-for="BuyerAddress" class="form-label"></label>
+                                        <textarea asp-for="BuyerAddress" class="form-control" rows="2"></textarea>
+                                        <span asp-validation-for="BuyerAddress" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <!-- Product Details -->
+                        <fieldset class="border p-3 mb-3">
+                            <legend class="w-auto px-2">Product Details</legend>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label asp-for="RiceGrade" class="form-label required"></label>
+                                        <select asp-for="RiceGrade" class="form-select">
+                                            <option value="">-- Select Grade --</option>
+                                            <option value="Basmati Premium">Basmati Premium</option>
+                                            <option value="Basmati Standard">Basmati Standard</option>
+                                            <option value="Sonam">Sonam</option>
+                                            <option value="Mansuri">Mansuri</option>
+                                            <option value="Katrni">Katrni</option>
+                                            <option value="Broken Rice">Broken Rice</option>
+                                        </select>
+                                        <span asp-validation-for="RiceGrade" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label asp-for="Quantity" class="form-label required"></label>
+                                        <div class="input-group">
+                                            <input asp-for="Quantity" type="number" step="0.01" class="form-control calc-trigger" />
+                                            <span class="input-group-text">Kg</span>
+                                        </div>
+                                        <span asp-validation-for="Quantity" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label asp-for="UnitPrice" class="form-label required"></label>
+                                        <div class="input-group">
+                                            <span class="input-group-text">₹</span>
+                                            <input asp-for="UnitPrice" type="number" step="0.01" class="form-control calc-trigger" />
+                                            <span class="input-group-text">/Kg</span>
+                                        </div>
+                                        <span asp-validation-for="UnitPrice" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <!-- Pricing & Tax Calculation -->
+                        <fieldset class="border p-3 mb-3">
+                            <legend class="w-auto px-2">Pricing & Tax Calculation</legend>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="mb-3">
+                                        <label asp-for="TotalInvoiceValue" class="form-label"></label>
+                                        <div class="input-group">
+                                            <span class="input-group-text">₹</span>
+                                            <input asp-for="TotalInvoiceValue" class="form-control" readonly />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="mb-3">
+                                        <label asp-for="Discount" class="form-label"></label>
+                                        <div class="input-group">
+                                            <span class="input-group-text">₹</span>
+                                            <input asp-for="Discount" type="number" step="0.01" class="form-control calc-trigger" />
+                                        </div>
+                                        <span asp-validation-for="Discount" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="mb-3">
+                                        <label asp-for="TaxableValue" class="form-label"></label>
+                                        <div class="input-group">
+                                            <span class="input-group-text">₹</span>
+                                            <input asp-for="TaxableValue" class="form-control" readonly />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="mb-3">
+                                        <label>GST Type</label>
+                                        <select id="gstType" class="form-select calc-trigger">
+                                            <option value="intrastate">Intrastate (CGST + SGST)</option>
+                                            <option value="interstate">Interstate (IGST)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="mb-3">
+                                        <label asp-for="CGSTAmount" class="form-label">CGST (2.5%)</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text">₹</span>
+                                            <input asp-for="CGSTAmount" class="form-control" readonly />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="mb-3">
+                                        <label asp-for="SGSTAmount" class="form-label">SGST (2.5%)</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text">₹</span>
+                                            <input asp-for="SGSTAmount" class="form-control" readonly />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="mb-3">
+                                        <label asp-for="IGSTAmount" class="form-label">IGST (5%)</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text">₹</span>
+                                            <input asp-for="IGSTAmount" class="form-control" readonly />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="mb-3">
+                                        <label asp-for="TotalTaxAmount" class="form-label">Total Tax</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text">₹</span>
+                                            <input asp-for="TotalTaxAmount" class="form-control" readonly />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="mb-3">
+                                        <label asp-for="FreightCharges" class="form-label"></label>
+                                        <div class="input-group">
+                                            <span class="input-group-text">₹</span>
+                                            <input asp-for="FreightCharges" type="number" step="0.01" class="form-control calc-trigger" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="mb-3">
+                                        <label asp-for="OtherCharges" class="form-label"></label>
+                                        <div class="input-group">
+                                            <span class="input-group-text">₹</span>
+                                            <input asp-for="OtherCharges" type="number" step="0.01" class="form-control calc-trigger" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="GrossInvoiceAmount" class="form-label h5">Gross Invoice Amount</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text">₹</span>
+                                            <input asp-for="GrossInvoiceAmount" class="form-control form-control-lg" readonly />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <!-- Payment Information -->
+                        <fieldset class="border p-3 mb-3">
+                            <legend class="w-auto px-2">Payment Information</legend>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label asp-for="PaymentMode" class="form-label"></label>
+                                        <select asp-for="PaymentMode" class="form-select">
+                                            <option value="">-- Select Payment Mode --</option>
+                                            <option value="Cash">Cash</option>
+                                            <option value="Bank Transfer">Bank Transfer</option>
+                                            <option value="Cheque">Cheque</option>
+                                            <option value="Credit">Credit</option>
+                                            <option value="UPI">UPI</option>
+                                        </select>
+                                        <span asp-validation-for="PaymentMode" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label asp-for="PaymentStatus" class="form-label required"></label>
+                                        <select asp-for="PaymentStatus" class="form-select">
+                                            <option value="">-- Select Status --</option>
+                                            <option value="Pending">Pending</option>
+                                            <option value="Paid">Paid</option>
+                                            <option value="Partial">Partial Payment</option>
+                                        </select>
+                                        <span asp-validation-for="PaymentStatus" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label asp-for="Remarks" class="form-label"></label>
+                                        <textarea asp-for="Remarks" class="form-control" rows="2"></textarea>
+                                        <span asp-validation-for="Remarks" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <div class="mt-3">
+                            <button type="submit" class="btn btn-warning btn-lg">
+                                <i class="fas fa-save"></i> Update Invoice
+                            </button>
+                            <button type="button" class="btn btn-info btn-lg" onclick="printPreview()">
+                                <i class="fas fa-print"></i> Print Preview
+                            </button>
+                            <a asp-action="Index" class="btn btn-secondary btn-lg">
+                                <i class="fas fa-arrow-left"></i> Back to List
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        const GST_RATE = 5; // 5% GST on rice
+
+        $(document).ready(function() {
+            // Calculate totals on change
+            $('.calc-trigger').on('change keyup', calculateTotals);
+            $('#gstType').on('change', calculateTotals);
+
+            // Determine GST type on load based on existing values
+            if (parseFloat($('#IGSTAmount').val() || 0) > 0) {
+                $('#gstType').val('interstate');
+            } else {
+                $('#gstType').val('intrastate');
+            }
+
+            function calculateTotals() {
+                var quantity = parseFloat($('#Quantity').val()) || 0;
+                var unitPrice = parseFloat($('#UnitPrice').val()) || 0;
+                var discount = parseFloat($('#Discount').val()) || 0;
+                var freight = parseFloat($('#FreightCharges').val()) || 0;
+                var other = parseFloat($('#OtherCharges').val()) || 0;
+
+                // Calculate total invoice value
+                var totalInvoiceValue = quantity * unitPrice;
+                $('#TotalInvoiceValue').val(totalInvoiceValue.toFixed(2));
+
+                // Calculate taxable value
+                var taxableValue = totalInvoiceValue - discount;
+                $('#TaxableValue').val(taxableValue.toFixed(2));
+
+                // Calculate GST
+                var gstType = $('#gstType').val();
+                var cgst = 0, sgst = 0, igst = 0;
+
+                if (gstType === 'interstate') {
+                    // Interstate - IGST only
+                    igst = taxableValue * GST_RATE / 100;
+                    $('#IGSTAmount').val(igst.toFixed(2));
+                    $('#CGSTAmount').val('0.00');
+                    $('#SGSTAmount').val('0.00');
+                } else {
+                    // Intrastate - CGST + SGST
+                    cgst = taxableValue * (GST_RATE / 2) / 100;
+                    sgst = taxableValue * (GST_RATE / 2) / 100;
+                    $('#CGSTAmount').val(cgst.toFixed(2));
+                    $('#SGSTAmount').val(sgst.toFixed(2));
+                    $('#IGSTAmount').val('0.00');
+                }
+
+                // Total tax
+                var totalTax = cgst + sgst + igst;
+                $('#TotalTaxAmount').val(totalTax.toFixed(2));
+
+                // Gross invoice amount
+                var grossAmount = taxableValue + totalTax + freight + other;
+                $('#GrossInvoiceAmount').val(grossAmount.toFixed(2));
+            }
+
+            // GSTIN validation
+            $('#buyerGSTIN').on('blur', function() {
+                var gstin = $(this).val();
+                if (gstin && !validateGSTIN(gstin)) {
+                    alert('Invalid GSTIN format. Please check and re-enter.');
+                    $(this).focus();
+                }
+            });
+
+            function validateGSTIN(gstin) {
+                // Basic GSTIN validation pattern
+                var pattern = /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[A-Z0-9]{1}[Z]{1}[A-Z0-9]{1}$/;
+                return pattern.test(gstin);
+            }
+        });
+
+        function printPreview() {
+            // Open print preview in new window
+            var invoiceNumber = $('#InvoiceNumber').val();
+            var url = '@Url.Action("Details", "RiceSales")/' + $('#Id').val();
+            window.open(url, '_blank', 'width=800,height=600');
+        }
+    </script>
+
+    <style>
+        .required:after {
+            content: " *";
+            color: red;
+        }
+        fieldset {
+            border: 1px solid #dee2e6 !important;
+            background: #f8f9fa;
+        }
+        legend {
+            font-size: 1rem;
+            font-weight: bold;
+            background: white;
+            padding: 0 10px;
+        }
+        .form-control-lg {
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+    </style>
+}

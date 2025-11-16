@@ -1,0 +1,337 @@
+@model RMMS.Models.Production.ProductionBatch
+@{
+    ViewData["Title"] = "Batch Details";
+}
+
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2><i class="fas fa-industry"></i> Production Batch Details</h2>
+        <a asp-action="Index" class="btn btn-secondary">
+            <i class="fas fa-arrow-left"></i> Back to List
+        </a>
+    </div>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show">
+            @TempData["Success"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show">
+            @TempData["Error"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    @if (TempData["Warning"] != null)
+    {
+        <div class="alert alert-warning alert-dismissible fade show">
+            @TempData["Warning"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    <div class="row">
+        <!-- Left Column -->
+        <div class="col-md-8">
+            <!-- Batch Information -->
+            <div class="card mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0"><i class="fas fa-info-circle"></i> Batch Information</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label text-muted">Batch Number</label>
+                            <p class="fs-5"><strong>@Model.BatchNumber</strong></p>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label text-muted">Status</label>
+                            <p>
+                                <span class="badge @Model.StatusBadgeClass fs-6">
+                                    <i class="fas @Model.StatusIcon"></i> @Model.Status
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label text-muted">Production Order</label>
+                            <p>@(Model.ProductionOrder?.OrderNumber ?? "N/A")</p>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label text-muted">Batch Date</label>
+                            <p>@Model.BatchDate.ToString("dd-MMM-yyyy")</p>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label text-muted">Shift</label>
+                            <p>
+                                <span class="badge @Model.ShiftBadgeClass">@Model.ShiftType</span>
+                            </p>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label text-muted">Completion</label>
+                            <div class="progress" style="height: 25px;">
+                                <div class="progress-bar bg-success" role="progressbar"
+                                     style="width: @Model.CompletionPercent%"
+                                     aria-valuenow="@Model.CompletionPercent"
+                                     aria-valuemin="0" aria-valuemax="100">
+                                    @Model.CompletionPercent%
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label text-muted">Operator</label>
+                            <p>@(Model.Operator?.EmployeeName ?? "Unassigned")</p>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label text-muted">Supervisor</label>
+                            <p>@(Model.Supervisor?.EmployeeName ?? "Unassigned")</p>
+                        </div>
+                    </div>
+
+                    @if (Model.StartTime.HasValue)
+                    {
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label text-muted">Start Time</label>
+                                <p>@Model.StartTime.Value.ToString("dd-MMM-yyyy HH:mm")</p>
+                            </div>
+                            @if (Model.EndTime.HasValue)
+                            {
+                                <div class="col-md-6">
+                                    <label class="form-label text-muted">End Time</label>
+                                    <p>@Model.EndTime.Value.ToString("dd-MMM-yyyy HH:mm")</p>
+                                </div>
+                            }
+                        </div>
+
+                        @if (Model.DurationHours.HasValue)
+                        {
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label class="form-label text-muted">Duration</label>
+                                    <p><strong>@Model.DurationHours.Value.ToString("F2") hours</strong></p>
+                                </div>
+                            </div>
+                        }
+                    }
+
+                    @if (!string.IsNullOrWhiteSpace(Model.QualityRemarks))
+                    {
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label text-muted">Quality Score</label>
+                                <p>@(Model.QualityScore?.ToString("F1") ?? "N/A") / 10</p>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label text-muted">Quality Remarks</label>
+                                <p>@Model.QualityRemarks</p>
+                            </div>
+                        </div>
+                    }
+
+                    @if (!string.IsNullOrWhiteSpace(Model.Remarks))
+                    {
+                        <div class="mb-3">
+                            <label class="form-label text-muted">Remarks</label>
+                            <p>@Model.Remarks</p>
+                        </div>
+                    }
+
+                    @if (!string.IsNullOrWhiteSpace(Model.Issues))
+                    {
+                        <div class="mb-3">
+                            <label class="form-label text-muted">Issues/Problems</label>
+                            <p class="text-danger">@Model.Issues</p>
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <!-- Batch Inputs/Outputs -->
+            <div class="card mb-4">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0"><i class="fas fa-exchange-alt"></i> Inputs & Outputs</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6 class="text-success">Total Input Quantity</h6>
+                            <p class="fs-4"><strong>@(ViewBag.TotalInputQuantity?.ToString("N2") ?? "0") kg</strong></p>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="text-primary">Total Output Quantity</h6>
+                            <p class="fs-4"><strong>@(ViewBag.TotalOutputQuantity?.ToString("N2") ?? "0") kg</strong></p>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-12">
+                            <h6>Efficiency</h6>
+                            <div class="progress" style="height: 30px;">
+                                <div class="progress-bar bg-info" role="progressbar"
+                                     style="width: @ViewBag.Efficiency%"
+                                     aria-valuenow="@ViewBag.Efficiency"
+                                     aria-valuemin="0" aria-valuemax="100">
+                                    @(ViewBag.Efficiency?.ToString("F1") ?? "0")%
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Audit Information -->
+            <div class="card">
+                <div class="card-header bg-secondary text-white">
+                    <h6 class="mb-0"><i class="fas fa-history"></i> Audit Information</h6>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p class="mb-1"><strong>Created By:</strong> @Model.CreatedBy</p>
+                            <p><strong>Created On:</strong> @Model.CreatedDate.ToString("dd-MMM-yyyy HH:mm")</p>
+                        </div>
+                        @if (Model.ModifiedDate.HasValue)
+                        {
+                            <div class="col-md-6">
+                                <p class="mb-1"><strong>Modified By:</strong> @Model.ModifiedBy</p>
+                                <p><strong>Modified On:</strong> @Model.ModifiedDate.Value.ToString("dd-MMM-yyyy HH:mm")</p>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column - Actions -->
+        <div class="col-md-4">
+            <!-- Workflow Actions -->
+            <div class="card mb-4">
+                <div class="card-header bg-warning text-dark">
+                    <h5 class="mb-0"><i class="fas fa-cogs"></i> Workflow Actions</h5>
+                </div>
+                <div class="card-body">
+                    <div class="d-grid gap-2">
+                        @if (Model.Status == "Planned")
+                        {
+                            <form asp-action="Start" asp-route-id="@Model.Id" method="post" onsubmit="return confirm('Start this batch?');">
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="btn btn-primary btn-lg w-100">
+                                    <i class="fas fa-play"></i> Start Batch
+                                </button>
+                            </form>
+                            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">
+                                <i class="fas fa-edit"></i> Edit Batch
+                            </a>
+                            <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">
+                                <i class="fas fa-trash"></i> Delete Batch
+                            </a>
+                        }
+
+                        @if (Model.Status == "In Progress")
+                        {
+                            <a asp-action="Complete" asp-route-id="@Model.Id" class="btn btn-success btn-lg">
+                                <i class="fas fa-check"></i> Complete Batch
+                            </a>
+                            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">
+                                <i class="fas fa-edit"></i> Edit Batch
+                            </a>
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#cancelModal">
+                                <i class="fas fa-times"></i> Cancel Batch
+                            </button>
+                        }
+
+                        @if (Model.Status == "Completed")
+                        {
+                            <form asp-action="CalculateYield" asp-route-id="@Model.Id" method="post">
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="btn btn-info btn-lg w-100">
+                                    <i class="fas fa-calculator"></i> Calculate Yield
+                                </button>
+                            </form>
+                            @if (Model.YieldRecord != null && Model.YieldRecord.IsVerified)
+                            {
+                                <form asp-action="Verify" asp-route-id="@Model.Id" method="post" onsubmit="return confirm('Verify this batch?');">
+                                    @Html.AntiForgeryToken()
+                                    <button type="submit" class="btn btn-success btn-lg w-100">
+                                        <i class="fas fa-check-double"></i> Verify Batch
+                                    </button>
+                                </form>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Stats -->
+            <div class="card">
+                <div class="card-header bg-info text-white">
+                    <h6 class="mb-0"><i class="fas fa-chart-bar"></i> Quick Stats</h6>
+                </div>
+                <div class="card-body">
+                    <ul class="list-unstyled mb-0">
+                        <li class="mb-2">
+                            <i class="fas fa-arrow-down text-success"></i>
+                            <strong>Inputs:</strong> @(ViewBag.TotalInputQuantity?.ToString("N0") ?? "0") kg
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-arrow-up text-primary"></i>
+                            <strong>Outputs:</strong> @(ViewBag.TotalOutputQuantity?.ToString("N0") ?? "0") kg
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-percent text-info"></i>
+                            <strong>Efficiency:</strong> @(ViewBag.Efficiency?.ToString("F1") ?? "0")%
+                        </li>
+                        @if (Model.QualityScore.HasValue)
+                        {
+                            <li>
+                                <i class="fas fa-star text-warning"></i>
+                                <strong>Quality:</strong> @Model.QualityScore.Value.ToString("F1")/10
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Cancel Batch Modal -->
+<div class="modal fade" id="cancelModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title">Cancel Batch</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form asp-action="Cancel" asp-route-id="@Model.Id" method="post">
+                @Html.AntiForgeryToken()
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">Cancellation Reason</label>
+                        <textarea name="reason" class="form-control" rows="3" required></textarea>
+                    </div>
+                    <div class="alert alert-warning">
+                        <i class="fas fa-exclamation-triangle"></i> This action cannot be undone!
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-danger">Cancel Batch</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

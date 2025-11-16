@@ -1,0 +1,187 @@
+@model RMMS.Models.FixedAsset
+@{
+    ViewData["Title"] = "Fixed Asset Details";
+}
+
+<div class="container-fluid">
+    <div class="card shadow">
+        <div class="card-header bg-info text-white">
+            <h3><i class="fas fa-eye"></i> Fixed Asset Details</h3>
+        </div>
+
+        <div class="card-body">
+            <div class="row mb-4">
+                <div class="col-md-12">
+                    <a asp-action="Index" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Back to List
+                    </a>
+                    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">
+                        <i class="fas fa-edit"></i> Edit
+                    </a>
+                    <form asp-action="Delete" asp-route-id="@Model.Id" method="post" style="display: inline;">
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this asset?');">
+                            <i class="fas fa-trash"></i> Delete
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <fieldset class="border p-3 mb-3">
+                <legend class="w-auto px-2">Asset Information</legend>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="font-weight-bold">@Html.DisplayNameFor(model => model.AssetId):</label>
+                            <p class="form-control-plaintext">@Model.AssetId</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="font-weight-bold">@Html.DisplayNameFor(model => model.AssetName):</label>
+                            <p class="form-control-plaintext">@Model.AssetName</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="font-weight-bold">Status:</label>
+                            <p class="form-control-plaintext">
+                                @if (Model.Status == "Active")
+                                {
+                                    <span class="badge bg-success">@Model.Status</span>
+                                }
+                                else if (Model.Status == "Under Maintenance")
+                                {
+                                    <span class="badge bg-warning">@Model.Status</span>
+                                }
+                                else if (Model.Status == "Sold" || Model.Status == "Scrapped" || Model.Status == "Disposed")
+                                {
+                                    <span class="badge bg-danger">@Model.Status</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-secondary">@Model.Status</span>
+                                }
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="font-weight-bold">@Html.DisplayNameFor(model => model.Description):</label>
+                            <p class="form-control-plaintext">@(Model.Description ?? "N/A")</p>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset class="border p-3 mb-3">
+                <legend class="w-auto px-2">Purchase Information</legend>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="font-weight-bold">@Html.DisplayNameFor(model => model.PurchaseDate):</label>
+                            <p class="form-control-plaintext">@Model.PurchaseDate.ToString("dd-MMM-yyyy")</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="font-weight-bold">@Html.DisplayNameFor(model => model.Supplier):</label>
+                            <p class="form-control-plaintext">@Model.Supplier</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="font-weight-bold">@Html.DisplayNameFor(model => model.PurchaseValue):</label>
+                            <p class="form-control-plaintext text-success h5">₹ @Model.PurchaseValue.ToString("N2")</p>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset class="border p-3 mb-3">
+                <legend class="w-auto px-2">Depreciation Details</legend>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="font-weight-bold">@Html.DisplayNameFor(model => model.DepreciationRate):</label>
+                            <p class="form-control-plaintext">@Model.DepreciationRate.ToString("N2") %</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="font-weight-bold">@Html.DisplayNameFor(model => model.AccumulatedDepreciation):</label>
+                            <p class="form-control-plaintext">₹ @Model.AccumulatedDepreciation.ToString("N2")</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="font-weight-bold">@Html.DisplayNameFor(model => model.NetBookValue):</label>
+                            <p class="form-control-plaintext text-primary h5">₹ @Model.NetBookValue.ToString("N2")</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="font-weight-bold">@Html.DisplayNameFor(model => model.PresentValueApprox):</label>
+                            <p class="form-control-plaintext text-info h5">₹ @Model.PresentValueApprox.ToString("N2")</p>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset class="border p-3 mb-3 bg-light">
+                <legend class="w-auto px-2">Audit Information</legend>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="font-weight-bold">Created Date:</label>
+                            <p class="form-control-plaintext">@Model.CreatedDate.ToString("dd-MMM-yyyy HH:mm")</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="font-weight-bold">Is Active:</label>
+                            <p class="form-control-plaintext">
+                                @if (Model.IsActive)
+                                {
+                                    <span class="badge bg-success">Yes</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-secondary">No</span>
+                                }
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+            <div class="mt-4">
+                <a asp-action="Index" class="btn btn-secondary btn-lg">
+                    <i class="fas fa-arrow-left"></i> Back to List
+                </a>
+                <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning btn-lg">
+                    <i class="fas fa-edit"></i> Edit
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    fieldset {
+        border: 1px solid #dee2e6 !important;
+        background: #f8f9fa;
+    }
+    legend {
+        font-size: 1rem;
+        font-weight: bold;
+        background: white;
+        padding: 0 10px;
+    }
+    .font-weight-bold {
+        font-weight: 600;
+        color: #495057;
+    }
+</style>

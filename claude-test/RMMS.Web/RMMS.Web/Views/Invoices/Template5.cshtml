@@ -1,0 +1,662 @@
+@model RMMS.Models.RiceSales
+@{
+    ViewData["Title"] = "Invoice - International Format Template 5";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Commercial Invoice - International</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+
+    <style>
+        @@media print {
+            .no-print { display: none !important; }
+            body { margin: 0; }
+            @@page { margin: 1cm; }
+        }
+
+        body {
+            font-family: 'Arial', 'Helvetica', sans-serif;
+            color: #2c3e50;
+            background: #ecf0f1;
+        }
+
+        .invoice-container {
+            max-width: 900px;
+            margin: 20px auto;
+            background: white;
+            box-shadow: 0 0 30px rgba(0,0,0,0.1);
+        }
+
+        .invoice-header {
+            background: linear-gradient(to right, #2c3e50, #34495e);
+            color: white;
+            padding: 30px 40px;
+        }
+
+        .company-logo {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .company-address {
+            font-size: 12px;
+            line-height: 1.6;
+            opacity: 0.95;
+        }
+
+        .invoice-type {
+            text-align: right;
+            font-size: 36px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .invoice-subtitle {
+            text-align: right;
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .invoice-meta {
+            background: #34495e;
+            color: white;
+            padding: 15px 40px;
+        }
+
+        .invoice-meta-item {
+            display: inline-block;
+            margin-right: 30px;
+            font-size: 13px;
+        }
+
+        .invoice-meta-item strong {
+            font-weight: 600;
+        }
+
+        .invoice-body {
+            padding: 30px 40px;
+        }
+
+        .party-info {
+            border: 1px solid #bdc3c7;
+            border-radius: 5px;
+            padding: 20px;
+            background: #f8f9fa;
+            margin-bottom: 20px;
+        }
+
+        .party-info h6 {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #7f8c8d;
+            margin-bottom: 12px;
+            letter-spacing: 1px;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 5px;
+        }
+
+        .party-info .company-name {
+            font-size: 15px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+
+        .party-info p {
+            margin: 4px 0;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        .shipping-info {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 3px;
+        }
+
+        .shipping-info h6 {
+            font-size: 12px;
+            font-weight: 700;
+            color: #2e7d32;
+            margin-bottom: 10px;
+        }
+
+        .shipping-detail {
+            display: inline-block;
+            margin-right: 25px;
+            font-size: 12px;
+        }
+
+        .items-table {
+            width: 100%;
+            margin: 25px 0;
+            border-collapse: collapse;
+            border: 1px solid #bdc3c7;
+        }
+
+        .items-table thead {
+            background: #2c3e50;
+            color: white;
+        }
+
+        .items-table thead th {
+            padding: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 11px;
+            letter-spacing: 0.5px;
+            text-align: left;
+        }
+
+        .items-table tbody td {
+            padding: 12px;
+            border-top: 1px solid #ecf0f1;
+            font-size: 12px;
+        }
+
+        .items-table tbody tr:hover {
+            background: #f8f9fa;
+        }
+
+        .product-code {
+            font-family: 'Courier New', monospace;
+            color: #7f8c8d;
+            font-size: 11px;
+        }
+
+        .totals-section {
+            margin-top: 30px;
+        }
+
+        .totals-table {
+            width: 100%;
+            max-width: 450px;
+            margin-left: auto;
+            border: 1px solid #bdc3c7;
+        }
+
+        .totals-table tr {
+            border-bottom: 1px solid #ecf0f1;
+        }
+
+        .totals-table td {
+            padding: 10px 15px;
+            font-size: 13px;
+        }
+
+        .totals-table td:first-child {
+            color: #7f8c8d;
+        }
+
+        .totals-table td:last-child {
+            text-align: right;
+            font-weight: 600;
+        }
+
+        .totals-table .subtotal {
+            background: #f8f9fa;
+        }
+
+        .totals-table .tax-row {
+            background: #fff3cd;
+        }
+
+        .totals-table .total {
+            background: #2c3e50;
+            color: white;
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .currency-info {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 12px 15px;
+            margin-top: 15px;
+            font-size: 12px;
+            border-radius: 3px;
+        }
+
+        .bank-details {
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 20px;
+            margin-top: 25px;
+            border-radius: 3px;
+        }
+
+        .bank-details h6 {
+            font-size: 13px;
+            font-weight: 700;
+            color: #1976d2;
+            margin-bottom: 12px;
+        }
+
+        .bank-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .bank-item {
+            font-size: 12px;
+        }
+
+        .bank-item strong {
+            display: block;
+            color: #1976d2;
+            font-size: 10px;
+            text-transform: uppercase;
+            margin-bottom: 3px;
+        }
+
+        .declaration {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+        }
+
+        .declaration h6 {
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+
+        .declaration p {
+            font-size: 11px;
+            line-height: 1.6;
+            margin: 5px 0;
+        }
+
+        .signature-section {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #dee2e6;
+        }
+
+        .signature-box {
+            text-align: center;
+            width: 200px;
+        }
+
+        .signature-line {
+            border-top: 2px solid #2c3e50;
+            margin-top: 60px;
+            padding-top: 8px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .signature-title {
+            font-size: 10px;
+            color: #7f8c8d;
+            text-transform: uppercase;
+        }
+
+        .footer {
+            background: #34495e;
+            color: white;
+            padding: 20px 40px;
+            text-align: center;
+            font-size: 11px;
+        }
+
+        .footer p {
+            margin: 5px 0;
+        }
+
+        .print-buttons {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .print-buttons .btn {
+            margin-left: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .badge-origin {
+            background: #4caf50;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 10px;
+            font-weight: 600;
+        }
+
+        .incoterm-badge {
+            background: #ff9800;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 3px;
+            font-size: 11px;
+            font-weight: 600;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div class="print-buttons no-print">
+        <button class="btn btn-secondary" onclick="window.history.back()">
+            <i class="fas fa-arrow-left me-2"></i>Back
+        </button>
+        <button class="btn btn-dark" onclick="window.print()">
+            <i class="fas fa-print me-2"></i>Print Invoice
+        </button>
+        <button class="btn btn-primary" onclick="downloadPDF()">
+            <i class="fas fa-download me-2"></i>Download PDF
+        </button>
+    </div>
+
+    <div class="invoice-container" id="invoice">
+        <!-- Header -->
+        <div class="invoice-header">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="company-logo">
+                        <i class="fas fa-globe-asia me-2"></i>RMMS RICE MILL INTERNATIONAL
+                    </div>
+                    <div class="company-address">
+                        123 Mill Road, Rice District<br>
+                        Agricultural Zone, State 560001, INDIA<br>
+                        Tel: +91 98765 43210 | Email: export@@rmmsrice.com<br>
+                        IEC Code: 0123456789 | GSTIN: 29ABCDE1234F1Z5
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="invoice-type">COMMERCIAL INVOICE</div>
+                    <div class="invoice-subtitle">For Customs & Banking Purposes</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="invoice-meta">
+            <div class="invoice-meta-item">
+                <strong>Invoice No:</strong> EXP-IN-2024-005
+            </div>
+            <div class="invoice-meta-item">
+                <strong>Date:</strong> October 21, 2025
+            </div>
+            <div class="invoice-meta-item">
+                <strong>IEC:</strong> 0123456789
+            </div>
+            <div class="invoice-meta-item">
+                <strong>AD Code:</strong> 0123456
+            </div>
+            <div class="invoice-meta-item">
+                <strong>Payment Terms:</strong> LC at Sight
+            </div>
+        </div>
+
+        <!-- Body -->
+        <div class="invoice-body">
+            <!-- Party Information -->
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="party-info">
+                        <h6><i class="fas fa-building me-2"></i>Exporter / Seller</h6>
+                        <div class="company-name">RMMS Rice Mill Private Limited</div>
+                        <p>123 Mill Road, Rice Processing Zone</p>
+                        <p>Agricultural District, State 560001</p>
+                        <p>INDIA</p>
+                        <p style="margin-top: 10px;">
+                            <strong>Contact:</strong> Mr. Suresh Kumar<br>
+                            <strong>Tel:</strong> +91 98765 43210<br>
+                            <strong>Email:</strong> export@@rmmsrice.com
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="party-info">
+                        <h6><i class="fas fa-globe me-2"></i>Consignee / Buyer</h6>
+                        <div class="company-name">International Rice Importers LLC</div>
+                        <p>456 Trade Center Boulevard</p>
+                        <p>Dubai International Free Zone</p>
+                        <p>UNITED ARAB EMIRATES</p>
+                        <p style="margin-top: 10px;">
+                            <strong>Contact:</strong> Ahmed Al Maktoum<br>
+                            <strong>Tel:</strong> +971 4 123 4567<br>
+                            <strong>Email:</strong> imports@@irillc.ae
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Shipping Information -->
+            <div class="shipping-info">
+                <h6><i class="fas fa-shipping-fast me-2"></i>Shipping & Logistics Information</h6>
+                <div class="shipping-detail">
+                    <strong>Port of Loading:</strong> Mumbai (INMUN1), India
+                </div>
+                <div class="shipping-detail">
+                    <strong>Port of Discharge:</strong> Jebel Ali (AEJEA), UAE
+                </div>
+                <div class="shipping-detail">
+                    <strong>Final Destination:</strong> Dubai, UAE
+                </div>
+                <div class="shipping-detail">
+                    <strong>Incoterms:</strong> <span class="incoterm-badge">FOB Mumbai</span>
+                </div>
+                <div class="shipping-detail">
+                    <strong>Container:</strong> 1 x 40' HC
+                </div>
+                <div class="shipping-detail">
+                    <strong>Vessel:</strong> MV Ocean Express
+                </div>
+            </div>
+
+            <!-- Items Table -->
+            <table class="items-table">
+                <thead>
+                    <tr>
+                        <th style="width: 5%">#</th>
+                        <th style="width: 35%">Description of Goods</th>
+                        <th style="width: 12%">HS Code</th>
+                        <th style="width: 12%">Origin</th>
+                        <th style="width: 10%; text-align: center">Quantity</th>
+                        <th style="width: 13%; text-align: right">Unit Price<br>(USD)</th>
+                        <th style="width: 13%; text-align: right">Total Value<br>(USD)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>
+                            <strong>Premium Basmati Rice - 1121 Sella</strong><br>
+                            <small>Extra Long Grain, Golden Sella, 5% Broken</small><br>
+                            <span class="product-code">SKU: RMMS-BAS-1121-5B</span>
+                        </td>
+                        <td>1006.30.10</td>
+                        <td><span class="badge-origin">INDIA</span></td>
+                        <td style="text-align: center">
+                            20,000 Kg<br>
+                            <small>(800 bags x 25kg)</small>
+                        </td>
+                        <td style="text-align: right">$850.00<br><small>per MT</small></td>
+                        <td style="text-align: right">$17,000.00</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>
+                            <strong>Parboiled Rice - IR64</strong><br>
+                            <small>Long Grain, 5% Broken, Parboiled</small><br>
+                            <span class="product-code">SKU: RMMS-PAR-IR64-5B</span>
+                        </td>
+                        <td>1006.30.20</td>
+                        <td><span class="badge-origin">INDIA</span></td>
+                        <td style="text-align: center">
+                            15,000 Kg<br>
+                            <small>(600 bags x 25kg)</small>
+                        </td>
+                        <td style="text-align: right">$620.00<br><small>per MT</small></td>
+                        <td style="text-align: right">$9,300.00</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Totals -->
+            <div class="totals-section">
+                <table class="totals-table">
+                    <tr class="subtotal">
+                        <td>Subtotal (FOB Mumbai):</td>
+                        <td>USD 26,300.00</td>
+                    </tr>
+                    <tr>
+                        <td>Freight Charges:</td>
+                        <td>Paid by Buyer</td>
+                    </tr>
+                    <tr>
+                        <td>Insurance:</td>
+                        <td>Paid by Buyer</td>
+                    </tr>
+                    <tr class="total">
+                        <td>TOTAL INVOICE VALUE:</td>
+                        <td>USD 26,300.00</td>
+                    </tr>
+                </table>
+
+                <div class="currency-info">
+                    <i class="fas fa-exclamation-circle me-2"></i>
+                    <strong>Currency:</strong> United States Dollar (USD) |
+                    <strong>Exchange Rate (indicative):</strong> 1 USD = ₹83.25 INR |
+                    <strong>Approx INR Value:</strong> ₹21,89,475.00
+                </div>
+            </div>
+
+            <!-- Bank Details -->
+            <div class="bank-details">
+                <h6><i class="fas fa-university me-2"></i>Banking Information for Remittance</h6>
+                <div class="bank-grid">
+                    <div class="bank-item">
+                        <strong>Beneficiary Bank:</strong>
+                        State Bank of India
+                    </div>
+                    <div class="bank-item">
+                        <strong>Branch:</strong>
+                        International Banking Branch, Mumbai
+                    </div>
+                    <div class="bank-item">
+                        <strong>Beneficiary Name:</strong>
+                        RMMS Rice Mill Private Limited
+                    </div>
+                    <div class="bank-item">
+                        <strong>Account Number:</strong>
+                        1234567890123456
+                    </div>
+                    <div class="bank-item">
+                        <strong>SWIFT Code:</strong>
+                        SBININBB123
+                    </div>
+                    <div class="bank-item">
+                        <strong>IFSC Code:</strong>
+                        SBIN0001234
+                    </div>
+                    <div class="bank-item">
+                        <strong>AD Code:</strong>
+                        0123456
+                    </div>
+                    <div class="bank-item">
+                        <strong>Currency:</strong>
+                        USD (US Dollars)
+                    </div>
+                </div>
+            </div>
+
+            <!-- Declaration -->
+            <div class="declaration">
+                <h6>DECLARATION</h6>
+                <p>
+                    • We hereby declare that this invoice shows the actual price of the goods described and that all particulars are true and correct.<br>
+                    • Country of Origin: INDIA<br>
+                    • We certify that the goods are of Indian origin and are being exported from India.<br>
+                    • The goods are in conformity with the contract/Purchase Order specifications.<br>
+                    • All goods comply with food safety and quality standards as per international norms.
+                </p>
+            </div>
+
+            <!-- Signatures -->
+            <div class="signature-section">
+                <div class="signature-box">
+                    <div class="signature-title">Prepared By</div>
+                    <div class="signature-line">
+                        Export Documentation<br>
+                        RMMS Rice Mill
+                    </div>
+                </div>
+                <div class="signature-box">
+                    <div class="signature-title">Authorized Signatory</div>
+                    <div class="signature-line">
+                        For RMMS Rice Mill Pvt. Ltd.<br>
+                        Director / Authorized Person
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p><strong>IMPORTANT NOTICE:</strong> This is a commercial invoice for international trade and customs clearance purposes.</p>
+            <p>For any queries or clarifications, please contact our export department at export@@rmmsrice.com</p>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+    <script>
+        function downloadPDF() {
+            const { jsPDF } = window.jspdf;
+
+            $('.print-buttons').hide();
+
+            html2canvas(document.querySelector('#invoice'), {
+                scale: 2,
+                useCORS: true,
+                backgroundColor: '#ffffff'
+            }).then(canvas => {
+                const imgData = canvas.toDataURL('image/png');
+                const pdf = new jsPDF('p', 'mm', 'a4');
+
+                const imgWidth = 210;
+                const pageHeight = 297;
+                const imgHeight = (canvas.height * imgWidth) / canvas.width;
+                let heightLeft = imgHeight;
+                let position = 0;
+
+                pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                heightLeft -= pageHeight;
+
+                while (heightLeft >= 0) {
+                    position = heightLeft - imgHeight;
+                    pdf.addPage();
+                    pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                    heightLeft -= pageHeight;
+                }
+
+                pdf.save('commercial-invoice-EXP-IN-2024-005.pdf');
+                $('.print-buttons').show();
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,191 @@
+╔═══════════════════════════════════════════════════════════════════════════╗
+║                  📧 EMAIL AUTOMATION - VISUAL GUIDE                       ║
+║                                                                           ║
+║  Send professional assessment invitations to 55 candidates                ║
+║  From: careers@semanticdataservices.com                                  ║
+║  Time: 20 minutes total                                                   ║
+╚═══════════════════════════════════════════════════════════════════════════╝
+
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│  STEP 1: GET SMTP SETTINGS FROM THUNDERBIRD (5 min)                    │
+└─────────────────────────────────────────────────────────────────────────┘
+
+  1. Open Thunderbird
+  2. Click [☰] menu → [Account Settings]
+  3. Click [Outgoing Server (SMTP)] in left sidebar
+  4. Write down these 3 things:
+
+     Server Name: __________________ (e.g., smtp.semanticdataservices.com)
+     Port:        __________________ (usually 587)
+     Security:    __________________ (usually STARTTLS)
+
+  5. Remember your password for careers@semanticdataservices.com
+
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│  STEP 2: CONFIGURE THE SCRIPT (5 min)                                  │
+└─────────────────────────────────────────────────────────────────────────┘
+
+  1. Open file: send_with_company_email.py
+  2. Find lines 18-25
+  3. Change to YOUR settings:
+
+     SENDER_EMAIL = 'careers@semanticdataservices.com'
+     SENDER_PASSWORD = 'YOUR_PASSWORD_HERE'  ⚠️ From your Thunderbird login
+
+     SMTP_SERVER = 'smtp.semanticdataservices.com'  ⚠️ From Step 1
+     SMTP_PORT = 587  ⚠️ From Step 1 (usually 587 or 465)
+     USE_TLS = True  # True if port 587, False if port 465
+
+  4. Save the file
+
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│  STEP 3: TEST SMTP CONNECTION (2 min)                                  │
+└─────────────────────────────────────────────────────────────────────────┘
+
+  Open terminal and run:
+
+  $ cd /home/user01/claude-test/Exam/production
+  $ python3 send_with_company_email.py --smtp-test
+
+  Expected output:
+  ✅ SMTP connection test successful!
+
+  If you see ✅ → Continue to Step 4
+  If you see ❌ → Check your SMTP settings again
+
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│  STEP 4: SEND TEST EMAIL TO YOURSELF (3 min)                           │
+└─────────────────────────────────────────────────────────────────────────┘
+
+  $ python3 send_with_company_email.py --test vinodyellagonda@paragroup.com
+
+  Expected output:
+  ✅ Test email sent successfully!
+  📬 Check your inbox at: vinodyellagonda@paragroup.com
+
+  Check your email:
+  ✅ Email received?
+  ✅ Looks professional? (purple gradient header)
+  ✅ Button works? (https://semanticservices.netlify.app)
+  ✅ All dates correct? (Nov 05-07, 2025)
+
+  If YES to all → Continue to Step 5
+
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│  STEP 5: SEND TO ALL 55 CANDIDATES (10 min)                            │
+└─────────────────────────────────────────────────────────────────────────┘
+
+  $ python3 send_with_company_email.py --send-all
+
+  You'll be asked:
+  ⚠️  You are about to send emails to 55 candidates. Continue? (yes/no):
+
+  Type: yes [Enter]
+
+  The script will send emails:
+  [INFO] ✅ Sent to: Anoushka Malik <anoushka22m@gmail.com>
+  [INFO] ✅ Sent to: Abhishek Kumar Shukla <abhishekkumarshukla.official@gmail.com>
+  [INFO] ✅ Sent to: Aayush Saini <ayushsaini2308@gmail.com>
+  ...
+  [INFO] ⏸️  Batch complete (10/55). Waiting 60s...
+  ...
+  [INFO] ✅ Sent to: Yash Thakur <yashth19@gmail.com>
+
+  ✅ Successfully sent: 55
+  ❌ Failed: 0
+
+  Wait ~10 minutes for completion
+
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│  STEP 6: VERIFY COMPLETION (2 min)                                     │
+└─────────────────────────────────────────────────────────────────────────┘
+
+  $ wc -l sent_emails.txt
+
+  Expected output: 55
+
+  Check Thunderbird:
+  Open Thunderbird → [Sent] folder
+  You should see 55 emails sent from careers@semanticdataservices.com
+
+  ✅ DONE! All 55 candidates have received their invitations.
+
+
+╔═══════════════════════════════════════════════════════════════════════════╗
+║  🎉 SUCCESS!                                                              ║
+║                                                                           ║
+║  ✅ 55 professional emails sent                                           ║
+║  ✅ All personalized (uses first name)                                    ║
+║  ✅ All include exam URL, dates, requirements                             ║
+║  ✅ From your company email: careers@semanticdataservices.com             ║
+║                                                                           ║
+║  Candidates will receive:                                                 ║
+║  • Professional HTML email with gradient header                           ║
+║  • Assessment details (Python & SQL, 90 min, Nov 05-07)                   ║
+║  • Exam URL button: https://semanticservices.netlify.app                  ║
+║  • Technical requirements & security guidelines                           ║
+║  • Contact info: careers@semanticdataservices.com                         ║
+╚═══════════════════════════════════════════════════════════════════════════╝
+
+
+╔═══════════════════════════════════════════════════════════════════════════╗
+║  📞 TROUBLESHOOTING                                                       ║
+╚═══════════════════════════════════════════════════════════════════════════╝
+
+  Problem: "SMTP connection failed"
+  Fix: Try these alternative SMTP servers:
+       - mail.semanticdataservices.com
+       - smtp.mail.semanticdataservices.com
+
+  Problem: "Authentication failed"
+  Fix: Double-check your password is correct
+
+  Problem: "SSL/TLS error"
+  Fix: If port 587 → USE_TLS = True
+       If port 465 → USE_TLS = False
+
+  Problem: Script stopped midway
+  Fix: Just re-run: python3 send_with_company_email.py --send-all
+       It will skip already-sent emails automatically!
+
+
+╔═══════════════════════════════════════════════════════════════════════════╗
+║  📁 FILES REFERENCE                                                       ║
+╚═══════════════════════════════════════════════════════════════════════════╝
+
+  Essential:
+  ✅ send_with_company_email.py - The automation script (use this!)
+  ✅ candidates.csv - All 55 candidates
+  ✅ SIMPLE_ONE_PAGE_GUIDE.md - Quick reference
+  ✅ THUNDERBIRD_SETUP_GUIDE.md - Detailed guide with troubleshooting
+
+  Optional:
+  📄 START_HERE.md - Entry point
+  📄 COMPLETE_SYSTEM_OVERVIEW.md - Full documentation
+
+
+╔═══════════════════════════════════════════════════════════════════════════╗
+║  ⚡ QUICK COMMAND REFERENCE                                               ║
+╚═══════════════════════════════════════════════════════════════════════════╝
+
+  # Test SMTP
+  python3 send_with_company_email.py --smtp-test
+
+  # Check config
+  python3 send_with_company_email.py --config-check
+
+  # Test email
+  python3 send_with_company_email.py --test YOUR_EMAIL@example.com
+
+  # Send to all 55
+  python3 send_with_company_email.py --send-all
+
+
+Total Time: 20 minutes
+Success Rate: 100% (with correct SMTP settings)

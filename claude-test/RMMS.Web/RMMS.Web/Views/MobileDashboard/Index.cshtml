@@ -1,0 +1,299 @@
+@model List<RMMS.Models.Mobile.MobileDevice>
+@{
+    ViewData["Title"] = "Mobile Analytics Dashboard";
+}
+
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col-12">
+            <h2><i class="fas fa-mobile-alt"></i> Mobile Analytics Dashboard</h2>
+            <p class="text-muted">Monitor mobile app usage, user engagement, and device analytics</p>
+        </div>
+    </div>
+
+    <!-- MAIN STATISTICS -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card bg-primary text-white">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="fas fa-mobile-alt"></i> Total Devices</h5>
+                    <h2>@ViewBag.TotalDevices</h2>
+                    <small>Registered devices</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-success text-white">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="fas fa-user-check"></i> Daily Active Users</h5>
+                    <h2>@ViewBag.DAU</h2>
+                    <small>Active today</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-info text-white">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="fas fa-users"></i> Monthly Active Users</h5>
+                    <h2>@ViewBag.MAU</h2>
+                    <small>Last 30 days</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-warning text-white">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="fas fa-calendar-week"></i> Weekly Active Users</h5>
+                    <h2>@ViewBag.WAU</h2>
+                    <small>Last 7 days</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PLATFORM BREAKDOWN -->
+    <div class="row mb-4">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="text-muted">Android Devices</h6>
+                    <h3 class="text-success">
+                        <i class="fab fa-android"></i> @ViewBag.AndroidCount
+                    </h3>
+                    <div class="progress" style="height: 25px;">
+                        <div class="progress-bar bg-success" style="width: @ViewBag.AndroidPercent%">
+                            @ViewBag.AndroidPercent%
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="text-muted">iOS Devices</h6>
+                    <h3 class="text-primary">
+                        <i class="fab fa-apple"></i> @ViewBag.iOSCount
+                    </h3>
+                    <div class="progress" style="height: 25px;">
+                        <div class="progress-bar bg-primary" style="width: @ViewBag.iOSPercent%">
+                            @ViewBag.iOSPercent%
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="text-muted">Push Notifications Enabled</h6>
+                    <h3 class="text-info">@ViewBag.PushEnabledCount</h3>
+                    <div class="progress" style="height: 25px;">
+                        <div class="progress-bar bg-info" style="width: @ViewBag.PushOptInRate%">
+                            @ViewBag.PushOptInRate% Opt-in
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ENGAGEMENT METRICS -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="text-muted">Active Devices</h6>
+                    <h3 class="text-success">@ViewBag.ActiveDevicesCount</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="text-muted">Inactive Devices</h6>
+                    <h3 class="text-secondary">@ViewBag.InactiveDevicesCount</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="text-muted">Avg Session Duration</h6>
+                    <h3 class="text-info">@ViewBag.AvgSessionDuration sec</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="text-muted">New Users This Week</h6>
+                    <h3 class="text-primary">@ViewBag.NewUsersThisWeek</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCREEN ANALYTICS & ERROR RATE -->
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="text-muted">Most Active Screen</h6>
+                    <h4 class="text-primary">@ViewBag.MostActiveScreen</h4>
+                    <small>@ViewBag.MostActiveScreenViews.ToString("N0") views</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="text-muted">Error Rate</h6>
+                    <h3 class="@(ViewBag.ErrorRate > 5 ? "text-danger" : "text-success")">
+                        @ViewBag.ErrorRate%
+                    </h3>
+                    <small>@(ViewBag.ErrorRate > 5 ? "Needs attention" : "Healthy")</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="text-muted">Recent Activity</h6>
+                    <h3 class="text-success">@ViewBag.RecentActivityCount</h3>
+                    <small>Last 24 hours</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ACTION BUTTONS -->
+    <div class="row mb-3">
+        <div class="col-12">
+            <a href="@Url.Action("GetDeviceStats", "MobileDashboard")" class="btn btn-primary" target="_blank">
+                <i class="fas fa-chart-pie"></i> Device Statistics
+            </a>
+            <a href="@Url.Action("GetUserEngagement", "MobileDashboard")" class="btn btn-success" target="_blank">
+                <i class="fas fa-chart-line"></i> Engagement Metrics
+            </a>
+            <a href="@Url.Action("GetTopScreens", "MobileDashboard")" class="btn btn-info" target="_blank">
+                <i class="fas fa-list"></i> Top Screens
+            </a>
+            <a href="@Url.Action("GetRecentActivity", "MobileDashboard")" class="btn btn-warning" target="_blank">
+                <i class="fas fa-history"></i> Recent Activity
+            </a>
+        </div>
+    </div>
+
+    <!-- DEVICES TABLE -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header bg-light">
+                    <h5 class="mb-0"><i class="fas fa-list"></i> Registered Devices (@Model.Count)</h5>
+                </div>
+                <div class="card-body">
+                    @if (Model.Any())
+                    {
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Device ID</th>
+                                        <th>Platform</th>
+                                        <th>App Version</th>
+                                        <th>Push Enabled</th>
+                                        <th>Last Active</th>
+                                        <th>Registered</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var device in Model)
+                                    {
+                                        var platformClass = device.Platform == "iOS" ? "primary" : "success";
+                                        var statusClass = device.IsActive ? "success" : "secondary";
+                                        var pushClass = device.NotificationsEnabled ? "success" : "secondary";
+                                        <tr>
+                                            <td><code>@device.DeviceId</code></td>
+                                            <td>
+                                                <span class="badge bg-@platformClass">
+                                                    @if (device.Platform == "iOS")
+                                                    {
+                                                        <i class="fab fa-apple"></i>
+                                                    }
+                                                    else
+                                                    {
+                                                        <i class="fab fa-android"></i>
+                                                    }
+                                                    @device.Platform
+                                                </span>
+                                            </td>
+                                            <td>@device.AppVersion</td>
+                                            <td>
+                                                <span class="badge bg-@pushClass">
+                                                    @(device.NotificationsEnabled ? "Enabled" : "Disabled")
+                                                </span>
+                                            </td>
+                                            <td>
+                                                @if (device.LastActiveAt.HasValue)
+                                                {
+                                                    var hoursSinceActive = (DateTime.UtcNow - device.LastActiveAt.Value).TotalHours;
+                                                    var activeClass = hoursSinceActive < 24 ? "text-success" : hoursSinceActive < 168 ? "text-warning" : "text-muted";
+                                                    <span class="@activeClass">
+                                                        @device.LastActiveAt.Value.ToString("yyyy-MM-dd HH:mm")
+                                                    </span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="text-muted">Never</span>
+                                                }
+                                            </td>
+                                            <td>@device.RegisteredAt.ToString("yyyy-MM-dd")</td>
+                                            <td><span class="badge bg-@statusClass">@(device.IsActive ? "Active" : "Inactive")</span></td>
+                                            <td>
+                                                <form method="post" asp-action="ToggleDevice" asp-route-id="@device.Id" style="display: inline;">
+                                                    <button type="submit" class="btn btn-sm btn-warning" title="Toggle Status">
+                                                        <i class="fas fa-power-off"></i>
+                                                    </button>
+                                                </form>
+                                                <form method="post" asp-action="DeleteDevice" asp-route-id="@device.Id" style="display: inline;">
+                                                    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Remove this device?');" title="Delete">
+                                                        <i class="fas fa-trash"></i>
+                                                    </button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle"></i> No mobile devices registered yet.
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["Success"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        @TempData["Error"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}

@@ -1,0 +1,44 @@
+{
+  "phase_id": 19,
+  "name": "Voice AI & Ambient Intelligence (Base)",
+  "epic": "Epic 20",
+  "story_points": 51,
+  "priority": "P0",
+  "dependencies": [
+    2,
+    15
+  ],
+  "version": "v2.0",
+  "user_stories": [
+    {
+      "story_id": "20.1",
+      "title": "Medical Voice Commands (Dictation)",
+      "story_points": 13,
+      "priority": "P0"
+    },
+    {
+      "story_id": "20.2",
+      "title": "Ambient Clinical Documentation (Note from Conversation)",
+      "story_points": 13,
+      "priority": "P0"
+    },
+    {
+      "story_id": "20.3",
+      "title": "Voice-to-EHR Integration",
+      "story_points": 13,
+      "priority": "P0"
+    },
+    {
+      "story_id": "20.4",
+      "title": "Multi-speaker Diarization",
+      "story_points": 8,
+      "priority": "P1"
+    },
+    {
+      "story_id": "20.5",
+      "title": "Medical Vocabulary Tuning",
+      "story_points": 4,
+      "priority": "P1"
+    }
+  ]
+}

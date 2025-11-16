@@ -1,0 +1,41 @@
+{
+  "verification_time": "2025-10-31T20:43:01.919625",
+  "total_checks": 6,
+  "passed": 6,
+  "failed": 0,
+  "success_rate": 100.0,
+  "total_duration_ms": 5.941152572631836,
+  "checks": [
+    {
+      "name": "Module Import",
+      "passed": true,
+      "duration_ms": 0.005245208740234375
+    },
+    {
+      "name": "Voice Command Processor",
+      "passed": true,
+      "duration_ms": 1.5866756439208984
+    },
+    {
+      "name": "Ambient Intelligence",
+      "passed": true,
+      "duration_ms": 1.0242462158203125
+    },
+    {
+      "name": "Clinical Note Generator",
+      "passed": true,
+      "duration_ms": 0.2760887145996094
+    },
+    {
+      "name": "Voice Data Security",
+      "passed": true,
+      "duration_ms": 1.2674331665039062
+    },
+    {
+      "name": "Integrated System",
+      "passed": true,
+      "duration_ms": 1.3496875762939453
+    }
+  ],
+  "status": "PASSED"
+}

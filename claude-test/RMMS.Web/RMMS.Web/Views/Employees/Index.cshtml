@@ -1,0 +1,172 @@
+@model RMMS.Common.Pagination.PagedResult<RMMS.Models.Masters.Employee>
+@{
+    ViewData["Title"] = "Employees";
+    string GetSortIcon(string columnName)
+    {
+        if (ViewBag.CurrentSort != columnName)
+            return "<i class='fas fa-sort text-muted'></i>";
+
+        return ViewBag.CurrentOrder == "asc"
+            ? "<i class='fas fa-sort-up'></i>"
+            : "<i class='fas fa-sort-down'></i>";
+    }
+
+    string GetSortUrl(string columnName)
+    {
+        var order = ViewBag.CurrentSort == columnName && ViewBag.CurrentOrder == "asc" ? "desc" : "asc";
+        return $"?searchTerm={ViewBag.SearchTerm}&sortBy={columnName}&sortOrder={order}&page=1";
+    }
+}
+
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2><i class="fas fa-users"></i> Employee Management</h2>
+        <a asp-action="Create" class="btn btn-primary">
+            <i class="fas fa-plus"></i> New Employee
+        </a>
+    </div>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show">
+            @TempData["Success"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show">
+            @TempData["Error"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5 class="mb-0"><i class="fas fa-list"></i> Employee List</h5>
+                </div>
+                <div class="col-md-6 text-end">
+                    <span class="badge bg-light text-dark">Total: @Model.TotalItems</span>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <!-- Search Form -->
+            <form method="get" class="row g-3 mb-3">
+                <div class="col-md-10">
+                    <input type="text" name="searchTerm" value="@ViewBag.SearchTerm"
+                           class="form-control" placeholder="Search by name, code, or mobile...">
+                    <input type="hidden" name="sortBy" value="@ViewBag.CurrentSort" />
+                    <input type="hidden" name="sortOrder" value="@ViewBag.CurrentOrder" />
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary w-100">
+                        <i class="fas fa-search"></i> Search
+                    </button>
+                </div>
+            </form>
+
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>
+                                <a href="@GetSortUrl("EmployeeCode")" class="text-white text-decoration-none">
+                                    Code @Html.Raw(GetSortIcon("EmployeeCode"))
+                                </a>
+                            </th>
+                            <th>
+                                <a href="@GetSortUrl("EmployeeName")" class="text-white text-decoration-none">
+                                    Name @Html.Raw(GetSortIcon("EmployeeName"))
+                                </a>
+                            </th>
+                            <th>
+                                <a href="@GetSortUrl("Department")" class="text-white text-decoration-none">
+                                    Department @Html.Raw(GetSortIcon("Department"))
+                                </a>
+                            </th>
+                            <th>
+                                <a href="@GetSortUrl("Designation")" class="text-white text-decoration-none">
+                                    Designation @Html.Raw(GetSortIcon("Designation"))
+                                </a>
+                            </th>
+                            <th>
+                                <a href="@GetSortUrl("Mobile")" class="text-white text-decoration-none">
+                                    Mobile @Html.Raw(GetSortIcon("Mobile"))
+                                </a>
+                            </th>
+                            <th>
+                                <a href="@GetSortUrl("Status")" class="text-white text-decoration-none">
+                                    Status @Html.Raw(GetSortIcon("Status"))
+                                </a>
+                            </th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.Items.Any())
+                        {
+                            @foreach (var employee in Model.Items)
+                            {
+                                <tr>
+                                    <td><strong>@employee.EmployeeCode</strong></td>
+                                    <td>@employee.EmployeeName</td>
+                                    <td>
+                                        <span class="badge bg-info">@employee.Department</span>
+                                    </td>
+                                    <td>@employee.Designation</td>
+                                    <td>@employee.Mobile</td>
+                                    <td>
+                                        <span class="badge bg-@(employee.Status == "Active" ? "success" : employee.Status == "Resigned" ? "warning" : employee.Status == "Terminated" ? "danger" : "secondary")">
+                                            @employee.Status
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <div class="btn-group btn-group-sm" role="group">
+                                            <a asp-action="Details" asp-route-id="@employee.Id" class="btn btn-info" title="Details">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+                                            <a asp-action="Edit" asp-route-id="@employee.Id" class="btn btn-warning" title="Edit">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            <a asp-action="Delete" asp-route-id="@employee.Id" class="btn btn-danger" title="Delete">
+                                                <i class="fas fa-trash"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="7" class="text-center py-4">
+                                    <i class="fas fa-inbox fa-3x text-muted mb-3"></i>
+                                    <p class="text-muted">No employees found</p>
+                                    @if (!string.IsNullOrEmpty(ViewBag.SearchTerm))
+                                    {
+                                        <a href="@Url.Action("Index")" class="btn btn-sm btn-outline-primary">Clear Search</a>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="card-footer">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <strong>Showing @Model.Items.Count of @Model.TotalItems employees</strong>
+                </div>
+                <div class="col-md-6">
+                    @await Html.PartialAsync("_PaginationPartial", Model)
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

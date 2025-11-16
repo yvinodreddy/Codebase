@@ -1,0 +1,76 @@
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="@Url.Action("Index")">Back to List</a></li>
+                    <li class="breadcrumb-item active">Details</li>
+                </ol>
+            </nav>
+            <h2><i class="fas fa-info-circle me-2"></i>Item Details</h2>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-list me-2"></i>Information</h5>
+                </div>
+                <div class="card-body">
+                    <table class="table table-borderless">
+                        <tr>
+                            <th width="30%">ID:</th>
+                            <td>@ViewBag.Item?.Id</td>
+                        </tr>
+                        <tr>
+                            <th>Name:</th>
+                            <td>@ViewBag.Item?.Name</td>
+                        </tr>
+                        <tr>
+                            <th>Description:</th>
+                            <td>@ViewBag.Item?.Description</td>
+                        </tr>
+                        <tr>
+                            <th>Status:</th>
+                            <td>
+                                @if (ViewBag.Item?.IsActive == true)
+                                {
+                                    <span class="badge bg-success">Active</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-secondary">Inactive</span>
+                                }
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Created:</th>
+                            <td>@ViewBag.Item?.CreatedDate.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                        </tr>
+                        <tr>
+                            <th>Modified:</th>
+                            <td>@(ViewBag.Item?.ModifiedDate?.ToString("yyyy-MM-dd HH:mm:ss") ?? "N/A")</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-body">
+                    <a href="@Url.Action("Edit", new { id = ViewBag.Item?.Id })" class="btn btn-primary w-100 mb-2">
+                        <i class="fas fa-edit me-2"></i>Edit
+                    </a>
+                    <a href="@Url.Action("Index")" class="btn btn-secondary w-100">
+                        <i class="fas fa-arrow-left me-2"></i>Back to List
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

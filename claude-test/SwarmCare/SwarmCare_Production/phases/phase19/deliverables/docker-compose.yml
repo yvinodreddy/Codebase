@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  voice-ai:
+    build:
+      context: ..
+      dockerfile: deliverables/Dockerfile
+    container_name: swarmcare-voice-ai
+    restart: unless-stopped
+    environment:
+      - ENVIRONMENT=production
+      - LOG_LEVEL=INFO
+      - HIPAA_COMPLIANCE=true
+      - RETENTION_DAYS=2555
+    ports:
+      - "8080:8080"
+    volumes:
+      - voice-data:/app/data
+      - audit-logs:/app/logs
+    networks:
+      - swarmcare-network
+    healthcheck:
+      test: ["CMD", "python3", "verify_phase19.py", "--quick"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    labels:
+      - "com.swarmcare.phase=19"
+      - "com.swarmcare.service=voice-ai"
+      - "com.swarmcare.version=1.0"
+
+  redis:
+    image: redis:7-alpine
+    container_name: swarmcare-redis
+    restart: unless-stopped
+    command: redis-server --appendonly yes
+    volumes:
+      - redis-data:/data
+    networks:
+      - swarmcare-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+volumes:
+  voice-data:
+    driver: local
+  audit-logs:
+    driver: local
+  redis-data:
+    driver: local
+
+networks:
+  swarmcare-network:
+    driver: bridge

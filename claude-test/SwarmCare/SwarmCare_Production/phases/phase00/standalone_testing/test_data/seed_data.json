@@ -1,0 +1,167 @@
+{
+  "phase": "phase00",
+  "phase_name": "Foundation",
+  "description": "Comprehensive test data for Phase 0 including 13 medical ontologies",
+
+  "medical_ontologies": {
+    "snomed_ct": {
+      "description": "SNOMED CT - Systematized Nomenclature of Medicine Clinical Terms",
+      "sample_concepts": [
+        {"concept_id": "73211009", "term": "Diabetes mellitus", "semantic_tag": "disorder"},
+        {"concept_id": "38341003", "term": "Hypertension", "semantic_tag": "disorder"},
+        {"concept_id": "840539006", "term": "COVID-19", "semantic_tag": "disorder"},
+        {"concept_id": "195967001", "term": "Asthma", "semantic_tag": "disorder"},
+        {"concept_id": "44054006", "term": "Type 2 diabetes mellitus", "semantic_tag": "disorder"}
+      ]
+    },
+
+    "icd10": {
+      "description": "ICD-10 - International Classification of Diseases, 10th Revision",
+      "sample_codes": [
+        {"code": "E11.9", "description": "Type 2 diabetes mellitus without complications"},
+        {"code": "I10", "description": "Essential (primary) hypertension"},
+        {"code": "U07.1", "description": "COVID-19, virus identified"},
+        {"code": "J45.9", "description": "Asthma, unspecified"},
+        {"code": "E78.5", "description": "Hyperlipidemia, unspecified"}
+      ]
+    },
+
+    "cpt": {
+      "description": "CPT - Current Procedural Terminology",
+      "sample_codes": [
+        {"code": "99213", "description": "Office visit, established patient, level 3"},
+        {"code": "80053", "description": "Comprehensive metabolic panel"},
+        {"code": "85025", "description": "Complete blood count with differential"},
+        {"code": "36415", "description": "Venipuncture"},
+        {"code": "83036", "description": "Hemoglobin A1C"}
+      ]
+    },
+
+    "loinc": {
+      "description": "LOINC - Logical Observation Identifiers Names and Codes",
+      "sample_codes": [
+        {"code": "4548-4", "description": "Hemoglobin A1c/Hemoglobin.total in Blood"},
+        {"code": "2339-0", "description": "Glucose [Mass/volume] in Blood"},
+        {"code": "8480-6", "description": "Systolic blood pressure"},
+        {"code": "8462-4", "description": "Diastolic blood pressure"},
+        {"code": "29463-7", "description": "Body weight"}
+      ]
+    },
+
+    "rxnorm": {
+      "description": "RxNorm - Normalized drug names",
+      "sample_medications": [
+        {"rxcui": "860975", "name": "Metformin 500 MG Oral Tablet"},
+        {"rxcui": "197361", "name": "Lisinopril 10 MG Oral Tablet"},
+        {"rxcui": "284635", "name": "Atorvastatin 20 MG Oral Tablet"},
+        {"rxcui": "308047", "name": "Aspirin 81 MG Delayed Release Oral Tablet"},
+        {"rxcui": "106892", "name": "Insulin Glargine 100 UNT/ML"}
+      ]
+    }
+  },
+
+  "ehr_data": {
+    "epic_fhir": {
+      "description": "Sample FHIR-compliant patient data for Epic integration testing",
+      "sample_patients": [
+        {
+          "id": "patient-001",
+          "resourceType": "Patient",
+          "name": {"family": "Doe", "given": ["John"]},
+          "birthDate": "1970-01-15",
+          "gender": "male",
+          "conditions": ["Diabetes mellitus type 2", "Hypertension"],
+          "medications": ["Metformin", "Lisinopril"]
+        },
+        {
+          "id": "patient-002",
+          "resourceType": "Patient",
+          "name": {"family": "Smith", "given": ["Jane"]},
+          "birthDate": "1985-06-22",
+          "gender": "female",
+          "conditions": ["Asthma"],
+          "medications": ["Albuterol"]
+        }
+      ]
+    },
+
+    "cerner_fhir": {
+      "description": "Sample data for Cerner integration testing",
+      "sample_encounters": [
+        {
+          "id": "encounter-001",
+          "patient_id": "patient-001",
+          "type": "Outpatient visit",
+          "date": "2025-10-15",
+          "diagnosis": ["E11.9"],
+          "procedures": ["99213"]
+        }
+      ]
+    }
+  },
+
+  "api_fixtures": {
+    "rag_queries": [
+      {
+        "query": "What are the symptoms of type 2 diabetes?",
+        "expected_chunks": 5,
+        "expected_ontologies": ["SNOMED CT", "ICD-10"]
+      },
+      {
+        "query": "What medications are used to treat hypertension?",
+        "expected_chunks": 3,
+        "expected_ontologies": ["RxNorm", "SNOMED CT"]
+      }
+    ],
+
+    "graph_queries": [
+      {
+        "cypher": "MATCH (c:SNOMEDConcept {term: 'Diabetes mellitus'}) RETURN c",
+        "expected_results": 1
+      },
+      {
+        "cypher": "MATCH (i:ICD10Code {code: 'E11.9'}) RETURN i",
+        "expected_results": 1
+      }
+    ]
+  },
+
+  "patient_scenarios": [
+    {
+      "scenario_id": "scenario-001",
+      "name": "Type 2 Diabetes with Hypertension",
+      "patient": {
+        "age": 55,
+        "gender": "male",
+        "conditions": ["Type 2 Diabetes", "Hypertension"],
+        "medications": ["Metformin 500mg BID", "Lisinopril 10mg QD"],
+        "vitals": {
+          "blood_pressure": "142/90",
+          "glucose": "145 mg/dL",
+          "hba1c": "7.2%",
+          "weight": "220 lbs",
+          "bmi": "32.1"
+        },
+        "labs": {
+          "ldl": "132 mg/dL",
+          "hdl": "42 mg/dL",
+          "triglycerides": "180 mg/dL"
+        }
+      }
+    },
+    {
+      "scenario_id": "scenario-002",
+      "name": "Asthma Management",
+      "patient": {
+        "age": 28,
+        "gender": "female",
+        "conditions": ["Persistent Asthma"],
+        "medications": ["Fluticasone/Salmeterol 250/50 BID", "Albuterol PRN"],
+        "vitals": {
+          "peak_flow": "380 L/min",
+          "oxygen_sat": "98%"
+        }
+      }
+    }
+  ]
+}

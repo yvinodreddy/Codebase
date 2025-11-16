@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  patient-xai:
+    build:
+      context: ..
+      dockerfile: deliverables/Dockerfile
+    container_name: patient-xai
+    ports:
+      - "8080:8080"  # Application port
+      - "9090:9090"  # Metrics port
+    environment:
+      - HIPAA_MODE=enabled
+      - AUDIT_LOGGING=enabled
+      - DEFAULT_LANGUAGE=en
+      - LOG_LEVEL=INFO
+    volumes:
+      - xai-logs:/var/log/patient-xai
+      - ./patient_xai_config.json:/app/config.json:ro
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python3", "-c", "from implementation import Phase25Implementation; print('ok')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - patient-xai-network
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: patient-xai-prometheus
+    ports:
+      - "9091:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus-data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+    networks:
+      - patient-xai-network
+    depends_on:
+      - patient-xai
+
+volumes:
+  xai-logs:
+    driver: local
+  prometheus-data:
+    driver: local
+
+networks:
+  patient-xai-network:
+    driver: bridge

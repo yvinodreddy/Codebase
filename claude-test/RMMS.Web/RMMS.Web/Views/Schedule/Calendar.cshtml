@@ -1,0 +1,369 @@
+@{
+    ViewData["Title"] = "Production Schedule Calendar";
+}
+
+<div class="container-fluid">
+    <!-- Page Header -->
+    <div class="row mb-4" data-aos="fade-down">
+        <div class="col-md-8">
+            <h1 class="display-5 fw-bold text-primary mb-2">
+                <i class="fas fa-calendar-alt me-3"></i>Production Schedule Calendar
+            </h1>
+            <p class="lead text-muted">Plan production batches, procurement, deliveries & maintenance</p>
+        </div>
+        <div class="col-md-4 text-end">
+            <button class="btn btn-primary btn-lg" onclick="addNewEvent()">
+                <i class="fas fa-plus-circle me-2"></i>Add Event
+            </button>
+        </div>
+    </div>
+
+    <!-- Quick Stats -->
+    <div class="row mb-4">
+        <div class="col-lg-3 col-md-6 mb-3" data-aos="zoom-in">
+            <div class="card stat-card border-primary">
+                <div class="card-body">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div>
+                            <div class="stat-label">This Week</div>
+                            <div class="stat-value text-primary">12</div>
+                            <small class="text-muted">Scheduled Events</small>
+                        </div>
+                        <div class="stat-icon bg-gradient-primary text-white">
+                            <i class="fas fa-calendar-week"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 mb-3" data-aos="zoom-in" data-aos-delay="100">
+            <div class="card stat-card border-success">
+                <div class="card-body">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div>
+                            <div class="stat-label">Production</div>
+                            <div class="stat-value text-success">8</div>
+                            <small class="text-muted">Batches Planned</small>
+                        </div>
+                        <div class="stat-icon bg-gradient-success text-white">
+                            <i class="fas fa-industry"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 mb-3" data-aos="zoom-in" data-aos-delay="200">
+            <div class="card stat-card border-warning">
+                <div class="card-body">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div>
+                            <div class="stat-label">Deliveries</div>
+                            <div class="stat-value text-warning">6</div>
+                            <small class="text-muted">Scheduled</small>
+                        </div>
+                        <div class="stat-icon" style="background: linear-gradient(135deg, #ffc107 0%, #e0a800 100%); color: white;">
+                            <i class="fas fa-truck"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 mb-3" data-aos="zoom-in" data-aos-delay="300">
+            <div class="card stat-card border-danger">
+                <div class="card-body">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div>
+                            <div class="stat-label">Maintenance</div>
+                            <div class="stat-value text-danger">2</div>
+                            <small class="text-muted">Due This Month</small>
+                        </div>
+                        <div class="stat-icon bg-gradient-danger text-white">
+                            <i class="fas fa-tools"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Calendar -->
+    <div class="row">
+        <div class="col-lg-9 mb-4" data-aos="fade-right">
+            <div class="card shadow-lg">
+                <div class="card-header bg-gradient-primary text-white">
+                    <h5 class="mb-0"><i class="fas fa-calendar me-2"></i>Schedule Calendar</h5>
+                </div>
+                <div class="card-body">
+                    <div id="calendar"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Event Legend & Quick Add -->
+        <div class="col-lg-3 mb-4" data-aos="fade-left">
+            <div class="card shadow-sm mb-4">
+                <div class="card-header">
+                    <h6 class="mb-0"><i class="fas fa-info-circle me-2"></i>Event Types</h6>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <span class="badge bg-success me-2" style="width: 15px; height: 15px; display: inline-block;"></span>
+                        <strong>Production</strong><br>
+                        <small class="text-muted">Production batches</small>
+                    </div>
+                    <div class="mb-3">
+                        <span class="badge bg-primary me-2" style="width: 15px; height: 15px; display: inline-block;"></span>
+                        <strong>Procurement</strong><br>
+                        <small class="text-muted">Paddy purchases</small>
+                    </div>
+                    <div class="mb-3">
+                        <span class="badge bg-warning me-2" style="width: 15px; height: 15px; display: inline-block;"></span>
+                        <strong>Delivery</strong><br>
+                        <small class="text-muted">Rice deliveries</small>
+                    </div>
+                    <div class="mb-3">
+                        <span class="badge bg-danger me-2" style="width: 15px; height: 15px; display: inline-block;"></span>
+                        <strong>Maintenance</strong><br>
+                        <small class="text-muted">Equipment service</small>
+                    </div>
+                    <div class="mb-3">
+                        <span class="badge bg-info me-2" style="width: 15px; height: 15px; display: inline-block;"></span>
+                        <strong>Quality Check</strong><br>
+                        <small class="text-muted">Inspections</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card shadow-sm">
+                <div class="card-header">
+                    <h6 class="mb-0"><i class="fas fa-plus me-2"></i>Quick Add</h6>
+                </div>
+                <div class="card-body">
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-success btn-sm" onclick="quickAdd('production')">
+                            <i class="fas fa-industry me-2"></i>Production Batch
+                        </button>
+                        <button class="btn btn-primary btn-sm" onclick="quickAdd('procurement')">
+                            <i class="fas fa-shopping-cart me-2"></i>Procurement
+                        </button>
+                        <button class="btn btn-warning btn-sm" onclick="quickAdd('delivery')">
+                            <i class="fas fa-truck me-2"></i>Delivery
+                        </button>
+                        <button class="btn btn-danger btn-sm" onclick="quickAdd('maintenance')">
+                            <i class="fas fa-tools me-2"></i>Maintenance
+                        </button>
+                        <button class="btn btn-info btn-sm" onclick="quickAdd('quality')">
+                            <i class="fas fa-check-circle me-2"></i>Quality Check
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Event Modal -->
+<div class="modal fade" id="eventModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-gradient-primary text-white">
+                <h5 class="modal-title"><i class="fas fa-calendar-plus me-2"></i>Add Schedule Event</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="eventForm">
+                    <div class="mb-3">
+                        <label class="form-label">Event Type <span class="required">*</span></label>
+                        <select class="form-select" id="eventType" required>
+                            <option value="">Choose...</option>
+                            <option value="production">Production Batch</option>
+                            <option value="procurement">Procurement</option>
+                            <option value="delivery">Delivery</option>
+                            <option value="maintenance">Maintenance</option>
+                            <option value="quality">Quality Check</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Title <span class="required">*</span></label>
+                        <input type="text" class="form-control" id="eventTitle" required placeholder="E.g., Basmati Production Batch #123">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Start Date & Time <span class="required">*</span></label>
+                        <input type="datetime-local" class="form-control" id="eventStart" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">End Date & Time</label>
+                        <input type="datetime-local" class="form-control" id="eventEnd">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Description</label>
+                        <textarea class="form-control" id="eventDescription" rows="3" placeholder="Additional details..."></textarea>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="eventAllDay">
+                        <label class="form-check-label" for="eventAllDay">
+                            All Day Event
+                        </label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" onclick="saveEvent()">
+                    <i class="fas fa-save me-2"></i>Save Event
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        let calendar;
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const calendarEl = document.getElementById('calendar');
+
+            calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+                },
+                editable: true,
+                selectable: true,
+                selectMirror: true,
+                dayMaxEvents: true,
+                weekends: true,
+                select: function(arg) {
+                    // Open modal when user selects a date range
+                    $('#eventStart').val(arg.startStr.substring(0, 16));
+                    if (arg.endStr) {
+                        $('#eventEnd').val(arg.endStr.substring(0, 16));
+                    }
+                    $('#eventModal').modal('show');
+                    calendar.unselect();
+                },
+                eventClick: function(info) {
+                    // Show event details when clicked
+                    RMMS.Alert.info({
+                        title: info.event.title,
+                        html: `
+                            <div class="text-start">
+                                <p><strong>Start:</strong> ${info.event.start.toLocaleString()}</p>
+                                ${info.event.end ? `<p><strong>End:</strong> ${info.event.end.toLocaleString()}</p>` : ''}
+                                ${info.event.extendedProps.description ? `<p><strong>Description:</strong> ${info.event.extendedProps.description}</p>` : ''}
+                            </div>
+                        `
+                    });
+                },
+                events: getSampleEvents()
+            });
+
+            calendar.render();
+        });
+
+        function getSampleEvents() {
+            // Sample events - would be loaded from backend in production
+            const today = new Date();
+            return [
+                {
+                    title: 'Basmati Production Batch #PB-2024-101',
+                    start: new Date(today.getFullYear(), today.getMonth(), 5),
+                    backgroundColor: '#28a745',
+                    borderColor: '#28a745'
+                },
+                {
+                    title: 'Paddy Procurement - Farmer Group A',
+                    start: new Date(today.getFullYear(), today.getMonth(), 8),
+                    backgroundColor: '#0090d2',
+                    borderColor: '#0090d2'
+                },
+                {
+                    title: 'Rice Delivery - ABC Traders',
+                    start: new Date(today.getFullYear(), today.getMonth(), 12),
+                    backgroundColor: '#ffc107',
+                    borderColor: '#ffc107'
+                },
+                {
+                    title: 'Machine Maintenance - Polisher #2',
+                    start: new Date(today.getFullYear(), today.getMonth(), 15),
+                    backgroundColor: '#dc3545',
+                    borderColor: '#dc3545'
+                },
+                {
+                    title: 'Quality Inspection - Monthly Check',
+                    start: new Date(today.getFullYear(), today.getMonth(), 20),
+                    backgroundColor: '#17a2b8',
+                    borderColor: '#17a2b8'
+                }
+            ];
+        }
+
+        function addNewEvent() {
+            $('#eventForm')[0].reset();
+            $('#eventModal').modal('show');
+        }
+
+        function quickAdd(type) {
+            $('#eventType').val(type).trigger('change');
+            $('#eventModal').modal('show');
+        }
+
+        function saveEvent() {
+            const form = $('#eventForm')[0];
+
+            if (!form.checkValidity()) {
+                RMMS.Toast.error('Please fill all required fields');
+                form.classList.add('was-validated');
+                return;
+            }
+
+            const eventData = {
+                title: $('#eventTitle').val(),
+                start: $('#eventStart').val(),
+                end: $('#eventEnd').val() || null,
+                allDay: $('#eventAllDay').is(':checked'),
+                description: $('#eventDescription').val(),
+                type: $('#eventType').val()
+            };
+
+            // Determine color based on type
+            const colors = {
+                'production': '#28a745',
+                'procurement': '#0090d2',
+                'delivery': '#ffc107',
+                'maintenance': '#dc3545',
+                'quality': '#17a2b8'
+            };
+
+            // Add event to calendar
+            calendar.addEvent({
+                title: eventData.title,
+                start: eventData.start,
+                end: eventData.end,
+                allDay: eventData.allDay,
+                backgroundColor: colors[eventData.type],
+                borderColor: colors[eventData.type],
+                extendedProps: {
+                    description: eventData.description,
+                    type: eventData.type
+                }
+            });
+
+            // TODO: Save to backend
+            RMMS.Toast.success('Event added to calendar!');
+            $('#eventModal').modal('hide');
+            $('#eventForm')[0].reset();
+        }
+    </script>
+}

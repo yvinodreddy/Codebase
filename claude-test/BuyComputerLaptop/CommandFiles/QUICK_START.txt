@@ -1,0 +1,167 @@
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                                                                              ║
+║          🚀 LAPTOP COMPARISON COMMAND - QUICK REFERENCE 🚀                   ║
+║                                                                              ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+┌──────────────────────────────────────────────────────────────────────────────┐
+│ HOW TO USE (Next Time You Need Laptop Comparison)                           │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+STEP 1: Navigate to Directory
+════════════════════════════════
+  cd /home/user01/claude-test
+
+STEP 2: Run the Command
+════════════════════════════════
+  /laptop-comparison
+
+STEP 3: Provide Your Details
+════════════════════════════════
+  Example:
+
+  I'm looking at these laptops for AI/ML:
+  1. Lenovo Legion Pro 5 (i7-14650HX + RTX 4060)
+  2. HP OMEN 16 (Ryzen 7 + RTX 4060)
+  3. Dell XPS 15 (i7 + RTX 4050)
+
+  Budget: ₹1.5 lakhs (can stretch if needed)
+  Requirements: 32GB RAM, GPU for deep learning, 6-8 years lifespan
+
+STEP 4: Get Instant Results!
+════════════════════════════════
+  ✅ Comprehensive HTML guide generated
+  ✅ 70KB+ file with complete analysis
+  ✅ Mobile responsive
+  ✅ All performance scores
+  ✅ Budget recommendations
+  ✅ Purchase links
+
+
+┌──────────────────────────────────────────────────────────────────────────────┐
+│ WHAT YOU GET AUTOMATICALLY                                                   │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+  ✅ Detailed AI/ML Performance Scores (with visual bars)
+     • Overall Score (0-100)
+     • GPU Power
+     • RAM Capacity
+     • Longevity
+     • CPU Power
+     • Value for Money
+
+  ✅ Budget Stretch Analysis
+     • Cost-per-year breakdown
+     • ROI calculations (₹XXX/month over X years)
+     • When to stretch vs. stick to budget
+
+  ✅ Comparison Tables
+     • Side-by-side specs
+     • Color-coded recommendations
+
+  ✅ Technical Deep Dive
+     • Why GPU matters for AI/ML
+     • Why 32GB+ RAM essential
+     • Why cooling critical
+
+  ✅ Purchase Information
+     • India market prices (₹)
+     • Flipkart, Amazon, brand store links
+     • Diwali/festival sales tips
+
+  ✅ Final Recommendations
+     • Top pick with reasoning
+     • Runner-up options
+     • Budget-friendly alternative
+     • Premium option
+     • What to AVOID
+
+  ✅ Action Plan
+     • Week-by-week shopping timeline
+     • Decision tree
+
+
+┌──────────────────────────────────────────────────────────────────────────────┐
+│ TIME SAVINGS                                                                 │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+  Manual Research:        1-2 hours
+  Manual HTML Creation:   2-3 hours
+  Total Manual Time:      3-5 hours
+
+  With /laptop-comparison: 3-5 minutes
+
+  ⏱️  SAVES 95% OF YOUR TIME! ⏱️
+
+
+┌──────────────────────────────────────────────────────────────────────────────┐
+│ PRO TIPS                                                                     │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+  💡 Include 4-5 laptops for best comparison
+  💡 Mention budget flexibility explicitly
+  💡 Specify exact use case (AI/ML, gaming, development)
+  💡 List must-have specs (RAM, GPU, CPU requirements)
+  💡 Mention location (India) for accurate pricing
+  💡 Include timeline (e.g., "buying during Diwali 2025")
+
+
+┌──────────────────────────────────────────────────────────────────────────────┐
+│ EXAMPLE SCENARIOS                                                            │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+  Scenario 1: AI/ML Workstation
+  ══════════════════════════════
+    /laptop-comparison
+    Need laptop for TensorFlow/PyTorch, budget ₹1.5L, RTX 4060+, 32GB RAM...
+
+  Scenario 2: Gaming Laptop
+  ══════════════════════════════
+    /laptop-comparison
+    Looking for gaming laptop, budget ₹1.2L, RTX 4060+, 144Hz display...
+
+  Scenario 3: Developer Laptop
+  ══════════════════════════════
+    /laptop-comparison
+    Need lightweight dev laptop, budget ₹80k, long battery, 14-15"...
+
+  Scenario 4: Video Editing
+  ══════════════════════════════
+    /laptop-comparison
+    Video editing workstation, budget ₹2L, 32GB+ RAM, color-accurate display...
+
+
+┌──────────────────────────────────────────────────────────────────────────────┐
+│ FILES CREATED                                                                │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+  Command File:
+    /home/user01/claude-test/.claude/commands/laptop-comparison.md
+
+  Documentation:
+    /home/user01/claude-test/.claude/commands/README.md
+    /home/user01/claude-test/BuyComputerLaptop/HOW_TO_USE_LAPTOP_COMPARISON_COMMAND.md
+
+  This Guide:
+    /home/user01/claude-test/BuyComputerLaptop/QUICK_START.txt
+
+
+┌──────────────────────────────────────────────────────────────────────────────┐
+│ CURRENT OUTPUT (Your Laptop Guide)                                          │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+  File: /home/user01/claude-test/BuyComputerLaptop/Laptop-AI-ML-Purchase-Guide-2025.html
+  Size: 94KB
+  Lines: 1,763
+  Laptops: 7 analyzed
+  Features: ✅ All (scores, budget analysis, mobile responsive, purchase links)
+
+
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                                                                              ║
+║  🎉 READY TO USE! Next time just type: /laptop-comparison                   ║
+║                                                                              ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+Created: October 20, 2025
+Command Location: /home/user01/claude-test/.claude/commands/

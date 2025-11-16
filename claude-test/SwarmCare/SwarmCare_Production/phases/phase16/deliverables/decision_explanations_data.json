@@ -1,0 +1,276 @@
+[
+  {
+    "patient_id": "P1001",
+    "decision": "Immediate Intervention Required",
+    "confidence": 0.87,
+    "risk_level": "High",
+    "reasoning": [
+      "Patient shows elevated vital signs: BP 165/98, HR 112",
+      "Oxygen saturation below threshold at 91%",
+      "Multiple comorbidities present (3): diabetes, hypertension, COPD",
+      "Historical pattern indicates deteriorating trend over 48 hours",
+      "Age-adjusted risk score exceeds critical threshold"
+    ],
+    "recommendations": [
+      "Initiate continuous monitoring with 15-minute vital sign checks",
+      "Consult pulmonologist for respiratory assessment",
+      "Review and adjust current medication regimen",
+      "Consider oxygen supplementation",
+      "Prepare for potential ICU transfer if condition worsens"
+    ],
+    "supporting_evidence": {
+      "vital_signs_trend": "deteriorating",
+      "lab_results": "abnormal inflammatory markers",
+      "previous_admissions": 2,
+      "response_to_treatment": "suboptimal"
+    },
+    "timestamp": "2025-10-31T10:15:23Z"
+  },
+  {
+    "patient_id": "P1002",
+    "decision": "Continue Standard Monitoring",
+    "confidence": 0.92,
+    "risk_level": "Low",
+    "reasoning": [
+      "All vital signs within normal ranges",
+      "Oxygen saturation stable at 97%",
+      "No active comorbidities or complications",
+      "Patient responding well to current treatment plan",
+      "No concerning trends in recent monitoring data"
+    ],
+    "recommendations": [
+      "Maintain current 4-hour monitoring schedule",
+      "Continue prescribed medication without adjustment",
+      "Schedule routine follow-up in 24 hours",
+      "Patient may be eligible for step-down care",
+      "Encourage ambulation and physical therapy"
+    ],
+    "supporting_evidence": {
+      "vital_signs_trend": "stable",
+      "lab_results": "all within normal limits",
+      "previous_admissions": 0,
+      "response_to_treatment": "excellent"
+    },
+    "timestamp": "2025-10-31T10:16:45Z"
+  },
+  {
+    "patient_id": "P1003",
+    "decision": "Increase Monitoring Frequency",
+    "confidence": 0.78,
+    "risk_level": "Medium",
+    "reasoning": [
+      "Borderline vital signs: BP 145/92, HR 95",
+      "Slight downward trend in oxygen saturation (94%)",
+      "Two comorbidities require closer attention",
+      "Recent medication changes need evaluation",
+      "Early warning score suggests increased vigilance needed"
+    ],
+    "recommendations": [
+      "Increase monitoring to 2-hour intervals",
+      "Conduct comprehensive nursing assessment",
+      "Review medication efficacy and side effects",
+      "Monitor fluid balance and intake/output",
+      "Consult physician if any parameter deteriorates"
+    ],
+    "supporting_evidence": {
+      "vital_signs_trend": "slightly declining",
+      "lab_results": "minor abnormalities",
+      "previous_admissions": 1,
+      "response_to_treatment": "moderate"
+    },
+    "timestamp": "2025-10-31T10:18:12Z"
+  },
+  {
+    "patient_id": "P1004",
+    "decision": "Critical Alert - Immediate Medical Team Notification",
+    "confidence": 0.91,
+    "risk_level": "Critical",
+    "reasoning": [
+      "Severely elevated vital signs: BP 178/105, HR 125",
+      "Dangerously low oxygen saturation at 88%",
+      "Multiple high-risk comorbidities (4): CHF, diabetes, renal insufficiency, COPD",
+      "Rapid deterioration over past 6 hours",
+      "Patient meets criteria for Rapid Response Team activation"
+    ],
+    "recommendations": [
+      "IMMEDIATE: Activate Rapid Response Team",
+      "Initiate emergency oxygen therapy",
+      "Prepare for possible intubation and mechanical ventilation",
+      "Transfer to ICU bed - coordinate with bed management",
+      "Family notification and advance care planning discussion",
+      "Stat labs: ABG, BMP, troponin, BNP"
+    ],
+    "supporting_evidence": {
+      "vital_signs_trend": "rapidly deteriorating",
+      "lab_results": "critical abnormalities",
+      "previous_admissions": 4,
+      "response_to_treatment": "poor"
+    },
+    "timestamp": "2025-10-31T10:19:34Z"
+  },
+  {
+    "patient_id": "P1005",
+    "decision": "Consider Discharge Planning",
+    "confidence": 0.89,
+    "risk_level": "Low",
+    "reasoning": [
+      "All vital signs stable and within normal limits",
+      "Oxygen saturation excellent at 98%",
+      "No comorbidities or complications present",
+      "Patient has met all treatment goals",
+      "Risk assessment indicates safe for discharge"
+    ],
+    "recommendations": [
+      "Initiate discharge planning process",
+      "Provide patient education materials",
+      "Schedule outpatient follow-up within 7 days",
+      "Ensure medication reconciliation completed",
+      "Arrange any necessary home health services"
+    ],
+    "supporting_evidence": {
+      "vital_signs_trend": "consistently stable",
+      "lab_results": "all normal",
+      "previous_admissions": 0,
+      "response_to_treatment": "complete resolution"
+    },
+    "timestamp": "2025-10-31T10:21:08Z"
+  },
+  {
+    "patient_id": "P1006",
+    "decision": "Specialist Consultation Required",
+    "confidence": 0.82,
+    "risk_level": "Medium",
+    "reasoning": [
+      "Moderate vital sign abnormalities: BP 150/95, HR 98",
+      "Oxygen saturation borderline at 93%",
+      "Complex comorbidity interaction requires specialist input",
+      "Treatment response has plateaued",
+      "Risk of progression without specialist intervention"
+    ],
+    "recommendations": [
+      "Request cardiology consultation within 24 hours",
+      "Continue enhanced monitoring at 2-hour intervals",
+      "Consider adjusting antihypertensive regimen",
+      "Perform echocardiogram if not recently completed",
+      "Optimize current medication for comorbidity management"
+    ],
+    "supporting_evidence": {
+      "vital_signs_trend": "plateaued improvement",
+      "lab_results": "moderate abnormalities",
+      "previous_admissions": 2,
+      "response_to_treatment": "incomplete"
+    },
+    "timestamp": "2025-10-31T10:22:41Z"
+  },
+  {
+    "patient_id": "P1007",
+    "decision": "Urgent Intervention Needed",
+    "confidence": 0.84,
+    "risk_level": "High",
+    "reasoning": [
+      "Concerning vital signs: BP 168/102, HR 115",
+      "Low oxygen saturation at 90%",
+      "Three comorbidities with compounding effects",
+      "Early signs of clinical deterioration detected",
+      "Patient history indicates high risk for complications"
+    ],
+    "recommendations": [
+      "Increase monitoring to continuous telemetry",
+      "Initiate supplemental oxygen therapy",
+      "Notify attending physician immediately",
+      "Consider ICU consultation for bed availability",
+      "Review and optimize current treatment plan",
+      "Prepare family for potential status change"
+    ],
+    "supporting_evidence": {
+      "vital_signs_trend": "declining",
+      "lab_results": "several abnormal values",
+      "previous_admissions": 3,
+      "response_to_treatment": "suboptimal"
+    },
+    "timestamp": "2025-10-31T10:24:15Z"
+  },
+  {
+    "patient_id": "P1008",
+    "decision": "Maintain Current Care Plan",
+    "confidence": 0.88,
+    "risk_level": "Low",
+    "reasoning": [
+      "Vital signs stable and improving: BP 128/82, HR 78",
+      "Excellent oxygen saturation at 96%",
+      "Single comorbidity well-controlled",
+      "Positive response to current treatment",
+      "No red flags or concerning trends identified"
+    ],
+    "recommendations": [
+      "Continue current monitoring schedule (4-hour intervals)",
+      "Maintain existing medication regimen",
+      "Encourage continued improvement activities",
+      "Routine reassessment in 24 hours",
+      "Begin discussing transition planning"
+    ],
+    "supporting_evidence": {
+      "vital_signs_trend": "improving",
+      "lab_results": "normalizing",
+      "previous_admissions": 1,
+      "response_to_treatment": "good"
+    },
+    "timestamp": "2025-10-31T10:25:52Z"
+  },
+  {
+    "patient_id": "P1009",
+    "decision": "Enhanced Observation Protocol",
+    "confidence": 0.75,
+    "risk_level": "Medium",
+    "reasoning": [
+      "Vital signs showing variability: BP fluctuating 135-152",
+      "Oxygen saturation occasionally dipping to 94%",
+      "One comorbidity with potential for complications",
+      "Recent treatment adjustment requires monitoring",
+      "Early intervention may prevent deterioration"
+    ],
+    "recommendations": [
+      "Implement enhanced observation protocol (2-hour vitals)",
+      "Monitor response to recent medication changes",
+      "Encourage deep breathing exercises and incentive spirometry",
+      "Conduct thorough nursing assessment twice per shift",
+      "Maintain heightened alertness for any changes"
+    ],
+    "supporting_evidence": {
+      "vital_signs_trend": "variable",
+      "lab_results": "minor abnormalities",
+      "previous_admissions": 1,
+      "response_to_treatment": "monitoring ongoing"
+    },
+    "timestamp": "2025-10-31T10:27:29Z"
+  },
+  {
+    "patient_id": "P1010",
+    "decision": "Emergency Medical Team Activation",
+    "confidence": 0.89,
+    "risk_level": "Critical",
+    "reasoning": [
+      "Critical vital signs: BP 180/108, HR 128, RR 28",
+      "Severely compromised oxygen saturation at 87%",
+      "Multiple severe comorbidities in decompensation",
+      "Acute deterioration over 4-hour period",
+      "Meets criteria for emergency medical intervention"
+    ],
+    "recommendations": [
+      "IMMEDIATE: Activate Code Blue team standby",
+      "Emergency oxygen therapy - non-rebreather mask",
+      "Obtain stat arterial blood gas and critical labs",
+      "Prepare for emergent intubation if respiratory failure progresses",
+      "Immediate ICU transfer - bypass standard protocols",
+      "Family notification - serious condition update",
+      "Cardiology and pulmonology stat consults"
+    ],
+    "supporting_evidence": {
+      "vital_signs_trend": "acute severe deterioration",
+      "lab_results": "critical multiple abnormalities",
+      "previous_admissions": 5,
+      "response_to_treatment": "treatment failure"
+    },
+    "timestamp": "2025-10-31T10:29:03Z"
+  }
+]

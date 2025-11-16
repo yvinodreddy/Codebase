@@ -1,0 +1,184 @@
+{
+  "timestamp": "2025-11-14T21:16:57.054849",
+  "total_prompts": 20,
+  "categories": {
+    "factual": [
+      {
+        "prompt": "What is the capital of France?",
+        "success": true,
+        "confidence": 100.0,
+        "iterations": 2,
+        "execution_time": 6.915811061859131,
+        "output_length": 32098
+      },
+      {
+        "prompt": "Who wrote Romeo and Juliet?",
+        "success": true,
+        "confidence": 100.0,
+        "iterations": 2,
+        "execution_time": 9.312048196792603,
+        "output_length": 32095
+      },
+      {
+        "prompt": "What is the speed of light in vacuum?",
+        "success": true,
+        "confidence": 100.0,
+        "iterations": 2,
+        "execution_time": 13.077516317367554,
+        "output_length": 32105
+      },
+      {
+        "prompt": "When did World War II end?",
+        "success": true,
+        "confidence": 100.0,
+        "iterations": 2,
+        "execution_time": 6.605492353439331,
+        "output_length": 32094
+      }
+    ],
+    "math_logic": [
+      {
+        "prompt": "What is 15% of 240?",
+        "success": true,
+        "confidence": 100.0,
+        "iterations": 2,
+        "execution_time": 9.833399772644043,
+        "output_length": 32087
+      },
+      {
+        "prompt": "If 5 machines make 5 widgets in 5 minutes, how many minutes for 100 machines to make 100 widgets?",
+        "success": true,
+        "confidence": 100.0,
+        "iterations": 2,
+        "execution_time": 6.796890020370483,
+        "output_length": 33879
+      },
+      {
+        "prompt": "Solve: 2x + 5 = 15",
+        "success": true,
+        "confidence": 100.0,
+        "iterations": 2,
+        "execution_time": 8.337350130081177,
+        "output_length": 32086
+      },
+      {
+        "prompt": "How many R's are in 'strawberry'?",
+        "success": true,
+        "confidence": 100.0,
+        "iterations": 2,
+        "execution_time": 11.235698461532593,
+        "output_length": 32101
+      }
+    ],
+    "code_generation": [
+      {
+        "prompt": "Write a Python function to check if a number is prime",
+        "success": true,
+        "confidence": 100.0,
+        "iterations": 2,
+        "execution_time": 9.541853427886963,
+        "output_length": 33835
+      },
+      {
+        "prompt": "Write a function to find the longest palindrome in a string",
+        "success": true,
+        "confidence": 100.0,
+        "iterations": 2,
+        "execution_time": 6.249826192855835,
+        "output_length": 33841
+      },
+      {
+        "prompt": "Write a binary search algorithm in Python",
+        "success": true,
+        "confidence": 100.0,
+        "iterations": 2,
+        "execution_time": 5.976934194564819,
+        "output_length": 32109
+      },
+      {
+        "prompt": "Write a function to reverse a linked list",
+        "success": true,
+        "confidence": 100.0,
+        "iterations": 2,
+        "execution_time": 5.451076507568359,
+        "output_length": 32109
+      }
+    ],
+    "analysis": [
+      {
+        "prompt": "Compare pros and cons of microservices vs monolithic architecture",
+        "success": true,
+        "confidence": 100.0,
+        "iterations": 2,
+        "execution_time": 5.914241313934326,
+        "output_length": 33845
+      },
+      {
+        "prompt": "Explain the difference between supervised and unsupervised learning",
+        "success": true,
+        "confidence": 100.0,
+        "iterations": 2,
+        "execution_time": 5.549441337585449,
+        "output_length": 33847
+      },
+      {
+        "prompt": "What are the main causes of the 2008 financial crisis?",
+        "success": true,
+        "confidence": 100.0,
+        "iterations": 2,
+        "execution_time": 8.50457215309143,
+        "output_length": 33836
+      },
+      {
+        "prompt": "Compare React, Vue, and Angular frameworks",
+        "success": true,
+        "confidence": 100.0,
+        "iterations": 2,
+        "execution_time": 5.7892560958862305,
+        "output_length": 32110
+      }
+    ],
+    "edge_cases": [
+      {
+        "prompt": "Is the following statement true or false: 'This statement is false'",
+        "success": true,
+        "confidence": 100.0,
+        "iterations": 2,
+        "execution_time": 5.4136786460876465,
+        "output_length": 33849
+      },
+      {
+        "prompt": "What happens when an irresistible force meets an immovable object?",
+        "success": true,
+        "confidence": 100.0,
+        "iterations": 2,
+        "execution_time": 5.251796722412109,
+        "output_length": 33848
+      },
+      {
+        "prompt": "Can you divide by zero?",
+        "success": true,
+        "confidence": 100.0,
+        "iterations": 2,
+        "execution_time": 5.312387943267822,
+        "output_length": 32091
+      },
+      {
+        "prompt": "What is the sound of one hand clapping?",
+        "success": true,
+        "confidence": 100.0,
+        "iterations": 2,
+        "execution_time": 5.330475330352783,
+        "output_length": 32107
+      }
+    ]
+  },
+  "summary": {
+    "success_rate": 100.0,
+    "avg_confidence": 100.0,
+    "avg_iterations": 2.0,
+    "avg_execution_time": 7.319987308979035,
+    "total_successful": 20,
+    "total_failed": 0
+  }
+}

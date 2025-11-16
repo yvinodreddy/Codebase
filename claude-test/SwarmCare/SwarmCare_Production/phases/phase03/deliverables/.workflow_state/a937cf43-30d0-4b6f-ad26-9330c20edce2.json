@@ -1,0 +1,493 @@
+{
+  "execution_id": "a937cf43-30d0-4b6f-ad26-9330c20edce2",
+  "workflow_id": "ehr_to_podcast",
+  "state": "COMPLETED",
+  "tasks": {
+    "extract_ehr": {
+      "task_id": "extract_ehr",
+      "name": "Extract EHR Data",
+      "action": "extract_ehr_data",
+      "dependencies": [],
+      "max_retries": 2,
+      "timeout_seconds": 300,
+      "state": "COMPLETED",
+      "result": {
+        "status": "success",
+        "records_extracted": 2
+      },
+      "error": null,
+      "start_time": 1761651230.5874825,
+      "end_time": 1761651230.5876567,
+      "retry_count": 0
+    },
+    "deidentify": {
+      "task_id": "deidentify",
+      "name": "De-identify PHI",
+      "action": "deidentify_phi",
+      "dependencies": [
+        "extract_ehr"
+      ],
+      "max_retries": 1,
+      "timeout_seconds": 300,
+      "state": "COMPLETED",
+      "result": {
+        "status": "success",
+        "phi_removed": true
+      },
+      "error": null,
+      "start_time": 1761651230.5877275,
+      "end_time": 1761651230.5878963,
+      "retry_count": 0
+    },
+    "process_clinical": {
+      "task_id": "process_clinical",
+      "name": "Process Clinical Notes",
+      "action": "process_clinical_notes",
+      "dependencies": [
+        "deidentify"
+      ],
+      "max_retries": 2,
+      "timeout_seconds": 300,
+      "state": "COMPLETED",
+      "result": {
+        "status": "success",
+        "notes_processed": 2
+      },
+      "error": null,
+      "start_time": 1761651230.5879707,
+      "end_time": 1761651230.5882378,
+      "retry_count": 0
+    },
+    "generate_script": {
+      "task_id": "generate_script",
+      "name": "Generate Podcast Script",
+      "action": "generate_podcast_script",
+      "dependencies": [
+        "process_clinical"
+      ],
+      "max_retries": 3,
+      "timeout_seconds": 300,
+      "state": "COMPLETED",
+      "result": {
+        "status": "success",
+        "script_length": 742
+      },
+      "error": null,
+      "start_time": 1761651230.5883195,
+      "end_time": 1761651230.5885162,
+      "retry_count": 0
+    },
+    "validate_medical": {
+      "task_id": "validate_medical",
+      "name": "Validate Medical Accuracy",
+      "action": "validate_medical_accuracy",
+      "dependencies": [
+        "generate_script"
+      ],
+      "max_retries": 2,
+      "timeout_seconds": 300,
+      "state": "COMPLETED",
+      "result": {
+        "status": "success",
+        "validated": true
+      },
+      "error": null,
+      "start_time": 1761651230.588588,
+      "end_time": 1761651230.588803,
+      "retry_count": 0
+    },
+    "generate_audio": {
+      "task_id": "generate_audio",
+      "name": "Generate Audio (TTS)",
+      "action": "generate_audio",
+      "dependencies": [
+        "validate_medical"
+      ],
+      "max_retries": 3,
+      "timeout_seconds": 300,
+      "state": "COMPLETED",
+      "result": {
+        "status": "success",
+        "audio_duration": 46.8
+      },
+      "error": null,
+      "start_time": 1761651230.5888941,
+      "end_time": 1761651230.5890899,
+      "retry_count": 0
+    },
+    "quality_review": {
+      "task_id": "quality_review",
+      "name": "Quality Assurance Review",
+      "action": "quality_assurance",
+      "dependencies": [
+        "generate_audio"
+      ],
+      "max_retries": 1,
+      "timeout_seconds": 300,
+      "state": "COMPLETED",
+      "result": {
+        "status": "success",
+        "qa_passed": true,
+        "checks": {
+          "ehr_data_present": true,
+          "phi_removed": true,
+          "script_generated": true,
+          "medical_validated": true,
+          "audio_generated": true
+        }
+      },
+      "error": null,
+      "start_time": 1761651230.5891623,
+      "end_time": 1761651230.5893652,
+      "retry_count": 0
+    }
+  },
+  "context": {
+    "patient_id": "PATIENT_TEST_001",
+    "encounter_id": "ENC_TEST_001",
+    "ehr_data": {
+      "patient_id": "PATIENT_TEST_001",
+      "encounter_id": "ENC_TEST_001",
+      "demographics": {
+        "name": "[PATIENT_NAME]",
+        "age": 45,
+        "gender": "M",
+        "mrn": "[MRN]"
+      },
+      "clinical_notes": [
+        {
+          "type": "progress_note",
+          "date": "[DATE]",
+          "author": "[PROVIDER_NAME]",
+          "text": "Patient presents with hypertension. BP 145/92. Started on lisinopril 10mg daily. Follow-up in 2 weeks."
+        },
+        {
+          "type": "assessment",
+          "date": "[DATE]",
+          "author": "[PROVIDER_NAME]",
+          "text": "Primary diagnosis: Essential hypertension (I10). Plan: Lifestyle modifications, DASH diet, medication as prescribed."
+        }
+      ],
+      "diagnoses": [
+        {
+          "icd10": "I10",
+          "description": "Essential (primary) hypertension"
+        }
+      ],
+      "medications": [
+        {
+          "name": "Lisinopril",
+          "dose": "10mg",
+          "frequency": "daily",
+          "route": "oral"
+        }
+      ],
+      "vitals": {
+        "bp": "145/92",
+        "hr": "78",
+        "temp": "98.6",
+        "resp_rate": "16"
+      }
+    },
+    "extraction_timestamp": "2025-10-28T07:33:50.587591",
+    "deidentified_data": {
+      "patient_id": "PATIENT_TEST_001",
+      "encounter_id": "ENC_TEST_001",
+      "demographics": {
+        "name": "[PATIENT_NAME]",
+        "age": 45,
+        "gender": "M",
+        "mrn": "[MRN]"
+      },
+      "clinical_notes": [
+        {
+          "type": "progress_note",
+          "date": "[DATE]",
+          "author": "[PROVIDER_NAME]",
+          "text": "Patient presents with hypertension. BP 145/92. Started on lisinopril 10mg daily. Follow-up in 2 weeks."
+        },
+        {
+          "type": "assessment",
+          "date": "[DATE]",
+          "author": "[PROVIDER_NAME]",
+          "text": "Primary diagnosis: Essential hypertension (I10). Plan: Lifestyle modifications, DASH diet, medication as prescribed."
+        }
+      ],
+      "diagnoses": [
+        {
+          "icd10": "I10",
+          "description": "Essential (primary) hypertension"
+        }
+      ],
+      "medications": [
+        {
+          "name": "Lisinopril",
+          "dose": "10mg",
+          "frequency": "daily",
+          "route": "oral"
+        }
+      ],
+      "vitals": {
+        "bp": "145/92",
+        "hr": "78",
+        "temp": "98.6",
+        "resp_rate": "16"
+      }
+    },
+    "phi_removed": true,
+    "processed_notes": [
+      {
+        "original": {
+          "type": "progress_note",
+          "date": "[DATE]",
+          "author": "[PROVIDER_NAME]",
+          "text": "Patient presents with hypertension. BP 145/92. Started on lisinopril 10mg daily. Follow-up in 2 weeks."
+        },
+        "extracted_concepts": {
+          "diagnoses": [
+            {
+              "term": "Hypertension",
+              "confidence": 0.95
+            }
+          ],
+          "medications": [
+            {
+              "term": "Lisinopril",
+              "confidence": 0.98
+            }
+          ],
+          "procedures": [],
+          "findings": [
+            {
+              "term": "Blood Pressure",
+              "confidence": 0.9
+            }
+          ]
+        },
+        "summary": "Patient presents with hypertension. BP 145/92. Started on lisinopril 10mg daily. Follow-up in 2 weeks."
+      },
+      {
+        "original": {
+          "type": "assessment",
+          "date": "[DATE]",
+          "author": "[PROVIDER_NAME]",
+          "text": "Primary diagnosis: Essential hypertension (I10). Plan: Lifestyle modifications, DASH diet, medication as prescribed."
+        },
+        "extracted_concepts": {
+          "diagnoses": [
+            {
+              "term": "Hypertension",
+              "confidence": 0.95
+            }
+          ],
+          "medications": [],
+          "procedures": [],
+          "findings": []
+        },
+        "summary": "Primary diagnosis: Essential hypertension (I10). Plan: Lifestyle modifications, DASH diet, medication as prescribed."
+      }
+    ],
+    "podcast_script": "Welcome to your personalized health summary. Let me walk you through your recent clinical visit and what it means for your health.\n\nYour healthcare provider has diagnosed you with Hypertension. Let me explain what this means in simple terms.\n\nYou've been prescribed Lisinopril. This medication helps manage your condition by lowering blood pressure.\n\nYour healthcare provider has diagnosed you with Hypertension. Let me explain what this means in simple terms.\n\nHere are your next steps: Continue taking your medication as prescribed, monitor your blood pressure at home, and follow up with your doctor in two weeks.\n\nRemember, managing your health is a journey. If you have any questions, don't hesitate to reach out to your healthcare team.",
+    "script_sections": [
+      {
+        "section": "introduction",
+        "content": "Welcome to your personalized health summary. Let me walk you through your recent clinical visit and what it means for your health."
+      },
+      {
+        "section": "diagnosis",
+        "content": "Your healthcare provider has diagnosed you with Hypertension. Let me explain what this means in simple terms."
+      },
+      {
+        "section": "medications",
+        "content": "You've been prescribed Lisinopril. This medication helps manage your condition by lowering blood pressure."
+      },
+      {
+        "section": "diagnosis",
+        "content": "Your healthcare provider has diagnosed you with Hypertension. Let me explain what this means in simple terms."
+      },
+      {
+        "section": "action_items",
+        "content": "Here are your next steps: Continue taking your medication as prescribed, monitor your blood pressure at home, and follow up with your doctor in two weeks."
+      },
+      {
+        "section": "conclusion",
+        "content": "Remember, managing your health is a journey. If you have any questions, don't hesitate to reach out to your healthcare team."
+      }
+    ],
+    "validation_result": {
+      "passed": true,
+      "method": "basic"
+    },
+    "audio_metadata": {
+      "format": "mp3",
+      "duration_seconds": 46.8,
+      "sample_rate": 44100,
+      "bitrate": "128k",
+      "voice": "professional_female",
+      "file_path": "/tmp/podcast_ENC_TEST_001.mp3",
+      "generated_at": "2025-10-28T07:33:50.589035"
+    },
+    "qa_checks": {
+      "ehr_data_present": true,
+      "phi_removed": true,
+      "script_generated": true,
+      "medical_validated": true,
+      "audio_generated": true
+    },
+    "qa_passed": true
+  },
+  "start_time": 1761651230.5873418,
+  "end_time": 1761651230.5894878,
+  "error": null,
+  "audit_log": [
+    {
+      "timestamp": "2025-10-28T07:33:50.587391",
+      "execution_id": "a937cf43-30d0-4b6f-ad26-9330c20edce2",
+      "event": "WORKFLOW_STARTED",
+      "details": {
+        "workflow_id": "ehr_to_podcast"
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:33:50.587526",
+      "execution_id": "a937cf43-30d0-4b6f-ad26-9330c20edce2",
+      "event": "TASK_STARTED",
+      "details": {
+        "task_id": "extract_ehr",
+        "task_name": "Extract EHR Data"
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:33:50.587712",
+      "execution_id": "a937cf43-30d0-4b6f-ad26-9330c20edce2",
+      "event": "TASK_COMPLETED",
+      "details": {
+        "task_id": "extract_ehr",
+        "duration_seconds": 0.0001742839813232422,
+        "attempt": 1
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:33:50.587761",
+      "execution_id": "a937cf43-30d0-4b6f-ad26-9330c20edce2",
+      "event": "TASK_STARTED",
+      "details": {
+        "task_id": "deidentify",
+        "task_name": "De-identify PHI"
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:33:50.587952",
+      "execution_id": "a937cf43-30d0-4b6f-ad26-9330c20edce2",
+      "event": "TASK_COMPLETED",
+      "details": {
+        "task_id": "deidentify",
+        "duration_seconds": 0.00016880035400390625,
+        "attempt": 1
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:33:50.588073",
+      "execution_id": "a937cf43-30d0-4b6f-ad26-9330c20edce2",
+      "event": "TASK_STARTED",
+      "details": {
+        "task_id": "process_clinical",
+        "task_name": "Process Clinical Notes"
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:33:50.588308",
+      "execution_id": "a937cf43-30d0-4b6f-ad26-9330c20edce2",
+      "event": "TASK_COMPLETED",
+      "details": {
+        "task_id": "process_clinical",
+        "duration_seconds": 0.00026702880859375,
+        "attempt": 1
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:33:50.588383",
+      "execution_id": "a937cf43-30d0-4b6f-ad26-9330c20edce2",
+      "event": "TASK_STARTED",
+      "details": {
+        "task_id": "generate_script",
+        "task_name": "Generate Podcast Script"
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:33:50.588577",
+      "execution_id": "a937cf43-30d0-4b6f-ad26-9330c20edce2",
+      "event": "TASK_COMPLETED",
+      "details": {
+        "task_id": "generate_script",
+        "duration_seconds": 0.00019669532775878906,
+        "attempt": 1
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:33:50.588644",
+      "execution_id": "a937cf43-30d0-4b6f-ad26-9330c20edce2",
+      "event": "TASK_STARTED",
+      "details": {
+        "task_id": "validate_medical",
+        "task_name": "Validate Medical Accuracy"
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:33:50.588883",
+      "execution_id": "a937cf43-30d0-4b6f-ad26-9330c20edce2",
+      "event": "TASK_COMPLETED",
+      "details": {
+        "task_id": "validate_medical",
+        "duration_seconds": 0.00021505355834960938,
+        "attempt": 1
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:33:50.588951",
+      "execution_id": "a937cf43-30d0-4b6f-ad26-9330c20edce2",
+      "event": "TASK_STARTED",
+      "details": {
+        "task_id": "generate_audio",
+        "task_name": "Generate Audio (TTS)"
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:33:50.589144",
+      "execution_id": "a937cf43-30d0-4b6f-ad26-9330c20edce2",
+      "event": "TASK_COMPLETED",
+      "details": {
+        "task_id": "generate_audio",
+        "duration_seconds": 0.0001957416534423828,
+        "attempt": 1
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:33:50.589239",
+      "execution_id": "a937cf43-30d0-4b6f-ad26-9330c20edce2",
+      "event": "TASK_STARTED",
+      "details": {
+        "task_id": "quality_review",
+        "task_name": "Quality Assurance Review"
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:33:50.589471",
+      "execution_id": "a937cf43-30d0-4b6f-ad26-9330c20edce2",
+      "event": "TASK_COMPLETED",
+      "details": {
+        "task_id": "quality_review",
+        "duration_seconds": 0.0002028942108154297,
+        "attempt": 1
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:33:50.589567",
+      "execution_id": "a937cf43-30d0-4b6f-ad26-9330c20edce2",
+      "event": "WORKFLOW_COMPLETED",
+      "details": {
+        "duration_seconds": 0.002146005630493164
+      }
+    }
+  ]
+}

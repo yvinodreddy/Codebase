@@ -1,0 +1,192 @@
+@model RMMS.Models.Masters.Product
+@{
+    ViewData["Title"] = "Product Details";
+}
+
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2><i class="fas fa-box"></i> Product Details</h2>
+        <div>
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">
+                <i class="fas fa-edit"></i> Edit
+            </a>
+            <a asp-action="Index" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i> Back to List
+            </a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h5><i class="fas fa-info-circle"></i> Basic Information</h5>
+                </div>
+                <div class="card-body">
+                    <table class="table table-borderless">
+                        <tr>
+                            <th width="200">Product Code:</th>
+                            <td><strong>@Model.ProductCode</strong></td>
+                        </tr>
+                        <tr>
+                            <th>Product Name:</th>
+                            <td><strong>@Model.ProductName</strong></td>
+                        </tr>
+                        <tr>
+                            <th>Category:</th>
+                            <td>
+                                <span class="badge bg-@(Model.ProductCategory == "Rice" ? "primary" : Model.ProductCategory == "Paddy" ? "success" : "warning")">
+                                    @Model.ProductCategory
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Type:</th>
+                            <td>@Model.ProductType</td>
+                        </tr>
+                        <tr>
+                            <th>Grade:</th>
+                            <td><span class="badge bg-info">@Model.Grade</span></td>
+                        </tr>
+                        <tr>
+                            <th>Description:</th>
+                            <td>@Model.Description</td>
+                        </tr>
+                        <tr>
+                            <th>Unit of Measure:</th>
+                            <td>@Model.UnitOfMeasure</td>
+                        </tr>
+                        <tr>
+                            <th>Unit Weight:</th>
+                            <td>@Model.UnitWeight?.ToString("N3") Kg</td>
+                        </tr>
+                        <tr>
+                            <th>Packaging Type:</th>
+                            <td>@Model.PackagingType</td>
+                        </tr>
+                        <tr>
+                            <th>Status:</th>
+                            <td>
+                                <span class="badge bg-@(Model.Status == "Active" ? "success" : Model.Status == "Discontinued" ? "danger" : "secondary")">
+                                    @Model.Status
+                                </span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card mt-3">
+                <div class="card-header bg-success text-white">
+                    <h5><i class="fas fa-rupee-sign"></i> Pricing & Tax</h5>
+                </div>
+                <div class="card-body">
+                    <table class="table table-borderless">
+                        <tr>
+                            <th width="200">HSN Code:</th>
+                            <td>@Model.HSNCode</td>
+                        </tr>
+                        <tr>
+                            <th>GST Rate:</th>
+                            <td>@Model.GSTRate?.ToString("N2")%</td>
+                        </tr>
+                        <tr>
+                            <th>Standard Cost:</th>
+                            <td><strong>₹ @Model.StandardCost?.ToString("N2")</strong></td>
+                        </tr>
+                        <tr>
+                            <th>Selling Price:</th>
+                            <td><strong class="text-success">₹ @Model.SellingPrice?.ToString("N2")</strong></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card mt-3">
+                <div class="card-header bg-warning text-dark">
+                    <h5><i class="fas fa-warehouse"></i> Inventory Management</h5>
+                </div>
+                <div class="card-body">
+                    <table class="table table-borderless">
+                        <tr>
+                            <th width="200">Minimum Stock Level:</th>
+                            <td>@Model.MinimumStockLevel?.ToString("N3") @Model.UnitOfMeasure</td>
+                        </tr>
+                        <tr>
+                            <th>Maximum Stock Level:</th>
+                            <td>@Model.MaximumStockLevel?.ToString("N3") @Model.UnitOfMeasure</td>
+                        </tr>
+                        <tr>
+                            <th>Reorder Level:</th>
+                            <td>@Model.ReorderLevel?.ToString("N3") @Model.UnitOfMeasure</td>
+                        </tr>
+                        <tr>
+                            <th>Storage Location:</th>
+                            <td>@Model.StorageLocation</td>
+                        </tr>
+                        <tr>
+                            <th>Shelf Life:</th>
+                            <td>@Model.ShelfLifeDays days</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card mt-3">
+                <div class="card-header bg-info text-white">
+                    <h5><i class="fas fa-tags"></i> Product Classification</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            @if (Model.IsRawMaterial)
+                            {
+                                <span class="badge bg-success p-2"><i class="fas fa-check"></i> Raw Material</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-secondary p-2"><i class="fas fa-times"></i> Not Raw Material</span>
+                            }
+                        </div>
+                        <div class="col-md-4">
+                            @if (Model.IsFinishedProduct)
+                            {
+                                <span class="badge bg-success p-2"><i class="fas fa-check"></i> Finished Product</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-secondary p-2"><i class="fas fa-times"></i> Not Finished Product</span>
+                            }
+                        </div>
+                        <div class="col-md-4">
+                            @if (Model.IsByProduct)
+                            {
+                                <span class="badge bg-success p-2"><i class="fas fa-check"></i> By-Product</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-secondary p-2"><i class="fas fa-times"></i> Not By-Product</span>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Audit Information</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Created:</strong><br />@Model.CreatedDate.ToString("dd-MMM-yyyy HH:mm")<br />by @Model.CreatedBy</p>
+                    @if (Model.ModifiedDate.HasValue)
+                    {
+                        <p><strong>Modified:</strong><br />@Model.ModifiedDate.Value.ToString("dd-MMM-yyyy HH:mm")<br />by @Model.ModifiedBy</p>
+                    }
+                    <p><strong>Active:</strong> @(Model.IsActive ? "Yes" : "No")</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

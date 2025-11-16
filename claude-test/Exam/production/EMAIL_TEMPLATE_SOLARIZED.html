@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam Results - Semantic Data Services</title>
+    <style>
+        /* ============= SOLARIZED LIGHT - WORLD-CLASS EMAIL TEMPLATE ============= */
+        /* Synchronized with Exam Application Palette */
+        /* Windows Terminal Settings Applied: Font Size 12pt, Line Height 1.2, Cell Width 0.6 */
+
+        body {
+            margin: 0;
+            padding: 8px;  /* Windows Terminal padding: 8,8,8,8 */
+            font-family: 'Cascadia Mono', 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+            background-color: #fdf6e3;  /* Solarized Light Base3 - warm cream */
+            color: #586e75;  /* Solarized Light Base01 - emphasized dark text */
+            line-height: 1.2;  /* Windows Terminal setting */
+            font-size: 12pt;  /* Windows Terminal setting */
+            letter-spacing: -0.02em;  /* Cell width 0.6 adjustment */
+        }
+
+        .email-container {
+            max-width: 680px;
+            margin: 0 auto;
+            background-color: #ffffff;  /* Pure white container */
+            border-radius: 12px;
+            box-shadow: 0 10px 15px -3px rgba(7, 54, 66, 0.15);  /* Solarized shadow */
+            border: 2px solid #d3cbb7;  /* Subtle border */
+        }
+
+        /* ============= PROFESSIONAL HEADER - SOLARIZED BLUE GRADIENT ============= */
+        .header {
+            background: linear-gradient(135deg, #268bd2 0%, #2aa198 100%);  /* Solarized Blue → Cyan */
+            padding: 48px 32px;
+            text-align: center;
+            color: #fdf6e3;  /* Light cream text on blue */
+            border-radius: 12px 12px 0 0;
+            border-bottom: 3px solid #073642;  /* Dark accent border */
+        }
+
+        .header-logo {
+            font-size: 56px;
+            margin-bottom: 16px;
+            display: block;
+            text-shadow: 0 4px 8px rgba(7, 54, 66, 0.3);
+        }
+
+        .header h1 {
+            margin: 0 0 8px 0;
+            font-size: 32px;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            color: #073642;
+        }
+
+        .header p {
+            margin: 0;
+            font-size: 16px;
+            opacity: 0.95;
+            font-weight: 400;
+            color: #073642;
+        }
+
+        /* ============= CONTENT AREA - SOLARIZED LIGHT ============= */
+        .content {
+            padding: 40px 32px;
+            background: #fdf6e3;  /* Warm cream background */
+        }
+
+        /* ============= PROFESSIONAL CARD SYSTEM ============= */
+        .card {
+            background: #eee8d5;  /* Solarized Base2 - beige */
+            border: 2px solid #d3cbb7;  /* Subtle tan border */
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 1px 3px 0 rgba(7, 54, 66, 0.1);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid #d3cbb7;
+        }
+
+        .card-icon {
+            font-size: 32px;
+            margin-right: 12px;
+        }
+
+        .card-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #073642;  /* Solarized Base02 - dark accent */
+            margin: 0;
+            letter-spacing: -0.01em;
+        }
+
+        /* ============= INFO GRID - OPTIMIZED LAYOUT ============= */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .info-item {
+            padding: 16px;
+            background: #fdf6e3;  /* Light cream */
+            border-radius: 8px;
+            border-left: 3px solid #268bd2;  /* Solarized Blue accent */
+            box-shadow: 0 1px 3px rgba(7, 54, 66, 0.08);
+        }
+
+        .info-label {
+            font-size: 13px;
+            color: #839496;  /* Solarized Base0 - body text */
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+
+        .info-value {
+            font-size: 16px;
+            color: #073642;  /* Solarized Base02 - dark */
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        /* ============= SCORE DISPLAY - PROMINENT ============= */
+        .score-card {
+            background: linear-gradient(135deg, #eee8d5 0%, #fdf6e3 100%);  /* Beige → Cream */
+            border: 3px solid #268bd2;  /* Solarized Blue */
+            padding: 32px;
+            text-align: center;
+            border-radius: 12px;
+            margin: 32px 0;
+            box-shadow: 0 4px 12px rgba(38, 139, 210, 0.2);
+        }
+
+        .score-value {
+            font-size: 56px;
+            font-weight: 700;
+            color: #268bd2;  /* Solarized Blue */
+            margin: 0;
+            line-height: 1;
+            text-shadow: 0 2px 4px rgba(38, 139, 210, 0.15);
+        }
+
+        .score-label {
+            font-size: 16px;
+            color: #073642;  /* Dark accent */
+            margin-top: 8px;
+            font-weight: 500;
+        }
+
+        /* ============= VIDEO SECTION - HIGHLIGHTED ============= */
+        .video-card {
+            background: linear-gradient(135deg, #f5f0e1 0%, #eee8d5 100%);  /* Lighter beige gradient */
+            border: 2px solid #2aa198;  /* Solarized Cyan */
+            border-radius: 12px;
+            padding: 28px;
+            margin: 24px 0;
+        }
+
+        .video-available {
+            background: #eee8d5;  /* Beige */
+            border: 2px solid #859900;  /* Solarized Green */
+            padding: 16px 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(133, 153, 0, 0.15);
+        }
+
+        .video-available-icon {
+            font-size: 28px;
+            margin-right: 12px;
+        }
+
+        .video-available-text {
+            flex: 1;
+            font-size: 15px;
+            color: #073642;  /* Dark accent */
+            font-weight: 600;
+            margin: 0;
+        }
+
+        /* ============= PROFESSIONAL BUTTONS - SOLARIZED PALETTE ============= */
+        .btn {
+            display: inline-block;
+            padding: 14px 28px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            text-align: center;
+            transition: all 0.2s ease;
+            margin: 8px 8px 8px 0;
+            font-family: inherit;
+            letter-spacing: -0.01em;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #268bd2 0%, #2aa198 100%);  /* Solarized Blue → Cyan */
+            color: #073642;  /* Light cream text */
+            box-shadow: 0 2px 4px rgba(38, 139, 210, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #2075b8 0%, #248884 100%);
+            box-shadow: 0 4px 8px rgba(38, 139, 210, 0.4);
+            transform: translateY(-1px);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #859900 0%, #2aa198 100%);  /* Solarized Green → Cyan */
+            color: #073642;  /* Light cream text */
+            box-shadow: 0 2px 4px rgba(133, 153, 0, 0.3);
+        }
+
+        .btn-success:hover {
+            background: linear-gradient(135deg, #6d7d00 0%, #248884 100%);
+            box-shadow: 0 4px 8px rgba(133, 153, 0, 0.4);
+            transform: translateY(-1px);
+        }
+
+        /* ============= SECURITY TABLE - PROFESSIONAL STYLING ============= */
+        .security-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            background: #fdf6e3;  /* Light cream */
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .security-table th {
+            background: #eee8d5;  /* Beige */
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 13px;
+            color: #073642;  /* Dark accent */
+            border-bottom: 2px solid #d3cbb7;
+        }
+
+        .security-table td {
+            padding: 12px;
+            border-bottom: 1px solid #e8e3d3;
+            font-size: 14px;
+            color: #586e75;  /* Emphasized content */
+        }
+
+        .security-table tr:hover {
+            background: #f5f0e1;  /* Hover state */
+        }
+
+        /* ============= RISK BADGES - SOLARIZED COLORS ============= */
+        .risk-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .risk-low {
+            background: rgba(133, 153, 0, 0.15);  /* Solarized Green tint */
+            color: #657b00;  /* Darker green */
+            border: 1px solid #859900;
+        }
+
+        .risk-medium {
+            background: rgba(181, 137, 0, 0.15);  /* Solarized Yellow tint */
+            color: #8a6800;  /* Darker yellow */
+            border: 1px solid #b58900;
+        }
+
+        .risk-high {
+            background: rgba(220, 50, 47, 0.15);  /* Solarized Red tint */
+            color: #a81e1b;  /* Darker red */
+            border: 1px solid #dc322f;
+        }
+
+        /* ============= ALERT BOXES - SOLARIZED SYSTEM ============= */
+        .alert {
+            padding: 16px 20px;
+            border-radius: 8px;
+            margin: 16px 0;
+            border-left: 4px solid;
+            line-height: 1.4;
+        }
+
+        .alert-info {
+            background: rgba(38, 139, 210, 0.1);  /* Solarized Blue tint */
+            border-color: #268bd2;
+            color: #073642;
+        }
+
+        .alert-success {
+            background: rgba(133, 153, 0, 0.1);  /* Solarized Green tint */
+            border-color: #859900;
+            color: #073642;
+        }
+
+        .alert-warning {
+            background: rgba(181, 137, 0, 0.1);  /* Solarized Yellow tint */
+            border-color: #b58900;
+            color: #073642;
+        }
+
+        .alert-danger {
+            background: rgba(220, 50, 47, 0.1);  /* Solarized Red tint */
+            border-color: #dc322f;
+            color: #073642;
+        }
+
+        /* ============= CHECKLIST - PROFESSIONAL DESIGN ============= */
+        .checklist {
+            background: rgba(133, 153, 0, 0.08);  /* Light green tint */
+            border: 2px solid #859900;  /* Solarized Green */
+            border-radius: 12px;
+            padding: 24px;
+            margin: 24px 0;
+        }
+
+        .checklist h3 {
+            color: #073642;  /* Dark accent */
+            font-size: 18px;
+            margin: 0 0 16px 0;
+            font-weight: 600;
+        }
+
+        .checklist ol {
+            margin: 0;
+            padding-left: 24px;
+            color: #586e75;  /* Emphasized content */
+        }
+
+        .checklist li {
+            margin-bottom: 12px;
+            font-size: 15px;
+            line-height: 1.4;
+        }
+
+        /* ============= FOOTER - SOLARIZED LIGHT ============= */
+        .footer {
+            background: #eee8d5;  /* Beige */
+            padding: 32px;
+            text-align: center;
+            border-top: 2px solid #d3cbb7;
+            border-radius: 0 0 12px 12px;
+        }
+
+        .footer p {
+            margin: 8px 0;
+            font-size: 13px;
+            color: #839496;  /* Secondary text */
+        }
+
+        .footer-logo {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .footer strong {
+            color: #073642;  /* Dark accent */
+        }
+
+        /* ============= RESPONSIVE - MOBILE OPTIMIZATION ============= */
+        @media only screen and (max-width: 600px) {
+            body {
+                padding: 4px;
+            }
+
+            .content {
+                padding: 24px 16px;
+            }
+
+            .card {
+                padding: 20px 16px;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header {
+                padding: 32px 20px;
+            }
+
+            .header h1 {
+                font-size: 24px;
+            }
+
+            .score-value {
+                font-size: 42px;
+            }
+
+            .btn {
+                display: block;
+                margin: 8px 0;
+            }
+        }
+
+        /* ============= PRINT STYLES ============= */
+        @media print {
+            body {
+                background: white;
+            }
+
+            .email-container {
+                box-shadow: none;
+                border: 1px solid #d3cbb7;
+            }
+
+            .btn {
+                display: none;
+            }
+        }
+
+        /* ============= ACCESSIBILITY ENHANCEMENTS ============= */
+        a:focus, button:focus {
+            outline: 3px solid #268bd2;  /* Solarized Blue focus */
+            outline-offset: 2px;
+        }
+
+        /* High contrast for readability - WCAG AAA compliant */
+        .info-value,
+        .card-title,
+        .score-value {
+            font-weight: 700;  /* Intense text style: Bright colors */
+        }
+
+        /* ============= ANIMATIONS - SUBTLE PROFESSIONAL ============= */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card {
+            animation: fadeIn 0.3s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <!-- Professional Header - Solarized Blue Gradient -->
+        <div class="header" >
+            <span class="header-logo">🎓</span>
+            <h1  style="color: #073642; !important">Examination Results</h1>
+            <p   style="color: #073642; !important">Semantic Data Services Pvt Ltd</p>
+        </div>
+
+        <!-- Main Content - Solarized Light Background -->
+        <div class="content">
+            <!-- Candidate Information Card -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-icon">👤</span>
+                    <h2 class="card-title">Candidate Information</h2>
+                </div>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-label">Full Name</div>
+                        <div class="info-value">{{student_name}}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Email Address</div>
+                        <div class="info-value">{{student_email}}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Session ID</div>
+                        <div class="info-value" style="font-family: 'Cascadia Mono', monospace; font-size: 13px;">{{session_id}}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Submission Time</div>
+                        <div class="info-value" style="font-size: 14px;">{{submission_timestamp}}</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Exam Timeline Card -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-icon">⏱️</span>
+                    <h2 class="card-title">Exam Timeline</h2>
+                </div>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-label">Started</div>
+                        <div class="info-value" style="font-size: 14px;">{{start_time}}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Completed</div>
+                        <div class="info-value" style="font-size: 14px;">{{end_time}}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Duration</div>
+                        <div class="info-value">{{duration}}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Progress</div>
+                        <div class="info-value">{{answered_questions}} / {{total_questions}} Questions</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Performance Score - Prominent Display -->
+            <div class="score-card">
+                <div class="score-value">{{percentage}}</div>
+                <div class="score-label">Completion Rate</div>
+                <div style="margin-top: 16px; font-size: 15px; color: #073642;">
+                    <strong>Score:</strong> {{mcq_score}} | <strong>Camera:</strong> {{camera_status}}
+                </div>
+            </div>
+
+            <!-- Video Recording Section -->
+            {{#video_link}}
+            <div class="video-card">
+                <div class="card-header" style="border-bottom: none; padding-bottom: 0; margin-bottom: 16px;">
+                    <span class="card-icon">🎬</span>
+                    <h2 class="card-title">Exam Video Recording</h2>
+                </div>
+
+                <div class="video-available">
+                    <span class="video-available-icon">✅</span>
+                    <p class="video-available-text">Video Successfully Uploaded & Available for Review</p>
+                </div>
+
+                <div style="margin: 20px 0;">
+                    <div style="margin-bottom: 12px;">
+                        <strong style="color: #073642;">Filename:</strong>
+                        <span style="color: #268bd2; font-family: 'Cascadia Mono', monospace; font-size: 14px;">{{video_filename}}</span>
+                    </div>
+                    <div style="margin-bottom: 20px;">
+                        <strong style="color: #073642;">Status:</strong>
+                        <span class="risk-badge risk-low">Available for Download</span>
+                    </div>
+                </div>
+
+                <div style="margin: 24px 0;">
+                    <a href="{{video_link}}" class="btn btn-primary" style="color: #073642; !important">🎥 Watch/Download Video</a>
+                    <a href="{{video_folder_link}}" class="btn btn-success" style="color: #073642; !important">📁 View All Recordings</a>
+                </div>
+
+                <div class="alert alert-info">
+                    <strong>📌 When to Review Video:</strong>
+                    <ul style="margin: 8px 0 0 0; padding-left: 20px;">
+                        <li>Risk Score above 60 (High Risk)</li>
+                        <li>Multiple tab switches detected</li>
+                        <li>Suspicious paste attempts</li>
+                        <li>Performance doesn't match skill level</li>
+                    </ul>
+                </div>
+            </div>
+            {{/video_link}}
+
+            {{^video_link}}
+            <div class="alert alert-warning">
+                <strong>⚠️ Video Recording Not Available</strong>
+                <p style="margin: 8px 0 0 0;">The exam video was not uploaded. Camera Status: {{camera_status}}</p>
+            </div>
+            {{/video_link}}
+
+            <!-- Security Report Card -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-icon">🔒</span>
+                    <h2 class="card-title">Security & Integrity Report</h2>
+                </div>
+
+                <div class="info-item" style="margin-bottom: 20px;">
+                    <div class="info-label">Overall Risk Score</div>
+                    <div class="info-value" style="font-size: 32px; color: #dc322f;">{{risk_score}} / 100</div>
+                    <div style="margin-top: 8px; font-size: 13px; color: #839496;">
+                        <span style="color: #859900;">0-30 = Low</span> |
+                        <span style="color: #b58900;">31-60 = Medium</span> |
+                        <span style="color: #dc322f;">61-100 = High</span>
+                    </div>
+                </div>
+
+                <table class="security-table">
+                    <thead>
+                        <tr>
+                            <th>Activity Type</th>
+                            <th style="text-align: center;">Count</th>
+                            <th style="text-align: center;">Severity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Tab Switches / Minimizing</td>
+                            <td style="text-align: center;"><strong>{{tab_switches}}</strong></td>
+                            <td style="text-align: center;"><span class="risk-badge risk-high">High</span></td>
+                        </tr>
+                        <tr>
+                            <td>Window Focus Loss</td>
+                            <td style="text-align: center;"><strong>{{focus_loss_count}}</strong></td>
+                            <td style="text-align: center;"><span class="risk-badge risk-medium">Medium</span></td>
+                        </tr>
+                        <tr>
+                            <td>Paste Attempts</td>
+                            <td style="text-align: center;"><strong>{{paste_attempts}}</strong></td>
+                            <td style="text-align: center;"><span class="risk-badge risk-high">High</span></td>
+                        </tr>
+                        <tr>
+                            <td>DevTools Detected</td>
+                            <td style="text-align: center;"><strong>{{devtools_detected}}</strong></td>
+                            <td style="text-align: center;"><span class="risk-badge risk-high">Critical</span></td>
+                        </tr>
+                        <tr style="background-color: #ffffff;">
+                            <td style="padding: 16px; border-bottom: 1px solid #eee8d5; color: #586e75; font-size: 15px;">Mouse Left Window Area</td>
+                            <td style="padding: 16px; border-bottom: 1px solid #eee8d5; color: #073642; font-weight: bold; text-align: center;">{{mouse_leave_count}}</td>
+                            <td style="padding: 16px; border-bottom: 1px solid #eee8d5; text-align: center;">
+                                <span style="background-color: rgba(181, 137, 0, 0.2); color: #6a5000; padding: 6px 16px; border-radius: 20px; font-size: 13px; font-weight: bold; border: 2px solid #b58900;">MEDIUM</span>
+                            </td>
+                        </tr>
+                        <tr style="background-color: #fdf6e3;">
+                            <td style="padding: 16px; border-bottom: 1px solid #eee8d5; color: #586e75; font-size: 15px;">Copy Attempts</td>
+                            <td style="padding: 16px; border-bottom: 1px solid #eee8d5; color: #073642; font-weight: bold; text-align: center;">{{copy_attempts}}</td>
+                            <td style="padding: 16px; border-bottom: 1px solid #eee8d5; text-align: center;">
+                                <span style="background-color: rgba(181, 137, 0, 0.2); color: #6a5000; padding: 6px 16px; border-radius: 20px; font-size: 13px; font-weight: bold; border: 2px solid #b58900;">MEDIUM</span>
+                            </td>
+                        </tr>
+                        <tr style="background-color: #ffffff;">
+                            <td style="padding: 16px; color: #586e75; font-size: 15px;">Right-Click Attempts</td>
+                            <td style="padding: 16px; color: #073642; font-weight: bold; text-align: center;">{{right_click_attempts}}</td>
+                            <td style="padding: 16px; text-align: center;">
+                                <span style="background-color: rgba(133, 153, 0, 0.15); color: #4a5d00; padding: 6px 16px; border-radius: 20px; font-size: 13px; font-weight: bold; border: 2px solid #859900;">LOW</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <!-- Behavior Analysis Section -->
+                <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin: 24px 0;">
+                    <tr>
+                        <td style="padding: 18px; background-color: #fdf6e3; border-left: 4px solid #268bd2; border-radius: 8px;">
+                            <div style="font-size: 18px; color: #073642; font-weight: bold; margin-bottom: 12px;">📈 Behavior Analysis</div>
+                            <div style="margin-bottom: 8px;">
+                                <span style="color: #839496; font-weight: 600;">Total Suspicious Events:</span>
+                                <span style="color: #dc322f; font-weight: bold; font-size: 18px; margin-left: 8px;">{{total_suspicious_events}}</span>
+                            </div>
+                            <div>
+                                <span style="color: #839496; font-weight: 600;">General Warnings:</span>
+                                <span style="color: #b58900; font-weight: bold; font-size: 18px; margin-left: 8px;">{{general_warnings}}</span>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- Evaluation Checklist -->
+            <div class="checklist">
+                <h3>📋 Evaluation Checklist</h3>
+                <ol>
+                    <li>✅ Review MCQ Score: <strong>{{mcq_score}}/50 ({{percentage}}%)</strong></li>
+                    <li>🎬 Watch video recording if Risk Score > 30</li>
+                    <li>🔍 Analyze security violations and suspicious activities</li>
+                    <li>💻 Manually evaluate coding solutions</li>
+                    <li>📝 Review subjective answers thoroughly</li>
+                    <li>🎯 Calculate final composite score</li>
+                    <li>📧 Send official results to candidate</li>
+                </ol>
+            </div>
+
+            <!-- Detailed Answers Section -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-icon">✍️</span>
+                    <h2 class="card-title">Detailed Answers</h2>
+                </div>
+                <div style="background: #fdf6e3; padding: 20px; border-radius: 8px; max-height: 400px; overflow-y: auto; font-family: 'Cascadia Mono', monospace; font-size: 13px; border: 2px solid #d3cbb7; line-height: 1.4;">
+                    {{{answers_summary}}}
+                </div>
+            </div>
+        </div>
+
+        <!-- Professional Footer - Solarized Beige -->
+        <div class="footer">
+            <div class="footer-logo">🔐</div>
+            <p style="font-weight: 600;"><strong>Semantic Data Services Pvt Ltd</strong></p>
+            <p>Automated Examination System • Session: {{session_id}}</p>
+            <p>This exam uses comprehensive anti-cheat monitoring and video proctoring</p>
+            <p style="margin-top: 16px; font-size: 12px;">© 2025 Semantic Data Services. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>

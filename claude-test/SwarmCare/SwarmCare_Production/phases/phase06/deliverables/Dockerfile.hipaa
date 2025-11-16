@@ -1,0 +1,36 @@
+# Phase 06: HIPAA Compliance - Production Dockerfile
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# Install dependencies
+RUN apt-get update && apt-get install -y \
+    gcc \
+    libssl-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy requirements
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy application
+COPY hipaa_compliance_system.py .
+
+# Create directories
+RUN mkdir -p /var/log/hipaa /etc/ssl/certs
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=3s --start-period=10s --retries=3 \
+  CMD python -c "from hipaa_compliance_system import HIPAAComplianceSystem; HIPAAComplianceSystem()" || exit 1
+
+# Labels
+LABEL maintainer="SwarmCare Engineering"
+LABEL description="HIPAA Compliance System"
+LABEL version="1.0.0"
+LABEL phase="06"
+
+# Expose secure port
+EXPOSE 8443
+
+# Run application
+CMD ["python", "hipaa_compliance_system.py"]

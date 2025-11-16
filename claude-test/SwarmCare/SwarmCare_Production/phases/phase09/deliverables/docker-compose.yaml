@@ -1,0 +1,109 @@
+# Docker Compose for SwarmCare Documentation - Local Development
+# Phase 09: Documentation Services
+# Version: 2.1
+# Last Updated: 2025-10-28
+
+version: '3.8'
+
+services:
+  # MkDocs Documentation
+  mkdocs:
+    image: swarmcare/mkdocs:2.1
+    container_name: swarmcare-mkdocs
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./docs/mkdocs:/docs
+    environment:
+      - ENABLE_LIVE_RELOAD=true
+    command: mkdocs serve --dev-addr=0.0.0.0:8000
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Sphinx Documentation
+  sphinx:
+    image: swarmcare/sphinx:2.1
+    container_name: swarmcare-sphinx
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./docs/sphinx:/docs
+    command: sphinx-autobuild /docs /docs/_build/html --host 0.0.0.0 --port 8080
+    restart: unless-stopped
+
+  # Docusaurus Documentation
+  docusaurus:
+    image: node:18-alpine
+    container_name: swarmcare-docusaurus
+    working_dir: /app
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./docs/docusaurus:/app
+    command: sh -c "npm install && npm start -- --host 0.0.0.0"
+    restart: unless-stopped
+
+  # Swagger UI for API Documentation
+  swagger-ui:
+    image: swaggerapi/swagger-ui:latest
+    container_name: swarmcare-swagger
+    ports:
+      - "8081:8080"
+    environment:
+      - SWAGGER_JSON=/openapi/openapi.yaml
+      - BASE_URL=/api/docs
+    volumes:
+      - ./openapi:/openapi
+    restart: unless-stopped
+
+  # ReDoc for API Documentation
+  redoc:
+    image: redocly/redoc:latest
+    container_name: swarmcare-redoc
+    ports:
+      - "8082:80"
+    environment:
+      - SPEC_URL=/openapi/openapi.yaml
+    volumes:
+      - ./openapi:/openapi
+    restart: unless-stopped
+
+  # Documentation Search (Algolia DocSearch Scraper)
+  docsearch-scraper:
+    image: algolia/docsearch-scraper:latest
+    container_name: swarmcare-docsearch
+    environment:
+      - APPLICATION_ID=${ALGOLIA_APP_ID}
+      - API_KEY=${ALGOLIA_API_KEY}
+    volumes:
+      - ./docsearch-config.json:/root/config.json
+    restart: "no"
+
+  # NGINX Reverse Proxy for all documentation services
+  nginx:
+    image: nginx:alpine
+    container_name: swarmcare-docs-nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./ssl:/etc/nginx/ssl:ro
+    depends_on:
+      - mkdocs
+      - sphinx
+      - docusaurus
+      - swagger-ui
+      - redoc
+    restart: unless-stopped
+
+networks:
+  default:
+    name: swarmcare-docs-network
+
+volumes:
+  docs-data:

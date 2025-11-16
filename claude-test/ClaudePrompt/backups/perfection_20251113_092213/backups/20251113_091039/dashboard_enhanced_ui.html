@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ULTRATHINK Enhanced Monitor</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #7e22ce 100%);
+            color: #fff;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+            background: linear-gradient(90deg, #fff, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .connection-status {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+
+        .connected { background: rgba(34, 197, 94, 0.3); border: 2px solid #22c55e; }
+        .disconnected { background: rgba(239, 68, 68, 0.3); border: 2px solid #ef4444; }
+
+        /* Summary Cards */
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .summary-card {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.2);
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .summary-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .summary-card .value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .summary-card .label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Track Grid */
+        .tracks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .track-card {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            padding: 25px;
+            border-radius: 15px;
+            border: 2px solid rgba(255,255,255,0.2);
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .track-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+            border-color: rgba(255,255,255,0.5);
+        }
+
+        .track-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899);
+        }
+
+        .track-card.completed::before { background: #22c55e; }
+        .track-card.running::before { background: #eab308; }
+        .track-card.error::before { background: #ef4444; }
+        .track-card.pending::before { background: #3b82f6; }
+
+        .track-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .track-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .track-status {
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .status-completed { background: rgba(34, 197, 94, 0.3); color: #22c55e; }
+        .status-running { background: rgba(234, 179, 8, 0.3); color: #eab308; }
+        .status-error { background: rgba(239, 68, 68, 0.3); color: #ef4444; }
+        .status-pending { background: rgba(59, 130, 246, 0.3); color: #3b82f6; }
+
+        .progress-container {
+            margin: 15px 0;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 25px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+
+        .progress-fill.completed { background: linear-gradient(90deg, #22c55e, #16a34a); }
+        .progress-fill.error { background: linear-gradient(90deg, #ef4444, #dc2626); }
+
+        .track-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin: 15px 0;
+            font-size: 0.9rem;
+        }
+
+        .stat-item {
+            background: rgba(0,0,0,0.2);
+            padding: 8px;
+            border-radius: 8px;
+        }
+
+        .stat-label {
+            opacity: 0.7;
+            font-size: 0.8rem;
+        }
+
+        .stat-value {
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-top: 3px;
+        }
+
+        .current-task {
+            background: rgba(0,0,0,0.3);
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 15px;
+            font-size: 0.85rem;
+            font-style: italic;
+            border-left: 3px solid #8b5cf6;
+        }
+
+        .click-hint {
+            text-align: center;
+            opacity: 0.6;
+            font-size: 0.8rem;
+            margin-top: 10px;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(5px);
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            margin: 2% auto;
+            padding: 30px;
+            border-radius: 20px;
+            max-width: 1200px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(255,255,255,0.2);
+        }
+
+        .modal-title {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .close-btn {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #fff;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0 10px;
+            transition: transform 0.2s;
+        }
+
+        .close-btn:hover {
+            transform: scale(1.2);
+            color: #ef4444;
+        }
+
+        .modal-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+            border-bottom: 2px solid rgba(255,255,255,0.1);
+        }
+
+        .tab-btn {
+            padding: 12px 24px;
+            background: transparent;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .tab-btn:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .tab-btn.active {
+            border-bottom-color: #8b5cf6;
+            background: rgba(139, 92, 246, 0.2);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Agent Grid */
+        .agents-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .agent-card {
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.3s;
+        }
+
+        .agent-card:hover {
+            background: rgba(255,255,255,0.15);
+            transform: scale(1.05);
+        }
+
+        .agent-id {
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: #8b5cf6;
+            margin-bottom: 8px;
+        }
+
+        .agent-name {
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        .agent-role {
+            font-size: 0.8rem;
+            opacity: 0.8;
+            font-style: italic;
+            margin-bottom: 8px;
+        }
+
+        .agent-priority {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 10px;
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
+
+        .priority-CRITICAL { background: #ef4444; }
+        .priority-HIGH { background: #f59e0b; }
+        .priority-MEDIUM { background: #3b82f6; }
+        .priority-LOW { background: #6b7280; }
+
+        /* Logs Viewer */
+        .logs-container {
+            background: #000;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            max-height: 500px;
+            overflow-y: auto;
+            border: 2px solid rgba(139, 92, 246, 0.5);
+        }
+
+        .log-line {
+            padding: 3px 0;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+
+        .log-line.verbose { color: #a78bfa; }
+        .log-line.error { color: #ef4444; font-weight: bold; }
+        .log-line.warning { color: #eab308; }
+        .log-line.success { color: #22c55e; }
+
+        .system-prompt-box {
+            background: rgba(0,0,0,0.5);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #8b5cf6;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            max-height: 400px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .info-card {
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #8b5cf6;
+        }
+
+        .info-label {
+            font-size: 0.8rem;
+            opacity: 0.7;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .info-value {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .error-list {
+            background: rgba(239, 68, 68, 0.2);
+            border: 2px solid #ef4444;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .error-item {
+            padding: 10px;
+            margin: 5px 0;
+            background: rgba(0,0,0,0.3);
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+        }
+
+        .warning-list {
+            background: rgba(234, 179, 8, 0.2);
+            border: 2px solid #eab308;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .warning-item {
+            padding: 10px;
+            margin: 5px 0;
+            background: rgba(0,0,0,0.3);
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+        }
+
+        /* System Resources */
+        .resource-bars {
+            margin: 20px 0;
+        }
+
+        .resource-item {
+            margin: 15px 0;
+        }
+
+        .resource-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+
+        .resource-bar {
+            height: 20px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .resource-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            transition: width 0.5s ease;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .tracks-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .agents-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(0,0,0,0.2);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(139, 92, 246, 0.5);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(139, 92, 246, 0.8);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔥 ULTRATHINK Enhanced Monitor</h1>
+            <div class="subtitle">Real-Time Track & Agent Visibility</div>
+            <div class="connection-status disconnected" id="connectionStatus">
+                ⚠️ Connecting to server...
+            </div>
+        </header>
+
+        <!-- Summary Section -->
+        <div class="summary-grid" id="summaryGrid">
+            <!-- Populated by JavaScript -->
+        </div>
+
+        <!-- Tracks Grid -->
+        <div class="tracks-grid" id="tracksGrid">
+            <!-- Populated by JavaScript -->
+        </div>
+
+        <!-- System Resources -->
+        <div class="resource-bars" id="systemResources">
+            <!-- Populated by JavaScript -->
+        </div>
+    </div>
+
+    <!-- Track Detail Modal -->
+    <div id="trackModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title" id="modalTitle">Track Details</div>
+                <button class="close-btn" onclick="closeModal()">&times;</button>
+            </div>
+
+            <div class="modal-tabs">
+                <button class="tab-btn active" onclick="switchTab('overview')">Overview</button>
+                <button class="tab-btn" onclick="switchTab('agents')">Agents</button>
+                <button class="tab-btn" onclick="switchTab('logs')">Live Logs</button>
+                <button class="tab-btn" onclick="switchTab('prompt')">System Prompt</button>
+                <button class="tab-btn" onclick="switchTab('errors')">Errors & Warnings</button>
+            </div>
+
+            <div id="overview" class="tab-content active">
+                <!-- Overview content -->
+            </div>
+
+            <div id="agents" class="tab-content">
+                <!-- Agents grid -->
+            </div>
+
+            <div id="logs" class="tab-content">
+                <!-- Logs viewer -->
+            </div>
+
+            <div id="prompt" class="tab-content">
+                <!-- System prompt -->
+            </div>
+
+            <div id="errors" class="tab-content">
+                <!-- Errors and warnings -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let ws = null;
+        let currentTrackData = {};
+        let reconnectInterval = null;
+
+        // WebSocket connection
+        function connectWebSocket() {
+            const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsUrl = `${protocol}//${window.location.hostname}:8889/ws`;
+
+            ws = new WebSocket(wsUrl);
+
+            ws.onopen = () => {
+                console.log('WebSocket connected');
+                document.getElementById('connectionStatus').className = 'connection-status connected';
+                document.getElementById('connectionStatus').innerHTML = '✅ Connected';
+                if (reconnectInterval) {
+                    clearInterval(reconnectInterval);
+                    reconnectInterval = null;
+                }
+            };
+
+            ws.onmessage = (event) => {
+                const data = JSON.parse(event.data);
+                updateDashboard(data);
+            };
+
+            ws.onclose = () => {
+                console.log('WebSocket disconnected');
+                document.getElementById('connectionStatus').className = 'connection-status disconnected';
+                document.getElementById('connectionStatus').innerHTML = '⚠️ Reconnecting...';
+
+                if (!reconnectInterval) {
+                    reconnectInterval = setInterval(() => {
+                        console.log('Attempting to reconnect...');
+                        connectWebSocket();
+                    }, 3000);
+                }
+            };
+
+            ws.onerror = (error) => {
+                console.error('WebSocket error:', error);
+            };
+        }
+
+        // Update dashboard with new data
+        function updateDashboard(data) {
+            currentTrackData = data;
+
+            // Update summary cards
+            updateSummary(data.summary);
+
+            // Update track cards
+            updateTracks(data.tracks);
+
+            // Update system resources
+            updateSystemResources(data.system);
+        }
+
+        function updateSummary(summary) {
+            const summaryHTML = `
+                <div class="summary-card">
+                    <div class="label">Overall Progress</div>
+                    <div class="value">${summary.total_progress}%</div>
+                </div>
+                <div class="summary-card">
+                    <div class="label">Completed</div>
+                    <div class="value">${summary.completed} / ${summary.total_tracks}</div>
+                </div>
+                <div class="summary-card">
+                    <div class="label">Running</div>
+                    <div class="value" style="color: #eab308;">${summary.running}</div>
+                </div>
+                <div class="summary-card">
+                    <div class="label">Errors</div>
+                    <div class="value" style="color: ${summary.errors > 0 ? '#ef4444' : '#22c55e'};">${summary.errors}</div>
+                </div>
+            `;
+            document.getElementById('summaryGrid').innerHTML = summaryHTML;
+        }
+
+        function updateTracks(tracks) {
+            const tracksHTML = tracks.map(track => `
+                <div class="track-card ${track.status}" onclick="openTrackDetails(${track.track_id})">
+                    <div class="track-header">
+                        <div class="track-title">Track ${track.track_id}</div>
+                        <div class="track-status status-${track.status}">${track.status}</div>
+                    </div>
+
+                    <div class="progress-container">
+                        <div class="progress-bar">
+                            <div class="progress-fill ${track.status}" style="width: ${track.progress}%">
+                                ${track.progress}%
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="track-stats">
+                        <div class="stat-item">
+                            <div class="stat-label">Lines</div>
+                            <div class="stat-value">${track.line_count.toLocaleString()}</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Size</div>
+                            <div class="stat-value">${track.file_size_kb} KB</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Agents</div>
+                            <div class="stat-value">${track.agent_count}</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Elapsed</div>
+                            <div class="stat-value">${formatTime(track.elapsed_seconds)}</div>
+                        </div>
+                    </div>
+
+                    <div class="current-task">
+                        📍 ${track.current_task}
+                    </div>
+
+                    <div class="click-hint">
+                        👆 Click for detailed view
+                    </div>
+                </div>
+            `).join('');
+
+            document.getElementById('tracksGrid').innerHTML = tracksHTML;
+        }
+
+        function updateSystemResources(system) {
+            const resourcesHTML = `
+                <h3 style="margin-bottom: 15px;">System Resources</h3>
+                <div class="resource-item">
+                    <div class="resource-label">
+                        <span>CPU Usage</span>
+                        <span>${system.cpu_percent}%</span>
+                    </div>
+                    <div class="resource-bar">
+                        <div class="resource-fill" style="width: ${system.cpu_percent}%"></div>
+                    </div>
+                </div>
+                <div class="resource-item">
+                    <div class="resource-label">
+                        <span>Memory Usage</span>
+                        <span>${system.memory_used_gb} / ${system.memory_total_gb} GB (${system.memory_percent}%)</span>
+                    </div>
+                    <div class="resource-bar">
+                        <div class="resource-fill" style="width: ${system.memory_percent}%"></div>
+                    </div>
+                </div>
+                <div class="resource-item">
+                    <div class="resource-label">
+                        <span>Disk Space</span>
+                        <span>${system.disk_free_gb} GB free (${100 - system.disk_percent}% available)</span>
+                    </div>
+                    <div class="resource-bar">
+                        <div class="resource-fill" style="width: ${system.disk_percent}%"></div>
+                    </div>
+                </div>
+            `;
+            document.getElementById('systemResources').innerHTML = resourcesHTML;
+        }
+
+        function openTrackDetails(trackId) {
+            const track = currentTrackData.tracks.find(t => t.track_id === trackId);
+            if (!track) return;
+
+            document.getElementById('modalTitle').innerHTML = `🔥 Track ${trackId} - Detailed View`;
+
+            // Populate overview tab
+            document.getElementById('overview').innerHTML = generateOverviewHTML(track);
+
+            // Populate agents tab
+            document.getElementById('agents').innerHTML = generateAgentsHTML(track);
+
+            // Populate logs tab
+            document.getElementById('logs').innerHTML = generateLogsHTML(track);
+
+            // Populate prompt tab
+            document.getElementById('prompt').innerHTML = generatePromptHTML(track);
+
+            // Populate errors tab
+            document.getElementById('errors').innerHTML = generateErrorsHTML(track);
+
+            document.getElementById('trackModal').style.display = 'block';
+        }
+
+        function generateOverviewHTML(track) {
+            return `
+                <div class="info-grid">
+                    <div class="info-card">
+                        <div class="info-label">Status</div>
+                        <div class="info-value" style="color: ${getStatusColor(track.status)}">${track.status.toUpperCase()}</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-label">Progress</div>
+                        <div class="info-value">${track.progress}%</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-label">Agent Count</div>
+                        <div class="info-value">${track.agent_count}</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-label">Line Count</div>
+                        <div class="info-value">${track.line_count.toLocaleString()}</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-label">File Size</div>
+                        <div class="info-value">${track.file_size_kb} KB</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-label">Elapsed Time</div>
+                        <div class="info-value">${formatTime(track.elapsed_seconds)}</div>
+                    </div>
+                </div>
+
+                <h3 style="margin: 20px 0 10px 0;">ULTRATHINK Stage</h3>
+                <div class="info-card">
+                    <div class="info-value" style="font-size: 1rem;">${track.ultrathink_stage || 'Not available'}</div>
+                </div>
+
+                <h3 style="margin: 20px 0 10px 0;">Current Task</h3>
+                <div class="system-prompt-box" style="max-height: 100px;">
+                    ${track.current_task}
+                </div>
+
+                <h3 style="margin: 20px 0 10px 0;">Context Usage</h3>
+                <div class="resource-item">
+                    <div class="resource-label">
+                        <span>Tokens Used</span>
+                        <span>${track.context_usage.used.toLocaleString()} / ${track.context_usage.max.toLocaleString()}</span>
+                    </div>
+                    <div class="resource-bar">
+                        <div class="resource-fill" style="width: ${(track.context_usage.used / track.context_usage.max * 100).toFixed(1)}%"></div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function generateAgentsHTML(track) {
+            if (!track.agents || track.agents.length === 0) {
+                return '<p style="text-align: center; padding: 40px;">No agent data available yet. Agents will appear once ULTRATHINK processing begins.</p>';
+            }
+
+            const agentsHTML = track.agents.map(agent => `
+                <div class="agent-card">
+                    <div class="agent-id">${agent.agent_id}</div>
+                    <div class="agent-name">${agent.name}</div>
+                    <div class="agent-role">${agent.role}</div>
+                    <div class="agent-priority priority-${agent.priority}">${agent.priority}</div>
+                </div>
+            `).join('');
+
+            return `
+                <h3 style="margin-bottom: 15px;">${track.agents.length} Agents Allocated</h3>
+                <div class="agents-grid">
+                    ${agentsHTML}
+                </div>
+            `;
+        }
+
+        function generateLogsHTML(track) {
+            if (!track.log_lines || track.log_lines.length === 0) {
+                return '<p style="text-align: center; padding: 40px;">No logs available yet.</p>';
+            }
+
+            const logsHTML = track.log_lines.map(line => {
+                let className = 'log-line';
+                if (line.includes('[VERBOSE]')) className += ' verbose';
+                if (line.includes('ERROR') || line.includes('FAIL')) className += ' error';
+                if (line.includes('WARNING') || line.includes('WARN')) className += ' warning';
+                if (line.includes('✓') || line.includes('PASS')) className += ' success';
+
+                return `<div class="${className}">${escapeHtml(line)}</div>`;
+            }).join('');
+
+            return `
+                <h3 style="margin-bottom: 15px;">Live Log Stream (Last 100 lines)</h3>
+                <div class="logs-container">
+                    ${logsHTML}
+                </div>
+            `;
+        }
+
+        function generatePromptHTML(track) {
+            if (!track.system_prompt) {
+                return '<p style="text-align: center; padding: 40px;">System prompt not yet generated.</p>';
+            }
+
+            return `
+                <h3 style="margin-bottom: 15px;">Generated System Prompt</h3>
+                <div class="system-prompt-box">
+${escapeHtml(track.system_prompt)}
+                </div>
+            `;
+        }
+
+        function generateErrorsHTML(track) {
+            let html = '';
+
+            if (track.errors && track.errors.length > 0) {
+                html += '<h3 style="margin-bottom: 15px;">❌ Errors</h3>';
+                html += '<div class="error-list">';
+                track.errors.forEach(error => {
+                    html += `<div class="error-item">${escapeHtml(error)}</div>`;
+                });
+                html += '</div>';
+            } else {
+                html += '<p style="color: #22c55e; text-align: center; padding: 20px;">✅ No errors detected!</p>';
+            }
+
+            if (track.warnings && track.warnings.length > 0) {
+                html += '<h3 style="margin: 20px 0 15px 0;">⚠️ Warnings</h3>';
+                html += '<div class="warning-list">';
+                track.warnings.forEach(warning => {
+                    html += `<div class="warning-item">${escapeHtml(warning)}</div>`;
+                });
+                html += '</div>';
+            }
+
+            return html || '<p style="text-align: center; padding: 40px;">No errors or warnings.</p>';
+        }
+
+        function closeModal() {
+            document.getElementById('trackModal').style.display = 'none';
+        }
+
+        function switchTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Show selected tab
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        function formatTime(seconds) {
+            const hours = Math.floor(seconds / 3600);
+            const minutes = Math.floor((seconds % 3600) / 60);
+            const secs = Math.floor(seconds % 60);
+
+            if (hours > 0) {
+                return `${hours}h ${minutes}m`;
+            } else if (minutes > 0) {
+                return `${minutes}m ${secs}s`;
+            } else {
+                return `${secs}s`;
+            }
+        }
+
+        function getStatusColor(status) {
+            switch(status) {
+                case 'completed': return '#22c55e';
+                case 'running': return '#eab308';
+                case 'error': return '#ef4444';
+                case 'pending': return '#3b82f6';
+                default: return '#fff';
+            }
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('trackModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+
+        // Initialize
+        connectWebSocket();
+
+        // Fetch initial state
+        fetch('/api/state')
+            .then(response => response.json())
+            .then(data => updateDashboard(data))
+            .catch(error => console.error('Error fetching initial state:', error));
+    </script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <NoWarn>NU1701</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EPPlus" Version="7.0.0" />
+    <PackageReference Include="Hangfire.Core" Version="1.8.17" />
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="6.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="8.0.0" />
+    <PackageReference Include="QuestPDF" Version="2024.10.3" />
+    <PackageReference Include="SixLabors.ImageSharp" Version="3.1.11" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RMMS.Common\RMMS.Common.csproj" />
+    <ProjectReference Include="..\RMMS.DataAccess\RMMS.DataAccess.csproj" />
+    <ProjectReference Include="..\RMMS.Models\RMMS.Models.csproj" />
+  </ItemGroup>
+
+</Project>

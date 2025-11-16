@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FHIR Healthcare API - Test Dashboard (Fixed)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: #2d3748;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #718096;
+            font-size: 16px;
+        }
+
+        .warning {
+            background: #fef5e7;
+            border: 2px solid #f39c12;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .warning h3 {
+            color: #e67e22;
+            margin-bottom: 10px;
+        }
+
+        .login-section {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .login-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 15px;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #4a5568;
+        }
+
+        input, select {
+            padding: 10px;
+            border: 2px solid #e2e8f0;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn:hover {
+            background: #5a67d8;
+            transform: translateY(-2px);
+        }
+
+        .btn.secondary {
+            background: #48bb78;
+        }
+
+        .btn.secondary:hover {
+            background: #38a169;
+        }
+
+        .status {
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        .status.success {
+            background: #c6f6d5;
+            color: #22543d;
+        }
+
+        .status.error {
+            background: #fed7d7;
+            color: #742a2a;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 20px;
+        }
+
+        .icon.patient { background: #bee3f8; }
+        .icon.observation { background: #fbb6ce; }
+        .icon.condition { background: #fbd38d; }
+        .icon.medication { background: #c6f6d5; }
+        .icon.lab { background: #e9d8fd; }
+        .icon.care { background: #fed7d7; }
+
+        .card-title {
+            color: #2d3748;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .test-item {
+            padding: 10px;
+            margin: 10px 0;
+            background: #f7fafc;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .test-item:hover {
+            background: #edf2f7;
+            padding-left: 15px;
+        }
+
+        .test-url {
+            color: #4299e1;
+            font-size: 12px;
+            word-break: break-all;
+            margin-top: 5px;
+        }
+
+        .result {
+            margin-top: 10px;
+            padding: 10px;
+            background: #f7fafc;
+            border-radius: 5px;
+            max-height: 300px;
+            overflow-y: auto;
+            display: none;
+        }
+
+        .result.show {
+            display: block;
+        }
+
+        pre {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-size: 12px;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-left: 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+
+        .badge.success { background: #c6f6d5; color: #22543d; }
+        .badge.pending { background: #fef5e7; color: #7d6608; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏥 FHIR Healthcare API - Test Dashboard</h1>
+            <p class="subtitle">Test your populated data by clicking on any endpoint below</p>
+
+            <div class="warning">
+                <h3>⚠️ HTTPS Redirect Detected</h3>
+                <p>Your API is redirecting to HTTPS. Make sure to:</p>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li>Use the correct protocol (HTTP or HTTPS)</li>
+                    <li>Use the correct port (5079 for HTTP or 7012 for HTTPS)</li>
+                    <li>If using HTTPS with self-signed certificate, open <a href="https://localhost:7012" target="_blank">https://localhost:7012</a> first and accept the certificate</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="login-section">
+            <h2>🔐 Authentication</h2>
+            <div class="login-grid">
+                <div class="input-group">
+                    <label>Username</label>
+                    <input type="text" id="username" value="dr.smith" />
+                </div>
+                <div class="input-group">
+                    <label>Password</label>
+                    <input type="password" id="password" value="Doctor123!" />
+                </div>
+                <div class="input-group">
+                    <label>Protocol</label>
+                    <select id="protocol">
+                        <option value="http">HTTP</option>
+                        <option value="https">HTTPS</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label>Port</label>
+                    <input type="text" id="port" value="5079" />
+                </div>
+            </div>
+            <div style="margin-top: 20px;">
+                <button class="btn" onclick="login()">Login & Get Token</button>
+                <button class="btn secondary" style="margin-left: 10px;" onclick="autoDetectAndLogin()">Auto-Detect & Login</button>
+            </div>
+            <div id="authStatus"></div>
+            <div id="tokenDisplay" style="margin-top: 10px; display: none;">
+                <label>Token (expires in 1 hour):</label>
+                <input type="text" id="tokenField" style="width: 100%; margin-top: 5px;" readonly />
+                <button class="btn" style="margin-top: 10px;" onclick="refreshToken()">Refresh Token</button>
+            </div>
+        </div>
+
+        <div class="grid">
+            <!-- Patient Card -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="icon patient">👤</div>
+                    <div>
+                        <div class="card-title">Patient Data</div>
+                        <span class="badge success">1 Record</span>
+                    </div>
+                </div>
+                <div class="test-item" onclick="testEndpoint('/api/fhir/Patient/1', 'patient1')">
+                    <strong>Get Patient ID: 1</strong>
+                    <div class="test-url">/api/fhir/Patient/1</div>
+                </div>
+                <div class="result" id="patient1"></div>
+
+                <div class="test-item" onclick="testEndpoint('/api/fhir/patient/search?name=Test', 'patientSearch')">
+                    <strong>Search Patients</strong>
+                    <div class="test-url">/api/fhir/patient/search?name=Test</div>
+                </div>
+                <div class="result" id="patientSearch"></div>
+            </div>
+
+            <!-- Observations Card -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="icon observation">📊</div>
+                    <div>
+                        <div class="card-title">Observations</div>
+                        <span class="badge success">4 Records</span>
+                    </div>
+                </div>
+                <div class="test-item" onclick="testEndpoint('/api/observation/search?patientId=1', 'obsSearch')">
+                    <strong>All Observations for Patient 1</strong>
+                    <div class="test-url">/api/observation/search?patientId=1</div>
+                </div>
+                <div class="result" id="obsSearch"></div>
+
+                <div class="test-item" onclick="testEndpoint('/api/observation/analytics/trends', 'obsTrends')">
+                    <strong>Observation Analytics</strong>
+                    <div class="test-url">/api/observation/analytics/trends</div>
+                </div>
+                <div class="result" id="obsTrends"></div>
+
+                <div class="test-item" onclick="testEndpoint('/api/observation/analytics/distribution', 'obsDistribution')">
+                    <strong>Observation Distribution</strong>
+                    <div class="test-url">/api/observation/analytics/distribution</div>
+                </div>
+                <div class="result" id="obsDistribution"></div>
+            </div>
+
+            <!-- Validated Lab Card -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="icon lab">🔬</div>
+                    <div>
+                        <div class="card-title">Lab Results</div>
+                        <span class="badge success">4 Records</span>
+                    </div>
+                </div>
+                <div class="test-item" onclick="testEndpoint('/api/validated-lab/patient/1', 'labPatient')">
+                    <strong>All Lab Results for Patient 1</strong>
+                    <div class="test-url">/api/validated-lab/patient/1</div>
+                </div>
+                <div class="result" id="labPatient"></div>
+
+                <div class="test-item" onclick="testEndpoint('/api/validated-lab/latest/1', 'labLatest')">
+                    <strong>Latest Lab Results</strong>
+                    <div class="test-url">/api/validated-lab/latest/1</div>
+                </div>
+                <div class="result" id="labLatest"></div>
+            </div>
+
+            <!-- Care Plans Card -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="icon care">📋</div>
+                    <div>
+                        <div class="card-title">Care Plans</div>
+                        <span class="badge success">2 Records Created</span>
+                    </div>
+                </div>
+                <div class="test-item" onclick="testEndpoint('/api/care-plan/patient/1', 'carePatient')">
+                    <strong>All Care Plans for Patient 1</strong>
+                    <div class="test-url">/api/care-plan/patient/1</div>
+                </div>
+                <div class="result" id="carePatient"></div>
+
+                <div class="test-item" onclick="testEndpoint('/api/care-plan/diabetes-status/1', 'careDiabetes')">
+                    <strong>Diabetes Care Plan Status</strong>
+                    <div class="test-url">/api/care-plan/diabetes-status/1</div>
+                </div>
+                <div class="result" id="careDiabetes"></div>
+            </div>
+
+            <!-- Health Monitoring Card -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="icon observation">📈</div>
+                    <div>
+                        <div class="card-title">Health Monitoring</div>
+                    </div>
+                </div>
+                <div class="test-item" onclick="testEndpoint('/api/health-monitoring/patient/1/summary', 'healthSummary')">
+                    <strong>Patient Health Summary</strong>
+                    <div class="test-url">/api/health-monitoring/patient/1/summary</div>
+                </div>
+                <div class="result" id="healthSummary"></div>
+
+                <div class="test-item" onclick="testEndpoint('/api/health-monitoring/patient/1/alerts', 'healthAlerts')">
+                    <strong>Health Alerts</strong>
+                    <div class="test-url">/api/health-monitoring/patient/1/alerts</div>
+                </div>
+                <div class="result" id="healthAlerts"></div>
+            </div>
+
+            <!-- Clinical Decision Support -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="icon condition">🤖</div>
+                    <div>
+                        <div class="card-title">Clinical Decision Support</div>
+                    </div>
+                </div>
+                <div class="test-item" onclick="testEndpoint('/api/clinical-decision-support/recommendations/1', 'cdsRec')">
+                    <strong>Get Recommendations</strong>
+                    <div class="test-url">/api/clinical-decision-support/recommendations/1</div>
+                </div>
+                <div class="result" id="cdsRec"></div>
+
+                <div class="test-item" onclick="testEndpoint('/api/clinical-decision-support/risk-assessment/1', 'cdsRisk')">
+                    <strong>Risk Assessment</strong>
+                    <div class="test-url">/api/clinical-decision-support/risk-assessment/1</div>
+                </div>
+                <div class="result" id="cdsRisk"></div>
+            </div>
+        </div>
+
+        <!-- Working Endpoints Summary -->
+        <div class="card">
+            <div class="card-header">
+                <div class="icon patient">✅</div>
+                <div class="card-title">Quick Test - Working Endpoints</div>
+            </div>
+            <button class="btn" onclick="testWorkingEndpoints()">Test Known Working Endpoints</button>
+            <div id="workingResults" style="margin-top: 20px;"></div>
+        </div>
+    </div>
+
+    <script>
+        let authToken = '';
+        let apiBaseUrl = 'http://localhost:5079';
+
+        function updateApiUrl() {
+            const protocol = document.getElementById('protocol').value;
+            const port = document.getElementById('port').value;
+            apiBaseUrl = `${protocol}://localhost:${port}`;
+        }
+
+        async function autoDetectAndLogin() {
+            const statusDiv = document.getElementById('authStatus');
+            statusDiv.innerHTML = '<div class="loading"></div> Auto-detecting API configuration...';
+
+            // Try different combinations
+            const attempts = [
+                { protocol: 'http', port: '5079' },
+                { protocol: 'https', port: '7012' },
+                { protocol: 'http', port: '5000' },
+                { protocol: 'https', port: '5001' }
+            ];
+
+            for (const attempt of attempts) {
+                const url = `${attempt.protocol}://localhost:${attempt.port}/api/auth/login`;
+                try {
+                    const response = await fetch(url, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            username: document.getElementById('username').value,
+                            password: document.getElementById('password').value
+                        })
+                    });
+
+                    if (response.ok) {
+                        const data = await response.json();
+                        if (data.token) {
+                            document.getElementById('protocol').value = attempt.protocol;
+                            document.getElementById('port').value = attempt.port;
+                            apiBaseUrl = `${attempt.protocol}://localhost:${attempt.port}`;
+                            authToken = data.token;
+                            statusDiv.innerHTML = `<div class="status success">✅ Connected to ${apiBaseUrl} as ${data.user.fullName}</div>`;
+                            document.getElementById('tokenDisplay').style.display = 'block';
+                            document.getElementById('tokenField').value = authToken;
+                            return;
+                        }
+                    }
+                } catch (error) {
+                    console.log(`Failed ${attempt.protocol}:${attempt.port}: ${error.message}`);
+                }
+            }
+
+            statusDiv.innerHTML = '<div class="status error">❌ Could not auto-detect API. Please configure manually.</div>';
+        }
+
+        function login() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            updateApiUrl();
+
+            const statusDiv = document.getElementById('authStatus');
+            statusDiv.innerHTML = '<div class="loading"></div> Logging in...';
+
+            fetch(`${apiBaseUrl}/api/auth/login`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ username, password })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.token) {
+                    authToken = data.token;
+                    statusDiv.innerHTML = `<div class="status success">✅ Logged in successfully as ${data.user.fullName} at ${apiBaseUrl}</div>`;
+                    document.getElementById('tokenDisplay').style.display = 'block';
+                    document.getElementById('tokenField').value = authToken;
+                } else {
+                    statusDiv.innerHTML = '<div class="status error">❌ Login failed: ' + (data.error || 'Unknown error') + '</div>';
+                }
+            })
+            .catch(error => {
+                statusDiv.innerHTML = `<div class="status error">❌ Connection error: ${error.message}<br>
+                    Try: 1) Change to HTTPS and port 7012, 2) Open ${apiBaseUrl} in a new tab to accept certificate</div>`;
+            });
+        }
+
+        function refreshToken() {
+            login();
+        }
+
+        function testEndpoint(endpoint, resultId) {
+            if (!authToken) {
+                alert('Please login first!');
+                return;
+            }
+
+            const resultDiv = document.getElementById(resultId);
+            resultDiv.innerHTML = '<div class="loading"></div> Loading...';
+            resultDiv.classList.add('show');
+
+            fetch(`${apiBaseUrl}${endpoint}`, {
+                headers: {
+                    'Authorization': 'Bearer ' + authToken,
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                return response.text();
+            })
+            .then(text => {
+                try {
+                    const json = JSON.parse(text);
+                    resultDiv.innerHTML = '<strong>✅ Success!</strong><pre>' + JSON.stringify(json, null, 2) + '</pre>';
+                } catch {
+                    resultDiv.innerHTML = '<strong>✅ Success!</strong><pre>' + text + '</pre>';
+                }
+            })
+            .catch(error => {
+                resultDiv.innerHTML = `<strong>❌ Error:</strong> ${error.message}<br>
+                    <small>If 401, click Refresh Token. If connection error, check protocol/port settings.</small>`;
+            });
+        }
+
+        function testWorkingEndpoints() {
+            if (!authToken) {
+                alert('Please login first!');
+                return;
+            }
+
+            const workingEndpoints = [
+                '/api/fhir/Patient/1',
+                '/api/fhir/patient/search?name=Test',
+                '/api/observation/search?patientId=1',
+                '/api/observation/analytics/trends',
+                '/api/observation/analytics/distribution',
+                '/api/validated-lab/patient/1',
+                '/api/validated-lab/latest/1',
+                '/api/care-plan/patient/1',
+                '/api/health-monitoring/patient/1/summary',
+                '/api/clinical-decision-support/recommendations/1'
+            ];
+
+            const resultsDiv = document.getElementById('workingResults');
+            resultsDiv.innerHTML = '<h3>Testing Working Endpoints...</h3>';
+
+            let successCount = 0;
+            let failCount = 0;
+            let completed = 0;
+
+            workingEndpoints.forEach((endpoint, index) => {
+                fetch(`${apiBaseUrl}${endpoint}`, {
+                    headers: {
+                        'Authorization': 'Bearer ' + authToken,
+                        'Accept': 'application/json'
+                    }
+                })
+                .then(response => {
+                    if (response.ok) {
+                        successCount++;
+                        resultsDiv.innerHTML += `<div style="color: green;">✅ ${endpoint}</div>`;
+                    } else {
+                        failCount++;
+                        resultsDiv.innerHTML += `<div style="color: red;">❌ ${endpoint} (${response.status})</div>`;
+                    }
+                    completed++;
+
+                    if (completed === workingEndpoints.length) {
+                        resultsDiv.innerHTML += `<h3 style="margin-top: 20px;">Summary: ${successCount} Success / ${failCount} Failed</h3>`;
+                        if (failCount > 0) {
+                            resultsDiv.innerHTML += `<p style="color: orange;">If seeing 401 errors, click "Refresh Token" button above.</p>`;
+                        }
+                    }
+                })
+                .catch(error => {
+                    failCount++;
+                    resultsDiv.innerHTML += `<div style="color: red;">❌ ${endpoint} (Connection Error)</div>`;
+                    completed++;
+
+                    if (completed === workingEndpoints.length) {
+                        resultsDiv.innerHTML += `<h3 style="margin-top: 20px;">Summary: ${successCount} Success / ${failCount} Failed</h3>`;
+                    }
+                });
+            });
+        }
+
+        // Auto-detect on page load
+        window.onload = function() {
+            // Check if we're on HTTPS
+            if (window.location.protocol === 'https:') {
+                document.getElementById('protocol').value = 'https';
+                document.getElementById('port').value = '7012';
+            }
+        };
+    </script>
+</body>
+</html>

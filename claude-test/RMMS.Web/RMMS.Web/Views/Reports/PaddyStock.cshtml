@@ -1,0 +1,94 @@
+﻿@{
+    ViewData["Title"] = "Paddy Stock Report";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var stockByVariety = ViewBag.StockByVariety as Dictionary<string, decimal> ?? new Dictionary<string, decimal>();
+}
+
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-header bg-success text-white">
+            <h3><i class="fas fa-seedling"></i> Paddy Stock Report</h3>
+            <p class="mb-0">Report Date: @ViewBag.ReportDate</p>
+        </div>
+
+        <div class="card-body">
+            <!-- Paddy Stock Overview -->
+            <div class="alert alert-success">
+                <h4>Total Paddy Stock: @string.Format("{0:N2}", ViewBag.TotalPaddyStock) kg</h4>
+                <p class="mb-0">This represents your raw material inventory ready for milling.</p>
+            </div>
+
+            <!-- Variety-wise Stock Table -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5>Paddy Stock by Variety</h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover ms-datatable" id="paddyStockTable">
+                            <thead class="table-success">
+                                <tr>
+                                    <th>Variety Name</th>
+                                    <th>Stock Quantity (kg)</th>
+                                    <th>Percentage of Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (stockByVariety != null && stockByVariety.Any())
+                                {
+                                    decimal totalStock = ViewBag.TotalPaddyStock > 0 ? ViewBag.TotalPaddyStock : 1;
+                                    foreach (var variety in stockByVariety.OrderByDescending(x => x.Value))
+                                    {
+                                        decimal percentage = (variety.Value / totalStock) * 100;
+                                        <tr>
+                                            <td><strong>@variety.Key</strong></td>
+                                            <td>@variety.Value.ToString("N2")</td>
+                                            <td>
+                                                <div class="progress" style="height: 20px;">
+                                                    <div class="progress-bar bg-success" role="progressbar"
+                                                         style="width: @percentage%"
+                                                         aria-valuenow="@percentage" aria-valuemin="0" aria-valuemax="100">
+                                                        @percentage.ToString("N1")%
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td colspan="3" class="text-center">
+                                            <i class="fas fa-info-circle fa-2x text-muted mb-2"></i>
+                                            <p>No paddy stock data available.</p>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Storage Recommendations -->
+            <div class="alert alert-info">
+                <h5><i class="fas fa-lightbulb"></i> Storage Best Practices</h5>
+                <ul>
+                    <li>Maintain moisture content below 14% for safe storage</li>
+                    <li>Regular fumigation every 3 months</li>
+                    <li>First In First Out (FIFO) rotation policy</li>
+                    <li>Temperature monitoring to prevent spoilage</li>
+                </ul>
+            </div>
+
+            <div class="mt-4">
+                <a href="@Url.Action("Index", "Reports")" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Back
+                </a>
+                <button class="btn btn-primary" onclick="window.print()">
+                    <i class="fas fa-print"></i> Print
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,198 @@
+@model List<RMMS.Models.Sales.Quotation>
+@{
+    ViewData["Title"] = "Quotations";
+}
+
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2><i class="fas fa-file-invoice"></i> Sales Quotations</h2>
+        <a asp-action="Create" class="btn btn-primary">
+            <i class="fas fa-plus"></i> New Quotation
+        </a>
+    </div>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show">
+            @TempData["Success"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show">
+            @TempData["Error"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    <!-- Statistics Cards - Temporarily Disabled -->
+    @* @if (ViewBag.Statistics != null)
+    {
+        <div class="row mb-4"> *@
+            <div class="col-md-2">
+                <div class="card text-white bg-primary">
+                    <div class="card-body">
+                        <h6>Total Quotations</h6>
+                        <h3>0</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="card text-white bg-secondary">
+                    <div class="card-body">
+                        <h6>Draft</h6>
+                        <h3>0</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="card text-white bg-info">
+                    <div class="card-body">
+                        <h6>Sent</h6>
+                        <h3>0</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="card text-white bg-success">
+                    <div class="card-body">
+                        <h6>Accepted</h6>
+                        <h3>0</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="card text-white bg-danger">
+                    <div class="card-body">
+                        <h6>Rejected</h6>
+                        <h3>0</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="card text-white bg-warning">
+                    <div class="card-body">
+                        <h6>Total Value</h6>
+                        <h3>₹0</h3>
+                    </div>
+                </div>
+            </div>
+        </div> @*
+    } *@
+
+    <div class="card">
+        <div class="card-header">
+            <form method="get" class="row g-3">
+                <div class="col-md-4">
+                    <input type="text" name="searchTerm" value="@ViewBag.SearchTerm"
+                           class="form-control" placeholder="Search by quotation number, customer...">
+                </div>
+                <div class="col-md-3">
+                    <select name="status" class="form-select">
+                        <option value="">All Status</option>
+                        <option value="Draft" selected="@(ViewBag.SelectedStatus == "Draft")">Draft</option>
+                        <option value="Sent" selected="@(ViewBag.SelectedStatus == "Sent")">Sent</option>
+                        <option value="Accepted" selected="@(ViewBag.SelectedStatus == "Accepted")">Accepted</option>
+                        <option value="Rejected" selected="@(ViewBag.SelectedStatus == "Rejected")">Rejected</option>
+                        <option value="Expired" selected="@(ViewBag.SelectedStatus == "Expired")">Expired</option>
+                        <option value="Converted" selected="@(ViewBag.SelectedStatus == "Converted")">Converted</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary w-100">
+                        <i class="fas fa-search"></i> Filter
+                    </button>
+                </div>
+                <div class="col-md-3 text-end">
+                    <a href="@Url.Action("Index")" class="btn btn-secondary">
+                        <i class="fas fa-redo"></i> Clear Filters
+                    </a>
+                </div>
+            </form>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>Quotation #</th>
+                            <th>Date</th>
+                            <th>Customer</th>
+                            <th>Valid Until</th>
+                            <th>Total Amount</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.Any())
+                        {
+                            @foreach (var quotation in Model)
+                            {
+                                <tr>
+                                    <td><strong>@quotation.QuotationNumber</strong></td>
+                                    <td>@quotation.QuotationDate.ToString("dd MMM yyyy")</td>
+                                    <td>@quotation.Customer?.CustomerName</td>
+                                    <td>
+                                        @{
+                                            var isExpired = quotation.ValidUntil < DateTime.Now && quotation.Status == "Sent";
+                                            var validUntilClass = isExpired ? "text-danger" : "text-success";
+                                        }
+                                        <span class="@validUntilClass">
+                                            @quotation.ValidUntil.ToString("dd MMM yyyy")
+                                        </span>
+                                        @if (isExpired)
+                                        {
+                                            <span class="badge bg-danger">Expired</span>
+                                        }
+                                    </td>
+                                    <td class="text-end"><strong>₹ @quotation.TotalAmount.ToString("N2")</strong></td>
+                                    <td>
+                                        @{
+                                            var statusClass = quotation.Status switch
+                                            {
+                                                "Draft" => "bg-secondary",
+                                                "Sent" => "bg-info",
+                                                "Accepted" => "bg-success",
+                                                "Rejected" => "bg-danger",
+                                                "Expired" => "bg-warning",
+                                                "Converted" => "bg-primary",
+                                                _ => "bg-secondary"
+                                            };
+                                        }
+                                        <span class="badge @statusClass">@quotation.Status</span>
+                                    </td>
+                                    <td>
+                                        <a asp-action="Details" asp-route-id="@quotation.Id" class="btn btn-sm btn-info" title="Details">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                        @if (quotation.Status == "Draft")
+                                        {
+                                            <a asp-action="Edit" asp-route-id="@quotation.Id" class="btn btn-sm btn-warning" title="Edit">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                        }
+                                        <a asp-action="Delete" asp-route-id="@quotation.Id" class="btn btn-sm btn-danger" title="Delete">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="7" class="text-center">No quotations found</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="card-footer">
+            <strong>Total Quotations:</strong> @Model.Count
+        </div>
+    </div>
+</div>

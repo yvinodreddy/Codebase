@@ -1,0 +1,296 @@
+================================================================================
+     PATIENT MANAGEMENT SYSTEM - WIREFRAME TOOLS QUICK REFERENCE
+     Share this with your UI/UX team - Ready to use in 5 minutes!
+================================================================================
+
+🎯 MISSION: Create wireframes that React developers can use to build UI
+
+
+🏆 TOP 3 RECOMMENDED TOOLS (100% FREE)
+================================================================================
+
+1. FIGMA ⭐ BEST OVERALL - HIGHLY RECOMMENDED
+   ├─ Link: https://www.figma.com
+   ├─ Why: Industry standard, React export, developer handoff
+   ├─ Free: Yes (3 files, unlimited personal projects)
+   ├─ React Export: YES (via Anima plugin + Inspect mode)
+   ├─ Learning curve: Medium (30 min tutorial gets you started)
+   └─ Perfect for: Production-ready designs
+
+2. EXCALIDRAW - FASTEST START
+   ├─ Link: https://excalidraw.com
+   ├─ Why: No signup, instant start, collaborative
+   ├─ Free: 100% free, open source
+   ├─ React Export: Via Excalidraw React library
+   ├─ Learning curve: Low (start immediately)
+   └─ Perfect for: Quick sketches, brainstorming
+
+3. UIZARD - BEST FOR HAND-DRAWN SKETCHES
+   ├─ Link: https://uizard.io
+   ├─ Why: AI converts sketches to digital wireframes
+   ├─ Free: Yes (3 projects, unlimited screens)
+   ├─ React Export: YES (code snippets)
+   ├─ Learning curve: Low (upload photo, AI does rest)
+   └─ Perfect for: Non-designers who sketch on paper
+
+
+📋 QUICK COMPARISON TABLE
+================================================================================
+
+Tool        | Signup | Best For          | React Export | Time to Start
+-----------------------------------------------------------------------
+Figma       | Yes    | Production design | ✅ Excellent  | 5 minutes
+Excalidraw  | No     | Quick wireframes  | ✅ Good       | 0 minutes
+Uizard      | Yes    | Sketch to digital | ✅ Good       | 5 minutes
+Penpot      | Yes    | Open source       | ✅ Good       | 5 minutes
+Draw.io     | No     | Simple diagrams   | ❌ No         | 0 minutes
+
+
+⚡ FASTEST WAY TO START (Choose One)
+================================================================================
+
+OPTION A: PROFESSIONAL QUALITY (Recommended)
+---------------------------------------------
+1. Go to https://www.figma.com
+2. Click "Sign up" (use Google/email)
+3. Click "New design file"
+4. Start designing with rectangles, text, components
+5. Share link with developers when done
+
+Time: 5 min setup + 2-3 hours designing = Complete wireframes
+
+
+OPTION B: INSTANT START (No signup)
+------------------------------------
+1. Go to https://excalidraw.com
+2. Start drawing immediately
+3. Use shapes to create UI elements
+4. Export as PNG
+5. Share with team
+
+Time: 0 min setup + 1 hour designing = Basic wireframes
+
+
+OPTION C: SKETCH ON PAPER FIRST
+--------------------------------
+1. Draw wireframes on paper/whiteboard
+2. Take photos with phone
+3. Go to https://uizard.io and sign up
+4. Upload photos
+5. AI converts to digital wireframes
+6. Export and share
+
+Time: 30 min sketching + 30 min digitizing = Digital wireframes
+
+
+🎨 12 SCREENS YOU NEED TO DESIGN
+================================================================================
+
+✅ Screen 1:  Login page
+✅ Screen 2:  Dashboard (with stats, charts)
+✅ Screen 3:  Patient list table
+✅ Screen 4:  Add new patient form
+✅ Screen 5:  Patient profile details
+✅ Screen 6:  Appointment scheduler
+✅ Screen 7:  Medical records form
+✅ Screen 8:  Prescription management
+✅ Screen 9:  Search & filters
+✅ Screen 10: Settings page
+✅ Screen 11: Reports & analytics
+✅ Screen 12: Notifications center
+
+
+📤 HOW TO HAND OFF TO REACT DEVELOPERS
+================================================================================
+
+IF USING FIGMA:
+---------------
+1. Click "Share" button (top right)
+2. Change to "Anyone with link can view"
+3. Copy link
+4. Send to developers with message:
+   "Here's the design file. Use Inspect panel (right sidebar) to see
+    CSS, spacing, and download assets."
+
+Optional (for React code):
+5. Install Anima plugin: Plugins → Browse → "Anima"
+6. Select a screen
+7. Run Anima → Export to Code → Select "React"
+8. Share generated code
+
+
+IF USING EXCALIDRAW:
+--------------------
+1. Click "Export to image" (💾 icon)
+2. Save as PNG
+3. Share PNG files with developers
+4. Developers recreate in React using wireframes as reference
+
+
+IF USING UIZARD:
+----------------
+1. Click "Share" or "Export"
+2. Generate code snippets
+3. Download assets
+4. Send link + code to developers
+
+
+🔧 DEVELOPER-FRIENDLY EXPORT CHECKLIST
+================================================================================
+
+Before sharing, make sure you have:
+
+□ All 12 screens designed and clearly labeled
+□ Consistent colors throughout (define color palette)
+□ Consistent spacing (use 8px grid)
+□ Consistent fonts (specify font family and sizes)
+□ All button states (default, hover, active, disabled)
+□ All form states (empty, filled, error, success)
+□ Icons exported as SVG
+□ Images exported as PNG (2x for retina)
+□ Design file shared with "View" access
+□ Color codes documented (e.g., Primary: #2196F3)
+□ Font info documented (e.g., Inter, 14px body text)
+
+
+💡 PRO TIPS FOR REACT DEVELOPERS
+================================================================================
+
+Color Palette (Healthcare-appropriate):
+----------------------------------------
+Primary Blue:    #2196F3  (trust, professional)
+Success Green:   #4CAF50  (healthy, positive)
+Warning Orange:  #FF9800  (alerts)
+Error Red:       #F44336  (critical)
+Gray Background: #FAFAFA
+Text Dark:       #212121
+Text Light:      #757575
+
+Typography:
+-----------
+Font: Inter (Google Fonts) or Roboto
+H1: 32px bold
+H2: 24px bold
+H3: 20px semibold
+Body: 14px regular
+Small: 12px regular
+
+Spacing System:
+---------------
+Use multiples of 8px: 8, 16, 24, 32, 40, 48, 64
+
+Component Libraries for React:
+-------------------------------
+- Material-UI: https://mui.com (matches well with Figma designs)
+- Ant Design: https://ant.design (has healthcare templates)
+- Chakra UI: https://chakra-ui.com (customizable)
+
+
+🎓 5-MINUTE FIGMA CRASH COURSE
+================================================================================
+
+1. CREATE FRAME
+   - Press 'F' or click Frame tool
+   - Select "Desktop" (1920x1080)
+
+2. ADD RECTANGLES (for UI elements)
+   - Press 'R' or click Rectangle tool
+   - Click and drag to create shape
+   - Change color in right sidebar
+
+3. ADD TEXT
+   - Press 'T' or click Text tool
+   - Click and type
+   - Change font, size in right sidebar
+
+4. CREATE BUTTON
+   - Draw rectangle
+   - Add text on top
+   - Select both (Shift+click)
+   - Right-click → "Frame selection" = Button component
+
+5. REUSE COMPONENT
+   - Copy button (Cmd/Ctrl + C)
+   - Paste (Cmd/Ctrl + V)
+   - Changes to original update all copies
+
+6. SHARE
+   - Click "Share" button
+   - Set to "Anyone with link can view"
+   - Copy link → send to team
+
+
+📚 HELPFUL RESOURCES
+================================================================================
+
+Figma Tutorial (30 min):
+https://www.youtube.com/watch?v=FTFaQWZBqQ8
+
+Healthcare UI Templates (Free):
+https://www.figma.com/community/search?model_type=files&q=healthcare
+
+Free Icons:
+- Material Icons: https://fonts.google.com/icons
+- Heroicons: https://heroicons.com
+
+Free Illustrations:
+- unDraw: https://undraw.co
+
+
+❓ FAQ
+================================================================================
+
+Q: Do I need design experience?
+A: No! Figma/Excalidraw are beginner-friendly.
+
+Q: How long does it take?
+A: 2-3 hours for all 12 screens (using Figma).
+
+Q: Can developers really build from these?
+A: Yes! Figma's Inspect mode gives exact CSS/spacing/colors.
+
+Q: What if I need help?
+A: Watch the 30-min Figma tutorial linked above.
+
+Q: Is it really free?
+A: Yes! All recommended tools have free tiers.
+
+
+🚀 YOUR NEXT ACTIONS
+================================================================================
+
+RIGHT NOW (5 minutes):
+1. Choose your tool (Figma recommended)
+2. Sign up / Open tool
+3. Create new project: "Patient Management System"
+
+TODAY (2-3 hours):
+4. Design Login screen (15 min)
+5. Design Dashboard (30 min)
+6. Design Patient List (30 min)
+7. Design remaining 9 screens (90 min)
+
+THIS WEEK:
+8. Share with React team
+9. Gather feedback
+10. Iterate on designs
+
+
+📧 READY TO SHARE WITH YOUR TEAM
+================================================================================
+
+Copy and send this file to your UI designers and React developers.
+Everyone will know exactly which tools to use and how to collaborate!
+
+
+Need the detailed guide? See: PATIENT_MANAGEMENT_WIREFRAME_GUIDE.txt
+
+
+================================================================================
+Created: October 17, 2025
+Purpose: Quick reference for wireframe tools
+Audience: UI designers, React developers, project managers
+Time to read: 5 minutes
+Time to implement: 3-4 hours
+Result: Production-ready wireframes for N patients
+================================================================================

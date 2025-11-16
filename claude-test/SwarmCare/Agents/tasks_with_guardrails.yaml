@@ -1,0 +1,364 @@
+# TASKS CONFIGURATION WITH INTEGRATED GUARDRAILS
+# Production-ready tasks with 7-layer guardrail protection
+
+extract_patient_clinical_profile:
+  description: >
+    Analyze the provided EHR knowledge graph and extract comprehensive clinical information for {patient_identifier} ({patient_name}).
+
+    Focus on:
+    - Patient demographics and contact information from {patient_data_source}
+    - Active medical conditions ({primary_conditions}) with SNOMED codes
+    - Current medications ({medication_list}) with dosages and RxNorm codes
+    - Recent observations and vital signs with LOINC codes from {observation_timeframe}
+    - Medical devices and monitoring equipment: {device_list}
+    - Care team members and their roles: {care_team_roles}
+    - Active care plans and goals related to {care_focus_areas}
+    - Allergies and family history relevant to {genetic_risk_factors}
+    - Current alerts and their clinical significance for {alert_categories}
+
+    **CRITICAL: Ensure all patient data is de-identified. Do not include actual names, addresses, phone numbers, emails, or other PHI.**
+
+    Use {data_extraction_method} to process {knowledge_graph_format} data.
+    Apply {clinical_filtering_criteria} and focus on {priority_clinical_elements}.
+  expected_output: >
+    A comprehensive clinical profile document containing:
+    1. Anonymized patient overview with demographics
+    2. Active condition summary with clinical status and SNOMED codes
+    3. Current medication regimen with RxNorm codes
+    4. Recent clinical measurements and trends
+    5. Care team composition (roles only, no names)
+    6. Active monitoring and alert systems
+    7. Family history and risk factors
+    8. Current care goals and treatment targets
+
+    **Must include:**
+    - Statement that data is anonymized/de-identified
+    - No PHI (names, addresses, contact info, SSN, MRN, etc.)
+    - Proper medical terminology with coding systems
+    - Evidence-based clinical information
+  agent: medical_knowledge_extractor
+  context: []
+  output_file: "{patient_id}_clinical_profile.{file_extension}"
+  human_input: {require_human_validation}
+  # GUARDRAILS: Medical knowledge extraction with PHI detection and terminology validation
+  guardrail: medical_knowledge_extraction_guardrail
+  guardrail_max_retries: 5
+
+synthesize_clinical_case_presentation:
+  description: >
+    Transform the extracted clinical data into a structured medical case presentation suitable for {educational_target} education.
+
+    Create a case that highlights:
+    - The complexity of managing {disease_complexity_type}
+    - Care coordination between {care_provider_types}
+    - Use of technology in {technology_integration_focus}
+    - Clinical decision-making around {decision_making_areas}
+    - Patient education and self-management strategies
+
+    **GUARDRAIL REQUIREMENTS:**
+    - All content MUST be anonymized and de-identified
+    - Include disclaimers: "For educational purposes only, not medical advice"
+    - Use hypothetical/fictional framing
+    - No actual patient identifiers
+    - Evidence-based information only
+  expected_output: >
+    A formal clinical case presentation including:
+    1. Chief complaint and history (anonymized)
+    2. Past medical and family history
+    3. Current medications and allergies
+    4. Physical examination findings
+    5. Laboratory and diagnostic results
+    6. Assessment and clinical reasoning
+    7. Treatment plan and care coordination
+    8. Follow-up and monitoring strategy
+    9. Educational discussion points
+
+    **Must include:**
+    - "This is an anonymized/de-identified educational case"
+    - "For educational purposes only, not medical advice"
+    - "Hypothetical case based on clinical patterns"
+    - Evidence-based clinical reasoning
+    - Proper medical terminology
+  agent: patient_case_synthesizer
+  context: [extract_patient_clinical_profile]
+  output_file: "{patient_id}_{case_type}_presentation.{file_extension}"
+  human_input: {require_case_review}
+  # GUARDRAILS: Clinical case with HIPAA compliance and PHI detection
+  guardrail: clinical_case_synthesis_guardrail
+  guardrail_max_retries: 5
+
+create_doctor_patient_dialogue:
+  description: >
+    Generate an authentic {provider_type}-{patient_type} conversation based on the clinical case.
+
+    Create a realistic dialogue that demonstrates:
+    - Effective communication about medical conditions
+    - Explanation of diagnostic results and parameters
+    - Discussion of medications and adherence
+    - Technology integration (devices, monitoring)
+    - Lifestyle modifications and self-care education
+    - Care team coordination and follow-up planning
+
+    **GUARDRAIL REQUIREMENTS:**
+    - Professional, respectful tone
+    - Medically accurate information
+    - Evidence-based recommendations
+    - Clear speaker labels (Doctor:, Patient:)
+    - No harmful or inappropriate content
+    - Culturally sensitive communication
+  expected_output: >
+    A natural, educational {provider_type}-{patient_type} dialogue script containing:
+    1. Opening and relationship building
+    2. Review of current health status
+    3. Discussion of test results
+    4. Medication review and adherence
+    5. Technology and device data review
+    6. Lifestyle and self-management education
+    7. Care plan updates and goal setting
+    8. Follow-up scheduling and coordination
+    9. Patient questions and summary
+
+    **Must include:**
+    - Clear dialogue format with speaker labels
+    - Medically accurate information
+    - Professional, empathetic tone
+    - Evidence-based guidance
+    - Patient safety considerations
+  agent: medical_conversation_writer
+  context: [synthesize_clinical_case_presentation]
+  output_file: "{patient_id}_{provider_type}_patient_dialogue.{file_extension}"
+  human_input: {require_dialogue_review}
+  # GUARDRAILS: Medical dialogue with content safety and medical fact checking
+  guardrail: medical_dialogue_guardrail
+  guardrail_max_retries: 5
+
+create_doctor_doctor_consultation:
+  description: >
+    Generate a professional consultation dialogue between {primary_provider_role} and {consulting_provider_role}.
+
+    Focus on:
+    - Clinical case review and decision-making
+    - Interpretation of diagnostic and monitoring data
+    - Treatment optimization strategies
+    - Care coordination and shared decision-making
+    - Technology integration in care delivery
+    - Patient adherence and behavioral factors
+    - Risk stratification and complication prevention
+
+    **GUARDRAIL REQUIREMENTS:**
+    - Professional medical communication
+    - Evidence-based clinical reasoning
+    - Accurate medical terminology
+    - Collaborative approach
+    - Patient-centered focus
+  expected_output: >
+    A professional medical consultation dialogue featuring:
+    1. Case presentation by referring provider
+    2. Specialist assessment and questions
+    3. Review of current management and outcomes
+    4. Discussion of optimization opportunities
+    5. Collaborative treatment planning
+    6. Technology utilization strategies
+    7. Patient education approaches
+    8. Follow-up and monitoring protocols
+    9. Clear action items and responsibilities
+
+    **Must include:**
+    - Clear professional dialogue format
+    - Evidence-based recommendations
+    - Appropriate medical terminology
+    - Collaborative decision-making
+    - Patient safety considerations
+  agent: medical_conversation_writer
+  context: [synthesize_clinical_case_presentation]
+  output_file: "{patient_id}_{provider_specialty}_consultation_dialogue.{file_extension}"
+  human_input: {require_consultation_review}
+  # GUARDRAILS: Medical dialogue with content safety and terminology validation
+  guardrail: medical_dialogue_guardrail
+  guardrail_max_retries: 5
+
+validate_medical_compliance:
+  description: >
+    Review all generated medical content for {compliance_framework} compliance, clinical accuracy, and ethical standards.
+
+    Ensure:
+    - Patient privacy protection and de-identification per {privacy_standards}
+    - Clinical accuracy of all medical information
+    - Appropriate use of medical terminology
+    - Compliance with {educational_standards}
+    - Ethical presentation of patient information
+    - Proper medical disclaimers and limitations
+    - Professional communication standards
+
+    **GUARDRAIL REQUIREMENTS:**
+    - Comprehensive compliance checklist completion
+    - Risk assessment performed
+    - All violations documented
+    - Clear approval/rejection decision
+    - Specific remediation guidance if needed
+  expected_output: >
+    A comprehensive compliance report including:
+    1. HIPAA/Privacy compliance verification
+    2. Clinical accuracy assessment
+    3. Privacy protection measures validation
+    4. Required medical disclaimers checklist
+    5. Educational use permissions verification
+    6. Ethical considerations addressed
+    7. Professional standards compliance
+    8. Risk mitigation recommendations
+    9. Final approval status
+
+    **Must include:**
+    - Clear approval/not approved status
+    - Compliance checklist (all items checked)
+    - Risk assessment (low/medium/high)
+    - Specific issues identified (if any)
+    - Remediation steps (if needed)
+  agent: compliance_validator
+  context: [create_doctor_patient_dialogue, create_doctor_doctor_consultation]
+  output_file: "{patient_id}_{content_type}_compliance_report.{file_extension}"
+  human_input: {require_compliance_review}
+  # GUARDRAILS: Compliance validation with HIPAA and fact checking
+  guardrail: compliance_validation_guardrail
+  guardrail_max_retries: 3
+
+generate_podcast_script_patient_education:
+  description: >
+    Create a comprehensive podcast script focused on patient education using the dialogue as foundation.
+
+    Structure to include:
+    - Introduction to educational topics
+    - Patient story and case background (anonymized)
+    - Doctor-patient conversation with commentary
+    - Expert insights and best practices
+    - Practical tips for listeners
+    - Resources and follow-up information
+    - Clear disclaimers
+
+    **GUARDRAIL REQUIREMENTS:**
+    - Educational value clearly demonstrated
+    - Medical disclaimers prominently included
+    - Engaging but accurate content
+    - Appropriate for target audience
+    - No harmful or misleading information
+  expected_output: >
+    A complete podcast script with:
+    1. Episode introduction and objectives
+    2. Host introduction and credentials
+    3. Patient case introduction (anonymized)
+    4. Doctor-patient dialogue with natural flow
+    5. Educational segments and commentary
+    6. Technology discussion and benefits
+    7. Actionable advice for listeners
+    8. Resource recommendations
+    9. Medical disclaimers and call-to-action
+    10. Episode conclusion and next steps
+    11. Timing cues and production notes
+
+    **Must include:**
+    - "This is for educational purposes only"
+    - "This is not medical advice"
+    - "Consult your healthcare provider"
+    - "Based on anonymized case"
+    - Evidence-based information
+    - Engaging narrative structure
+  agent: podcast_script_generator
+  context: [create_doctor_patient_dialogue, validate_medical_compliance]
+  output_file: "{patient_id}_{podcast_type}_education_script.{file_extension}"
+  human_input: {require_script_review}
+  # GUARDRAILS: Podcast script with education focus and compliance
+  guardrail: podcast_script_guardrail
+  guardrail_max_retries: 5
+
+generate_podcast_script_professional_education:
+  description: >
+    Create a professional medical education podcast script using the consultation as foundation.
+
+    Design for healthcare professionals with focus on:
+    - Complex case management and clinical reasoning
+    - Interprofessional collaboration best practices
+    - Technology integration in clinical care
+    - Evidence-based treatment optimization
+    - Patient-centered care coordination
+    - Quality improvement and outcomes
+
+    **GUARDRAIL REQUIREMENTS:**
+    - Professional medical education standards
+    - Evidence-based content
+    - Appropriate complexity level
+    - CME-worthy content
+    - Clinical accuracy
+  expected_output: >
+    A professional medical education podcast script featuring:
+    1. Learning objectives and CME information
+    2. Expert host introductions and credentials
+    3. Case-based learning introduction
+    4. Provider-provider consultation dialogue
+    5. Clinical pearl segments
+    6. Evidence-based practice discussions
+    7. Technology integration insights
+    8. Care coordination strategies
+    9. Quality metrics and outcomes
+    10. Key takeaways and action items
+    11. CME quiz questions
+    12. Professional development resources
+
+    **Must include:**
+    - Clear learning objectives
+    - Evidence-based content
+    - Professional-level complexity
+    - Clinical pearls and insights
+    - CME compliance elements
+  agent: podcast_script_generator
+  context: [create_doctor_doctor_consultation, validate_medical_compliance]
+  output_file: "{patient_id}_{professional_podcast_type}_education_script.{file_extension}"
+  human_input: {require_professional_review}
+  # GUARDRAILS: Professional podcast with high clinical standards
+  guardrail: podcast_script_guardrail
+  guardrail_max_retries: 5
+
+final_quality_review:
+  description: >
+    Conduct comprehensive final review of all generated medical podcast content.
+
+    Perform:
+    - Clinical fact-checking against current guidelines
+    - Educational content assessment
+    - Professional communication review
+    - Technical accuracy verification
+    - Audience appropriateness evaluation
+    - Content flow and engagement analysis
+    - Final compliance confirmation
+
+    **GUARDRAIL REQUIREMENTS:**
+    - All quality metrics evaluated
+    - Objective scoring applied
+    - Clear approval/rejection decision
+    - Specific feedback provided
+    - Publication readiness assessed
+  expected_output: >
+    A final quality assurance report containing:
+    1. Clinical accuracy verification results
+    2. Educational value assessment scores
+    3. Professional standards compliance check
+    4. Content engagement and flow evaluation
+    5. Technical medical accuracy confirmation
+    6. Audience appropriateness ratings
+    7. Identified areas for improvement
+    8. Final publication recommendations
+    9. Quality score and approval status
+    10. Post-publication monitoring suggestions
+
+    **Must include:**
+    - Overall quality score (0-100)
+    - Approval status (approved/not approved/conditional)
+    - Specific strengths identified
+    - Specific areas for improvement
+    - Recommendation for publication
+  agent: quality_assurance_reviewer
+  context: [generate_podcast_script_patient_education, generate_podcast_script_professional_education]
+  output_file: "{patient_id}_{content_category}_final_quality_report.{file_extension}"
+  human_input: {require_final_approval}
+  # GUARDRAILS: Quality assurance with comprehensive validation
+  guardrail: quality_assurance_guardrail
+  guardrail_max_retries: 3

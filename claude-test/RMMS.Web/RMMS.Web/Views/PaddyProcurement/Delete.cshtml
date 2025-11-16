@@ -1,0 +1,129 @@
+@model RMMS.Models.PaddyProcurement
+@{
+    ViewData["Title"] = "Delete Paddy Procurement";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="card shadow">
+        <div class="card-header bg-danger text-white">
+            <h3><i class="fas fa-exclamation-triangle"></i> Delete Paddy Procurement</h3>
+        </div>
+
+        <div class="card-body">
+            <div class="alert alert-danger">
+                <h4 class="alert-heading"><i class="fas fa-exclamation-circle"></i> Confirm Deletion</h4>
+                <p>Are you sure you want to delete this paddy procurement record?</p>
+                <hr>
+                <p class="mb-0"><strong>Warning:</strong> This action cannot be undone!</p>
+            </div>
+
+            <fieldset class="border p-3 mb-3 bg-light">
+                <legend class="w-auto px-2">Record to be Deleted</legend>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="font-weight-bold">@Html.DisplayNameFor(model => model.VoucherNumber):</label>
+                            <p class="form-control-plaintext">@Model.VoucherNumber</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="font-weight-bold">@Html.DisplayNameFor(model => model.ReceiptDate):</label>
+                            <p class="form-control-plaintext">@Model.ReceiptDate.ToString("dd-MMM-yyyy")</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="font-weight-bold">@Html.DisplayNameFor(model => model.SupplierName):</label>
+                            <p class="form-control-plaintext">@Model.SupplierName</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="font-weight-bold">@Html.DisplayNameFor(model => model.PaddyVariety):</label>
+                            <p class="form-control-plaintext">@Model.PaddyVariety</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="font-weight-bold">@Html.DisplayNameFor(model => model.Grade):</label>
+                            <p class="form-control-plaintext">@(Model.Grade ?? "N/A")</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="font-weight-bold">@Html.DisplayNameFor(model => model.QuantityReceived):</label>
+                            <p class="form-control-plaintext">@Model.QuantityReceived.ToString("N2") kg</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="font-weight-bold">@Html.DisplayNameFor(model => model.TotalNetWeight):</label>
+                            <p class="form-control-plaintext">@Model.TotalNetWeight.ToString("N2") kg</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="font-weight-bold">@Html.DisplayNameFor(model => model.StorageLocation):</label>
+                            <p class="form-control-plaintext">@(Model.StorageLocation ?? "N/A")</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="font-weight-bold">@Html.DisplayNameFor(model => model.ClosingStock):</label>
+                            <p class="form-control-plaintext">@(Model.ClosingStock?.ToString("N2") ?? "0.00") kg</p>
+                        </div>
+                    </div>
+                </div>
+
+                @if (!string.IsNullOrEmpty(Model.Remarks))
+                {
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="font-weight-bold">@Html.DisplayNameFor(model => model.Remarks):</label>
+                                <p class="form-control-plaintext">@Model.Remarks</p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </fieldset>
+
+            <form asp-action="Delete" method="post">
+                <input type="hidden" asp-for="Id" />
+
+                <div class="form-group mt-4">
+                    <button type="submit" class="btn btn-danger btn-lg">
+                        <i class="fas fa-trash"></i> Yes, Delete This Record
+                    </button>
+                    <a asp-action="Index" class="btn btn-secondary btn-lg">
+                        <i class="fas fa-times"></i> Cancel
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+    fieldset {
+        border: 1px solid #dee2e6 !important;
+    }
+    legend {
+        font-size: 1rem;
+        font-weight: bold;
+        background: white;
+        padding: 0 10px;
+    }
+    .font-weight-bold {
+        font-weight: 600;
+        color: #495057;
+    }
+</style>

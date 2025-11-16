@@ -1,0 +1,617 @@
+﻿<!-- RMMS.Web/Views/Home/Index.cshtml -->
+@model RMMS.Services.DashboardViewModel
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="container-fluid">
+    <h1 class="h3 mb-4">
+        <i class="fas fa-dashboard"></i> Dashboard
+        <small class="text-muted float-end">Welcome, @User.Identity?.Name!</small>
+    </h1>
+
+    <!-- Summary Cards -->
+    <div class="row mb-4">
+        <div class="col-xl-3 col-md-6 mb-3">
+            <div class="card stat-card border-primary">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <h5 class="card-title text-uppercase text-muted mb-0">Paddy Stock</h5>
+                            <span class="h2 font-weight-bold mb-0">@Model.TotalPaddyStock.ToString("N0")</span>
+                            <span class="text-muted">quintals</span>
+                        </div>
+                        <div class="col-auto">
+                            <div class="icon-shape bg-primary text-white rounded-circle shadow">
+                                <i class="fas fa-wheat fa-2x"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-3">
+            <div class="card stat-card border-success">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <h5 class="card-title text-uppercase text-muted mb-0">Monthly Revenue</h5>
+                            <span class="h2 font-weight-bold mb-0">₹ @Model.MonthlyRevenue.ToString("N0")</span>
+                        </div>
+                        <div class="col-auto">
+                            <div class="icon-shape bg-success text-white rounded-circle shadow">
+                                <i class="fas fa-rupee-sign fa-2x"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-3">
+            <div class="card stat-card border-warning">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <h5 class="card-title text-uppercase text-muted mb-0">Pending Payments</h5>
+                            <span class="h2 font-weight-bold mb-0">@Model.PendingPayments</span>
+                        </div>
+                        <div class="col-auto">
+                            <div class="icon-shape bg-warning text-white rounded-circle shadow">
+                                <i class="fas fa-clock fa-2x"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-3">
+            <div class="card stat-card border-info">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <h5 class="card-title text-uppercase text-muted mb-0">Total Customers</h5>
+                            <span class="h2 font-weight-bold mb-0">@Model.TotalCustomers</span>
+                        </div>
+                        <div class="col-auto">
+                            <div class="icon-shape bg-info text-white rounded-circle shadow">
+                                <i class="fas fa-users fa-2x"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Inventory Summary Cards -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <h4 class="mb-3"><i class="fas fa-boxes"></i> Inventory Overview</h4>
+        </div>
+        <div class="col-xl-3 col-md-6 mb-3">
+            <div class="card stat-card border-primary">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <h5 class="card-title text-uppercase text-muted mb-0">Total Inventory Value</h5>
+                            <span class="h2 font-weight-bold mb-0">₹ @Model.TotalInventoryValue.ToString("N0")</span>
+                        </div>
+                        <div class="col-auto">
+                            <div class="icon-shape bg-primary text-white rounded-circle shadow">
+                                <i class="fas fa-rupee-sign fa-2x"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-3">
+            <div class="card stat-card border-warning">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <h5 class="card-title text-uppercase text-muted mb-0">Low Stock Items</h5>
+                            <span class="h2 font-weight-bold mb-0">@Model.LowStockItemsCount</span>
+                            <span class="text-muted">products</span>
+                        </div>
+                        <div class="col-auto">
+                            <div class="icon-shape bg-warning text-white rounded-circle shadow">
+                                <i class="fas fa-exclamation-triangle fa-2x"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-3">
+            <div class="card stat-card border-info">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <h5 class="card-title text-uppercase text-muted mb-0">Total Warehouses</h5>
+                            <span class="h2 font-weight-bold mb-0">@Model.TotalWarehouses</span>
+                        </div>
+                        <div class="col-auto">
+                            <div class="icon-shape bg-info text-white rounded-circle shadow">
+                                <i class="fas fa-warehouse fa-2x"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-3">
+            <div class="card stat-card border-secondary">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <h5 class="card-title text-uppercase text-muted mb-0">Pending Adjustments</h5>
+                            <span class="h2 font-weight-bold mb-0">@Model.PendingAdjustmentsCount</span>
+                        </div>
+                        <div class="col-auto">
+                            <div class="icon-shape bg-secondary text-white rounded-circle shadow">
+                                <i class="fas fa-adjust fa-2x"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Production Overview -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <h4 class="mb-3"><i class="fas fa-industry"></i> Production Overview</h4>
+        </div>
+        <div class="col-xl-3 col-md-6 mb-3">
+            <div class="card stat-card border-success">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <h5 class="card-title text-uppercase text-muted mb-0">Today's Production</h5>
+                            <span class="h2 font-weight-bold mb-0">@Model.TodaysProductionQuantity.ToString("N0")</span>
+                            <span class="text-muted">kg</span>
+                        </div>
+                        <div class="col-auto">
+                            <div class="icon-shape bg-success text-white rounded-circle shadow">
+                                <i class="fas fa-chart-line fa-2x"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="mt-2 mb-0 text-muted text-sm">
+                        <span class="text-success mr-2"><i class="fas fa-check-circle"></i> @Model.CompletedBatchesToday completed</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-3">
+            <div class="card stat-card border-info">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <h5 class="card-title text-uppercase text-muted mb-0">Active Batches</h5>
+                            <span class="h2 font-weight-bold mb-0">@Model.ActiveBatches</span>
+                        </div>
+                        <div class="col-auto">
+                            <div class="icon-shape bg-info text-white rounded-circle shadow">
+                                <i class="fas fa-cogs fa-2x"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="mt-2 mb-0 text-muted text-sm">
+                        <span class="text-info mr-2"><i class="fas fa-clock"></i> @Model.TodaysBatches total today</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-3">
+            <div class="card stat-card border-primary">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <h5 class="card-title text-uppercase text-muted mb-0">Machines</h5>
+                            <span class="h2 font-weight-bold mb-0">@Model.OperationalMachines / @Model.TotalMachines</span>
+                        </div>
+                        <div class="col-auto">
+                            <div class="icon-shape bg-primary text-white rounded-circle shadow">
+                                <i class="fas fa-tools fa-2x"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="mt-2 mb-0 text-muted text-sm">
+                        <span class="text-primary mr-2"><i class="fas fa-check"></i> Operational</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-3">
+            <div class="card stat-card border-warning">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <h5 class="card-title text-uppercase text-muted mb-0">Pending Orders</h5>
+                            <span class="h2 font-weight-bold mb-0">@Model.PendingProductionOrders</span>
+                        </div>
+                        <div class="col-auto">
+                            <div class="icon-shape bg-warning text-white rounded-circle shadow">
+                                <i class="fas fa-clipboard-list fa-2x"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="mt-2 mb-0 text-muted text-sm">
+                        <span class="text-warning mr-2"><i class="fas fa-hourglass-half"></i> Scheduled/In Progress</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Charts Row -->
+    <div class="row mb-4">
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">Monthly Sales Trend</h5>
+                </div>
+                <div class="card-body">
+                    <canvas id="salesChart" height="100"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">Stock by Variety</h5>
+                </div>
+                <div class="card-body">
+                    <canvas id="stockChart" height="200"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Transactions -->
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">Recent Transactions</h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Type</th>
+                                    <th>Description</th>
+                                    <th>Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.RecentTransactions != null)
+                                {
+                                    @foreach (var transaction in Model.RecentTransactions)
+                                    {
+                                        <tr>
+                                            <td>@transaction.Date.ToString("dd-MMM-yyyy")</td>
+                                            <td>
+                                                <span class="badge bg-@(transaction.Type == "Sale" ? "success" : "primary")">
+                                                    @transaction.Type
+                                                </span>
+                                            </td>
+                                            <td>@transaction.Description</td>
+                                            <td>₹ @transaction.Amount.ToString("N2")</td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- System Alerts -->
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">System Alerts</h5>
+                </div>
+                <div class="card-body">
+                    @if (Model.Alerts != null && Model.Alerts.Any())
+                    {
+                        @foreach (var alert in Model.Alerts)
+                        {
+                            <div class="alert alert-@(alert.Severity?.ToLower() ?? "info") alert-dismissible fade show" role="alert">
+                                <strong>@(alert.Type ?? "Alert"):</strong> @(alert.Message ?? "No message")
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <p class="text-muted">No alerts at this time.</p>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Inventory Details Row -->
+    <div class="row mb-4">
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-header bg-warning text-white">
+                    <h5 class="mb-0"><i class="fas fa-exclamation-triangle"></i> Low Stock Alert</h5>
+                </div>
+                <div class="card-body">
+                    @if (Model.LowStockItems != null && Model.LowStockItems.Any())
+                    {
+                        <div class="table-responsive">
+                            <table class="table table-sm table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Product</th>
+                                        <th>Warehouse</th>
+                                        <th>Current</th>
+                                        <th>Minimum</th>
+                                        <th>Shortage</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.LowStockItems)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <strong>@item.ProductName</strong><br>
+                                                <small class="text-muted">@item.ProductCode</small>
+                                            </td>
+                                            <td>@item.WarehouseName</td>
+                                            <td><span class="badge bg-danger">@item.CurrentStock.ToString("N2")</span></td>
+                                            <td>@item.MinimumLevel.ToString("N2")</td>
+                                            <td class="text-danger"><strong>@item.ShortageQuantity.ToString("N2")</strong></td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="text-end mt-2">
+                            <a asp-controller="Inventory" asp-action="Index" class="btn btn-sm btn-warning">View All Inventory →</a>
+                        </div>
+                    }
+                    else
+                    {
+                        <p class="text-muted text-center mb-0"><i class="fas fa-check-circle text-success"></i> All products are above minimum stock levels</p>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0"><i class="fas fa-exchange-alt"></i> Recent Stock Movements</h5>
+                </div>
+                <div class="card-body">
+                    @if (Model.RecentStockMovements != null && Model.RecentStockMovements.Any())
+                    {
+                        <div class="table-responsive">
+                            <table class="table table-sm table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Code</th>
+                                        <th>Type</th>
+                                        <th>Product</th>
+                                        <th>Qty</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var movement in Model.RecentStockMovements)
+                                    {
+                                        <tr>
+                                            <td>@movement.MovementDate.ToString("dd-MMM")</td>
+                                            <td><small>@movement.MovementCode</small></td>
+                                            <td>
+                                                <span class="badge @(movement.MovementType == "IN" ? "bg-success" : "bg-warning")">
+                                                    @movement.MovementType
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <small>@movement.ProductName</small><br>
+                                                <small class="text-muted">@movement.WarehouseName</small>
+                                            </td>
+                                            <td><strong>@movement.Quantity.ToString("N0")</strong></td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="text-end mt-2">
+                            <a asp-controller="StockMovements" asp-action="Index" class="btn btn-sm btn-info">View All Movements →</a>
+                        </div>
+                    }
+                    else
+                    {
+                        <p class="text-muted text-center mb-0">No recent stock movements</p>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Production Details Row -->
+    <div class="row mb-4">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0"><i class="fas fa-industry"></i> Recent Production Batches</h5>
+                </div>
+                <div class="card-body">
+                    @if (Model.RecentBatches != null && Model.RecentBatches.Any())
+                    {
+                        <div class="table-responsive">
+                            <table class="table table-sm table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Batch #</th>
+                                        <th>Date</th>
+                                        <th>Status</th>
+                                        <th>Input (kg)</th>
+                                        <th>Output (kg)</th>
+                                        <th>Yield %</th>
+                                        <th>Operator</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var batch in Model.RecentBatches)
+                                    {
+                                        <tr>
+                                            <td><strong>@batch.BatchNumber</strong></td>
+                                            <td>@batch.BatchDate.ToString("dd-MMM-yyyy")</td>
+                                            <td>
+                                                @if (batch.Status == "Completed")
+                                                {
+                                                    <span class="badge bg-success">@batch.Status</span>
+                                                }
+                                                else if (batch.Status == "In Progress")
+                                                {
+                                                    <span class="badge bg-info">@batch.Status</span>
+                                                }
+                                                else if (batch.Status == "Planned")
+                                                {
+                                                    <span class="badge bg-secondary">@batch.Status</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="badge bg-primary">@batch.Status</span>
+                                                }
+                                            </td>
+                                            <td>@batch.InputQuantity.ToString("N0")</td>
+                                            <td>@batch.OutputQuantity.ToString("N0")</td>
+                                            <td>
+                                                @if (batch.YieldPercent >= 65)
+                                                {
+                                                    <span class="badge bg-success">@batch.YieldPercent.ToString("F1")%</span>
+                                                }
+                                                else if (batch.YieldPercent >= 55)
+                                                {
+                                                    <span class="badge bg-warning">@batch.YieldPercent.ToString("F1")%</span>
+                                                }
+                                                else if (batch.YieldPercent > 0)
+                                                {
+                                                    <span class="badge bg-danger">@batch.YieldPercent.ToString("F1")%</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="text-muted">N/A</span>
+                                                }
+                                            </td>
+                                            <td><small>@batch.OperatorName</small></td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="text-end mt-2">
+                            <a asp-controller="ProductionBatches" asp-action="Index" class="btn btn-sm btn-primary">View All Batches →</a>
+                        </div>
+                    }
+                    else
+                    {
+                        <p class="text-muted text-center mb-0">No recent production batches</p>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Sales Chart - Using real data from database
+        var salesCtx = document.getElementById('salesChart').getContext('2d');
+
+        @{
+            var monthlySales = ViewBag.MonthlySalesChart as List<RMMS.Services.ChartData> ?? new List<RMMS.Services.ChartData>();
+            var salesLabels = string.Join(",", monthlySales.Select(x => $"'{x.Label}'"));
+            var salesData = string.Join(",", monthlySales.Select(x => x.Value));
+        }
+
+        var salesChart = new Chart(salesCtx, {
+            type: 'line',
+            data: {
+                labels: [@Html.Raw(salesLabels.Length > 0 ? salesLabels : "'No Data'")],
+                datasets: [{
+                    label: 'Monthly Sales (₹)',
+                    data: [@Html.Raw(salesData.Length > 0 ? salesData : "0")],
+                    borderColor: 'rgb(75, 192, 192)',
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    tension: 0.1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return '₹' + value.toLocaleString('en-IN');
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Stock Chart - Using real data from database
+        var stockCtx = document.getElementById('stockChart').getContext('2d');
+
+        @{
+            var stockByVariety = ViewBag.StockByVarietyChart as List<RMMS.Services.ChartData> ?? new List<RMMS.Services.ChartData>();
+            var stockLabels = string.Join(",", stockByVariety.Select(x => $"'{x.Label}'"));
+            var stockData = string.Join(",", stockByVariety.Select(x => x.Value));
+        }
+
+        var stockChart = new Chart(stockCtx, {
+            type: 'doughnut',
+            data: {
+                labels: [@Html.Raw(stockLabels.Length > 0 ? stockLabels : "'No Data'")],
+                datasets: [{
+                    data: [@Html.Raw(stockData.Length > 0 ? stockData : "0")],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.8)',
+                        'rgba(54, 162, 235, 0.8)',
+                        'rgba(255, 206, 86, 0.8)',
+                        'rgba(75, 192, 192, 0.8)',
+                        'rgba(153, 102, 255, 0.8)',
+                        'rgba(255, 159, 64, 0.8)'
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+    </script>
+}

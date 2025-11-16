@@ -1,0 +1,113 @@
+﻿@{
+    ViewData["Title"] = "Stock Movement Report";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-header bg-dark text-white">
+            <h3><i class="fas fa-exchange-alt"></i> Stock Movement Report</h3>
+            <p class="mb-0">Period: @ViewBag.ReportPeriod</p>
+        </div>
+
+        <div class="card-body">
+            <!-- Movement Summary showing the flow of inventory -->
+            <div class="row mb-4">
+                <div class="col-md-4">
+                    <div class="card border-success">
+                        <div class="card-body text-center">
+                            <h6>Total Inward</h6>
+                            <h3 class="text-success">+ @string.Format("{0:N2}", ViewBag.TotalInward) kg</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card border-danger">
+                        <div class="card-body text-center">
+                            <h6>Total Outward</h6>
+                            <h3 class="text-danger">- @string.Format("{0:N2}", ViewBag.TotalOutward) kg</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card border-primary">
+                        <div class="card-body text-center">
+                            <h6>Net Movement</h6>
+                            <h3 class="@(ViewBag.NetMovement >= 0 ? "text-success" : "text-danger")">
+                                @(ViewBag.NetMovement >= 0 ? "+" : "") @string.Format("{0:N2}", ViewBag.NetMovement) kg
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Movement Details Table -->
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover ms-datatable" id="movementTable">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Date</th>
+                            <th>Transaction Type</th>
+                            <th>Item</th>
+                            <th>Reference No</th>
+                            <th>Inward Qty (kg)</th>
+                            <th>Outward Qty (kg)</th>
+                            <th>Running Balance</th>
+                            <th>Remarks</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            var movements = ViewBag.Movements as List<dynamic> ?? new List<dynamic>();
+                            decimal runningBalance = 0;
+                        }
+                        @if (movements.Any())
+                        {
+                            foreach (var movement in movements)
+                            {
+                                runningBalance += movement.Inward - movement.Outward;
+                                <tr>
+                                    <td>@movement.Date.ToString("dd-MMM-yyyy")</td>
+                                    <td>
+                                        @if (movement.Type == "Procurement")
+                                        {
+                                            <span class="badge bg-success">@movement.Type</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge bg-danger">@movement.Type</span>
+                                        }
+                                    </td>
+                                    <td>@movement.Item</td>
+                                    <td>@movement.Reference</td>
+                                    <td class="text-success">@(movement.Inward > 0 ? movement.Inward.ToString("N2") : "-")</td>
+                                    <td class="text-danger">@(movement.Outward > 0 ? movement.Outward.ToString("N2") : "-")</td>
+                                    <td><strong>@runningBalance.ToString("N2")</strong></td>
+                                    <td>@movement.Remarks</td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="8" class="text-center">
+                                    <i class="fas fa-database fa-2x text-muted mb-2"></i>
+                                    <p>No stock movements found for the selected period.</p>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="mt-4">
+                <a href="@Url.Action("Index", "Reports")" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Back
+                </a>
+                <button class="btn btn-primary" onclick="window.print()">
+                    <i class="fas fa-print"></i> Print
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

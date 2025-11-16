@@ -1,0 +1,96 @@
+{
+  "v0_baseline": {
+    "name": "v0 - Baseline (No AI Acceleration)",
+    "date": "2025-10-01",
+    "features": [
+      "Basic medical knowledge extraction",
+      "Simple dialogue generation",
+      "Manual coding and testing",
+      "No guardrails",
+      "No AI acceleration"
+    ],
+    "story_points": 840,
+    "coverage_percent": 76.2,
+    "competitive_score": 85,
+    "max_score": 120,
+    "guardrails_layers": 0,
+    "test_coverage": 60.0,
+    "timeline_weeks": 36,
+    "cost_crore": 6.5,
+    "valuation_m": 180,
+    "prompts_count": 0,
+    "notes": "Traditional development approach with no AI assistance"
+  },
+  "v2_0_before_acceleration": {
+    "name": "v2.0 - Before AI Acceleration",
+    "date": "2025-10-15",
+    "features": [
+      "Multi-agent system (CrewAI)",
+      "Medical knowledge graph",
+      "Basic HIPAA compliance",
+      "Partial guardrails (3 layers)",
+      "Manual implementation"
+    ],
+    "story_points": 840,
+    "coverage_percent": 76.2,
+    "competitive_score": 105,
+    "max_score": 120,
+    "guardrails_layers": 3,
+    "test_coverage": 75.0,
+    "timeline_weeks": 26,
+    "cost_crore": 4.96,
+    "valuation_m": 250,
+    "prompts_count": 32,
+    "notes": "Initial AI prompts framework, 76% coverage, missing key features"
+  },
+  "v2_1_after_acceleration": {
+    "name": "v2.1 - After AI Acceleration",
+    "date": "2025-10-25",
+    "features": [
+      "Complete multi-agent system",
+      "Full medical knowledge graph",
+      "Complete HIPAA compliance",
+      "7-layer guardrail system",
+      "48 AI prompts (all epics)",
+      "XAI & explainability",
+      "Voice AI & ambient intelligence",
+      "Population health management",
+      "Clinical trial matching",
+      "SOC 2 & HITRUST ready",
+      "FDA 510(k) ready"
+    ],
+    "story_points": 1102,
+    "coverage_percent": 100.0,
+    "competitive_score": 120,
+    "max_score": 120,
+    "guardrails_layers": 7,
+    "test_coverage": 91.0,
+    "timeline_weeks": 22,
+    "cost_crore": 3.25,
+    "valuation_m": 324,
+    "prompts_count": 48,
+    "notes": "Full AI acceleration, 100% coverage, perfect competitive score"
+  },
+  "current": {
+    "name": "Current - Production Ready",
+    "date": "2025-10-26",
+    "features": [
+      "All v2.1 features",
+      "Comprehensive testing suite",
+      "Full documentation",
+      "Automated validation",
+      "Production deployment ready"
+    ],
+    "story_points": 1102,
+    "coverage_percent": 100.0,
+    "competitive_score": 120,
+    "max_score": 120,
+    "guardrails_layers": 7,
+    "test_coverage": 91.0,
+    "timeline_weeks": 22,
+    "cost_crore": 3.25,
+    "valuation_m": 324,
+    "prompts_count": 48,
+    "notes": "Production-ready with full validation and testing"
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "service": {
+    "name": "Patient-Facing XAI",
+    "version": "1.0.0",
+    "phase": 25,
+    "environment": "production"
+  },
+  "hipaa": {
+    "enabled": true,
+    "phi_protection": "enabled",
+    "audit_logging": true,
+    "encryption_at_rest": true,
+    "encryption_in_transit": true
+  },
+  "defaults": {
+    "language": "en",
+    "literacy_level": "intermediate",
+    "modalities": ["text", "simplified_summary", "faq"],
+    "validate_explanations": true,
+    "enable_portal_delivery": true
+  },
+  "languages": {
+    "supported": ["en", "es", "zh", "fr", "de", "ar", "pt", "ru", "ja", "hi"],
+    "auto_detect": true,
+    "fallback": "en"
+  },
+  "performance": {
+    "max_batch_size": 100,
+    "cache_enabled": true,
+    "cache_ttl_seconds": 3600,
+    "max_concurrent_requests": 50,
+    "request_timeout_ms": 5000
+  },
+  "accessibility": {
+    "wcag_level": "AAA",
+    "screen_reader_optimization": true,
+    "high_contrast_available": true,
+    "font_size_adjustable": true
+  },
+  "validation": {
+    "readability_thresholds": {
+      "basic": 80,
+      "elementary": 70,
+      "intermediate": 60,
+      "advanced": 50,
+      "expert": 30
+    },
+    "require_comprehension_aids": true,
+    "require_action_steps": true
+  },
+  "portal": {
+    "enabled": true,
+    "audit_all_accesses": true,
+    "export_formats": ["html", "pdf", "json", "txt"]
+  },
+  "monitoring": {
+    "metrics_enabled": true,
+    "metrics_port": 9090,
+    "health_check_port": 8080,
+    "prometheus_enabled": true
+  }
+}

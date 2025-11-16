@@ -1,0 +1,3558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Technical Assessment | Semantic Data Services</title>
+
+    <!-- Bootstrap 5.3 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+
+    <!-- EmailJS v4.x -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+    <!-- CryptoJS for Answer Encryption -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+
+    <style>
+        /* ============= SOLARIZED LIGHT - PROFESSIONAL DESIGN SYSTEM ============= */
+        :root {
+            /* Solarized Light Base Colors */
+            --sol-base3: #fdf6e3;      /* Background - warm cream */
+            --sol-base2: #eee8d5;      /* Background highlights */
+            --sol-base1: #93a1a1;      /* Comments / secondary */
+            --sol-base0: #839496;      /* Body text / default code */
+            --sol-base00: #657b83;     /* Primary content */
+            --sol-base01: #586e75;     /* Emphasized content */
+            --sol-base02: #073642;     /* Dark accent */
+            --sol-base03: #002b36;     /* Darkest (for contrast) */
+
+            /* Solarized Accent Colors */
+            --sol-yellow: #b58900;
+            --sol-orange: #cb4b16;
+            --sol-red: #dc322f;
+            --sol-magenta: #d33682;
+            --sol-violet: #6c71c4;
+            --sol-blue: #268bd2;
+            --sol-cyan: #2aa198;
+            --sol-green: #859900;
+
+            /* Semantic Mappings for Exam System */
+            --primary-bg: #fdf6e3;           /* Base background */
+            --secondary-bg: #eee8d5;         /* Cards, panels */
+            --tertiary-bg: #f5f0e1;          /* Hover states */
+            --border-color: #d3cbb7;         /* Subtle borders */
+            --border-light: #e8e3d3;         /* Very light borders */
+
+            --text-primary: #586e75;         /* Main text */
+            --text-secondary: #839496;       /* Secondary text */
+            --text-tertiary: #93a1a1;        /* Hints, placeholders */
+
+            --accent-primary: #268bd2;       /* Blue - primary actions */
+            --accent-success: #859900;       /* Green - success */
+            --accent-warning: #b58900;       /* Yellow - warnings */
+            --accent-danger: #dc322f;        /* Red - errors */
+            --accent-info: #2aa198;          /* Cyan - info */
+
+            /* Shadows for depth */
+            --shadow-sm: 0 1px 3px 0 rgba(7, 54, 66, 0.1);
+            --shadow-md: 0 4px 6px -1px rgba(7, 54, 66, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(7, 54, 66, 0.15);
+            --shadow-xl: 0 20px 25px -5px rgba(7, 54, 66, 0.2);
+
+            /* Gradients */
+            --gradient-primary: linear-gradient(135deg, #268bd2 0%, #2aa198 100%);
+            --gradient-warm: linear-gradient(135deg, #b58900 0%, #cb4b16 100%);
+            --gradient-sky-blue: linear-gradient(135deg, #87CEEB 0%, #4A90E2 100%);  /* Light sky blue for login */
+            --gradient-success: linear-gradient(135deg, #859900 0%, #2aa198 100%);  /* Green→Cyan for success */
+
+            /* Legacy Variable Mappings (for backward compatibility) */
+            --hr-dark-bg: #fdf6e3;          /* Map to cream background */
+            --hr-card-bg: #eee8d5;          /* Map to beige cards */
+            --hr-border: #d3cbb7;           /* Map to subtle tan border */
+            --hr-green: #859900;            /* Solarized green */
+            --hr-dark-green: #657b00;       /* Darker green variant */
+            --hr-text-light: #657b83;       /* Readable dark text */
+            --hr-text-white: #586e75;       /* Emphasized dark text */
+            --hr-code-bg: #eee8d5;          /* Beige code background */
+
+            /* Status Colors */
+            --success: #859900;             /* Solarized green */
+            --danger: #dc322f;              /* Solarized red */
+            --warning: #b58900;             /* Solarized yellow */
+            --info: #2aa198;                /* Solarized cyan */
+
+            /* Microsoft-inspired gradient for success screen */
+            --ms-gradient: linear-gradient(135deg, #b58900 0%, #cb4b16 100%);
+        }
+
+        /* Professional Font Stack - Windows Terminal Settings Applied */
+        * {
+            font-family: 'Cascadia Mono', 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Inter', 'Consolas', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+            box-sizing: border-box;
+            font-weight: normal;
+            /* Windows Terminal: Cell width 0.6 translates to tighter letter spacing */
+            letter-spacing: -0.02em;
+        }
+
+        body {
+            margin: 0;
+            padding: 8px;  /* Windows Terminal: Padding 8,8,8,8 */
+            background: var(--primary-bg);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            /* Windows Terminal: Font size 12pt */
+            font-size: 12pt;
+            /* Windows Terminal: Line height 1.2 */
+            line-height: 1.2;
+        }
+
+        /* ============= SCREEN MANAGEMENT ============= */
+        .screen {
+            display: none !important;
+            min-height: 100vh;
+        }
+
+        .screen.active {
+            display: flex !important;
+        }
+
+        /* ============= LOGIN SCREEN - PROFESSIONAL SKY BLUE ============= */
+        .login-screen {
+            /* Light sky blue gradient for professional, attractive appearance */
+            background: var(--gradient-sky-blue);
+            min-height: 100vh;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .login-container {
+            background: white;  /* Pure white for maximum professionalism against sky blue */
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);  /* Deeper shadow for elevation */
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            padding: 48px;
+            max-width: 480px;
+            width: 100%;
+            animation: slideUp 0.5s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .login-logo {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 24px;
+            /* Use blue gradient for logo contrast against warm background */
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .login-logo i {
+            font-size: 48px;
+            color: white;
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .login-header h1 {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--sol-base01);
+            margin-bottom: 8px;
+            letter-spacing: -0.03em;
+        }
+
+        .login-header p {
+            color: var(--text-secondary);
+            font-size: 15px;
+            font-weight: 450;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+            font-size: 14px;
+            letter-spacing: -0.01em;
+        }
+
+        .form-control {
+            padding: 14px 16px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 450;
+            background: var(--sol-base2);
+            color: var(--text-primary);
+            transition: all 0.3s;
+        }
+
+        .form-control:focus {
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 0 3px rgba(38, 139, 210, 0.1);
+            outline: none;
+            background: var(--sol-base3);
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 16px;
+            background: var(--gradient-primary);
+            color: var(--sol-base3);
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 8px;
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+            filter: brightness(1.05);
+        }
+
+        .btn-login:active {
+            transform: translateY(0);
+            box-shadow: var(--shadow-sm);
+        }
+
+        /* ============= RULES SCREEN - PROFESSIONAL DARKER GREEN ============= */
+        .rules-screen {
+            /* Darker, more appealing green gradient background */
+            background: linear-gradient(135deg, #2d5016 0%, #3d6b1f 50%, #4a7c23 100%);
+            height: 100vh;  /* FIXED: Exact viewport height for no scrollbar */
+            overflow: hidden;  /* FIXED: Prevent page scrollbar */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;  /* FIXED: Reduced padding for better fit */
+        }
+
+        .rules-container {
+            max-width: 900px;
+            width: 100%;
+            max-height: calc(100vh - 40px);  /* FIXED: Fit within viewport with padding */
+            margin: 0 auto;
+            background: white;  /* Pure white container for maximum readability */
+            border-radius: 16px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            padding: 32px;  /* FIXED: Reduced padding for better fit */
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            overflow-y: auto;  /* FIXED: Internal scrolling if content too tall */
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .rules-header {
+            text-align: center;
+            margin-bottom: 24px;  /* FIXED: Reduced for better fit */
+            padding-bottom: 16px;  /* FIXED: Reduced for better fit */
+            border-bottom: 2px solid var(--hr-border);
+            flex-shrink: 0;  /* FIXED: Don't shrink header */
+        }
+
+        .rules-header h1 {
+            font-size: 32px;  /* FIXED: Slightly smaller for better fit */
+            font-weight: 700;
+            color: #2d5016;  /* Darker green to match new background theme */
+            margin-bottom: 8px;
+            letter-spacing: -0.03em;
+        }
+
+        .rules-header p {
+            color: #555;  /* Darker text for readability on white */
+            font-size: 15px;  /* FIXED: Slightly smaller */
+            font-weight: 500;
+        }
+
+        .rules-list {
+            margin-bottom: 24px;  /* FIXED: Reduced for better fit */
+            flex-shrink: 0;  /* FIXED: Don't shrink rules */
+        }
+
+        .rule-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 12px;  /* FIXED: Reduced padding for better fit */
+            margin-bottom: 10px;  /* FIXED: Reduced margin */
+            background: rgba(45, 80, 22, 0.08);  /* Light green tint */
+            border-left: 4px solid #3d6b1f;  /* Darker green accent */
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .rule-item:hover {
+            background: rgba(45, 80, 22, 0.12);
+            transform: translateX(4px);
+            box-shadow: 0 2px 8px rgba(45, 80, 22, 0.1);
+        }
+
+        .rule-item i {
+            color: #3d6b1f;  /* Darker green for icons */
+            font-size: 20px;
+            margin-right: 16px;
+            margin-top: 2px;
+        }
+
+        .rule-item .rule-text {
+            flex: 1;
+            color: #333;  /* Darker text for readability */
+            line-height: 1.6;
+            font-weight: 500;
+            font-size: 15px;
+        }
+
+        .checkpoint-section {
+            /* Appealing darker background for checkpoints */
+            background: linear-gradient(135deg, rgba(45, 80, 22, 0.12) 0%, rgba(61, 107, 31, 0.08) 100%);
+            border-radius: 12px;
+            padding: 20px;  /* FIXED: Reduced padding */
+            margin-bottom: 20px;  /* FIXED: Reduced margin */
+            border: 2px solid rgba(45, 80, 22, 0.2);
+            box-shadow: 0 4px 12px rgba(45, 80, 22, 0.08);
+            flex-shrink: 0;  /* FIXED: Don't shrink checkpoints */
+        }
+
+        .checkpoint-section h3 {
+            color: #2d5016;  /* Darker green for heading */
+            font-size: 18px;  /* FIXED: Slightly smaller */
+            margin-bottom: 16px;  /* FIXED: Reduced margin */
+            font-weight: 700;
+        }
+
+        .checkpoint-item {
+            background: white;
+            border: 2px solid rgba(45, 80, 22, 0.25);
+            border-radius: 10px;
+            padding: 12px;  /* FIXED: Reduced padding */
+            margin-bottom: 10px;  /* FIXED: Reduced margin */
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .checkpoint-item:hover {
+            /* Clear, visible hover state */
+            border-color: #3d6b1f;
+            background: rgba(61, 107, 31, 0.05);
+            transform: translateX(4px);
+            box-shadow: 0 4px 12px rgba(45, 80, 22, 0.15);
+        }
+
+        .checkpoint-item.checked {
+            /* Stronger checked state with excellent visibility */
+            border-color: #2d5016;
+            background: rgba(45, 80, 22, 0.1);
+            box-shadow: 0 0 0 3px rgba(45, 80, 22, 0.15);
+        }
+
+        .checkpoint-item input[type="checkbox"] {
+            width: 24px;
+            height: 24px;
+            margin-right: 12px;
+            cursor: pointer;
+            accent-color: #2d5016;  /* Darker green for checkbox */
+        }
+
+        .checkpoint-item label {
+            color: #333;  /* Dark text for readability */
+            cursor: pointer;
+            margin-bottom: 0;
+            display: flex;
+            align-items: center;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        /* FIXED: Ensure Start button is always visible at bottom */
+        .rules-container .btn-login {
+            margin-top: auto;  /* FIXED: Push to bottom */
+            flex-shrink: 0;  /* FIXED: Never shrink the button */
+        }
+
+        /* ============= EXAM SCREEN - HACKERRANK STYLE ============= */
+        .exam-screen {
+            background: var(--hr-dark-bg);
+            flex-direction: column;
+        }
+
+        /* Top Navigation Bar */
+        .exam-navbar {
+            background: var(--hr-card-bg);
+            border-bottom: 1px solid var(--hr-border);
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .exam-navbar .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .exam-navbar .brand i {
+            font-size: 32px;
+            color: var(--hr-green);
+        }
+
+        .exam-navbar .brand-text h1 {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--hr-text-white);
+            margin: 0;
+        }
+
+        .exam-navbar .brand-text p {
+            font-size: 12px;
+            color: var(--hr-text-light);
+            margin: 0;
+        }
+
+        .exam-navbar .nav-info {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .timer-box {
+            background: rgba(27,169,76,0.1);
+            border: 2px solid var(--hr-green);
+            padding: 12px 20px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .timer-box i {
+            color: var(--hr-green);
+            font-size: 20px;
+        }
+
+        .timer-box .timer-text {
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--hr-green);
+        }
+
+        .timer-box.warning {
+            background: rgba(239,68,68,0.1);
+            border-color: var(--danger);
+            animation: pulse 1s infinite;
+        }
+
+        .timer-box.warning i,
+        .timer-box.warning .timer-text {
+            color: var(--danger);
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+
+        .recording-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            /* Solid background for better visibility */
+            background: #fdf1f1;
+            border: 2px solid var(--danger);
+            padding: 8px 16px;
+            border-radius: 8px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .recording-dot {
+            width: 10px;
+            height: 10px;
+            background: var(--danger);
+            border-radius: 50%;
+            animation: blink 1.5s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .recording-badge span {
+            color: var(--danger);
+            font-weight: 600;
+            font-size: 13px;
+        }
+
+        /* Main Exam Layout */
+        .exam-layout {
+            display: flex;
+            height: calc(100vh - 70px);
+        }
+
+        /* Left Sidebar - Camera & Student Info */
+        .exam-sidebar {
+            width: 320px;
+            background: var(--hr-card-bg);
+            border-right: 1px solid var(--hr-border);
+            padding: 24px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .camera-panel {
+            /* Light background for better readability - matching center/right panels */
+            background: var(--sol-base2);
+            border-radius: 12px;
+            padding: 16px;
+            border: 2px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .camera-panel h3 {
+            color: var(--accent-success);  /* Visible green against light background */
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .camera-feed {
+            width: 100%;
+            aspect-ratio: 4/3;
+            background: #000;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .camera-feed video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .camera-placeholder {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: #666;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .camera-placeholder i {
+            font-size: 48px;
+            margin-bottom: 12px;
+        }
+
+        .student-panel {
+            /* Light background for better readability - matching center/right panels */
+            background: var(--sol-base2);
+            border-radius: 12px;
+            padding: 16px;
+            border: 2px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .student-panel h3 {
+            color: var(--accent-success);  /* Visible green against light background */
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .student-info-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .student-info-item:last-child {
+            border-bottom: none;
+        }
+
+        .student-info-item i {
+            color: var(--accent-success);  /* Visible green */
+            font-size: 16px;
+        }
+
+        .student-info-item span {
+            color: var(--text-primary);  /* Dark readable text */
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .progress-panel {
+            /* Light background for better readability - matching center/right panels */
+            background: var(--sol-base2);
+            border-radius: 12px;
+            padding: 16px;
+            border: 2px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .progress-panel h3 {
+            color: var(--accent-success);  /* Visible green against light background */
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .progress-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .stat-box {
+            text-align: center;
+            background: white;
+            padding: 12px;
+            border-radius: 8px;
+            border: 2px solid var(--border-light);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        .stat-box .stat-number {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--accent-success);  /* Visible green */
+            display: block;
+        }
+
+        .stat-box .stat-label {
+            font-size: 11px;
+            color: var(--text-secondary);  /* Readable text */
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+
+        .progress-bar-container {
+            margin-top: 12px;
+        }
+
+        .progress-bar-label {
+            font-size: 11px;
+            color: var(--text-primary);  /* Readable dark text */
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: white;
+            border: 1px solid var(--border-light);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--hr-green), #10b981);
+            transition: width 0.3s ease;
+        }
+
+        /* Center - Question Area */
+        .exam-content {
+            flex: 1;
+            padding: 32px;
+            overflow-y: auto;
+            background: var(--hr-dark-bg);
+        }
+
+        .question-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .question-header-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid var(--hr-border);
+        }
+
+        .question-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--hr-green);
+        }
+
+        .question-points-badge {
+            background: var(--hr-green);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .question-card {
+            background: var(--sol-base3);
+            /* Visible border for definition */
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 32px;
+            margin-bottom: 24px;
+            box-shadow: var(--shadow-md);
+        }
+
+        .question-text {
+            font-size: 14pt;
+            /* Darker text for better readability */
+            color: var(--text-primary);
+            line-height: 1.5;
+            margin-bottom: 24px;
+            white-space: pre-wrap;
+            font-weight: 500;
+            letter-spacing: -0.01em;
+        }
+
+        .question-image {
+            max-width: 100%;
+            border-radius: 8px;
+            margin: 20px 0;
+            border: 1px solid var(--hr-border);
+        }
+
+        /* MCQ Options - Elegant Design with Better Contrast */
+        .mcq-options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .mcq-option {
+            /* Light background for better readability */
+            background: var(--sol-base2);
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            padding: 16px 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .mcq-option:hover {
+            border-color: var(--accent-primary);
+            background: rgba(38, 139, 210, 0.08);
+            transform: translateX(4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .mcq-option.selected {
+            border-color: var(--accent-primary);
+            background: rgba(38, 139, 210, 0.15);
+            box-shadow: 0 0 0 3px rgba(38, 139, 210, 0.15);
+        }
+
+        .mcq-option input[type="radio"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            accent-color: var(--accent-primary);
+        }
+
+        .mcq-option-text {
+            flex: 1;
+            /* Darker text for readability */
+            color: var(--text-primary);
+            font-size: 13pt;
+            font-weight: 500;
+            letter-spacing: -0.01em;
+            line-height: 1.4;
+        }
+
+        .mcq-option-text code {
+            background: var(--hr-code-bg);
+            padding: 2px 8px;
+            border-radius: 4px;
+            color: #f97316;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 14px;
+        }
+
+        /* Code Editor - Solarized Light Style */
+        .code-editor-container {
+            background: var(--sol-base2);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+        }
+
+        .code-editor-header {
+            background: var(--tertiary-bg);
+            padding: 12px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .code-editor-header .language-label {
+            color: var(--accent-primary);
+            font-weight: 600;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .code-editor-header .traffic-lights {
+            display: flex;
+            gap: 8px;
+        }
+
+        .traffic-light {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .traffic-light.red { background: #ff5f56; }
+        .traffic-light.yellow { background: #ffbd2e; }
+        .traffic-light.green { background: #27c93f; }
+
+        .code-editor-wrapper {
+            display: flex;
+            max-height: 500px;
+            overflow: auto;
+            background: var(--hr-code-bg);
+            position: relative;
+        }
+
+        .line-numbers {
+            background: var(--tertiary-bg);
+            padding: 16px 12px 16px 16px;
+            text-align: right;
+            color: var(--text-tertiary);
+            font-family: 'Cascadia Mono', 'Consolas', 'Monaco', monospace;
+            font-size: 12pt;
+            line-height: 1.2;
+            user-select: none;
+            border-right: 2px solid var(--border-color);
+            white-space: pre;
+            margin: 0;
+            overflow: hidden;
+            min-width: 45px;
+        }
+
+        .code-editor {
+            flex: 1;
+            background: var(--sol-base2);
+            /* Solarized syntax highlighting colors */
+            color: var(--text-primary);
+            border: none;
+            padding: 16px;
+            font-family: 'Cascadia Mono', 'Consolas', 'Monaco', monospace;
+            font-size: 12pt;
+            line-height: 1.2;
+            resize: none;
+            min-height: 400px;
+            outline: none;
+            white-space: pre;
+            overflow-wrap: normal;
+            overflow: auto;
+            scrollbar-width: thin;
+        }
+
+        .code-editor::placeholder {
+            color: var(--text-tertiary);
+        }
+
+        /* Scrollbar styling for code editor */
+        .code-editor-wrapper::-webkit-scrollbar {
+            width: 12px;
+            height: 12px;
+        }
+
+        .code-editor-wrapper::-webkit-scrollbar-track {
+            background: var(--sol-base2);
+        }
+
+        .code-editor-wrapper::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 6px;
+        }
+
+        .code-editor-wrapper::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-primary);
+        }
+
+        /* Right Sidebar - Question Navigator */
+        .exam-navigator {
+            width: 260px;
+            background: var(--hr-card-bg);
+            border-left: 1px solid var(--hr-border);
+            padding: 24px;
+            overflow-y: auto;
+        }
+
+        .navigator-header {
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid var(--hr-border);
+        }
+
+        .navigator-header h3 {
+            color: var(--hr-green);
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .navigator-stats {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .navigator-stat {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+        }
+
+        .navigator-stat .label {
+            color: var(--hr-text-light);
+        }
+
+        .navigator-stat .value {
+            color: var(--hr-green);
+            font-weight: 600;
+        }
+
+        .question-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .question-box {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            /* Light background for unanswered questions */
+            background: var(--sol-base2);
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            /* Dark text for visibility */
+            color: var(--text-primary);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .question-box:hover {
+            border-color: var(--accent-primary);
+            transform: scale(1.05);
+            box-shadow: var(--shadow-md);
+        }
+
+        .question-box.current {
+            /* Vibrant blue for current question */
+            background: var(--accent-primary);
+            border-color: var(--accent-primary);
+            color: white;
+            box-shadow: 0 0 0 3px rgba(38, 139, 210, 0.2);
+        }
+
+        .question-box.answered {
+            /* Green tint for answered questions with darker text */
+            background: rgba(133, 153, 0, 0.2);
+            border-color: var(--accent-success);
+            color: var(--sol-base02);
+            font-weight: 700;
+        }
+
+        .legend {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            padding: 16px;
+            background: var(--tertiary-bg);
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 1px solid var(--border-light);
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 12px;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .legend-box {
+            width: 24px;
+            height: 24px;
+            border-radius: 4px;
+            border: 2px solid var(--border-color);
+            background: var(--sol-base2);
+        }
+
+        .legend-box.current {
+            background: var(--accent-primary);
+            border-color: var(--accent-primary);
+        }
+
+        .legend-box.answered {
+            background: rgba(133, 153, 0, 0.2);
+            border-color: var(--accent-success);
+        }
+
+        /* Navigation Buttons - Redesigned with Better Visibility */
+        .navigation-buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 32px;
+        }
+
+        .btn-nav {
+            flex: 1;
+            padding: 14px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-previous {
+            /* Solid light background with darker text for clarity */
+            background: var(--sol-base2);
+            color: var(--text-primary);
+            border: 2px solid var(--border-color);
+        }
+
+        .btn-previous:hover:not(:disabled) {
+            border-color: var(--accent-primary);
+            background: rgba(38, 139, 210, 0.1);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-previous:active:not(:disabled) {
+            transform: translateY(0);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-next {
+            /* Solid blue background with white text - highly visible */
+            background: var(--accent-primary);
+            color: white;
+            border: 2px solid var(--accent-primary);
+        }
+
+        .btn-next:hover:not(:disabled) {
+            background: #1f7ab8;
+            border-color: #1f7ab8;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(38, 139, 210, 0.4);
+        }
+
+        .btn-next:active:not(:disabled) {
+            transform: translateY(0);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-submit {
+            width: 100%;
+            /* Use Solarized gradient instead of purple */
+            background: linear-gradient(135deg, var(--accent-success) 0%, var(--sol-cyan) 100%);
+            color: white;
+            padding: 16px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(133, 153, 0, 0.4);
+            filter: brightness(1.1);
+        }
+
+        .btn-submit:active {
+            transform: translateY(0);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-nav:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            filter: grayscale(0.5);
+        }
+
+        /* Thank You Screen - Professional with Swapped Colors */
+        .thank-you-screen {
+            /* Yellow/orange gradient background */
+            background: var(--ms-gradient);
+            min-height: 100vh;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .thank-you-container {
+            /* Pure white container for maximum professionalism */
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            padding: 48px;
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            animation: slideUp 0.5s ease-out;
+        }
+
+        /* Company Branding at top */
+        .thank-you-container::before {
+            content: 'Semantic Data Services';
+            display: block;
+            font-size: 20px;
+            font-weight: 700;
+            color: #2d5016;  /* Darker green for contrast */
+            margin-bottom: 24px;
+            letter-spacing: 0.5px;
+        }
+
+        .success-icon {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 24px;
+            /* Light green with gradient for appeal */
+            background: linear-gradient(135deg, #3d6b1f 0%, #4a7c23 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: scaleIn 0.5s ease-out;
+            box-shadow: 0 10px 30px rgba(45, 80, 22, 0.3);
+        }
+
+        @keyframes scaleIn {
+            from { transform: scale(0); }
+            to { transform: scale(1); }
+        }
+
+        .success-icon i {
+            font-size: 50px;
+            color: white;
+        }
+
+        .thank-you-container h1 {
+            font-size: 32px;
+            font-weight: 700;
+            color: #2d5016;  /* Darker green for heading */
+            margin-bottom: 12px;
+            letter-spacing: -0.02em;
+        }
+
+        .thank-you-container p {
+            font-size: 14pt;
+            color: #555;  /* Darker gray for readability */
+            line-height: 1.4;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .submission-details {
+            /* Light background with subtle tint */
+            background: rgba(61, 107, 31, 0.05);
+            border: 2px solid rgba(45, 80, 22, 0.2);
+            border-radius: 12px;
+            padding: 24px;
+            text-align: left;
+            margin-top: 24px;
+            box-shadow: 0 4px 12px rgba(45, 80, 22, 0.08);
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(45, 80, 22, 0.1);
+        }
+
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+
+        .detail-label {
+            font-weight: 600;
+            color: #666;
+        }
+
+        .detail-value {
+            color: #2d5016;  /* Darker green for values */
+            font-weight: 700;
+        }
+
+        /* ============= MOBILE RESPONSIVE ============= */
+        @media (max-width: 1200px) {
+            .exam-sidebar {
+                width: 280px;
+            }
+
+            .exam-navigator {
+                width: 220px;
+            }
+
+            .question-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 992px) {
+            .exam-layout {
+                flex-direction: column;
+                height: auto;
+            }
+
+            .exam-sidebar,
+            .exam-navigator {
+                width: 100%;
+                border: none;
+                border-bottom: 1px solid var(--hr-border);
+            }
+
+            .exam-sidebar {
+                order: 1;
+            }
+
+            .exam-content {
+                order: 2;
+            }
+
+            .exam-navigator {
+                order: 3;
+            }
+
+            .camera-panel {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 16px;
+            }
+
+            .student-panel,
+            .progress-panel {
+                grid-column: span 1;
+            }
+
+            .question-grid {
+                grid-template-columns: repeat(5, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .login-container,
+            .rules-container,
+            .thank-you-container {
+                padding: 32px 24px;
+            }
+
+            .exam-navbar {
+                padding: 12px 16px;
+            }
+
+            .exam-navbar .brand i {
+                font-size: 24px;
+            }
+
+            .exam-navbar .brand-text h1 {
+                font-size: 16px;
+            }
+
+            .exam-content {
+                padding: 20px 16px;
+            }
+
+            .question-card {
+                padding: 20px;
+            }
+
+            .camera-panel {
+                grid-template-columns: 1fr;
+            }
+
+            .question-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            .navigation-buttons {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .login-container,
+            .rules-container {
+                padding: 24px 16px;
+            }
+
+            .login-header h1,
+            .rules-header h1 {
+                font-size: 24px;
+            }
+
+            .timer-box {
+                padding: 8px 12px;
+            }
+
+            .timer-box .timer-text {
+                font-size: 16px;
+            }
+
+            .question-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 8px;
+            }
+
+            .code-editor {
+                font-size: 12px;
+            }
+        }
+
+        /* ============= UTILITIES ============= */
+        .hidden {
+            display: none !important;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        /* Alert Messages */
+        .alert {
+            padding: 14px 16px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .alert-danger {
+            background: rgba(239,68,68,0.1);
+            border: 1px solid var(--danger);
+            color: var(--danger);
+        }
+
+        .alert-success {
+            background: rgba(16,185,129,0.1);
+            border: 1px solid var(--success);
+            color: var(--success);
+        }
+
+        .alert-info {
+            background: rgba(42, 161, 152, 0.1);
+            border: 1px solid var(--info);
+            color: var(--info);
+        }
+
+        /* ============= CUSTOM CONFIRMATION MODAL ============= */
+        .swal2-popup {
+            background: var(--sol-base3) !important;
+            border: 2px solid var(--border-color) !important;
+            border-radius: 16px !important;
+            padding: 32px !important;
+            box-shadow: var(--shadow-xl) !important;
+        }
+
+        .swal2-title {
+            color: var(--text-primary) !important;
+            font-size: 24px !important;
+            font-weight: 700 !important;
+            font-family: 'Cascadia Mono', 'Segoe UI', sans-serif !important;
+        }
+
+        .swal2-html-container {
+            color: var(--text-secondary) !important;
+            font-size: 14pt !important;
+            line-height: 1.4 !important;
+            font-family: 'Segoe UI', sans-serif !important;
+        }
+
+        .swal2-confirm {
+            background: linear-gradient(135deg, var(--accent-success) 0%, var(--sol-cyan) 100%) !important;
+            border: none !important;
+            border-radius: 8px !important;
+            padding: 12px 32px !important;
+            font-size: 15px !important;
+            font-weight: 600 !important;
+            box-shadow: var(--shadow-md) !important;
+            transition: all 0.3s !important;
+        }
+
+        .swal2-confirm:hover {
+            transform: translateY(-2px) !important;
+            box-shadow: var(--shadow-lg) !important;
+        }
+
+        .swal2-cancel {
+            background: var(--sol-base2) !important;
+            color: var(--text-primary) !important;
+            border: 2px solid var(--border-color) !important;
+            border-radius: 8px !important;
+            padding: 12px 32px !important;
+            font-size: 15px !important;
+            font-weight: 600 !important;
+            box-shadow: var(--shadow-sm) !important;
+            transition: all 0.3s !important;
+        }
+
+        .swal2-cancel:hover {
+            border-color: var(--accent-danger) !important;
+            background: rgba(220, 50, 47, 0.1) !important;
+            transform: translateY(-2px) !important;
+        }
+
+        .swal2-icon {
+            border-color: var(--accent-warning) !important;
+            color: var(--accent-warning) !important;
+        }
+
+        .swal2-icon.swal2-warning {
+            border-color: var(--accent-warning) !important;
+            color: var(--accent-warning) !important;
+        }
+
+        /* Upload Progress Overlay */
+        #uploadProgress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(253, 246, 227, 0.95);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            backdrop-filter: blur(4px);
+        }
+
+        #uploadProgress.active {
+            display: flex;
+        }
+
+        .upload-content {
+            background: var(--sol-base3);
+            border: 2px solid var(--border-color);
+            border-radius: 16px;
+            padding: 48px;
+            text-align: center;
+            max-width: 500px;
+            box-shadow: var(--shadow-xl);
+        }
+
+        .upload-spinner {
+            width: 64px;
+            height: 64px;
+            border: 4px solid var(--sol-base2);
+            border-top-color: var(--accent-primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 24px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .upload-text {
+            font-size: 18px;
+            color: var(--text-primary);
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .upload-bar {
+            width: 100%;
+            height: 12px;
+            background: var(--sol-base2);
+            border-radius: 6px;
+            overflow: hidden;
+            margin-top: 16px;
+        }
+
+        .upload-bar-fill {
+            height: 100%;
+            background: var(--gradient-primary);
+            transition: width 0.3s ease;
+            border-radius: 6px;
+        }
+
+        /* ============= CUSTOM CONFIRMATION MODAL ============= */
+        .custom-confirm-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            backdrop-filter: blur(4px);
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .custom-confirm-overlay.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .custom-confirm-dialog {
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideUpFade 0.3s ease-out;
+            text-align: center;
+        }
+
+        @keyframes slideUpFade {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .custom-confirm-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 24px;
+            background: linear-gradient(135deg, #e63946 0%, #dc322f 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 24px rgba(230, 57, 70, 0.3);
+        }
+
+        .custom-confirm-icon i {
+            font-size: 40px;
+            color: white;
+        }
+
+        .custom-confirm-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #2d5016;
+            margin-bottom: 16px;
+        }
+
+        .custom-confirm-message {
+            font-size: 16px;
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        .custom-confirm-warning {
+            background: rgba(230, 57, 70, 0.1);
+            border: 2px solid rgba(230, 57, 70, 0.3);
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 24px;
+            color: #e63946;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .custom-confirm-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+        }
+
+        .custom-confirm-btn {
+            padding: 14px 32px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            min-width: 120px;
+        }
+
+        .custom-confirm-btn-cancel {
+            background: var(--sol-base2);
+            color: var(--text-primary);
+            border: 2px solid var(--border-color);
+        }
+
+        .custom-confirm-btn-cancel:hover {
+            background: rgba(220, 50, 47, 0.1);
+            border-color: var(--accent-danger);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .custom-confirm-btn-submit {
+            background: linear-gradient(135deg, #3d6b1f 0%, #4a7c23 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(45, 80, 22, 0.3);
+        }
+
+        .custom-confirm-btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(45, 80, 22, 0.4);
+        }
+
+        .custom-confirm-btn-submit:active,
+        .custom-confirm-btn-cancel:active {
+            transform: translateY(0);
+        }
+
+        /* ============= CUSTOM SUCCESS/ALERT DIALOG ============= */
+        .custom-alert-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            backdrop-filter: blur(4px);
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .custom-alert-overlay.active {
+            display: flex;
+        }
+
+        .custom-alert-dialog {
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            max-width: 520px;
+            width: 90%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideUpFade 0.3s ease-out;
+            text-align: center;
+            border: 3px solid var(--border-color);
+        }
+
+        .custom-alert-icon {
+            width: 90px;
+            height: 90px;
+            margin: 0 auto 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+            font-size: 48px;
+        }
+
+        .custom-alert-icon.success {
+            background: linear-gradient(135deg, #3d6b1f 0%, #4a7c23 100%);
+        }
+
+        .custom-alert-icon.error {
+            background: linear-gradient(135deg, #e63946 0%, #dc322f 100%);
+        }
+
+        .custom-alert-icon.warning {
+            background: linear-gradient(135deg, #b58900 0%, #cb9900 100%);
+        }
+
+        .custom-alert-title {
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+            letter-spacing: -0.3px;
+        }
+
+        .custom-alert-message {
+            font-size: 16px;
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 16px;
+            white-space: pre-line;
+        }
+
+        .custom-alert-details {
+            background: var(--sol-base2);
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            padding: 16px;
+            margin: 20px 0;
+            text-align: left;
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .custom-alert-button {
+            padding: 16px 48px;
+            border-radius: 10px;
+            font-size: 17px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            margin-top: 8px;
+            min-width: 160px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .custom-alert-button.success {
+            background: linear-gradient(135deg, #3d6b1f 0%, #4a7c23 100%);
+            color: white;
+        }
+
+        .custom-alert-button.error {
+            background: linear-gradient(135deg, #e63946 0%, #dc322f 100%);
+            color: white;
+        }
+
+        .custom-alert-button.warning {
+            background: linear-gradient(135deg, #b58900 0%, #cb9900 100%);
+            color: white;
+        }
+
+        .custom-alert-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        .custom-alert-button:active {
+            transform: translateY(-1px);
+        }
+    </style>
+</head>
+<body>
+    <!-- ==================== LOGIN SCREEN ==================== -->
+    <div id="loginScreen" class="screen active login-screen">
+        <div class="login-container">
+            <div class="login-logo">
+                <i class="bi bi-mortarboard-fill"></i>
+            </div>
+            <div class="login-header">
+                <h1>Semantic Data Services</h1>
+                <p>Professional Technical Assessment Portal</p>
+            </div>
+
+            <div id="loginError" class="alert alert-danger hidden">
+                <i class="bi bi-exclamation-triangle-fill"></i>
+                <span id="loginErrorText"></span>
+            </div>
+
+            <form id="loginForm">
+                <div class="mb-3">
+                    <label for="studentName" class="form-label">Full Name</label>
+                    <input type="text" class="form-control" id="studentName" placeholder="Enter your full name" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="studentEmail" class="form-label">Email Address</label>
+                    <input type="email" class="form-control" id="studentEmail" placeholder="your.email@example.com" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="studentPhone" class="form-label">Phone Number</label>
+                    <input type="tel" class="form-control" id="studentPhone" placeholder="+1 (555) 123-4567" required>
+                </div>
+
+                <button type="submit" class="btn-login">
+                    <i class="bi bi-box-arrow-in-right"></i> Continue to Assessment
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ==================== RULES SCREEN ==================== -->
+    <div id="rulesScreen" class="screen rules-screen">
+        <div class="rules-container">
+            <div class="rules-header">
+                <h1><i class="bi bi-shield-check"></i> Examination Guidelines</h1>
+                <p>Please read carefully and accept all terms before proceeding</p>
+            </div>
+
+            <div class="rules-list">
+                <div class="rule-item">
+                    <i class="bi bi-clock-fill"></i>
+                    <div class="rule-text">
+                        <strong>Time Limit:</strong> You have 90 minutes to complete this assessment. The timer will start when you begin the exam.
+                    </div>
+                </div>
+
+                <div class="rule-item">
+                    <i class="bi bi-camera-video-fill"></i>
+                    <div class="rule-text">
+                        <strong>Camera Monitoring:</strong> Your camera must remain on throughout the exam for proctoring purposes. The session will be recorded.
+                    </div>
+                </div>
+
+                <div class="rule-item">
+                    <i class="bi bi-file-earmark-text-fill"></i>
+                    <div class="rule-text">
+                        <strong>Question Format:</strong> This exam contains 15 questions including multiple choice (Q1-10) and coding challenges (Q11-15).
+                    </div>
+                </div>
+
+                <div class="rule-item">
+                    <i class="bi bi-arrow-left-right"></i>
+                    <div class="rule-text">
+                        <strong>Navigation:</strong> You can navigate between questions using the question navigator on the right. Your answers are auto-saved.
+                    </div>
+                </div>
+
+                <div class="rule-item">
+                    <i class="bi bi-exclamation-triangle-fill"></i>
+                    <div class="rule-text">
+                        <strong>Anti-Cheat:</strong> Tab switching, right-clicking, and developer tools are monitored. Multiple violations may result in disqualification.
+                    </div>
+                </div>
+
+                <div class="rule-item">
+                    <i class="bi bi-send-fill"></i>
+                    <div class="rule-text">
+                        <strong>Submission:</strong> Click "Submit Exam" when finished. You cannot make changes after submission.
+                    </div>
+                </div>
+            </div>
+
+            <div class="checkpoint-section">
+                <h3><i class="bi bi-check2-square"></i> Acknowledgment Required</h3>
+
+                <div class="checkpoint-item" id="checkpoint1">
+                    <label>
+                        <input type="checkbox" id="agree1">
+                        <span>I understand the time limit is 90 minutes and the exam will auto-submit when time expires</span>
+                    </label>
+                </div>
+
+                <div class="checkpoint-item" id="checkpoint2">
+                    <label>
+                        <input type="checkbox" id="agree2">
+                        <span>I consent to camera monitoring and video recording throughout this examination</span>
+                    </label>
+                </div>
+
+                <div class="checkpoint-item" id="checkpoint3">
+                    <label>
+                        <input type="checkbox" id="agree3">
+                        <span>I will not use any unauthorized materials, resources, or assistance during the exam</span>
+                    </label>
+                </div>
+
+                <div class="checkpoint-item" id="checkpoint4">
+                    <label>
+                        <input type="checkbox" id="agree4">
+                        <span>I acknowledge that violations of academic integrity will result in disqualification</span>
+                    </label>
+                </div>
+            </div>
+
+            <button id="startExamBtn" class="btn-login" disabled>
+                <i class="bi bi-play-circle-fill"></i> Start Examination
+            </button>
+        </div>
+    </div>
+
+    <!-- ==================== EXAM SCREEN ==================== -->
+    <div id="examScreen" class="screen exam-screen">
+        <!-- Top Navigation -->
+        <div class="exam-navbar">
+            <div class="brand">
+                <i class="bi bi-code-square"></i>
+                <div class="brand-text">
+                    <h1>Technical Assessment</h1>
+                    <p id="studentNameDisplay">Student Name</p>
+                </div>
+            </div>
+
+            <div class="nav-info">
+                <div class="recording-badge">
+                    <div class="recording-dot"></div>
+                    <span>RECORDING</span>
+                </div>
+
+                <div class="timer-box" id="timerBox">
+                    <i class="bi bi-clock-fill"></i>
+                    <div class="timer-text" id="timerDisplay">90:00</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Layout -->
+        <div class="exam-layout">
+            <!-- Left Sidebar -->
+            <div class="exam-sidebar">
+                <!-- Camera Panel -->
+                <div class="camera-panel">
+                    <h3><i class="bi bi-camera-video"></i> Proctoring Feed</h3>
+                    <div class="camera-feed" id="cameraFeed">
+                        <div class="camera-placeholder">
+                            <i class="bi bi-camera-video-off"></i>
+                            <p>Initializing camera...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Student Info Panel -->
+                <div class="student-panel">
+                    <h3><i class="bi bi-person-badge"></i> Candidate Info</h3>
+                    <div class="student-info-item">
+                        <i class="bi bi-person-fill"></i>
+                        <span id="sidebarStudentName">-</span>
+                    </div>
+                    <div class="student-info-item">
+                        <i class="bi bi-envelope-fill"></i>
+                        <span id="sidebarStudentEmail">-</span>
+                    </div>
+                </div>
+
+                <!-- Progress Panel -->
+                <div class="progress-panel">
+                    <h3><i class="bi bi-graph-up"></i> Progress</h3>
+                    <div class="progress-stats">
+                        <div class="stat-box">
+                            <span class="stat-number" id="answeredCount">0</span>
+                            <span class="stat-label">Answered</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-number">15</span>
+                            <span class="stat-label">Total</span>
+                        </div>
+                    </div>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar-label">Overall Completion</div>
+                        <div class="progress-bar">
+                            <div class="progress-bar-fill" id="progressFill" style="width: 0%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Center Content -->
+            <div class="exam-content">
+                <div class="question-container">
+                    <div class="question-header-bar">
+                        <div class="question-title" id="questionTitle">Question 1 of 15</div>
+                        <div class="question-points-badge" id="questionPoints">5 Points</div>
+                    </div>
+
+                    <div class="question-card" id="questionCard">
+                        <!-- Question content will be dynamically loaded here -->
+                    </div>
+
+                    <div class="navigation-buttons">
+                        <button class="btn-nav btn-previous" id="prevBtn" disabled>
+                            <i class="bi bi-chevron-left"></i> Previous
+                        </button>
+                        <button class="btn-nav btn-next" id="nextBtn">
+                            Next <i class="bi bi-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Sidebar - Navigator -->
+            <div class="exam-navigator">
+                <div class="navigator-header">
+                    <h3><i class="bi bi-grid-3x3-gap-fill"></i> Question Navigator</h3>
+                    <div class="navigator-stats">
+                        <div class="navigator-stat">
+                            <span class="label">Answered:</span>
+                            <span class="value" id="navAnsweredCount">0/15</span>
+                        </div>
+                        <div class="navigator-stat">
+                            <span class="label">Remaining:</span>
+                            <span class="value" id="navRemainingCount">15</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-grid" id="questionGrid">
+                    <!-- Question boxes will be dynamically generated -->
+                </div>
+
+                <div class="legend">
+                    <div class="legend-item">
+                        <div class="legend-box current"></div>
+                        <span>Current</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-box answered"></div>
+                        <span>Answered</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-box"></div>
+                        <span>Not Answered</span>
+                    </div>
+                </div>
+
+                <button class="btn-submit" id="submitBtn">
+                    <i class="bi bi-send-fill"></i> Submit Examination
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== THANK YOU SCREEN ==================== -->
+    <div id="thankYouScreen" class="screen thank-you-screen">
+        <div class="thank-you-container">
+            <div class="success-icon">
+                <i class="bi bi-check-lg"></i>
+            </div>
+
+            <h1>Submission Successful!</h1>
+            <p>Thank you for completing the technical assessment. Your responses have been recorded and submitted successfully.</p>
+
+            <div class="submission-details">
+                <div class="detail-row">
+                    <span class="detail-label">Student Name:</span>
+                    <span class="detail-value" id="finalStudentName">-</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Email:</span>
+                    <span class="detail-value" id="finalStudentEmail">-</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Questions Answered:</span>
+                    <span class="detail-value" id="finalAnsweredCount">-</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Submission Time:</span>
+                    <span class="detail-value" id="finalSubmissionTime">-</span>
+                </div>
+            </div>
+
+            <div class="alert alert-success" style="margin-top: 24px;">
+                <i class="bi bi-check-circle-fill"></i>
+                <span>Your submission has been saved successfully! A download and email notification have been triggered.</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- SECURITY FIX: Question files renamed to obscure names to prevent easy identification -->
+    <!-- Original files: questions-database.js, questions-subjective.js, exam-integration.js -->
+    <!-- Files backed up with .backup extension and renamed to random alphanumeric names -->
+	<script src="qdb47f2k.js"></script>
+	<script src="qsb83m9p.js"></script>
+	<script src="exi21r5t.js"></script>
+
+	<script>
+		// Merge subjective questions into database
+		QUESTION_DATABASE.pythonSubjective = PYTHON_SUBJECTIVE;
+		QUESTION_DATABASE.sqlSubjective = SQL_SUBJECTIVE;
+
+        // ==================== ENHANCED SECURITY: DEVTOOLS DETECTION ====================
+        // Display prominent warning in console if developer tools are opened
+        console.log('%c⚠️ SECURITY WARNING', 'color: red; font-size: 24px; font-weight: bold; background: yellow; padding: 10px;');
+        console.log('%c🚨 EXAM INTEGRITY VIOLATION DETECTED', 'color: white; font-size: 18px; font-weight: bold; background: red; padding: 8px;');
+        console.log('%cOpening Developer Tools during an exam is strictly prohibited!', 'color: red; font-size: 16px; font-weight: bold;');
+        console.log('%c• All activities are being monitored and logged', 'color: red; font-size: 14px;');
+        console.log('%c• Question data access attempts are tracked', 'color: red; font-size: 14px;');
+        console.log('%c• Violations will result in exam disqualification', 'color: red; font-size: 14px;');
+        console.log('%c• Your IP, timestamp, and actions are recorded', 'color: red; font-size: 14px;');
+
+        // Log security event
+        if (studentData && studentData.securityViolations) {
+            studentData.securityViolations.push({
+                type: 'Console Access',
+                timestamp: new Date().toISOString(),
+                message: 'Student accessed browser console during exam'
+            });
+        }
+	</script>
+    <script>
+        // ==================== EMAILJS CONFIGURATION ====================
+        const EMAILJS_CONFIG = {
+            serviceId: 'service_38vjeqn',
+            templateId: 'template_1js9wgd',
+            publicKey: 'b2QWWNLk22wkN9Qn7',
+            adminEmail: 'vinodyellagonda@paragroup.com'
+        };
+
+        // Initialize EmailJS
+        emailjs.init(EMAILJS_CONFIG.publicKey);
+        console.log('✅ EmailJS initialized with service:', EMAILJS_CONFIG.serviceId);
+
+        // ==================== GLOBAL VARIABLES ====================
+        let currentScreen = 'loginScreen';
+        let currentQuestionIndex = 0;
+        let timeLeft = 90 * 60; // 90 minutes in seconds
+        let timerInterval = null;
+        let cameraStream = null;
+
+        // ==================== VIDEO RECORDING SYSTEM ====================
+        let mediaRecorder = null;
+        let recordedChunks = [];
+        let videoBlob = null;
+        let isRecording = false;
+        let isUploadingResults = false;  // Track upload status for window close prevention
+
+        const studentData = {
+            name: '',
+            email: '',
+            phone: '',
+            startTime: null,
+            endTime: null,
+            answers: {},
+            securityViolations: [],
+            questionTimes: {}
+        };
+
+        // ==================== RANDOM QUESTION SYSTEM ====================
+        // Questions will be dynamically loaded from the question database
+        // with random selection: 10 objective (MCQ) + 5 subjective (coding)
+        let QUESTIONS = [];
+        let examManager = null;
+
+        // ==================== GLOBAL UTILITY FUNCTIONS ====================
+        // These functions are defined in global scope so they can be called from inline event handlers
+        // (onclick, oninput, onscroll attributes in dynamically generated HTML)
+
+        // HTML escaping to prevent XSS
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Update line numbers in code editor
+        function updateLineNumbers() {
+            const editor = document.getElementById('codeEditor');
+            const lineNumbers = document.getElementById('lineNumbers');
+            if (editor && lineNumbers) {
+                const lines = Math.max(editor.value.split('\n').length, 20);
+                lineNumbers.textContent = Array.from({length: lines}, (_, i) => i + 1).join('\n');
+            }
+        }
+
+        // Sync line numbers scroll with code editor scroll
+        function syncLineNumbersScroll() {
+            const lineNumbers = document.getElementById('lineNumbers');
+            const editor = document.getElementById('codeEditor');
+
+            if (lineNumbers && editor) {
+                // Sync line numbers with code editor scroll
+                lineNumbers.scrollTop = editor.scrollTop;
+            }
+        }
+
+        // Handle MCQ option selection
+        function selectOption(questionId, optionIndex) {
+            const question = QUESTIONS.find(q => q.id === questionId);
+            const answer = question.options[optionIndex];
+
+            studentData.answers[questionId] = answer;
+
+            // Update UI
+            renderQuestion();
+            updateStats();
+            renderQuestionGrid();
+
+            console.log(`💾 Answer saved for Q${questionId}:`, answer);
+        }
+
+        // Save code editor answer
+        function saveCodeAnswer(questionId) {
+            const editor = document.getElementById('codeEditor');
+            if (editor) {
+                studentData.answers[questionId] = editor.value;
+                updateStats();
+                renderQuestionGrid();
+                console.log(`💾 Code saved for Q${questionId}`);
+            }
+        }
+
+        // Render current question
+        function renderQuestion() {
+            const question = QUESTIONS[currentQuestionIndex];
+            const card = document.getElementById('questionCard');
+
+            // Update header
+            document.getElementById('questionTitle').textContent = `Question ${currentQuestionIndex + 1} of ${QUESTIONS.length}`;
+            document.getElementById('questionPoints').textContent = `${question.points} Points`;
+
+            let html = `<div class="question-text">${escapeHtml(question.question)}</div>`;
+
+            // Add image if exists
+            if (question.image) {
+                html += `<img src="${question.image}" class="question-image" alt="Question visual" onerror="this.style.display='none'">`;
+            }
+
+            if (question.type === 'mcq') {
+                // MCQ Options
+                html += '<div class="mcq-options">';
+                question.options.forEach((option, index) => {
+                    const optionId = `q${question.id}_opt${index}`;
+                    const isSelected = studentData.answers[question.id] === option;
+
+                    html += `
+                        <div class="mcq-option ${isSelected ? 'selected' : ''}" onclick="selectOption(${question.id}, ${index})">
+                            <input type="radio"
+                                   name="q${question.id}"
+                                   id="${optionId}"
+                                   value="${index}"
+                                   ${isSelected ? 'checked' : ''}>
+                            <div class="mcq-option-text">${escapeHtml(option)}</div>
+                        </div>
+                    `;
+                });
+                html += '</div>';
+            } else {
+                // Code Editor
+                const savedAnswer = studentData.answers[question.id] || question.starterCode || '';
+                const lines = Math.max(savedAnswer.split('\n').length, 20);
+                const lineNumbers = Array.from({length: lines}, (_, i) => i + 1).join('\n');
+
+                html += `
+                    <div class="code-editor-container">
+                        <div class="code-editor-header">
+                            <div class="language-label">
+                                <i class="bi bi-code-slash"></i>
+                                Python 3
+                            </div>
+                            <div class="traffic-lights">
+                                <div class="traffic-light red"></div>
+                                <div class="traffic-light yellow"></div>
+                                <div class="traffic-light green"></div>
+                            </div>
+                        </div>
+                        <div class="code-editor-wrapper" id="codeEditorWrapper">
+                            <pre class="line-numbers" id="lineNumbers">${lineNumbers}</pre>
+                            <textarea class="code-editor"
+                                      id="codeEditor"
+                                      spellcheck="false"
+                                      placeholder="Write your Python code here..."
+                                      oninput="saveCodeAnswer(${question.id}); updateLineNumbers();"
+                                      onscroll="syncLineNumbersScroll();">${savedAnswer}</textarea>
+                        </div>
+                    </div>
+                `;
+            }
+
+            card.innerHTML = html;
+
+            // Update navigation buttons
+            document.getElementById('prevBtn').disabled = currentQuestionIndex === 0;
+            document.getElementById('nextBtn').disabled = currentQuestionIndex === QUESTIONS.length - 1;
+        }
+
+        // Render question navigation grid
+        function renderQuestionGrid() {
+            const grid = document.getElementById('questionGrid');
+            grid.innerHTML = '';
+
+            QUESTIONS.forEach((question, index) => {
+                const box = document.createElement('div');
+                box.className = 'question-box';
+                box.textContent = index + 1;
+
+                if (studentData.answers[question.id]) {
+                    box.classList.add('answered');
+                }
+
+                if (index === currentQuestionIndex) {
+                    box.classList.add('current');
+                }
+
+                box.onclick = () => {
+                    currentQuestionIndex = index;
+                    renderQuestion();
+                    renderQuestionGrid();
+                };
+
+                grid.appendChild(box);
+            });
+        }
+
+        // Update statistics display
+        function updateStats() {
+            const answered = Object.keys(studentData.answers).length;
+            const total = QUESTIONS.length;
+            const remaining = total - answered;
+            const percentage = Math.round((answered / total) * 100);
+
+            document.getElementById('answeredCount').textContent = answered;
+            document.getElementById('navAnsweredCount').textContent = `${answered}/${total}`;
+            document.getElementById('navRemainingCount').textContent = remaining;
+            document.getElementById('progressFill').style.width = `${percentage}%`;
+        }
+
+        // OLD SAMPLE QUESTIONS - REPLACED WITH DYNAMIC SYSTEM
+        // Keeping for reference (these are now part of the larger 160-question database)
+        /*
+        const OLD_SAMPLE_QUESTIONS = [
+            // MCQ Questions (1-10)
+            {
+                id: 1,
+                type: 'mcq',
+                points: 5,
+                question: 'What will be the output of the following Python code?\n\nx = [[0], [1]]\nprint(\' \'.join(list(map(str, x))))',
+                options: [
+                    '[0] [1]',
+                    '0 1',
+                    '[\'0\'] [\'1\']',
+                    'Error'
+                ]
+            },
+            {
+                id: 2,
+                type: 'mcq',
+                points: 5,
+                question: 'Which of the following is the correct way to open a file "data.txt" in Python for reading?',
+                options: [
+                    'file = open("data.txt", "r")',
+                    'file = read("data.txt")',
+                    'file = open("data.txt", mode="read")',
+                    'file = File.open("data.txt")'
+                ]
+            },
+            {
+                id: 3,
+                type: 'mcq',
+                points: 5,
+                question: 'What is the time complexity of accessing an element in a Python list by index?',
+                options: [
+                    'O(1)',
+                    'O(n)',
+                    'O(log n)',
+                    'O(n²)'
+                ]
+            },
+            {
+                id: 4,
+                type: 'mcq',
+                points: 5,
+                question: 'Which Python data structure would be most appropriate for implementing a queue?',
+                options: [
+                    'collections.deque',
+                    'list',
+                    'tuple',
+                    'set'
+                ]
+            },
+            {
+                id: 5,
+                type: 'mcq',
+                points: 5,
+                question: 'What will be the output of: print(type(lambda x: x))',
+                options: [
+                    '<class \'function\'>',
+                    '<class \'lambda\'>',
+                    '<class \'method\'>',
+                    '<class \'callable\'>'
+                ]
+            },
+            {
+                id: 6,
+                type: 'mcq',
+                points: 5,
+                question: 'In Python, which keyword is used to create an anonymous function?',
+                options: [
+                    'lambda',
+                    'function',
+                    'def',
+                    'anonymous'
+                ]
+            },
+            {
+                id: 7,
+                type: 'mcq',
+                points: 5,
+                question: 'What is the output of: print([1, 2, 3] + [4, 5, 6])',
+                options: [
+                    '[1, 2, 3, 4, 5, 6]',
+                    '[5, 7, 9]',
+                    '[[1, 2, 3], [4, 5, 6]]',
+                    'Error'
+                ]
+            },
+            {
+                id: 8,
+                type: 'mcq',
+                points: 5,
+                question: 'Which method is used to remove whitespace from both ends of a string?',
+                options: [
+                    'strip()',
+                    'trim()',
+                    'remove()',
+                    'clean()'
+                ]
+            },
+            {
+                id: 9,
+                type: 'mcq',
+                points: 5,
+                question: 'What is the correct way to create a dictionary in Python?',
+                options: [
+                    'my_dict = {"key": "value"}',
+                    'my_dict = dict["key": "value"]',
+                    'my_dict = ["key": "value"]',
+                    'my_dict = ("key": "value")'
+                ]
+            },
+            {
+                id: 10,
+                type: 'mcq',
+                points: 5,
+                question: 'Which of the following is NOT a valid Python variable name?',
+                options: [
+                    '2variable',
+                    'variable2',
+                    '_variable',
+                    'variable_2'
+                ]
+            },
+
+            // Coding Questions (11-15)
+            {
+                id: 11,
+                type: 'coding',
+                points: 10,
+                question: 'Write a Python function that takes a list of integers and returns the sum of all even numbers in the list.\n\nExample:\nInput: [1, 2, 3, 4, 5, 6]\nOutput: 12 (2 + 4 + 6)',
+                starterCode: 'def sum_even_numbers(numbers):\n    # Write your code here\n    pass\n\n# Test your function\nresult = sum_even_numbers([1, 2, 3, 4, 5, 6])\nprint(result)  # Should print 12'
+            },
+            {
+                id: 12,
+                type: 'coding',
+                points: 10,
+                question: 'Write a Python function that checks if a given string is a palindrome (reads the same forwards and backwards).\n\nExample:\nInput: "racecar"\nOutput: True\n\nInput: "hello"\nOutput: False',
+                starterCode: 'def is_palindrome(text):\n    # Write your code here\n    pass\n\n# Test your function\nprint(is_palindrome("racecar"))  # Should print True\nprint(is_palindrome("hello"))    # Should print False'
+            },
+            {
+                id: 13,
+                type: 'coding',
+                points: 10,
+                question: 'Write a Python function that finds the maximum element in a list without using the built-in max() function.\n\nExample:\nInput: [3, 7, 2, 9, 1]\nOutput: 9',
+                starterCode: 'def find_maximum(numbers):\n    # Write your code here\n    pass\n\n# Test your function\nresult = find_maximum([3, 7, 2, 9, 1])\nprint(result)  # Should print 9'
+            },
+            {
+                id: 14,
+                type: 'coding',
+                points: 10,
+                question: 'Write a Python function that removes all duplicate elements from a list while preserving the order of first occurrence.\n\nExample:\nInput: [1, 2, 2, 3, 4, 3, 5]\nOutput: [1, 2, 3, 4, 5]',
+                starterCode: 'def remove_duplicates(numbers):\n    # Write your code here\n    pass\n\n# Test your function\nresult = remove_duplicates([1, 2, 2, 3, 4, 3, 5])\nprint(result)  # Should print [1, 2, 3, 4, 5]'
+            },
+            {
+                id: 15,
+                type: 'coding',
+                points: 10,
+                question: 'Write a Python function that counts the frequency of each word in a given sentence and returns a dictionary.\n\nExample:\nInput: "hello world hello"\nOutput: {"hello": 2, "world": 1}',
+                starterCode: 'def word_frequency(sentence):\n    # Write your code here\n    pass\n\n# Test your function\nresult = word_frequency("hello world hello")\nprint(result)  # Should print {"hello": 2, "world": 1}'
+            }
+        ];
+        */
+        // END OF OLD SAMPLE QUESTIONS
+
+        // ==================== VIDEO RECORDING FUNCTIONS ====================
+        async function startVideoRecording() {
+            if (!cameraStream) {
+                console.warn('⚠️ Cannot start recording: No camera stream available');
+                return false;
+            }
+
+            try {
+                console.log('🎬 Starting video recording...');
+
+                // Reset recording state
+                recordedChunks = [];
+                videoBlob = null;
+
+                // Try different codecs - MP4 first (user preference), then WebM fallback
+                const mimeTypes = [
+                    'video/mp4',
+                    'video/mp4;codecs=avc1',
+                    'video/mp4;codecs=h264',
+                    'video/webm;codecs=h264',
+                    'video/webm;codecs=vp9',
+                    'video/webm;codecs=vp8',
+                    'video/webm'
+                ];
+
+                let selectedMimeType = 'video/webm'; // Default fallback
+                for (const mimeType of mimeTypes) {
+                    if (MediaRecorder.isTypeSupported(mimeType)) {
+                        selectedMimeType = mimeType;
+                        console.log(`✅ Using codec: ${mimeType}`);
+                        break;
+                    }
+                }
+
+                // Determine file extension based on actual format
+                let fileExtension = '.mp4';
+                if (selectedMimeType.includes('webm')) {
+                    fileExtension = '.webm';
+                }
+                // Store extension for later use
+                window.videoFileExtension = fileExtension;
+                console.log(`📹 Video will be saved as: ${fileExtension} format`);
+
+                mediaRecorder = new MediaRecorder(cameraStream, {
+                    mimeType: selectedMimeType,
+                    videoBitsPerSecond: 256000 // 256 Kbps - good quality
+                });
+
+                // Store video chunks as they're recorded
+                mediaRecorder.ondataavailable = function(event) {
+                    if (event.data && event.data.size > 0) {
+                        recordedChunks.push(event.data);
+                        console.log(`📹 Recorded chunk: ${(event.data.size / 1024 / 1024).toFixed(2)} MB`);
+                    }
+                };
+
+                // When recording stops, create the final video blob
+                mediaRecorder.onstop = function() {
+                    console.log('🛑 Recording stopped');
+                    videoBlob = new Blob(recordedChunks, { type: selectedMimeType });
+                    const sizeMB = (videoBlob.size / 1024 / 1024).toFixed(2);
+                    console.log(`✅ Video recording complete: ${sizeMB} MB`);
+                };
+
+                mediaRecorder.onerror = function(event) {
+                    console.error('❌ Recording error:', event.error);
+                };
+
+                // Start recording (capture data every 10 seconds)
+                mediaRecorder.start(10000);
+                isRecording = true;
+
+                console.log('✅ Video recording started successfully');
+                return true;
+
+            } catch (error) {
+                console.error('❌ Failed to start video recording:', error);
+                return false;
+            }
+        }
+
+        function stopVideoRecording() {
+            if (mediaRecorder && isRecording) {
+                console.log('⏹️ Stopping video recording...');
+                mediaRecorder.stop();
+                isRecording = false;
+                return true;
+            }
+            return false;
+        }
+
+        // Upload video to FREE public file hosting
+        async function uploadVideoToPCloud(videoBlob, filename) {
+            if (!videoBlob) {
+                console.error('❌ No video to upload');
+                return { success: false, error: 'No video recorded' };
+            }
+
+            const fileSizeMB = (videoBlob.size / 1024 / 1024).toFixed(2);
+            console.log('☁️ Starting video upload to public file hosting...');
+            console.log(`📦 File: ${filename}, Size: ${fileSizeMB} MB`);
+
+            // STRATEGY 1: Gofile.io - 30+ days retention
+            console.log('🔄 Strategy 1: Uploading to Gofile.io...');
+            try {
+                showUploadProgress('Preparing upload...', 10);
+
+                const serverResponse = await fetch('https://api.gofile.io/servers');
+
+                if (serverResponse.ok) {
+                    const serverData = await serverResponse.json();
+
+                    if (serverData.status === 'ok' && serverData.data && serverData.data.servers && serverData.data.servers.length > 0) {
+                        const server = serverData.data.servers[0].name;
+                        console.log(`📍 Using server: ${server}`);
+
+                        showUploadProgress('Uploading exam video...', 30);
+
+                        const formData = new FormData();
+                        formData.append('file', videoBlob, filename);
+
+                        const uploadResponse = await fetch(`https://${server}.gofile.io/contents/uploadfile`, {
+                            method: 'POST',
+                            body: formData
+                        });
+
+                        if (uploadResponse.ok) {
+                            const uploadData = await uploadResponse.json();
+
+                            if (uploadData.status === 'ok' && uploadData.data && uploadData.data.downloadPage) {
+                                console.log('✅ Gofile.io upload successful!');
+                                console.log(`🔗 Download link: ${uploadData.data.downloadPage}`);
+
+                                showUploadProgress('Upload Complete!', 100);
+
+                                return {
+                                    success: true,
+                                    method: 'Gofile.io',
+                                    videoLink: uploadData.data.downloadPage,
+                                    folderLink: uploadData.data.downloadPage,
+                                    filename: filename,
+                                    fileId: uploadData.data.fileId,
+                                    retention: '30+ days'
+                                };
+                            }
+                        }
+                    }
+                }
+            } catch (error) {
+                console.error('❌ Gofile.io upload failed:', error.message);
+            }
+
+            // STRATEGY 2: Pixeldrain - 120 days retention
+            console.log('🔄 Strategy 2: Uploading to Pixeldrain...');
+            try {
+                showUploadProgress('Uploading exam video...', 50);
+
+                const uploadResponse = await fetch('https://pixeldrain.com/api/file/' + filename, {
+                    method: 'PUT',
+                    body: videoBlob,
+                    headers: {
+                        'Content-Type': 'application/octet-stream'
+                    }
+                });
+
+                if (uploadResponse.ok) {
+                    const uploadData = await uploadResponse.json();
+
+                    if (uploadData.success && uploadData.id) {
+                        const downloadLink = `https://pixeldrain.com/u/${uploadData.id}`;
+
+                        console.log('✅ Pixeldrain upload successful!');
+                        console.log(`🔗 Download link: ${downloadLink}`);
+
+                        showUploadProgress('Upload Complete!', 100);
+
+                        return {
+                            success: true,
+                            method: 'Pixeldrain',
+                            videoLink: downloadLink,
+                            folderLink: downloadLink,
+                            filename: filename,
+                            fileId: uploadData.id,
+                            retention: '120 days'
+                        };
+                    }
+                }
+            } catch (error) {
+                console.error('❌ Pixeldrain upload failed:', error.message);
+            }
+
+            // FALLBACK: Download locally
+            console.log('🔄 All uploads failed - downloading locally');
+            try {
+                const url = URL.createObjectURL(videoBlob);
+                const a = document.createElement('a');
+                a.style.display = 'none';
+                a.href = url;
+                a.download = filename;
+                document.body.appendChild(a);
+
+                showUploadProgress('Saving video to your device...', 70);
+                a.click();
+
+                setTimeout(() => {
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                }, 100);
+
+                console.log(`✅ Video downloaded: ${filename}`);
+                showUploadProgress('Video saved successfully', 100);
+
+                alert(`⚠️ Important: Manual Upload Required\n\nYour exam video has been saved to your device.\n\nFilename: ${filename}\n\nPlease email this file to: ${EMAILJS_CONFIG.adminEmail}\n\nYour answers have been submitted successfully.`);
+
+                return {
+                    success: false,
+                    fallback: true,
+                    downloaded: true,
+                    error: 'Upload failed. Video downloaded.',
+                    filename: filename
+                };
+            } catch (error) {
+                console.error('❌ Download failed:', error.message);
+                return {
+                    success: false,
+                    fallback: true,
+                    downloaded: false,
+                    error: 'Upload and download both failed.',
+                    filename: filename
+                };
+            }
+        }
+
+        function showUploadProgress(message, percentage) {
+            // Set upload flag to prevent window close
+            isUploadingResults = true;
+
+            let progressDiv = document.getElementById('uploadProgress');
+            if (!progressDiv) {
+                // Create full-screen overlay with backdrop
+                progressDiv = document.createElement('div');
+                progressDiv.id = 'uploadProgress';
+                progressDiv.className = 'active';
+                progressDiv.style.cssText = `
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background: rgba(253, 246, 227, 0.97);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    z-index: 10000;
+                    backdrop-filter: blur(8px);
+                `;
+                document.body.appendChild(progressDiv);
+            }
+
+            progressDiv.innerHTML = `
+                <div style="background: white; border: 3px solid rgba(45, 80, 22, 0.2); border-radius: 20px; padding: 48px; text-align: center; max-width: 550px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);">
+                    <div style="width: 80px; height: 80px; border: 5px solid rgba(61, 107, 31, 0.2); border-top-color: #3d6b1f; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 24px;"></div>
+                    <h3 style="margin-bottom: 16px; color: #2d5016; font-size: 22px; font-weight: 700;">⚙️ ${message}</h3>
+                    <p style="color: #e63946; font-size: 15px; font-weight: 600; margin-bottom: 20px; background: rgba(230, 57, 70, 0.1); padding: 12px; border-radius: 8px; border: 2px solid rgba(230, 57, 70, 0.2);">
+                        ⚠️ DO NOT CLOSE THIS WINDOW<br>Your results are being processed and uploaded
+                    </p>
+                    <div style="width: 100%; height: 12px; background: rgba(61, 107, 31, 0.15); border-radius: 6px; overflow: hidden; margin-bottom: 12px; border: 1px solid rgba(45, 80, 22, 0.2);">
+                        <div style="height: 100%; background: linear-gradient(90deg, #3d6b1f, #4a7c23); width: ${percentage}%; transition: width 0.5s ease;"></div>
+                    </div>
+                    <p style="color: #2d5016; font-size: 16px; font-weight: 700;">${percentage}% Complete</p>
+                    <p style="color: #666; font-size: 13px; margin-top: 12px; font-style: italic;">This may take a few moments depending on your connection speed...</p>
+                </div>
+            `;
+        }
+
+        function hideUploadProgress() {
+            // Clear upload flag to allow window close
+            isUploadingResults = false;
+
+            const progressDiv = document.getElementById('uploadProgress');
+            if (progressDiv) {
+                progressDiv.remove();
+            }
+        }
+
+        // CRITICAL: Prevent window close during video upload
+        window.addEventListener('beforeunload', function(e) {
+            if (isUploadingResults) {
+                // Prevent window close during upload
+                e.preventDefault();
+                e.returnValue = 'Your exam results are still being uploaded! If you close now, your results will be lost. Are you sure you want to leave?';
+                return e.returnValue;
+            }
+        });
+
+        // ==================== UTILITY FUNCTIONS ====================
+        function showScreen(screenId) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById(screenId).classList.add('active');
+            currentScreen = screenId;
+        }
+
+        function showError(elementId, message) {
+            const errorEl = document.getElementById(elementId);
+            const textEl = document.getElementById(elementId + 'Text');
+            if (textEl) textEl.textContent = message;
+            errorEl.classList.remove('hidden');
+        }
+
+        function hideError(elementId) {
+            document.getElementById(elementId).classList.add('hidden');
+        }
+
+        // ==================== SUBMISSION FUNCTIONS (GLOBAL SCOPE) ====================
+        // These functions need to be in global scope to be accessible from event handlers
+
+        // Custom alert dialog to match application design
+        function showCustomAlert(type, title, message, details = '') {
+            // Remove any existing alert
+            const existingAlert = document.querySelector('.custom-alert-overlay');
+            if (existingAlert) {
+                existingAlert.remove();
+            }
+
+            // Create overlay
+            const overlay = document.createElement('div');
+            overlay.className = 'custom-alert-overlay active';
+
+            // Determine icon based on type
+            let icon = '';
+            if (type === 'success') {
+                icon = '✅';
+            } else if (type === 'error') {
+                icon = '❌';
+            } else if (type === 'warning') {
+                icon = '⚠️';
+            }
+
+            // Build details section if provided
+            const detailsHtml = details ? `<div class="custom-alert-details">${details}</div>` : '';
+
+            overlay.innerHTML = `
+                <div class="custom-alert-dialog">
+                    <div class="custom-alert-icon ${type}">
+                        ${icon}
+                    </div>
+                    <h3 class="custom-alert-title">${title}</h3>
+                    <p class="custom-alert-message">${message}</p>
+                    ${detailsHtml}
+                    <button class="custom-alert-button ${type}" id="customAlertBtn">
+                        OK
+                    </button>
+                </div>
+            `;
+
+            document.body.appendChild(overlay);
+
+            // Add event listener to close button
+            document.getElementById('customAlertBtn').addEventListener('click', () => {
+                overlay.remove();
+            });
+
+            // Close on overlay click
+            overlay.addEventListener('click', (e) => {
+                if (e.target === overlay) {
+                    overlay.remove();
+                }
+            });
+
+            // Close on Escape key
+            const escapeHandler = (e) => {
+                if (e.key === 'Escape') {
+                    overlay.remove();
+                    document.removeEventListener('keydown', escapeHandler);
+                }
+            };
+            document.addEventListener('keydown', escapeHandler);
+        }
+
+        function calculateDuration(startTime, endTime) {
+            const durationSeconds = Math.floor((new Date(endTime) - new Date(startTime)) / 1000);
+            const minutes = Math.floor(durationSeconds / 60);
+            const seconds = durationSeconds % 60;
+            return `${minutes}m ${seconds}s`;
+        }
+
+        function showThankYouScreen() {
+            const answered = Object.keys(studentData.answers).length;
+
+            document.getElementById('finalStudentName').textContent = studentData.name;
+            document.getElementById('finalStudentEmail').textContent = studentData.email;
+            document.getElementById('finalAnsweredCount').textContent = `${answered}/${QUESTIONS.length}`;
+            document.getElementById('finalSubmissionTime').textContent = new Date().toLocaleString();
+
+            showScreen('thankYouScreen');
+        }
+
+        async function sendSubmissionEmail(videoLink = '', videoFolderLink = '', videoFilename = '') {
+            const answered = Object.keys(studentData.answers).length;
+            const submissionTime = new Date().toLocaleString();
+
+            // Format answers for email (compact HTML format)
+            let answersHtml = '<div style="font-family: monospace; font-size: 12px;">';
+
+            QUESTIONS.forEach((question, index) => {
+                const answer = studentData.answers[question.id];
+                const status = answer ? '✅' : '❌';
+
+                answersHtml += `<div style="margin-bottom: 15px; padding: 10px; background: #f5f5f5; border-left: 3px solid ${answer ? '#1ba94c' : '#ef4444'};">`;
+                answersHtml += `<strong>${status} Q${index + 1} (${question.type.toUpperCase()}):</strong><br/>`;
+
+                if (answer) {
+                    if (question.type === 'mcq') {
+                        answersHtml += `Answer: ${answer}`;
+                    } else {
+                        const codePreview = answer.length > 200 ? answer.substring(0, 200) + '...' : answer;
+                        answersHtml += `<pre style="background: #1a1a1a; color: #c9d1d9; padding: 10px; border-radius: 4px; overflow-x: auto;">${codePreview}</pre>`;
+                    }
+                } else {
+                    answersHtml += '<em style="color: #999;">Not answered</em>';
+                }
+
+                answersHtml += '</div>';
+            });
+
+            answersHtml += '</div>';
+
+            // Calculate counts from securityViolations array
+            const tabSwitches = studentData.securityViolations.filter(v => v.type === 'Tab Switch').length;
+            const focusLoss = studentData.securityViolations.filter(v => v.type === 'Focus Loss').length;
+            const mouseLeave = studentData.securityViolations.filter(v => v.type === 'Mouse Leave').length;
+            const copyAttempts = studentData.securityViolations.filter(v => v.type === 'Copy Attempt').length;
+            const pasteAttempts = studentData.securityViolations.filter(v => v.type === 'Paste Attempt').length;
+            const rightClickAttempts = studentData.securityViolations.filter(v => v.type === 'Right Click Attempt').length;
+            const devToolsDetected = studentData.securityViolations.filter(v => v.type === 'DevTools Detected').length;
+
+            // Calculate risk score
+            const riskScore = (tabSwitches * 15) + (devToolsDetected * 25) + (pasteAttempts * 20) +
+                              (copyAttempts * 5) + (focusLoss * 3) + (mouseLeave * 2) + (rightClickAttempts * 2);
+
+            const templateParams = {
+                reply_to: String(studentData.email).trim(),
+                to_name: 'Exam Administrator',
+                student_name: String(studentData.name || 'N/A'),
+                student_email: String(studentData.email || 'N/A'),
+                student_phone: String(studentData.phone || 'N/A'),
+                session_id: String(`EXAM_${Date.now()}`),
+                start_time: String(new Date(studentData.startTime).toLocaleString()),
+                end_time: String(new Date(studentData.endTime).toLocaleString()),
+                duration: String(calculateDuration(studentData.startTime, studentData.endTime)),
+                total_questions: String(QUESTIONS.length),
+                answered_questions: String(answered),
+                mcq_score: String('To be evaluated'),
+                percentage: String(Math.round((answered / QUESTIONS.length) * 100) + '%'),
+                tab_switches: String(tabSwitches),
+                warnings: String(studentData.securityViolations.length),
+                camera_status: String(cameraStream ? 'Enabled' : 'Disabled'),
+                mouse_leave_count: String(mouseLeave),
+                copy_attempts: String(copyAttempts),
+                paste_attempts: String(pasteAttempts),
+                right_click_attempts: String(rightClickAttempts),
+                focus_loss_count: String(focusLoss),
+                devtools_detected: devToolsDetected > 0 ? String('Yes (' + devToolsDetected + 'x)') : String('No'),
+                risk_score: String(Math.min(riskScore, 100)),
+                total_suspicious_events: String(studentData.securityViolations.length),
+                general_warnings: String(studentData.securityViolations.length),
+                suspicious_activities: String(studentData.securityViolations.length),
+                question_times: String(JSON.stringify(studentData.questionTimes)),
+                answers_summary: String(answersHtml || '<p>No answers provided</p>'),
+                submission_timestamp: new Date().toISOString(),
+                video_link: String(videoLink || ''),
+                video_folder_link: String(videoFolderLink || ''),
+                video_filename: String(videoFilename || '')
+            };
+
+            console.log('📧 EMAIL NOTIFICATION SYSTEM');
+            console.log('════════════════════════════════════════════════════════');
+            console.log('📝 Sending email to:', EMAILJS_CONFIG.adminEmail);
+            console.log('📤 Service:', EMAILJS_CONFIG.serviceId);
+            console.log('📋 Template:', EMAILJS_CONFIG.templateId);
+            if (videoLink) {
+                console.log('🎬 Video Link:', videoLink);
+                console.log('📁 Video Filename:', videoFilename);
+            } else {
+                console.log('⚠️ No video recorded');
+            }
+            console.log('════════════════════════════════════════════════════════');
+
+            // Always save to localStorage first
+            try {
+                const submissions = JSON.parse(localStorage.getItem('examSubmissions') || '[]');
+                submissions.push({
+                    ...templateParams,
+                    timestamp: new Date().toISOString(),
+                    fullData: studentData
+                });
+                localStorage.setItem('examSubmissions', JSON.stringify(submissions));
+                console.log('✅ Submission saved to localStorage');
+            } catch (error) {
+                console.error('❌ localStorage save failed:', error);
+            }
+
+            // Send email via EmailJS with retry logic
+            const maxRetries = 3;
+            let lastError = null;
+
+            for (let attempt = 1; attempt <= maxRetries; attempt++) {
+                try {
+                    console.log(`📨 Email attempt ${attempt}/${maxRetries}...`);
+
+                    const response = await emailjs.send(
+                        EMAILJS_CONFIG.serviceId,
+                        EMAILJS_CONFIG.templateId,
+                        templateParams
+                    );
+
+                    console.log('✅ EMAIL SENT SUCCESSFULLY!');
+                    console.log('📬 Response:', response.status, response.text);
+                    console.log('════════════════════════════════════════════════════════');
+
+                    // Success - no need for alert, Thank You screen will show
+                    // (Removed redundant success alert for world-class UX)
+                    console.log('✅ Submission complete - proceeding to Thank You screen');
+                    return; // Success - exit function
+
+                } catch (error) {
+                    lastError = error;
+                    console.error(`❌ Attempt ${attempt}/${maxRetries} failed:`, error);
+
+                    // Check for configuration error
+                    if (error.status === 422) {
+                        const configError = `EmailJS Configuration Error: The email template recipient is not configured. Please set the "To Email" field in EmailJS dashboard to: ${EMAILJS_CONFIG.adminEmail}`;
+                        console.error('❌', configError);
+                        showCustomAlert(
+                            'warning',
+                            'Configuration Error',
+                            'EmailJS is not configured properly.',
+                            configError
+                        );
+                        return;
+                    }
+
+                    if (attempt < maxRetries) {
+                        const waitTime = Math.pow(2, attempt) * 1000; // Exponential backoff: 2s, 4s, 8s
+                        console.log(`⏳ Waiting ${waitTime/1000}s before retry...`);
+                        await new Promise(resolve => setTimeout(resolve, waitTime));
+                    }
+                }
+            }
+
+            // All retries failed
+            console.error('❌ EMAIL SENDING FAILED after', maxRetries, 'attempts');
+            console.error('Last error:', lastError);
+            console.log('💾 Submission data is saved in localStorage');
+            console.log('════════════════════════════════════════════════════════');
+
+            // Show error to user but don't block submission
+            const errorMsg = lastError.text || lastError.message || 'Unknown error';
+            showCustomAlert(
+                'warning',
+                'Email Delivery Issue',
+                'Your exam has been submitted and saved locally, but the confirmation email could not be sent.',
+                `Error: ${errorMsg}\n\nPlease contact: ${EMAILJS_CONFIG.adminEmail}`
+            );
+        }
+
+        async function submitExam() {
+            console.log('📤 Submitting exam...');
+
+            try {
+                // Set end time
+                studentData.endTime = new Date().toISOString();
+
+                // Stop timer
+                if (timerInterval) {
+                    clearInterval(timerInterval);
+                }
+
+                // Stop video recording FIRST (before stopping camera)
+                if (isRecording) {
+                    console.log('⏹️ Stopping video recording...');
+                    stopVideoRecording();
+                    // Wait for recording to finalize
+                    await new Promise(resolve => setTimeout(resolve, 1000));
+                }
+
+                // Stop camera
+                if (cameraStream) {
+                    cameraStream.getTracks().forEach(track => track.stop());
+                }
+
+                // Upload video and get link
+                let videoLink = '';
+                let videoFolderLink = '';
+                let videoFilename = '';
+
+                if (videoBlob) {
+                    console.log('☁️ Uploading video...');
+                    showUploadProgress('Processing exam video...', 5);
+
+                    // Create filename with candidate info
+                    const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+                    const safeName = studentData.name.replace(/[^a-zA-Z0-9]/g, '_');
+                    const extension = window.videoFileExtension || '.webm';
+                    const filename = `exam_${safeName}_${timestamp}${extension}`;
+
+                    const uploadResult = await uploadVideoToPCloud(videoBlob, filename);
+
+                    if (uploadResult.success) {
+                        showUploadProgress('Video uploaded successfully!', 100);
+                        console.log(`✅ Video uploaded successfully using ${uploadResult.method}`);
+                        console.log(`🔗 Video link: ${uploadResult.videoLink}`);
+
+                        videoLink = uploadResult.videoLink;
+                        videoFolderLink = uploadResult.folderLink;
+                        videoFilename = uploadResult.filename;
+
+                        await new Promise(resolve => setTimeout(resolve, 1500));
+                        hideUploadProgress();
+                    } else {
+                        console.warn('⚠️ Video upload failed, but continuing with submission');
+                        hideUploadProgress();
+                    }
+                } else {
+                    console.log('ℹ️ No video recorded (camera was not available)');
+                }
+
+                // Send email with video links
+                await sendSubmissionEmail(videoLink, videoFolderLink, videoFilename);
+
+                // Show thank you screen
+                showThankYouScreen();
+
+            } catch (error) {
+                console.error('❌ Submission error:', error);
+                showCustomAlert(
+                    'error',
+                    'Submission Error',
+                    'An unexpected error occurred during submission. Your data has been saved locally.',
+                    `Error: ${error.message || 'Unknown error'}\n\nPlease contact support if this persists.`
+                );
+
+                // Still show thank you screen even if there's an error
+                showThankYouScreen();
+            }
+        }
+
+        function autoSubmitExam() {
+            showCustomAlert(
+                'warning',
+                'Time Expired',
+                'Your exam time has expired and will be submitted automatically.',
+                'Please wait while we process your submission...'
+            );
+            // Submit after a brief moment for the user to see the message
+            setTimeout(() => {
+                submitExam();
+            }, 2000);
+        }
+
+        // Custom confirmation dialog function
+        function showCustomConfirm(unanswered, total) {
+            const overlay = document.createElement('div');
+            overlay.className = 'custom-confirm-overlay active';
+
+            const warningHtml = unanswered > 0
+                ? `<div class="custom-confirm-warning">⚠️ Warning: You have ${unanswered} of ${total} questions unanswered!</div>`
+                : '';
+
+            overlay.innerHTML = `
+                <div class="custom-confirm-dialog">
+                    <div class="custom-confirm-icon">
+                        <i class="bi bi-exclamation-triangle"></i>
+                    </div>
+                    <h3 class="custom-confirm-title">Submit Your Examination?</h3>
+                    <p class="custom-confirm-message">
+                        You are about to submit your exam. Once submitted, you cannot make any changes.
+                    </p>
+                    ${warningHtml}
+                    <div class="custom-confirm-buttons">
+                        <button class="custom-confirm-btn custom-confirm-btn-cancel" id="confirmCancelBtn">
+                            Cancel
+                        </button>
+                        <button class="custom-confirm-btn custom-confirm-btn-submit" id="confirmSubmitBtn">
+                            Submit Exam
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            document.body.appendChild(overlay);
+
+            // Add event listeners (need to be added after appending to DOM)
+            document.getElementById('confirmCancelBtn').addEventListener('click', () => {
+                overlay.remove();
+            });
+
+            document.getElementById('confirmSubmitBtn').addEventListener('click', () => {
+                overlay.remove();
+                submitExam();
+            });
+        }
+
+        // ==================== INITIALIZATION ====================
+        // Wait for DOM to be fully loaded before attaching event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🚀 DOM loaded - initializing event listeners...');
+
+            // ==================== LOGIN HANDLING ====================
+            document.getElementById('loginForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                console.log('📝 Login form submitted');
+
+                const name = document.getElementById('studentName').value.trim();
+                const email = document.getElementById('studentEmail').value.trim();
+                const phone = document.getElementById('studentPhone').value.trim();
+
+                console.log('Input values:', { name, email, phone });
+
+                // Validation
+                if (!name || name.length < 2) {
+                    console.error('❌ Validation failed: Name too short');
+                    showError('loginError', 'Please enter your full name (minimum 2 characters)');
+                    return;
+                }
+
+                if (!email || !email.includes('@') || !email.includes('.')) {
+                    console.error('❌ Validation failed: Invalid email');
+                    showError('loginError', 'Please enter a valid email address');
+                    return;
+                }
+
+                if (!phone || phone.length < 10) {
+                    console.error('❌ Validation failed: Phone too short');
+                    showError('loginError', 'Please enter a valid phone number');
+                    return;
+                }
+
+                // Success
+                console.log('✅ Validation passed');
+                hideError('loginError');
+                studentData.name = name;
+                studentData.email = email;
+                studentData.phone = phone;
+
+                console.log('✅ Login successful:', studentData);
+                console.log('➡️  Navigating to Rules Screen...');
+                showScreen('rulesScreen');
+            });
+
+        // ==================== RULES SCREEN HANDLING ====================
+        document.querySelectorAll('#rulesScreen input[type="checkbox"]').forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                const parent = this.closest('.checkpoint-item');
+                if (this.checked) {
+                    parent.classList.add('checked');
+                } else {
+                    parent.classList.remove('checked');
+                }
+
+                const agree1 = document.getElementById('agree1').checked;
+                const agree2 = document.getElementById('agree2').checked;
+                const agree3 = document.getElementById('agree3').checked;
+                const agree4 = document.getElementById('agree4').checked;
+
+                document.getElementById('startExamBtn').disabled = !(agree1 && agree2 && agree3 && agree4);
+            });
+        });
+
+        document.getElementById('startExamBtn').addEventListener('click', function() {
+            startExam();
+        });
+
+        // ==================== EXAM INITIALIZATION ====================
+        async function startExam() {
+            console.log('🚀 Starting exam...');
+
+            // Set start time
+            studentData.startTime = new Date().toISOString();
+
+            // ==================== INITIALIZE RANDOM QUESTION SYSTEM ====================
+            if (!examManager || QUESTIONS.length === 0) {
+                try {
+                    console.log('🎲 Initializing random question system...');
+                    console.log('📚 Question Database Status:');
+                    console.log('  - Python MCQ:', QUESTION_DATABASE.pythonMCQ.length);
+                    console.log('  - SQL MCQ:', QUESTION_DATABASE.sqlMCQ.length);
+                    console.log('  - Python Subjective:', QUESTION_DATABASE.pythonSubjective.length);
+                    console.log('  - SQL Subjective:', QUESTION_DATABASE.sqlSubjective.length);
+
+                    // Initialize exam manager with random question selection
+                    examManager = initializeExamSystem();
+                    QUESTIONS = examManager.selectedQuestions;
+
+                    console.log('✅ Random question system initialized successfully!');
+                    console.log('📊 Selected Questions:');
+                    console.log('  - Total:', QUESTIONS.length);
+                    console.log('  - Objective (MCQ):', QUESTIONS.filter(q => q.type === 'mcq').length);
+                    console.log('  - Subjective (Coding):', QUESTIONS.filter(q => q.type === 'coding').length);
+                    console.log('  - Python:', QUESTIONS.filter(q => q.category === 'python').length);
+                    console.log('  - SQL:', QUESTIONS.filter(q => q.category === 'sql').length);
+                    console.log('🔐 All questions encrypted and ready for progressive decryption');
+                } catch (error) {
+                    console.error('❌ Failed to initialize question system:', error);
+                    alert('Error initializing exam questions. Please refresh and try again.');
+                    return;
+                }
+            }
+
+            // Show exam screen
+            showScreen('examScreen');
+
+            // Update student info displays
+            document.getElementById('studentNameDisplay').textContent = studentData.name;
+            document.getElementById('sidebarStudentName').textContent = studentData.name;
+            document.getElementById('sidebarStudentEmail').textContent = studentData.email;
+
+            // Initialize camera
+            await initializeCamera();
+
+            // Start timer
+            startTimer();
+
+            // Render first question
+            renderQuestion();
+            renderQuestionGrid();
+            updateStats();
+
+            // Setup anti-cheat monitoring
+            setupAntiCheat();
+
+            console.log('✅ Exam started successfully!');
+        }
+
+        // ==================== CAMERA HANDLING ====================
+        async function initializeCamera() {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({
+                    video: { width: 640, height: 480 },
+                    audio: false
+                });
+
+                cameraStream = stream;
+
+                const videoEl = document.createElement('video');
+                videoEl.srcObject = stream;
+                videoEl.autoplay = true;
+                videoEl.muted = true;
+
+                const cameraFeed = document.getElementById('cameraFeed');
+                cameraFeed.innerHTML = '';
+                cameraFeed.appendChild(videoEl);
+
+                // Start video recording
+                await startVideoRecording();
+
+                console.log('✅ Camera initialized successfully with video recording');
+            } catch (error) {
+                console.error('❌ Camera initialization failed:', error);
+
+                const cameraFeed = document.getElementById('cameraFeed');
+                cameraFeed.innerHTML = `
+                    <div class="camera-placeholder">
+                        <i class="bi bi-camera-video-off"></i>
+                        <p>Camera not available</p>
+                        <small style="color: #999;">The exam will continue without video</small>
+                    </div>
+                `;
+            }
+        }
+
+        // Old startRecording function removed - now using startVideoRecording() from VIDEO RECORDING FUNCTIONS section
+
+        // ==================== TIMER HANDLING ====================
+        function startTimer() {
+            updateTimerDisplay();
+
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                updateTimerDisplay();
+
+                // Warning at 5 minutes
+                if (timeLeft === 5 * 60) {
+                    document.getElementById('timerBox').classList.add('warning');
+                    alert('⚠️ Warning: Only 5 minutes remaining!');
+                }
+
+                // Auto-submit at 0
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    autoSubmitExam();
+                }
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            const display = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            document.getElementById('timerDisplay').textContent = display;
+        }
+
+        // ==================== ANSWER HANDLING (Event Listeners Only) ====================
+        // Note: Functions moved to global scope above (line 2164+)
+        // This section now only contains the navigation event listeners
+
+        // ==================== NAVIGATION ====================
+        document.getElementById('prevBtn').addEventListener('click', () => {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                renderQuestion();
+                renderQuestionGrid();
+            }
+        });
+
+        document.getElementById('nextBtn').addEventListener('click', () => {
+            if (currentQuestionIndex < QUESTIONS.length - 1) {
+                currentQuestionIndex++;
+                renderQuestion();
+                renderQuestionGrid();
+            }
+        });
+
+        // Note: renderQuestionGrid() and updateStats() now defined in global scope (line 2297 and 2325)
+
+        // ==================== SUBMISSION ====================
+        document.getElementById('submitBtn').addEventListener('click', () => {
+            const answered = Object.keys(studentData.answers).length;
+            const total = QUESTIONS.length;
+            const unanswered = total - answered;
+
+            // Show custom confirmation dialog
+            showCustomConfirm(unanswered, total);
+        });
+
+        // ==================== ANTI-CHEAT MONITORING ====================
+        function setupAntiCheat() {
+            // 1. Tab switching detection (ALREADY EXISTS)
+            document.addEventListener('visibilitychange', () => {
+                if (document.hidden) {
+                    const violation = {
+                        type: 'Tab Switch',
+                        timestamp: new Date().toISOString()
+                    };
+                    studentData.securityViolations.push(violation);
+                    console.warn('⚠️ Tab switch detected:', violation);
+                }
+            });
+
+            // 2. Window focus loss (ADDED)
+            window.addEventListener('blur', () => {
+                studentData.securityViolations.push({
+                    type: 'Focus Loss',
+                    timestamp: new Date().toISOString()
+                });
+                console.warn('⚠️ Focus loss detected');
+            });
+
+            // 3. Mouse leaving window (ADDED)
+            document.addEventListener('mouseleave', () => {
+                studentData.securityViolations.push({
+                    type: 'Mouse Leave',
+                    timestamp: new Date().toISOString()
+                });
+                console.warn('⚠️ Mouse left window area');
+            });
+
+            // 4. Copy attempts (ADDED)
+            document.addEventListener('copy', (e) => {
+                e.preventDefault();
+                studentData.securityViolations.push({
+                    type: 'Copy Attempt',
+                    timestamp: new Date().toISOString()
+                });
+                console.warn('⚠️ Copy attempt detected');
+            });
+
+            // 5. Paste attempts (ADDED - currently paste is blocked but not counted)
+            document.addEventListener('paste', (e) => {
+                e.preventDefault();
+                studentData.securityViolations.push({
+                    type: 'Paste Attempt',
+                    timestamp: new Date().toISOString()
+                });
+                console.warn('⚠️ Paste attempt detected');
+            });
+
+            // 6. Right-click attempts (MODIFIED to count)
+            document.addEventListener('contextmenu', (e) => {
+                e.preventDefault();
+                studentData.securityViolations.push({
+                    type: 'Right Click Attempt',
+                    timestamp: new Date().toISOString()
+                });
+                console.warn('⚠️ Right-click attempt detected');
+            });
+
+            // 7. DevTools detection (ALREADY EXISTS)
+            window.addEventListener('resize', () => {
+                if (window.outerWidth - window.innerWidth > 200 ||
+                    window.outerHeight - window.innerHeight > 200) {
+                    const violation = {
+                        type: 'DevTools Detected',
+                        timestamp: new Date().toISOString()
+                    };
+                    studentData.securityViolations.push(violation);
+                    console.warn('⚠️ DevTools possibly open:', violation);
+                }
+            });
+
+            // 8. Keyboard shortcuts (ALREADY EXISTS)
+            document.addEventListener('keydown', (e) => {
+                // Block F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U
+                if (e.key === 'F12' ||
+                    (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) ||
+                    (e.ctrlKey && e.key === 'u')) {
+                    e.preventDefault();
+                    console.warn('⚠️ Keyboard shortcut blocked:', e.key);
+                }
+            });
+        }
+
+            console.log('✅ All event listeners initialized successfully');
+        }); // End of DOMContentLoaded
+
+        // ==================== SYSTEM INITIALIZATION ====================
+        console.log('🎓 Professional Technical Assessment System Loaded');
+        console.log('🎨 HackerRank-style UI with Bootstrap 5.3 Framework');
+        console.log('📱 Mobile-responsive design optimized for all screen sizes');
+        console.log('✅ Production-ready and world-class quality');
+    </script>
+</body>
+</html>

@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam Results - Semantic Data Services</title>
+    <style>
+        /* ============= WORLD-CLASS EMAIL TEMPLATE - PRODUCTION READY ============= */
+        /* Fixed: Header visibility, duplicate percentage, button readability */
+        /* Synchronized with Exam Application Design System */
+
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #fdf6e3 0%, #eee8d5 100%);
+            color: #586e75;
+            line-height: 1.6;
+        }
+
+        .email-container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(7, 54, 66, 0.15);
+            border: 3px solid #d3cbb7;
+            overflow: hidden;
+        }
+
+        /* ============= PROFESSIONAL HEADER - HIGH CONTRAST ============= */
+        .header {
+            background: linear-gradient(135deg, #268bd2 0%, #2aa198 100%);
+            padding: 50px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Subtle pattern overlay */
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(circle at 20% 50%, rgba(255,255,255,0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(255,255,255,0.1) 0%, transparent 50%);
+            z-index: 1;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .header-logo {
+            font-size: 64px;
+            margin-bottom: 20px;
+            display: block;
+            filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3));
+        }
+
+        .header h1 {
+            margin: 0 0 12px 0;
+            font-size: 36px;
+            font-weight: 700;
+            /* FIXED: High contrast white text */
+            color: #ffffff;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            letter-spacing: -0.5px;
+        }
+
+        .header p {
+            margin: 0;
+            font-size: 18px;
+            font-weight: 500;
+            /* FIXED: High contrast light text */
+            color: #fdf6e3;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.15);
+        }
+
+        /* ============= CONTENT AREA ============= */
+        .content {
+            padding: 40px;
+            background: #fdf6e3;
+        }
+
+        /* ============= ENHANCED CARD SYSTEM ============= */
+        .card {
+            background: #ffffff;
+            border: 2px solid #d3cbb7;
+            border-radius: 12px;
+            padding: 28px;
+            margin-bottom: 28px;
+            box-shadow: 0 4px 12px rgba(7, 54, 66, 0.08);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(7, 54, 66, 0.12);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 3px solid #eee8d5;
+        }
+
+        .card-icon {
+            font-size: 36px;
+            margin-right: 14px;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+        }
+
+        .card-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #073642;
+            margin: 0;
+            letter-spacing: -0.3px;
+        }
+
+        /* ============= INFO GRID - ENHANCED ============= */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+        }
+
+        .info-item {
+            padding: 18px;
+            background: #fdf6e3;
+            border-radius: 10px;
+            border-left: 4px solid #268bd2;
+            box-shadow: 0 2px 6px rgba(7, 54, 66, 0.06);
+            transition: transform 0.2s;
+        }
+
+        .info-item:hover {
+            transform: translateX(4px);
+        }
+
+        .info-label {
+            font-size: 12px;
+            color: #839496;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 6px;
+        }
+
+        .info-value {
+            font-size: 17px;
+            color: #073642;
+            font-weight: 700;
+            line-height: 1.4;
+            word-break: break-word;
+        }
+
+        /* ============= SCORE DISPLAY - PROMINENT & FIXED ============= */
+        .score-card {
+            background: linear-gradient(135deg, #ffffff 0%, #fdf6e3 100%);
+            border: 4px solid #268bd2;
+            padding: 40px;
+            text-align: center;
+            border-radius: 16px;
+            margin: 32px 0;
+            box-shadow: 0 8px 24px rgba(38, 139, 210, 0.25);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .score-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(38, 139, 210, 0.05) 0%, transparent 70%);
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        .score-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .score-value {
+            font-size: 72px;
+            font-weight: 900;
+            color: #268bd2;
+            margin: 0;
+            line-height: 1;
+            text-shadow: 0 4px 8px rgba(38, 139, 210, 0.2);
+            /* FIXED: Remove duplicate % - it's added in template {{percentage}}% */
+        }
+
+        .score-label {
+            font-size: 18px;
+            color: #073642;
+            margin-top: 12px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .score-details {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid #eee8d5;
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            flex-wrap: wrap;
+        }
+
+        .score-detail-item {
+            text-align: center;
+        }
+
+        .score-detail-label {
+            font-size: 13px;
+            color: #839496;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+
+        .score-detail-value {
+            font-size: 20px;
+            color: #073642;
+            font-weight: 700;
+        }
+
+        /* ============= VIDEO SECTION - ENHANCED ============= */
+        .video-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f5f0e1 100%);
+            border: 3px solid #2aa198;
+            border-radius: 14px;
+            padding: 32px;
+            margin: 28px 0;
+        }
+
+        .video-available {
+            background: linear-gradient(135deg, rgba(133, 153, 0, 0.15) 0%, rgba(133, 153, 0, 0.05) 100%);
+            border: 2px solid #859900;
+            padding: 18px 24px;
+            border-radius: 10px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(133, 153, 0, 0.15);
+        }
+
+        .video-available-icon {
+            font-size: 32px;
+            margin-right: 16px;
+        }
+
+        .video-available-text {
+            flex: 1;
+            font-size: 16px;
+            color: #073642;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .video-info {
+            background: #fdf6e3;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 24px 0;
+            border-left: 4px solid #2aa198;
+        }
+
+        .video-info-item {
+            margin-bottom: 14px;
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+        }
+
+        .video-info-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .video-info-label {
+            font-weight: 700;
+            color: #073642;
+            min-width: 80px;
+        }
+
+        .video-info-value {
+            color: #268bd2;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            word-break: break-all;
+        }
+
+        /* ============= PROFESSIONAL BUTTONS - FIXED READABILITY ============= */
+        .button-container {
+            margin: 28px 0;
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 16px 32px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 16px;
+            text-align: center;
+            transition: all 0.3s ease;
+            font-family: inherit;
+            letter-spacing: 0.3px;
+            border: none;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            cursor: pointer;
+        }
+
+        .btn-icon {
+            font-size: 22px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #268bd2 0%, #2aa198 100%);
+            /* FIXED: High contrast white text for readability */
+            color: #ffffff;
+            font-weight: 700;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #1e6fa8 0%, #208679 100%);
+            box-shadow: 0 6px 20px rgba(38, 139, 210, 0.4);
+            transform: translateY(-3px);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #859900 0%, #2aa198 100%);
+            /* FIXED: High contrast white text for readability */
+            color: #ffffff;
+            font-weight: 700;
+        }
+
+        .btn-success:hover {
+            background: linear-gradient(135deg, #6b7a00 0%, #208679 100%);
+            box-shadow: 0 6px 20px rgba(133, 153, 0, 0.4);
+            transform: translateY(-3px);
+        }
+
+        .btn:active {
+            transform: translateY(-1px);
+        }
+
+        /* ============= SECURITY TABLE - ENHANCED ============= */
+        .security-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 20px 0;
+            background: #ffffff;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 2px solid #d3cbb7;
+        }
+
+        .security-table th {
+            background: linear-gradient(135deg, #268bd2 0%, #2aa198 100%);
+            padding: 16px;
+            text-align: left;
+            font-weight: 700;
+            font-size: 14px;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .security-table td {
+            padding: 16px;
+            border-bottom: 1px solid #eee8d5;
+            font-size: 15px;
+            color: #586e75;
+            font-weight: 500;
+        }
+
+        .security-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .security-table tbody tr:hover {
+            background: #fdf6e3;
+        }
+
+        /* ============= RISK BADGES - ENHANCED ============= */
+        .risk-badge {
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .risk-low {
+            background: linear-gradient(135deg, rgba(133, 153, 0, 0.2) 0%, rgba(133, 153, 0, 0.1) 100%);
+            color: #4a5d00;
+            border: 2px solid #859900;
+        }
+
+        .risk-medium {
+            background: linear-gradient(135deg, rgba(181, 137, 0, 0.2) 0%, rgba(181, 137, 0, 0.1) 100%);
+            color: #6a5000;
+            border: 2px solid #b58900;
+        }
+
+        .risk-high {
+            background: linear-gradient(135deg, rgba(220, 50, 47, 0.2) 0%, rgba(220, 50, 47, 0.1) 100%);
+            color: #8a1e1b;
+            border: 2px solid #dc322f;
+        }
+
+        /* ============= ALERT BOXES - ENHANCED ============= */
+        .alert {
+            padding: 20px 24px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 5px solid;
+            line-height: 1.6;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .alert strong {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+
+        .alert-info {
+            background: rgba(38, 139, 210, 0.08);
+            border-color: #268bd2;
+            color: #073642;
+        }
+
+        .alert-success {
+            background: rgba(133, 153, 0, 0.08);
+            border-color: #859900;
+            color: #073642;
+        }
+
+        .alert-warning {
+            background: rgba(181, 137, 0, 0.08);
+            border-color: #b58900;
+            color: #073642;
+        }
+
+        .alert-danger {
+            background: rgba(220, 50, 47, 0.08);
+            border-color: #dc322f;
+            color: #073642;
+        }
+
+        .alert ul {
+            margin: 12px 0 0 0;
+            padding-left: 24px;
+        }
+
+        .alert li {
+            margin-bottom: 8px;
+        }
+
+        /* ============= CHECKLIST - PROFESSIONAL DESIGN ============= */
+        .checklist {
+            background: linear-gradient(135deg, rgba(133, 153, 0, 0.08) 0%, rgba(133, 153, 0, 0.03) 100%);
+            border: 3px solid #859900;
+            border-radius: 12px;
+            padding: 28px;
+            margin: 28px 0;
+        }
+
+        .checklist h3 {
+            color: #073642;
+            font-size: 20px;
+            margin: 0 0 20px 0;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .checklist ol {
+            margin: 0;
+            padding-left: 28px;
+            color: #586e75;
+        }
+
+        .checklist li {
+            margin-bottom: 14px;
+            font-size: 16px;
+            line-height: 1.6;
+            font-weight: 500;
+        }
+
+        .checklist li strong {
+            color: #073642;
+        }
+
+        /* ============= FOOTER - PROFESSIONAL ============= */
+        .footer {
+            background: linear-gradient(135deg, #eee8d5 0%, #d3cbb7 100%);
+            padding: 40px;
+            text-align: center;
+            border-top: 3px solid #d3cbb7;
+        }
+
+        .footer-logo {
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+
+        .footer p {
+            margin: 10px 0;
+            font-size: 14px;
+            color: #586e75;
+        }
+
+        .footer strong {
+            color: #073642;
+            font-weight: 700;
+        }
+
+        .footer-brand {
+            font-size: 18px;
+            font-weight: 700;
+            color: #268bd2;
+            margin-bottom: 8px;
+        }
+
+        /* ============= RESPONSIVE - MOBILE OPTIMIZATION ============= */
+        @media only screen and (max-width: 600px) {
+            body {
+                padding: 8px;
+            }
+
+            .content {
+                padding: 24px 20px;
+            }
+
+            .card {
+                padding: 24px 20px;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header {
+                padding: 40px 24px;
+            }
+
+            .header h1 {
+                font-size: 28px;
+            }
+
+            .header p {
+                font-size: 16px;
+            }
+
+            .score-value {
+                font-size: 56px;
+            }
+
+            .button-container {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .score-details {
+                flex-direction: column;
+                gap: 16px;
+            }
+        }
+
+        /* ============= PRINT STYLES ============= */
+        @media print {
+            body {
+                background: white;
+            }
+
+            .email-container {
+                box-shadow: none;
+                border: 1px solid #d3cbb7;
+            }
+
+            .btn {
+                display: none;
+            }
+
+            .card:hover, .info-item:hover {
+                transform: none;
+            }
+        }
+
+        /* ============= ACCESSIBILITY ============= */
+        a:focus, button:focus {
+            outline: 3px solid #268bd2;
+            outline-offset: 3px;
+        }
+
+        /* ============= ANIMATIONS ============= */
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card {
+            animation: slideIn 0.4s ease-out;
+        }
+
+        .card:nth-child(1) { animation-delay: 0.1s; }
+        .card:nth-child(2) { animation-delay: 0.2s; }
+        .card:nth-child(3) { animation-delay: 0.3s; }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <!-- Professional Header - High Contrast -->
+        <div class="header">
+            <div class="header-content">
+                <span class="header-logo">🎓</span>
+                <h1>Examination Results</h1>
+                <p>Semantic Data Services Pvt Ltd</p>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="content">
+            <!-- Candidate Information Card -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-icon">👤</span>
+                    <h2 class="card-title">Candidate Information</h2>
+                </div>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-label">Full Name</div>
+                        <div class="info-value">{{student_name}}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Email Address</div>
+                        <div class="info-value">{{student_email}}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Session ID</div>
+                        <div class="info-value" style="font-family: 'Courier New', monospace; font-size: 14px;">{{session_id}}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Submission Time</div>
+                        <div class="info-value" style="font-size: 15px;">{{submission_timestamp}}</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Exam Timeline Card -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-icon">⏱️</span>
+                    <h2 class="card-title">Exam Timeline</h2>
+                </div>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-label">Started</div>
+                        <div class="info-value" style="font-size: 15px;">{{start_time}}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Completed</div>
+                        <div class="info-value" style="font-size: 15px;">{{end_time}}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Duration</div>
+                        <div class="info-value">{{duration}}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Progress</div>
+                        <div class="info-value">{{answered_questions}} / {{total_questions}} Questions</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Performance Score - Prominent Display -->
+            <div class="score-card">
+                <div class="score-content">
+                    <div class="score-value">{{percentage}}%</div>
+                    <div class="score-label">Completion Rate</div>
+                    <div class="score-details">
+                        <div class="score-detail-item">
+                            <div class="score-detail-label">MCQ Score</div>
+                            <div class="score-detail-value">{{mcq_score}}</div>
+                        </div>
+                        <div class="score-detail-item">
+                            <div class="score-detail-label">Camera Status</div>
+                            <div class="score-detail-value">{{camera_status}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video Recording Section -->
+            {{#video_link}}
+            <div class="video-card">
+                <div class="card-header" style="border-bottom: none; padding-bottom: 0; margin-bottom: 20px;">
+                    <span class="card-icon">🎬</span>
+                    <h2 class="card-title">Exam Video Recording</h2>
+                </div>
+
+                <div class="video-available">
+                    <span class="video-available-icon">✅</span>
+                    <p class="video-available-text">Video Successfully Uploaded & Available for Review</p>
+                </div>
+
+                <div class="video-info">
+                    <div class="video-info-item">
+                        <span class="video-info-label">Filename:</span>
+                        <span class="video-info-value">{{video_filename}}</span>
+                    </div>
+                    <div class="video-info-item">
+                        <span class="video-info-label">Status:</span>
+                        <span class="risk-badge risk-low">Available for Download</span>
+                    </div>
+                </div>
+
+                <div class="button-container">
+                    <a href="{{video_link}}" class="btn btn-primary">
+                        <span class="btn-icon">🎥</span>
+                        <span>Watch/Download Video</span>
+                    </a>
+                    <a href="{{video_folder_link}}" class="btn btn-success">
+                        <span class="btn-icon">📁</span>
+                        <span>View All Recordings</span>
+                    </a>
+                </div>
+
+                <div class="alert alert-info">
+                    <strong>📌 When to Review Video:</strong>
+                    <ul>
+                        <li>Risk Score above 60 (High Risk)</li>
+                        <li>Multiple tab switches detected</li>
+                        <li>Suspicious paste attempts</li>
+                        <li>Performance doesn't match skill level</li>
+                    </ul>
+                </div>
+            </div>
+            {{/video_link}}
+
+            {{^video_link}}
+            <div class="alert alert-warning">
+                <strong>⚠️ Video Recording Not Available</strong>
+                <p style="margin: 8px 0 0 0;">The exam video was not uploaded. Camera Status: {{camera_status}}</p>
+            </div>
+            {{/video_link}}
+
+            <!-- Security Report Card -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-icon">🔒</span>
+                    <h2 class="card-title">Security & Integrity Report</h2>
+                </div>
+
+                <div class="info-item" style="margin-bottom: 24px;">
+                    <div class="info-label">Overall Risk Score</div>
+                    <div class="info-value" style="font-size: 42px; color: #dc322f;">{{risk_score}} / 100</div>
+                    <div style="margin-top: 12px; font-size: 14px; color: #839496; font-weight: 600;">
+                        <span style="color: #859900;">●</span> 0-30 = Low &nbsp;|&nbsp;
+                        <span style="color: #b58900;">●</span> 31-60 = Medium &nbsp;|&nbsp;
+                        <span style="color: #dc322f;">●</span> 61-100 = High
+                    </div>
+                </div>
+
+                <table class="security-table">
+                    <thead>
+                        <tr>
+                            <th>Activity Type</th>
+                            <th style="text-align: center;">Count</th>
+                            <th style="text-align: center;">Severity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Tab Switches / Minimizing</td>
+                            <td style="text-align: center;"><strong>{{tab_switches}}</strong></td>
+                            <td style="text-align: center;"><span class="risk-badge risk-high">High</span></td>
+                        </tr>
+                        <tr>
+                            <td>Window Focus Loss</td>
+                            <td style="text-align: center;"><strong>{{focus_loss_count}}</strong></td>
+                            <td style="text-align: center;"><span class="risk-badge risk-medium">Medium</span></td>
+                        </tr>
+                        <tr>
+                            <td>Paste Attempts</td>
+                            <td style="text-align: center;"><strong>{{paste_attempts}}</strong></td>
+                            <td style="text-align: center;"><span class="risk-badge risk-high">High</span></td>
+                        </tr>
+                        <tr>
+                            <td>DevTools Detected</td>
+                            <td style="text-align: center;"><strong>{{devtools_detected}}</strong></td>
+                            <td style="text-align: center;"><span class="risk-badge risk-high">Critical</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Evaluation Checklist -->
+            <div class="checklist">
+                <h3>📋 Evaluation Checklist</h3>
+                <ol>
+                    <li>✅ Review MCQ Score: <strong>{{mcq_score}}/50 ({{percentage}}%)</strong></li>
+                    <li>🎬 Watch video recording if Risk Score > 30</li>
+                    <li>🔍 Analyze security violations and suspicious activities</li>
+                    <li>💻 Manually evaluate coding solutions</li>
+                    <li>📝 Review subjective answers thoroughly</li>
+                    <li>🎯 Calculate final composite score</li>
+                    <li>📧 Send official results to candidate</li>
+                </ol>
+            </div>
+
+            <!-- Detailed Answers Section -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-icon">✍️</span>
+                    <h2 class="card-title">Detailed Answers</h2>
+                </div>
+                <div style="background: #fdf6e3; padding: 24px; border-radius: 10px; max-height: 500px; overflow-y: auto; font-family: 'Courier New', monospace; font-size: 14px; border: 2px solid #d3cbb7; line-height: 1.6;">
+                    {{{answers_summary}}}
+                </div>
+            </div>
+        </div>
+
+        <!-- Professional Footer -->
+        <div class="footer">
+            <div class="footer-logo">🔐</div>
+            <p class="footer-brand">Semantic Data Services Pvt Ltd</p>
+            <p style="font-weight: 600;">Automated Examination System • Session: {{session_id}}</p>
+            <p>This exam uses comprehensive anti-cheat monitoring and video proctoring</p>
+            <p style="margin-top: 20px; font-size: 13px; color: #839496;">© 2025 Semantic Data Services. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,116 @@
+{
+  "phase_id": 1,
+  "name": "RAG Heat System",
+  "epic": "Epic 2",
+  "story_points": 60,
+  "priority": "P0",
+  "dependencies": [
+    0
+  ],
+  "version": "v1.0",
+  "user_stories": [
+    {
+      "story_id": "2.1",
+      "title": "Document Ingestion Pipeline",
+      "description": "As a System, I want to ingest medical documents and convert them to embeddings so that I can perform semantic search",
+      "acceptance_criteria": [
+        "Document upload API endpoint (POST /api/v1/documents)",
+        "PDF/TXT parsing implemented",
+        "Text chunking strategy (500-1000 tokens per chunk)",
+        "Embedding generation (OpenAI/Cohere)",
+        "Vector database storage (Weaviate/Pinecone)",
+        "Metadata extraction and storage",
+        "5000+ medical documents ingested"
+      ],
+      "tasks": [
+        "Create FastAPI endpoint for document upload",
+        "Implement PDF parsing (pypdf, pdfplumber)",
+        "Implement text chunking (LangChain RecursiveCharacterTextSplitter)",
+        "Set up Weaviate or Pinecone",
+        "Implement embedding generation (OpenAI text-embedding-ada-002)",
+        "Store embeddings in vector DB",
+        "Extract and store metadata (title, author, date, medical specialty)",
+        "Create batch ingestion script",
+        "Test with 100 sample documents",
+        "Load 5000+ production documents"
+      ],
+      "story_points": 13,
+      "priority": "P0"
+    },
+    {
+      "story_id": "2.2",
+      "title": "Medical NLP Entity Extraction",
+      "description": "As a System, I want to extract medical entities from text so that I can link them to ontologies",
+      "acceptance_criteria": [
+        "Named Entity Recognition (NER) implemented",
+        "Medical entity types extracted (diseases, drugs, symptoms, procedures)",
+        "Entity linking to ontologies (SNOMED-CT, RxNorm, ICD-10)",
+        "Confidence scores for entity extraction",
+        "API endpoint for entity extraction"
+      ],
+      "tasks": [
+        "Set up spaCy with medical models (scispaCy)",
+        "Implement NER for medical entities",
+        "Create ontology linking service",
+        "Implement entity disambiguation",
+        "Create entity extraction API endpoint",
+        "Test with medical documents",
+        "Tune for accuracy (target >85%)"
+      ],
+      "story_points": 13,
+      "priority": "P1"
+    },
+    {
+      "story_id": "2.3",
+      "title": "RAG Query Pipeline",
+      "description": "As a User, I want to ask medical questions and get accurate answers so that I can retrieve relevant medical knowledge",
+      "acceptance_criteria": [
+        "Query API endpoint (POST /api/v1/query)",
+        "Hybrid search (vector + graph)",
+        "Context retrieval and ranking",
+        "LLM-based answer generation",
+        "Source citation in responses",
+        "Response time <3 seconds (p95)"
+      ],
+      "tasks": [
+        "Create query API endpoint",
+        "Implement vector search (top-k retrieval)",
+        "Implement graph search (Cypher queries)",
+        "Merge and rank results",
+        "Implement prompt engineering for medical domain",
+        "Generate answers with OpenAI/Claude",
+        "Add source citations",
+        "Implement caching (Redis) for common queries",
+        "Performance testing and optimization"
+      ],
+      "story_points": 21,
+      "priority": "P0"
+    },
+    {
+      "story_id": "2.4",
+      "title": "Knowledge Graph Explorer UI",
+      "description": "As a User, I want a visual interface to explore the medical knowledge graph so that I can understand relationships between medical concepts",
+      "acceptance_criteria": [
+        "React component for graph visualization",
+        "D3.js or vis.js integration",
+        "Interactive node/edge exploration",
+        "Search and filter functionality",
+        "Entity details panel",
+        "Graph query builder (visual Cypher)"
+      ],
+      "tasks": [
+        "Set up React project structure",
+        "Install D3.js or vis.js",
+        "Create graph visualization component",
+        "Fetch graph data from Neo4j API",
+        "Implement interactive exploration (click, drag, zoom)",
+        "Add search bar for entity lookup",
+        "Create entity details panel",
+        "Implement filters (entity type, relationship type)",
+        "Add visual Cypher query builder (optional)"
+      ],
+      "story_points": 13,
+      "priority": "P2"
+    }
+  ]
+}

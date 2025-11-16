@@ -1,0 +1,56 @@
+{
+  "stats": {
+    "documents_ingested": 3,
+    "chunks_created": 3,
+    "queries_processed": 3,
+    "system_start_time": "2025-10-28T07:14:04.088792",
+    "total_chunks": 3,
+    "total_vectors": 3,
+    "dimension": 384,
+    "unique_documents": 3,
+    "system_uptime_seconds": 0.002429
+  },
+  "documents": {
+    "doc_001": {
+      "document_id": "doc_001",
+      "title": "Type 2 Diabetes Management Guidelines",
+      "content": "\n            Type 2 diabetes mellitus is a chronic metabolic disorder characterized by insulin resistance\n            and relative insulin deficiency. First-line treatment typically involves metformin, along with\n            lifestyle modifications including diet and exercise. Blood glucose monitoring is essential for\n            optimal management. Hemoglobin A1c should be measured every 3-6 months. Complications can include\n            diabetic neuropathy, retinopathy, and nephropathy. Regular screening is recommended for all patients.\n            ",
+      "document_type": "clinical_guideline",
+      "source": "Medical Guidelines Database",
+      "metadata": {
+        "specialty": "Endocrinology",
+        "year": 2024
+      },
+      "ontology_tags": [],
+      "created_at": "2025-10-28T07:14:04.088813"
+    },
+    "doc_002": {
+      "document_id": "doc_002",
+      "title": "Hypertension Treatment Protocol",
+      "content": "\n            Essential hypertension affects millions of patients worldwide. Treatment goals include maintaining\n            blood pressure below 130/80 mmHg for most patients. First-line agents include ACE inhibitors like\n            lisinopril, ARBs, calcium channel blockers, and thiazide diuretics. Combination therapy may be\n            necessary for adequate control. Regular monitoring and medication adherence are critical for\n            preventing cardiovascular complications such as stroke and myocardial infarction.\n            ",
+      "document_type": "clinical_protocol",
+      "source": "Cardiology Department",
+      "metadata": {
+        "specialty": "Cardiology",
+        "year": 2024
+      },
+      "ontology_tags": [],
+      "created_at": "2025-10-28T07:14:04.088817"
+    },
+    "doc_003": {
+      "document_id": "doc_003",
+      "title": "Pneumonia Diagnosis and Management",
+      "content": "\n            Community-acquired pneumonia requires prompt diagnosis and treatment. Chest X-ray is the standard\n            diagnostic modality. Laboratory tests should include complete blood count and inflammatory markers.\n            Empiric antibiotic therapy should be initiated promptly, with coverage for Streptococcus pneumoniae\n            and atypical organisms. Severity assessment using CURB-65 or PSI score guides disposition decisions.\n            Most patients can be managed as outpatients with oral antibiotics.\n            ",
+      "document_type": "clinical_guideline",
+      "source": "Infectious Disease Guidelines",
+      "metadata": {
+        "specialty": "Pulmonology",
+        "year": 2024
+      },
+      "ontology_tags": [],
+      "created_at": "2025-10-28T07:14:04.088820"
+    }
+  },
+  "vector_store_size": 3,
+  "exported_at": "2025-10-28T07:14:04.091271"
+}

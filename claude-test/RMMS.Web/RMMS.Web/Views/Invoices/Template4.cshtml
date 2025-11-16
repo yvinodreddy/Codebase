@@ -1,0 +1,624 @@
+@model RMMS.Models.RiceSales
+@{
+    ViewData["Title"] = "Invoice - Classic Traditional Template 4";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Invoice - Classic Traditional</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+
+    <style>
+        @@media print {
+            .no-print { display: none !important; }
+            body { margin: 0; }
+            @@page { margin: 1.5cm; }
+        }
+
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            color: #000;
+            background: #f5f5f5;
+        }
+
+        .invoice-container {
+            max-width: 850px;
+            margin: 20px auto;
+            background: white;
+            border: 3px double #333;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        .invoice-header {
+            border-bottom: 3px double #333;
+            padding: 30px 40px;
+            background: #fff;
+        }
+
+        .company-logo-section {
+            text-align: center;
+            border-bottom: 2px solid #333;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+
+        .company-name {
+            font-size: 36px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .company-tagline {
+            font-size: 14px;
+            font-style: italic;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .company-details {
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        .invoice-title-box {
+            border: 2px solid #333;
+            background: #f9f9f9;
+            padding: 15px;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .invoice-title {
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .invoice-body {
+            padding: 30px 40px;
+        }
+
+        .info-box {
+            border: 2px solid #333;
+            padding: 20px;
+            margin-bottom: 20px;
+            background: #fafafa;
+        }
+
+        .info-box h6 {
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 8px;
+        }
+
+        .info-box p {
+            margin: 5px 0;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .invoice-details-table {
+            width: 100%;
+            margin: 20px 0;
+            border: 2px solid #333;
+            border-collapse: collapse;
+        }
+
+        .invoice-details-table td {
+            padding: 10px;
+            border: 1px solid #333;
+            font-size: 13px;
+        }
+
+        .invoice-details-table td:first-child {
+            font-weight: 700;
+            background: #f9f9f9;
+            width: 150px;
+        }
+
+        .items-table {
+            width: 100%;
+            border: 2px solid #333;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .items-table th,
+        .items-table td {
+            border: 1px solid #333;
+            padding: 12px;
+            font-size: 13px;
+        }
+
+        .items-table thead {
+            background: #333;
+            color: white;
+        }
+
+        .items-table thead th {
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .items-table tbody tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+
+        .items-table .product-name {
+            font-weight: 600;
+        }
+
+        .items-table .product-desc {
+            font-size: 11px;
+            color: #666;
+            font-style: italic;
+        }
+
+        .totals-box {
+            border: 2px solid #333;
+            background: #f9f9f9;
+            padding: 20px;
+            margin-top: 30px;
+        }
+
+        .totals-table {
+            width: 100%;
+            max-width: 450px;
+            margin-left: auto;
+        }
+
+        .totals-table tr {
+            border-bottom: 1px solid #ccc;
+        }
+
+        .totals-table tr:last-child {
+            border-bottom: none;
+        }
+
+        .totals-table td {
+            padding: 8px 0;
+            font-size: 14px;
+        }
+
+        .totals-table td:last-child {
+            text-align: right;
+            font-weight: 600;
+        }
+
+        .totals-table .grand-total {
+            border-top: 3px double #333;
+            font-size: 18px;
+            font-weight: 700;
+            background: #fff;
+        }
+
+        .totals-table .grand-total td {
+            padding-top: 12px;
+        }
+
+        .amount-words {
+            border: 1px solid #333;
+            background: #fff;
+            padding: 15px;
+            margin-top: 15px;
+            font-style: italic;
+        }
+
+        .payment-terms {
+            border: 2px solid #333;
+            padding: 20px;
+            margin-top: 30px;
+            background: #fafafa;
+        }
+
+        .payment-terms h6 {
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 8px;
+        }
+
+        .payment-detail {
+            display: flex;
+            margin: 8px 0;
+            font-size: 13px;
+        }
+
+        .payment-detail strong {
+            min-width: 180px;
+        }
+
+        .terms-conditions {
+            border: 1px solid #333;
+            padding: 15px;
+            margin-top: 30px;
+            background: #fff;
+        }
+
+        .terms-conditions h6 {
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .terms-conditions ol {
+            margin: 0;
+            padding-left: 20px;
+            font-size: 12px;
+            line-height: 1.8;
+        }
+
+        .signature-section {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 2px solid #333;
+        }
+
+        .signature-box {
+            text-align: center;
+            float: right;
+            width: 250px;
+        }
+
+        .signature-line {
+            border-top: 2px solid #333;
+            margin-top: 60px;
+            padding-top: 10px;
+            font-weight: 700;
+            font-size: 13px;
+        }
+
+        .invoice-footer {
+            border-top: 3px double #333;
+            padding: 20px 40px;
+            text-align: center;
+            background: #f9f9f9;
+            font-size: 12px;
+            font-style: italic;
+        }
+
+        .print-buttons {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .print-buttons .btn {
+            margin-left: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .decorative-corner {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            border: 2px solid #333;
+        }
+
+        .decorative-corner.top-left {
+            top: 10px;
+            left: 10px;
+            border-right: none;
+            border-bottom: none;
+        }
+
+        .decorative-corner.top-right {
+            top: 10px;
+            right: 10px;
+            border-left: none;
+            border-bottom: none;
+        }
+
+        .decorative-corner.bottom-left {
+            bottom: 10px;
+            left: 10px;
+            border-right: none;
+            border-top: none;
+        }
+
+        .decorative-corner.bottom-right {
+            bottom: 10px;
+            right: 10px;
+            border-left: none;
+            border-top: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="print-buttons no-print">
+        <button class="btn btn-secondary" onclick="window.history.back()">
+            <i class="fas fa-arrow-left me-2"></i>Back
+        </button>
+        <button class="btn btn-dark" onclick="window.print()">
+            <i class="fas fa-print me-2"></i>Print Invoice
+        </button>
+        <button class="btn btn-primary" onclick="downloadPDF()">
+            <i class="fas fa-download me-2"></i>Download PDF
+        </button>
+    </div>
+
+    <div class="invoice-container" id="invoice">
+        <!-- Header -->
+        <div class="invoice-header" style="position: relative;">
+            <div class="decorative-corner top-left"></div>
+            <div class="decorative-corner top-right"></div>
+
+            <div class="company-logo-section">
+                <div class="company-name">
+                    <i class="fas fa-industry"></i> RMMS RICE MILL
+                </div>
+                <div class="company-tagline">Established 1985 - Traditional Quality, Modern Excellence</div>
+                <div class="company-details">
+                    123 Mill Road, Rice District, Agricultural Zone, State 560001<br>
+                    Telephone: +91 98765 43210 | Email: info@@rmmsricemill.com<br>
+                    GSTIN: 29ABCDE1234F1Z5 | PAN: ABCDE1234F
+                </div>
+            </div>
+
+            <div class="invoice-title-box">
+                <div class="invoice-title">TAX INVOICE</div>
+            </div>
+
+            <table class="invoice-details-table">
+                <tr>
+                    <td>Invoice Number:</td>
+                    <td><strong>@Model.InvoiceNumber</strong></td>
+                    <td>Invoice Date:</td>
+                    <td><strong>October 21, 2025</strong></td>
+                </tr>
+                <tr>
+                    <td>Payment Terms:</td>
+                    <td>Net 15 Days</td>
+                    <td>Due Date:</td>
+                    <td><strong>November 05, 2025</strong></td>
+                </tr>
+                <tr>
+                    <td>Reference No:</td>
+                    <td>PO-ABC-2024-089</td>
+                    <td>Vehicle No:</td>
+                    <td>KA-01-AB-1234</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Body -->
+        <div class="invoice-body">
+            <!-- Bill To & Ship To -->
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="info-box">
+                        <h6>Bill To</h6>
+                        <p><strong>ABC Rice Traders Private Limited</strong></p>
+                        <p>456 Trading Complex, Market Street</p>
+                        <p>Commercial Zone, City 560002</p>
+                        <p>State: Karnataka</p>
+                        <p>Telephone: +91 98765 12345</p>
+                        <p>GSTIN: 29XYZAB5678G1H9</p>
+                        <p>State Code: 29</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="info-box">
+                        <h6>Ship To</h6>
+                        <p><strong>ABC Warehouse Division</strong></p>
+                        <p>789 Storage Complex, Warehouse Area</p>
+                        <p>Industrial Zone, City 560003</p>
+                        <p>State: Karnataka</p>
+                        <p>Contact: Mr. Ramesh Kumar</p>
+                        <p>Telephone: +91 98765 67890</p>
+                        <p>Reference: WH-ABC-001</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Items Table -->
+            <table class="items-table">
+                <thead>
+                    <tr>
+                        <th style="width: 5%; text-align: center">S.No</th>
+                        <th style="width: 35%">Description of Goods</th>
+                        <th style="width: 12%; text-align: center">HSN/SAC</th>
+                        <th style="width: 10%; text-align: center">Quantity</th>
+                        <th style="width: 13%; text-align: right">Rate (₹)</th>
+                        <th style="width: 12%; text-align: right">Per</th>
+                        <th style="width: 13%; text-align: right">Amount (₹)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="text-align: center">1</td>
+                        <td>
+                            <div class="product-name">Premium Basmati Rice - 1121 Variety</div>
+                            <div class="product-desc">Grade A Quality, Steam Processed, 25 kg bags</div>
+                        </td>
+                        <td style="text-align: center">1006 30 10</td>
+                        <td style="text-align: center">100.00</td>
+                        <td style="text-align: right">1,500.00</td>
+                        <td style="text-align: right">Bags</td>
+                        <td style="text-align: right">1,50,000.00</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center">2</td>
+                        <td>
+                            <div class="product-name">Sona Masoori Rice - Premium Grade</div>
+                            <div class="product-desc">Medium Grain, Raw Processed, 25 kg bags</div>
+                        </td>
+                        <td style="text-align: center">1006 30 90</td>
+                        <td style="text-align: center">50.00</td>
+                        <td style="text-align: right">1,100.00</td>
+                        <td style="text-align: right">Bags</td>
+                        <td style="text-align: right">55,000.00</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center">3</td>
+                        <td>
+                            <div class="product-name">Parboiled Rice - Standard Grade</div>
+                            <div class="product-desc">Boiled & Dried, 25 kg bags</div>
+                        </td>
+                        <td style="text-align: center">1006 30 20</td>
+                        <td style="text-align: center">30.00</td>
+                        <td style="text-align: right">950.00</td>
+                        <td style="text-align: right">Bags</td>
+                        <td style="text-align: right">28,500.00</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Totals -->
+            <div class="totals-box">
+                <table class="totals-table">
+                    <tr>
+                        <td>Total Amount Before Tax:</td>
+                        <td>₹2,33,500.00</td>
+                    </tr>
+                    <tr>
+                        <td>Add: CGST @@2.5%</td>
+                        <td>₹5,837.50</td>
+                    </tr>
+                    <tr>
+                        <td>Add: SGST @@2.5%</td>
+                        <td>₹5,837.50</td>
+                    </tr>
+                    <tr>
+                        <td>Total Tax Amount:</td>
+                        <td>₹11,675.00</td>
+                    </tr>
+                    <tr>
+                        <td>Round Off:</td>
+                        <td>₹0.00</td>
+                    </tr>
+                    <tr class="grand-total">
+                        <td>GRAND TOTAL:</td>
+                        <td>₹2,45,175.00</td>
+                    </tr>
+                </table>
+
+                <div class="amount-words">
+                    <strong>Amount Chargeable (in words):</strong><br>
+                    Indian Rupees Two Lakh Forty Five Thousand One Hundred Seventy Five Only
+                </div>
+            </div>
+
+            <!-- Payment Terms -->
+            <div class="payment-terms">
+                <h6>Bank Details for Payment</h6>
+                <div class="payment-detail">
+                    <strong>Bank Name:</strong>
+                    <span>State Bank of India</span>
+                </div>
+                <div class="payment-detail">
+                    <strong>Account Holder Name:</strong>
+                    <span>RMMS Rice Mill Private Limited</span>
+                </div>
+                <div class="payment-detail">
+                    <strong>Account Number:</strong>
+                    <span>1234567890123456</span>
+                </div>
+                <div class="payment-detail">
+                    <strong>IFSC Code:</strong>
+                    <span>SBIN0001234</span>
+                </div>
+                <div class="payment-detail">
+                    <strong>Branch:</strong>
+                    <span>Agricultural Zone Branch, State</span>
+                </div>
+                <div class="payment-detail">
+                    <strong>Account Type:</strong>
+                    <span>Current Account</span>
+                </div>
+            </div>
+
+            <!-- Terms & Conditions -->
+            <div class="terms-conditions">
+                <h6>Terms & Conditions</h6>
+                <ol>
+                    <li>Payment must be made within 15 days from the date of invoice.</li>
+                    <li>Goods once sold will not be taken back or exchanged.</li>
+                    <li>Interest @@18% p.a. will be charged on delayed payments.</li>
+                    <li>All disputes are subject to jurisdiction of local courts only.</li>
+                    <li>Quality complaints must be reported within 48 hours of delivery.</li>
+                    <li>Delivery subject to availability and confirmation.</li>
+                </ol>
+            </div>
+
+            <!-- Signature -->
+            <div class="signature-section clearfix">
+                <div class="signature-box">
+                    <div>For <strong>RMMS RICE MILL</strong></div>
+                    <div class="signature-line">
+                        Authorized Signatory
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="invoice-footer" style="position: relative;">
+            <div class="decorative-corner bottom-left"></div>
+            <div class="decorative-corner bottom-right"></div>
+            <p>This is a computer-generated invoice and does not require a physical signature.</p>
+            <p>Certified that the particulars given above are true and correct.</p>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+    <script>
+        function downloadPDF() {
+            const { jsPDF } = window.jspdf;
+
+            $('.print-buttons').hide();
+
+            html2canvas(document.querySelector('#invoice'), {
+                scale: 2,
+                useCORS: true,
+                backgroundColor: '#ffffff'
+            }).then(canvas => {
+                const imgData = canvas.toDataURL('image/png');
+                const pdf = new jsPDF('p', 'mm', 'a4');
+
+                const imgWidth = 210;
+                const pageHeight = 297;
+                const imgHeight = (canvas.height * imgWidth) / canvas.width;
+                let heightLeft = imgHeight;
+                let position = 0;
+
+                pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                heightLeft -= pageHeight;
+
+                while (heightLeft >= 0) {
+                    position = heightLeft - imgHeight;
+                    pdf.addPage();
+                    pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                    heightLeft -= pageHeight;
+                }
+
+                pdf.save('invoice-@(Model.InvoiceNumber).pdf');
+                $('.print-buttons').show();
+            });
+        }
+    </script>
+</body>
+</html>

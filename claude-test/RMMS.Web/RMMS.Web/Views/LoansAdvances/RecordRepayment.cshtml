@@ -1,0 +1,150 @@
+@model RMMS.Models.LoanAdvance
+@{
+    ViewData["Title"] = "Record Repayment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="card shadow">
+        <div class="card-header bg-success text-white">
+            <div class="row">
+                <div class="col-md-6">
+                    <h3><i class="fas fa-money-bill"></i> Record Repayment</h3>
+                </div>
+                <div class="col-md-6 text-end">
+                    <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-light">
+                        <i class="fas fa-arrow-left"></i> Back to Details
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <!-- Loan Summary -->
+            <div class="alert alert-info">
+                <h5 class="alert-heading"><i class="fas fa-info-circle"></i> Loan/Advance Summary</h5>
+                <div class="row">
+                    <div class="col-md-6">
+                        <strong>Party Name:</strong> @Model.PartyName<br />
+                        <strong>Particulars:</strong> @Model.Particulars<br />
+                        <strong>Date:</strong> @Model.Date.ToString("dd-MMM-yyyy")
+                    </div>
+                    <div class="col-md-6">
+                        <strong>Amount Given:</strong> ₹ @Model.AmountGiven.ToString("N2")<br />
+                        <strong>Already Repaid:</strong> ₹ @Model.Repayment.ToString("N2")<br />
+                        <strong class="text-danger fs-5">Balance Due:</strong> <span class="text-danger fs-5">₹ @Model.Balance.ToString("N2")</span>
+                    </div>
+                </div>
+            </div>
+
+            <hr />
+
+            <!-- Repayment Form -->
+            <form asp-action="RecordRepayment" method="post">
+                @Html.AntiForgeryToken()
+                <input type="hidden" asp-for="Id" />
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="repaymentAmount" class="form-label">
+                                <i class="fas fa-rupee-sign"></i> Repayment Amount <span class="text-danger">*</span>
+                            </label>
+                            <div class="input-group">
+                                <span class="input-group-text">₹</span>
+                                <input type="number"
+                                       class="form-control"
+                                       id="repaymentAmount"
+                                       name="repaymentAmount"
+                                       step="0.01"
+                                       min="0.01"
+                                       max="@Model.Balance"
+                                       required
+                                       placeholder="Enter repayment amount">
+                            </div>
+                            <small class="form-text text-muted">Maximum: ₹ @Model.Balance.ToString("N2")</small>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="repaymentDate" class="form-label">
+                                <i class="fas fa-calendar"></i> Repayment Date <span class="text-danger">*</span>
+                            </label>
+                            <input type="date"
+                                   class="form-control"
+                                   id="repaymentDate"
+                                   name="repaymentDate"
+                                   value="@DateTime.Now.ToString("yyyy-MM-dd")"
+                                   max="@DateTime.Now.ToString("yyyy-MM-dd")"
+                                   required>
+                            <small class="form-text text-muted">Date cannot be in the future</small>
+                        </div>
+                    </div>
+                </div>
+
+                <hr />
+
+                <!-- Action Buttons -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <button type="submit" class="btn btn-success btn-lg">
+                            <i class="fas fa-check"></i> Record Repayment
+                        </button>
+                        <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-secondary btn-lg">
+                            <i class="fas fa-times"></i> Cancel
+                        </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const repaymentAmountInput = document.getElementById('repaymentAmount');
+            const maxBalance = @Model.Balance;
+
+            // Validate repayment amount on input
+            repaymentAmountInput.addEventListener('input', function() {
+                const value = parseFloat(this.value);
+                if (value > maxBalance) {
+                    this.setCustomValidity('Repayment amount cannot exceed the balance due of ₹' + maxBalance.toFixed(2));
+                } else if (value <= 0) {
+                    this.setCustomValidity('Repayment amount must be greater than zero');
+                } else {
+                    this.setCustomValidity('');
+                }
+            });
+
+            // Confirm before submitting
+            document.querySelector('form').addEventListener('submit', function(e) {
+                const amount = document.getElementById('repaymentAmount').value;
+                const date = document.getElementById('repaymentDate').value;
+
+                if (!confirm(`Confirm recording repayment of ₹${parseFloat(amount).toFixed(2)} on ${date}?`)) {
+                    e.preventDefault();
+                }
+            });
+        });
+    </script>
+}
+
+<style>
+    .alert-info {
+        background-color: #d1ecf1;
+        border-color: #bee5eb;
+    }
+
+    .form-label {
+        font-weight: 600;
+        color: #495057;
+    }
+
+    .btn-lg {
+        padding: 0.75rem 1.5rem;
+        font-size: 1.1rem;
+    }
+</style>

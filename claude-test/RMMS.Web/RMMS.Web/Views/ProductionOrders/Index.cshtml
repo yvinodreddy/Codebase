@@ -1,0 +1,265 @@
+@model RMMS.Common.Pagination.PagedResult<RMMS.Models.Production.ProductionOrder>
+
+@{
+    ViewData["Title"] = "Production Orders";
+    string GetSortIcon(string columnName)
+    {
+        if (ViewBag.CurrentSort != columnName)
+            return "<i class='fas fa-sort text-muted'></i>";
+
+        return ViewBag.CurrentOrder == "asc"
+            ? "<i class='fas fa-sort-up'></i>"
+            : "<i class='fas fa-sort-down'></i>";
+    }
+
+    string GetSortUrl(string columnName)
+    {
+        var order = ViewBag.CurrentSort == columnName && ViewBag.CurrentOrder == "asc" ? "desc" : "asc";
+        return $"?searchTerm={ViewBag.SearchTerm}&orderStatus={ViewBag.SelectedStatus}&sortBy={columnName}&sortOrder={order}&page=1";
+    }
+}
+
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2><i class="fas fa-clipboard-list"></i> Production Orders</h2>
+        <a asp-action="Create" class="btn btn-primary">
+            <i class="fas fa-plus"></i> New Production Order
+        </a>
+    </div>
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show">
+            @TempData["SuccessMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show">
+            @TempData["ErrorMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    <!-- Summary Cards -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card bg-primary text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Total Orders</h5>
+                    <h2 class="mb-0">@ViewBag.TotalOrders</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-warning text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Scheduled</h5>
+                    <h2 class="mb-0">@ViewBag.ScheduledCount</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-info text-white">
+                <div class="card-body">
+                    <h5 class="card-title">In Progress</h5>
+                    <h2 class="mb-0">@ViewBag.InProgressCount</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-success text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Completed</h5>
+                    <h2 class="mb-0">@ViewBag.CompletedCount</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Production Statistics -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="text-muted">Planned Quantity</h6>
+                    <h4>@ViewBag.TotalPlannedQty.ToString("N2") Qt</h4>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="text-muted">Produced Quantity</h6>
+                    <h4>@ViewBag.TotalProducedQty.ToString("N2") Qt</h4>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="text-muted">Average Yield</h6>
+                    <h4>@ViewBag.AverageYield.ToString("N2")%</h4>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="text-muted">Overdue Orders</h6>
+                    <h4 class="@(ViewBag.OverdueCount > 0 ? "text-danger" : "")">@ViewBag.OverdueCount</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filter and Search -->
+    <div class="card mb-3">
+        <div class="card-body">
+            <form method="get" asp-action="Index">
+                <div class="row">
+                    <div class="col-md-4">
+                        <input type="text" name="searchTerm" class="form-control" placeholder="Search orders..." value="@ViewBag.SearchTerm" />
+                        <input type="hidden" name="sortBy" value="@ViewBag.CurrentSort" />
+                        <input type="hidden" name="sortOrder" value="@ViewBag.CurrentOrder" />
+                    </div>
+                    <div class="col-md-4">
+                        <select name="orderStatus" class="form-select">
+                            <option value="">All Statuses</option>
+                            <option value="Draft" selected="@(ViewBag.SelectedStatus == "Draft")">Draft</option>
+                            <option value="Scheduled" selected="@(ViewBag.SelectedStatus == "Scheduled")">Scheduled</option>
+                            <option value="In Progress" selected="@(ViewBag.SelectedStatus == "In Progress")">In Progress</option>
+                            <option value="Completed" selected="@(ViewBag.SelectedStatus == "Completed")">Completed</option>
+                            <option value="Closed" selected="@(ViewBag.SelectedStatus == "Closed")">Closed</option>
+                            <option value="Cancelled" selected="@(ViewBag.SelectedStatus == "Cancelled")">Cancelled</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <button type="submit" class="btn btn-primary w-100">
+                            <i class="fas fa-search"></i> Search
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Orders Table -->
+    <div class="card">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>
+                                <a href="@GetSortUrl("OrderNumber")" class="text-white text-decoration-none">
+                                    Order Number @Html.Raw(GetSortIcon("OrderNumber"))
+                                </a>
+                            </th>
+                            <th>
+                                <a href="@GetSortUrl("OrderDate")" class="text-white text-decoration-none">
+                                    Order Date @Html.Raw(GetSortIcon("OrderDate"))
+                                </a>
+                            </th>
+                            <th>Paddy Variety</th>
+                            <th>
+                                <a href="@GetSortUrl("PaddyQuantity")" class="text-white text-decoration-none">
+                                    Paddy Quantity (Qt) @Html.Raw(GetSortIcon("PaddyQuantity"))
+                                </a>
+                            </th>
+                            <th>
+                                <a href="@GetSortUrl("TargetQuantity")" class="text-white text-decoration-none">
+                                    Target Rice (Qt) @Html.Raw(GetSortIcon("TargetQuantity"))
+                                </a>
+                            </th>
+                            <th>Machine</th>
+                            <th>Priority</th>
+                            <th>
+                                <a href="@GetSortUrl("Status")" class="text-white text-decoration-none">
+                                    Status @Html.Raw(GetSortIcon("Status"))
+                                </a>
+                            </th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.Items.Any())
+                        {
+                            @foreach (var order in Model.Items)
+                            {
+                                <tr class="@(order.IsOverdue ? "table-danger" : "")">
+                                    <td>
+                                        <strong>@order.OrderNumber</strong>
+                                        @if (order.IsOverdue)
+                                        {
+                                            <i class="fas fa-exclamation-triangle text-danger" title="Overdue"></i>
+                                        }
+                                    </td>
+                                    <td>@order.OrderDate.ToString("yyyy-MM-dd")</td>
+                                    <td>@(order.PaddyVariety ?? "N/A")</td>
+                                    <td>@order.PaddyQuantity.ToString("N2")</td>
+                                    <td>@(order.TargetQuantity?.ToString("N2") ?? "N/A")</td>
+                                    <td>@(order.AssignedMachine?.MachineName ?? "Unassigned")</td>
+                                    <td>
+                                        <span class="badge @order.PriorityBadgeClass">
+                                            @order.Priority
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span class="badge @order.StatusBadgeClass">
+                                            @order.Status
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <div class="btn-group btn-group-sm" role="group">
+                                            <a asp-action="Details" asp-route-id="@order.Id" class="btn btn-info" title="Details">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+                                            @if (order.Status == "Draft" || order.Status == "Scheduled")
+                                            {
+                                                <a asp-action="Edit" asp-route-id="@order.Id" class="btn btn-warning" title="Edit">
+                                                    <i class="fas fa-edit"></i>
+                                                </a>
+                                            }
+                                            @if (order.Status == "Draft")
+                                            {
+                                                <a asp-action="Delete" asp-route-id="@order.Id" class="btn btn-danger" title="Delete">
+                                                    <i class="fas fa-trash"></i>
+                                                </a>
+                                            }
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="9" class="text-center py-4">
+                                    <i class="fas fa-inbox fa-3x text-muted mb-3"></i>
+                                    <p class="text-muted">No production orders found</p>
+                                    @if (!string.IsNullOrEmpty(ViewBag.SearchTerm))
+                                    {
+                                        <a href="@Url.Action("Index")" class="btn btn-sm btn-outline-primary">Clear Search</a>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="card-footer">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <strong>Showing @Model.Items.Count of @Model.TotalItems orders</strong>
+                </div>
+                <div class="col-md-6">
+                    @await Html.PartialAsync("_PaginationPartial", Model)
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

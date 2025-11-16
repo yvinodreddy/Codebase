@@ -1,0 +1,250 @@
+@{
+    ViewData["Title"] = "Execute Report";
+    var report = ViewBag.ReportDefinition as RMMS.Models.Reporting.CustomReportDefinition;
+}
+
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="@Url.Action("Index")">Custom Report Builder</a></li>
+                    <li class="breadcrumb-item active">Execute Report</li>
+                </ol>
+            </nav>
+            <h2><i class="fas fa-play-circle me-2"></i>Execute Report: @report?.ReportName</h2>
+            <p class="text-muted">@report?.Description</p>
+        </div>
+    </div>
+
+    <form asp-action="Execute" asp-route-id="@report?.Id" method="post" id="executeForm">
+        <div class="row">
+            <div class="col-lg-9">
+                <!-- Report Parameters -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="mb-0"><i class="fas fa-sliders-h me-2"></i>Report Parameters</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Date Range</label>
+                                <div class="input-group">
+                                    <input type="date" name="parameters[StartDate]" class="form-control" />
+                                    <span class="input-group-text">to</span>
+                                    <input type="date" name="parameters[EndDate]" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Filter by Status</label>
+                                <select name="parameters[Status]" class="form-select">
+                                    <option value="">All</option>
+                                    <option value="Active">Active</option>
+                                    <option value="Inactive">Inactive</option>
+                                    <option value="Pending">Pending</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Grouping Level</label>
+                                <select name="parameters[GroupLevel]" class="form-select">
+                                    <option value="None">None</option>
+                                    <option value="Daily">Daily</option>
+                                    <option value="Weekly">Weekly</option>
+                                    <option value="Monthly">Monthly</option>
+                                    <option value="Yearly">Yearly</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Row Limit</label>
+                                <input type="number" name="parameters[Limit]" class="form-control" value="1000" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-check mb-2">
+                                    <input type="checkbox" name="parameters[IncludeSubtotals]" class="form-check-input" id="includeSubtotals" />
+                                    <label class="form-check-label" for="includeSubtotals">Include Subtotals</label>
+                                </div>
+                                <div class="form-check mb-2">
+                                    <input type="checkbox" name="parameters[IncludeGrandTotal]" class="form-check-input" id="includeGrandTotal" checked />
+                                    <label class="form-check-label" for="includeGrandTotal">Include Grand Total</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" name="parameters[ShowNullValues]" class="form-check-input" id="showNullValues" />
+                                    <label class="form-check-label" for="showNullValues">Show Null Values</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Advanced Filters -->
+                <div class="card mb-4">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0"><i class="fas fa-filter me-2"></i>Advanced Filters</h5>
+                        <button type="button" class="btn btn-sm btn-primary" onclick="addAdvancedFilter()">
+                            <i class="fas fa-plus me-1"></i>Add Filter
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <div id="advancedFiltersContainer">
+                            <p class="text-muted">No advanced filters applied. Click "Add Filter" to create custom conditions.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3">
+                <!-- Report Info -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="mb-0"><i class="fas fa-info-circle me-2"></i>Report Info</h5>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-sm table-borderless">
+                            <tr>
+                                <td><strong>Data Source:</strong></td>
+                            </tr>
+                            <tr>
+                                <td><span class="badge bg-info">@report?.DataSource</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Output Type:</strong></td>
+                            </tr>
+                            <tr>
+                                <td><span class="badge bg-secondary">@report?.OutputType</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Fields:</strong></td>
+                            </tr>
+                            <tr>
+                                <td><small>@report?.SelectedColumns</small></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Actions -->
+                <div class="card">
+                    <div class="card-body">
+                        <button type="submit" class="btn btn-success w-100 mb-2">
+                            <i class="fas fa-play me-2"></i>Execute Report
+                        </button>
+                        <button type="button" class="btn btn-primary w-100 mb-2" onclick="scheduleReport()">
+                            <i class="fas fa-clock me-2"></i>Schedule
+                        </button>
+                        <button type="button" class="btn btn-info w-100 mb-2" onclick="exportReport()">
+                            <i class="fas fa-download me-2"></i>Export
+                        </button>
+                        <a href="@Url.Action("Index")" class="btn btn-secondary w-100">
+                            <i class="fas fa-times me-2"></i>Cancel
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <script>
+        function addAdvancedFilter() {
+            const filterHtml = `
+                <div class="filter-row p-3 mb-2 border rounded">
+                    <div class="row">
+                        <div class="col-md-5 mb-2">
+                            <input type="text" class="form-control" placeholder="Field Name" name="advancedFilters[Field][]" />
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <select class="form-select" name="advancedFilters[Operator][]">
+                                <option value="=">=</option>
+                                <option value="!=">!=</option>
+                                <option value=">">></option>
+                                <option value="<"><</option>
+                                <option value=">=">>=</option>
+                                <option value="<="><=</option>
+                                <option value="LIKE">LIKE</option>
+                                <option value="IN">IN</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <input type="text" class="form-control" placeholder="Value" name="advancedFilters[Value][]" />
+                        </div>
+                        <div class="col-md-1 mb-2">
+                            <button type="button" class="btn btn-danger btn-sm" onclick="$(this).closest('.filter-row').remove()">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            $('#advancedFiltersContainer').prepend(filterHtml);
+        }
+
+        function scheduleReport() {
+            Swal.fire({
+                title: 'Schedule Report',
+                html: `
+                    <div class="text-start">
+                        <div class="mb-3">
+                            <label class="form-label">Schedule Type</label>
+                            <select class="form-select" id="scheduleType">
+                                <option value="once">Once</option>
+                                <option value="daily">Daily</option>
+                                <option value="weekly">Weekly</option>
+                                <option value="monthly">Monthly</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Run Time</label>
+                            <input type="time" class="form-control" id="scheduleTime" value="09:00" />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Email Recipients</label>
+                            <input type="email" class="form-control" id="scheduleEmail" placeholder="email@example.com" />
+                        </div>
+                    </div>
+                `,
+                showCancelButton: true,
+                confirmButtonText: 'Schedule',
+                width: 500
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    toastr.success('Report scheduled successfully');
+                }
+            });
+        }
+
+        function exportReport() {
+            Swal.fire({
+                title: 'Export Format',
+                showCancelButton: true,
+                html: `
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-outline-success" onclick="Swal.close(); toastr.success('Exporting to Excel...')">
+                            <i class="fas fa-file-excel me-2"></i>Excel
+                        </button>
+                        <button class="btn btn-outline-danger" onclick="Swal.close(); toastr.success('Exporting to PDF...')">
+                            <i class="fas fa-file-pdf me-2"></i>PDF
+                        </button>
+                        <button class="btn btn-outline-primary" onclick="Swal.close(); toastr.success('Exporting to CSV...')">
+                            <i class="fas fa-file-csv me-2"></i>CSV
+                        </button>
+                        <button class="btn btn-outline-info" onclick="Swal.close(); toastr.success('Exporting to JSON...')">
+                            <i class="fas fa-file-code me-2"></i>JSON
+                        </button>
+                    </div>
+                `,
+                showConfirmButton: false
+            });
+        }
+
+        $(document).ready(function() {
+            // Set default date range to last 30 days
+            const today = new Date().toISOString().split('T')[0];
+            const thirtyDaysAgo = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+            $('input[name="parameters[EndDate]"]').val(today);
+            $('input[name="parameters[StartDate]"]').val(thirtyDaysAgo);
+        });
+    </script>
+}

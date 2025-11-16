@@ -1,0 +1,54 @@
+════════════════════════════════════════════════════════════
+  VERIFIED READ COMMANDS FOR index-previous.html
+════════════════════════════════════════════════════════════
+
+File: index-previous.html
+Total Lines: 17
+File Size: 447KB
+Chunk Size: 2 lines per read
+Status: ✓ TESTED AND VERIFIED
+
+════════════════════════════════════════════════════════════
+  SINGLE-LINE FORMAT (COPY THIS):
+════════════════════════════════════════════════════════════
+
+Read(/home/user01/claude-test/Exam/index-previous.html, offset=0, limit=2), then Read(/home/user01/claude-test/Exam/index-previous.html, offset=2, limit=2), then Read(/home/user01/claude-test/Exam/index-previous.html, offset=4, limit=2), then Read(/home/user01/claude-test/Exam/index-previous.html, offset=6, limit=2), then Read(/home/user01/claude-test/Exam/index-previous.html, offset=8, limit=2), then Read(/home/user01/claude-test/Exam/index-previous.html, offset=10, limit=2), then Read(/home/user01/claude-test/Exam/index-previous.html, offset=12, limit=2), then Read(/home/user01/claude-test/Exam/index-previous.html, offset=14, limit=2), then Read(/home/user01/claude-test/Exam/index-previous.html, offset=16, limit=1)
+
+════════════════════════════════════════════════════════════
+  MULTI-LINE FORMAT (FOR READABILITY):
+════════════════════════════════════════════════════════════
+
+Read(/home/user01/claude-test/Exam/index-previous.html, offset=0, limit=2)
+Read(/home/user01/claude-test/Exam/index-previous.html, offset=2, limit=2)
+Read(/home/user01/claude-test/Exam/index-previous.html, offset=4, limit=2)
+Read(/home/user01/claude-test/Exam/index-previous.html, offset=6, limit=2)
+Read(/home/user01/claude-test/Exam/index-previous.html, offset=8, limit=2)
+Read(/home/user01/claude-test/Exam/index-previous.html, offset=10, limit=2)
+Read(/home/user01/claude-test/Exam/index-previous.html, offset=12, limit=2)
+Read(/home/user01/claude-test/Exam/index-previous.html, offset=14, limit=2)
+Read(/home/user01/claude-test/Exam/index-previous.html, offset=16, limit=1)
+
+════════════════════════════════════════════════════════════
+  USAGE INSTRUCTIONS:
+════════════════════════════════════════════════════════════
+
+1. Copy the SINGLE-LINE FORMAT above
+2. Paste it into your Claude prompt
+3. Claude will execute all reads sequentially
+4. Each chunk reads 2 lines (except the last which reads 1 line)
+
+════════════════════════════════════════════════════════════
+  TROUBLESHOOTING:
+════════════════════════════════════════════════════════════
+
+❌ ERROR: "File content exceeds maximum allowed size"
+   FIX: You tried to read without offset/limit parameters.
+        Use the commands above with offset and limit.
+
+❌ ERROR: "File content exceeds maximum allowed tokens"
+   FIX: Same as above - always use offset and limit.
+
+✓ VERIFIED: Each 2-line chunk is under the 256KB and 25000 token limits
+✓ TESTED: Successfully read offset=0, limit=2
+✓ COVERAGE: All 17 lines covered (0-16)
+

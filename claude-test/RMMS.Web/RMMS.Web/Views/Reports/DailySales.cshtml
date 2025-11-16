@@ -1,0 +1,178 @@
+﻿@{
+    ViewData["Title"] = "Daily Sales Report";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var riceSales = ViewBag.RiceSales as List<RMMS.Models.RiceSales> ?? new List<RMMS.Models.RiceSales>();
+    var byProductSales = ViewBag.ByProductSales as List<RMMS.Models.ByProductSales> ?? new List<RMMS.Models.ByProductSales>();
+}
+
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            <h3><i class="fas fa-calendar-day"></i> Daily Sales Report</h3>
+            <p class="mb-0">Date: @ViewBag.ReportDate (@ViewBag.DayName)</p>
+        </div>
+
+        <div class="card-body">
+            <!-- Summary Cards -->
+            <div class="row mb-4">
+                <div class="col-md-3">
+                    <div class="card bg-success text-white">
+                        <div class="card-body">
+                            <h6>Total Sales</h6>
+                            <h3>₹ @ViewBag.GrandTotal</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card bg-info text-white">
+                        <div class="card-body">
+                            <h6>Total Quantity</h6>
+                            <h3>@ViewBag.TotalQuantity kg</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card bg-warning text-dark">
+                        <div class="card-body">
+                            <h6>Number of Invoices</h6>
+                            <h3>@ViewBag.NumberOfInvoices</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card bg-secondary text-white">
+                        <div class="card-body">
+                            <h6>Average Sale</h6>
+                            <h3>₹ @(ViewBag.NumberOfInvoices > 0 ? (ViewBag.GrandTotal / ViewBag.NumberOfInvoices).ToString("N2") : "0")</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Rice Sales Table -->
+            <h5>Rice Sales</h5>
+            <div class="table-responsive mb-4">
+                <table class="ms-datatable table table-bordered table-hover" data-export="true" data-page-length="16">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Invoice No</th>
+                            <th>Customer</th>
+                            <th>Rice Grade</th>
+                            <th>Quantity (kg)</th>
+                            <th>Rate</th>
+                            <th>Amount</th>
+                            <th>GST</th>
+                            <th>Total</th>
+                            <th>Payment</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (riceSales.Any())
+                        {
+                            foreach (var sale in riceSales)
+                            {
+                                <tr>
+                                    <td>@sale.InvoiceNumber</td>
+                                    <td>@sale.BuyerName</td>
+                                    <td>@sale.RiceGrade</td>
+                                    <td>@sale.Quantity.ToString("N2")</td>
+                                    <td>₹ @sale.UnitPrice.ToString("N2")</td>
+                                    <td>₹ @sale.TaxableValue.ToString("N2")</td>
+                                    <td>₹ @sale.TotalTaxAmount.ToString("N2")</td>
+                                    <td>₹ @sale.GrossInvoiceAmount.ToString("N2")</td>
+                                    <td>
+                                        <span class="badge @(sale.PaymentStatus == "Paid" ? "bg-success" : "bg-warning")">
+                                            @sale.PaymentStatus
+                                        </span>
+                                    </td>
+                                </tr>
+                            }
+                            <tr class="table-info fw-bold">
+                                <td colspan="3">Rice Sales Total</td>
+                                <td>@riceSales.Sum(s => s.Quantity).ToString("N2")</td>
+                                <td>-</td>
+                                <td>₹ @riceSales.Sum(s => s.TaxableValue).ToString("N2")</td>
+                                <td>₹ @riceSales.Sum(s => s.TotalTaxAmount).ToString("N2")</td>
+                                <td>₹ @ViewBag.TotalRiceSales</td>
+                                <td>-</td>
+                            </tr>
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="9" class="text-center">No rice sales for this date</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- By-Product Sales Table -->
+            <h5>By-Product Sales</h5>
+            <div class="table-responsive">
+                <table class="ms-datatable table table-bordered table-hover" data-export="true" data-page-length="16">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Product Type</th>
+                            <th>Buyer</th>
+                            <th>Quantity (kg)</th>
+                            <th>Rate</th>
+                            <th>Total Amount</th>
+                            <th>Payment Mode</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (byProductSales.Any())
+                        {
+                            foreach (var sale in byProductSales)
+                            {
+                                <tr>
+                                    <td>@sale.ProductType</td>
+                                    <td>@sale.BuyerName</td>
+                                    <td>@sale.Quantity.ToString("N2")</td>
+                                    <td>₹ @sale.Rate.ToString("N2")</td>
+                                    <td>₹ @sale.TotalAmount.ToString("N2")</td>
+                                    <td>@sale.PaymentMode</td>
+                                    <td>
+                                        <span class="badge @(sale.PaymentStatus == "Paid" ? "bg-success" : "bg-warning")">
+                                            @sale.PaymentStatus
+                                        </span>
+                                    </td>
+                                </tr>
+                            }
+                            <tr class="table-info fw-bold">
+                                <td colspan="2">By-Product Sales Total</td>
+                                <td>@byProductSales.Sum(s => s.Quantity).ToString("N2")</td>
+                                <td>-</td>
+                                <td>₹ @ViewBag.TotalByProductSales</td>
+                                <td colspan="2">-</td>
+                            </tr>
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="7" class="text-center">No by-product sales for this date</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="mt-4">
+                <a href="@Url.Action("Index", "Reports")" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Back
+                </a>
+                <button class="btn btn-primary" onclick="window.print()">
+                    <i class="fas fa-print"></i> Print
+                </button>
+                <a href="@Url.Action("DailySales", new { date = DateTime.Parse(ViewBag.ReportDate).AddDays(-1) })" class="btn btn-info">
+                    <i class="fas fa-chevron-left"></i> Previous Day
+                </a>
+                <a href="@Url.Action("DailySales", new { date = DateTime.Parse(ViewBag.ReportDate).AddDays(1) })" class="btn btn-info">
+                    Next Day <i class="fas fa-chevron-right"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

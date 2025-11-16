@@ -1,0 +1,501 @@
+{
+  "summary": {
+    "total_checks": 39,
+    "passed": 39,
+    "failed": 0,
+    "warnings": 0,
+    "success_rate": 100.0,
+    "duration_seconds": 0.11548495292663574,
+    "start_time": "2025-10-26T13:24:56.973856",
+    "end_time": "2025-10-26T13:24:57.089349"
+  },
+  "results": [
+    {
+      "name": "Guardrails Core: guardrails/__init__.py",
+      "category": "File Structure",
+      "passed": true,
+      "message": "Size: 936 bytes",
+      "details": {
+        "path": "/home/user01/claude-test/SwarmCare/guardrails/__init__.py",
+        "size": 936
+      },
+      "timestamp": "2025-10-26T13:24:56.973999"
+    },
+    {
+      "name": "Guardrails Core: guardrails/azure_content_safety.py",
+      "category": "File Structure",
+      "passed": true,
+      "message": "Size: 11,942 bytes",
+      "details": {
+        "path": "/home/user01/claude-test/SwarmCare/guardrails/azure_content_safety.py",
+        "size": 11942
+      },
+      "timestamp": "2025-10-26T13:24:56.974072"
+    },
+    {
+      "name": "Guardrails Core: guardrails/medical_guardrails.py",
+      "category": "File Structure",
+      "passed": true,
+      "message": "Size: 12,398 bytes",
+      "details": {
+        "path": "/home/user01/claude-test/SwarmCare/guardrails/medical_guardrails.py",
+        "size": 12398
+      },
+      "timestamp": "2025-10-26T13:24:56.974118"
+    },
+    {
+      "name": "Guardrails Core: guardrails/multi_layer_system.py",
+      "category": "File Structure",
+      "passed": true,
+      "message": "Size: 14,039 bytes",
+      "details": {
+        "path": "/home/user01/claude-test/SwarmCare/guardrails/multi_layer_system.py",
+        "size": 14039
+      },
+      "timestamp": "2025-10-26T13:24:56.974156"
+    },
+    {
+      "name": "Guardrails Core: guardrails/crewai_guardrails.py",
+      "category": "File Structure",
+      "passed": true,
+      "message": "Size: 14,191 bytes",
+      "details": {
+        "path": "/home/user01/claude-test/SwarmCare/guardrails/crewai_guardrails.py",
+        "size": 14191
+      },
+      "timestamp": "2025-10-26T13:24:56.974191"
+    },
+    {
+      "name": "Guardrails Core: guardrails/monitoring.py",
+      "category": "File Structure",
+      "passed": true,
+      "message": "Size: 9,921 bytes",
+      "details": {
+        "path": "/home/user01/claude-test/SwarmCare/guardrails/monitoring.py",
+        "size": 9921
+      },
+      "timestamp": "2025-10-26T13:24:56.974226"
+    },
+    {
+      "name": "AI Framework: AI_Accelerate_Prompts/AI_PROMPTS_LIBRARY.md",
+      "category": "File Structure",
+      "passed": true,
+      "message": "Size: 218,405 bytes",
+      "details": {
+        "path": "/home/user01/claude-test/SwarmCare/AI_Accelerate_Prompts/AI_PROMPTS_LIBRARY.md",
+        "size": 218405
+      },
+      "timestamp": "2025-10-26T13:24:56.974260"
+    },
+    {
+      "name": "AI Framework: AI_Accelerate_Prompts/START_HERE.md",
+      "category": "File Structure",
+      "passed": true,
+      "message": "Size: 11,429 bytes",
+      "details": {
+        "path": "/home/user01/claude-test/SwarmCare/AI_Accelerate_Prompts/START_HERE.md",
+        "size": 11429
+      },
+      "timestamp": "2025-10-26T13:24:56.974311"
+    },
+    {
+      "name": "AI Framework: AI_Accelerate_Prompts/README.md",
+      "category": "File Structure",
+      "passed": true,
+      "message": "Size: 18,003 bytes",
+      "details": {
+        "path": "/home/user01/claude-test/SwarmCare/AI_Accelerate_Prompts/README.md",
+        "size": 18003
+      },
+      "timestamp": "2025-10-26T13:24:56.974343"
+    },
+    {
+      "name": "AI Framework: AI_Accelerate_Prompts/IMPLEMENTATION_GUIDE.md",
+      "category": "File Structure",
+      "passed": true,
+      "message": "Size: 19,548 bytes",
+      "details": {
+        "path": "/home/user01/claude-test/SwarmCare/AI_Accelerate_Prompts/IMPLEMENTATION_GUIDE.md",
+        "size": 19548
+      },
+      "timestamp": "2025-10-26T13:24:56.974375"
+    },
+    {
+      "name": "AI Framework: AI_Accelerate_Prompts/BEFORE_AFTER_COMPARISON.md",
+      "category": "File Structure",
+      "passed": true,
+      "message": "Size: 14,203 bytes",
+      "details": {
+        "path": "/home/user01/claude-test/SwarmCare/AI_Accelerate_Prompts/BEFORE_AFTER_COMPARISON.md",
+        "size": 14203
+      },
+      "timestamp": "2025-10-26T13:24:56.974408"
+    },
+    {
+      "name": "Implementation: swarmcare_crew_with_guardrails.py",
+      "category": "File Structure",
+      "passed": true,
+      "message": "Size: 15,435 bytes",
+      "details": {
+        "path": "/home/user01/claude-test/SwarmCare/swarmcare_crew_with_guardrails.py",
+        "size": 15435
+      },
+      "timestamp": "2025-10-26T13:24:56.974441"
+    },
+    {
+      "name": "Implementation: requirements.txt",
+      "category": "File Structure",
+      "passed": true,
+      "message": "Size: 555 bytes",
+      "details": {
+        "path": "/home/user01/claude-test/SwarmCare/requirements.txt",
+        "size": 555
+      },
+      "timestamp": "2025-10-26T13:24:56.974480"
+    },
+    {
+      "name": "Implementation: .env.template",
+      "category": "File Structure",
+      "passed": true,
+      "message": "Size: 1,094 bytes",
+      "details": {
+        "path": "/home/user01/claude-test/SwarmCare/.env.template",
+        "size": 1094
+      },
+      "timestamp": "2025-10-26T13:24:56.974517"
+    },
+    {
+      "name": "Implementation: setup_guardrails.sh",
+      "category": "File Structure",
+      "passed": true,
+      "message": "Size: 4,773 bytes",
+      "details": {
+        "path": "/home/user01/claude-test/SwarmCare/setup_guardrails.sh",
+        "size": 4773
+      },
+      "timestamp": "2025-10-26T13:24:56.974546"
+    },
+    {
+      "name": "Testing: tests/test_guardrails.py",
+      "category": "File Structure",
+      "passed": true,
+      "message": "Size: 15,080 bytes",
+      "details": {
+        "path": "/home/user01/claude-test/SwarmCare/tests/test_guardrails.py",
+        "size": 15080
+      },
+      "timestamp": "2025-10-26T13:24:56.974580"
+    },
+    {
+      "name": "Documentation: GUARDRAILS_README.md",
+      "category": "File Structure",
+      "passed": true,
+      "message": "Size: 14,696 bytes",
+      "details": {
+        "path": "/home/user01/claude-test/SwarmCare/GUARDRAILS_README.md",
+        "size": 14696
+      },
+      "timestamp": "2025-10-26T13:24:56.974612"
+    },
+    {
+      "name": "Documentation: GUARDRAILS_IMPLEMENTATION_GUIDE.md",
+      "category": "File Structure",
+      "passed": true,
+      "message": "Size: 18,407 bytes",
+      "details": {
+        "path": "/home/user01/claude-test/SwarmCare/GUARDRAILS_IMPLEMENTATION_GUIDE.md",
+        "size": 18407
+      },
+      "timestamp": "2025-10-26T13:24:56.974641"
+    },
+    {
+      "name": "Documentation: IMPLEMENTATION_COMPLETE.md",
+      "category": "File Structure",
+      "passed": true,
+      "message": "Size: 13,402 bytes",
+      "details": {
+        "path": "/home/user01/claude-test/SwarmCare/IMPLEMENTATION_COMPLETE.md",
+        "size": 13402
+      },
+      "timestamp": "2025-10-26T13:24:56.974677"
+    },
+    {
+      "name": "Layer 1: Prompt Shields (Jailbreak Prevention)",
+      "category": "Guardrails",
+      "passed": true,
+      "message": "\u2713 PromptShieldsValidator implemented with Azure AI Prompt Shields API",
+      "details": {
+        "has_class": true,
+        "has_check_method": true,
+        "has_jailbreak": true,
+        "has_shield_endpoint": true
+      },
+      "timestamp": "2025-10-26T13:24:56.974830"
+    },
+    {
+      "name": "Layer 2: Input Content Filtering (Azure AI)",
+      "category": "Guardrails",
+      "passed": true,
+      "message": "\u2713 Found Azure Content Safety with 4/4 categories",
+      "details": {
+        "has_class": true,
+        "categories": [
+          "Hate",
+          "Sexual",
+          "Violence",
+          "SelfHarm"
+        ]
+      },
+      "timestamp": "2025-10-26T13:24:56.974929"
+    },
+    {
+      "name": "Layer 3: PHI Detection (18 HIPAA Identifiers)",
+      "category": "Guardrails",
+      "passed": true,
+      "message": "\u2713 PHI Detection with email, phone, SSN, MRN patterns",
+      "details": {
+        "has_detector": true,
+        "has_detect_method": true,
+        "has_patterns": true,
+        "has_ssn": true
+      },
+      "timestamp": "2025-10-26T13:24:56.975040"
+    },
+    {
+      "name": "Layer 4: Medical Terminology Validation",
+      "category": "Guardrails",
+      "passed": true,
+      "message": "\u2713 Medical terminology with SNOMED/ICD/LOINC support",
+      "details": {
+        "has_validator": true,
+        "has_validate_method": true,
+        "has_snomed": true,
+        "has_icd": true,
+        "has_loinc": true
+      },
+      "timestamp": "2025-10-26T13:24:56.975127"
+    },
+    {
+      "name": "Layer 5: Output Content Filtering",
+      "category": "Guardrails",
+      "passed": true,
+      "message": "\u2713 Output content filtering implemented",
+      "details": {
+        "has_output_validation": true,
+        "has_content_safety_output": true
+      },
+      "timestamp": "2025-10-26T13:24:56.975246"
+    },
+    {
+      "name": "Layer 6: Groundedness Detection (Hallucination)",
+      "category": "Guardrails",
+      "passed": true,
+      "message": "\u2713 Groundedness detection with Azure AI RAG validation",
+      "details": {
+        "has_class": true,
+        "has_method": true,
+        "has_ungrounded_check": true,
+        "has_grounding_sources": true
+      },
+      "timestamp": "2025-10-26T13:24:56.975339"
+    },
+    {
+      "name": "Layer 7: HIPAA Compliance & Medical Facts",
+      "category": "Guardrails",
+      "passed": true,
+      "message": "\u2713 HIPAA Compliance validation with medical fact checking",
+      "details": {
+        "has_hipaa_validator": true,
+        "has_validate_method": true,
+        "has_hipaa_keyword": true,
+        "has_fact_checker": true
+      },
+      "timestamp": "2025-10-26T13:24:56.975416"
+    },
+    {
+      "name": "AI Prompts Library exists (>50KB)",
+      "category": "AI Framework",
+      "passed": true,
+      "message": "\u2713 Library has 213.1KB, 7,811 lines",
+      "details": {
+        "size_bytes": 218234,
+        "size_kb": 213.119140625,
+        "lines": 7811
+      },
+      "timestamp": "2025-10-26T13:24:56.977120"
+    },
+    {
+      "name": "Before/After comparison documented",
+      "category": "AI Framework",
+      "passed": true,
+      "message": "\u2713 Before/After comparison with metrics and ROI",
+      "details": {
+        "has_before": true,
+        "has_after": true,
+        "has_metrics": true,
+        "has_roi": true
+      },
+      "timestamp": "2025-10-26T13:24:56.979295"
+    },
+    {
+      "name": "Implementation guide exists",
+      "category": "AI Framework",
+      "passed": true,
+      "message": "\u2713 Implementation guide exists (19.1KB)",
+      "details": {
+        "exists": true,
+        "size_kb": 19.08984375
+      },
+      "timestamp": "2025-10-26T13:24:56.979553"
+    },
+    {
+      "name": "48 AI Prompts documented (Epic 1-48)",
+      "category": "AI Framework",
+      "passed": true,
+      "message": "Found 48 prompts, 0 epics (target: 48)",
+      "details": {
+        "prompt_count": 48,
+        "epic_count": 0,
+        "file_size_kb": 213.119140625,
+        "sample_prompts": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "timestamp": "2025-10-26T13:24:56.989452"
+    },
+    {
+      "name": "Python files have valid syntax",
+      "category": "Code Quality",
+      "passed": true,
+      "message": "\u2713 All 21 Python files have valid syntax",
+      "details": {
+        "total_files": 21,
+        "errors": []
+      },
+      "timestamp": "2025-10-26T13:24:57.073980"
+    },
+    {
+      "name": "No security issues in production code",
+      "category": "Code Quality",
+      "passed": true,
+      "message": "\u2713 No security issues in production code",
+      "details": {
+        "issues": []
+      },
+      "timestamp": "2025-10-26T13:24:57.088425"
+    },
+    {
+      "name": "Proper imports in main files",
+      "category": "Code Quality",
+      "passed": true,
+      "message": "\u2713 All 3/3 required imports present",
+      "details": {
+        "found": 3,
+        "required": 3,
+        "imports": [
+          "from guardrails.crewai_guardrails import",
+          "from guardrails.multi_layer_system import",
+          "from guardrails.monitoring import"
+        ]
+      },
+      "timestamp": "2025-10-26T13:24:57.088768"
+    },
+    {
+      "name": "Required dependencies listed",
+      "category": "Dependencies",
+      "passed": true,
+      "message": "\u2713 Found 5/5 required dependencies",
+      "details": {
+        "found": [
+          "crewai",
+          "azure-ai-contentsafety",
+          "python-dotenv",
+          "tenacity",
+          "pytest"
+        ],
+        "required": [
+          "crewai",
+          "azure-ai-contentsafety",
+          "python-dotenv",
+          "tenacity",
+          "pytest"
+        ]
+      },
+      "timestamp": "2025-10-26T13:24:57.088934"
+    },
+    {
+      "name": "Environment variables documented",
+      "category": "Configuration",
+      "passed": true,
+      "message": "\u2713 Found 4/4 required variables in template",
+      "details": {
+        "found": [
+          "AZURE_OPENAI_API_KEY",
+          "AZURE_OPENAI_ENDPOINT",
+          "CONTENT_SAFETY_KEY",
+          "CONTENT_SAFETY_ENDPOINT"
+        ],
+        "required": [
+          "AZURE_OPENAI_API_KEY",
+          "AZURE_OPENAI_ENDPOINT",
+          "CONTENT_SAFETY_KEY",
+          "CONTENT_SAFETY_ENDPOINT"
+        ]
+      },
+      "timestamp": "2025-10-26T13:24:57.089055"
+    },
+    {
+      "name": "Documentation: GUARDRAILS_README.md",
+      "category": "Documentation",
+      "passed": true,
+      "message": "\u2713 Size: 14,696 bytes (min: 3,000)",
+      "details": {
+        "size": 14696,
+        "min_size": 3000
+      },
+      "timestamp": "2025-10-26T13:24:57.089144"
+    },
+    {
+      "name": "Documentation: GUARDRAILS_IMPLEMENTATION_GUIDE.md",
+      "category": "Documentation",
+      "passed": true,
+      "message": "\u2713 Size: 18,407 bytes (min: 5,000)",
+      "details": {
+        "size": 18407,
+        "min_size": 5000
+      },
+      "timestamp": "2025-10-26T13:24:57.089212"
+    },
+    {
+      "name": "Documentation: IMPLEMENTATION_COMPLETE.md",
+      "category": "Documentation",
+      "passed": true,
+      "message": "\u2713 Size: 13,402 bytes (min: 2,000)",
+      "details": {
+        "size": 13402,
+        "min_size": 2000
+      },
+      "timestamp": "2025-10-26T13:24:57.089266"
+    },
+    {
+      "name": "Documentation: AI_Accelerate_Prompts/README.md",
+      "category": "Documentation",
+      "passed": true,
+      "message": "\u2713 Size: 18,003 bytes (min: 2,000)",
+      "details": {
+        "size": 18003,
+        "min_size": 2000
+      },
+      "timestamp": "2025-10-26T13:24:57.089327"
+    }
+  ]
+}

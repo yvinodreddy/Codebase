@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>RMMS Mobile API Tester</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .header h1 {
+            color: #667eea;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .status.online {
+            background: #10b981;
+            color: white;
+        }
+
+        .status.offline {
+            background: #ef4444;
+            color: white;
+        }
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .card h2 {
+            font-size: 18px;
+            color: #667eea;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 10px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:active {
+            transform: scale(0.95);
+        }
+
+        .btn-success {
+            background: #10b981;
+            color: white;
+        }
+
+        .btn-danger {
+            background: #ef4444;
+            color: white;
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 14px;
+            margin-bottom: 10px;
+            font-family: inherit;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .result {
+            background: #f3f4f6;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 10px;
+            font-size: 12px;
+            font-family: 'Courier New', monospace;
+            max-height: 300px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+
+        .result.success {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .result.error {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        .badge.get {
+            background: #3b82f6;
+            color: white;
+        }
+
+        .badge.post {
+            background: #10b981;
+            color: white;
+        }
+
+        .badge.put {
+            background: #f59e0b;
+            color: white;
+        }
+
+        .token-display {
+            background: #f3f4f6;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 11px;
+            word-break: break-all;
+            margin: 10px 0;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            overflow-x: auto;
+        }
+
+        .tab {
+            padding: 10px 15px;
+            background: #f3f4f6;
+            border-radius: 8px;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.3s;
+            font-size: 13px;
+        }
+
+        .tab.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f4f6;
+            border-top-color: #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .test-result-summary {
+            display: flex;
+            justify-content: space-around;
+            margin: 15px 0;
+        }
+
+        .test-stat {
+            text-align: center;
+        }
+
+        .test-stat-number {
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .test-stat-label {
+            font-size: 12px;
+            color: #6b7280;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📱 RMMS Mobile API Tester</h1>
+            <p style="color: #6b7280; font-size: 14px; margin-top: 5px;">Test mobile endpoints from your device</p>
+            <div style="margin-top: 15px;">
+                <span class="status offline" id="serverStatus">Checking...</span>
+                <span style="font-size: 12px; color: #6b7280; margin-left: 10px;" id="serverUrl"></span>
+            </div>
+        </div>
+
+        <div class="tabs">
+            <div class="tab active" onclick="switchTab('auth')">🔐 Auth</div>
+            <div class="tab" onclick="switchTab('config')">⚙️ Config</div>
+            <div class="tab" onclick="switchTab('device')">📱 Device</div>
+            <div class="tab" onclick="switchTab('dashboard')">📊 Dashboard</div>
+            <div class="tab" onclick="switchTab('analytics')">📈 Analytics</div>
+        </div>
+
+        <!-- Auth Tab -->
+        <div class="tab-content active" id="auth-tab">
+            <div class="card">
+                <h2>Authentication</h2>
+                <input type="text" id="username" placeholder="Username" value="admin">
+                <input type="password" id="password" placeholder="Password" value="Admin@123">
+                <button class="btn btn-primary" onclick="login()">Login & Get JWT Token</button>
+                <div id="tokenDisplay"></div>
+                <div id="authResult"></div>
+            </div>
+        </div>
+
+        <!-- Config Tab -->
+        <div class="tab-content" id="config-tab">
+            <div class="card">
+                <h2>
+                    Mobile Configuration
+                    <span class="badge get">GET</span>
+                </h2>
+                <select id="platform" style="width: 100%; padding: 12px; border-radius: 8px; margin-bottom: 10px;">
+                    <option value="Android">Android</option>
+                    <option value="iOS">iOS</option>
+                </select>
+                <input type="text" id="appVersion" placeholder="App Version" value="1.0.0">
+                <button class="btn btn-primary" onclick="getMobileConfig()">Get Configuration</button>
+                <div id="configResult"></div>
+            </div>
+
+            <div class="card">
+                <h2>
+                    Version Check
+                    <span class="badge get">GET</span>
+                </h2>
+                <button class="btn btn-primary" onclick="checkVersion()">Check Version Compatibility</button>
+                <div id="versionResult"></div>
+            </div>
+        </div>
+
+        <!-- Device Tab -->
+        <div class="tab-content" id="device-tab">
+            <div class="card">
+                <h2>
+                    Register Device
+                    <span class="badge post">POST</span>
+                </h2>
+                <input type="text" id="deviceId" placeholder="Device ID" value="">
+                <input type="text" id="deviceModel" placeholder="Device Model" value="">
+                <button class="btn btn-primary" onclick="registerDevice()">Register This Device</button>
+                <div id="deviceResult"></div>
+            </div>
+
+            <div class="card">
+                <h2>
+                    My Devices
+                    <span class="badge get">GET</span>
+                </h2>
+                <button class="btn btn-primary" onclick="getMyDevices()">Get My Registered Devices</button>
+                <div id="devicesResult"></div>
+            </div>
+        </div>
+
+        <!-- Dashboard Tab -->
+        <div class="tab-content" id="dashboard-tab">
+            <div class="card">
+                <h2>
+                    Mobile Dashboard
+                    <span class="badge get">GET</span>
+                </h2>
+                <button class="btn btn-primary" onclick="getMobileDashboard()">Load Dashboard Data</button>
+                <div id="dashboardResult"></div>
+            </div>
+        </div>
+
+        <!-- Analytics Tab -->
+        <div class="tab-content" id="analytics-tab">
+            <div class="card">
+                <h2>
+                    Track Event
+                    <span class="badge post">POST</span>
+                </h2>
+                <select id="eventCategory" style="width: 100%; padding: 12px; border-radius: 8px; margin-bottom: 10px;">
+                    <option value="navigation">Navigation</option>
+                    <option value="action">Action</option>
+                    <option value="error">Error</option>
+                </select>
+                <input type="text" id="eventAction" placeholder="Action (e.g., screen_view)" value="screen_view">
+                <input type="text" id="eventLabel" placeholder="Label (e.g., dashboard)" value="test_screen">
+                <button class="btn btn-primary" onclick="trackEvent()">Track Event</button>
+                <div id="analyticsResult"></div>
+            </div>
+
+            <div class="card">
+                <h2>
+                    Analytics Summary
+                    <span class="badge get">GET</span>
+                </h2>
+                <button class="btn btn-primary" onclick="getAnalyticsSummary()">Get Analytics Summary</button>
+                <div id="analyticsSummaryResult"></div>
+            </div>
+        </div>
+
+        <!-- Test All Button -->
+        <div class="card">
+            <h2>🧪 Run All Tests</h2>
+            <button class="btn btn-success" onclick="runAllTests()">Run Complete Test Suite</button>
+            <div id="allTestsResult"></div>
+        </div>
+    </div>
+
+    <script>
+        // Configuration
+        const API_BASE = window.location.origin + '/api/v1';
+        let jwtToken = localStorage.getItem('jwtToken') || '';
+        let testResults = { passed: 0, failed: 0, total: 0 };
+
+        // Initialize
+        document.getElementById('serverUrl').textContent = API_BASE;
+        checkServerStatus();
+        generateDeviceId();
+
+        if (jwtToken) {
+            displayToken();
+        }
+
+        function switchTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
+
+            // Show selected tab
+            document.getElementById(tabName + '-tab').classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        async function checkServerStatus() {
+            try {
+                const response = await fetch(`${API_BASE}/../../health`);
+                if (response.ok) {
+                    document.getElementById('serverStatus').textContent = '✓ Online';
+                    document.getElementById('serverStatus').className = 'status online';
+                } else {
+                    throw new Error('Server not responding');
+                }
+            } catch (error) {
+                document.getElementById('serverStatus').textContent = '✗ Offline';
+                document.getElementById('serverStatus').className = 'status offline';
+            }
+        }
+
+        function generateDeviceId() {
+            const deviceId = 'mobile-test-' + Math.random().toString(36).substr(2, 9);
+            document.getElementById('deviceId').value = deviceId;
+
+            // Detect device
+            const userAgent = navigator.userAgent;
+            let deviceModel = 'Unknown Device';
+            if (/android/i.test(userAgent)) {
+                deviceModel = 'Android Device';
+            } else if (/iPad|iPhone|iPod/.test(userAgent)) {
+                deviceModel = 'iOS Device';
+            } else {
+                deviceModel = 'Web Browser';
+            }
+            document.getElementById('deviceModel').value = deviceModel;
+        }
+
+        async function login() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const resultDiv = document.getElementById('authResult');
+
+            resultDiv.innerHTML = '<div class="loading"></div> Logging in...';
+
+            try {
+                const response = await fetch(`${API_BASE}/Auth/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password })
+                });
+
+                const data = await response.json();
+
+                if (response.ok && data.data && data.data.token) {
+                    jwtToken = data.data.token;
+                    localStorage.setItem('jwtToken', jwtToken);
+                    displayToken();
+                    resultDiv.innerHTML = `<div class="result success">✓ Login successful!<br><br>Token saved and ready to use.</div>`;
+                } else {
+                    resultDiv.innerHTML = `<div class="result error">✗ Login failed:<br><br>${JSON.stringify(data, null, 2)}</div>`;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="result error">✗ Error: ${error.message}</div>`;
+            }
+        }
+
+        function displayToken() {
+            const tokenDisplay = document.getElementById('tokenDisplay');
+            tokenDisplay.innerHTML = `
+                <div class="token-display">
+                    <strong>JWT Token:</strong><br>
+                    ${jwtToken.substring(0, 50)}...
+                    <button class="btn btn-danger" style="margin-top: 10px;" onclick="clearToken()">Clear Token</button>
+                </div>
+            `;
+        }
+
+        function clearToken() {
+            jwtToken = '';
+            localStorage.removeItem('jwtToken');
+            document.getElementById('tokenDisplay').innerHTML = '';
+            document.getElementById('authResult').innerHTML = '<div class="result">Token cleared. Please login again.</div>';
+        }
+
+        async function getMobileConfig() {
+            const platform = document.getElementById('platform').value;
+            const appVersion = document.getElementById('appVersion').value;
+            const resultDiv = document.getElementById('configResult');
+
+            resultDiv.innerHTML = '<div class="loading"></div> Loading...';
+
+            try {
+                const response = await fetch(`${API_BASE}/mobile/MobileConfig?platform=${platform}&appVersion=${appVersion}`);
+                const data = await response.json();
+
+                if (response.ok) {
+                    resultDiv.innerHTML = `<div class="result success">✓ Success (${response.status})<br><br>${JSON.stringify(data, null, 2)}</div>`;
+                } else {
+                    resultDiv.innerHTML = `<div class="result error">✗ Error (${response.status})<br><br>${JSON.stringify(data, null, 2)}</div>`;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="result error">✗ Error: ${error.message}</div>`;
+            }
+        }
+
+        async function checkVersion() {
+            const platform = document.getElementById('platform').value;
+            const appVersion = document.getElementById('appVersion').value;
+            const resultDiv = document.getElementById('versionResult');
+
+            resultDiv.innerHTML = '<div class="loading"></div> Checking...';
+
+            try {
+                const response = await fetch(`${API_BASE}/mobile/MobileConfig/version-check?platform=${platform}&appVersion=${appVersion}`);
+                const data = await response.json();
+
+                if (response.ok) {
+                    resultDiv.innerHTML = `<div class="result success">✓ Success (${response.status})<br><br>${JSON.stringify(data, null, 2)}</div>`;
+                } else {
+                    resultDiv.innerHTML = `<div class="result error">✗ Error (${response.status})<br><br>${JSON.stringify(data, null, 2)}</div>`;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="result error">✗ Error: ${error.message}</div>`;
+            }
+        }
+
+        async function registerDevice() {
+            if (!jwtToken) {
+                alert('Please login first!');
+                return;
+            }
+
+            const deviceId = document.getElementById('deviceId').value;
+            const deviceModel = document.getElementById('deviceModel').value;
+            const platform = document.getElementById('platform').value;
+            const resultDiv = document.getElementById('deviceResult');
+
+            resultDiv.innerHTML = '<div class="loading"></div> Registering...';
+
+            const deviceData = {
+                deviceId: deviceId,
+                platform: platform,
+                platformVersion: navigator.userAgent,
+                appVersion: document.getElementById('appVersion').value,
+                pushToken: 'test-push-token-' + Date.now(),
+                deviceModel: deviceModel,
+                deviceName: 'Test Device'
+            };
+
+            try {
+                const response = await fetch(`${API_BASE}/mobile/MobileDevice/register`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${jwtToken}`
+                    },
+                    body: JSON.stringify(deviceData)
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    resultDiv.innerHTML = `<div class="result success">✓ Device registered! (${response.status})<br><br>${JSON.stringify(data, null, 2)}</div>`;
+                } else {
+                    resultDiv.innerHTML = `<div class="result error">✗ Error (${response.status})<br><br>${JSON.stringify(data, null, 2)}</div>`;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="result error">✗ Error: ${error.message}</div>`;
+            }
+        }
+
+        async function getMyDevices() {
+            if (!jwtToken) {
+                alert('Please login first!');
+                return;
+            }
+
+            const resultDiv = document.getElementById('devicesResult');
+            resultDiv.innerHTML = '<div class="loading"></div> Loading...';
+
+            try {
+                const response = await fetch(`${API_BASE}/mobile/MobileDevice/my-devices`, {
+                    headers: {
+                        'Authorization': `Bearer ${jwtToken}`
+                    }
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    resultDiv.innerHTML = `<div class="result success">✓ Success (${response.status})<br><br>${JSON.stringify(data, null, 2)}</div>`;
+                } else {
+                    resultDiv.innerHTML = `<div class="result error">✗ Error (${response.status})<br><br>${JSON.stringify(data, null, 2)}</div>`;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="result error">✗ Error: ${error.message}</div>`;
+            }
+        }
+
+        async function getMobileDashboard() {
+            if (!jwtToken) {
+                alert('Please login first!');
+                return;
+            }
+
+            const resultDiv = document.getElementById('dashboardResult');
+            resultDiv.innerHTML = '<div class="loading"></div> Loading dashboard...';
+
+            try {
+                const response = await fetch(`${API_BASE}/mobile/MobileDashboard`, {
+                    headers: {
+                        'Authorization': `Bearer ${jwtToken}`
+                    }
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    resultDiv.innerHTML = `<div class="result success">✓ Dashboard loaded! (${response.status})<br><br>${JSON.stringify(data, null, 2)}</div>`;
+                } else {
+                    resultDiv.innerHTML = `<div class="result error">✗ Error (${response.status})<br><br>${JSON.stringify(data, null, 2)}</div>`;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="result error">✗ Error: ${error.message}</div>`;
+            }
+        }
+
+        async function trackEvent() {
+            if (!jwtToken) {
+                alert('Please login first!');
+                return;
+            }
+
+            const category = document.getElementById('eventCategory').value;
+            const action = document.getElementById('eventAction').value;
+            const label = document.getElementById('eventLabel').value;
+            const resultDiv = document.getElementById('analyticsResult');
+
+            resultDiv.innerHTML = '<div class="loading"></div> Tracking event...';
+
+            const eventData = {
+                category: category,
+                action: action,
+                label: label,
+                screen: 'Mobile Test UI',
+                properties: {
+                    timestamp: new Date().toISOString(),
+                    userAgent: navigator.userAgent
+                }
+            };
+
+            try {
+                const response = await fetch(`${API_BASE}/mobile/MobileAnalytics/track?deviceId=1`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${jwtToken}`
+                    },
+                    body: JSON.stringify(eventData)
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    resultDiv.innerHTML = `<div class="result success">✓ Event tracked! (${response.status})<br><br>${JSON.stringify(data, null, 2)}</div>`;
+                } else {
+                    resultDiv.innerHTML = `<div class="result error">✗ Error (${response.status})<br><br>${JSON.stringify(data, null, 2)}</div>`;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="result error">✗ Error: ${error.message}</div>`;
+            }
+        }
+
+        async function getAnalyticsSummary() {
+            if (!jwtToken) {
+                alert('Please login first!');
+                return;
+            }
+
+            const resultDiv = document.getElementById('analyticsSummaryResult');
+            resultDiv.innerHTML = '<div class="loading"></div> Loading...';
+
+            try {
+                const response = await fetch(`${API_BASE}/mobile/MobileAnalytics/summary?days=7`, {
+                    headers: {
+                        'Authorization': `Bearer ${jwtToken}`
+                    }
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    resultDiv.innerHTML = `<div class="result success">✓ Success (${response.status})<br><br>${JSON.stringify(data, null, 2)}</div>`;
+                } else {
+                    resultDiv.innerHTML = `<div class="result error">✗ Error (${response.status})<br><br>${JSON.stringify(data, null, 2)}</div>`;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="result error">✗ Error: ${error.message}</div>`;
+            }
+        }
+
+        async function runAllTests() {
+            const resultDiv = document.getElementById('allTestsResult');
+            testResults = { passed: 0, failed: 0, total: 0 };
+
+            resultDiv.innerHTML = '<div class="loading"></div> Running all tests...';
+
+            // Run tests
+            await testEndpoint('GET Mobile Config', () => getMobileConfig());
+            await sleep(500);
+            await testEndpoint('Check Version', () => checkVersion());
+
+            if (jwtToken) {
+                await sleep(500);
+                await testEndpoint('Register Device', () => registerDevice());
+                await sleep(500);
+                await testEndpoint('Get My Devices', () => getMyDevices());
+                await sleep(500);
+                await testEndpoint('Get Dashboard', () => getMobileDashboard());
+                await sleep(500);
+                await testEndpoint('Track Event', () => trackEvent());
+            }
+
+            // Display results
+            const passRate = ((testResults.passed / testResults.total) * 100).toFixed(0);
+            resultDiv.innerHTML = `
+                <div class="result ${testResults.failed === 0 ? 'success' : 'error'}">
+                    <strong>Test Results:</strong><br><br>
+                    Total: ${testResults.total}<br>
+                    ✓ Passed: ${testResults.passed}<br>
+                    ✗ Failed: ${testResults.failed}<br>
+                    Success Rate: ${passRate}%
+                </div>
+            `;
+        }
+
+        async function testEndpoint(name, testFn) {
+            testResults.total++;
+            try {
+                await testFn();
+                testResults.passed++;
+                console.log(`✓ ${name} passed`);
+            } catch (error) {
+                testResults.failed++;
+                console.log(`✗ ${name} failed:`, error);
+            }
+        }
+
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        // Auto-refresh server status every 30 seconds
+        setInterval(checkServerStatus, 30000);
+    </script>
+</body>
+</html>

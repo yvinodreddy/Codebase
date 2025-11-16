@@ -1,0 +1,75 @@
+
+================================================================================
+[VERBOSE] STAGE 1: Prompt Preprocessing & Analysis
+================================================================================
+[VERBOSE]   → Processing step 1/5 in Prompt Preprocessing & Analysis
+[VERBOSE]   → Processing step 2/5 in Prompt Preprocessing & Analysis
+[VERBOSE]   → Processing step 3/5 in Prompt Preprocessing & Analysis
+[VERBOSE]   → Processing step 4/5 in Prompt Preprocessing & Analysis
+[VERBOSE]   → Processing step 5/5 in Prompt Preprocessing & Analysis
+[VERBOSE]   ✓ STAGE 1 completed in 2.529s
+
+================================================================================
+[VERBOSE] STAGE 2: Guardrails - Input Validation
+================================================================================
+[VERBOSE]   → Processing step 1/5 in Guardrails - Input Validation
+[VERBOSE]   → Processing step 2/5 in Guardrails - Input Validation
+[VERBOSE]   → Processing step 3/5 in Guardrails - Input Validation
+[VERBOSE]   → Processing step 4/5 in Guardrails - Input Validation
+[VERBOSE]   → Processing step 5/5 in Guardrails - Input Validation
+[VERBOSE]   ✓ STAGE 2 completed in 2.535s
+
+================================================================================
+[VERBOSE] STAGE 3: Context Management
+================================================================================
+[VERBOSE]   → Processing step 1/5 in Context Management
+[VERBOSE]   → Processing step 2/5 in Context Management
+[VERBOSE]   → Processing step 3/5 in Context Management
+[VERBOSE]   → Processing step 4/5 in Context Management
+[VERBOSE]   → Processing step 5/5 in Context Management
+[VERBOSE]   ✓ STAGE 3 completed in 2.538s
+
+================================================================================
+[VERBOSE] STAGE 4: Agent Orchestration
+================================================================================
+[VERBOSE]   → Processing step 1/5 in Agent Orchestration
+[VERBOSE]   → Processing step 2/5 in Agent Orchestration
+[VERBOSE]   → Processing step 3/5 in Agent Orchestration
+[VERBOSE]   → Processing step 4/5 in Agent Orchestration
+[VERBOSE]   → Processing step 5/5 in Agent Orchestration
+[VERBOSE]   ✓ STAGE 4 completed in 2.536s
+
+================================================================================
+[VERBOSE] STAGE 5: Execution
+================================================================================
+[VERBOSE]   → Processing step 1/5 in Execution
+[VERBOSE]   → Processing step 2/5 in Execution
+[VERBOSE]   → Processing step 3/5 in Execution
+[VERBOSE]   → Processing step 4/5 in Execution
+[VERBOSE]   → Processing step 5/5 in Execution
+[VERBOSE]   ✓ STAGE 5 completed in 2.543s
+
+================================================================================
+[VERBOSE] STAGE 6: Output Validation
+================================================================================
+[VERBOSE]   → Processing step 1/5 in Output Validation
+[VERBOSE]   → Processing step 2/5 in Output Validation
+[VERBOSE]   → Processing step 3/5 in Output Validation
+[VERBOSE]   → Processing step 4/5 in Output Validation
+[VERBOSE]   → Processing step 5/5 in Output Validation
+[VERBOSE]   ✓ STAGE 6 completed in 2.535s
+[VERBOSE]   ✓ Test completed successfully!
+
+================================================================================
+[VERBOSE] STAGE 1: Prompt Preprocessing & Analysis
+================================================================================
+[VERBOSE]   → Processing step 1/5 in Prompt Preprocessing & Analysis
+[VERBOSE]   → Processing step 2/5 in Prompt Preprocessing & Analysis
+[VERBOSE]   → Processing step 3/5 in Prompt Preprocessing & Analysis
+[VERBOSE]   → Processing step 4/5 in Prompt Preprocessing & Analysis
+[VERBOSE]   → Processing step 5/5 in Prompt Preprocessing & Analysis
+[VERBOSE]   ✓ STAGE 1 completed in 2.539s
+
+================================================================================
+[VERBOSE] STAGE 2: Guardrails - Input Validation
+================================================================================

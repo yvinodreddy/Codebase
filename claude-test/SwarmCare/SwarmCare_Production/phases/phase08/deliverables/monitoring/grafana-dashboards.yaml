@@ -1,0 +1,207 @@
+# Grafana Dashboards ConfigMap for SwarmCare
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-dashboards
+  namespace: monitoring
+  labels:
+    grafana_dashboard: "1"
+data:
+  swarmcare-overview.json: |
+    {
+      "dashboard": {
+        "title": "SwarmCare - Production Overview",
+        "tags": ["swarmcare", "production"],
+        "timezone": "UTC",
+        "panels": [
+          {
+            "id": 1,
+            "title": "Request Rate",
+            "type": "graph",
+            "targets": [
+              {
+                "expr": "rate(http_requests_total{namespace=\"swarmcare\"}[5m])",
+                "legendFormat": "{{ method }} {{ path }}"
+              }
+            ]
+          },
+          {
+            "id": 2,
+            "title": "Error Rate",
+            "type": "graph",
+            "targets": [
+              {
+                "expr": "rate(http_requests_total{namespace=\"swarmcare\",status=~\"5..\"}[5m])",
+                "legendFormat": "{{ status }}"
+              }
+            ]
+          },
+          {
+            "id": 3,
+            "title": "Response Time (p95)",
+            "type": "graph",
+            "targets": [
+              {
+                "expr": "histogram_quantile(0.95, rate(http_request_duration_seconds_bucket{namespace=\"swarmcare\"}[5m]))",
+                "legendFormat": "{{ method }} {{ path }}"
+              }
+            ]
+          },
+          {
+            "id": 4,
+            "title": "CPU Usage",
+            "type": "graph",
+            "targets": [
+              {
+                "expr": "rate(container_cpu_usage_seconds_total{namespace=\"swarmcare\"}[5m])",
+                "legendFormat": "{{ pod }}"
+              }
+            ]
+          },
+          {
+            "id": 5,
+            "title": "Memory Usage",
+            "type": "graph",
+            "targets": [
+              {
+                "expr": "container_memory_usage_bytes{namespace=\"swarmcare\"}",
+                "legendFormat": "{{ pod }}"
+              }
+            ]
+          },
+          {
+            "id": 6,
+            "title": "Pod Count",
+            "type": "stat",
+            "targets": [
+              {
+                "expr": "count(kube_pod_info{namespace=\"swarmcare\"})"
+              }
+            ]
+          },
+          {
+            "id": 7,
+            "title": "Database Connections",
+            "type": "graph",
+            "targets": [
+              {
+                "expr": "postgresql_connections{namespace=\"swarmcare\"}",
+                "legendFormat": "Active Connections"
+              }
+            ]
+          },
+          {
+            "id": 8,
+            "title": "Redis Operations",
+            "type": "graph",
+            "targets": [
+              {
+                "expr": "rate(redis_commands_total{namespace=\"swarmcare\"}[5m])",
+                "legendFormat": "{{ cmd }}"
+              }
+            ]
+          }
+        ]
+      }
+    }
+
+  swarmcare-performance.json: |
+    {
+      "dashboard": {
+        "title": "SwarmCare - Performance Metrics",
+        "tags": ["swarmcare", "performance"],
+        "panels": [
+          {
+            "id": 1,
+            "title": "API Latency Distribution",
+            "type": "heatmap",
+            "targets": [
+              {
+                "expr": "rate(http_request_duration_seconds_bucket{namespace=\"swarmcare\"}[5m])"
+              }
+            ]
+          },
+          {
+            "id": 2,
+            "title": "Throughput",
+            "type": "graph",
+            "targets": [
+              {
+                "expr": "sum(rate(http_requests_total{namespace=\"swarmcare\"}[5m]))"
+              }
+            ]
+          },
+          {
+            "id": 3,
+            "title": "TTS Generation Time",
+            "type": "graph",
+            "targets": [
+              {
+                "expr": "histogram_quantile(0.95, rate(tts_generation_duration_seconds_bucket[5m]))"
+              }
+            ]
+          },
+          {
+            "id": 4,
+            "title": "Audio Processing Time",
+            "type": "graph",
+            "targets": [
+              {
+                "expr": "histogram_quantile(0.95, rate(audio_processing_duration_seconds_bucket[5m]))"
+              }
+            ]
+          }
+        ]
+      }
+    }
+
+  swarmcare-health.json: |
+    {
+      "dashboard": {
+        "title": "SwarmCare - Health & Availability",
+        "tags": ["swarmcare", "health"],
+        "panels": [
+          {
+            "id": 1,
+            "title": "Service Uptime",
+            "type": "stat",
+            "targets": [
+              {
+                "expr": "avg(up{job=\"swarmcare\"})"
+              }
+            ]
+          },
+          {
+            "id": 2,
+            "title": "Pod Restarts",
+            "type": "graph",
+            "targets": [
+              {
+                "expr": "rate(kube_pod_container_status_restarts_total{namespace=\"swarmcare\"}[1h])",
+                "legendFormat": "{{ pod }}"
+              }
+            ]
+          },
+          {
+            "id": 3,
+            "title": "Health Check Success Rate",
+            "type": "gauge",
+            "targets": [
+              {
+                "expr": "rate(health_check_success_total[5m]) / rate(health_check_total[5m])"
+              }
+            ]
+          },
+          {
+            "id": 4,
+            "title": "Deployment Status",
+            "type": "table",
+            "targets": [
+              {
+                "expr": "kube_deployment_status_replicas{namespace=\"swarmcare\"}"
+              }
+            ]
+          }
+        ]
+      }
+    }

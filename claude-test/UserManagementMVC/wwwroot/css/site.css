@@ -1,0 +1,25 @@
+html {
+  font-size: 14px;
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  line-height: 60px;
+}
+
+.card {
+  border-radius: 10px;
+}
+
+.card-header {
+  border-radius: 10px 10px 0 0 !important;
+}

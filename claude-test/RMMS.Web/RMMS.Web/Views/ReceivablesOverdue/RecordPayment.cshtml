@@ -1,0 +1,75 @@
+@model RMMS.Models.ReceivableOverdue
+@{
+    ViewData["Title"] = "Record Payment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="card shadow">
+        <div class="card-header bg-success text-white">
+            <h3><i class="fas fa-money-bill"></i> Record Payment</h3>
+        </div>
+
+        <div class="card-body">
+            <div class="alert alert-info">
+                <h5><i class="fas fa-info-circle"></i> Receivable Summary</h5>
+                <div class="row">
+                    <div class="col-md-6">
+                        <strong>Customer:</strong> @Model.CustomerName<br />
+                        <strong>Invoice Number:</strong> @Model.InvoiceNumber<br />
+                        <strong>Invoice Date:</strong> @Model.InvoiceDate.ToString("dd-MMM-yyyy")<br />
+                        <strong>Due Date:</strong> @Model.DueDate.ToString("dd-MMM-yyyy")
+                    </div>
+                    <div class="col-md-6">
+                        <strong>Invoice Amount:</strong> ₹ @Model.InvoiceAmount.ToString("N2")<br />
+                        <strong>Already Received:</strong> ₹ @Model.AmountReceived.ToString("N2")<br />
+                        <strong class="text-danger fs-5">Balance Due:</strong> <span class="text-danger fs-5">₹ @Model.BalanceDue.ToString("N2")</span>
+                    </div>
+                </div>
+            </div>
+
+            <form asp-action="RecordPayment" method="post">
+                @Html.AntiForgeryToken()
+                <input type="hidden" asp-for="Id" />
+
+                <div class="row">
+                    <div class="col-md-6 offset-md-3">
+                        <div class="mb-3">
+                            <label for="receiptAmount" class="form-label">
+                                <i class="fas fa-rupee-sign"></i> Receipt Amount <span class="text-danger">*</span>
+                            </label>
+                            <div class="input-group input-group-lg">
+                                <span class="input-group-text">₹</span>
+                                <input type="number" class="form-control" id="receiptAmount" name="receiptAmount"
+                                       step="0.01" min="0.01" max="@Model.BalanceDue" required placeholder="Enter amount">
+                            </div>
+                            <small class="text-muted">Maximum: ₹ @Model.BalanceDue.ToString("N2")</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <button type="submit" class="btn btn-success btn-lg">
+                            <i class="fas fa-check"></i> Record Payment
+                        </button>
+                        <a asp-action="Index" class="btn btn-secondary btn-lg">
+                            <i class="fas fa-times"></i> Cancel
+                        </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.querySelector('form').addEventListener('submit', function(e) {
+            const amount = document.getElementById('receiptAmount').value;
+            if (!confirm(`Confirm recording payment of ₹${parseFloat(amount).toFixed(2)}?`)) {
+                e.preventDefault();
+            }
+        });
+    </script>
+}

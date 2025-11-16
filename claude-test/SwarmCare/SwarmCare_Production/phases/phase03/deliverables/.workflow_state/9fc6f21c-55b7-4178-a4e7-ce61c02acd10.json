@@ -1,0 +1,64 @@
+{
+  "execution_id": "9fc6f21c-55b7-4178-a4e7-ce61c02acd10",
+  "workflow_id": "persist_workflow",
+  "state": "COMPLETED",
+  "tasks": {
+    "persist": {
+      "task_id": "persist",
+      "name": "Persist Task",
+      "action": "simple_task",
+      "dependencies": [],
+      "max_retries": 3,
+      "timeout_seconds": 300,
+      "state": "COMPLETED",
+      "result": {
+        "persisted": true
+      },
+      "error": null,
+      "start_time": 1761651198.0844488,
+      "end_time": 1761651198.0846477,
+      "retry_count": 0
+    }
+  },
+  "context": {},
+  "start_time": 1761651198.0842943,
+  "end_time": 1761651198.0848098,
+  "error": null,
+  "audit_log": [
+    {
+      "timestamp": "2025-10-28T07:33:18.084309",
+      "execution_id": "9fc6f21c-55b7-4178-a4e7-ce61c02acd10",
+      "event": "WORKFLOW_STARTED",
+      "details": {
+        "workflow_id": "persist_workflow"
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:33:18.084620",
+      "execution_id": "9fc6f21c-55b7-4178-a4e7-ce61c02acd10",
+      "event": "TASK_STARTED",
+      "details": {
+        "task_id": "persist",
+        "task_name": "Persist Task"
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:33:18.084797",
+      "execution_id": "9fc6f21c-55b7-4178-a4e7-ce61c02acd10",
+      "event": "TASK_COMPLETED",
+      "details": {
+        "task_id": "persist",
+        "duration_seconds": 0.00019884109497070312,
+        "attempt": 1
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:33:18.084898",
+      "execution_id": "9fc6f21c-55b7-4178-a4e7-ce61c02acd10",
+      "event": "WORKFLOW_COMPLETED",
+      "details": {
+        "duration_seconds": 0.0005154609680175781
+      }
+    }
+  ]
+}

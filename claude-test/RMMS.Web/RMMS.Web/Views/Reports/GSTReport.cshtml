@@ -1,0 +1,187 @@
+﻿@{
+    ViewData["Title"] = "GST Report";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var sales = ViewBag.Sales as List<RMMS.Models.RiceSales> ?? new List<RMMS.Models.RiceSales>();
+}
+
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            <h3><i class="fas fa-file-invoice"></i> GST Report - @ViewBag.MonthName @ViewBag.Year</h3>
+            <p class="mb-0">Period: @ViewBag.ReportPeriod</p>
+        </div>
+
+        <div class="card-body">
+            <!-- GST Summary showing your tax obligations at a glance -->
+            <div class="row mb-4">
+                <div class="col-md-2">
+                    <div class="card border-primary">
+                        <div class="card-body">
+                            <h6 class="text-muted">Total Sales Value</h6>
+                            <h5>₹ @string.Format("{0:N2}", ViewBag.TotalSalesValue)</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="card border-info">
+                        <div class="card-body">
+                            <h6 class="text-muted">Taxable Value</h6>
+                            <h5>₹ @string.Format("{0:N2}", ViewBag.TotalTaxableValue)</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="card border-success">
+                        <div class="card-body">
+                            <h6 class="text-muted">CGST</h6>
+                            <h5>₹ @string.Format("{0:N2}", ViewBag.TotalCGST)</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="card border-success">
+                        <div class="card-body">
+                            <h6 class="text-muted">SGST</h6>
+                            <h5>₹ @string.Format("{0:N2}", ViewBag.TotalSGST)</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="card border-warning">
+                        <div class="card-body">
+                            <h6 class="text-muted">IGST</h6>
+                            <h5>₹ @string.Format("{0:N2}", ViewBag.TotalIGST)</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="card border-danger">
+                        <div class="card-body">
+                            <h6 class="text-muted">Total GST</h6>
+                            <h5 class="text-danger">₹ @string.Format("{0:N2}", ViewBag.TotalGST)</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Transaction Type Summary -->
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <div class="alert alert-info">
+                        <strong>Intrastate Transactions:</strong> @ViewBag.IntrastateCount
+                        <small class="d-block">Within state - attracts CGST + SGST</small>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="alert alert-warning">
+                        <strong>Interstate Transactions:</strong> @ViewBag.InterstateCount
+                        <small class="d-block">Outside state - attracts IGST</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Detailed GST Transaction Table for tax filing purposes -->
+            <div class="card mb-4">
+                <div class="card-header bg-light">
+                    <h5>GST Transaction Details</h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover table-sm">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Invoice No</th>
+                                    <th>Customer Name</th>
+                                    <th>GSTIN</th>
+                                    <th>State</th>
+                                    <th>Invoice Value</th>
+                                    <th>Taxable Value</th>
+                                    <th>CGST</th>
+                                    <th>SGST</th>
+                                    <th>IGST</th>
+                                    <th>Total Tax</th>
+                                    <th>Gross Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var sale in sales.OrderBy(s => s.SaleDate))
+                                {
+                                    <tr>
+                                        <td>@sale.SaleDate.ToString("dd-MMM")</td>
+                                        <td>@sale.InvoiceNumber</td>
+                                        <td>@sale.BuyerName</td>
+                                        <td>@(sale.BuyerGSTIN ?? "N/A")</td>
+                                        <td>@(sale.BuyerAddress ?? "Local")</td>
+                                        <td>@sale.TotalInvoiceValue.ToString("N2")</td>
+                                        <td>@sale.TaxableValue.ToString("N2")</td>
+                                        <td>@sale.CGSTAmount.ToString("N2")</td>
+                                        <td>@sale.SGSTAmount.ToString("N2")</td>
+                                        <td>@sale.IGSTAmount.ToString("N2")</td>
+                                        <td class="fw-bold">@sale.TotalTaxAmount.ToString("N2")</td>
+                                        <td class="fw-bold">@sale.GrossInvoiceAmount.ToString("N2")</td>
+                                    </tr>
+                                }
+                                @if (!sales.Any())
+                                {
+                                    <tr>
+                                        <td colspan="12" class="text-center">No GST transactions for this period</td>
+                                    </tr>
+                                }
+                                <!-- Summary row at the bottom for totals -->
+                                <tr class="table-info fw-bold">
+                                    <td colspan="5">TOTAL</td>
+                                    <td>@ViewBag.TotalSalesValue</td>
+                                    <td>@ViewBag.TotalTaxableValue</td>
+                                    <td>@ViewBag.TotalCGST</td>
+                                    <td>@ViewBag.TotalSGST</td>
+                                    <td>@ViewBag.TotalIGST</td>
+                                    <td>@ViewBag.TotalGST</td>
+                                    <td>@(ViewBag.TotalTaxableValue + ViewBag.TotalGST)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GST Filing Information helpful for compliance -->
+            <div class="alert alert-info">
+                <h5><i class="fas fa-info-circle"></i> GST Filing Information</h5>
+                <p>This report contains all the information required for GST filing. The data shown here should match your GSTR-1 return.</p>
+                <ul>
+                    <li>GSTR-1 Due Date: 11th of next month</li>
+                    <li>GSTR-3B Due Date: 20th of next month</li>
+                    <li>Current GST Rate on Rice: 5%</li>
+                    <li>HSN Code for Rice: 1006</li>
+                </ul>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="mt-4">
+                <a href="@Url.Action("Index", "Reports")" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Back
+                </a>
+                <button class="btn btn-primary" onclick="window.print()">
+                    <i class="fas fa-print"></i> Print Report
+                </button>
+                <a href="@Url.Action("ExportGSTR1Json", "Reports", new { month = ViewBag.Month, year = ViewBag.Year })" class="btn btn-info">
+                    <i class="fas fa-file-code"></i> Download GSTR-1 JSON
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function exportGSTR1() {
+            alert('GSTR-1 export format will be implemented as per GST portal requirements');
+        }
+
+        function downloadJSON() {
+            // This will eventually generate JSON format required for GST filing
+            alert('JSON generation for GST portal will be implemented');
+        }
+    </script>
+}

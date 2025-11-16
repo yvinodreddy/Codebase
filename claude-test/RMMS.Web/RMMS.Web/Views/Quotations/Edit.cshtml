@@ -1,0 +1,210 @@
+@model RMMS.Models.Sales.Quotation
+@{
+    ViewData["Title"] = "Edit Quotation";
+}
+
+<div class="container-fluid">
+    <h2><i class="fas fa-edit"></i> Edit Quotation</h2>
+    <hr />
+
+    @if (Model.Status != "Draft")
+    {
+        <div class="alert alert-warning">
+            <i class="fas fa-exclamation-triangle"></i> <strong>Warning:</strong> Only Draft quotations can be edited. This quotation has status: <strong>@Model.Status</strong>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info">
+            <i class="fas fa-info-circle"></i> <strong>Note:</strong> Quotation items are managed separately in the Details view.
+        </div>
+    }
+
+    <form asp-action="Edit" method="post">
+        <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="CreatedDate" />
+        <input type="hidden" asp-for="CreatedBy" />
+        <input type="hidden" asp-for="IsActive" />
+
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Quotation Information</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label asp-for="QuotationNumber" class="form-label"></label>
+                                <input asp-for="QuotationNumber" class="form-control" readonly />
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="QuotationDate" class="form-label"></label>
+                                <input asp-for="QuotationDate" class="form-control" type="date" required
+                                       disabled="@(Model.Status != "Draft")" />
+                                <span asp-validation-for="QuotationDate" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label asp-for="InquiryId" class="form-label">Inquiry (Optional)</label>
+                                <select asp-for="InquiryId" class="form-select"
+                                        disabled="@(Model.Status != "Draft")">
+                                    <option value="">No Inquiry</option>
+                                    @if (ViewBag.Inquiries != null)
+                                    {
+                                        @foreach (var inquiry in ViewBag.Inquiries)
+                                        {
+                                            <option value="@inquiry.Id" selected="@(inquiry.Id == Model.InquiryId)">
+                                                @inquiry.InquiryNumber - @inquiry.Customer?.CustomerName
+                                            </option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="CustomerId" class="form-label">Customer *</label>
+                                <select asp-for="CustomerId" class="form-select" required
+                                        disabled="@(Model.Status != "Draft")">
+                                    <option value="">Select Customer</option>
+                                    @if (ViewBag.Customers != null)
+                                    {
+                                        @foreach (var customer in ViewBag.Customers)
+                                        {
+                                            <option value="@customer.Id" selected="@(customer.Id == Model.CustomerId)">
+                                                @customer.CustomerName (@customer.CustomerCode)
+                                            </option>
+                                        }
+                                    }
+                                </select>
+                                <span asp-validation-for="CustomerId" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label asp-for="ValidUntil" class="form-label"></label>
+                                <input asp-for="ValidUntil" class="form-control" type="date" required
+                                       disabled="@(Model.Status != "Draft")" />
+                                <span asp-validation-for="ValidUntil" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="Status" class="form-label"></label>
+                                <input asp-for="Status" class="form-control" readonly />
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label asp-for="PaymentTerms" class="form-label"></label>
+                                <input asp-for="PaymentTerms" class="form-control"
+                                       placeholder="e.g., 30 Days, Advance Payment"
+                                       disabled="@(Model.Status != "Draft")" />
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="DeliveryTerms" class="form-label"></label>
+                                <input asp-for="DeliveryTerms" class="form-control"
+                                       placeholder="e.g., Ex-Works, FOB, CIF"
+                                       disabled="@(Model.Status != "Draft")" />
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="TermsAndConditions" class="form-label"></label>
+                            <textarea asp-for="TermsAndConditions" class="form-control" rows="3"
+                                      placeholder="Enter terms and conditions..."
+                                      disabled="@(Model.Status != "Draft")"></textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Remarks" class="form-label"></label>
+                            <textarea asp-for="Remarks" class="form-control" rows="2"
+                                      placeholder="Additional notes..."
+                                      disabled="@(Model.Status != "Draft")"></textarea>
+                        </div>
+
+                        @if (Model.ApprovedByEmployeeId.HasValue)
+                        {
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label class="form-label">Approved By</label>
+                                    <input value="@Model.ApprovedByEmployee?.EmployeeName" class="form-control" readonly />
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Approval Date</label>
+                                    <input value="@Model.ApprovalDate?.ToString("yyyy-MM-dd")" class="form-control" readonly />
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+
+                <div class="card mt-3">
+                    <div class="card-header">
+                        <h5>Audit Information</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p class="mb-1"><strong>Created:</strong> @Model.CreatedDate.ToString("yyyy-MM-dd HH:mm")</p>
+                                <p class="mb-0"><strong>Created By:</strong> @Model.CreatedBy</p>
+                            </div>
+                            <div class="col-md-6">
+                                @if (Model.ModifiedDate.HasValue)
+                                {
+                                    <p class="mb-1"><strong>Modified:</strong> @Model.ModifiedDate?.ToString("yyyy-MM-dd HH:mm")</p>
+                                    <p class="mb-0"><strong>Modified By:</strong> @Model.ModifiedBy</p>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h5>Actions</h5>
+                    </div>
+                    <div class="card-body">
+                        @if (Model.Status == "Draft")
+                        {
+                            <button type="submit" class="btn btn-primary w-100 mb-2">
+                                <i class="fas fa-save"></i> Update Quotation
+                            </button>
+                        }
+                        <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-info w-100 mb-2">
+                            <i class="fas fa-eye"></i> View Details
+                        </a>
+                        <a asp-action="Index" class="btn btn-secondary w-100">
+                            <i class="fas fa-arrow-left"></i> Back to List
+                        </a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Information</h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="small">
+                            <li>Only Draft quotations can be edited</li>
+                            <li>Quotation Number cannot be changed</li>
+                            <li>Customer cannot be changed after sending</li>
+                            <li>Manage items in Details view</li>
+                            @if (Model.Status != "Draft")
+                            {
+                                <li class="text-warning"><strong>This quotation is @Model.Status</strong></li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

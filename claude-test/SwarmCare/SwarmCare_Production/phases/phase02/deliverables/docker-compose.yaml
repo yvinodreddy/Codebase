@@ -1,0 +1,220 @@
+# Docker Compose for SWARMCARE Agents - Local Development
+# Phase 02: Production-Ready Docker Compose
+# Version: 2.1
+# Last Updated: 2025-10-28
+
+version: '3.8'
+
+services:
+  # Knowledge Agent
+  knowledge-agent:
+    image: swarmcare/knowledge-agent:2.1
+    container_name: knowledge-agent
+    environment:
+      - AGENT_TYPE=knowledge
+      - PERFORMANCE_SLA_MS=2000
+      - NEO4J_URI=bolt://neo4j:7687
+      - RAG_HEAT_ENDPOINT=http://rag-heat:8000
+      - LOG_LEVEL=INFO
+    ports:
+      - "8081:8080"
+      - "9091:9090"
+    networks:
+      - swarmcare-network
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 4G
+        reservations:
+          cpus: '1'
+          memory: 2G
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+
+  # Case Agent
+  case-agent:
+    image: swarmcare/case-agent:2.1
+    container_name: case-agent
+    environment:
+      - AGENT_TYPE=case
+      - PERFORMANCE_SLA_MS=3000
+      - EPIC_FHIR_ENDPOINT=${EPIC_FHIR_ENDPOINT}
+      - LOG_LEVEL=INFO
+    ports:
+      - "8082:8080"
+      - "9092:9090"
+    networks:
+      - swarmcare-network
+    deploy:
+      resources:
+        limits:
+          cpus: '3'
+          memory: 6G
+        reservations:
+          cpus: '1.5'
+          memory: 3G
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+
+  # Conversation Agent
+  conversation-agent:
+    image: swarmcare/conversation-agent:2.1
+    container_name: conversation-agent
+    environment:
+      - AGENT_TYPE=conversation
+      - PERFORMANCE_SLA_MS=1000
+      - LOG_LEVEL=INFO
+    ports:
+      - "8083:8080"
+      - "9093:9090"
+    networks:
+      - swarmcare-network
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 4G
+        reservations:
+          cpus: '1'
+          memory: 2G
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+
+  # Compliance Agent
+  compliance-agent:
+    image: swarmcare/compliance-agent:2.1
+    container_name: compliance-agent
+    environment:
+      - AGENT_TYPE=compliance
+      - PERFORMANCE_SLA_MS=100
+      - LOG_LEVEL=INFO
+    ports:
+      - "8084:8080"
+      - "9094:9090"
+    networks:
+      - swarmcare-network
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 2G
+        reservations:
+          cpus: '0.5'
+          memory: 1G
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    read_only: true
+
+  # Podcast Agent
+  podcast-agent:
+    image: swarmcare/podcast-agent:2.1
+    container_name: podcast-agent
+    environment:
+      - AGENT_TYPE=podcast
+      - PERFORMANCE_SLA_MS=30000
+      - LOG_LEVEL=INFO
+    ports:
+      - "8085:8080"
+      - "9095:9090"
+    networks:
+      - swarmcare-network
+    deploy:
+      resources:
+        limits:
+          cpus: '4'
+          memory: 8G
+        reservations:
+          cpus: '2'
+          memory: 4G
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 60s
+      timeout: 30s
+      retries: 3
+    restart: unless-stopped
+
+  # QA Agent
+  qa-agent:
+    image: swarmcare/qa-agent:2.1
+    container_name: qa-agent
+    environment:
+      - AGENT_TYPE=qa
+      - PERFORMANCE_SLA_MS=500
+      - LOG_LEVEL=INFO
+    ports:
+      - "8086:8080"
+      - "9096:9090"
+    networks:
+      - swarmcare-network
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 4G
+        reservations:
+          cpus: '1'
+          memory: 2G
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+
+  # Prometheus for Monitoring
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus-data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+    ports:
+      - "9090:9090"
+    networks:
+      - swarmcare-network
+    restart: unless-stopped
+
+  # Grafana for Visualization
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_INSTALL_PLUGINS=grafana-clock-panel
+    volumes:
+      - grafana-data:/var/lib/grafana
+    ports:
+      - "3000:3000"
+    networks:
+      - swarmcare-network
+    restart: unless-stopped
+
+networks:
+  swarmcare-network:
+    driver: bridge
+
+volumes:
+  prometheus-data:
+  grafana-data:

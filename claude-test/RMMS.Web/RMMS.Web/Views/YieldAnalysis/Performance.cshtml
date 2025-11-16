@@ -1,0 +1,286 @@
+@model List<RMMS.Services.Interfaces.Production.BatchPerformanceData>
+@{
+    ViewData["Title"] = "Batch Performance Analysis";
+    var fromDate = ViewBag.FromDate as DateTime?;
+    var toDate = ViewBag.ToDate as DateTime?;
+}
+
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2><i class="fas fa-tachometer-alt"></i> Batch Performance Analysis</h2>
+        <a asp-action="Index" class="btn btn-outline-secondary">
+            <i class="fas fa-arrow-left"></i> Back to Dashboard
+        </a>
+    </div>
+
+    <!-- Date Filter -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <form method="get" class="row g-3">
+                <div class="col-md-4">
+                    <label class="form-label">From Date</label>
+                    <input type="date" name="fromDate" class="form-control" value="@fromDate?.ToString("yyyy-MM-dd")" />
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">To Date</label>
+                    <input type="date" name="toDate" class="form-control" value="@toDate?.ToString("yyyy-MM-dd")" />
+                </div>
+                <div class="col-md-4 d-flex align-items-end">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-filter"></i> Apply Filter
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    @if (Model != null && Model.Any())
+    {
+        <!-- Summary Cards -->
+        <div class="row mb-4">
+            <div class="col-md-3">
+                <div class="card border-success">
+                    <div class="card-body text-center">
+                        <h6 class="text-muted">Excellent Performance</h6>
+                        <h3 class="text-success">@Model.Count(b => b.PerformanceRating == "Excellent")</h3>
+                        <small class="text-muted">batches</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card border-primary">
+                    <div class="card-body text-center">
+                        <h6 class="text-muted">Good Performance</h6>
+                        <h3 class="text-primary">@Model.Count(b => b.PerformanceRating == "Good")</h3>
+                        <small class="text-muted">batches</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card border-warning">
+                    <div class="card-body text-center">
+                        <h6 class="text-muted">Average Performance</h6>
+                        <h3 class="text-warning">@Model.Count(b => b.PerformanceRating == "Average")</h3>
+                        <small class="text-muted">batches</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card border-danger">
+                    <div class="card-body text-center">
+                        <h6 class="text-muted">Poor Performance</h6>
+                        <h3 class="text-danger">@Model.Count(b => b.PerformanceRating == "Poor")</h3>
+                        <small class="text-muted">batches</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Performance Distribution Chart -->
+        <div class="card mb-4">
+            <div class="card-header bg-light">
+                <h5 class="mb-0"><i class="fas fa-chart-pie"></i> Performance Distribution</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <canvas id="performanceChart"></canvas>
+                    </div>
+                    <div class="col-md-6">
+                        <canvas id="shiftChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Performance Table -->
+        <div class="card">
+            <div class="card-header bg-light">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0"><i class="fas fa-table"></i> Batch Performance Details</h5>
+                    <div>
+                        <button class="btn btn-sm btn-outline-success" onclick="filterPerformance('Excellent')">Excellent</button>
+                        <button class="btn btn-sm btn-outline-primary" onclick="filterPerformance('Good')">Good</button>
+                        <button class="btn btn-sm btn-outline-warning" onclick="filterPerformance('Average')">Average</button>
+                        <button class="btn btn-sm btn-outline-danger" onclick="filterPerformance('Poor')">Poor</button>
+                        <button class="btn btn-sm btn-outline-secondary" onclick="filterPerformance('All')">All</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="ms-datatable table table-striped table-hover" id="performanceTable" data-export="true" data-page-length="16">
+                        <thead>
+                            <tr>
+                                <th>Batch #</th>
+                                <th>Date</th>
+                                <th>Shift</th>
+                                <th>Operator</th>
+                                <th>Input (kg)</th>
+                                <th>Output (kg)</th>
+                                <th>Yield %</th>
+                                <th>Duration (hrs)</th>
+                                <th>Quality Score</th>
+                                <th>Performance</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var batch in Model)
+                            {
+                                <tr class="performance-row" data-rating="@batch.PerformanceRating">
+                                    <td><strong>@batch.BatchNumber</strong></td>
+                                    <td>@batch.BatchDate.ToString("dd-MMM")</td>
+                                    <td>
+                                        <span class="badge @(batch.ShiftType == "Morning" ? "bg-warning" : batch.ShiftType == "Evening" ? "bg-info" : "bg-dark")">
+                                            @batch.ShiftType
+                                        </span>
+                                    </td>
+                                    <td><small>@batch.OperatorName</small></td>
+                                    <td>@batch.InputQuantity.ToString("N0")</td>
+                                    <td>@batch.OutputQuantity.ToString("N0")</td>
+                                    <td>
+                                        <span class="badge @(batch.YieldPercent >= 65 ? "bg-success" : batch.YieldPercent >= 55 ? "bg-warning" : "bg-danger")">
+                                            @batch.YieldPercent.ToString("F1")%
+                                        </span>
+                                    </td>
+                                    <td>@batch.ProcessingHours.ToString("F1")</td>
+                                    <td>
+                                        <div class="progress" style="height: 20px;">
+                                            <div class="progress-bar @(batch.QualityScore >= 8 ? "bg-success" : batch.QualityScore >= 6 ? "bg-primary" : "bg-warning")"
+                                                 style="width: @(batch.QualityScore * 10)%">
+                                                @batch.QualityScore.ToString("F1")
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        @switch (batch.PerformanceRating)
+                                        {
+                                            case "Excellent":
+                                                <span class="badge bg-success"><i class="fas fa-star"></i> Excellent</span>
+                                                break;
+                                            case "Good":
+                                                <span class="badge bg-primary"><i class="fas fa-thumbs-up"></i> Good</span>
+                                                break;
+                                            case "Average":
+                                                <span class="badge bg-warning"><i class="fas fa-minus"></i> Average</span>
+                                                break;
+                                            case "Poor":
+                                                <span class="badge bg-danger"><i class="fas fa-exclamation-triangle"></i> Poor</span>
+                                                break;
+                                        }
+                                    </td>
+                                    <td>
+                                        <span class="badge @(batch.Status == "Completed" ? "bg-success" : "bg-secondary")">
+                                            @batch.Status
+                                        </span>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info">
+            <i class="fas fa-info-circle"></i> No performance data available for the selected period.
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    @if (Model != null && Model.Any())
+    {
+        <script>
+            // Performance Distribution Chart
+            var perfCtx = document.getElementById('performanceChart').getContext('2d');
+            var performanceChart = new Chart(perfCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Excellent', 'Good', 'Average', 'Poor'],
+                    datasets: [{
+                        data: [
+                            @Model.Count(b => b.PerformanceRating == "Excellent"),
+                            @Model.Count(b => b.PerformanceRating == "Good"),
+                            @Model.Count(b => b.PerformanceRating == "Average"),
+                            @Model.Count(b => b.PerformanceRating == "Poor")
+                        ],
+                        backgroundColor: [
+                            'rgba(75, 192, 192, 0.8)',
+                            'rgba(54, 162, 235, 0.8)',
+                            'rgba(255, 206, 86, 0.8)',
+                            'rgba(255, 99, 132, 0.8)'
+                        ]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Performance Rating Distribution'
+                        }
+                    }
+                }
+            });
+
+            // Shift Performance Chart
+            var shiftCtx = document.getElementById('shiftChart').getContext('2d');
+            var shiftData = {
+                Morning: @Html.Raw(Json.Serialize(Model.Where(b => b.ShiftType == "Morning").Average(b => (double?)b.YieldPercent) ?? 0)),
+                Evening: @Html.Raw(Json.Serialize(Model.Where(b => b.ShiftType == "Evening").Average(b => (double?)b.YieldPercent) ?? 0)),
+                Night: @Html.Raw(Json.Serialize(Model.Where(b => b.ShiftType == "Night").Average(b => (double?)b.YieldPercent) ?? 0))
+            };
+
+            var shiftChart = new Chart(shiftCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Morning', 'Evening', 'Night'],
+                    datasets: [{
+                        label: 'Average Yield %',
+                        data: [shiftData.Morning, shiftData.Evening, shiftData.Night],
+                        backgroundColor: [
+                            'rgba(255, 206, 86, 0.8)',
+                            'rgba(54, 162, 235, 0.8)',
+                            'rgba(153, 102, 255, 0.8)'
+                        ]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Average Yield by Shift'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            min: 50,
+                            max: 75
+                        }
+                    }
+                }
+            });
+
+            // Filter function
+            function filterPerformance(rating) {
+                var rows = document.querySelectorAll('.performance-row');
+                rows.forEach(function(row) {
+                    if (rating === 'All') {
+                        row.style.display = '';
+                    } else if (row.getAttribute('data-rating') === rating) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+            }
+        </script>
+    }
+}

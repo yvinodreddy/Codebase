@@ -1,0 +1,172 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/28.2.5 Chrome/138.0.7204.251 Electron/37.6.1 Safari/537.36" version="28.2.5">
+  <diagram name="Page-1" id="kH4C781-jqM3vJ6XT2e9">
+    <mxGraphModel dx="1186" dy="744" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="PVnspZg3bZH8eplkTrKA-1" value="&#xa;      &#xa;        &#xa;        &#xa;        &#xa;        &#xa;        &#xa;          &#xa;        &#xa;&#xa;        &#xa;        &#xa;          &#xa;        &#xa;&#xa;        &#xa;        &#xa;          &#xa;        &#xa;&#xa;        &#xa;          &#xa;        &#xa;&#xa;        &#xa;        &#xa;          &#xa;        &#xa;&#xa;        &#xa;          &#xa;        &#xa;&#xa;        &#xa;          &#xa;        &#xa;&#xa;        &#xa;        &#xa;          &#xa;        &#xa;&#xa;        &#xa;          &#xa;        &#xa;&#xa;        &#xa;        &#xa;          &#xa;        &#xa;&#xa;        &#xa;          &#xa;        &#xa;&#xa;        &#xa;        &#xa;          &#xa;        &#xa;&#xa;        &#xa;          &#xa;        &#xa;&#xa;        &#xa;        &#xa;          &#xa;        &#xa;&#xa;        &#xa;          &#xa;        &#xa;&#xa;        &#xa;        &#xa;          &#xa;        &#xa;&#xa;        &#xa;        &#xa;          &#xa;        &#xa;&#xa;        &#xa;          &#xa;        &#xa;&#xa;        &#xa;        &#xa;          &#xa;        &#xa;&#xa;        &#xa;          &#xa;        &#xa;&#xa;        &#xa;        &#xa;          &#xa;        &#xa;&#xa;        &#xa;          &#xa;        &#xa;&#xa;        &#xa;        &#xa;          &#xa;        &#xa;&#xa;        &#xa;        &#xa;          &#xa;        &#xa;&#xa;        &#xa;          &#xa;        &#xa;&#xa;        &#xa;        &#xa;          &#xa;        &#xa;&#xa;        &#xa;          &#xa;        &#xa;&#xa;        &#xa;        &#xa;          &#xa;        &#xa;&#xa;        &#xa;        &#xa;          &#xa;        &#xa;&#xa;        &#xa;          &#xa;        &#xa;&#xa;        &#xa;        &#xa;          &#xa;        &#xa;&#xa;        &#xa;          &#xa;        &#xa;&#xa;        &#xa;        &#xa;          &#xa;        &#xa;&#xa;        &#xa;        &#xa;          &#xa;        &#xa;&#xa;        &#xa;          &#xa;        &#xa;&#xa;        &#xa;        &#xa;          &#xa;        &#xa;&#xa;        &#xa;          &#xa;        &#xa;&#xa;        &#xa;        &#xa;          &#xa;        &#xa;&#xa;        &#xa;          &#xa;        &#xa;&#xa;        &#xa;        &#xa;          &#xa;        &#xa;&#xa;        &#xa;          &#xa;        &#xa;&#xa;        &#xa;        &#xa;          &#xa;        &#xa;&#xa;        &#xa;          &#xa;        &#xa;&#xa;        &#xa;          &#xa;        &#xa;&#xa;        &#xa;          &#xa;        &#xa;&#xa;        &#xa;          &#xa;        &#xa;&#xa;        &#xa;          &#xa;        &#xa;&#xa;        &#xa;          &#xa;        &#xa;&#xa;        &#xa;          &#xa;        &#xa;&#xa;        &#xa;          &#xa;        &#xa;&#xa;        &#xa;          &#xa;        &#xa;&#xa;        &#xa;        &#xa;          &#xa;        &#xa;&#xa;      &#xa;    " style="text;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="360" width="30" height="3460" as="geometry" />
+        </mxCell>
+        <mxCell id="PVnspZg3bZH8eplkTrKA-50" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="PVnspZg3bZH8eplkTrKA-2" target="PVnspZg3bZH8eplkTrKA-1" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="PVnspZg3bZH8eplkTrKA-2" value="SwarmCare Knowledge Graph Schema Architecture" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="500" y="60" width="500" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="PVnspZg3bZH8eplkTrKA-3" value="CORE ENTITY CLASSES" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=14;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="50" y="120" width="1500" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="PVnspZg3bZH8eplkTrKA-4" value="swc:Patient" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="100" y="160" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="PVnspZg3bZH8eplkTrKA-5" value="Properties:&#xa;• patientId (string)&#xa;• firstName (string)&#xa;• lastName (string)&#xa;• dateOfBirth (date)&#xa;• gender (string)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8f9fa;strokeColor=#dee2e6;fontSize=9;align=left;" parent="1" vertex="1">
+          <mxGeometry x="80" y="250" width="160" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="PVnspZg3bZH8eplkTrKA-6" value="swc:HypertensionPatient" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;" parent="1" vertex="1">
+          <mxGeometry x="330" y="210" width="140" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="PVnspZg3bZH8eplkTrKA-7" value="swc:DiabetesPatient" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;" parent="1" vertex="1">
+          <mxGeometry x="450" y="290" width="140" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="PVnspZg3bZH8eplkTrKA-8" value="swc:CardiacPatient" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;" parent="1" vertex="1">
+          <mxGeometry x="280" y="290" width="140" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="PVnspZg3bZH8eplkTrKA-9" value="Properties:&#xa;• conditionCode (SNOMED)&#xa;• conditionName (string)&#xa;• severity (string)&#xa;• onsetDate (date)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8f9fa;strokeColor=#dee2e6;fontSize=9;align=left;" parent="1" vertex="1">
+          <mxGeometry x="647" y="260" width="180" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="PVnspZg3bZH8eplkTrKA-10" value="swc:Medication" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="930" y="210" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="PVnspZg3bZH8eplkTrKA-11" value="Properties:&#xa;• rxNormCode (string)&#xa;• medicationName (string)&#xa;• dosage (string)&#xa;• frequency (string)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8f9fa;strokeColor=#dee2e6;fontSize=9;align=left;" parent="1" vertex="1">
+          <mxGeometry x="920" y="280" width="160" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="PVnspZg3bZH8eplkTrKA-12" value="swc:Prescription" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=12;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="1150" y="170" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="PVnspZg3bZH8eplkTrKA-13" value="Properties:&#xa;• prescriptionId (string)&#xa;• prescribedDate (dateTime)&#xa;• startDate (date)&#xa;• endDate (date)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8f9fa;strokeColor=#dee2e6;fontSize=9;align=left;" parent="1" vertex="1">
+          <mxGeometry x="1141" y="260" width="160" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="PVnspZg3bZH8eplkTrKA-14" value="swc:HealthcareProvider" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=12;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="1400" y="170" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="PVnspZg3bZH8eplkTrKA-15" value="Properties:&#xa;• providerId (string)&#xa;• firstName (string)&#xa;• lastName (string)&#xa;• specialty (string)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8f9fa;strokeColor=#dee2e6;fontSize=9;align=left;" parent="1" vertex="1">
+          <mxGeometry x="1380" y="270" width="180" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="PVnspZg3bZH8eplkTrKA-16" value="VITAL SIGNS AND WEARABLE DATA" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="50" y="380" width="1500" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="PVnspZg3bZH8eplkTrKA-17" value="swc:VitalSigns" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#cce5ff;strokeColor=#4da6ff;fontSize=12;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="100" y="440" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="PVnspZg3bZH8eplkTrKA-18" value="Properties:&#xa;• timestamp (dateTime)&#xa;• heartRate (int)&#xa;• bloodPressureSystolic (int)&#xa;• bloodPressureDiastolic (int)&#xa;• oxygenSaturation (float)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8f9fa;strokeColor=#dee2e6;fontSize=9;align=left;" parent="1" vertex="1">
+          <mxGeometry x="80" y="510" width="160" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="PVnspZg3bZH8eplkTrKA-19" value="swc:WearableDevice" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#cce5ff;strokeColor=#4da6ff;fontSize=12;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="435" y="480" width="130" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="PVnspZg3bZH8eplkTrKA-20" value="Properties:&#xa;• deviceId (string)&#xa;• deviceType (string)&#xa;• manufacturer (string)&#xa;• model (string)&#xa;• batteryLevel (float)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8f9fa;strokeColor=#dee2e6;fontSize=9;align=left;" parent="1" vertex="1">
+          <mxGeometry x="415" y="540" width="170" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="PVnspZg3bZH8eplkTrKA-21" value="swc:HealthAlert" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffcccc;strokeColor=#ff6666;fontSize=12;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="757" y="440" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="PVnspZg3bZH8eplkTrKA-22" value="Properties:&#xa;• alertId (string)&#xa;• alertType (string)&#xa;• severity (string)&#xa;• timestamp (dateTime)&#xa;• description (string)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8f9fa;strokeColor=#dee2e6;fontSize=9;align=left;" parent="1" vertex="1">
+          <mxGeometry x="757" y="510" width="160" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="PVnspZg3bZH8eplkTrKA-23" value="DYNAMIC CLASSIFICATION RULES (SHACL)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=14;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="1000" y="380" width="550" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="PVnspZg3bZH8eplkTrKA-24" value="Hypertension Classification Rule" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff9e6;strokeColor=#ffcc00;fontSize=11;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="1090" y="440" width="180" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="PVnspZg3bZH8eplkTrKA-25" value="IF bloodPressureSystolic &gt;= 140&#xa;OR bloodPressureDiastolic &gt;= 90&#xa;THEN rdf:type = HypertensionPatient" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8f9fa;strokeColor=#dee2e6;fontSize=9;align=left;fontFamily=monospace;" parent="1" vertex="1">
+          <mxGeometry x="1090" y="490" width="180" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="PVnspZg3bZH8eplkTrKA-26" value="Diabetes Classification Rule" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff9e6;strokeColor=#ffcc00;fontSize=11;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="1290" y="440" width="180" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="PVnspZg3bZH8eplkTrKA-27" value="IF hasMedicalCondition&#xa;   hasCode snomed:73211009&#xa;THEN rdf:type = DiabetesPatient" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8f9fa;strokeColor=#dee2e6;fontSize=9;align=left;fontFamily=monospace;" parent="1" vertex="1">
+          <mxGeometry x="1290" y="490" width="180" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="PVnspZg3bZH8eplkTrKA-28" value="RELATIONSHIP PROPERTIES" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=14;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="50" y="640" width="1500" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="PVnspZg3bZH8eplkTrKA-29" value="Patient Relationships" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8f5e8;strokeColor=#4caf50;fontSize=12;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="80" y="700" width="180" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="PVnspZg3bZH8eplkTrKA-30" value="• hasMedicalCondition&#xa;• hasPrescription&#xa;• hasVitalSigns&#xa;• hasWearableDevice&#xa;• hasHealthAlert&#xa;• assignedTo" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8f9fa;strokeColor=#dee2e6;fontSize=9;align=left;" parent="1" vertex="1">
+          <mxGeometry x="80" y="740" width="180" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="PVnspZg3bZH8eplkTrKA-31" value="Temporal Relationships" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff3e0;strokeColor=#ff9800;fontSize=12;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="300" y="700" width="180" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="PVnspZg3bZH8eplkTrKA-32" value="• occurredAt&#xa;• validFrom&#xa;• validTo&#xa;• predecessor&#xa;• successor&#xa;• concurrent" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8f9fa;strokeColor=#dee2e6;fontSize=9;align=left;" parent="1" vertex="1">
+          <mxGeometry x="300" y="740" width="180" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="PVnspZg3bZH8eplkTrKA-33" value="EXTERNAL ONTOLOGY INTEGRATION" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffebee;strokeColor=#f44336;fontSize=14;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="50" y="880" width="1500" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="PVnspZg3bZH8eplkTrKA-34" value="SNOMED CT" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff3e0;strokeColor=#ff9800;fontSize=12;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="80" y="940" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="PVnspZg3bZH8eplkTrKA-35" value="Medical Conditions:&#xa;• snomed:38341003 → Hypertension&#xa;• snomed:73211009 → Diabetes" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8f9fa;strokeColor=#dee2e6;fontSize=9;align=left;" parent="1" vertex="1">
+          <mxGeometry x="80" y="990" width="180" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="PVnspZg3bZH8eplkTrKA-36" value="RxNorm" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8f5e8;strokeColor=#4caf50;fontSize=12;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="300" y="940" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="PVnspZg3bZH8eplkTrKA-37" value="Medications:&#xa;• rxnorm:1049502 → Metformin 500mg&#xa;• rxnorm:197361 → Lisinopril" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8f9fa;strokeColor=#dee2e6;fontSize=9;align=left;" parent="1" vertex="1">
+          <mxGeometry x="300" y="990" width="180" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="PVnspZg3bZH8eplkTrKA-38" value="FHIR R4" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e3f2fd;strokeColor=#2196f3;fontSize=12;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="520" y="940" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="PVnspZg3bZH8eplkTrKA-39" value="Resource Mapping:&#xa;• fhir:Patient → swc:Patient&#xa;• fhir:Observation → swc:VitalSigns" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8f9fa;strokeColor=#dee2e6;fontSize=9;align=left;" parent="1" vertex="1">
+          <mxGeometry x="520" y="990" width="180" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="PVnspZg3bZH8eplkTrKA-40" value="SAMPLE KNOWLEDGE GRAPH INSTANCE" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8f5e8;strokeColor=#4caf50;fontSize=14;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="1070" y="880" width="480" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="PVnspZg3bZH8eplkTrKA-41" value="# Sample Patient with Hypertension&#xa;swc:Patient_001 a swc:HypertensionPatient ;&#xa;  swc:patientId &quot;P001&quot; ;&#xa;  swc:firstName &quot;John&quot; ;&#xa;  swc:lastName &quot;Doe&quot; ;&#xa;  swc:hasMedicalCondition swc:Condition_001 ;&#xa;  swc:hasVitalSigns swc:VitalSigns_001 .&#xa;&#xa;swc:Condition_001 a swc:MedicalCondition ;&#xa;  swc:conditionCode snomed:38341003 ;&#xa;  swc:conditionName &quot;Essential hypertension&quot; .&#xa;&#xa;swc:VitalSigns_001 a swc:VitalSigns ;&#xa;  swc:timestamp &quot;2024-01-15T08:30:00Z&quot; ;&#xa;  swc:heartRate 85 ;&#xa;  swc:bloodPressureSystolic 145 ;&#xa;  swc:bloodPressureDiastolic 92 ." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8f9fa;strokeColor=#dee2e6;fontSize=8;align=left;fontFamily=monospace;gradientColor=light-dark(#eecece, #ededed);" parent="1" vertex="1">
+          <mxGeometry x="1110" y="920" width="400" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="PVnspZg3bZH8eplkTrKA-42" value="hasMedicalCondition" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=9;flowAnimation=1;" parent="1" target="PVnspZg3bZH8eplkTrKA-49" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="200" y="190" as="sourcePoint" />
+            <mxPoint x="627" y="210" as="targetPoint" />
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PVnspZg3bZH8eplkTrKA-43" value="hasPrescription" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=9;flowAnimation=1;" parent="1" source="PVnspZg3bZH8eplkTrKA-49" target="PVnspZg3bZH8eplkTrKA-12" edge="1">
+          <mxGeometry x="-0.481" relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="940" y="190" />
+              <mxPoint x="940" y="190" />
+            </Array>
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PVnspZg3bZH8eplkTrKA-44" value="prescribedBy" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=9;flowAnimation=1;" parent="1" source="PVnspZg3bZH8eplkTrKA-12" target="PVnspZg3bZH8eplkTrKA-14" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="PVnspZg3bZH8eplkTrKA-45" value="hasVitalSigns" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=9;" parent="1" source="PVnspZg3bZH8eplkTrKA-4" target="PVnspZg3bZH8eplkTrKA-17" edge="1">
+          <mxGeometry x="-0.9091" y="20" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PVnspZg3bZH8eplkTrKA-46" value="generatedBy" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=9;" parent="1" source="PVnspZg3bZH8eplkTrKA-17" target="PVnspZg3bZH8eplkTrKA-19" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="PVnspZg3bZH8eplkTrKA-47" value="triggeredAlert" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=9;" parent="1" source="PVnspZg3bZH8eplkTrKA-17" target="PVnspZg3bZH8eplkTrKA-21" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="PVnspZg3bZH8eplkTrKA-48" value="rdfs:subClassOf" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=8;fontStyle=2;" parent="1" vertex="1">
+          <mxGeometry x="344" y="250" width="70" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="PVnspZg3bZH8eplkTrKA-49" value="swc:MedicalCondition" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="647" y="160" width="140" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

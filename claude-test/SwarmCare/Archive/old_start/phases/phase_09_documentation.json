@@ -1,0 +1,25 @@
+{
+  "phase_id": 9,
+  "name": "Documentation",
+  "epic": "Epic 10",
+  "story_points": 21,
+  "priority": "P1",
+  "dependencies": [
+    8
+  ],
+  "version": "v1.0",
+  "user_stories": [
+    {
+      "story_id": "10.1",
+      "title": "Technical Documentation",
+      "story_points": 13,
+      "priority": "P1"
+    },
+    {
+      "story_id": "10.2",
+      "title": "User Documentation",
+      "story_points": 8,
+      "priority": "P2"
+    }
+  ]
+}

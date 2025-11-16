@@ -1,0 +1,86 @@
+@model RMMS.Models.Production.Machine
+@{
+    ViewData["Title"] = "Record Maintenance";
+}
+
+<div class="container">
+    <h2 class="text-success">
+        <i class="fas fa-wrench"></i>
+        @ViewData["Title"]
+    </h2>
+    <hr />
+
+    <div class="alert alert-success">
+        <h5><i class="fas fa-info-circle"></i> Record Maintenance</h5>
+        <p>Please confirm that maintenance has been completed for this machine.</p>
+        <p class="mb-0"><strong>Note:</strong> This will update the last maintenance date and reset the machine status to operational.</p>
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-header bg-primary text-white">
+            <h5>Machine Details</h5>
+        </div>
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-4">Machine Code</dt>
+                <dd class="col-sm-8"><strong>@Model.MachineCode</strong></dd>
+
+                <dt class="col-sm-4">Machine Name</dt>
+                <dd class="col-sm-8">@Model.MachineName</dd>
+
+                <dt class="col-sm-4">Machine Type</dt>
+                <dd class="col-sm-8">
+                    <span class="badge bg-secondary">
+                        <i class="fas @Model.TypeIcon"></i> @Model.MachineType
+                    </span>
+                </dd>
+
+                <dt class="col-sm-4">Current Status</dt>
+                <dd class="col-sm-8">
+                    <span class="badge @Model.StatusBadgeClass">
+                        <i class="fas @Model.StatusIcon"></i> @Model.Status
+                    </span>
+                </dd>
+
+                <dt class="col-sm-4">Running Hours</dt>
+                <dd class="col-sm-8">@Model.RunningHours.ToString("N0") hours</dd>
+
+                @if (Model.LastMaintenanceDate.HasValue)
+                {
+                    <dt class="col-sm-4">Last Maintenance</dt>
+                    <dd class="col-sm-8">@Model.LastMaintenanceDate.Value.ToString("dd-MMM-yyyy")</dd>
+                }
+
+                @if (Model.MaintenanceIntervalHours.HasValue)
+                {
+                    <dt class="col-sm-4">Maintenance Interval</dt>
+                    <dd class="col-sm-8">Every @Model.MaintenanceIntervalHours.Value.ToString("N0") hours</dd>
+                }
+            </dl>
+        </div>
+    </div>
+
+    <form asp-action="Maintenance" method="post">
+        <input type="hidden" name="id" value="@Model.Id" />
+
+        <div class="card mb-3">
+            <div class="card-header">
+                <h5>Maintenance Remarks</h5>
+            </div>
+            <div class="card-body">
+                <textarea name="remarks" class="form-control" rows="4"
+                          placeholder="Enter details about the maintenance work performed..."></textarea>
+                <small class="text-muted">Describe what was done, parts replaced, issues found, etc.</small>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-between">
+            <a asp-action="Index" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i> Back to List
+            </a>
+            <button type="submit" class="btn btn-success">
+                <i class="fas fa-check"></i> Confirm Maintenance Completed
+            </button>
+        </div>
+    </form>
+</div>

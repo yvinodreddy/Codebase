@@ -1,0 +1,35 @@
+{
+    "phase": "phase15",
+    "phase_name": "Advanced Medical NLP & Auto-Coding",
+    "total_story_points": 0,
+    "priority": "** P0",
+    "status": "** Not Started",
+    "stories": [
+        {
+            "id": "US-15-001",
+            "title": "Advanced Medical NLP & Auto-Coding - Story 1",
+            "description": "As a developer, I want to implement Advanced Medical NLP & Auto-Coding functionality",
+            "story_points": 5,
+            "priority": "** P0",
+            "status": "pending",
+            "acceptance_criteria": [
+                "Implementation complete",
+                "Tests passing",
+                "Documentation updated"
+            ],
+            "implementation_notes": "To be implemented",
+            "test_scenarios": [],
+            "dependencies": [],
+            "tags": [
+                "advanced-medical-nlp-&-auto-coding"
+            ]
+        }
+    ],
+    "metrics": {
+        "planned_story_points": 0,
+        "completed_story_points": 0,
+        "completion_percentage": 0,
+        "test_coverage_percentage": 0,
+        "acceptance_criteria_met": "0%"
+    }
+}

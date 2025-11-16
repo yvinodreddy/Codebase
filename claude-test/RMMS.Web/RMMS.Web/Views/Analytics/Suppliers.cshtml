@@ -1,0 +1,225 @@
+@{
+    ViewData["Title"] = "Suppliers Analytics";
+    var data = ViewBag.Data as dynamic;
+    var startDate = ViewBag.StartDate as DateTime?;
+    var endDate = ViewBag.EndDate as DateTime?;
+}
+
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <h2 class="mb-3"><i class="bi bi-people-fill"></i> Suppliers Analytics</h2>
+            <p class="text-muted">Vendor performance and procurement insights</p>
+        </div>
+        <div class="col-md-4 text-end">
+            <a href="@Url.Action("Index", "Analytics")" class="btn btn-secondary">
+                <i class="bi bi-arrow-left"></i> Back to Dashboard
+            </a>
+        </div>
+    </div>
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            @TempData["ErrorMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    <!-- Date Range Filter -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <form method="get" class="row g-3">
+                <div class="col-md-4">
+                    <label class="form-label">Start Date</label>
+                    <input type="date" name="startDate" class="form-control"
+                           value="@(startDate?.ToString("yyyy-MM-dd") ?? DateTime.Today.AddDays(-30).ToString("yyyy-MM-dd"))">
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">End Date</label>
+                    <input type="date" name="endDate" class="form-control"
+                           value="@(endDate?.ToString("yyyy-MM-dd") ?? DateTime.Today.ToString("yyyy-MM-dd"))">
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">&nbsp;</label>
+                    <button type="submit" class="btn btn-primary w-100">
+                        <i class="bi bi-search"></i> Apply Filter
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    @if (data != null)
+    {
+        <!-- Key Metrics -->
+        <div class="row mb-4">
+            <div class="col-md-3 mb-3">
+                <div class="card bg-primary text-white">
+                    <div class="card-body">
+                        <h6 class="card-subtitle mb-2">Total Vendors</h6>
+                        <h2 class="card-title mb-0">@data.TotalVendors</h2>
+                        <small>Active: @data.ActiveVendors</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 mb-3">
+                <div class="card bg-success text-white">
+                    <div class="card-body">
+                        <h6 class="card-subtitle mb-2">Total Procurements</h6>
+                        <h2 class="card-title mb-0">@data.TotalProcurements</h2>
+                        <small>In selected period</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 mb-3">
+                <div class="card bg-info text-white">
+                    <div class="card-body">
+                        <h6 class="card-subtitle mb-2">Total Quantity</h6>
+                        <h2 class="card-title mb-0">@data.TotalProcurementQty.ToString("N0")</h2>
+                        <small>Kg procured</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 mb-3">
+                <div class="card bg-warning text-dark">
+                    <div class="card-body">
+                        <h6 class="card-subtitle mb-2">Total Value</h6>
+                        <h2 class="card-title mb-0">₹@data.TotalProcurementValue.ToString("N0")</h2>
+                        <small>Procurement value</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Top Vendors -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0"><i class="bi bi-star-fill"></i> Top Vendors</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="ms-datatable table table-striped table-hover" data-export="true" data-page-length="16">
+                                <thead>
+                                    <tr>
+                                        <th>Vendor Code</th>
+                                        <th>Vendor Name</th>
+                                        <th>Contact</th>
+                                        <th>Status</th>
+                                        <th>Rating</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (data.Vendors != null && data.Vendors.Count > 0)
+                                    {
+                                        @foreach (var vendor in data.Vendors)
+                                        {
+                                            <tr>
+                                                <td><strong>@vendor.VendorCode</strong></td>
+                                                <td>@vendor.VendorName</td>
+                                                <td>
+                                                    @if (vendor.Contacts != null && vendor.Contacts.Count > 0)
+                                                    {
+                                                        var contact = ((IEnumerable<dynamic>)vendor.Contacts).FirstOrDefault();
+                                                        <small>@contact?.ContactPerson<br/>@contact?.Mobile</small>
+                                                    }
+                                                </td>
+                                                <td>
+                                                    <span class="badge @(vendor.Status == "Active" ? "bg-success" : "bg-secondary")">
+                                                        @vendor.Status
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    @{
+                                                        int? rating = vendor.Rating as int?;
+                                                    }
+                                                    @if (rating.HasValue)
+                                                    {
+                                                        <span class="text-warning">
+                                                            @for (int i = 0; i < rating.Value; i++)
+                                                            {
+                                                                <i class="bi bi-star-fill"></i>
+                                                            }
+                                                        </span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="text-muted">Not rated</span>
+                                                    }
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <tr>
+                                            <td colspan="5" class="text-center text-muted">No vendors found</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Procurements -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0"><i class="bi bi-cart-fill"></i> Recent Procurements</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="ms-datatable table table-striped table-hover" data-export="true" data-page-length="16">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Challan No</th>
+                                        <th>Paddy Type</th>
+                                        <th>Quantity (Kg)</th>
+                                        <th>Amount</th>
+                                        <th>Payment Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (data.RecentProcurements != null && data.RecentProcurements.Count > 0)
+                                    {
+                                        @foreach (var procurement in data.RecentProcurements)
+                                        {
+                                            <tr>
+                                                <td>@procurement.ReceiptDate.ToString("dd-MMM-yyyy")</td>
+                                                <td><strong>@procurement.VoucherNumber</strong></td>
+                                                <td>@procurement.PaddyVariety</td>
+                                                <td class="text-end">@procurement.QuantityReceived.ToString("N0")</td>
+                                                <td class="text-end">@procurement.TotalNetWeight.ToString("N2") Kg</td>
+                                                <td>
+                                                    <span class="badge bg-success">
+                                                        Received
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <tr>
+                                            <td colspan="6" class="text-center text-muted">No procurements found in selected period</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

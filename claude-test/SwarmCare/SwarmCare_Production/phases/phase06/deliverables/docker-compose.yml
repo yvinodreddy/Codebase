@@ -1,0 +1,73 @@
+# Phase 06: HIPAA Compliance - Docker Compose Configuration
+# Production-ready HIPAA-compliant deployment
+
+version: '3.8'
+
+services:
+  # HIPAA Compliance Service
+  hipaa-compliance:
+    build:
+      context: .
+      dockerfile: Dockerfile.hipaa
+    container_name: swarmcare-hipaa
+    environment:
+      - ENCRYPTION_KEY=${ENCRYPTION_KEY}
+      - JWT_SECRET=${JWT_SECRET}
+      - REDIS_URL=redis://redis:6379
+      - POSTGRES_URL=postgresql://swarmcare:${DB_PASSWORD}@postgres:5432/swarmcare_hipaa
+      - LOG_LEVEL=INFO
+    ports:
+      - "8443:8443"
+    volumes:
+      - ./audit-logs:/var/log/hipaa:rw
+      - ./certs:/etc/ssl/certs:ro
+    networks:
+      - hipaa-secure-network
+    depends_on:
+      - redis
+      - postgres
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 1G
+
+  # Redis for session management
+  redis:
+    image: redis:7-alpine
+    container_name: swarmcare-redis-hipaa
+    command: redis-server --requirepass ${REDIS_PASSWORD} --appendonly yes
+    volumes:
+      - redis-data:/data
+    networks:
+      - hipaa-secure-network
+    restart: unless-stopped
+
+  # PostgreSQL for audit logs and user data
+  postgres:
+    image: postgres:15-alpine
+    container_name: swarmcare-postgres-hipaa
+    environment:
+      - POSTGRES_DB=swarmcare_hipaa
+      - POSTGRES_USER=swarmcare
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_INITDB_ARGS=--encoding=UTF8
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./init-db.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    networks:
+      - hipaa-secure-network
+    restart: unless-stopped
+
+volumes:
+  redis-data:
+    driver: local
+  postgres-data:
+    driver: local
+
+networks:
+  hipaa-secure-network:
+    driver: bridge
+    driver_opts:
+      encrypted: "true"

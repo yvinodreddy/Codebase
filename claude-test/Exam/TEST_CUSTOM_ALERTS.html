@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Custom Alert Dialogs</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 40px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #fdf6e3 0%, #eee8d5 100%);
+            min-height: 100vh;
+        }
+
+        .test-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: #073642;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #839496;
+            margin-bottom: 30px;
+        }
+
+        .test-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #fdf6e3;
+            border-radius: 10px;
+            border-left: 4px solid #268bd2;
+        }
+
+        .test-section h2 {
+            color: #268bd2;
+            margin-top: 0;
+            font-size: 20px;
+        }
+
+        .test-section p {
+            color: #586e75;
+            margin-bottom: 15px;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #3d6b1f 0%, #4a7c23 100%);
+            color: white;
+        }
+
+        .btn-error {
+            background: linear-gradient(135deg, #e63946 0%, #dc322f 100%);
+            color: white;
+        }
+
+        .btn-warning {
+            background: linear-gradient(135deg, #b58900 0%, #cb9900 100%);
+            color: white;
+        }
+
+        .status {
+            margin-top: 30px;
+            padding: 20px;
+            background: #eee8d5;
+            border-radius: 10px;
+            border: 2px solid #d3cbb7;
+        }
+
+        .status h3 {
+            margin-top: 0;
+            color: #073642;
+        }
+
+        .status-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #d3cbb7;
+        }
+
+        .status-item:last-child {
+            border-bottom: none;
+        }
+
+        .status-label {
+            color: #839496;
+            font-weight: 600;
+        }
+
+        .status-value {
+            color: #268bd2;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🧪 Custom Alert Dialog Test Suite</h1>
+        <p class="subtitle">Test the new custom styled alert dialogs that match the exam application design</p>
+
+        <div class="test-section">
+            <h2>✅ Success Dialog</h2>
+            <p>Tests the success dialog shown after exam submission.</p>
+            <div class="btn-group">
+                <button class="btn-success" onclick="testSuccessDialog()">
+                    Test Success Dialog
+                </button>
+                <button class="btn-success" onclick="testSuccessWithDetails()">
+                    Test with Details
+                </button>
+            </div>
+        </div>
+
+        <div class="test-section">
+            <h2>❌ Error Dialog</h2>
+            <p>Tests the error dialog for critical failures.</p>
+            <div class="btn-group">
+                <button class="btn-error" onclick="testErrorDialog()">
+                    Test Error Dialog
+                </button>
+                <button class="btn-error" onclick="testErrorWithDetails()">
+                    Test with Error Details
+                </button>
+            </div>
+        </div>
+
+        <div class="test-section">
+            <h2>⚠️ Warning Dialog</h2>
+            <p>Tests the warning dialog for configuration issues and partial failures.</p>
+            <div class="btn-group">
+                <button class="btn-warning" onclick="testWarningDialog()">
+                    Test Warning Dialog
+                </button>
+                <button class="btn-warning" onclick="testConfigError()">
+                    Test Config Error
+                </button>
+                <button class="btn-warning" onclick="testEmailError()">
+                    Test Email Error
+                </button>
+            </div>
+        </div>
+
+        <div class="status">
+            <h3>Test Status</h3>
+            <div class="status-item">
+                <span class="status-label">Implementation:</span>
+                <span class="status-value">✅ Complete</span>
+            </div>
+            <div class="status-item">
+                <span class="status-label">Styling:</span>
+                <span class="status-value">✅ Matches Application</span>
+            </div>
+            <div class="status-item">
+                <span class="status-label">Animations:</span>
+                <span class="status-value">✅ Smooth Transitions</span>
+            </div>
+            <div class="status-item">
+                <span class="status-label">Accessibility:</span>
+                <span class="status-value">✅ Keyboard Support</span>
+            </div>
+        </div>
+
+        <div style="margin-top: 30px; padding: 20px; background: rgba(38, 139, 210, 0.1); border-radius: 10px; border-left: 4px solid #268bd2;">
+            <h3 style="margin-top: 0; color: #268bd2;">💡 Features</h3>
+            <ul style="color: #586e75; margin-bottom: 0;">
+                <li>✅ Matches exam application design system</li>
+                <li>✅ Smooth animations and transitions</li>
+                <li>✅ Keyboard support (Escape to close)</li>
+                <li>✅ Click overlay to close</li>
+                <li>✅ Optional details section for error messages</li>
+                <li>✅ Type-specific styling (success, error, warning)</li>
+                <li>✅ Production-ready implementation</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Include the custom alert styles and function from index.html -->
+    <style>
+        /* Copy from index.html - Custom Alert Dialog Styles */
+        .custom-alert-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            backdrop-filter: blur(4px);
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .custom-alert-overlay.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .custom-alert-dialog {
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            max-width: 520px;
+            width: 90%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideUpFade 0.3s ease-out;
+            text-align: center;
+            border: 3px solid #d3cbb7;
+        }
+
+        @keyframes slideUpFade {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .custom-alert-icon {
+            width: 90px;
+            height: 90px;
+            margin: 0 auto 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+            font-size: 48px;
+        }
+
+        .custom-alert-icon.success {
+            background: linear-gradient(135deg, #3d6b1f 0%, #4a7c23 100%);
+        }
+
+        .custom-alert-icon.error {
+            background: linear-gradient(135deg, #e63946 0%, #dc322f 100%);
+        }
+
+        .custom-alert-icon.warning {
+            background: linear-gradient(135deg, #b58900 0%, #cb9900 100%);
+        }
+
+        .custom-alert-title {
+            font-size: 26px;
+            font-weight: 700;
+            color: #073642;
+            margin-bottom: 16px;
+            letter-spacing: -0.3px;
+        }
+
+        .custom-alert-message {
+            font-size: 16px;
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 16px;
+            white-space: pre-line;
+        }
+
+        .custom-alert-details {
+            background: #fdf6e3;
+            border: 2px solid #d3cbb7;
+            border-radius: 8px;
+            padding: 16px;
+            margin: 20px 0;
+            text-align: left;
+            font-size: 14px;
+            color: #586e75;
+            line-height: 1.6;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .custom-alert-button {
+            padding: 16px 48px;
+            border-radius: 10px;
+            font-size: 17px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            margin-top: 8px;
+            min-width: 160px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .custom-alert-button.success {
+            background: linear-gradient(135deg, #3d6b1f 0%, #4a7c23 100%);
+            color: white;
+        }
+
+        .custom-alert-button.error {
+            background: linear-gradient(135deg, #e63946 0%, #dc322f 100%);
+            color: white;
+        }
+
+        .custom-alert-button.warning {
+            background: linear-gradient(135deg, #b58900 0%, #cb9900 100%);
+            color: white;
+        }
+
+        .custom-alert-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        .custom-alert-button:active {
+            transform: translateY(-1px);
+        }
+    </style>
+
+    <script>
+        // Copy from index.html - showCustomAlert function
+        function showCustomAlert(type, title, message, details = '') {
+            // Remove any existing alert
+            const existingAlert = document.querySelector('.custom-alert-overlay');
+            if (existingAlert) {
+                existingAlert.remove();
+            }
+
+            // Create overlay
+            const overlay = document.createElement('div');
+            overlay.className = 'custom-alert-overlay active';
+
+            // Determine icon based on type
+            let icon = '';
+            if (type === 'success') {
+                icon = '✅';
+            } else if (type === 'error') {
+                icon = '❌';
+            } else if (type === 'warning') {
+                icon = '⚠️';
+            }
+
+            // Build details section if provided
+            const detailsHtml = details ? `<div class="custom-alert-details">${details}</div>` : '';
+
+            overlay.innerHTML = `
+                <div class="custom-alert-dialog">
+                    <div class="custom-alert-icon ${type}">
+                        ${icon}
+                    </div>
+                    <h3 class="custom-alert-title">${title}</h3>
+                    <p class="custom-alert-message">${message}</p>
+                    ${detailsHtml}
+                    <button class="custom-alert-button ${type}" id="customAlertBtn">
+                        OK
+                    </button>
+                </div>
+            `;
+
+            document.body.appendChild(overlay);
+
+            // Add event listener to close button
+            document.getElementById('customAlertBtn').addEventListener('click', () => {
+                overlay.remove();
+            });
+
+            // Close on overlay click
+            overlay.addEventListener('click', (e) => {
+                if (e.target === overlay) {
+                    overlay.remove();
+                }
+            });
+
+            // Close on Escape key
+            const escapeHandler = (e) => {
+                if (e.key === 'Escape') {
+                    overlay.remove();
+                    document.removeEventListener('keydown', escapeHandler);
+                }
+            };
+            document.addEventListener('keydown', escapeHandler);
+        }
+
+        // Test functions
+        function testSuccessDialog() {
+            showCustomAlert(
+                'success',
+                'Exam Submitted Successfully!',
+                'Your exam has been submitted and a confirmation email has been sent to the administrator.\n\nThank you for completing the assessment!'
+            );
+        }
+
+        function testSuccessWithDetails() {
+            showCustomAlert(
+                'success',
+                'All Tests Passed!',
+                'The exam system has been successfully validated.',
+                '✅ Custom alerts working\n✅ Email template fixed\n✅ Button text visible\n✅ Header contrast improved'
+            );
+        }
+
+        function testErrorDialog() {
+            showCustomAlert(
+                'error',
+                'Submission Failed',
+                'An unexpected error occurred during exam submission.\n\nPlease try again or contact support.'
+            );
+        }
+
+        function testErrorWithDetails() {
+            showCustomAlert(
+                'error',
+                'Network Error',
+                'Unable to connect to the server.',
+                'Error Code: 500\nError Message: Internal Server Error\nTimestamp: ' + new Date().toLocaleString()
+            );
+        }
+
+        function testWarningDialog() {
+            showCustomAlert(
+                'warning',
+                'Incomplete Submission',
+                'Some questions were not answered.\n\nYour progress has been saved.'
+            );
+        }
+
+        function testConfigError() {
+            showCustomAlert(
+                'warning',
+                'Configuration Error',
+                'EmailJS is not configured properly.',
+                'EmailJS Configuration Error: The email template recipient is not configured. Please set the "To Email" field in EmailJS dashboard to: admin@example.com'
+            );
+        }
+
+        function testEmailError() {
+            showCustomAlert(
+                'warning',
+                'Email Delivery Issue',
+                'Your exam has been submitted and saved locally, but the confirmation email could not be sent.',
+                'Error: Network timeout\n\nPlease contact: admin@example.com'
+            );
+        }
+
+        // Auto-test on load (optional)
+        console.log('✅ Custom Alert Test Suite Loaded');
+        console.log('Click the buttons to test different alert types');
+    </script>
+</body>
+</html>

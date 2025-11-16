@@ -1,0 +1,37 @@
+{
+  "phase_id": 17,
+  "name": "Population Health Management (Base)",
+  "epic": "Epic 18",
+  "story_points": 43,
+  "priority": "P1",
+  "dependencies": [
+    13
+  ],
+  "version": "v2.0",
+  "user_stories": [
+    {
+      "story_id": "18.1",
+      "title": "Chronic Disease Registry",
+      "story_points": 13,
+      "priority": "P1"
+    },
+    {
+      "story_id": "18.2",
+      "title": "Risk Stratification Engine",
+      "story_points": 13,
+      "priority": "P1"
+    },
+    {
+      "story_id": "18.3",
+      "title": "Care Gap Identification",
+      "story_points": 13,
+      "priority": "P1"
+    },
+    {
+      "story_id": "18.4",
+      "title": "Population Health Dashboard",
+      "story_points": 4,
+      "priority": "P2"
+    }
+  ]
+}

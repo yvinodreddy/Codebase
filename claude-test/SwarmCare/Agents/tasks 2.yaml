@@ -1,0 +1,583 @@
+# SwarmCare Tasks Configuration
+# File: config/tasks.yaml
+# This file defines all tasks that can be executed by agents in the SwarmCare system
+
+# ============================================================================
+# DIAGNOSTIC WORKFLOW TASKS
+# ============================================================================
+
+initial_patient_assessment:
+  description: |
+    Conduct a comprehensive initial assessment for patient {patient_id}.
+    
+    Current presenting symptoms: {symptoms}
+    
+    You must:
+    1. Retrieve complete patient medical history and demographics
+    2. Analyze the presenting symptoms in context of patient's medical background
+    3. Identify any red flags or urgent clinical indicators
+    4. Assess the severity and urgency of the patient's condition
+    5. Document any allergies, current medications, and relevant family history
+    6. Generate an initial clinical impression with differential diagnoses
+    
+    Focus on patient safety and thoroughness. If any life-threatening conditions are suspected, 
+    flag them immediately for urgent care.
+  expected_output: |
+    A structured patient assessment report containing:
+    - Patient demographics and contact information
+    - Complete medical history summary
+    - Current symptoms analysis with severity scoring
+    - Medication list with potential interactions flagged
+    - Allergy information
+    - Family history relevance
+    - Initial clinical impression
+    - Red flags or urgent care indicators
+    - Recommended next steps for diagnostic workup
+  agent: triage_nurse
+  output_format: "json"
+  priority: "high"
+  estimated_time: "10-15 minutes"
+
+symptom_analysis:
+  description: |
+    Perform detailed symptom analysis for patient {patient_id} presenting with: {symptoms}
+    
+    Based on the initial assessment, you need to:
+    1. Conduct systematic symptom evaluation using clinical decision tools
+    2. Apply diagnostic criteria and scoring systems where appropriate
+    3. Consider symptom patterns, timing, and associated factors
+    4. Evaluate symptom severity and functional impact
+    5. Cross-reference symptoms with patient's medical history
+    6. Generate a prioritized differential diagnosis list
+    7. Identify symptoms that require immediate attention
+    8. Recommend specific diagnostic tests or consultations
+    
+    Use evidence-based medicine principles and current clinical guidelines.
+  expected_output: |
+    Comprehensive symptom analysis including:
+    - Systematic symptom breakdown with clinical significance
+    - Applied diagnostic criteria and scoring results
+    - Differential diagnosis list (ranked by probability)
+    - Risk stratification assessment
+    - Recommended diagnostic workup with rationale
+    - Urgency level and triage recommendations
+    - Clinical decision support recommendations
+  agent: diagnostic_specialist
+  output_format: "json"
+  priority: "high"
+  estimated_time: "15-20 minutes"
+
+risk_assessment:
+  description: |
+    Conduct comprehensive risk assessment for patient {patient_id}.
+    
+    Consider:
+    - Clinical risk factors based on symptoms: {symptoms}
+    - Patient demographics and comorbidities
+    - Medication risks and interactions
+    - Procedural risks if applicable
+    - Prognostic factors
+    
+    You must:
+    1. Calculate clinical risk scores using validated tools
+    2. Assess cardiovascular, bleeding, and other organ-specific risks
+    3. Evaluate medication-related risks and contraindications
+    4. Consider patient-specific factors (age, frailty, social factors)
+    5. Provide risk mitigation strategies
+    6. Generate risk communication materials for patient/family
+    7. Identify high-risk scenarios requiring specialist input
+    
+    Use evidence-based risk calculators and guidelines.
+  expected_output: |
+    Detailed risk assessment report with:
+    - Calculated risk scores with confidence intervals
+    - Risk category classification (low/moderate/high/very high)
+    - Specific risk factors identified and quantified
+    - Risk mitigation strategies and recommendations
+    - Contraindications and precautions
+    - Patient counseling points about risks
+    - Specialist referral recommendations if high-risk
+    - Monitoring requirements
+  agent: risk_assessment_specialist
+  output_format: "json"
+  priority: "medium"
+  estimated_time: "10-15 minutes"
+
+# ============================================================================
+# TREATMENT PLANNING TASKS
+# ============================================================================
+
+treatment_plan_development:
+  description: |
+    Develop comprehensive treatment plan for patient {patient_id} with diagnosis: {diagnosis}
+    
+    Patient context:
+    - Primary symptoms: {symptoms}
+    - Insurance plan: {insurance_plan}
+    - Risk assessment results: {risk_assessment}
+    
+    Create a personalized treatment plan that includes:
+    1. Evidence-based treatment recommendations
+    2. Medication protocols with dosing and monitoring
+    3. Non-pharmacological interventions
+    4. Lifestyle modifications and patient education
+    5. Follow-up schedule and monitoring protocols
+    6. Alternative treatment options
+    7. Patient preferences and shared decision making
+    8. Cost-effectiveness considerations
+    
+    Ensure plan aligns with current clinical guidelines and patient's insurance coverage.
+  expected_output: |
+    Comprehensive treatment plan including:
+    - Primary treatment recommendations with evidence grades
+    - Detailed medication regimen with monitoring parameters
+    - Non-drug interventions and lifestyle modifications
+    - Patient education materials and counseling points
+    - Follow-up schedule with specific monitoring milestones
+    - Alternative treatment options with pros/cons
+    - Insurance coverage considerations and alternatives
+    - Shared decision-making documentation
+    - Quality measures and outcome indicators
+  agent: treatment_coordinator
+  output_format: "json"
+  priority: "high"
+  estimated_time: "20-30 minutes"
+
+medication_management:
+  description: |
+    Review and optimize medication management for patient {patient_id}.
+    
+    Current clinical context:
+    - Symptoms: {symptoms}
+    - Proposed treatment: {treatment_plan}
+    - Insurance: {insurance_plan}
+    
+    Perform comprehensive medication review:
+    1. Analyze all current medications for interactions
+    2. Check for duplicate therapies and contraindications
+    3. Verify dosing appropriateness for patient factors
+    4. Assess medication adherence barriers
+    5. Review insurance formulary coverage
+    6. Identify cost-saving opportunities
+    7. Provide medication counseling points
+    8. Set up monitoring protocols for safety
+    
+    Prioritize patient safety and optimize therapeutic outcomes.
+  expected_output: |
+    Medication management plan with:
+    - Complete medication reconciliation
+    - Drug interaction analysis with severity ratings
+    - Dosing recommendations with rationale
+    - Insurance coverage status and alternatives
+    - Medication adherence assessment and interventions
+    - Patient counseling materials
+    - Monitoring schedule for drug safety and efficacy
+    - Cost optimization recommendations
+    - Pharmacy coordination requirements
+  agent: pharmacist
+  output_format: "json"
+  priority: "high"
+  estimated_time: "15-20 minutes"
+
+# ============================================================================
+# CARE COORDINATION TASKS
+# ============================================================================
+
+specialist_referral_coordination:
+  description: |
+    Coordinate specialist referrals for patient {patient_id} based on diagnosis and treatment needs.
+    
+    Clinical context:
+    - Patient symptoms: {symptoms}
+    - Diagnosis: {diagnosis}
+    - Insurance plan: {insurance_plan}
+    - Patient location: {patient_location}
+    
+    Coordinate appropriate specialist care:
+    1. Identify required specialist consultations
+    2. Find in-network specialists within reasonable distance
+    3. Check specialist availability and wait times
+    4. Verify insurance coverage and authorization requirements
+    5. Prioritize referrals based on urgency
+    6. Prepare comprehensive referral documentation
+    7. Coordinate care transitions and communication
+    8. Set up patient follow-up tracking
+    
+    Ensure seamless care coordination and optimal patient access.
+  expected_output: |
+    Specialist referral coordination plan including:
+    - List of required specialist consultations with rationale
+    - Identified in-network specialists with contact information
+    - Appointment availability and estimated wait times
+    - Insurance authorization status and requirements
+    - Referral priority ranking with timeline
+    - Prepared referral letters with clinical summaries
+    - Care coordination communication plan
+    - Patient tracking and follow-up schedule
+    - Alternative options if primary choices unavailable
+  agent: care_coordinator
+  output_format: "json"
+  priority: "medium"
+  estimated_time: "15-25 minutes"
+
+insurance_authorization:
+  description: |
+    Handle insurance authorization and coverage verification for patient {patient_id}.
+    
+    Authorization requirements:
+    - Insurance plan: {insurance_plan}
+    - Proposed treatments: {treatment_plan}
+    - Specialist referrals: {specialist_referrals}
+    - Diagnostic tests: {diagnostic_tests}
+    
+    Manage insurance processes:
+    1. Verify current insurance coverage and benefits
+    2. Check authorization requirements for treatments
+    3. Submit prior authorization requests
+    4. Identify coverage gaps and alternatives
+    5. Calculate patient cost responsibilities
+    6. Appeal denied claims if appropriate
+    7. Coordinate with providers on coverage issues
+    8. Provide patient financial counseling
+    
+    Maximize coverage while minimizing patient financial burden.
+  expected_output: |
+    Insurance coordination summary with:
+    - Coverage verification results
+    - Authorization status for all treatments/services
+    - Prior authorization submissions with tracking numbers
+    - Coverage gaps identified with alternative solutions
+    - Patient cost estimates (copays, deductibles, coinsurance)
+    - Appeals submitted with justification
+    - Provider communication regarding coverage
+    - Patient financial assistance options
+    - Timeline for authorization decisions
+  agent: insurance_specialist
+  output_format: "json"
+  priority: "medium"
+  estimated_time: "20-30 minutes"
+
+# ============================================================================
+# MONITORING AND FOLLOW-UP TASKS
+# ============================================================================
+
+monitoring_protocol_setup:
+  description: |
+    Establish monitoring protocols for patient {patient_id} based on treatment plan.
+    
+    Treatment context:
+    - Diagnosis: {diagnosis}
+    - Treatment plan: {treatment_plan}
+    - Risk factors: {risk_factors}
+    - Insurance: {insurance_plan}
+    
+    Set up comprehensive monitoring:
+    1. Define clinical monitoring parameters and schedules
+    2. Establish laboratory and diagnostic test protocols
+    3. Set up symptom tracking and patient-reported outcomes
+    4. Create safety monitoring for medications/treatments
+    5. Define escalation criteria and emergency protocols
+    6. Schedule regular follow-up appointments
+    7. Set up patient communication preferences
+    8. Establish quality metrics and outcome measures
+    
+    Ensure patient safety and optimize treatment outcomes.
+  expected_output: |
+    Monitoring protocol plan including:
+    - Clinical monitoring schedule with specific parameters
+    - Laboratory/diagnostic test calendar with rationale
+    - Patient-reported outcome measures and collection methods
+    - Medication safety monitoring protocols
+    - Escalation criteria and emergency contact procedures
+    - Follow-up appointment schedule with provider types
+    - Patient communication plan and preferences
+    - Quality metrics and outcome tracking methods
+    - Technology tools for remote monitoring if applicable
+  agent: care_coordinator
+  output_format: "json"
+  priority: "medium"
+  estimated_time: "15-20 minutes"
+
+patient_education:
+  description: |
+    Develop comprehensive patient education plan for patient {patient_id}.
+    
+    Educational needs based on:
+    - Diagnosis: {diagnosis}
+    - Treatment plan: {treatment_plan}
+    - Patient demographics: {patient_demographics}
+    - Health literacy level: {health_literacy}
+    
+    Create personalized education materials:
+    1. Assess patient's learning preferences and barriers
+    2. Develop condition-specific education materials
+    3. Create medication education and adherence tools
+    4. Design lifestyle modification guidance
+    5. Provide emergency warning signs education
+    6. Develop family/caregiver education materials
+    7. Create follow-up education schedule
+    8. Establish education outcome measures
+    
+    Ensure materials are culturally appropriate and accessible.
+  expected_output: |
+    Patient education plan with:
+    - Learning assessment and preferred education methods
+    - Customized educational materials for condition/treatment
+    - Medication education tools and adherence aids
+    - Lifestyle modification guides and resources
+    - Emergency symptom recognition and action plans
+    - Family/caregiver education materials
+    - Education delivery schedule and methods
+    - Outcome measures for education effectiveness
+    - Cultural and language considerations addressed
+  agent: patient_educator
+  output_format: "json"
+  priority: "low"
+  estimated_time: "10-15 minutes"
+
+# ============================================================================
+# QUALITY ASSURANCE TASKS
+# ============================================================================
+
+clinical_guidelines_review:
+  description: |
+    Review care plan against current clinical guidelines for patient {patient_id}.
+    
+    Review parameters:
+    - Diagnosis: {diagnosis}
+    - Treatment plan: {treatment_plan}
+    - Risk assessment: {risk_assessment}
+    - Current guidelines version: {guidelines_version}
+    
+    Conduct comprehensive guideline review:
+    1. Compare treatment plan to current evidence-based guidelines
+    2. Identify any deviations and provide justification requirements
+    3. Check for missed opportunities or recommendations
+    4. Verify quality measures are being addressed
+    5. Assess adherence to safety protocols
+    6. Review preventive care opportunities
+    7. Validate clinical decision support recommendations
+    8. Ensure documentation meets quality standards
+    
+    Maintain highest standards of evidence-based care.
+  expected_output: |
+    Guidelines compliance review including:
+    - Guideline adherence assessment with compliance scoring
+    - Identified deviations with clinical justification requirements
+    - Missed opportunities and additional recommendations
+    - Quality measure compliance status
+    - Safety protocol adherence verification
+    - Preventive care opportunities identified
+    - Clinical decision support validation
+    - Documentation quality assessment
+    - Recommendations for plan optimization
+  agent: quality_assurance_specialist
+  output_format: "json"
+  priority: "low"
+  estimated_time: "10-15 minutes"
+
+outcome_prediction:
+  description: |
+    Predict patient outcomes and generate prognosis for patient {patient_id}.
+    
+    Prognostic factors:
+    - Diagnosis: {diagnosis}
+    - Treatment plan: {treatment_plan}
+    - Risk factors: {risk_factors}
+    - Patient characteristics: {patient_demographics}
+    
+    Generate evidence-based predictions:
+    1. Apply validated prognostic models and calculators
+    2. Analyze treatment response predictions
+    3. Estimate functional outcome probabilities
+    4. Calculate quality of life projections
+    5. Assess treatment compliance likelihood
+    6. Predict potential complications and timeline
+    7. Generate patient counseling materials about prognosis
+    8. Identify factors that could improve outcomes
+    
+    Provide realistic, evidence-based prognostic information.
+  expected_output: |
+    Outcome prediction report with:
+    - Prognostic model results with confidence intervals
+    - Treatment response probability estimates
+    - Functional outcome predictions with timeline
+    - Quality of life projections
+    - Compliance prediction and improvement strategies
+    - Potential complication risks and prevention
+    - Patient-friendly prognostic information
+    - Modifiable factors for outcome improvement
+    - Uncertainty acknowledgment and scenario planning
+  agent: outcomes_analyst
+  output_format: "json"
+  priority: "low"
+  estimated_time: "15-20 minutes"
+
+# ============================================================================
+# EMERGENCY AND URGENT CARE TASKS
+# ============================================================================
+
+urgent_triage:
+  description: |
+    Perform urgent triage assessment for patient {patient_id} with acute symptoms.
+    
+    Urgent presentation:
+    - Chief complaint: {symptoms}
+    - Onset and duration: {symptom_onset}
+    - Severity: {symptom_severity}
+    - Vital signs: {vital_signs}
+    
+    Immediate triage priorities:
+    1. Assess for life-threatening conditions requiring immediate intervention
+    2. Apply standardized triage protocols (ESI, CTAS, etc.)
+    3. Determine appropriate level of care (ED, urgent care, clinic)
+    4. Identify need for emergency interventions
+    5. Coordinate immediate diagnostic workup
+    6. Ensure appropriate monitoring and safety measures
+    7. Communicate urgency to receiving providers
+    8. Document triage decision rationale
+    
+    Prioritize patient safety and appropriate resource utilization.
+  expected_output: |
+    Urgent triage assessment with:
+    - Triage category and acuity level assignment
+    - Life-threatening condition screening results
+    - Recommended care setting and timeline
+    - Immediate intervention requirements
+    - Priority diagnostic studies needed
+    - Monitoring and safety protocols
+    - Provider communication priorities
+    - Resource allocation recommendations
+    - Disposition planning considerations
+  agent: emergency_triage_nurse
+  output_format: "json"
+  priority: "critical"
+  estimated_time: "5-10 minutes"
+
+crisis_intervention:
+  description: |
+    Manage crisis intervention for patient {patient_id} experiencing mental health emergency.
+    
+    Crisis context:
+    - Mental health symptoms: {mental_health_symptoms}
+    - Risk assessment: {suicide_risk}
+    - Support system: {support_system}
+    - Previous interventions: {previous_interventions}
+    
+    Immediate crisis management:
+    1. Conduct comprehensive suicide/harm risk assessment
+    2. Implement immediate safety measures
+    3. Engage patient in crisis de-escalation
+    4. Coordinate with emergency services if needed
+    5. Activate support systems and resources
+    6. Develop immediate safety plan
+    7. Arrange appropriate level of psychiatric care
+    8. Ensure continuous monitoring and follow-up
+    
+    Focus on immediate safety and stabilization.
+  expected_output: |
+    Crisis intervention plan including:
+    - Comprehensive risk assessment with safety planning
+    - Immediate interventions implemented
+    - De-escalation techniques used and effectiveness
+    - Emergency services coordination if required
+    - Support system activation and engagement
+    - Safety plan with coping strategies and contacts
+    - Psychiatric care level determination and coordination
+    - Continuous monitoring plan and follow-up schedule
+    - Documentation for continuity of care
+  agent: mental_health_crisis_specialist
+  output_format: "json"
+  priority: "critical"
+  estimated_time: "30-45 minutes"
+
+# ============================================================================
+# PREVENTIVE CARE TASKS
+# ============================================================================
+
+preventive_care_screening:
+  description: |
+    Review and coordinate preventive care screening for patient {patient_id}.
+    
+    Patient profile:
+    - Age: {patient_age}
+    - Gender: {patient_gender}
+    - Risk factors: {risk_factors}
+    - Insurance: {insurance_plan}
+    - Last screening dates: {previous_screenings}
+    
+    Comprehensive preventive care review:
+    1. Apply age and gender-appropriate screening guidelines
+    2. Assess individual risk factors for targeted screening
+    3. Review overdue or upcoming screening needs
+    4. Verify insurance coverage for preventive services
+    5. Coordinate scheduling with appropriate providers
+    6. Provide patient education about screening importance
+    7. Set up reminder systems for future screenings
+    8. Address barriers to preventive care access
+    
+    Optimize preventive care delivery and patient engagement.
+  expected_output: |
+    Preventive care plan with:
+    - Current screening status assessment
+    - Overdue screenings identified with prioritization
+    - Upcoming screening recommendations with timeline
+    - Insurance coverage verification for all services
+    - Provider coordination and scheduling assistance
+    - Patient education materials for screening preparation
+    - Reminder system setup for future preventive care
+    - Barrier assessment and mitigation strategies
+    - Quality metrics for preventive care delivery
+  agent: preventive_care_coordinator
+  output_format: "json"
+  priority: "low"
+  estimated_time: "10-15 minutes"
+
+# ============================================================================
+# TASK METADATA AND CONFIGURATION
+# ============================================================================
+
+# Global task settings
+task_defaults:
+  timeout: 1800  # 30 minutes default timeout
+  retry_attempts: 3
+  retry_delay: 60  # seconds
+  logging_level: "INFO"
+  output_validation: true
+  context_preservation: true
+
+# Task dependencies and relationships
+task_workflows:
+  diagnostic_workflow:
+    - initial_patient_assessment
+    - symptom_analysis
+    - risk_assessment
+    - treatment_plan_development
+    - specialist_referral_coordination
+    - monitoring_protocol_setup
+
+  treatment_workflow:
+    - treatment_plan_development
+    - medication_management
+    - insurance_authorization
+    - patient_education
+    - monitoring_protocol_setup
+
+  emergency_workflow:
+    - urgent_triage
+    - crisis_intervention
+    - treatment_plan_development
+    - monitoring_protocol_setup
+
+  preventive_workflow:
+    - preventive_care_screening
+    - insurance_authorization
+    - patient_education
+
+# Quality metrics for tasks
+quality_metrics:
+  completion_rate: 0.95
+  accuracy_threshold: 0.90
+  patient_satisfaction: 0.85
+  guideline_adherence: 0.95
+  timeliness: 0.90

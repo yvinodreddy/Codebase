@@ -1,0 +1,64 @@
+{
+  "execution_id": "4f6ce5ea-c5c8-4b87-85a7-a0b3d22e6238",
+  "workflow_id": "status_workflow",
+  "state": "COMPLETED",
+  "tasks": {
+    "status": {
+      "task_id": "status",
+      "name": "Status Task",
+      "action": "status_task",
+      "dependencies": [],
+      "max_retries": 3,
+      "timeout_seconds": 300,
+      "state": "COMPLETED",
+      "result": {
+        "status": "ok"
+      },
+      "error": null,
+      "start_time": 1761650890.6707737,
+      "end_time": 1761650890.6708217,
+      "retry_count": 0
+    }
+  },
+  "context": {},
+  "start_time": 1761650890.6706867,
+  "end_time": 1761650890.6708703,
+  "error": null,
+  "audit_log": [
+    {
+      "timestamp": "2025-10-28T07:28:10.670708",
+      "execution_id": "4f6ce5ea-c5c8-4b87-85a7-a0b3d22e6238",
+      "event": "WORKFLOW_STARTED",
+      "details": {
+        "workflow_id": "status_workflow"
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:28:10.670813",
+      "execution_id": "4f6ce5ea-c5c8-4b87-85a7-a0b3d22e6238",
+      "event": "TASK_STARTED",
+      "details": {
+        "task_id": "status",
+        "task_name": "Status Task"
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:28:10.670864",
+      "execution_id": "4f6ce5ea-c5c8-4b87-85a7-a0b3d22e6238",
+      "event": "TASK_COMPLETED",
+      "details": {
+        "task_id": "status",
+        "duration_seconds": 4.792213439941406e-05,
+        "attempt": 1
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:28:10.670910",
+      "execution_id": "4f6ce5ea-c5c8-4b87-85a7-a0b3d22e6238",
+      "event": "WORKFLOW_COMPLETED",
+      "details": {
+        "duration_seconds": 0.00018358230590820312
+      }
+    }
+  ]
+}

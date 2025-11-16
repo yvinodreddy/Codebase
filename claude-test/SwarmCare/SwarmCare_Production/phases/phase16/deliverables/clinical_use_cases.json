@@ -1,0 +1,275 @@
+[
+  {
+    "use_case_id": "UC001",
+    "title": "Early Sepsis Detection and Intervention",
+    "clinical_scenario": "A 68-year-old patient with diabetes presents with subtle vital sign changes that could indicate early sepsis.",
+    "patient_profile": {
+      "age": 68,
+      "gender": "Female",
+      "primary_diagnosis": "Type 2 Diabetes Mellitus",
+      "comorbidities": ["Hypertension", "Chronic Kidney Disease Stage 3"],
+      "current_vitals": {
+        "temperature": 37.8,
+        "heart_rate": 98,
+        "respiratory_rate": 22,
+        "blood_pressure": "145/88",
+        "oxygen_saturation": 94
+      }
+    },
+    "ai_prediction": {
+      "risk_level": "High",
+      "confidence": 0.84,
+      "primary_concern": "Early sepsis indicators"
+    },
+    "explanation_provided": {
+      "shap_top_features": [
+        "Elevated respiratory rate (22 bpm) - contributing +0.18",
+        "Borderline temperature (37.8°C) - contributing +0.12",
+        "Decreased oxygen saturation (94%) - contributing +0.15",
+        "Age factor (68 years) - contributing +0.14"
+      ],
+      "lime_rules": [
+        "IF respiratory_rate > 20 AND temp > 37.5 THEN sepsis_risk = HIGH (weight: 0.31)",
+        "IF oxygen_sat < 95 AND age > 65 THEN deterioration_risk = HIGH (weight: 0.24)"
+      ],
+      "clinical_reasoning": "Pattern suggests early inflammatory response with compensatory tachypnea. Combination of subtle vital sign changes in diabetic patient warrants immediate evaluation for infection source."
+    },
+    "clinical_action_taken": {
+      "immediate_actions": [
+        "Ordered stat complete blood count with differential",
+        "Blood cultures x2 from separate sites",
+        "Lactate level measurement",
+        "Urinalysis and culture"
+      ],
+      "outcome": "Blood cultures confirmed E. coli bacteremia. Early antibiotic administration within 1 hour of flag prevented progression to septic shock.",
+      "time_saved_hours": 4,
+      "outcome_improvement": "Patient avoided ICU admission through early intervention"
+    },
+    "lessons_learned": [
+      "AI-driven early warning enabled intervention before traditional sepsis criteria were met",
+      "Explainable predictions helped clinician trust subtle warning signs",
+      "Feature importance aligned with clinical knowledge of sepsis presentation"
+    ],
+    "explainability_value": "High - Explanations convinced emergency physician to order comprehensive workup despite only subtle vital sign changes"
+  },
+  {
+    "use_case_id": "UC002",
+    "title": "Cardiac Event Risk Stratification",
+    "clinical_scenario": "A 72-year-old patient post-MI with fluctuating vital signs requiring risk assessment for cardiac complications.",
+    "patient_profile": {
+      "age": 72,
+      "gender": "Male",
+      "primary_diagnosis": "Acute Myocardial Infarction (2 days post-event)",
+      "comorbidities": ["Heart Failure", "Atrial Fibrillation", "Dyslipidemia"],
+      "current_vitals": {
+        "temperature": 36.9,
+        "heart_rate": 105,
+        "respiratory_rate": 20,
+        "blood_pressure": "158/95",
+        "oxygen_saturation": 93
+      }
+    },
+    "ai_prediction": {
+      "risk_level": "High",
+      "confidence": 0.89,
+      "primary_concern": "Cardiac decompensation risk"
+    },
+    "explanation_provided": {
+      "shap_top_features": [
+        "Elevated heart rate variability - contributing +0.22",
+        "Increasing blood pressure trend - contributing +0.19",
+        "Borderline oxygen saturation - contributing +0.16",
+        "Multiple cardiac comorbidities - contributing +0.21"
+      ],
+      "attention_visualization": "Model focusing heavily on heart rate patterns (head 0: 0.28), BP trends (head 2: 0.24), and historical cardiac events (head 5: 0.19)",
+      "decision_explanation": "Risk assessment based on combination of hemodynamic instability, compensatory mechanisms, and high-risk cardiac history suggesting potential for acute decompensation"
+    },
+    "clinical_action_taken": {
+      "immediate_actions": [
+        "Transferred to cardiac telemetry unit",
+        "Cardiology consultation ordered",
+        "Echocardiogram scheduled",
+        "Adjusted diuretic and beta-blocker dosing"
+      ],
+      "outcome": "Echo revealed declining ejection fraction (30%). Medication optimization and closer monitoring prevented heart failure exacerbation requiring ICU care.",
+      "time_saved_hours": 12,
+      "outcome_improvement": "Proactive intervention prevented heart failure decompensation and potential need for mechanical support"
+    },
+    "lessons_learned": [
+      "Attention weights highlighted vital sign patterns not immediately obvious to human observers",
+      "Integration of historical cardiac events improved risk prediction accuracy",
+      "Transparent risk scoring facilitated shared decision-making with cardiology team"
+    ],
+    "explainability_value": "Critical - Detailed feature contributions justified escalation of care level and specialist involvement"
+  },
+  {
+    "use_case_id": "UC003",
+    "title": "Post-Operative Respiratory Decline Prevention",
+    "clinical_scenario": "A 55-year-old patient 24 hours post-abdominal surgery with early signs of respiratory compromise.",
+    "patient_profile": {
+      "age": 55,
+      "gender": "Female",
+      "primary_diagnosis": "Post-operative laparoscopic cholecystectomy",
+      "comorbidities": ["Obesity (BMI 34)", "Sleep Apnea"],
+      "current_vitals": {
+        "temperature": 37.2,
+        "heart_rate": 88,
+        "respiratory_rate": 24,
+        "blood_pressure": "138/82",
+        "oxygen_saturation": 92
+      }
+    },
+    "ai_prediction": {
+      "risk_level": "Medium-High",
+      "confidence": 0.81,
+      "primary_concern": "Respiratory insufficiency developing"
+    },
+    "explanation_provided": {
+      "shap_top_features": [
+        "Elevated respiratory rate (24 bpm) - contributing +0.21",
+        "Declining oxygen saturation trend - contributing +0.19",
+        "Obesity + sleep apnea interaction - contributing +0.17",
+        "Post-operative status - contributing +0.13"
+      ],
+      "lime_rules": [
+        "IF resp_rate > 22 AND obesity = TRUE AND post_op < 48hrs THEN respiratory_risk = HIGH (weight: 0.35)",
+        "IF oxygen_sat_trend = declining AND sleep_apnea = TRUE THEN intervention_needed = YES (weight: 0.28)"
+      ],
+      "clinical_reasoning": "Combination of increased work of breathing, obesity-related restriction, and sleep apnea creates high risk for rapid deterioration. Early intervention critical."
+    },
+    "clinical_action_taken": {
+      "immediate_actions": [
+        "Initiated supplemental oxygen therapy",
+        "Ordered incentive spirometry with respiratory therapy",
+        "Increased monitoring frequency to every 2 hours",
+        "Arranged chest X-ray to rule out atelectasis/pneumonia",
+        "Adjusted pain management to optimize respiratory effort"
+      ],
+      "outcome": "CXR showed bilateral lower lobe atelectasis. Aggressive pulmonary hygiene and oxygen support prevented need for re-intubation. Patient recovered without complications.",
+      "time_saved_hours": 8,
+      "outcome_improvement": "Avoided potential ICU transfer and mechanical ventilation"
+    },
+    "lessons_learned": [
+      "Feature interaction detection (obesity + sleep apnea + post-op) provided superior risk assessment",
+      "Trend analysis of oxygen saturation more valuable than single point measurement",
+      "Explainable predictions enabled early mobilization of respiratory therapy resources"
+    ],
+    "explainability_value": "High - Rule-based explanations were immediately actionable and aligned with respiratory care protocols"
+  },
+  {
+    "use_case_id": "UC004",
+    "title": "Elderly Patient Fall Risk and Delirium Prevention",
+    "clinical_scenario": "An 82-year-old patient with multiple medications showing subtle cognitive changes and mobility concerns.",
+    "patient_profile": {
+      "age": 82,
+      "gender": "Male",
+      "primary_diagnosis": "Pneumonia",
+      "comorbidities": ["Dementia", "Parkinson's Disease", "Polypharmacy (14 medications)"],
+      "current_vitals": {
+        "temperature": 37.4,
+        "heart_rate": 76,
+        "respiratory_rate": 18,
+        "blood_pressure": "125/75",
+        "oxygen_saturation": 95
+      }
+    },
+    "ai_prediction": {
+      "risk_level": "High",
+      "confidence": 0.87,
+      "primary_concern": "Delirium and fall risk"
+    },
+    "explanation_provided": {
+      "shap_top_features": [
+        "Advanced age (82 years) - contributing +0.24",
+        "Polypharmacy (14 medications) - contributing +0.19",
+        "Baseline cognitive impairment - contributing +0.18",
+        "Acute infection context - contributing +0.15",
+        "Movement disorder (Parkinson's) - contributing +0.12"
+      ],
+      "decision_explanation": "High risk profile due to confluence of delirium risk factors: advanced age, baseline dementia, polypharmacy, and acute illness. Combination significantly increases fall risk and adverse outcomes.",
+      "recommendations": [
+        "Implement enhanced fall prevention protocols",
+        "Review and reduce medications where possible",
+        "Increase reorientation interventions",
+        "Consider physical therapy evaluation",
+        "Family presence encouraged for cognitive support"
+      ]
+    },
+    "clinical_action_taken": {
+      "immediate_actions": [
+        "Activated enhanced fall precautions protocol",
+        "Pharmacist medication reconciliation - reduced to 10 essential medications",
+        "Hourly rounding with reorientation",
+        "Moved to room closer to nursing station",
+        "Family education on delirium prevention strategies"
+      ],
+      "outcome": "Patient remained oriented throughout hospitalization. No falls occurred. Medication reduction improved mental clarity and reduced confusion episodes.",
+      "time_saved_hours": "N/A",
+      "outcome_improvement": "Prevented likely fall event and delirium episode, reducing length of stay by estimated 3-4 days"
+    },
+    "lessons_learned": [
+      "AI identified polypharmacy as modifiable risk factor, prompting medication review",
+      "Multi-factor risk assessment provided comprehensive prevention strategy",
+      "Explainable predictions facilitated family engagement in prevention plan"
+    ],
+    "explainability_value": "Critical - Detailed risk factor breakdown enabled targeted interventions addressing specific modifiable factors"
+  },
+  {
+    "use_case_id": "UC005",
+    "title": "Chronic Disease Exacerbation in Complex Patient",
+    "clinical_scenario": "A 64-year-old patient with multiple chronic conditions showing early signs of COPD exacerbation.",
+    "patient_profile": {
+      "age": 64,
+      "gender": "Female",
+      "primary_diagnosis": "COPD Exacerbation",
+      "comorbidities": ["Heart Failure", "Diabetes", "Chronic Kidney Disease", "Obesity"],
+      "current_vitals": {
+        "temperature": 37.6,
+        "heart_rate": 92,
+        "respiratory_rate": 26,
+        "blood_pressure": "142/88",
+        "oxygen_saturation": 91
+      }
+    },
+    "ai_prediction": {
+      "risk_level": "High",
+      "confidence": 0.92,
+      "primary_concern": "Multi-system decompensation risk"
+    },
+    "explanation_provided": {
+      "shap_top_features": [
+        "Elevated respiratory rate (26 bpm) - contributing +0.23",
+        "Low oxygen saturation (91%) - contributing +0.21",
+        "Complex comorbidity interactions - contributing +0.20",
+        "Recent medication non-adherence pattern - contributing +0.14",
+        "Declining trend over 72 hours - contributing +0.13"
+      ],
+      "lime_rules": [
+        "IF resp_rate > 24 AND oxygen_sat < 92 AND COPD = TRUE THEN exacerbation_severe = HIGH (weight: 0.42)",
+        "IF HF = TRUE AND COPD = TRUE AND CKD = TRUE THEN complication_risk = VERY_HIGH (weight: 0.38)"
+      ],
+      "attention_visualization": "Model showing high attention to respiratory parameters (heads 0,2,4) and comorbidity interaction patterns (heads 1,5,7)",
+      "clinical_reasoning": "COPD-heart failure interaction creates risk spiral. Respiratory compromise may precipitate heart failure decompensation while fluid overload worsens gas exchange. Requires carefully balanced intervention."
+    },
+    "clinical_action_taken": {
+      "immediate_actions": [
+        "Pulmonology and cardiology co-consultation",
+        "Careful diuretic dosing with renal function monitoring",
+        "Bronchodilator optimization",
+        "Started antibiotics and corticosteroids for COPD exacerbation",
+        "Close monitoring of fluid status and oxygenation",
+        "Coordinated care plan addressing multiple conditions"
+      ],
+      "outcome": "Successfully managed exacerbation while avoiding fluid overload. Careful attention to drug-disease and disease-disease interactions prevented cascade of complications. Patient discharged in stable condition with improved disease management plan.",
+      "time_saved_hours": 6,
+      "outcome_improvement": "Prevented ICU admission and likely intubation through early coordinated multi-specialty intervention"
+    },
+    "lessons_learned": [
+      "AI detection of comorbidity interactions enabled coordinated multi-specialty approach",
+      "Attention mechanism revealed complex disease interaction patterns",
+      "Transparent reasoning facilitated agreement between pulmonary and cardiac teams on treatment strategy",
+      "Trend analysis over 72 hours provided earlier warning than point-in-time assessment"
+    ],
+    "explainability_value": "Critical - Complex multi-system explanations were essential for coordinating care across specialties and preventing conflicting treatment approaches"
+  }
+]

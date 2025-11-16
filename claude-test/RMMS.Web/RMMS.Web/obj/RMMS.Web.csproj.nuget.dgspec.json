@@ -1,0 +1,506 @@
+{
+  "format": 1,
+  "restore": {
+    "/home/user01/claude-test/RMMS.Web/RMMS.Web/RMMS.Web.csproj": {}
+  },
+  "projects": {
+    "/home/user01/claude-test/RMMS.Web/RMMS.Common/RMMS.Common.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/user01/claude-test/RMMS.Web/RMMS.Common/RMMS.Common.csproj",
+        "projectName": "RMMS.Common",
+        "projectPath": "/home/user01/claude-test/RMMS.Web/RMMS.Common/RMMS.Common.csproj",
+        "packagesPath": "/home/user01/.nuget/packages/",
+        "outputPath": "/home/user01/claude-test/RMMS.Web/RMMS.Common/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/user01/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "noWarn": [
+            "NU1701"
+          ],
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "BCrypt.Net-Next": {
+              "target": "Package",
+              "version": "[4.0.3, )"
+            },
+            "ClosedXML": {
+              "target": "Package",
+              "version": "[0.105.0, )"
+            },
+            "iTextSharp": {
+              "target": "Package",
+              "version": "[5.5.13.4, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.121/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/user01/claude-test/RMMS.Web/RMMS.DataAccess/RMMS.DataAccess.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/user01/claude-test/RMMS.Web/RMMS.DataAccess/RMMS.DataAccess.csproj",
+        "projectName": "RMMS.DataAccess",
+        "projectPath": "/home/user01/claude-test/RMMS.Web/RMMS.DataAccess/RMMS.DataAccess.csproj",
+        "packagesPath": "/home/user01/.nuget/packages/",
+        "outputPath": "/home/user01/claude-test/RMMS.Web/RMMS.DataAccess/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/user01/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "/home/user01/claude-test/RMMS.Web/RMMS.Common/RMMS.Common.csproj": {
+                "projectPath": "/home/user01/claude-test/RMMS.Web/RMMS.Common/RMMS.Common.csproj"
+              },
+              "/home/user01/claude-test/RMMS.Web/RMMS.Models/RMMS.Models.csproj": {
+                "projectPath": "/home/user01/claude-test/RMMS.Web/RMMS.Models/RMMS.Models.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "noWarn": [
+            "NU1701"
+          ],
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.Data.SqlClient": {
+              "target": "Package",
+              "version": "[6.1.1, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Microsoft.Extensions.Configuration": {
+              "target": "Package",
+              "version": "[9.0.9, )"
+            },
+            "Microsoft.Extensions.Configuration.Abstractions": {
+              "target": "Package",
+              "version": "[9.0.9, )"
+            },
+            "Microsoft.Extensions.Configuration.Json": {
+              "target": "Package",
+              "version": "[9.0.9, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.121/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/user01/claude-test/RMMS.Web/RMMS.Models/RMMS.Models.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/user01/claude-test/RMMS.Web/RMMS.Models/RMMS.Models.csproj",
+        "projectName": "RMMS.Models",
+        "projectPath": "/home/user01/claude-test/RMMS.Web/RMMS.Models/RMMS.Models.csproj",
+        "packagesPath": "/home/user01/.nuget/packages/",
+        "outputPath": "/home/user01/claude-test/RMMS.Web/RMMS.Models/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/user01/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "/home/user01/claude-test/RMMS.Web/RMMS.Common/RMMS.Common.csproj": {
+                "projectPath": "/home/user01/claude-test/RMMS.Web/RMMS.Common/RMMS.Common.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "noWarn": [
+            "NU1701"
+          ],
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.121/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/user01/claude-test/RMMS.Web/RMMS.Services/RMMS.Services.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/user01/claude-test/RMMS.Web/RMMS.Services/RMMS.Services.csproj",
+        "projectName": "RMMS.Services",
+        "projectPath": "/home/user01/claude-test/RMMS.Web/RMMS.Services/RMMS.Services.csproj",
+        "packagesPath": "/home/user01/.nuget/packages/",
+        "outputPath": "/home/user01/claude-test/RMMS.Web/RMMS.Services/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/user01/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "/home/user01/claude-test/RMMS.Web/RMMS.Common/RMMS.Common.csproj": {
+                "projectPath": "/home/user01/claude-test/RMMS.Web/RMMS.Common/RMMS.Common.csproj"
+              },
+              "/home/user01/claude-test/RMMS.Web/RMMS.DataAccess/RMMS.DataAccess.csproj": {
+                "projectPath": "/home/user01/claude-test/RMMS.Web/RMMS.DataAccess/RMMS.DataAccess.csproj"
+              },
+              "/home/user01/claude-test/RMMS.Web/RMMS.Models/RMMS.Models.csproj": {
+                "projectPath": "/home/user01/claude-test/RMMS.Web/RMMS.Models/RMMS.Models.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "noWarn": [
+            "NU1701"
+          ],
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "EPPlus": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "Hangfire.Core": {
+              "target": "Package",
+              "version": "[1.8.17, )"
+            },
+            "Microsoft.Data.SqlClient": {
+              "target": "Package",
+              "version": "[6.1.1, )"
+            },
+            "Microsoft.Extensions.Hosting.Abstractions": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "QuestPDF": {
+              "target": "Package",
+              "version": "[2024.10.3, )"
+            },
+            "SixLabors.ImageSharp": {
+              "target": "Package",
+              "version": "[3.1.11, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.121/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/user01/claude-test/RMMS.Web/RMMS.Web/RMMS.Web.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/user01/claude-test/RMMS.Web/RMMS.Web/RMMS.Web.csproj",
+        "projectName": "RMMS.Web",
+        "projectPath": "/home/user01/claude-test/RMMS.Web/RMMS.Web/RMMS.Web.csproj",
+        "packagesPath": "/home/user01/.nuget/packages/",
+        "outputPath": "/home/user01/claude-test/RMMS.Web/RMMS.Web/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/user01/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "/home/user01/claude-test/RMMS.Web/RMMS.Common/RMMS.Common.csproj": {
+                "projectPath": "/home/user01/claude-test/RMMS.Web/RMMS.Common/RMMS.Common.csproj"
+              },
+              "/home/user01/claude-test/RMMS.Web/RMMS.Models/RMMS.Models.csproj": {
+                "projectPath": "/home/user01/claude-test/RMMS.Web/RMMS.Models/RMMS.Models.csproj"
+              },
+              "/home/user01/claude-test/RMMS.Web/RMMS.Services/RMMS.Services.csproj": {
+                "projectPath": "/home/user01/claude-test/RMMS.Web/RMMS.Services/RMMS.Services.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "noWarn": [
+            "NU1701"
+          ],
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Asp.Versioning.Mvc": {
+              "target": "Package",
+              "version": "[8.1.0, )"
+            },
+            "Asp.Versioning.Mvc.ApiExplorer": {
+              "target": "Package",
+              "version": "[8.1.0, )"
+            },
+            "AspNetCore.HealthChecks.SqlServer": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "AspNetCore.HealthChecks.UI": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "AspNetCore.HealthChecks.UI.Client": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "AspNetCore.HealthChecks.UI.InMemory.Storage": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "AspNetCoreRateLimit": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
+            "BCrypt.Net-Next": {
+              "target": "Package",
+              "version": "[4.0.3, )"
+            },
+            "ClosedXML": {
+              "target": "Package",
+              "version": "[0.105.0, )"
+            },
+            "FirebaseAdmin": {
+              "target": "Package",
+              "version": "[3.0.0, )"
+            },
+            "Hangfire.AspNetCore": {
+              "target": "Package",
+              "version": "[1.8.17, )"
+            },
+            "Hangfire.Core": {
+              "target": "Package",
+              "version": "[1.8.17, )"
+            },
+            "Hangfire.SqlServer": {
+              "target": "Package",
+              "version": "[1.8.17, )"
+            },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Microsoft.AspNetCore.SignalR": {
+              "target": "Package",
+              "version": "[1.1.0, )"
+            },
+            "Microsoft.Data.SqlClient": {
+              "target": "Package",
+              "version": "[6.1.1, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "QuestPDF": {
+              "target": "Package",
+              "version": "[2024.10.3, )"
+            },
+            "Serilog.AspNetCore": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
+            "Serilog.Sinks.Console": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
+            "Serilog.Sinks.File": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.5.0, )"
+            },
+            "Swashbuckle.AspNetCore.Annotations": {
+              "target": "Package",
+              "version": "[6.5.0, )"
+            },
+            "System.IdentityModel.Tokens.Jwt": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Twilio": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.121/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

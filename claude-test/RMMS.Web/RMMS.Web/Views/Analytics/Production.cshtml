@@ -1,0 +1,213 @@
+@{
+    ViewData["Title"] = "Production Analytics";
+    var data = ViewBag.Data as dynamic;
+    var startDate = ViewBag.StartDate as DateTime?;
+    var endDate = ViewBag.EndDate as DateTime?;
+}
+
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <h2 class="mb-3"><i class="bi bi-gear-fill"></i> Production Analytics</h2>
+            <p class="text-muted">Production efficiency, batch tracking, and machine performance</p>
+        </div>
+        <div class="col-md-4 text-end">
+            <a href="@Url.Action("Index", "Analytics")" class="btn btn-secondary">
+                <i class="bi bi-arrow-left"></i> Back to Dashboard
+            </a>
+        </div>
+    </div>
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            @TempData["ErrorMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    <!-- Date Range Filter -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <form method="get" class="row g-3">
+                <div class="col-md-4">
+                    <label class="form-label">Start Date</label>
+                    <input type="date" name="startDate" class="form-control"
+                           value="@(startDate?.ToString("yyyy-MM-dd") ?? DateTime.Today.AddDays(-30).ToString("yyyy-MM-dd"))">
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">End Date</label>
+                    <input type="date" name="endDate" class="form-control"
+                           value="@(endDate?.ToString("yyyy-MM-dd") ?? DateTime.Today.ToString("yyyy-MM-dd"))">
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">&nbsp;</label>
+                    <button type="submit" class="btn btn-primary w-100">
+                        <i class="bi bi-search"></i> Apply Filter
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    @if (data != null)
+    {
+        <!-- Key Metrics -->
+        <div class="row mb-4">
+            <div class="col-md-3 mb-3">
+                <div class="card bg-primary text-white">
+                    <div class="card-body">
+                        <h6 class="card-subtitle mb-2">Total Batches</h6>
+                        <h2 class="card-title mb-0">@data.TotalBatches</h2>
+                        <small>In selected period</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 mb-3">
+                <div class="card bg-success text-white">
+                    <div class="card-body">
+                        <h6 class="card-subtitle mb-2">Completed</h6>
+                        <h2 class="card-title mb-0">@data.CompletedBatches</h2>
+                        <small>@((data.TotalBatches > 0 ? (data.CompletedBatches * 100.0 / data.TotalBatches) : 0).ToString("N1"))% completion</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 mb-3">
+                <div class="card bg-info text-white">
+                    <div class="card-body">
+                        <h6 class="card-subtitle mb-2">In Progress</h6>
+                        <h2 class="card-title mb-0">@data.InProgressBatches</h2>
+                        <small>Currently running</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 mb-3">
+                <div class="card bg-warning text-dark">
+                    <div class="card-body">
+                        <h6 class="card-subtitle mb-2">Planned</h6>
+                        <h2 class="card-title mb-0">@data.PlannedBatches</h2>
+                        <small>Yet to start</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Production Quantity -->
+        <div class="row mb-4">
+            <div class="col-md-6 mb-3">
+                <div class="card border-primary">
+                    <div class="card-body">
+                        <h6 class="card-subtitle mb-2 text-muted">Total Input Quantity</h6>
+                        <h3 class="card-title text-primary">@data.TotalInputQty.ToString("N2") Kg</h3>
+                        <small class="text-muted">Raw material used</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <div class="card border-success">
+                    <div class="card-body">
+                        <h6 class="card-subtitle mb-2 text-muted">Total Output Quantity</h6>
+                        <h3 class="card-title text-success">@data.TotalOutputQty.ToString("N2") Kg</h3>
+                        <small class="text-muted">
+                            Conversion: @((data.TotalInputQty > 0 ? (data.TotalOutputQty * 100.0 / data.TotalInputQty) : 0).ToString("N1"))%
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Machine Status -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0"><i class="bi bi-cpu"></i> Machine Status</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h4>@data.TotalMachines</h4>
+                                <p class="mb-0">Total Machines</p>
+                            </div>
+                            <div class="col-md-4">
+                                <h4 class="text-success">@data.ActiveMachines</h4>
+                                <p class="mb-0">Active Machines</p>
+                            </div>
+                            <div class="col-md-4">
+                                <h4 class="text-muted">@(data.TotalMachines - data.ActiveMachines)</h4>
+                                <p class="mb-0">Inactive/Maintenance</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Batches -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0"><i class="bi bi-list-check"></i> Recent Production Batches</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="ms-datatable table table-striped table-hover" data-export="true" data-page-length="16">
+                                <thead>
+                                    <tr>
+                                        <th>Batch Number</th>
+                                        <th>Date</th>
+                                        <th>Status</th>
+                                        <th>Input Qty</th>
+                                        <th>Output Qty</th>
+                                        <th>Efficiency</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (data.Batches != null && data.Batches.Count > 0)
+                                    {
+                                        @foreach (var batch in data.Batches)
+                                        {
+                                            var efficiency = batch.TotalInputQuantity > 0 ?
+                                                (batch.TotalOutputQuantity * 100.0 / batch.TotalInputQuantity) : 0;
+
+                                            <tr>
+                                                <td><strong>@batch.BatchNumber</strong></td>
+                                                <td>@batch.BatchDate.ToString("dd-MMM-yyyy")</td>
+                                                <td>
+                                                    <span class="badge @(batch.Status == "Completed" ? "bg-success" :
+                                                                        batch.Status == "In Progress" ? "bg-primary" :
+                                                                        batch.Status == "Planned" ? "bg-warning" : "bg-secondary")">
+                                                        @batch.Status
+                                                    </span>
+                                                </td>
+                                                <td class="text-end">@batch.TotalInputQuantity.ToString("N2")</td>
+                                                <td class="text-end">@batch.TotalOutputQuantity.ToString("N2")</td>
+                                                <td class="text-end">
+                                                    <span class="badge @(efficiency >= 70 ? "bg-success" :
+                                                                        efficiency >= 50 ? "bg-warning" : "bg-danger")">
+                                                        @efficiency.ToString("N1")%
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <tr>
+                                            <td colspan="6" class="text-center text-muted">No batches found in selected period</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

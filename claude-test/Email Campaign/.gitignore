@@ -1,0 +1,37 @@
+# Sensitive configuration
+config.json
+
+# Candidate data (contains personal information)
+data/candidates.csv
+data/sent_emails.txt
+
+# Logs (may contain sensitive information)
+logs/
+*.log
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# IDE/Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Backup files
+*.bak
+*.backup
+*~
+
+# Completion markers
+*_complete.txt
+
+# Temporary files
+*.tmp

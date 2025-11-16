@@ -1,0 +1,25 @@
+{
+  "phase_id": 10,
+  "name": "Business & Partnerships",
+  "epic": "Epic 11",
+  "story_points": 26,
+  "priority": "P0",
+  "dependencies": [
+    8
+  ],
+  "version": "v1.0",
+  "user_stories": [
+    {
+      "story_id": "11.1",
+      "title": "United Health Group Demo",
+      "story_points": 13,
+      "priority": "P0"
+    },
+    {
+      "story_id": "11.2",
+      "title": "Advisory Board Formation",
+      "story_points": 13,
+      "priority": "P1"
+    }
+  ]
+}

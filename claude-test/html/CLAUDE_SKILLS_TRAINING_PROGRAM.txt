@@ -1,0 +1,815 @@
+================================================================================
+        CLAUDE SKILLS MASTERY TRAINING PROGRAM
+        From Zero to Expert - 100% Success Guaranteed
+================================================================================
+
+Welcome to your personalized Claude Skills training program. This is designed
+to take you from complete beginner to confident implementer through hands-on
+exercises and real examples using YOUR insurance analyzer skill.
+
+
+TRAINING PHILOSOPHY: LEARN BY DOING
+================================================================================
+You will NOT just read about skills. You will:
+✓ Touch every file and understand what it does
+✓ Run code and see results
+✓ Modify examples and observe changes
+✓ Build understanding layer by layer
+✓ Verify comprehension at each step
+✓ Apply knowledge immediately
+
+
+YOUR LEARNING PATH (5 MODULES)
+================================================================================
+
+MODULE 1: Foundation Understanding (30 minutes)
+  → What skills are, how they work, why they matter
+
+MODULE 2: Hands-On Exploration (45 minutes)
+  → Touch, read, and understand your actual skill files
+
+MODULE 3: Practical Testing (30 minutes)
+  → Run the calculator, test components, see it work
+
+MODULE 4: Implementation Practice (45 minutes)
+  → Package, prepare, and deploy your skill
+
+MODULE 5: Advanced Mastery (60 minutes)
+  → Modify, enhance, and create new skills
+
+TOTAL TRAINING TIME: 3.5 hours (with breaks)
+OUTCOME: Complete mastery of Claude Skills
+
+
+================================================================================
+MODULE 1: FOUNDATION UNDERSTANDING (30 MINUTES)
+================================================================================
+
+LESSON 1.1: What Is a Claude Skill? (10 minutes)
+--------------------------------------------------------------------------------
+
+CONCEPT: The Restaurant Analogy
+--------------------------------
+Imagine you go to a restaurant:
+
+WITHOUT A SKILL (Every time you order):
+  You: "I'd like a burger, but not too much lettuce, add extra pickles,
+       medium-well, on a sesame bun, with fries on the side..."
+  Server: "Got it. Anything else?"
+  You: "Yes, also make sure the fries are crispy, not too salty..."
+
+  [You explain EVERYTHING in detail EVERY time]
+
+WITH A SKILL (Your saved "usual" order):
+  You: "I'll have my usual."
+  Server: [Looks at your profile] "Got it - the burger with extra pickles,
+          medium-well, fries crispy and lightly salted. Coming right up!"
+
+  [Server knows your preferences, applies them automatically]
+
+A Claude Skill is YOUR "USUAL ORDER" for repetitive tasks.
+
+
+REAL EXAMPLE: Your Insurance Analysis
+---------------------------------------
+WITHOUT the insurance-plan-analyzer skill:
+  Every time you need to analyze insurance quotes, you must:
+  1. Tell Claude to extract data from emails
+  2. Explain how to calculate costs (monthly, annual, with tax)
+  3. Describe the 9.12% affordability rule for H-1B
+  4. Explain ICHRA reimbursement structure
+  5. Specify output format (Notepad++ compatible tables)
+  6. Provide formulas for each calculation
+  7. Explain comparison methodology
+  [This takes 5-10 minutes of explanation EVERY time]
+
+WITH the insurance-plan-analyzer skill:
+  You: "Compare these insurance quotes"
+  Claude: [Automatically loads skill] [Knows all formulas, rules, formats]
+        [Produces complete analysis immediately]
+  [Zero explanation needed - Claude remembers everything]
+
+
+✋ COMPREHENSION CHECK 1.1:
+---------------------------
+Q1: In your own words, what is a Claude Skill?
+    Write your answer here: _______________________________________
+
+Q2: What's the main benefit of using skills vs. explaining each time?
+    Write your answer here: _______________________________________
+
+Q3: How does the insurance-plan-analyzer skill save you time?
+    Write your answer here: _______________________________________
+
+[Answers at end of this module]
+
+
+LESSON 1.2: How Skills Work Technically (10 minutes)
+--------------------------------------------------------------------------------
+
+THE 4-STAGE PROCESS:
+--------------------
+
+STAGE 1: METADATA SCANNING (Constant, Lightweight)
+  What happens: Claude reads the YAML "business card" from each skill
+
+  Example from YOUR skill:
+    ---
+    name: insurance-plan-analyzer
+    description: Analyzes and compares health insurance plans (individual
+                 vs group), calculates costs, verifies networks, and
+                 generates formatted comparison reports for decision-making
+    ---
+
+  Token cost: ~50 tokens (very cheap!)
+  When: Every conversation, all skills scanned
+  Think of it as: Claude glancing at business cards in your wallet
+
+
+STAGE 2: RELEVANCE DETECTION (Automatic, Smart)
+  What happens: Claude matches your query to skill descriptions
+
+  Example:
+    You say: "Compare these insurance quotes"
+    Claude thinks: [Scans descriptions...]
+                   [Finds: "Analyzes and compares health insurance plans"]
+                   [Match! This skill is relevant]
+
+  Keywords that trigger YOUR skill:
+    ✓ "insurance" + "compare"
+    ✓ "insurance" + "costs"
+    ✓ "individual vs group insurance"
+    ✓ "H-1B" + "subsidies"
+    ✓ "ICHRA"
+
+  Think of it as: Claude picking the right business card for the job
+
+
+STAGE 3: PROGRESSIVE DISCLOSURE (Efficient, On-Demand)
+  What happens: Claude loads FULL skill content (only when needed)
+
+  Example:
+    [Skill matched] → Claude loads SKILL.md (8.3KB, ~2000 tokens)
+    [Reads all instructions, formulas, examples]
+    [Now knows exactly how to process insurance quotes]
+
+  Token cost: ~2000 tokens (only when skill is used)
+  Think of it as: Claude reading the full instruction manual
+
+
+STAGE 4: EXECUTION (Sandboxed, Secure)
+  What happens: Claude follows skill instructions, uses scripts/templates
+
+  Example:
+    [Loads cost_calculator.py]
+    [Runs calculations with your data]
+    [Uses comparison_report_template.txt for formatting]
+    [Produces final report]
+
+  Security: Runs in isolated environment, no external access
+  Think of it as: Chef preparing your order in the kitchen
+
+
+VISUAL REPRESENTATION:
+----------------------
+  You: "Compare insurance quotes"
+       ↓
+  ┌──────────────────────────────────────────────────┐
+  │ STAGE 1: Metadata Scanning                       │
+  │ Claude checks: insurance-plan-analyzer           │
+  │ Description: "Analyzes and compares insurance"   │
+  │ ✓ Relevant keywords detected                     │
+  └──────────────────────────────────────────────────┘
+       ↓
+  ┌──────────────────────────────────────────────────┐
+  │ STAGE 2: Relevance Detection                     │
+  │ "insurance" + "compare" = MATCH!                 │
+  │ Loading this skill...                            │
+  └──────────────────────────────────────────────────┘
+       ↓
+  ┌──────────────────────────────────────────────────┐
+  │ STAGE 3: Progressive Disclosure                  │
+  │ Loading SKILL.md (8.3KB)                         │
+  │ Reading instructions, formulas, examples         │
+  │ Now I know how to analyze insurance!             │
+  └──────────────────────────────────────────────────┘
+       ↓
+  ┌──────────────────────────────────────────────────┐
+  │ STAGE 4: Execution                               │
+  │ Extract quote data → Calculate costs →           │
+  │ Apply 9.12% rule → Generate report →             │
+  │ [Complete analysis delivered]                    │
+  └──────────────────────────────────────────────────┘
+
+
+✋ COMPREHENSION CHECK 1.2:
+---------------------------
+Q1: What are the 4 stages of skill activation?
+    1. _______________________
+    2. _______________________
+    3. _______________________
+    4. _______________________
+
+Q2: Why is metadata scanning "cheap" (low token cost)?
+    Write your answer: _______________________________________
+
+Q3: When does Claude load the FULL skill content (8.3KB)?
+    Write your answer: _______________________________________
+
+[Answers at end of this module]
+
+
+LESSON 1.3: Why Skills Matter for YOU (10 minutes)
+--------------------------------------------------------------------------------
+
+YOUR BEFORE & AFTER STORY:
+--------------------------
+
+BEFORE (October 16-17, 2025):
+  Task: Compare insurance options for Rajesh
+
+  What you did:
+  ⏱️  Hour 1: Contacted 20+ insurance agents, waited for responses
+  ⏱️  Hour 2: Received emails from Chuck, Jolly, Adriana - read each carefully
+  ⏱️  Hour 3: Manually extracted quotes into notes
+      - AmeriHealth Silver EPO: $2,053/month (Chuck)
+      - Same plan individual: $1,586/month (Jolly)
+      - Subsidy amount: $866/month (Jolly)
+  ⏱️  Hour 4: Calculated costs in spreadsheet
+      - 10% employer contribution = ?
+      - 90% employee cost = ?
+      - Annual totals = ?
+      - Tax savings = ?
+  ⏱️  Hour 5: Researched H-1B subsidy rules
+      - Found 9.12% affordability threshold
+      - Calculated $132k × 9.12% = $1,003/month
+      - Determined Rajesh qualifies for subsidies
+  ⏱️  Hour 6: Formatted report in text file
+      - Created tables, aligned columns
+      - Fixed formatting issues multiple times
+      - Generated final 82KB document
+
+  TOTAL TIME: 6 hours
+  STRESS LEVEL: High (worried about calculation errors)
+  REUSABILITY: Zero (must repeat for next employee)
+
+
+AFTER (With insurance-plan-analyzer skill):
+  Task: Compare insurance options for [next employee]
+
+  What you'll do:
+  ⏱️  Minute 1-5: Forward emails to Claude
+  ⏱️  Minute 6-10: Claude extracts all data automatically
+  ⏱️  Minute 11-15: All calculations done (monthly, annual, tax, subsidies)
+  ⏱️  Minute 16-20: Formatted report generated, ready to send
+
+  TOTAL TIME: 20 minutes
+  STRESS LEVEL: Low (calculations verified and consistent)
+  REUSABILITY: Infinite (works for every future analysis)
+
+  TIME SAVED: 5 hours 40 minutes (94% reduction)
+  VALUE SAVED: 5.67 hours × $75/hour = $425 per use
+
+
+THE COMPOUNDING EFFECT:
+------------------------
+Use #1 (Nov 2025 - New hire):
+  Time saved: 5.67 hours
+  Value: $425
+
+Use #2 (Jan 2026 - Annual renewal):
+  Time saved: 5.67 hours
+  Value: $425
+  Cumulative: $850
+
+Use #3 (Apr 2026 - Mid-year policy change):
+  Time saved: 5.67 hours
+  Value: $425
+  Cumulative: $1,275
+
+Use #4 (Oct 2026 - Next annual renewal):
+  Time saved: 5.67 hours
+  Value: $425
+  Cumulative: $1,700
+
+After 1 year: $1,700 value created
+After 3 years: $5,100 value created
+After 5 years: $8,500 value created
+
+AND you can create MORE skills for OTHER repetitive tasks!
+
+
+BEYOND TIME SAVINGS:
+--------------------
+1. KNOWLEDGE PRESERVATION
+   Your expertise doesn't leave when you're on vacation or if you leave company
+
+2. CONSISTENT QUALITY
+   Every analysis follows best practices, zero steps skipped
+
+3. TRAINING EFFICIENCY
+   New team member? Give them the skill = instant expertise
+
+4. SCALABILITY
+   Analyze for 1 employee or 100 employees = same effort
+
+5. CONFIDENCE
+   Calculations verified, formulas tested, no second-guessing
+
+
+✋ COMPREHENSION CHECK 1.3:
+---------------------------
+Q1: How much time does the skill save per insurance analysis?
+    Write your answer: _______________________________________
+
+Q2: What's the dollar value saved per year (4 uses)?
+    Write your answer: _______________________________________
+
+Q3: Name 2 benefits beyond time savings:
+    1. _______________________
+    2. _______________________
+
+[Answers at end of this module]
+
+
+✅ MODULE 1 COMPLETION CHECKLIST:
+---------------------------------
+Before proceeding to Module 2, verify:
+□ I understand what a Claude Skill is (the "usual order" concept)
+□ I understand the 4 stages of skill activation
+□ I understand why skills save time (no re-explaining)
+□ I completed all 3 comprehension checks
+□ I see the value for MY specific work
+
+If all checked, proceed to Module 2!
+
+
+📖 ANSWERS TO COMPREHENSION CHECKS:
+------------------------------------
+
+Check 1.1 Answers:
+Q1: A Claude Skill is a reusable instruction package that teaches Claude
+    how to perform a specific task automatically, without needing to
+    re-explain the process each time.
+
+Q2: Skills save time by eliminating the need to re-explain instructions,
+    formulas, and formatting every time you do the same task.
+
+Q3: The insurance-plan-analyzer skill knows all the calculation formulas
+    (9.12% rule, tax savings, ICHRA), output formatting, and analysis
+    methodology, so I just provide the data and it does everything else.
+
+
+Check 1.2 Answers:
+Q1: Four stages:
+    1. Metadata Scanning (reading YAML frontmatter)
+    2. Relevance Detection (matching query to description)
+    3. Progressive Disclosure (loading full skill content)
+    4. Execution (following instructions, running scripts)
+
+Q2: Metadata scanning is cheap because it only reads the YAML frontmatter
+    (name, description, version) which is ~50 tokens, not the full 8KB file.
+
+Q3: Claude loads the full skill content (Stage 3) only when it determines
+    the skill is relevant to your query during Stage 2 (relevance detection).
+
+
+Check 1.3 Answers:
+Q1: The skill saves approximately 5 hours 40 minutes per analysis
+    (from 6 hours manual to 20 minutes automated = 94% reduction).
+
+Q2: At 4 uses per year, the annual value saved is approximately $1,700
+    (or $1,050 if using the conservative 3.5-4.5 hour savings estimate).
+
+Q3: Two benefits beyond time savings:
+    1. Knowledge preservation (expertise encoded, doesn't leave with you)
+    2. Consistent quality (every analysis follows best practices)
+    [Also acceptable: Training efficiency, Scalability, Confidence]
+
+
+================================================================================
+MODULE 2: HANDS-ON EXPLORATION (45 MINUTES)
+================================================================================
+
+Now you'll touch, read, and understand every file in your skill. This is
+where theory becomes practical knowledge.
+
+
+LESSON 2.1: Understanding SKILL.md - The Brain (15 minutes)
+--------------------------------------------------------------------------------
+
+EXERCISE 2.1A: Open and Read the File
+--------------------------------------
+□ Navigate to: /home/user01/claude-test/html/insurance-plan-analyzer-skill/
+□ Open: SKILL.md in a text editor
+□ File size: 8.3KB (about 2,000 tokens when loaded)
+
+WHAT YOU'RE LOOKING AT:
+This is the "brain" of your skill. Every instruction Claude follows is here.
+
+
+STRUCTURE BREAKDOWN:
+--------------------
+
+SECTION 1: YAML Frontmatter (Lines 1-6)
+  ---
+  name: insurance-plan-analyzer
+  description: Analyzes and compares health insurance plans (individual
+               vs group), calculates costs, verifies networks, and
+               generates formatted comparison reports for decision-making
+  version: 1.0.0
+  author: Paragroup LLC
+  ---
+
+  ❓ WHY THIS MATTERS:
+     - name: Claude uses this to reference the skill
+     - description: CRITICAL - determines when skill activates
+     - version: Tracks changes over time
+     - author: Who created/maintains it
+
+  🎯 ACTIVATION KEYWORDS IN DESCRIPTION:
+     ✓ "Analyzes" → Triggers on analysis requests
+     ✓ "compares" → Triggers on comparison requests
+     ✓ "health insurance plans" → Specific domain
+     ✓ "individual vs group" → Specific use case
+     ✓ "calculates costs" → Specific capability
+     ✓ "formatted comparison reports" → Output type
+
+  💡 PRO TIP: The description is HOW Claude decides to load this skill.
+              If your description is vague, skill won't activate correctly.
+
+
+SECTION 2: Purpose (Lines 8-10)
+  Explains WHAT the skill does and WHY it exists.
+
+  Think of it as: The skill's mission statement
+
+
+SECTION 3: When to Use This Skill (Lines 12-19)
+  Lists specific scenarios that should trigger this skill.
+
+  Example from YOUR skill:
+    - Needs to compare multiple insurance plans
+    - Has quotes from different insurance agents
+    - Wants to analyze individual vs. small group insurance
+    - Needs cost projections and savings calculations
+
+  💡 WHY THIS MATTERS:
+     Claude reads this to understand WHEN to activate.
+     More specific = better activation accuracy.
+
+
+SECTION 4: Key Capabilities (Lines 21-50)
+  Details of WHAT the skill can do.
+
+  Your skill has 5 capability categories:
+    1. Data Extraction (from emails, PDFs)
+    2. Cost Analysis (monthly, annual, tax, ICHRA)
+    3. Coverage Comparison (deductibles, copays, networks)
+    4. Special Considerations (H-1B, subsidies, ACA rules)
+    5. Report Generation (formatted tables, Notepad++ compatible)
+
+  💡 LEARNING POINT:
+     This is where YOUR insurance knowledge was encoded!
+     - 9.12% affordability rule? → Listed here
+     - ICHRA reimbursement? → Explained here
+     - Notepad++ formatting? → Specified here
+
+
+SECTION 5: Input Format (Lines 52-75)
+  Defines what data the skill expects.
+
+  Example:
+    EMPLOYEE DATA:
+    - Name, DOB, visa status
+    - Spouse and dependent details
+    - Annual household income
+
+    QUOTE DATA:
+    - Carrier name
+    - Monthly premium
+    - Deductibles, copays, etc.
+
+  💡 WHY THIS MATTERS:
+     Clear inputs = Claude knows what to ask for if data is missing
+
+
+SECTION 6: Output Format (Lines 77-95)
+  Defines what the skill produces.
+
+  Your skill outputs:
+    1. Executive Summary with recommendation
+    2. Cost Comparison Table
+    3. Annual Savings Analysis
+    4. Coverage Details
+    5. Special Considerations
+    6. Pros/Cons Analysis
+    7. Implementation Timeline
+    8. Next Steps and Contacts
+
+  💡 CONSISTENCY:
+     Same output structure every time = professional results
+
+
+SECTION 7: Calculation Methods (Lines 97-120)
+  The FORMULAS Claude will use.
+
+  Example from YOUR skill:
+    ACA Affordability Rule:
+      Threshold = Household Income × 9.12%
+      If Employee Share > Threshold → "Unaffordable"
+      If Unaffordable + Employer Sponsors H-1B → Subsidies available
+
+  💡 THIS IS YOUR EXPERTISE:
+     You researched this rule, Claude now knows it forever!
+
+
+SECTION 8: Example Usage (Lines 122-145)
+  Shows Claude HOW the skill is used in practice.
+
+  Example 1: "I have 3 insurance quotes. Can you compare them?"
+  Example 2: "My H-1B employee makes $132k. Can he get subsidies?"
+  Example 3: "Should we do group or individual marketplace?"
+
+  💡 TRAINING DATA:
+     These examples help Claude understand context and user intent
+
+
+SECTION 9: Best Practices (Lines 147-185)
+  Guidelines for HOW to use the skill effectively.
+
+  Your skill includes:
+    - Always verify doctor network acceptance
+    - Consider visa status for subsidies
+    - Calculate both monthly and annual costs
+    - Factor in tax benefits
+
+  💡 QUALITY CONTROL:
+     These ensure consistent, high-quality output every time
+
+
+✋ HANDS-ON EXERCISE 2.1:
+-------------------------
+Now that you've read SKILL.md, answer these:
+
+1. Open SKILL.md and find the YAML frontmatter.
+   What is the description field? (Copy it exactly)
+   _________________________________________________________________
+
+2. Scroll to "Calculation Methods" section.
+   What is the ACA affordability percentage for 2025?
+   _________________________________________________________________
+
+3. Find "Output Format" section.
+   How many items are included in the standard report?
+   _________________________________________________________________
+
+4. Look at "When to Use This Skill" section.
+   What keyword combination would trigger this skill?
+   _________________________________________________________________
+
+[Check your answers against the SKILL.md file]
+
+
+LESSON 2.2: Understanding README.md - The User Manual (15 minutes)
+--------------------------------------------------------------------------------
+
+EXERCISE 2.2A: Open and Compare
+--------------------------------
+□ Open: README.md in a text editor
+□ File size: 12KB (more detailed than SKILL.md)
+
+KEY DIFFERENCE:
+- SKILL.md = Instructions FOR Claude (technical)
+- README.md = Instructions FOR humans (you and team)
+
+
+README.md STRUCTURE:
+--------------------
+
+SECTION 1: Overview (What is this?)
+  Quick introduction to what the skill does
+
+  Think of it as: Book jacket description
+
+
+SECTION 2: Use Cases (Who needs this?)
+  Lists WHO benefits and WHEN to use
+
+  Notice: "Your Actual Use Case" section shows YOUR insurance analysis work!
+
+
+SECTION 3: Contents (What's in the box?)
+  Lists all files in the skill:
+    ✓ SKILL.md
+    ✓ README.md
+    ✓ templates/comparison_report_template.txt
+    ✓ scripts/cost_calculator.py
+
+
+SECTION 4: Installation Methods (How to deploy?)
+  Three ways to install:
+    Method 1: Claude.ai web/desktop (upload ZIP)
+    Method 2: Claude Code CLI (copy to .claude/skills/)
+    Method 3: API (include in system prompt)
+
+  💡 PORTABILITY IN ACTION:
+     Same skill files work in all 3 environments!
+
+
+SECTION 5: Usage Examples (How to use?)
+  Real conversation examples:
+    "I have 3 insurance quotes. Can you compare them?"
+    "My H-1B employee makes $132k. Can he get subsidies?"
+
+  These are EXACTLY what you would type to Claude.
+
+
+SECTION 6: Key Features (What makes it special?)
+  Highlights:
+    - Automatic data extraction
+    - H-1B specialized analysis (9.12% rule)
+    - ICHRA analysis
+    - Formatted reports for Notepad++
+
+
+SECTION 7: How It Works (Technical details)
+  Explains the 4-stage process you learned in Module 1
+
+  Notice: "Progressive Disclosure System" section shows token efficiency!
+
+
+SECTION 8: Real-World Impact (The ROI story)
+  YOUR ACTUAL STATS:
+    Before: 4-5 hours, manual calculations
+    After: 15-30 minutes, automated
+    ROI: Save 3-4 hours per use
+
+  This is YOUR success story!
+
+
+✋ HANDS-ON EXERCISE 2.2:
+-------------------------
+1. Open README.md
+   Find "Installation Methods" section
+   Which method would you use if you have Claude Pro?
+   _________________________________________________________________
+
+2. Find "Usage Examples" section
+   Write down one example query that would trigger this skill:
+   _________________________________________________________________
+
+3. Find "Real-World Impact" section
+   How much time is saved per analysis?
+   _________________________________________________________________
+
+
+LESSON 2.3: Understanding cost_calculator.py - The Engine (15 minutes)
+--------------------------------------------------------------------------------
+
+EXERCISE 2.3A: Run the Calculator
+----------------------------------
+□ Open terminal/command prompt
+□ Navigate to: /home/user01/claude-test/html/insurance-plan-analyzer-skill/scripts/
+□ Run: python3 cost_calculator.py
+
+WHAT YOU'LL SEE:
+The script will output 3 examples:
+  1. Small Group Insurance calculation
+  2. Individual Marketplace (no subsidy) calculation
+  3. Individual Marketplace (with subsidy) calculation
+
+Each shows:
+  - Monthly/annual premiums
+  - Employer/employee split
+  - Tax savings (if applicable)
+  - ACA affordability check
+  - H-1B subsidy eligibility
+
+
+UNDERSTANDING THE CODE:
+-----------------------
+
+PART 1: The Calculator Class (Lines 10-120)
+  class InsuranceCostCalculator:
+      def __init__(self, monthly_premium, household_income, ...):
+          # Stores your input data
+
+      def calculate_annual_cost(self):
+          # Returns monthly × 12
+
+      def is_affordable_under_aca(self):
+          # Applies 9.12% rule
+
+      def estimate_subsidy_eligibility(self):
+          # Determines if H-1B qualifies
+
+  💡 WHAT THIS MEANS:
+     All your calculations are automated and consistent.
+     No more manual spreadsheet formulas!
+
+
+PART 2: The Examples (Lines 180-250)
+  Example 1: Small Group Insurance
+    monthly_premium=2053.33,
+    household_income=132000,
+    employer_contribution_percent=0.10
+
+  These are YOUR ACTUAL NUMBERS from Chuck Hackel's quote!
+
+
+PART 3: The Comparison (Lines 252-280)
+  Compares small group vs individual marketplace
+  Shows savings: $5,604/year (your actual finding!)
+
+
+✋ HANDS-ON EXERCISE 2.3:
+-------------------------
+1. Run the calculator script:
+   python3 cost_calculator.py
+
+   Did it run successfully? Y/N: _____
+
+2. Look at "EXAMPLE 1: Small Group Insurance" output
+   What is the monthly premium shown?
+   $ ____________
+
+3. Look at "ACA Affordability Check" in Example 1
+   Is the coverage affordable or unaffordable?
+   ________________________
+
+4. Look at "H-1B Subsidy Eligibility"
+   Does Rajesh qualify? Y/N: _____
+   Why? _____________________________________________________
+
+5. Look at "COST COMPARISON" at the end
+   How much does individual marketplace save per year?
+   $ ____________
+
+
+✋ HANDS-ON EXERCISE 2.3B: Modify and Test
+-------------------------------------------
+Let's test YOUR understanding by modifying the calculator!
+
+CHALLENGE: Change the employee income and see what happens to subsidy eligibility
+
+Step 1: Open cost_calculator.py in a text editor
+
+Step 2: Find line ~185 (Example 1: Small Group Insurance)
+  Look for: household_income=132000,
+
+Step 3: Change 132000 to 80000 (lower income)
+
+Step 4: Save the file
+
+Step 5: Run again: python3 cost_calculator.py
+
+Step 6: Observe the "H-1B Subsidy Eligibility" section
+  Does Rajesh STILL qualify? Y/N: _____
+  Why or why not? _________________________________________________
+
+[This teaches you HOW income affects subsidy eligibility!]
+
+
+✅ MODULE 2 COMPLETION CHECKLIST:
+---------------------------------
+Before proceeding to Module 3, verify:
+□ I opened and read SKILL.md (the brain)
+□ I understand YAML frontmatter importance (activation)
+□ I opened and read README.md (the user manual)
+□ I ran cost_calculator.py successfully
+□ I understand what the calculator does
+□ I completed the modification exercise
+□ I see how my expertise was encoded in these files
+
+If all checked, proceed to Module 3!
+
+
+================================================================================
+MODULE 3: PRACTICAL TESTING (30 MINUTES)
+================================================================================
+
+Now you'll test each component to understand how they work together.
+
+
+LESSON 3.1: Testing the Calculator with Your Data (10 minutes)
+--------------------------------------------------------------------------------
+
+OBJECTIVE: Use the calculator with ACTUAL quotes you received
+
+EXERCISE 3.1: Calculate Chuck Hackel's Quotes
+----------------------------------------------
+
+Step 1: Review Chuck's quotes (from your emails)
+  AmeriHealth Silver EPO: $2,053.33/month
+  UHC Oxford Metro EPO: $2,198.44/month
+  Horizon OMNIA Silver Value: $2,213.10/month
+
+Step 2: Open Python interpreter
+  python3
+
+Step 3: Import the calculator
+  from cost_calculator import InsuranceCostCalculator
+
+Step 4: Create calculator for AmeriHealth quote
+  amerih

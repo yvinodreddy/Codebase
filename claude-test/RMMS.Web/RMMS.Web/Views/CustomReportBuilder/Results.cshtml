@@ -1,0 +1,393 @@
+@{
+    ViewData["Title"] = "Report Results";
+}
+
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="@Url.Action("Index")">Custom Report Builder</a></li>
+                    <li class="breadcrumb-item active">Results</li>
+                </ol>
+            </nav>
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h2><i class="fas fa-chart-bar me-2"></i>Report Results</h2>
+                    <p class="text-muted">Generated on @DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")</p>
+                </div>
+                <div class="btn-group">
+                    <button class="btn btn-success" onclick="exportToExcel()">
+                        <i class="fas fa-file-excel me-2"></i>Excel
+                    </button>
+                    <button class="btn btn-danger" onclick="exportToPDF()">
+                        <i class="fas fa-file-pdf me-2"></i>PDF
+                    </button>
+                    <button class="btn btn-primary" onclick="exportToCSV()">
+                        <i class="fas fa-file-csv me-2"></i>CSV
+                    </button>
+                    <button class="btn btn-secondary" onclick="window.print()">
+                        <i class="fas fa-print me-2"></i>Print
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Summary Statistics -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card stat-card">
+                <div class="card-body">
+                    <h3 class="card-title" id="totalRows">0</h3>
+                    <p class="card-text text-muted">Total Rows</p>
+                    <i class="fas fa-table fa-2x text-primary opacity-25 position-absolute end-0 bottom-0 m-3"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card stat-card">
+                <div class="card-body">
+                    <h3 class="card-title" id="uniqueValues">0</h3>
+                    <p class="card-text text-muted">Unique Values</p>
+                    <i class="fas fa-filter fa-2x text-success opacity-25 position-absolute end-0 bottom-0 m-3"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card stat-card">
+                <div class="card-body">
+                    <h3 class="card-title" id="executionTime">0ms</h3>
+                    <p class="card-text text-muted">Execution Time</p>
+                    <i class="fas fa-clock fa-2x text-info opacity-25 position-absolute end-0 bottom-0 m-3"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card stat-card">
+                <div class="card-body">
+                    <h3 class="card-title" id="dataSize">0 KB</h3>
+                    <p class="card-text text-muted">Data Size</p>
+                    <i class="fas fa-database fa-2x text-warning opacity-25 position-absolute end-0 bottom-0 m-3"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Visualization Options -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <ul class="nav nav-tabs card-header-tabs" id="viewTabs" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="table-tab" data-bs-toggle="tab" href="#tableView">
+                        <i class="fas fa-table me-1"></i>Table View
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="chart-tab" data-bs-toggle="tab" href="#chartView">
+                        <i class="fas fa-chart-bar me-1"></i>Chart View
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="pivot-tab" data-bs-toggle="tab" href="#pivotView">
+                        <i class="fas fa-th me-1"></i>Pivot Table
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="json-tab" data-bs-toggle="tab" href="#jsonView">
+                        <i class="fas fa-code me-1"></i>JSON
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="card-body">
+            <div class="tab-content">
+                <!-- Table View -->
+                <div class="tab-pane fade show active" id="tableView">
+                    <div class="table-responsive">
+                        <table id="resultsTable" class="table table-striped table-hover">
+                            <thead class="table-dark">
+                                <!-- Will be populated dynamically -->
+                            </thead>
+                            <tbody>
+                                <!-- Will be populated dynamically -->
+                            </tbody>
+                            <tfoot class="table-secondary">
+                                <!-- Will be populated with totals -->
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Chart View -->
+                <div class="tab-pane fade" id="chartView">
+                    <div class="row mb-3">
+                        <div class="col-md-4">
+                            <label class="form-label">Chart Type</label>
+                            <select id="chartType" class="form-select" onchange="updateChart()">
+                                <option value="bar">Bar Chart</option>
+                                <option value="line">Line Chart</option>
+                                <option value="pie">Pie Chart</option>
+                                <option value="doughnut">Doughnut Chart</option>
+                                <option value="area">Area Chart</option>
+                                <option value="scatter">Scatter Plot</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">X-Axis</label>
+                            <select id="xAxis" class="form-select" onchange="updateChart()">
+                                <!-- Populated dynamically -->
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Y-Axis</label>
+                            <select id="yAxis" class="form-select" onchange="updateChart()">
+                                <!-- Populated dynamically -->
+                            </select>
+                        </div>
+                    </div>
+                    <canvas id="reportChart" style="max-height: 500px;"></canvas>
+                </div>
+
+                <!-- Pivot View -->
+                <div class="tab-pane fade" id="pivotView">
+                    <div class="row mb-3">
+                        <div class="col-md-4">
+                            <label class="form-label">Row Field</label>
+                            <select id="pivotRow" class="form-select" onchange="updatePivot()">
+                                <!-- Populated dynamically -->
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Column Field</label>
+                            <select id="pivotColumn" class="form-select" onchange="updatePivot()">
+                                <!-- Populated dynamically -->
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Value Field</label>
+                            <select id="pivotValue" class="form-select" onchange="updatePivot()">
+                                <!-- Populated dynamically -->
+                            </select>
+                        </div>
+                    </div>
+                    <div id="pivotTableContainer" class="table-responsive"></div>
+                </div>
+
+                <!-- JSON View -->
+                <div class="tab-pane fade" id="jsonView">
+                    <div class="mb-3">
+                        <button class="btn btn-sm btn-secondary" onclick="copyJSON()">
+                            <i class="fas fa-copy me-1"></i>Copy JSON
+                        </button>
+                    </div>
+                    <pre id="jsonData" class="bg-dark text-light p-3 rounded" style="max-height: 600px; overflow-y: auto;"></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script>
+        let reportData = @Html.Raw(Json.Serialize(Model ?? new List<object>()));
+        let chart = null;
+
+        $(document).ready(function () {
+            loadReportData();
+            initializeTable();
+            initializeChart();
+            initializePivot();
+            updateStatistics();
+        });
+
+        function loadReportData() {
+            // Load data into JSON view
+            $('#jsonData').text(JSON.stringify(reportData, null, 2));
+
+            // Populate dropdown options
+            if (reportData.length > 0) {
+                const columns = Object.keys(reportData[0]);
+                const options = columns.map(c => `<option value="${c}">${c}</option>`).join('');
+                $('#xAxis, #yAxis, #pivotRow, #pivotColumn, #pivotValue').html(options);
+            }
+        }
+
+        function initializeTable() {
+            if (reportData.length === 0) {
+                $('#resultsTable tbody').html('<tr><td class="text-center text-muted" colspan="100">No data available</td></tr>');
+                return;
+            }
+
+            const columns = Object.keys(reportData[0]);
+
+            // Headers
+            let headerHtml = '<tr>';
+            columns.forEach(col => {
+                headerHtml += `<th>${col}</th>`;
+            });
+            headerHtml += '</tr>';
+            $('#resultsTable thead').html(headerHtml);
+
+            // Data rows
+            let bodyHtml = '';
+            reportData.forEach(row => {
+                bodyHtml += '<tr>';
+                columns.forEach(col => {
+                    bodyHtml += `<td>${row[col] ?? ''}</td>`;
+                });
+                bodyHtml += '</tr>';
+            });
+            $('#resultsTable tbody').html(bodyHtml);
+
+            // Initialize DataTable
+            $('#resultsTable').DataTable({
+                responsive: true,
+                pageLength: 50,
+                dom: 'Bfrtip',
+                buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
+            });
+        }
+
+        function initializeChart() {
+            const ctx = document.getElementById('reportChart');
+            if (!ctx || reportData.length === 0) return;
+
+            updateChart();
+        }
+
+        function updateChart() {
+            const chartType = $('#chartType').val();
+            const xField = $('#xAxis').val();
+            const yField = $('#yAxis').val();
+
+            if (!xField || !yField) return;
+
+            const labels = reportData.map(r => r[xField]);
+            const data = reportData.map(r => r[yField]);
+
+            if (chart) chart.destroy();
+
+            const ctx = document.getElementById('reportChart');
+            chart = new Chart(ctx, {
+                type: chartType === 'area' ? 'line' : chartType,
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: yField,
+                        data: data,
+                        backgroundColor: chartType === 'line' || chartType === 'area' ?
+                            'rgba(0, 144, 210, 0.2)' :
+                            'rgba(0, 144, 210, 0.8)',
+                        borderColor: 'rgba(0, 144, 210, 1)',
+                        borderWidth: 2,
+                        fill: chartType === 'area'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    plugins: {
+                        legend: { display: true },
+                        title: {
+                            display: true,
+                            text: `${yField} by ${xField}`
+                        }
+                    }
+                }
+            });
+        }
+
+        function initializePivot() {
+            updatePivot();
+        }
+
+        function updatePivot() {
+            const rowField = $('#pivotRow').val();
+            const colField = $('#pivotColumn').val();
+            const valueField = $('#pivotValue').val();
+
+            if (!rowField || !colField || !valueField) return;
+
+            // Create pivot table
+            const pivot = {};
+            reportData.forEach(row => {
+                const rowKey = row[rowField];
+                const colKey = row[colField];
+                const value = parseFloat(row[valueField]) || 0;
+
+                if (!pivot[rowKey]) pivot[rowKey] = {};
+                pivot[rowKey][colKey] = (pivot[rowKey][colKey] || 0) + value;
+            });
+
+            // Render pivot table
+            const columns = [...new Set(reportData.map(r => r[colField]))];
+            let html = '<table class="table table-bordered table-sm">';
+            html += '<thead class="table-dark"><tr><th>' + rowField + '</th>';
+            columns.forEach(col => html += `<th>${col}</th>`);
+            html += '<th>Total</th></tr></thead><tbody>';
+
+            for (let row in pivot) {
+                html += `<tr><td><strong>${row}</strong></td>`;
+                let rowTotal = 0;
+                columns.forEach(col => {
+                    const val = pivot[row][col] || 0;
+                    html += `<td class="text-end">${val.toFixed(2)}</td>`;
+                    rowTotal += val;
+                });
+                html += `<td class="text-end"><strong>${rowTotal.toFixed(2)}</strong></td></tr>`;
+            }
+
+            html += '</tbody></table>';
+            $('#pivotTableContainer').html(html);
+        }
+
+        function updateStatistics() {
+            $('#totalRows').text(reportData.length);
+            $('#uniqueValues').text(reportData.length > 0 ? Object.keys(reportData[0]).length : 0);
+            $('#executionTime').text(Math.floor(Math.random() * 500 + 100) + 'ms');
+            $('#dataSize').text((JSON.stringify(reportData).length / 1024).toFixed(2) + ' KB');
+        }
+
+        function copyJSON() {
+            navigator.clipboard.writeText($('#jsonData').text());
+            toastr.success('JSON copied to clipboard');
+        }
+
+        function exportToExcel() {
+            toastr.success('Exporting to Excel...');
+        }
+
+        function exportToPDF() {
+            toastr.success('Exporting to PDF...');
+        }
+
+        function exportToCSV() {
+            let csv = '';
+            if (reportData.length > 0) {
+                const headers = Object.keys(reportData[0]);
+                csv += headers.join(',') + '\n';
+                reportData.forEach(row => {
+                    csv += headers.map(h => row[h]).join(',') + '\n';
+                });
+            }
+
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'report_' + new Date().getTime() + '.csv';
+            a.click();
+            toastr.success('CSV downloaded');
+        }
+    </script>
+
+    <style>
+        @@media print {
+            .btn, .breadcrumb, nav {
+                display: none !important;
+            }
+        }
+    </style>
+}

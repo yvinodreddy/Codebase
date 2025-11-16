@@ -1,0 +1,37 @@
+{
+  "phase_id": 15,
+  "name": "Advanced Medical NLP & Auto-Coding (Base)",
+  "epic": "Epic 16",
+  "story_points": 47,
+  "priority": "P0",
+  "dependencies": [
+    1
+  ],
+  "version": "v2.0",
+  "user_stories": [
+    {
+      "story_id": "16.1",
+      "title": "Automated ICD-10/11 Coding",
+      "story_points": 13,
+      "priority": "P0"
+    },
+    {
+      "story_id": "16.2",
+      "title": "Automated CPT Coding",
+      "story_points": 13,
+      "priority": "P0"
+    },
+    {
+      "story_id": "16.3",
+      "title": "Clinical Note Summarization",
+      "story_points": 13,
+      "priority": "P0"
+    },
+    {
+      "story_id": "16.4",
+      "title": "Medical Concept Normalization",
+      "story_points": 8,
+      "priority": "P1"
+    }
+  ]
+}

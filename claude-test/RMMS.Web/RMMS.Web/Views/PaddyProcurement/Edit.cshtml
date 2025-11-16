@@ -1,0 +1,245 @@
+@model RMMS.Models.PaddyProcurement
+@{
+    ViewData["Title"] = "Edit Paddy Procurement";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="card shadow">
+        <div class="card-header bg-warning text-white">
+            <h3><i class="fas fa-edit"></i> Edit Paddy Procurement Entry</h3>
+        </div>
+
+        <div class="card-body">
+            <form asp-action="Edit" method="post">
+                <input type="hidden" asp-for="Id" />
+                <input type="hidden" asp-for="CreatedBy" />
+                <input type="hidden" asp-for="CreatedDate" />
+                <input type="hidden" asp-for="ModifiedBy" value="" />
+                <input type="hidden" asp-for="ModifiedDate" value="@DateTime.Now" />
+                <input type="hidden" asp-for="IsActive" />
+
+                @if (!ViewData.ModelState.IsValid)
+                {
+                    <div class="alert alert-danger">
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                    </div>
+                }
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="VoucherNumber" class="control-label">Voucher Number</label>
+                            <input asp-for="VoucherNumber" class="form-control" readonly style="background-color: #f8f9fa;" />
+                            <span asp-validation-for="VoucherNumber" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="ReceiptDate" class="control-label">Receipt Date</label>
+                            <input asp-for="ReceiptDate" type="date" class="form-control" />
+                            <span asp-validation-for="ReceiptDate" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="SupplierName" class="control-label">Supplier Name</label>
+                            <input asp-for="SupplierName" class="form-control" placeholder="Enter supplier name" />
+                            <span asp-validation-for="SupplierName" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="PurchaseOrderNumber" class="control-label">Purchase Order Number</label>
+                            <input asp-for="PurchaseOrderNumber" class="form-control" placeholder="Optional - PO Number" />
+                            <span asp-validation-for="PurchaseOrderNumber" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label asp-for="PaddyVariety" class="control-label">Paddy Variety</label>
+                            <select asp-for="PaddyVariety" class="form-control">
+                                <option value="">-- Select Variety --</option>
+                                @if (ViewBag.PaddyVarieties != null)
+                                {
+                                    @foreach (var variety in ViewBag.PaddyVarieties)
+                                    {
+                                        <option value="@variety">@variety</option>
+                                    }
+                                }
+                                else
+                                {
+                                    <option value="Basmati">Basmati</option>
+                                    <option value="Sona Masoori">Sona Masoori</option>
+                                    <option value="IR-64">IR-64</option>
+                                    <option value="Swarna">Swarna</option>
+                                    <option value="Common">Common</option>
+                                }
+                            </select>
+                            <span asp-validation-for="PaddyVariety" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label asp-for="Grade" class="control-label">Grade</label>
+                            <select asp-for="Grade" class="form-control">
+                                <option value="">-- Select Grade --</option>
+                                <option value="A">Grade A</option>
+                                <option value="B">Grade B</option>
+                                <option value="C">Grade C</option>
+                                <option value="Premium">Premium</option>
+                                <option value="Standard">Standard</option>
+                            </select>
+                            <span asp-validation-for="Grade" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label asp-for="MoistureContent" class="control-label">Moisture Content (%)</label>
+                            <input asp-for="MoistureContent" type="number" step="0.01" class="form-control" placeholder="14.5" />
+                            <span asp-validation-for="MoistureContent" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label asp-for="OpeningStock" class="control-label">Opening Stock (kg)</label>
+                            <input asp-for="OpeningStock" type="number" step="0.01" class="form-control" id="openingStock" placeholder="0" />
+                            <span asp-validation-for="OpeningStock" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label asp-for="QuantityReceived" class="control-label">Quantity Received (kg)</label>
+                            <input asp-for="QuantityReceived" type="number" step="0.01" class="form-control" id="quantityReceived" />
+                            <span asp-validation-for="QuantityReceived" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label asp-for="Issues" class="control-label">Issues (kg)</label>
+                            <input asp-for="Issues" type="number" step="0.01" class="form-control" id="issues" placeholder="0" />
+                            <span asp-validation-for="Issues" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label asp-for="ClosingStock" class="control-label">Closing Stock (kg)</label>
+                            <input asp-for="ClosingStock" type="number" step="0.01" class="form-control" id="closingStock" readonly style="background-color: #f8f9fa;" />
+                            <span asp-validation-for="ClosingStock" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label asp-for="WeightPerBag" class="control-label">Weight Per Bag (kg)</label>
+                            <input asp-for="WeightPerBag" type="number" step="0.01" class="form-control" placeholder="50" />
+                            <span asp-validation-for="WeightPerBag" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label asp-for="TotalNetWeight" class="control-label">Total Net Weight (kg)</label>
+                            <input asp-for="TotalNetWeight" type="number" step="0.01" class="form-control" />
+                            <span asp-validation-for="TotalNetWeight" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label asp-for="LossShrinkage" class="control-label">Loss/Shrinkage (kg)</label>
+                            <input asp-for="LossShrinkage" type="number" step="0.01" class="form-control" readonly style="background-color: #f8f9fa;" />
+                            <span asp-validation-for="LossShrinkage" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="StorageDate" class="control-label">Storage Date</label>
+                            <input asp-for="StorageDate" type="date" class="form-control" />
+                            <span asp-validation-for="StorageDate" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="StorageLocation" class="control-label">Storage Location/Godown</label>
+                            <input asp-for="StorageLocation" class="form-control" placeholder="Enter storage location" />
+                            <span asp-validation-for="StorageLocation" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="ResponsiblePerson" class="control-label">Responsible Person</label>
+                            <input asp-for="ResponsiblePerson" class="form-control" placeholder="Name of responsible person" />
+                            <span asp-validation-for="ResponsiblePerson" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Remarks" class="control-label">Remarks</label>
+                            <textarea asp-for="Remarks" class="form-control" rows="2" placeholder="Any additional notes..."></textarea>
+                            <span asp-validation-for="Remarks" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group mt-4">
+                    <button type="submit" class="btn btn-warning btn-lg">
+                        <i class="fas fa-save"></i> Update Procurement
+                    </button>
+                    <a asp-action="Index" class="btn btn-secondary btn-lg">
+                        <i class="fas fa-times"></i> Cancel
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        $(document).ready(function() {
+            // Auto-calculate Closing Stock
+            $('#openingStock, #quantityReceived, #issues').on('input', function() {
+                var opening = parseFloat($('#openingStock').val()) || 0;
+                var received = parseFloat($('#quantityReceived').val()) || 0;
+                var issued = parseFloat($('#issues').val()) || 0;
+
+                var closing = opening + received - issued;
+                $('#closingStock').val(closing.toFixed(2));
+            });
+
+            // Trigger calculation on page load
+            $('#openingStock').trigger('input');
+        });
+    </script>
+}

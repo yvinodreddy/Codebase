@@ -1,0 +1,63 @@
+@model RMMS.Models.Production.ProductionOrder
+
+@{
+    ViewData["Title"] = "Delete Production Order";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h2 class="text-danger"><i class="fas fa-trash"></i> Delete Production Order</h2>
+            <hr />
+
+            <div class="alert alert-warning">
+                <i class="fas fa-exclamation-triangle"></i>
+                <strong>Warning!</strong> You are about to delete this production order. This action cannot be undone.
+            </div>
+
+            <div class="card">
+                <div class="card-header bg-danger text-white">
+                    <h5 class="mb-0">Order Information</h5>
+                </div>
+                <div class="card-body">
+                    <dl class="row">
+                        <dt class="col-sm-4">Order Number:</dt>
+                        <dd class="col-sm-8"><strong>@Model.OrderNumber</strong></dd>
+
+                        <dt class="col-sm-4">Scheduled Date:</dt>
+                        <dd class="col-sm-8">@Model.ScheduledDate.ToString("yyyy-MM-dd")</dd>
+
+                        <dt class="col-sm-4">Paddy Variety:</dt>
+                        <dd class="col-sm-8">@(Model.PaddyVariety ?? "Not specified")</dd>
+
+                        <dt class="col-sm-4">Quantity:</dt>
+                        <dd class="col-sm-8">@Model.PaddyQuantity.ToString("N2") @Model.PaddyUOM</dd>
+
+                        <dt class="col-sm-4">Status:</dt>
+                        <dd class="col-sm-8">
+                            <span class="badge @Model.StatusBadgeClass">@Model.Status</span>
+                        </dd>
+
+                        <dt class="col-sm-4">Priority:</dt>
+                        <dd class="col-sm-8">
+                            <span class="badge @Model.PriorityBadgeClass">@Model.Priority</span>
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+
+            <form asp-action="Delete" method="post" class="mt-4">
+                @Html.AntiForgeryToken()
+                <input type="hidden" asp-for="Id" />
+                <div class="d-flex justify-content-between">
+                    <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Cancel
+                    </a>
+                    <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this production order?')">
+                        <i class="fas fa-trash"></i> Delete Order
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

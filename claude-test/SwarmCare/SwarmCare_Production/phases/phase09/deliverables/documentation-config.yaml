@@ -1,0 +1,325 @@
+# SwarmCare Documentation System Configuration
+# Phase 09: Production-Ready Documentation Configuration
+# Version: 2.1
+# Last Updated: 2025-10-28
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: swarmcare-documentation-config
+  namespace: swarmcare-production
+  labels:
+    app: swarmcare
+    component: documentation
+    phase: "09"
+    version: "2.1"
+data:
+  # Global Documentation Configuration
+  documentation_version: "2.1"
+  framework_version: "100%"
+  enable_auto_generation: "true"
+  enable_versioning: "true"
+  enable_search: "true"
+
+  # MkDocs Configuration
+  mkdocs.yml: |
+    site_name: SwarmCare Documentation
+    site_description: Complete SwarmCare platform documentation
+    site_author: SwarmCare Team
+    site_url: https://docs.swarmcare.io
+
+    theme:
+      name: material
+      palette:
+        primary: blue
+        accent: light blue
+      features:
+        - navigation.instant
+        - navigation.tracking
+        - navigation.tabs
+        - navigation.sections
+        - navigation.expand
+        - search.suggest
+        - search.highlight
+        - content.code.copy
+
+    plugins:
+      - search
+      - minify:
+          minify_html: true
+      - git-revision-date
+      - mkdocstrings
+
+    markdown_extensions:
+      - admonition
+      - codehilite
+      - pymdownx.highlight
+      - pymdownx.superfences
+      - pymdownx.tabbed
+      - toc:
+          permalink: true
+
+    nav:
+      - Home: index.md
+      - Getting Started:
+          - Installation: getting-started/installation.md
+          - Quick Start: getting-started/quickstart.md
+          - Configuration: getting-started/configuration.md
+      - User Guides:
+          - For Clinicians: guides/clinicians.md
+          - For Administrators: guides/administrators.md
+          - For Patients: guides/patients.md
+      - Technical Documentation:
+          - Architecture: technical/architecture.md
+          - API Reference: technical/api.md
+          - Database Schema: technical/database.md
+          - Security: technical/security.md
+      - Tutorials:
+          - Basic Tutorials: tutorials/basic.md
+          - Advanced Tutorials: tutorials/advanced.md
+          - Integration: tutorials/integration.md
+      - Deployment:
+          - Kubernetes: deployment/kubernetes.md
+          - Docker: deployment/docker.md
+          - Cloud Providers: deployment/cloud.md
+      - Reference:
+          - API: reference/api.md
+          - CLI: reference/cli.md
+          - Configuration: reference/config.md
+
+  # Sphinx Configuration
+  conf.py: |
+    # Sphinx configuration for SwarmCare Documentation
+    project = 'SwarmCare'
+    copyright = '2025, SwarmCare Team'
+    author = 'SwarmCare Team'
+    version = '2.1'
+    release = '2.1.0'
+
+    extensions = [
+        'sphinx.ext.autodoc',
+        'sphinx.ext.napoleon',
+        'sphinx.ext.viewcode',
+        'sphinx.ext.intersphinx',
+        'sphinx.ext.todo',
+        'sphinx.ext.coverage',
+        'sphinx.ext.mathjax',
+        'sphinx.ext.ifconfig',
+    ]
+
+    templates_path = ['_templates']
+    exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
+    html_theme = 'alabaster'
+    html_static_path = ['_static']
+    html_title = 'SwarmCare Documentation'
+
+    # Napoleon settings for Google/NumPy docstring support
+    napoleon_google_docstring = True
+    napoleon_numpy_docstring = True
+    napoleon_include_init_with_doc = True
+
+    # Autodoc settings
+    autodoc_default_options = {
+        'members': True,
+        'member-order': 'bysource',
+        'special-members': '__init__',
+        'undoc-members': True,
+        'exclude-members': '__weakref__'
+    }
+
+  # Docusaurus Configuration
+  docusaurus.config.js: |
+    module.exports = {
+      title: 'SwarmCare Documentation',
+      tagline: 'Enterprise Healthcare AI Platform',
+      url: 'https://docs.swarmcare.io',
+      baseUrl: '/',
+      onBrokenLinks: 'throw',
+      onBrokenMarkdownLinks: 'warn',
+      favicon: 'img/favicon.ico',
+
+      presets: [
+        [
+          'classic',
+          {
+            docs: {
+              sidebarPath: require.resolve('./sidebars.js'),
+              editUrl: 'https://github.com/swarmcare/docs/edit/main/',
+            },
+            blog: {
+              showReadingTime: true,
+              editUrl: 'https://github.com/swarmcare/docs/edit/main/blog/',
+            },
+            theme: {
+              customCss: require.resolve('./src/css/custom.css'),
+            },
+          },
+        ],
+      ],
+
+      themeConfig: {
+        navbar: {
+          title: 'SwarmCare',
+          logo: {
+            alt: 'SwarmCare Logo',
+            src: 'img/logo.svg',
+          },
+          items: [
+            {
+              type: 'doc',
+              docId: 'intro',
+              position: 'left',
+              label: 'Documentation',
+            },
+            {to: '/blog', label: 'Blog', position: 'left'},
+            {
+              href: 'https://github.com/swarmcare',
+              label: 'GitHub',
+              position: 'right',
+            },
+          ],
+        },
+        footer: {
+          style: 'dark',
+          links: [
+            {
+              title: 'Docs',
+              items: [
+                {
+                  label: 'Getting Started',
+                  to: '/docs/intro',
+                },
+                {
+                  label: 'API Reference',
+                  to: '/docs/api',
+                },
+              ],
+            },
+            {
+              title: 'Community',
+              items: [
+                {
+                  label: 'GitHub',
+                  href: 'https://github.com/swarmcare',
+                },
+              ],
+            },
+          ],
+          copyright: `Copyright © ${new Date().getFullYear()} SwarmCare.`,
+        },
+        algolia: {
+          appId: 'YOUR_APP_ID',
+          apiKey: 'YOUR_API_KEY',
+          indexName: 'swarmcare',
+        },
+      },
+    };
+
+  # OpenAPI Specification
+  openapi_spec.yaml: |
+    openapi: 3.1.0
+    info:
+      title: SwarmCare API
+      version: 2.1.0
+      description: |
+        SwarmCare Enterprise Healthcare AI Platform API
+
+        ## Authentication
+        All API requests require authentication via Bearer token.
+
+        ## Rate Limiting
+        - 1000 requests per hour for authenticated users
+        - 100 requests per hour for unauthenticated users
+      contact:
+        name: SwarmCare API Support
+        url: https://support.swarmcare.io
+        email: api@swarmcare.io
+      license:
+        name: Proprietary
+        url: https://swarmcare.io/license
+
+    servers:
+      - url: https://api.swarmcare.io/v1
+        description: Production server
+      - url: https://staging-api.swarmcare.io/v1
+        description: Staging server
+      - url: http://localhost:8080/v1
+        description: Local development server
+
+    security:
+      - BearerAuth: []
+
+    components:
+      securitySchemes:
+        BearerAuth:
+          type: http
+          scheme: bearer
+          bearerFormat: JWT
+
+    paths:
+      /health:
+        get:
+          summary: Health check endpoint
+          description: Returns the health status of the API
+          responses:
+            '200':
+              description: API is healthy
+              content:
+                application/json:
+                  schema:
+                    type: object
+                    properties:
+                      status:
+                        type: string
+                        example: healthy
+                      version:
+                        type: string
+                        example: 2.1.0
+
+  # Documentation Linting Rules
+  .markdownlint.json: |
+    {
+      "default": true,
+      "MD003": { "style": "atx" },
+      "MD007": { "indent": 2 },
+      "MD013": { "line_length": 120 },
+      "MD024": { "allow_different_nesting": true },
+      "MD033": false,
+      "MD041": false
+    }
+
+  # Vale Style Configuration
+  .vale.ini: |
+    StylesPath = styles
+    MinAlertLevel = suggestion
+
+    [*.md]
+    BasedOnStyles = Vale, Microsoft, write-good
+    Vale.Terms = YES
+    write-good.Passive = NO
+    write-good.Weasel = NO
+
+  # Documentation Build Script
+  build_docs.sh: |
+    #!/bin/bash
+    # Build all documentation formats
+
+    echo "Building SwarmCare Documentation..."
+
+    # Build MkDocs
+    echo "Building MkDocs..."
+    mkdocs build -d site/mkdocs
+
+    # Build Sphinx
+    echo "Building Sphinx..."
+    cd sphinx && make html && cd ..
+
+    # Build Docusaurus
+    echo "Building Docusaurus..."
+    cd docusaurus && npm run build && cd ..
+
+    echo "Documentation build complete!"
+    echo "Outputs:"
+    echo "  - MkDocs: site/mkdocs/"
+    echo "  - Sphinx: sphinx/_build/html/"
+    echo "  - Docusaurus: docusaurus/build/"

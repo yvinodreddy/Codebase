@@ -1,0 +1,28 @@
+# Phase 25: Patient-Facing XAI - Python Dependencies
+#
+# ZERO EXTERNAL DEPENDENCIES REQUIRED!
+#
+# This system uses Python standard library only for maximum compatibility
+# and minimal security surface.
+#
+# Core dependencies (stdlib):
+# - dataclasses (Python 3.7+)
+# - enum
+# - typing
+# - hashlib
+# - json
+# - datetime
+# - collections
+# - re
+#
+# Optional dependencies for deployment only:
+# flask>=2.3.0  # For REST API (if needed)
+# gunicorn>=21.2.0  # For production server (if needed)
+# prometheus-client>=0.18.0  # For metrics (if needed)
+#
+# For testing only:
+# pytest>=7.4.0
+# pytest-cov>=4.1.0
+#
+# RECOMMENDED: No installation needed for core functionality!
+# Simply copy patient_facing_xai_core.py and implementation.py

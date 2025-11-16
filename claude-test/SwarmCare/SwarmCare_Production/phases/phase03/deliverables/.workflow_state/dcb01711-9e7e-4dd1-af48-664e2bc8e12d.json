@@ -1,0 +1,140 @@
+{
+  "execution_id": "dcb01711-9e7e-4dd1-af48-664e2bc8e12d",
+  "workflow_id": "increment_workflow",
+  "state": "COMPLETED",
+  "tasks": {
+    "inc1": {
+      "task_id": "inc1",
+      "name": "Increment 1",
+      "action": "increment",
+      "dependencies": [],
+      "max_retries": 3,
+      "timeout_seconds": 300,
+      "state": "COMPLETED",
+      "result": {
+        "incremented": true
+      },
+      "error": null,
+      "start_time": 1761650893.6916516,
+      "end_time": 1761650893.69171,
+      "retry_count": 0
+    },
+    "inc2": {
+      "task_id": "inc2",
+      "name": "Increment 2",
+      "action": "increment",
+      "dependencies": [
+        "inc1"
+      ],
+      "max_retries": 3,
+      "timeout_seconds": 300,
+      "state": "COMPLETED",
+      "result": {
+        "incremented": true
+      },
+      "error": null,
+      "start_time": 1761650893.6917672,
+      "end_time": 1761650893.6918197,
+      "retry_count": 0
+    },
+    "inc3": {
+      "task_id": "inc3",
+      "name": "Increment 3",
+      "action": "increment",
+      "dependencies": [
+        "inc2"
+      ],
+      "max_retries": 3,
+      "timeout_seconds": 300,
+      "state": "COMPLETED",
+      "result": {
+        "incremented": true
+      },
+      "error": null,
+      "start_time": 1761650893.6918724,
+      "end_time": 1761650893.691922,
+      "retry_count": 0
+    }
+  },
+  "context": {
+    "value": 3
+  },
+  "start_time": 1761650893.691539,
+  "end_time": 1761650893.691975,
+  "error": null,
+  "audit_log": [
+    {
+      "timestamp": "2025-10-28T07:28:13.691565",
+      "execution_id": "dcb01711-9e7e-4dd1-af48-664e2bc8e12d",
+      "event": "WORKFLOW_STARTED",
+      "details": {
+        "workflow_id": "increment_workflow"
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:28:13.691699",
+      "execution_id": "dcb01711-9e7e-4dd1-af48-664e2bc8e12d",
+      "event": "TASK_STARTED",
+      "details": {
+        "task_id": "inc1",
+        "task_name": "Increment 1"
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:28:13.691755",
+      "execution_id": "dcb01711-9e7e-4dd1-af48-664e2bc8e12d",
+      "event": "TASK_COMPLETED",
+      "details": {
+        "task_id": "inc1",
+        "duration_seconds": 5.841255187988281e-05,
+        "attempt": 1
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:28:13.691805",
+      "execution_id": "dcb01711-9e7e-4dd1-af48-664e2bc8e12d",
+      "event": "TASK_STARTED",
+      "details": {
+        "task_id": "inc2",
+        "task_name": "Increment 2"
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:28:13.691856",
+      "execution_id": "dcb01711-9e7e-4dd1-af48-664e2bc8e12d",
+      "event": "TASK_COMPLETED",
+      "details": {
+        "task_id": "inc2",
+        "duration_seconds": 5.245208740234375e-05,
+        "attempt": 1
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:28:13.691915",
+      "execution_id": "dcb01711-9e7e-4dd1-af48-664e2bc8e12d",
+      "event": "TASK_STARTED",
+      "details": {
+        "task_id": "inc3",
+        "task_name": "Increment 3"
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:28:13.691968",
+      "execution_id": "dcb01711-9e7e-4dd1-af48-664e2bc8e12d",
+      "event": "TASK_COMPLETED",
+      "details": {
+        "task_id": "inc3",
+        "duration_seconds": 4.9591064453125e-05,
+        "attempt": 1
+      }
+    },
+    {
+      "timestamp": "2025-10-28T07:28:13.692021",
+      "execution_id": "dcb01711-9e7e-4dd1-af48-664e2bc8e12d",
+      "event": "WORKFLOW_COMPLETED",
+      "details": {
+        "duration_seconds": 0.0004360675811767578
+      }
+    }
+  ]
+}

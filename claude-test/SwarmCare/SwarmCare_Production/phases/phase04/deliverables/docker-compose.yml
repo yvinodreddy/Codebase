@@ -1,0 +1,136 @@
+# Phase 04: Frontend Application - Docker Compose Configuration
+# Complete local development environment
+#
+# Usage:
+#   Start:    docker-compose up -d
+#   Stop:     docker-compose down
+#   Logs:     docker-compose logs -f
+#   Rebuild:  docker-compose up -d --build
+
+version: '3.8'
+
+services:
+  # ==========================================================================
+  # FRONTEND (React + Nginx)
+  # ==========================================================================
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    container_name: swarmcare-frontend
+    ports:
+      - "3000:80"
+    environment:
+      - REACT_APP_API_URL=http://localhost:8000
+      - REACT_APP_WS_URL=ws://localhost:8000
+    depends_on:
+      - backend
+    networks:
+      - swarmcare-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:80/"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 5s
+
+  # ==========================================================================
+  # BACKEND API (FastAPI)
+  # ==========================================================================
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    container_name: swarmcare-backend
+    ports:
+      - "8000:8000"
+    environment:
+      - API_HOST=0.0.0.0
+      - API_PORT=8000
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=5432
+      - POSTGRES_DB=swarmcare_frontend
+      - POSTGRES_USER=swarmcare
+      - POSTGRES_PASSWORD=dev_password_123
+      - JWT_SECRET=dev_jwt_secret_change_in_prod
+      - LOG_LEVEL=info
+    depends_on:
+      - redis
+      - postgres
+    networks:
+      - swarmcare-network
+    restart: unless-stopped
+    volumes:
+      - ./logs:/app/logs
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/health"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 10s
+
+  # ==========================================================================
+  # REDIS (Cache)
+  # ==========================================================================
+  redis:
+    image: redis:7-alpine
+    container_name: swarmcare-redis
+    ports:
+      - "6379:6379"
+    networks:
+      - swarmcare-network
+    restart: unless-stopped
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 5s
+
+  # ==========================================================================
+  # POSTGRESQL (Database)
+  # ==========================================================================
+  postgres:
+    image: postgres:15-alpine
+    container_name: swarmcare-postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=swarmcare_frontend
+      - POSTGRES_USER=swarmcare
+      - POSTGRES_PASSWORD=dev_password_123
+    networks:
+      - swarmcare-network
+    restart: unless-stopped
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U swarmcare"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 10s
+
+# ============================================================================
+# NETWORKS
+# ============================================================================
+networks:
+  swarmcare-network:
+    driver: bridge
+    name: swarmcare-network
+
+# ============================================================================
+# VOLUMES
+# ============================================================================
+volumes:
+  redis-data:
+    driver: local
+    name: swarmcare-redis-data
+  postgres-data:
+    driver: local
+    name: swarmcare-postgres-data

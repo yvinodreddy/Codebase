@@ -1,0 +1,73 @@
+@model RMMS.Models.CashBook
+@{
+    ViewData["Title"] = "Cash Book Entry Details";
+}
+
+<div class="container-fluid">
+    <div class="card shadow">
+        <div class="card-header bg-info text-white">
+            <h3><i class="fas fa-money-bill-wave"></i> Cash Book Entry Details</h3>
+        </div>
+
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <dl class="row">
+                        <dt class="col-sm-5">Transaction Date:</dt>
+                        <dd class="col-sm-7">@Model.TransactionDate.ToString("dd-MMM-yyyy")</dd>
+
+                        <dt class="col-sm-5">Voucher Number:</dt>
+                        <dd class="col-sm-7">@(Model.VoucherNumber ?? "N/A")</dd>
+
+                        <dt class="col-sm-5">Particulars:</dt>
+                        <dd class="col-sm-7">@Model.Particulars</dd>
+
+                        <dt class="col-sm-5">Receipts:</dt>
+                        <dd class="col-sm-7 text-success fw-bold">
+                            @(Model.Receipts > 0 ? "₹ " + Model.Receipts.ToString("N2") : "-")
+                        </dd>
+                    </dl>
+                </div>
+
+                <div class="col-md-6">
+                    <dl class="row">
+                        <dt class="col-sm-5">Payments:</dt>
+                        <dd class="col-sm-7 text-danger fw-bold">
+                            @(Model.Payments > 0 ? "₹ " + Model.Payments.ToString("N2") : "-")
+                        </dd>
+
+                        <dt class="col-sm-5">Balance:</dt>
+                        <dd class="col-sm-7 fw-bold">₹ @Model.Balance.ToString("N2")</dd>
+
+                        <dt class="col-sm-5">Remarks:</dt>
+                        <dd class="col-sm-7">@(Model.Remarks ?? "N/A")</dd>
+
+                        <dt class="col-sm-5">Created By:</dt>
+                        <dd class="col-sm-7">@(Model.CreatedBy ?? "N/A")</dd>
+
+                        <dt class="col-sm-5">Created Date:</dt>
+                        <dd class="col-sm-7">@Model.CreatedDate.ToString("dd-MMM-yyyy HH:mm")</dd>
+                    </dl>
+                </div>
+            </div>
+
+            <hr />
+
+            <div class="mt-4">
+                <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">
+                    <i class="fas fa-edit"></i> Edit
+                </a>
+                <form asp-action="Delete" asp-route-id="@Model.Id" method="post" style="display: inline;"
+                      onsubmit="return confirm('Are you sure you want to delete this cash transaction?');">
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="btn btn-danger">
+                        <i class="fas fa-trash"></i> Delete
+                    </button>
+                </form>
+                <a asp-action="Index" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Back to List
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

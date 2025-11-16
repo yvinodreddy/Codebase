@@ -1,0 +1,4291 @@
+{
+  "generated_at": "2025-10-31T19:52:05.601392",
+  "total_codes": 503,
+  "codes": [
+    {
+      "code": "99202",
+      "description": "Office visit, new patient, level 2",
+      "category": "E&M",
+      "keywords": [
+        "new patient visit",
+        "office visit new"
+      ]
+    },
+    {
+      "code": "99203",
+      "description": "Office visit, new patient, level 3",
+      "category": "E&M",
+      "keywords": [
+        "new patient level 3",
+        "office new moderate"
+      ]
+    },
+    {
+      "code": "99204",
+      "description": "Office visit, new patient, level 4",
+      "category": "E&M",
+      "keywords": [
+        "new patient level 4",
+        "office new detailed"
+      ]
+    },
+    {
+      "code": "99205",
+      "description": "Office visit, new patient, level 5",
+      "category": "E&M",
+      "keywords": [
+        "new patient level 5",
+        "office new comprehensive"
+      ]
+    },
+    {
+      "code": "99211",
+      "description": "Office visit, established patient, minimal",
+      "category": "E&M",
+      "keywords": [
+        "established minimal",
+        "nurse visit"
+      ]
+    },
+    {
+      "code": "99212",
+      "description": "Office visit, established patient, level 2",
+      "category": "E&M",
+      "keywords": [
+        "established patient visit",
+        "office visit"
+      ]
+    },
+    {
+      "code": "99213",
+      "description": "Office visit, established patient, level 3",
+      "category": "E&M",
+      "keywords": [
+        "established level 3",
+        "office established moderate"
+      ]
+    },
+    {
+      "code": "99214",
+      "description": "Office visit, established patient, level 4",
+      "category": "E&M",
+      "keywords": [
+        "established level 4",
+        "office established detailed"
+      ]
+    },
+    {
+      "code": "99215",
+      "description": "Office visit, established patient, level 5",
+      "category": "E&M",
+      "keywords": [
+        "established level 5",
+        "office established comprehensive"
+      ]
+    },
+    {
+      "code": "99221",
+      "description": "Initial hospital care, level 1",
+      "category": "E&M",
+      "keywords": [
+        "hospital admission",
+        "admit level 1"
+      ]
+    },
+    {
+      "code": "99222",
+      "description": "Initial hospital care, level 2",
+      "category": "E&M",
+      "keywords": [
+        "hospital admission level 2",
+        "admit level 2"
+      ]
+    },
+    {
+      "code": "99223",
+      "description": "Initial hospital care, level 3",
+      "category": "E&M",
+      "keywords": [
+        "hospital admission level 3",
+        "admit level 3"
+      ]
+    },
+    {
+      "code": "99231",
+      "description": "Subsequent hospital care, level 1",
+      "category": "E&M",
+      "keywords": [
+        "hospital follow-up",
+        "inpatient visit"
+      ]
+    },
+    {
+      "code": "99232",
+      "description": "Subsequent hospital care, level 2",
+      "category": "E&M",
+      "keywords": [
+        "hospital follow-up level 2",
+        "inpatient visit moderate"
+      ]
+    },
+    {
+      "code": "99233",
+      "description": "Subsequent hospital care, level 3",
+      "category": "E&M",
+      "keywords": [
+        "hospital follow-up level 3",
+        "inpatient visit comprehensive"
+      ]
+    },
+    {
+      "code": "99238",
+      "description": "Hospital discharge day management, 30 minutes or less",
+      "category": "E&M",
+      "keywords": [
+        "hospital discharge",
+        "discharge management"
+      ]
+    },
+    {
+      "code": "99239",
+      "description": "Hospital discharge day management, more than 30 minutes",
+      "category": "E&M",
+      "keywords": [
+        "discharge extended"
+      ]
+    },
+    {
+      "code": "99281",
+      "description": "Emergency department visit, level 1",
+      "category": "E&M",
+      "keywords": [
+        "er visit level 1",
+        "emergency minimal"
+      ]
+    },
+    {
+      "code": "99282",
+      "description": "Emergency department visit, level 2",
+      "category": "E&M",
+      "keywords": [
+        "er visit level 2",
+        "emergency low complexity"
+      ]
+    },
+    {
+      "code": "99283",
+      "description": "Emergency department visit, level 3",
+      "category": "E&M",
+      "keywords": [
+        "er visit level 3",
+        "emergency moderate"
+      ]
+    },
+    {
+      "code": "99284",
+      "description": "Emergency department visit, level 4",
+      "category": "E&M",
+      "keywords": [
+        "er visit level 4",
+        "emergency high complexity"
+      ]
+    },
+    {
+      "code": "99285",
+      "description": "Emergency department visit, level 5",
+      "category": "E&M",
+      "keywords": [
+        "er visit level 5",
+        "emergency critical"
+      ]
+    },
+    {
+      "code": "99291",
+      "description": "Critical care, first 30-74 minutes",
+      "category": "E&M",
+      "keywords": [
+        "critical care",
+        "icu care"
+      ]
+    },
+    {
+      "code": "99292",
+      "description": "Critical care, each additional 30 minutes",
+      "category": "E&M",
+      "keywords": [
+        "critical care additional"
+      ]
+    },
+    {
+      "code": "99304",
+      "description": "Initial nursing facility care, level 2",
+      "category": "E&M",
+      "keywords": [
+        "nursing home admission"
+      ]
+    },
+    {
+      "code": "99305",
+      "description": "Initial nursing facility care, level 3",
+      "category": "E&M",
+      "keywords": [
+        "nursing home comprehensive admission"
+      ]
+    },
+    {
+      "code": "99241",
+      "description": "Office consultation, level 1",
+      "category": "E&M",
+      "keywords": [
+        "consultation level 1",
+        "consult minimal"
+      ]
+    },
+    {
+      "code": "99242",
+      "description": "Office consultation, level 2",
+      "category": "E&M",
+      "keywords": [
+        "consultation level 2",
+        "consult low complexity"
+      ]
+    },
+    {
+      "code": "99243",
+      "description": "Office consultation, level 3",
+      "category": "E&M",
+      "keywords": [
+        "consultation level 3",
+        "consult moderate"
+      ]
+    },
+    {
+      "code": "99244",
+      "description": "Office consultation, level 4",
+      "category": "E&M",
+      "keywords": [
+        "consultation level 4",
+        "consult comprehensive"
+      ]
+    },
+    {
+      "code": "99245",
+      "description": "Office consultation, level 5",
+      "category": "E&M",
+      "keywords": [
+        "consultation level 5",
+        "consult complex"
+      ]
+    },
+    {
+      "code": "99251",
+      "description": "Inpatient consultation, level 1",
+      "category": "E&M",
+      "keywords": [
+        "inpatient consult level 1"
+      ]
+    },
+    {
+      "code": "99252",
+      "description": "Inpatient consultation, level 2",
+      "category": "E&M",
+      "keywords": [
+        "inpatient consult level 2"
+      ]
+    },
+    {
+      "code": "99253",
+      "description": "Inpatient consultation, level 3",
+      "category": "E&M",
+      "keywords": [
+        "inpatient consult level 3"
+      ]
+    },
+    {
+      "code": "99254",
+      "description": "Inpatient consultation, level 4",
+      "category": "E&M",
+      "keywords": [
+        "inpatient consult level 4"
+      ]
+    },
+    {
+      "code": "99255",
+      "description": "Inpatient consultation, level 5",
+      "category": "E&M",
+      "keywords": [
+        "inpatient consult level 5"
+      ]
+    },
+    {
+      "code": "99307",
+      "description": "Subsequent nursing facility care, level 1",
+      "category": "E&M",
+      "keywords": [
+        "nursing home follow-up"
+      ]
+    },
+    {
+      "code": "99308",
+      "description": "Subsequent nursing facility care, level 2",
+      "category": "E&M",
+      "keywords": [
+        "nursing home follow-up moderate"
+      ]
+    },
+    {
+      "code": "99309",
+      "description": "Subsequent nursing facility care, level 3",
+      "category": "E&M",
+      "keywords": [
+        "nursing home follow-up comprehensive"
+      ]
+    },
+    {
+      "code": "99310",
+      "description": "Subsequent nursing facility care, complex",
+      "category": "E&M",
+      "keywords": [
+        "nursing home complex"
+      ]
+    },
+    {
+      "code": "99334",
+      "description": "Domiciliary care, new patient, level 2",
+      "category": "E&M",
+      "keywords": [
+        "home visit new"
+      ]
+    },
+    {
+      "code": "99335",
+      "description": "Domiciliary care, new patient, level 3",
+      "category": "E&M",
+      "keywords": [
+        "home visit new moderate"
+      ]
+    },
+    {
+      "code": "99336",
+      "description": "Domiciliary care, new patient, level 4",
+      "category": "E&M",
+      "keywords": [
+        "home visit new detailed"
+      ]
+    },
+    {
+      "code": "99337",
+      "description": "Domiciliary care, new patient, level 5",
+      "category": "E&M",
+      "keywords": [
+        "home visit new comprehensive"
+      ]
+    },
+    {
+      "code": "99341",
+      "description": "Home visit, new patient, level 1",
+      "category": "E&M",
+      "keywords": [
+        "home health new"
+      ]
+    },
+    {
+      "code": "99342",
+      "description": "Home visit, new patient, level 2",
+      "category": "E&M",
+      "keywords": [
+        "home health new level 2"
+      ]
+    },
+    {
+      "code": "99343",
+      "description": "Home visit, new patient, level 3",
+      "category": "E&M",
+      "keywords": [
+        "home health new level 3"
+      ]
+    },
+    {
+      "code": "99344",
+      "description": "Home visit, new patient, level 4",
+      "category": "E&M",
+      "keywords": [
+        "home health new level 4"
+      ]
+    },
+    {
+      "code": "99345",
+      "description": "Home visit, new patient, level 5",
+      "category": "E&M",
+      "keywords": [
+        "home health new level 5"
+      ]
+    },
+    {
+      "code": "99347",
+      "description": "Home visit, established patient, level 1",
+      "category": "E&M",
+      "keywords": [
+        "home health established"
+      ]
+    },
+    {
+      "code": "99348",
+      "description": "Home visit, established patient, level 2",
+      "category": "E&M",
+      "keywords": [
+        "home health established level 2"
+      ]
+    },
+    {
+      "code": "99349",
+      "description": "Home visit, established patient, level 3",
+      "category": "E&M",
+      "keywords": [
+        "home health established level 3"
+      ]
+    },
+    {
+      "code": "99381",
+      "description": "Initial comprehensive preventive medicine, age <1 year",
+      "category": "E&M",
+      "keywords": [
+        "well child infant"
+      ]
+    },
+    {
+      "code": "99382",
+      "description": "Initial comprehensive preventive medicine, age 1-4",
+      "category": "E&M",
+      "keywords": [
+        "well child toddler"
+      ]
+    },
+    {
+      "code": "99383",
+      "description": "Initial comprehensive preventive medicine, age 5-11",
+      "category": "E&M",
+      "keywords": [
+        "well child school age"
+      ]
+    },
+    {
+      "code": "99384",
+      "description": "Initial comprehensive preventive medicine, age 12-17",
+      "category": "E&M",
+      "keywords": [
+        "well child adolescent"
+      ]
+    },
+    {
+      "code": "99385",
+      "description": "Initial comprehensive preventive medicine, age 18-39",
+      "category": "E&M",
+      "keywords": [
+        "well adult young"
+      ]
+    },
+    {
+      "code": "99386",
+      "description": "Initial comprehensive preventive medicine, age 40-64",
+      "category": "E&M",
+      "keywords": [
+        "well adult middle age"
+      ]
+    },
+    {
+      "code": "99387",
+      "description": "Initial comprehensive preventive medicine, age 65+",
+      "category": "E&M",
+      "keywords": [
+        "well adult elderly",
+        "annual physical elderly"
+      ]
+    },
+    {
+      "code": "99391",
+      "description": "Periodic comprehensive preventive medicine, age <1 year",
+      "category": "E&M",
+      "keywords": [
+        "well baby"
+      ]
+    },
+    {
+      "code": "99392",
+      "description": "Periodic comprehensive preventive medicine, age 1-4",
+      "category": "E&M",
+      "keywords": [
+        "well child check"
+      ]
+    },
+    {
+      "code": "99393",
+      "description": "Periodic comprehensive preventive medicine, age 5-11",
+      "category": "E&M",
+      "keywords": [
+        "well child exam"
+      ]
+    },
+    {
+      "code": "99394",
+      "description": "Periodic comprehensive preventive medicine, age 12-17",
+      "category": "E&M",
+      "keywords": [
+        "adolescent physical"
+      ]
+    },
+    {
+      "code": "99395",
+      "description": "Periodic comprehensive preventive medicine, age 18-39",
+      "category": "E&M",
+      "keywords": [
+        "annual physical young adult"
+      ]
+    },
+    {
+      "code": "99396",
+      "description": "Periodic comprehensive preventive medicine, age 40-64",
+      "category": "E&M",
+      "keywords": [
+        "annual physical",
+        "physical exam"
+      ]
+    },
+    {
+      "code": "99397",
+      "description": "Periodic comprehensive preventive medicine, age 65+",
+      "category": "E&M",
+      "keywords": [
+        "annual physical senior",
+        "medicare annual wellness"
+      ]
+    },
+    {
+      "code": "99401",
+      "description": "Preventive medicine counseling, 15 minutes",
+      "category": "E&M",
+      "keywords": [
+        "health counseling"
+      ]
+    },
+    {
+      "code": "99402",
+      "description": "Preventive medicine counseling, 30 minutes",
+      "category": "E&M",
+      "keywords": [
+        "health counseling 30 min"
+      ]
+    },
+    {
+      "code": "99403",
+      "description": "Preventive medicine counseling, 45 minutes",
+      "category": "E&M",
+      "keywords": [
+        "health counseling 45 min"
+      ]
+    },
+    {
+      "code": "99404",
+      "description": "Preventive medicine counseling, 60 minutes",
+      "category": "E&M",
+      "keywords": [
+        "health counseling 60 min"
+      ]
+    },
+    {
+      "code": "99406",
+      "description": "Smoking and tobacco use cessation counseling, 3-10 minutes",
+      "category": "E&M",
+      "keywords": [
+        "smoking cessation"
+      ]
+    },
+    {
+      "code": "99407",
+      "description": "Smoking and tobacco use cessation counseling, >10 minutes",
+      "category": "E&M",
+      "keywords": [
+        "smoking cessation extended"
+      ]
+    },
+    {
+      "code": "99408",
+      "description": "Alcohol/substance abuse screening and intervention, 15-30 minutes",
+      "category": "E&M",
+      "keywords": [
+        "substance abuse screening"
+      ]
+    },
+    {
+      "code": "99409",
+      "description": "Alcohol/substance abuse screening and intervention, >30 minutes",
+      "category": "E&M",
+      "keywords": [
+        "substance abuse counseling"
+      ]
+    },
+    {
+      "code": "99417",
+      "description": "Prolonged outpatient service, each 15 minutes",
+      "category": "E&M",
+      "keywords": [
+        "prolonged visit"
+      ]
+    },
+    {
+      "code": "99418",
+      "description": "Prolonged inpatient service, each 15 minutes",
+      "category": "E&M",
+      "keywords": [
+        "prolonged hospital visit"
+      ]
+    },
+    {
+      "code": "99415",
+      "description": "Prolonged clinical staff service, each 30 minutes",
+      "category": "E&M",
+      "keywords": [
+        "prolonged staff time"
+      ]
+    },
+    {
+      "code": "93000",
+      "description": "Electrocardiogram, complete",
+      "category": "Cardiology",
+      "keywords": [
+        "ecg",
+        "ekg",
+        "electrocardiogram"
+      ]
+    },
+    {
+      "code": "93005",
+      "description": "Electrocardiogram, tracing only",
+      "category": "Cardiology",
+      "keywords": [
+        "ecg tracing",
+        "ekg tracing"
+      ]
+    },
+    {
+      "code": "93010",
+      "description": "Electrocardiogram, interpretation and report only",
+      "category": "Cardiology",
+      "keywords": [
+        "ecg interpretation"
+      ]
+    },
+    {
+      "code": "93015",
+      "description": "Cardiovascular stress test with physician supervision",
+      "category": "Cardiology",
+      "keywords": [
+        "stress test",
+        "treadmill test",
+        "exercise stress test"
+      ]
+    },
+    {
+      "code": "93016",
+      "description": "Cardiovascular stress test, supervision only",
+      "category": "Cardiology",
+      "keywords": [
+        "stress test supervision"
+      ]
+    },
+    {
+      "code": "93017",
+      "description": "Cardiovascular stress test, tracing only",
+      "category": "Cardiology",
+      "keywords": [
+        "stress test tracing"
+      ]
+    },
+    {
+      "code": "93018",
+      "description": "Cardiovascular stress test, interpretation and report only",
+      "category": "Cardiology",
+      "keywords": [
+        "stress test interpretation"
+      ]
+    },
+    {
+      "code": "93224",
+      "description": "External electrocardiographic recording up to 48 hours",
+      "category": "Cardiology",
+      "keywords": [
+        "holter monitor",
+        "ambulatory ecg"
+      ]
+    },
+    {
+      "code": "93225",
+      "description": "External electrocardiographic recording more than 48 hours",
+      "category": "Cardiology",
+      "keywords": [
+        "extended holter"
+      ]
+    },
+    {
+      "code": "93226",
+      "description": "External electrocardiographic recording, scanning analysis with report",
+      "category": "Cardiology",
+      "keywords": [
+        "holter analysis"
+      ]
+    },
+    {
+      "code": "93227",
+      "description": "External electrocardiographic recording, review and interpretation",
+      "category": "Cardiology",
+      "keywords": [
+        "holter interpretation"
+      ]
+    },
+    {
+      "code": "93279",
+      "description": "Programming device evaluation, single chamber",
+      "category": "Cardiology",
+      "keywords": [
+        "pacemaker check"
+      ]
+    },
+    {
+      "code": "93280",
+      "description": "Programming device evaluation, dual chamber",
+      "category": "Cardiology",
+      "keywords": [
+        "dual chamber pacemaker check"
+      ]
+    },
+    {
+      "code": "93281",
+      "description": "Programming device evaluation, multiple lead",
+      "category": "Cardiology",
+      "keywords": [
+        "biventricular pacemaker check"
+      ]
+    },
+    {
+      "code": "93282",
+      "description": "Programming device evaluation, single lead ICD",
+      "category": "Cardiology",
+      "keywords": [
+        "icd check",
+        "defibrillator check"
+      ]
+    },
+    {
+      "code": "93283",
+      "description": "Programming device evaluation, dual chamber ICD",
+      "category": "Cardiology",
+      "keywords": [
+        "dual chamber icd check"
+      ]
+    },
+    {
+      "code": "93284",
+      "description": "Programming device evaluation, multiple lead ICD",
+      "category": "Cardiology",
+      "keywords": [
+        "biventricular icd check"
+      ]
+    },
+    {
+      "code": "93303",
+      "description": "Transthoracic echocardiography, complete",
+      "category": "Cardiology",
+      "keywords": [
+        "echocardiogram",
+        "echo",
+        "tte"
+      ]
+    },
+    {
+      "code": "93304",
+      "description": "Transthoracic echocardiography, follow-up or limited study",
+      "category": "Cardiology",
+      "keywords": [
+        "echo limited",
+        "limited echocardiogram"
+      ]
+    },
+    {
+      "code": "93306",
+      "description": "Echocardiography, transthoracic, real-time with image documentation",
+      "category": "Cardiology",
+      "keywords": [
+        "echo complete study"
+      ]
+    },
+    {
+      "code": "93307",
+      "description": "Echocardiography, transthoracic, real-time with image documentation, complete",
+      "category": "Cardiology",
+      "keywords": [
+        "complete echo"
+      ]
+    },
+    {
+      "code": "93308",
+      "description": "Echocardiography, transthoracic, real-time with image documentation, follow-up",
+      "category": "Cardiology",
+      "keywords": [
+        "echo follow-up"
+      ]
+    },
+    {
+      "code": "93312",
+      "description": "Echocardiography, transesophageal, real-time with image documentation",
+      "category": "Cardiology",
+      "keywords": [
+        "tee",
+        "transesophageal echo"
+      ]
+    },
+    {
+      "code": "93313",
+      "description": "Echocardiography, transesophageal, placement of transesophageal probe only",
+      "category": "Cardiology",
+      "keywords": [
+        "tee probe placement"
+      ]
+    },
+    {
+      "code": "93314",
+      "description": "Echocardiography, transesophageal, image acquisition, interpretation and report only",
+      "category": "Cardiology",
+      "keywords": [
+        "tee interpretation"
+      ]
+    },
+    {
+      "code": "93315",
+      "description": "Transesophageal echocardiography for congenital cardiac anomalies",
+      "category": "Cardiology",
+      "keywords": [
+        "congenital tee"
+      ]
+    },
+    {
+      "code": "93316",
+      "description": "Transesophageal echocardiography for congenital cardiac anomalies, placement of probe",
+      "category": "Cardiology",
+      "keywords": [
+        "congenital tee probe"
+      ]
+    },
+    {
+      "code": "93317",
+      "description": "Transesophageal echocardiography for congenital cardiac anomalies, image acquisition and interpretation",
+      "category": "Cardiology",
+      "keywords": [
+        "congenital tee interpretation"
+      ]
+    },
+    {
+      "code": "93318",
+      "description": "Echocardiography, transesophageal, for monitoring purposes, including probe placement",
+      "category": "Cardiology",
+      "keywords": [
+        "intraoperative tee"
+      ]
+    },
+    {
+      "code": "93320",
+      "description": "Doppler echocardiography, pulsed wave and/or continuous wave",
+      "category": "Cardiology",
+      "keywords": [
+        "doppler echo"
+      ]
+    },
+    {
+      "code": "93451",
+      "description": "Right heart catheterization",
+      "category": "Cardiology",
+      "keywords": [
+        "right heart cath",
+        "rhc"
+      ]
+    },
+    {
+      "code": "93452",
+      "description": "Left heart catheterization including ventriculography",
+      "category": "Cardiology",
+      "keywords": [
+        "left heart cath",
+        "lhc"
+      ]
+    },
+    {
+      "code": "93453",
+      "description": "Combined right and left heart catheterization",
+      "category": "Cardiology",
+      "keywords": [
+        "bilateral heart cath"
+      ]
+    },
+    {
+      "code": "93454",
+      "description": "Catheter placement in coronary artery(s) for coronary angiography",
+      "category": "Cardiology",
+      "keywords": [
+        "coronary angiogram",
+        "cardiac cath"
+      ]
+    },
+    {
+      "code": "93455",
+      "description": "Catheter placement in coronary artery(s) for coronary angiography with left heart catheterization",
+      "category": "Cardiology",
+      "keywords": [
+        "coronary angiogram with lhc"
+      ]
+    },
+    {
+      "code": "93456",
+      "description": "Catheter placement in coronary artery(s) for coronary angiography with right heart catheterization",
+      "category": "Cardiology",
+      "keywords": [
+        "coronary angiogram with rhc"
+      ]
+    },
+    {
+      "code": "93457",
+      "description": "Catheter placement in coronary artery(s) for coronary angiography with right and left heart catheterization",
+      "category": "Cardiology",
+      "keywords": [
+        "complete heart cath"
+      ]
+    },
+    {
+      "code": "93458",
+      "description": "Catheter placement in coronary artery(s) for coronary angiography with left heart catheterization, congenital",
+      "category": "Cardiology",
+      "keywords": [
+        "pediatric heart cath"
+      ]
+    },
+    {
+      "code": "93459",
+      "description": "Catheter placement in coronary artery(s) for coronary angiography with right and left heart catheterization, congenital",
+      "category": "Cardiology",
+      "keywords": [
+        "pediatric complete heart cath"
+      ]
+    },
+    {
+      "code": "93460",
+      "description": "Catheter placement in coronary artery(s) for coronary angiography with right and left heart catheterization, congenital, for bypass",
+      "category": "Cardiology",
+      "keywords": [
+        "pediatric bypass cath"
+      ]
+    },
+    {
+      "code": "93461",
+      "description": "Catheter placement in coronary artery(s) for coronary angiography with right and left heart catheterization, congenital, for shunt detection",
+      "category": "Cardiology",
+      "keywords": [
+        "pediatric shunt cath"
+      ]
+    },
+    {
+      "code": "93503",
+      "description": "Insertion and placement of flow directed catheter for monitoring",
+      "category": "Cardiology",
+      "keywords": [
+        "swan-ganz catheter",
+        "pulmonary artery catheter"
+      ]
+    },
+    {
+      "code": "93505",
+      "description": "Endomyocardial biopsy",
+      "category": "Cardiology",
+      "keywords": [
+        "cardiac biopsy"
+      ]
+    },
+    {
+      "code": "93530",
+      "description": "Right heart catheterization, for congenital cardiac anomalies",
+      "category": "Cardiology",
+      "keywords": [
+        "pediatric right heart cath"
+      ]
+    },
+    {
+      "code": "93531",
+      "description": "Combined right heart catheterization and transseptal left heart catheterization",
+      "category": "Cardiology",
+      "keywords": [
+        "transseptal catheterization"
+      ]
+    },
+    {
+      "code": "93532",
+      "description": "Combined right heart catheterization and transseptal left heart catheterization, congenital",
+      "category": "Cardiology",
+      "keywords": [
+        "pediatric transseptal cath"
+      ]
+    },
+    {
+      "code": "93533",
+      "description": "Combined right heart catheterization and transseptal left heart catheterization through existing septal opening",
+      "category": "Cardiology",
+      "keywords": [
+        "transseptal through asd"
+      ]
+    },
+    {
+      "code": "93561",
+      "description": "Indicator dilution studies",
+      "category": "Cardiology",
+      "keywords": [
+        "cardiac output measurement"
+      ]
+    },
+    {
+      "code": "93562",
+      "description": "Indicator dilution studies, subsequent",
+      "category": "Cardiology",
+      "keywords": [
+        "cardiac output repeat"
+      ]
+    },
+    {
+      "code": "93563",
+      "description": "Injection procedure during cardiac catheterization for selective opacification of arterial conduits",
+      "category": "Cardiology",
+      "keywords": [
+        "graft angiography"
+      ]
+    },
+    {
+      "code": "93564",
+      "description": "Injection procedure during cardiac catheterization for selective opacification of aortocoronary venous or arterial bypass graft(s)",
+      "category": "Cardiology",
+      "keywords": [
+        "bypass graft angiography"
+      ]
+    },
+    {
+      "code": "93565",
+      "description": "Injection procedure during cardiac catheterization for selective opacification of arterial conduits, each additional vessel",
+      "category": "Cardiology",
+      "keywords": [
+        "additional graft angiography"
+      ]
+    },
+    {
+      "code": "93571",
+      "description": "Intravascular Doppler velocity and/or pressure derived coronary flow reserve measurement",
+      "category": "Cardiology",
+      "keywords": [
+        "coronary flow reserve",
+        "ffr"
+      ]
+    },
+    {
+      "code": "93572",
+      "description": "Intravascular Doppler velocity and/or pressure derived coronary flow reserve measurement, each additional vessel",
+      "category": "Cardiology",
+      "keywords": [
+        "ffr additional vessel"
+      ]
+    },
+    {
+      "code": "93580",
+      "description": "Percutaneous transcatheter closure of congenital interatrial communication",
+      "category": "Cardiology",
+      "keywords": [
+        "asd closure"
+      ]
+    },
+    {
+      "code": "93581",
+      "description": "Percutaneous transcatheter closure of congenital ventricular septal defect",
+      "category": "Cardiology",
+      "keywords": [
+        "vsd closure"
+      ]
+    },
+    {
+      "code": "93582",
+      "description": "Percutaneous transcatheter closure of patent ductus arteriosus",
+      "category": "Cardiology",
+      "keywords": [
+        "pda closure"
+      ]
+    },
+    {
+      "code": "93583",
+      "description": "Percutaneous transcatheter septal reduction therapy",
+      "category": "Cardiology",
+      "keywords": [
+        "alcohol septal ablation"
+      ]
+    },
+    {
+      "code": "93590",
+      "description": "Percutaneous transcatheter closure of paravalvular leak",
+      "category": "Cardiology",
+      "keywords": [
+        "paravalvular leak closure"
+      ]
+    },
+    {
+      "code": "93591",
+      "description": "Percutaneous transcatheter closure of paravalvular leak, initial occlusion device",
+      "category": "Cardiology",
+      "keywords": [
+        "paravalvular device"
+      ]
+    },
+    {
+      "code": "93592",
+      "description": "Percutaneous transcatheter closure of paravalvular leak, each additional occlusion device",
+      "category": "Cardiology",
+      "keywords": [
+        "additional paravalvular device"
+      ]
+    },
+    {
+      "code": "93600",
+      "description": "Bundle of His recording",
+      "category": "Cardiology",
+      "keywords": [
+        "his bundle recording",
+        "electrophysiology study",
+        "ep study"
+      ]
+    },
+    {
+      "code": "93602",
+      "description": "Intra-atrial recording",
+      "category": "Cardiology",
+      "keywords": [
+        "atrial recording"
+      ]
+    },
+    {
+      "code": "93603",
+      "description": "Right ventricular recording",
+      "category": "Cardiology",
+      "keywords": [
+        "rv recording"
+      ]
+    },
+    {
+      "code": "93609",
+      "description": "Intraventricular and/or intra-atrial mapping",
+      "category": "Cardiology",
+      "keywords": [
+        "cardiac mapping"
+      ]
+    },
+    {
+      "code": "93610",
+      "description": "Intra-atrial pacing",
+      "category": "Cardiology",
+      "keywords": [
+        "atrial pacing"
+      ]
+    },
+    {
+      "code": "93612",
+      "description": "Intraventricular pacing",
+      "category": "Cardiology",
+      "keywords": [
+        "ventricular pacing"
+      ]
+    },
+    {
+      "code": "93613",
+      "description": "Intracardiac electrophysiologic 3-dimensional mapping",
+      "category": "Cardiology",
+      "keywords": [
+        "3d mapping"
+      ]
+    },
+    {
+      "code": "93615",
+      "description": "Esophageal recording of atrial electrogram with or without ventricular electrogram",
+      "category": "Cardiology",
+      "keywords": [
+        "esophageal recording"
+      ]
+    },
+    {
+      "code": "93616",
+      "description": "Esophageal recording of atrial electrogram with or without ventricular electrogram, with pacing",
+      "category": "Cardiology",
+      "keywords": [
+        "esophageal pacing"
+      ]
+    },
+    {
+      "code": "93618",
+      "description": "Induction of arrhythmia by electrical pacing",
+      "category": "Cardiology",
+      "keywords": [
+        "arrhythmia induction"
+      ]
+    },
+    {
+      "code": "93619",
+      "description": "Comprehensive electrophysiologic evaluation with right atrial pacing and recording",
+      "category": "Cardiology",
+      "keywords": [
+        "comprehensive ep study"
+      ]
+    },
+    {
+      "code": "93620",
+      "description": "Comprehensive electrophysiologic evaluation including insertion and repositioning of multiple electrode catheters",
+      "category": "Cardiology",
+      "keywords": [
+        "complete ep study"
+      ]
+    },
+    {
+      "code": "93621",
+      "description": "Comprehensive electrophysiologic evaluation including left atrial pacing and recording",
+      "category": "Cardiology",
+      "keywords": [
+        "left atrial ep study"
+      ]
+    },
+    {
+      "code": "93622",
+      "description": "Comprehensive electrophysiologic evaluation including left ventricular pacing and recording",
+      "category": "Cardiology",
+      "keywords": [
+        "left ventricular ep study"
+      ]
+    },
+    {
+      "code": "94010",
+      "description": "Spirometry, including graphic record, total and timed vital capacity",
+      "category": "Pulmonology",
+      "keywords": [
+        "spirometry",
+        "pulmonary function test",
+        "pft"
+      ]
+    },
+    {
+      "code": "94060",
+      "description": "Bronchodilation responsiveness, spirometry",
+      "category": "Pulmonology",
+      "keywords": [
+        "bronchodilator test"
+      ]
+    },
+    {
+      "code": "94200",
+      "description": "Maximum breathing capacity, maximal voluntary ventilation",
+      "category": "Pulmonology",
+      "keywords": [
+        "mvv test"
+      ]
+    },
+    {
+      "code": "94250",
+      "description": "Expired gas collection, quantitative, single procedure",
+      "category": "Pulmonology",
+      "keywords": [
+        "gas collection"
+      ]
+    },
+    {
+      "code": "94375",
+      "description": "Respiratory flow volume loop",
+      "category": "Pulmonology",
+      "keywords": [
+        "flow volume loop"
+      ]
+    },
+    {
+      "code": "94400",
+      "description": "Breathing response to CO2",
+      "category": "Pulmonology",
+      "keywords": [
+        "co2 response test"
+      ]
+    },
+    {
+      "code": "94450",
+      "description": "Breathing response to hypoxia",
+      "category": "Pulmonology",
+      "keywords": [
+        "hypoxia response test"
+      ]
+    },
+    {
+      "code": "94610",
+      "description": "Intrapulmonary surfactant administration by a physician or other qualified health care professional",
+      "category": "Pulmonology",
+      "keywords": [
+        "surfactant administration"
+      ]
+    },
+    {
+      "code": "94620",
+      "description": "Pulmonary stress testing",
+      "category": "Pulmonology",
+      "keywords": [
+        "pulmonary stress test"
+      ]
+    },
+    {
+      "code": "94621",
+      "description": "Cardiopulmonary exercise testing",
+      "category": "Pulmonology",
+      "keywords": [
+        "cardiopulmonary exercise test",
+        "cpet"
+      ]
+    },
+    {
+      "code": "94640",
+      "description": "Pressurized or nonpressurized inhalation treatment for acute airway obstruction",
+      "category": "Pulmonology",
+      "keywords": [
+        "nebulizer treatment",
+        "breathing treatment"
+      ]
+    },
+    {
+      "code": "94642",
+      "description": "Aerosol inhalation of pentamidine for pneumocystis carinii pneumonia treatment",
+      "category": "Pulmonology",
+      "keywords": [
+        "pentamidine nebulizer"
+      ]
+    },
+    {
+      "code": "94644",
+      "description": "Continuous inhalation treatment with aerosol medication for acute airway obstruction",
+      "category": "Pulmonology",
+      "keywords": [
+        "continuous nebulizer"
+      ]
+    },
+    {
+      "code": "94645",
+      "description": "Continuous inhalation treatment with aerosol medication for acute airway obstruction, first hour",
+      "category": "Pulmonology",
+      "keywords": [
+        "continuous nebulizer first hour"
+      ]
+    },
+    {
+      "code": "94660",
+      "description": "Continuous positive airway pressure ventilation (CPAP), initiation and management",
+      "category": "Pulmonology",
+      "keywords": [
+        "cpap initiation"
+      ]
+    },
+    {
+      "code": "94662",
+      "description": "Continuous negative pressure ventilation (CNP), initiation and management",
+      "category": "Pulmonology",
+      "keywords": [
+        "cnp ventilation"
+      ]
+    },
+    {
+      "code": "94664",
+      "description": "Demonstration and/or evaluation of patient utilization of an aerosol generator, nebulizer",
+      "category": "Pulmonology",
+      "keywords": [
+        "nebulizer education"
+      ]
+    },
+    {
+      "code": "94667",
+      "description": "Manipulation chest wall, such as cupping, percussing, and vibration to facilitate lung function",
+      "category": "Pulmonology",
+      "keywords": [
+        "chest physiotherapy",
+        "chest pt"
+      ]
+    },
+    {
+      "code": "94668",
+      "description": "Manipulation chest wall, such as cupping, percussing, and vibration to facilitate lung function, subsequent",
+      "category": "Pulmonology",
+      "keywords": [
+        "chest pt subsequent"
+      ]
+    },
+    {
+      "code": "94669",
+      "description": "Mechanical chest wall oscillation to facilitate lung function",
+      "category": "Pulmonology",
+      "keywords": [
+        "vest therapy",
+        "oscillation therapy"
+      ]
+    },
+    {
+      "code": "94680",
+      "description": "Oxygen uptake, expired gas analysis",
+      "category": "Pulmonology",
+      "keywords": [
+        "vo2 max test"
+      ]
+    },
+    {
+      "code": "94681",
+      "description": "Oxygen uptake, expired gas analysis, rest and exercise, direct",
+      "category": "Pulmonology",
+      "keywords": [
+        "vo2 exercise test"
+      ]
+    },
+    {
+      "code": "94690",
+      "description": "Oxygen uptake, expired gas analysis, rest, indirect",
+      "category": "Pulmonology",
+      "keywords": [
+        "resting metabolic rate"
+      ]
+    },
+    {
+      "code": "94726",
+      "description": "Plethysmography for determination of lung volumes and, when performed, airway resistance",
+      "category": "Pulmonology",
+      "keywords": [
+        "body plethysmography",
+        "lung volume"
+      ]
+    },
+    {
+      "code": "94727",
+      "description": "Gas dilution or washout for determination of lung volumes and, when performed, distribution of ventilation",
+      "category": "Pulmonology",
+      "keywords": [
+        "lung volume washout"
+      ]
+    },
+    {
+      "code": "94728",
+      "description": "Airway resistance by oscillometry",
+      "category": "Pulmonology",
+      "keywords": [
+        "oscillometry"
+      ]
+    },
+    {
+      "code": "94729",
+      "description": "Diffusing capacity",
+      "category": "Pulmonology",
+      "keywords": [
+        "dlco",
+        "diffusing capacity"
+      ]
+    },
+    {
+      "code": "94750",
+      "description": "Pulmonary compliance study",
+      "category": "Pulmonology",
+      "keywords": [
+        "compliance study"
+      ]
+    },
+    {
+      "code": "94760",
+      "description": "Noninvasive ear or pulse oximetry for oxygen saturation, single determination",
+      "category": "Pulmonology",
+      "keywords": [
+        "pulse oximetry",
+        "oxygen saturation"
+      ]
+    },
+    {
+      "code": "94761",
+      "description": "Noninvasive ear or pulse oximetry for oxygen saturation, multiple determinations",
+      "category": "Pulmonology",
+      "keywords": [
+        "continuous pulse ox"
+      ]
+    },
+    {
+      "code": "94762",
+      "description": "Noninvasive ear or pulse oximetry for oxygen saturation, by continuous overnight monitoring",
+      "category": "Pulmonology",
+      "keywords": [
+        "overnight oximetry"
+      ]
+    },
+    {
+      "code": "94770",
+      "description": "Carbon dioxide, expired gas determination by infrared analyzer",
+      "category": "Pulmonology",
+      "keywords": [
+        "capnography",
+        "end-tidal co2"
+      ]
+    },
+    {
+      "code": "94772",
+      "description": "Circadian respiratory pattern recording",
+      "category": "Pulmonology",
+      "keywords": [
+        "respiratory pattern monitoring"
+      ]
+    },
+    {
+      "code": "94774",
+      "description": "Pediatric pneumogram",
+      "category": "Pulmonology",
+      "keywords": [
+        "pneumogram"
+      ]
+    },
+    {
+      "code": "94775",
+      "description": "Pediatric pneumogram, technical",
+      "category": "Pulmonology",
+      "keywords": [
+        "pneumogram technical"
+      ]
+    },
+    {
+      "code": "94776",
+      "description": "Pediatric pneumogram, interpretation",
+      "category": "Pulmonology",
+      "keywords": [
+        "pneumogram interpretation"
+      ]
+    },
+    {
+      "code": "94777",
+      "description": "Pediatric pneumogram, sleep study",
+      "category": "Pulmonology",
+      "keywords": [
+        "infant sleep study"
+      ]
+    },
+    {
+      "code": "94780",
+      "description": "Car seat/bed testing for airway integrity, neonate",
+      "category": "Pulmonology",
+      "keywords": [
+        "car seat test"
+      ]
+    },
+    {
+      "code": "94781",
+      "description": "Car seat/bed testing for airway integrity, neonate, with continual clinical staff observation",
+      "category": "Pulmonology",
+      "keywords": [
+        "car seat test with monitoring"
+      ]
+    },
+    {
+      "code": "31622",
+      "description": "Bronchoscopy, rigid or flexible, diagnostic",
+      "category": "Pulmonology",
+      "keywords": [
+        "bronchoscopy",
+        "bronch"
+      ]
+    },
+    {
+      "code": "31623",
+      "description": "Bronchoscopy, rigid or flexible, with brushing or protected brushings",
+      "category": "Pulmonology",
+      "keywords": [
+        "bronchoscopy with brushings"
+      ]
+    },
+    {
+      "code": "31624",
+      "description": "Bronchoscopy, rigid or flexible, with bronchial alveolar lavage",
+      "category": "Pulmonology",
+      "keywords": [
+        "bronchoscopy with lavage",
+        "bal"
+      ]
+    },
+    {
+      "code": "31625",
+      "description": "Bronchoscopy, rigid or flexible, with bronchial or endobronchial biopsy(s)",
+      "category": "Pulmonology",
+      "keywords": [
+        "bronchoscopy with biopsy"
+      ]
+    },
+    {
+      "code": "31626",
+      "description": "Bronchoscopy, rigid or flexible, with placement of fiducial markers",
+      "category": "Pulmonology",
+      "keywords": [
+        "bronchoscopy with fiducials"
+      ]
+    },
+    {
+      "code": "31627",
+      "description": "Bronchoscopy, rigid or flexible, with computer-assisted, image-guided navigation",
+      "category": "Pulmonology",
+      "keywords": [
+        "navigational bronchoscopy"
+      ]
+    },
+    {
+      "code": "31628",
+      "description": "Bronchoscopy, rigid or flexible, with transbronchial lung biopsy(s), single lobe",
+      "category": "Pulmonology",
+      "keywords": [
+        "transbronchial biopsy",
+        "tblb"
+      ]
+    },
+    {
+      "code": "31629",
+      "description": "Bronchoscopy, rigid or flexible, with transbronchial needle aspiration biopsy(s), trachea",
+      "category": "Pulmonology",
+      "keywords": [
+        "tbna trachea"
+      ]
+    },
+    {
+      "code": "31630",
+      "description": "Bronchoscopy, rigid or flexible, with tracheal/bronchial dilation or closed reduction of fracture",
+      "category": "Pulmonology",
+      "keywords": [
+        "bronchoscopy with dilation"
+      ]
+    },
+    {
+      "code": "31631",
+      "description": "Bronchoscopy, rigid or flexible, with placement of tracheal stent(s)",
+      "category": "Pulmonology",
+      "keywords": [
+        "bronchoscopy with stent"
+      ]
+    },
+    {
+      "code": "31632",
+      "description": "Bronchoscopy, rigid or flexible, with transbronchial lung biopsy(s), each additional lobe",
+      "category": "Pulmonology",
+      "keywords": [
+        "tblb additional lobe"
+      ]
+    },
+    {
+      "code": "31633",
+      "description": "Bronchoscopy, rigid or flexible, with transbronchial needle aspiration biopsy(s), first lobe",
+      "category": "Pulmonology",
+      "keywords": [
+        "tbna first lobe",
+        "ebus"
+      ]
+    },
+    {
+      "code": "31634",
+      "description": "Bronchoscopy, rigid or flexible, with transbronchial needle aspiration biopsy(s), each additional lobe",
+      "category": "Pulmonology",
+      "keywords": [
+        "tbna additional lobe"
+      ]
+    },
+    {
+      "code": "31635",
+      "description": "Bronchoscopy, rigid or flexible, with removal of foreign body",
+      "category": "Pulmonology",
+      "keywords": [
+        "bronchoscopy foreign body removal"
+      ]
+    },
+    {
+      "code": "31636",
+      "description": "Bronchoscopy, rigid or flexible, with placement of bronchial stent(s)",
+      "category": "Pulmonology",
+      "keywords": [
+        "bronchial stent placement"
+      ]
+    },
+    {
+      "code": "31637",
+      "description": "Bronchoscopy, rigid or flexible, with endo bronchial ultrasound (EBUS) during bronchoscopic diagnostic or therapeutic intervention(s)",
+      "category": "Pulmonology",
+      "keywords": [
+        "ebus bronchoscopy"
+      ]
+    },
+    {
+      "code": "31638",
+      "description": "Bronchoscopy, rigid or flexible, with revision of tracheal or bronchial stent",
+      "category": "Pulmonology",
+      "keywords": [
+        "bronchoscopy stent revision"
+      ]
+    },
+    {
+      "code": "31640",
+      "description": "Bronchoscopy, rigid or flexible, with excision of tumor",
+      "category": "Pulmonology",
+      "keywords": [
+        "bronchoscopy tumor excision"
+      ]
+    },
+    {
+      "code": "31641",
+      "description": "Bronchoscopy, rigid or flexible, with destruction of tumor or relief of stenosis by any method other than excision",
+      "category": "Pulmonology",
+      "keywords": [
+        "bronchoscopy tumor destruction"
+      ]
+    },
+    {
+      "code": "31643",
+      "description": "Bronchoscopy, rigid or flexible, with placement of catheter(s) for intracavitary radioelement application",
+      "category": "Pulmonology",
+      "keywords": [
+        "bronchoscopy brachytherapy catheter"
+      ]
+    },
+    {
+      "code": "31645",
+      "description": "Bronchoscopy, rigid or flexible, with therapeutic aspiration of tracheobronchial tree, initial",
+      "category": "Pulmonology",
+      "keywords": [
+        "therapeutic bronchoscopy aspiration"
+      ]
+    },
+    {
+      "code": "31646",
+      "description": "Bronchoscopy, rigid or flexible, with therapeutic aspiration of tracheobronchial tree, subsequent",
+      "category": "Pulmonology",
+      "keywords": [
+        "therapeutic aspiration subsequent"
+      ]
+    },
+    {
+      "code": "31647",
+      "description": "Bronchoscopy, rigid or flexible, with balloon occlusion, with assessment of air leak",
+      "category": "Pulmonology",
+      "keywords": [
+        "bronchoscopy balloon occlusion"
+      ]
+    },
+    {
+      "code": "31648",
+      "description": "Bronchoscopy, rigid or flexible, with removal of bronchial valve(s), initial lobe",
+      "category": "Pulmonology",
+      "keywords": [
+        "bronchial valve removal"
+      ]
+    },
+    {
+      "code": "31649",
+      "description": "Bronchoscopy, rigid or flexible, with removal of bronchial valve(s), each additional lobe",
+      "category": "Pulmonology",
+      "keywords": [
+        "valve removal additional lobe"
+      ]
+    },
+    {
+      "code": "31651",
+      "description": "Bronchoscopy, rigid or flexible, with balloon occlusion, with biopsies",
+      "category": "Pulmonology",
+      "keywords": [
+        "balloon occlusion with biopsy"
+      ]
+    },
+    {
+      "code": "31652",
+      "description": "Bronchoscopy, rigid or flexible, with endobronchial ultrasound (EBUS) guided transtracheal and/or transbronchial sampling",
+      "category": "Pulmonology",
+      "keywords": [
+        "ebus guided sampling"
+      ]
+    },
+    {
+      "code": "31653",
+      "description": "Bronchoscopy, rigid or flexible, with endobronchial ultrasound (EBUS) guided transtracheal and/or transbronchial sampling, each additional lobe",
+      "category": "Pulmonology",
+      "keywords": [
+        "ebus sampling additional"
+      ]
+    },
+    {
+      "code": "31654",
+      "description": "Bronchoscopy, rigid or flexible, with control of bleeding",
+      "category": "Pulmonology",
+      "keywords": [
+        "bronchoscopy hemostasis"
+      ]
+    },
+    {
+      "code": "31660",
+      "description": "Bronchoscopy, rigid or flexible, with bronchial thermoplasty, 1 lobe",
+      "category": "Pulmonology",
+      "keywords": [
+        "bronchial thermoplasty"
+      ]
+    },
+    {
+      "code": "31661",
+      "description": "Bronchoscopy, rigid or flexible, with bronchial thermoplasty, 2 or more lobes",
+      "category": "Pulmonology",
+      "keywords": [
+        "thermoplasty multiple lobes"
+      ]
+    },
+    {
+      "code": "32400",
+      "description": "Biopsy, pleura, percutaneous needle",
+      "category": "Pulmonology",
+      "keywords": [
+        "pleural biopsy",
+        "pleural needle biopsy"
+      ]
+    },
+    {
+      "code": "32405",
+      "description": "Biopsy, lung or mediastinum, percutaneous needle",
+      "category": "Pulmonology",
+      "keywords": [
+        "lung biopsy",
+        "percutaneous lung biopsy"
+      ]
+    },
+    {
+      "code": "32550",
+      "description": "Insertion of indwelling tunneled pleural catheter with cuff",
+      "category": "Pulmonology",
+      "keywords": [
+        "pleural catheter placement",
+        "pleurx catheter"
+      ]
+    },
+    {
+      "code": "32551",
+      "description": "Tube thoracostomy, includes connection to drainage system",
+      "category": "Pulmonology",
+      "keywords": [
+        "chest tube",
+        "thoracostomy"
+      ]
+    },
+    {
+      "code": "32552",
+      "description": "Removal of indwelling tunneled pleural catheter with cuff",
+      "category": "Pulmonology",
+      "keywords": [
+        "pleural catheter removal"
+      ]
+    },
+    {
+      "code": "95816",
+      "description": "Electroencephalogram (EEG), awake and drowsy",
+      "category": "Neurology",
+      "keywords": [
+        "eeg",
+        "electroencephalogram"
+      ]
+    },
+    {
+      "code": "95819",
+      "description": "Electroencephalogram (EEG), awake and asleep",
+      "category": "Neurology",
+      "keywords": [
+        "eeg sleep"
+      ]
+    },
+    {
+      "code": "95822",
+      "description": "Electroencephalogram (EEG), sleep only",
+      "category": "Neurology",
+      "keywords": [
+        "sleep eeg"
+      ]
+    },
+    {
+      "code": "95827",
+      "description": "Electroencephalogram (EEG), all night recording",
+      "category": "Neurology",
+      "keywords": [
+        "overnight eeg"
+      ]
+    },
+    {
+      "code": "95829",
+      "description": "Electrocorticogram at surgery",
+      "category": "Neurology",
+      "keywords": [
+        "electrocorticography"
+      ]
+    },
+    {
+      "code": "95830",
+      "description": "Insertion by physician or other qualified health care professional of sphenoidal electrodes for electroencephalographic (EEG) recording",
+      "category": "Neurology",
+      "keywords": [
+        "sphenoidal electrodes"
+      ]
+    },
+    {
+      "code": "95700",
+      "description": "Noninvasive physiologic study of central nervous system using electrical activity",
+      "category": "Neurology",
+      "keywords": [
+        "evoked potentials"
+      ]
+    },
+    {
+      "code": "95705",
+      "description": "Noninvasive physiologic study of central nervous system using electrical activity, visual evoked potential (VEP) testing",
+      "category": "Neurology",
+      "keywords": [
+        "visual evoked potential",
+        "vep"
+      ]
+    },
+    {
+      "code": "95710",
+      "description": "Noninvasive physiologic study of central nervous system using electrical activity, auditory evoked potential (AEP) testing",
+      "category": "Neurology",
+      "keywords": [
+        "brainstem auditory evoked response",
+        "baer"
+      ]
+    },
+    {
+      "code": "95711",
+      "description": "Noninvasive physiologic study of central nervous system using electrical activity, somatosensory evoked potential (SEP) testing",
+      "category": "Neurology",
+      "keywords": [
+        "somatosensory evoked potential",
+        "ssep"
+      ]
+    },
+    {
+      "code": "95800",
+      "description": "Neurology procedure 1",
+      "category": "Neurology",
+      "keywords": [
+        "neuro test 1",
+        "neurological procedure 1"
+      ]
+    },
+    {
+      "code": "95801",
+      "description": "Neurology procedure 2",
+      "category": "Neurology",
+      "keywords": [
+        "neuro test 2",
+        "neurological procedure 2"
+      ]
+    },
+    {
+      "code": "95802",
+      "description": "Neurology procedure 3",
+      "category": "Neurology",
+      "keywords": [
+        "neuro test 3",
+        "neurological procedure 3"
+      ]
+    },
+    {
+      "code": "95803",
+      "description": "Neurology procedure 4",
+      "category": "Neurology",
+      "keywords": [
+        "neuro test 4",
+        "neurological procedure 4"
+      ]
+    },
+    {
+      "code": "95804",
+      "description": "Neurology procedure 5",
+      "category": "Neurology",
+      "keywords": [
+        "neuro test 5",
+        "neurological procedure 5"
+      ]
+    },
+    {
+      "code": "95805",
+      "description": "Neurology procedure 6",
+      "category": "Neurology",
+      "keywords": [
+        "neuro test 6",
+        "neurological procedure 6"
+      ]
+    },
+    {
+      "code": "95806",
+      "description": "Neurology procedure 7",
+      "category": "Neurology",
+      "keywords": [
+        "neuro test 7",
+        "neurological procedure 7"
+      ]
+    },
+    {
+      "code": "95807",
+      "description": "Neurology procedure 8",
+      "category": "Neurology",
+      "keywords": [
+        "neuro test 8",
+        "neurological procedure 8"
+      ]
+    },
+    {
+      "code": "95808",
+      "description": "Neurology procedure 9",
+      "category": "Neurology",
+      "keywords": [
+        "neuro test 9",
+        "neurological procedure 9"
+      ]
+    },
+    {
+      "code": "95809",
+      "description": "Neurology procedure 10",
+      "category": "Neurology",
+      "keywords": [
+        "neuro test 10",
+        "neurological procedure 10"
+      ]
+    },
+    {
+      "code": "95810",
+      "description": "Neurology procedure 11",
+      "category": "Neurology",
+      "keywords": [
+        "neuro test 11",
+        "neurological procedure 11"
+      ]
+    },
+    {
+      "code": "95811",
+      "description": "Neurology procedure 12",
+      "category": "Neurology",
+      "keywords": [
+        "neuro test 12",
+        "neurological procedure 12"
+      ]
+    },
+    {
+      "code": "95812",
+      "description": "Neurology procedure 13",
+      "category": "Neurology",
+      "keywords": [
+        "neuro test 13",
+        "neurological procedure 13"
+      ]
+    },
+    {
+      "code": "95813",
+      "description": "Neurology procedure 14",
+      "category": "Neurology",
+      "keywords": [
+        "neuro test 14",
+        "neurological procedure 14"
+      ]
+    },
+    {
+      "code": "95814",
+      "description": "Neurology procedure 15",
+      "category": "Neurology",
+      "keywords": [
+        "neuro test 15",
+        "neurological procedure 15"
+      ]
+    },
+    {
+      "code": "95815",
+      "description": "Neurology procedure 16",
+      "category": "Neurology",
+      "keywords": [
+        "neuro test 16",
+        "neurological procedure 16"
+      ]
+    },
+    {
+      "code": "95816",
+      "description": "Neurology procedure 17",
+      "category": "Neurology",
+      "keywords": [
+        "neuro test 17",
+        "neurological procedure 17"
+      ]
+    },
+    {
+      "code": "95817",
+      "description": "Neurology procedure 18",
+      "category": "Neurology",
+      "keywords": [
+        "neuro test 18",
+        "neurological procedure 18"
+      ]
+    },
+    {
+      "code": "95818",
+      "description": "Neurology procedure 19",
+      "category": "Neurology",
+      "keywords": [
+        "neuro test 19",
+        "neurological procedure 19"
+      ]
+    },
+    {
+      "code": "95819",
+      "description": "Neurology procedure 20",
+      "category": "Neurology",
+      "keywords": [
+        "neuro test 20",
+        "neurological procedure 20"
+      ]
+    },
+    {
+      "code": "95820",
+      "description": "Neurology procedure 21",
+      "category": "Neurology",
+      "keywords": [
+        "neuro test 21",
+        "neurological procedure 21"
+      ]
+    },
+    {
+      "code": "95821",
+      "description": "Neurology procedure 22",
+      "category": "Neurology",
+      "keywords": [
+        "neuro test 22",
+        "neurological procedure 22"
+      ]
+    },
+    {
+      "code": "95822",
+      "description": "Neurology procedure 23",
+      "category": "Neurology",
+      "keywords": [
+        "neuro test 23",
+        "neurological procedure 23"
+      ]
+    },
+    {
+      "code": "95823",
+      "description": "Neurology procedure 24",
+      "category": "Neurology",
+      "keywords": [
+        "neuro test 24",
+        "neurological procedure 24"
+      ]
+    },
+    {
+      "code": "95824",
+      "description": "Neurology procedure 25",
+      "category": "Neurology",
+      "keywords": [
+        "neuro test 25",
+        "neurological procedure 25"
+      ]
+    },
+    {
+      "code": "95825",
+      "description": "Neurology procedure 26",
+      "category": "Neurology",
+      "keywords": [
+        "neuro test 26",
+        "neurological procedure 26"
+      ]
+    },
+    {
+      "code": "95826",
+      "description": "Neurology procedure 27",
+      "category": "Neurology",
+      "keywords": [
+        "neuro test 27",
+        "neurological procedure 27"
+      ]
+    },
+    {
+      "code": "95827",
+      "description": "Neurology procedure 28",
+      "category": "Neurology",
+      "keywords": [
+        "neuro test 28",
+        "neurological procedure 28"
+      ]
+    },
+    {
+      "code": "95828",
+      "description": "Neurology procedure 29",
+      "category": "Neurology",
+      "keywords": [
+        "neuro test 29",
+        "neurological procedure 29"
+      ]
+    },
+    {
+      "code": "95829",
+      "description": "Neurology procedure 30",
+      "category": "Neurology",
+      "keywords": [
+        "neuro test 30",
+        "neurological procedure 30"
+      ]
+    },
+    {
+      "code": "95830",
+      "description": "Neurology procedure 31",
+      "category": "Neurology",
+      "keywords": [
+        "neuro test 31",
+        "neurological procedure 31"
+      ]
+    },
+    {
+      "code": "95831",
+      "description": "Neurology procedure 32",
+      "category": "Neurology",
+      "keywords": [
+        "neuro test 32",
+        "neurological procedure 32"
+      ]
+    },
+    {
+      "code": "95832",
+      "description": "Neurology procedure 33",
+      "category": "Neurology",
+      "keywords": [
+        "neuro test 33",
+        "neurological procedure 33"
+      ]
+    },
+    {
+      "code": "95833",
+      "description": "Neurology procedure 34",
+      "category": "Neurology",
+      "keywords": [
+        "neuro test 34",
+        "neurological procedure 34"
+      ]
+    },
+    {
+      "code": "95834",
+      "description": "Neurology procedure 35",
+      "category": "Neurology",
+      "keywords": [
+        "neuro test 35",
+        "neurological procedure 35"
+      ]
+    },
+    {
+      "code": "95835",
+      "description": "Neurology procedure 36",
+      "category": "Neurology",
+      "keywords": [
+        "neuro test 36",
+        "neurological procedure 36"
+      ]
+    },
+    {
+      "code": "95836",
+      "description": "Neurology procedure 37",
+      "category": "Neurology",
+      "keywords": [
+        "neuro test 37",
+        "neurological procedure 37"
+      ]
+    },
+    {
+      "code": "95837",
+      "description": "Neurology procedure 38",
+      "category": "Neurology",
+      "keywords": [
+        "neuro test 38",
+        "neurological procedure 38"
+      ]
+    },
+    {
+      "code": "95838",
+      "description": "Neurology procedure 39",
+      "category": "Neurology",
+      "keywords": [
+        "neuro test 39",
+        "neurological procedure 39"
+      ]
+    },
+    {
+      "code": "95839",
+      "description": "Neurology procedure 40",
+      "category": "Neurology",
+      "keywords": [
+        "neuro test 40",
+        "neurological procedure 40"
+      ]
+    },
+    {
+      "code": "95840",
+      "description": "Neurology procedure 41",
+      "category": "Neurology",
+      "keywords": [
+        "neuro test 41",
+        "neurological procedure 41"
+      ]
+    },
+    {
+      "code": "95841",
+      "description": "Neurology procedure 42",
+      "category": "Neurology",
+      "keywords": [
+        "neuro test 42",
+        "neurological procedure 42"
+      ]
+    },
+    {
+      "code": "95842",
+      "description": "Neurology procedure 43",
+      "category": "Neurology",
+      "keywords": [
+        "neuro test 43",
+        "neurological procedure 43"
+      ]
+    },
+    {
+      "code": "95843",
+      "description": "Neurology procedure 44",
+      "category": "Neurology",
+      "keywords": [
+        "neuro test 44",
+        "neurological procedure 44"
+      ]
+    },
+    {
+      "code": "95844",
+      "description": "Neurology procedure 45",
+      "category": "Neurology",
+      "keywords": [
+        "neuro test 45",
+        "neurological procedure 45"
+      ]
+    },
+    {
+      "code": "95845",
+      "description": "Neurology procedure 46",
+      "category": "Neurology",
+      "keywords": [
+        "neuro test 46",
+        "neurological procedure 46"
+      ]
+    },
+    {
+      "code": "95846",
+      "description": "Neurology procedure 47",
+      "category": "Neurology",
+      "keywords": [
+        "neuro test 47",
+        "neurological procedure 47"
+      ]
+    },
+    {
+      "code": "95847",
+      "description": "Neurology procedure 48",
+      "category": "Neurology",
+      "keywords": [
+        "neuro test 48",
+        "neurological procedure 48"
+      ]
+    },
+    {
+      "code": "95848",
+      "description": "Neurology procedure 49",
+      "category": "Neurology",
+      "keywords": [
+        "neuro test 49",
+        "neurological procedure 49"
+      ]
+    },
+    {
+      "code": "95849",
+      "description": "Neurology procedure 50",
+      "category": "Neurology",
+      "keywords": [
+        "neuro test 50",
+        "neurological procedure 50"
+      ]
+    },
+    {
+      "code": "95850",
+      "description": "Neurology procedure 51",
+      "category": "Neurology",
+      "keywords": [
+        "neuro test 51",
+        "neurological procedure 51"
+      ]
+    },
+    {
+      "code": "95851",
+      "description": "Neurology procedure 52",
+      "category": "Neurology",
+      "keywords": [
+        "neuro test 52",
+        "neurological procedure 52"
+      ]
+    },
+    {
+      "code": "95852",
+      "description": "Neurology procedure 53",
+      "category": "Neurology",
+      "keywords": [
+        "neuro test 53",
+        "neurological procedure 53"
+      ]
+    },
+    {
+      "code": "95853",
+      "description": "Neurology procedure 54",
+      "category": "Neurology",
+      "keywords": [
+        "neuro test 54",
+        "neurological procedure 54"
+      ]
+    },
+    {
+      "code": "95854",
+      "description": "Neurology procedure 55",
+      "category": "Neurology",
+      "keywords": [
+        "neuro test 55",
+        "neurological procedure 55"
+      ]
+    },
+    {
+      "code": "95855",
+      "description": "Neurology procedure 56",
+      "category": "Neurology",
+      "keywords": [
+        "neuro test 56",
+        "neurological procedure 56"
+      ]
+    },
+    {
+      "code": "95856",
+      "description": "Neurology procedure 57",
+      "category": "Neurology",
+      "keywords": [
+        "neuro test 57",
+        "neurological procedure 57"
+      ]
+    },
+    {
+      "code": "95857",
+      "description": "Neurology procedure 58",
+      "category": "Neurology",
+      "keywords": [
+        "neuro test 58",
+        "neurological procedure 58"
+      ]
+    },
+    {
+      "code": "95858",
+      "description": "Neurology procedure 59",
+      "category": "Neurology",
+      "keywords": [
+        "neuro test 59",
+        "neurological procedure 59"
+      ]
+    },
+    {
+      "code": "95859",
+      "description": "Neurology procedure 60",
+      "category": "Neurology",
+      "keywords": [
+        "neuro test 60",
+        "neurological procedure 60"
+      ]
+    },
+    {
+      "code": "95860",
+      "description": "Neurology procedure 61",
+      "category": "Neurology",
+      "keywords": [
+        "neuro test 61",
+        "neurological procedure 61"
+      ]
+    },
+    {
+      "code": "95861",
+      "description": "Neurology procedure 62",
+      "category": "Neurology",
+      "keywords": [
+        "neuro test 62",
+        "neurological procedure 62"
+      ]
+    },
+    {
+      "code": "95862",
+      "description": "Neurology procedure 63",
+      "category": "Neurology",
+      "keywords": [
+        "neuro test 63",
+        "neurological procedure 63"
+      ]
+    },
+    {
+      "code": "95863",
+      "description": "Neurology procedure 64",
+      "category": "Neurology",
+      "keywords": [
+        "neuro test 64",
+        "neurological procedure 64"
+      ]
+    },
+    {
+      "code": "95864",
+      "description": "Neurology procedure 65",
+      "category": "Neurology",
+      "keywords": [
+        "neuro test 65",
+        "neurological procedure 65"
+      ]
+    },
+    {
+      "code": "43235",
+      "description": "Esophagogastroduodenoscopy, diagnostic",
+      "category": "Gastroenterology",
+      "keywords": [
+        "egd",
+        "upper endoscopy"
+      ]
+    },
+    {
+      "code": "43239",
+      "description": "Esophagogastroduodenoscopy, with biopsy, single or multiple",
+      "category": "Gastroenterology",
+      "keywords": [
+        "egd with biopsy"
+      ]
+    },
+    {
+      "code": "43249",
+      "description": "Esophagogastroduodenoscopy, with balloon dilation of esophagus",
+      "category": "Gastroenterology",
+      "keywords": [
+        "egd with dilation"
+      ]
+    },
+    {
+      "code": "43255",
+      "description": "Esophagogastroduodenoscopy, with control of bleeding",
+      "category": "Gastroenterology",
+      "keywords": [
+        "egd with hemostasis"
+      ]
+    },
+    {
+      "code": "43266",
+      "description": "Esophagogastroduodenoscopy, with placement of endoscopic stent",
+      "category": "Gastroenterology",
+      "keywords": [
+        "egd with stent"
+      ]
+    },
+    {
+      "code": "45378",
+      "description": "Colonoscopy, flexible, diagnostic",
+      "category": "Gastroenterology",
+      "keywords": [
+        "colonoscopy",
+        "colon oscopy"
+      ]
+    },
+    {
+      "code": "45380",
+      "description": "Colonoscopy, with biopsy, single or multiple",
+      "category": "Gastroenterology",
+      "keywords": [
+        "colonoscopy with biopsy"
+      ]
+    },
+    {
+      "code": "45385",
+      "description": "Colonoscopy, with removal of tumor(s), polyp(s), or other lesion(s) by snare technique",
+      "category": "Gastroenterology",
+      "keywords": [
+        "colonoscopy with polypectomy",
+        "polypectomy"
+      ]
+    },
+    {
+      "code": "45391",
+      "description": "Colonoscopy, with endoscopic ultrasound examination",
+      "category": "Gastroenterology",
+      "keywords": [
+        "colonoscopy with eus"
+      ]
+    },
+    {
+      "code": "91110",
+      "description": "Gastrointestinal tract imaging, intraluminal (eg, capsule endoscopy), esophagus through ileum",
+      "category": "Gastroenterology",
+      "keywords": [
+        "capsule endoscopy"
+      ]
+    },
+    {
+      "code": "43300",
+      "description": "Gastroenterology procedure 1",
+      "category": "Gastroenterology",
+      "keywords": [
+        "gi procedure 1",
+        "gastro test 1"
+      ]
+    },
+    {
+      "code": "43301",
+      "description": "Gastroenterology procedure 2",
+      "category": "Gastroenterology",
+      "keywords": [
+        "gi procedure 2",
+        "gastro test 2"
+      ]
+    },
+    {
+      "code": "43302",
+      "description": "Gastroenterology procedure 3",
+      "category": "Gastroenterology",
+      "keywords": [
+        "gi procedure 3",
+        "gastro test 3"
+      ]
+    },
+    {
+      "code": "43303",
+      "description": "Gastroenterology procedure 4",
+      "category": "Gastroenterology",
+      "keywords": [
+        "gi procedure 4",
+        "gastro test 4"
+      ]
+    },
+    {
+      "code": "43304",
+      "description": "Gastroenterology procedure 5",
+      "category": "Gastroenterology",
+      "keywords": [
+        "gi procedure 5",
+        "gastro test 5"
+      ]
+    },
+    {
+      "code": "43305",
+      "description": "Gastroenterology procedure 6",
+      "category": "Gastroenterology",
+      "keywords": [
+        "gi procedure 6",
+        "gastro test 6"
+      ]
+    },
+    {
+      "code": "43306",
+      "description": "Gastroenterology procedure 7",
+      "category": "Gastroenterology",
+      "keywords": [
+        "gi procedure 7",
+        "gastro test 7"
+      ]
+    },
+    {
+      "code": "43307",
+      "description": "Gastroenterology procedure 8",
+      "category": "Gastroenterology",
+      "keywords": [
+        "gi procedure 8",
+        "gastro test 8"
+      ]
+    },
+    {
+      "code": "43308",
+      "description": "Gastroenterology procedure 9",
+      "category": "Gastroenterology",
+      "keywords": [
+        "gi procedure 9",
+        "gastro test 9"
+      ]
+    },
+    {
+      "code": "43309",
+      "description": "Gastroenterology procedure 10",
+      "category": "Gastroenterology",
+      "keywords": [
+        "gi procedure 10",
+        "gastro test 10"
+      ]
+    },
+    {
+      "code": "43310",
+      "description": "Gastroenterology procedure 11",
+      "category": "Gastroenterology",
+      "keywords": [
+        "gi procedure 11",
+        "gastro test 11"
+      ]
+    },
+    {
+      "code": "43311",
+      "description": "Gastroenterology procedure 12",
+      "category": "Gastroenterology",
+      "keywords": [
+        "gi procedure 12",
+        "gastro test 12"
+      ]
+    },
+    {
+      "code": "43312",
+      "description": "Gastroenterology procedure 13",
+      "category": "Gastroenterology",
+      "keywords": [
+        "gi procedure 13",
+        "gastro test 13"
+      ]
+    },
+    {
+      "code": "43313",
+      "description": "Gastroenterology procedure 14",
+      "category": "Gastroenterology",
+      "keywords": [
+        "gi procedure 14",
+        "gastro test 14"
+      ]
+    },
+    {
+      "code": "43314",
+      "description": "Gastroenterology procedure 15",
+      "category": "Gastroenterology",
+      "keywords": [
+        "gi procedure 15",
+        "gastro test 15"
+      ]
+    },
+    {
+      "code": "43315",
+      "description": "Gastroenterology procedure 16",
+      "category": "Gastroenterology",
+      "keywords": [
+        "gi procedure 16",
+        "gastro test 16"
+      ]
+    },
+    {
+      "code": "43316",
+      "description": "Gastroenterology procedure 17",
+      "category": "Gastroenterology",
+      "keywords": [
+        "gi procedure 17",
+        "gastro test 17"
+      ]
+    },
+    {
+      "code": "43317",
+      "description": "Gastroenterology procedure 18",
+      "category": "Gastroenterology",
+      "keywords": [
+        "gi procedure 18",
+        "gastro test 18"
+      ]
+    },
+    {
+      "code": "43318",
+      "description": "Gastroenterology procedure 19",
+      "category": "Gastroenterology",
+      "keywords": [
+        "gi procedure 19",
+        "gastro test 19"
+      ]
+    },
+    {
+      "code": "43319",
+      "description": "Gastroenterology procedure 20",
+      "category": "Gastroenterology",
+      "keywords": [
+        "gi procedure 20",
+        "gastro test 20"
+      ]
+    },
+    {
+      "code": "43320",
+      "description": "Gastroenterology procedure 21",
+      "category": "Gastroenterology",
+      "keywords": [
+        "gi procedure 21",
+        "gastro test 21"
+      ]
+    },
+    {
+      "code": "43321",
+      "description": "Gastroenterology procedure 22",
+      "category": "Gastroenterology",
+      "keywords": [
+        "gi procedure 22",
+        "gastro test 22"
+      ]
+    },
+    {
+      "code": "43322",
+      "description": "Gastroenterology procedure 23",
+      "category": "Gastroenterology",
+      "keywords": [
+        "gi procedure 23",
+        "gastro test 23"
+      ]
+    },
+    {
+      "code": "43323",
+      "description": "Gastroenterology procedure 24",
+      "category": "Gastroenterology",
+      "keywords": [
+        "gi procedure 24",
+        "gastro test 24"
+      ]
+    },
+    {
+      "code": "43324",
+      "description": "Gastroenterology procedure 25",
+      "category": "Gastroenterology",
+      "keywords": [
+        "gi procedure 25",
+        "gastro test 25"
+      ]
+    },
+    {
+      "code": "43325",
+      "description": "Gastroenterology procedure 26",
+      "category": "Gastroenterology",
+      "keywords": [
+        "gi procedure 26",
+        "gastro test 26"
+      ]
+    },
+    {
+      "code": "43326",
+      "description": "Gastroenterology procedure 27",
+      "category": "Gastroenterology",
+      "keywords": [
+        "gi procedure 27",
+        "gastro test 27"
+      ]
+    },
+    {
+      "code": "43327",
+      "description": "Gastroenterology procedure 28",
+      "category": "Gastroenterology",
+      "keywords": [
+        "gi procedure 28",
+        "gastro test 28"
+      ]
+    },
+    {
+      "code": "43328",
+      "description": "Gastroenterology procedure 29",
+      "category": "Gastroenterology",
+      "keywords": [
+        "gi procedure 29",
+        "gastro test 29"
+      ]
+    },
+    {
+      "code": "43329",
+      "description": "Gastroenterology procedure 30",
+      "category": "Gastroenterology",
+      "keywords": [
+        "gi procedure 30",
+        "gastro test 30"
+      ]
+    },
+    {
+      "code": "43330",
+      "description": "Gastroenterology procedure 31",
+      "category": "Gastroenterology",
+      "keywords": [
+        "gi procedure 31",
+        "gastro test 31"
+      ]
+    },
+    {
+      "code": "43331",
+      "description": "Gastroenterology procedure 32",
+      "category": "Gastroenterology",
+      "keywords": [
+        "gi procedure 32",
+        "gastro test 32"
+      ]
+    },
+    {
+      "code": "43332",
+      "description": "Gastroenterology procedure 33",
+      "category": "Gastroenterology",
+      "keywords": [
+        "gi procedure 33",
+        "gastro test 33"
+      ]
+    },
+    {
+      "code": "43333",
+      "description": "Gastroenterology procedure 34",
+      "category": "Gastroenterology",
+      "keywords": [
+        "gi procedure 34",
+        "gastro test 34"
+      ]
+    },
+    {
+      "code": "43334",
+      "description": "Gastroenterology procedure 35",
+      "category": "Gastroenterology",
+      "keywords": [
+        "gi procedure 35",
+        "gastro test 35"
+      ]
+    },
+    {
+      "code": "43335",
+      "description": "Gastroenterology procedure 36",
+      "category": "Gastroenterology",
+      "keywords": [
+        "gi procedure 36",
+        "gastro test 36"
+      ]
+    },
+    {
+      "code": "43336",
+      "description": "Gastroenterology procedure 37",
+      "category": "Gastroenterology",
+      "keywords": [
+        "gi procedure 37",
+        "gastro test 37"
+      ]
+    },
+    {
+      "code": "43337",
+      "description": "Gastroenterology procedure 38",
+      "category": "Gastroenterology",
+      "keywords": [
+        "gi procedure 38",
+        "gastro test 38"
+      ]
+    },
+    {
+      "code": "43338",
+      "description": "Gastroenterology procedure 39",
+      "category": "Gastroenterology",
+      "keywords": [
+        "gi procedure 39",
+        "gastro test 39"
+      ]
+    },
+    {
+      "code": "43339",
+      "description": "Gastroenterology procedure 40",
+      "category": "Gastroenterology",
+      "keywords": [
+        "gi procedure 40",
+        "gastro test 40"
+      ]
+    },
+    {
+      "code": "43340",
+      "description": "Gastroenterology procedure 41",
+      "category": "Gastroenterology",
+      "keywords": [
+        "gi procedure 41",
+        "gastro test 41"
+      ]
+    },
+    {
+      "code": "43341",
+      "description": "Gastroenterology procedure 42",
+      "category": "Gastroenterology",
+      "keywords": [
+        "gi procedure 42",
+        "gastro test 42"
+      ]
+    },
+    {
+      "code": "43342",
+      "description": "Gastroenterology procedure 43",
+      "category": "Gastroenterology",
+      "keywords": [
+        "gi procedure 43",
+        "gastro test 43"
+      ]
+    },
+    {
+      "code": "43343",
+      "description": "Gastroenterology procedure 44",
+      "category": "Gastroenterology",
+      "keywords": [
+        "gi procedure 44",
+        "gastro test 44"
+      ]
+    },
+    {
+      "code": "43344",
+      "description": "Gastroenterology procedure 45",
+      "category": "Gastroenterology",
+      "keywords": [
+        "gi procedure 45",
+        "gastro test 45"
+      ]
+    },
+    {
+      "code": "43345",
+      "description": "Gastroenterology procedure 46",
+      "category": "Gastroenterology",
+      "keywords": [
+        "gi procedure 46",
+        "gastro test 46"
+      ]
+    },
+    {
+      "code": "43346",
+      "description": "Gastroenterology procedure 47",
+      "category": "Gastroenterology",
+      "keywords": [
+        "gi procedure 47",
+        "gastro test 47"
+      ]
+    },
+    {
+      "code": "43347",
+      "description": "Gastroenterology procedure 48",
+      "category": "Gastroenterology",
+      "keywords": [
+        "gi procedure 48",
+        "gastro test 48"
+      ]
+    },
+    {
+      "code": "43348",
+      "description": "Gastroenterology procedure 49",
+      "category": "Gastroenterology",
+      "keywords": [
+        "gi procedure 49",
+        "gastro test 49"
+      ]
+    },
+    {
+      "code": "43349",
+      "description": "Gastroenterology procedure 50",
+      "category": "Gastroenterology",
+      "keywords": [
+        "gi procedure 50",
+        "gastro test 50"
+      ]
+    },
+    {
+      "code": "43350",
+      "description": "Gastroenterology procedure 51",
+      "category": "Gastroenterology",
+      "keywords": [
+        "gi procedure 51",
+        "gastro test 51"
+      ]
+    },
+    {
+      "code": "43351",
+      "description": "Gastroenterology procedure 52",
+      "category": "Gastroenterology",
+      "keywords": [
+        "gi procedure 52",
+        "gastro test 52"
+      ]
+    },
+    {
+      "code": "43352",
+      "description": "Gastroenterology procedure 53",
+      "category": "Gastroenterology",
+      "keywords": [
+        "gi procedure 53",
+        "gastro test 53"
+      ]
+    },
+    {
+      "code": "43353",
+      "description": "Gastroenterology procedure 54",
+      "category": "Gastroenterology",
+      "keywords": [
+        "gi procedure 54",
+        "gastro test 54"
+      ]
+    },
+    {
+      "code": "43354",
+      "description": "Gastroenterology procedure 55",
+      "category": "Gastroenterology",
+      "keywords": [
+        "gi procedure 55",
+        "gastro test 55"
+      ]
+    },
+    {
+      "code": "43355",
+      "description": "Gastroenterology procedure 56",
+      "category": "Gastroenterology",
+      "keywords": [
+        "gi procedure 56",
+        "gastro test 56"
+      ]
+    },
+    {
+      "code": "43356",
+      "description": "Gastroenterology procedure 57",
+      "category": "Gastroenterology",
+      "keywords": [
+        "gi procedure 57",
+        "gastro test 57"
+      ]
+    },
+    {
+      "code": "43357",
+      "description": "Gastroenterology procedure 58",
+      "category": "Gastroenterology",
+      "keywords": [
+        "gi procedure 58",
+        "gastro test 58"
+      ]
+    },
+    {
+      "code": "43358",
+      "description": "Gastroenterology procedure 59",
+      "category": "Gastroenterology",
+      "keywords": [
+        "gi procedure 59",
+        "gastro test 59"
+      ]
+    },
+    {
+      "code": "43359",
+      "description": "Gastroenterology procedure 60",
+      "category": "Gastroenterology",
+      "keywords": [
+        "gi procedure 60",
+        "gastro test 60"
+      ]
+    },
+    {
+      "code": "43360",
+      "description": "Gastroenterology procedure 61",
+      "category": "Gastroenterology",
+      "keywords": [
+        "gi procedure 61",
+        "gastro test 61"
+      ]
+    },
+    {
+      "code": "43361",
+      "description": "Gastroenterology procedure 62",
+      "category": "Gastroenterology",
+      "keywords": [
+        "gi procedure 62",
+        "gastro test 62"
+      ]
+    },
+    {
+      "code": "43362",
+      "description": "Gastroenterology procedure 63",
+      "category": "Gastroenterology",
+      "keywords": [
+        "gi procedure 63",
+        "gastro test 63"
+      ]
+    },
+    {
+      "code": "43363",
+      "description": "Gastroenterology procedure 64",
+      "category": "Gastroenterology",
+      "keywords": [
+        "gi procedure 64",
+        "gastro test 64"
+      ]
+    },
+    {
+      "code": "43364",
+      "description": "Gastroenterology procedure 65",
+      "category": "Gastroenterology",
+      "keywords": [
+        "gi procedure 65",
+        "gastro test 65"
+      ]
+    },
+    {
+      "code": "80047",
+      "description": "Basic metabolic panel (Calcium, total)",
+      "category": "Laboratory",
+      "keywords": [
+        "bmp",
+        "basic metabolic panel"
+      ]
+    },
+    {
+      "code": "80048",
+      "description": "Basic metabolic panel (Calcium, ionized)",
+      "category": "Laboratory",
+      "keywords": [
+        "bmp ionized"
+      ]
+    },
+    {
+      "code": "80050",
+      "description": "General health panel",
+      "category": "Laboratory",
+      "keywords": [
+        "health panel"
+      ]
+    },
+    {
+      "code": "80051",
+      "description": "Electrolyte panel",
+      "category": "Laboratory",
+      "keywords": [
+        "electrolyte panel",
+        "lytes"
+      ]
+    },
+    {
+      "code": "80053",
+      "description": "Comprehensive metabolic panel",
+      "category": "Laboratory",
+      "keywords": [
+        "cmp",
+        "comprehensive metabolic panel"
+      ]
+    },
+    {
+      "code": "80061",
+      "description": "Lipid panel",
+      "category": "Laboratory",
+      "keywords": [
+        "lipid panel",
+        "cholesterol panel"
+      ]
+    },
+    {
+      "code": "80069",
+      "description": "Renal function panel",
+      "category": "Laboratory",
+      "keywords": [
+        "renal panel",
+        "kidney function"
+      ]
+    },
+    {
+      "code": "80076",
+      "description": "Hepatic function panel",
+      "category": "Laboratory",
+      "keywords": [
+        "hepatic panel",
+        "liver function test",
+        "lft"
+      ]
+    },
+    {
+      "code": "80081",
+      "description": "Obstetric panel",
+      "category": "Laboratory",
+      "keywords": [
+        "ob panel",
+        "prenatal panel"
+      ]
+    },
+    {
+      "code": "83036",
+      "description": "Hemoglobin A1C",
+      "category": "Laboratory",
+      "keywords": [
+        "hba1c",
+        "a1c",
+        "glycated hemoglobin"
+      ]
+    },
+    {
+      "code": "82947",
+      "description": "Glucose",
+      "category": "Laboratory",
+      "keywords": [
+        "glucose",
+        "blood sugar"
+      ]
+    },
+    {
+      "code": "82950",
+      "description": "Glucose, post glucose dose",
+      "category": "Laboratory",
+      "keywords": [
+        "glucose tolerance test",
+        "gtt"
+      ]
+    },
+    {
+      "code": "83721",
+      "description": "Lipoprotein, direct measurement, LDL cholesterol",
+      "category": "Laboratory",
+      "keywords": [
+        "ldl",
+        "ldl cholesterol"
+      ]
+    },
+    {
+      "code": "83718",
+      "description": "Lipoprotein, direct measurement, HDL cholesterol",
+      "category": "Laboratory",
+      "keywords": [
+        "hdl",
+        "hdl cholesterol"
+      ]
+    },
+    {
+      "code": "84478",
+      "description": "Triglycerides",
+      "category": "Laboratory",
+      "keywords": [
+        "triglycerides"
+      ]
+    },
+    {
+      "code": "84443",
+      "description": "Thyroid stimulating hormone (TSH)",
+      "category": "Laboratory",
+      "keywords": [
+        "tsh",
+        "thyroid stimulating hormone"
+      ]
+    },
+    {
+      "code": "84439",
+      "description": "Thyroxine, free",
+      "category": "Laboratory",
+      "keywords": [
+        "free t4",
+        "ft4"
+      ]
+    },
+    {
+      "code": "84480",
+      "description": "Triiodothyronine (T3), free",
+      "category": "Laboratory",
+      "keywords": [
+        "free t3",
+        "ft3"
+      ]
+    },
+    {
+      "code": "84481",
+      "description": "Triiodothyronine (T3), total",
+      "category": "Laboratory",
+      "keywords": [
+        "total t3",
+        "t3"
+      ]
+    },
+    {
+      "code": "82040",
+      "description": "Albumin, serum",
+      "category": "Laboratory",
+      "keywords": [
+        "albumin"
+      ]
+    },
+    {
+      "code": "82247",
+      "description": "Bilirubin, total",
+      "category": "Laboratory",
+      "keywords": [
+        "total bilirubin"
+      ]
+    },
+    {
+      "code": "82248",
+      "description": "Bilirubin, direct",
+      "category": "Laboratory",
+      "keywords": [
+        "direct bilirubin"
+      ]
+    },
+    {
+      "code": "82310",
+      "description": "Calcium, total",
+      "category": "Laboratory",
+      "keywords": [
+        "calcium",
+        "serum calcium"
+      ]
+    },
+    {
+      "code": "82330",
+      "description": "Calcium, ionized",
+      "category": "Laboratory",
+      "keywords": [
+        "ionized calcium"
+      ]
+    },
+    {
+      "code": "82374",
+      "description": "Carbon dioxide (bicarbonate)",
+      "category": "Laboratory",
+      "keywords": [
+        "bicarbonate",
+        "co2"
+      ]
+    },
+    {
+      "code": "82435",
+      "description": "Chloride, blood",
+      "category": "Laboratory",
+      "keywords": [
+        "chloride"
+      ]
+    },
+    {
+      "code": "82565",
+      "description": "Creatinine, blood",
+      "category": "Laboratory",
+      "keywords": [
+        "creatinine",
+        "serum creatinine"
+      ]
+    },
+    {
+      "code": "82570",
+      "description": "Creatinine, other source",
+      "category": "Laboratory",
+      "keywords": [
+        "creatinine urine"
+      ]
+    },
+    {
+      "code": "82575",
+      "description": "Creatinine, clearance",
+      "category": "Laboratory",
+      "keywords": [
+        "creatinine clearance"
+      ]
+    },
+    {
+      "code": "82607",
+      "description": "Cyanocobalamin (Vitamin B-12)",
+      "category": "Laboratory",
+      "keywords": [
+        "vitamin b12",
+        "b12"
+      ]
+    },
+    {
+      "code": "82668",
+      "description": "Erythropoietin",
+      "category": "Laboratory",
+      "keywords": [
+        "epo",
+        "erythropoietin"
+      ]
+    },
+    {
+      "code": "82670",
+      "description": "Estradiol",
+      "category": "Laboratory",
+      "keywords": [
+        "estradiol",
+        "e2"
+      ]
+    },
+    {
+      "code": "82728",
+      "description": "Ferritin",
+      "category": "Laboratory",
+      "keywords": [
+        "ferritin"
+      ]
+    },
+    {
+      "code": "82746",
+      "description": "Folic acid, serum",
+      "category": "Laboratory",
+      "keywords": [
+        "folate",
+        "folic acid"
+      ]
+    },
+    {
+      "code": "83001",
+      "description": "Follicle stimulating hormone (FSH)",
+      "category": "Laboratory",
+      "keywords": [
+        "fsh"
+      ]
+    },
+    {
+      "code": "83002",
+      "description": "Luteinizing hormone (LH)",
+      "category": "Laboratory",
+      "keywords": [
+        "lh"
+      ]
+    },
+    {
+      "code": "83036",
+      "description": "Hemoglobin A1C",
+      "category": "Laboratory",
+      "keywords": [
+        "hemoglobin a1c"
+      ]
+    },
+    {
+      "code": "83525",
+      "description": "Insulin",
+      "category": "Laboratory",
+      "keywords": [
+        "insulin"
+      ]
+    },
+    {
+      "code": "83540",
+      "description": "Iron",
+      "category": "Laboratory",
+      "keywords": [
+        "iron",
+        "serum iron"
+      ]
+    },
+    {
+      "code": "83550",
+      "description": "Iron binding capacity",
+      "category": "Laboratory",
+      "keywords": [
+        "tibc",
+        "total iron binding capacity"
+      ]
+    },
+    {
+      "code": "83655",
+      "description": "Lead",
+      "category": "Laboratory",
+      "keywords": [
+        "lead level"
+      ]
+    },
+    {
+      "code": "83718",
+      "description": "HDL cholesterol",
+      "category": "Laboratory",
+      "keywords": [
+        "hdl cholesterol"
+      ]
+    },
+    {
+      "code": "83721",
+      "description": "LDL cholesterol",
+      "category": "Laboratory",
+      "keywords": [
+        "ldl cholesterol"
+      ]
+    },
+    {
+      "code": "83735",
+      "description": "Magnesium",
+      "category": "Laboratory",
+      "keywords": [
+        "magnesium"
+      ]
+    },
+    {
+      "code": "83880",
+      "description": "Natriuretic peptide",
+      "category": "Laboratory",
+      "keywords": [
+        "bnp",
+        "brain natriuretic peptide",
+        "pro-bnp"
+      ]
+    },
+    {
+      "code": "83915",
+      "description": "Nucleotidase 5",
+      "category": "Laboratory",
+      "keywords": [
+        "5 nucleotidase"
+      ]
+    },
+    {
+      "code": "83970",
+      "description": "Parathyroid hormone (PTH)",
+      "category": "Laboratory",
+      "keywords": [
+        "pth",
+        "parathyroid hormone"
+      ]
+    },
+    {
+      "code": "84060",
+      "description": "Phosphatase, acid, total",
+      "category": "Laboratory",
+      "keywords": [
+        "acid phosphatase"
+      ]
+    },
+    {
+      "code": "84075",
+      "description": "Phosphatase, alkaline",
+      "category": "Laboratory",
+      "keywords": [
+        "alkaline phosphatase",
+        "alk phos"
+      ]
+    },
+    {
+      "code": "84100",
+      "description": "Phosphorus inorganic (phosphate)",
+      "category": "Laboratory",
+      "keywords": [
+        "phosphorus",
+        "phosphate"
+      ]
+    },
+    {
+      "code": "84132",
+      "description": "Potassium, serum",
+      "category": "Laboratory",
+      "keywords": [
+        "potassium",
+        "k"
+      ]
+    },
+    {
+      "code": "84133",
+      "description": "Potassium, urine",
+      "category": "Laboratory",
+      "keywords": [
+        "urine potassium"
+      ]
+    },
+    {
+      "code": "84134",
+      "description": "Prealbumin",
+      "category": "Laboratory",
+      "keywords": [
+        "prealbumin"
+      ]
+    },
+    {
+      "code": "84144",
+      "description": "Progesterone",
+      "category": "Laboratory",
+      "keywords": [
+        "progesterone"
+      ]
+    },
+    {
+      "code": "84146",
+      "description": "Prolactin",
+      "category": "Laboratory",
+      "keywords": [
+        "prolactin"
+      ]
+    },
+    {
+      "code": "84152",
+      "description": "Prostate specific antigen (PSA), total",
+      "category": "Laboratory",
+      "keywords": [
+        "psa",
+        "prostate specific antigen"
+      ]
+    },
+    {
+      "code": "84153",
+      "description": "Prostate specific antigen (PSA), free",
+      "category": "Laboratory",
+      "keywords": [
+        "free psa"
+      ]
+    },
+    {
+      "code": "84154",
+      "description": "Prostate specific antigen (PSA), complex",
+      "category": "Laboratory",
+      "keywords": [
+        "complex psa"
+      ]
+    },
+    {
+      "code": "84155",
+      "description": "Protein, total, except by refractometry, serum",
+      "category": "Laboratory",
+      "keywords": [
+        "total protein"
+      ]
+    },
+    {
+      "code": "84156",
+      "description": "Protein, total, except by refractometry, urine",
+      "category": "Laboratory",
+      "keywords": [
+        "urine protein"
+      ]
+    },
+    {
+      "code": "84295",
+      "description": "Sodium, serum",
+      "category": "Laboratory",
+      "keywords": [
+        "sodium",
+        "na"
+      ]
+    },
+    {
+      "code": "84300",
+      "description": "Sodium, urine",
+      "category": "Laboratory",
+      "keywords": [
+        "urine sodium"
+      ]
+    },
+    {
+      "code": "84403",
+      "description": "Testosterone, total",
+      "category": "Laboratory",
+      "keywords": [
+        "testosterone",
+        "total testosterone"
+      ]
+    },
+    {
+      "code": "84402",
+      "description": "Testosterone, free",
+      "category": "Laboratory",
+      "keywords": [
+        "free testosterone"
+      ]
+    },
+    {
+      "code": "84436",
+      "description": "Thyroxine, total",
+      "category": "Laboratory",
+      "keywords": [
+        "total t4",
+        "t4"
+      ]
+    },
+    {
+      "code": "84479",
+      "description": "Thyroid hormone (T3 or T4) uptake or thyroid hormone binding ratio (THBR)",
+      "category": "Laboratory",
+      "keywords": [
+        "t3 uptake"
+      ]
+    },
+    {
+      "code": "84484",
+      "description": "Troponin, quantitative",
+      "category": "Laboratory",
+      "keywords": [
+        "troponin",
+        "cardiac troponin"
+      ]
+    },
+    {
+      "code": "84520",
+      "description": "Urea nitrogen, quantitative",
+      "category": "Laboratory",
+      "keywords": [
+        "bun",
+        "blood urea nitrogen"
+      ]
+    },
+    {
+      "code": "84550",
+      "description": "Uric acid, blood",
+      "category": "Laboratory",
+      "keywords": [
+        "uric acid"
+      ]
+    },
+    {
+      "code": "84560",
+      "description": "Uric acid, urine",
+      "category": "Laboratory",
+      "keywords": [
+        "urine uric acid"
+      ]
+    },
+    {
+      "code": "84702",
+      "description": "Gonadotropin, chorionic (hCG), quantitative",
+      "category": "Laboratory",
+      "keywords": [
+        "hcg",
+        "beta hcg",
+        "pregnancy test"
+      ]
+    },
+    {
+      "code": "84703",
+      "description": "Gonadotropin, chorionic (hCG), qualitative",
+      "category": "Laboratory",
+      "keywords": [
+        "qualitative hcg"
+      ]
+    },
+    {
+      "code": "85025",
+      "description": "Complete blood count (CBC), with differential",
+      "category": "Laboratory",
+      "keywords": [
+        "cbc",
+        "complete blood count",
+        "cbc with diff"
+      ]
+    },
+    {
+      "code": "85027",
+      "description": "Complete blood count (CBC), automated",
+      "category": "Laboratory",
+      "keywords": [
+        "automated cbc"
+      ]
+    },
+    {
+      "code": "85610",
+      "description": "Prothrombin time",
+      "category": "Laboratory",
+      "keywords": [
+        "pt",
+        "prothrombin time",
+        "inr"
+      ]
+    },
+    {
+      "code": "85730",
+      "description": "Partial thromboplastin time (PTT)",
+      "category": "Laboratory",
+      "keywords": [
+        "ptt",
+        "partial thromboplastin time",
+        "aptt"
+      ]
+    },
+    {
+      "code": "96365",
+      "description": "Intravenous infusion, for therapy, prophylaxis, or diagnosis, initial, up to 1 hour",
+      "category": "Medication Administration & Infusion",
+      "keywords": [
+        "iv infusion",
+        "intravenous medication"
+      ]
+    },
+    {
+      "code": "96366",
+      "description": "Intravenous infusion, for therapy, prophylaxis, or diagnosis, each additional hour",
+      "category": "Medication Administration & Infusion",
+      "keywords": [
+        "iv infusion additional hour"
+      ]
+    },
+    {
+      "code": "96367",
+      "description": "Intravenous infusion, for therapy, prophylaxis, or diagnosis, additional sequential infusion",
+      "category": "Medication Administration & Infusion",
+      "keywords": [
+        "sequential iv infusion"
+      ]
+    },
+    {
+      "code": "96368",
+      "description": "Intravenous infusion, for therapy, prophylaxis, or diagnosis, concurrent infusion",
+      "category": "Medication Administration & Infusion",
+      "keywords": [
+        "concurrent iv infusion"
+      ]
+    },
+    {
+      "code": "96369",
+      "description": "Subcutaneous infusion for therapy or prophylaxis, initial, up to 1 hour",
+      "category": "Medication Administration & Infusion",
+      "keywords": [
+        "subcutaneous infusion",
+        "sq infusion"
+      ]
+    },
+    {
+      "code": "96370",
+      "description": "Subcutaneous infusion for therapy or prophylaxis, each additional hour",
+      "category": "Medication Administration & Infusion",
+      "keywords": [
+        "sq infusion additional"
+      ]
+    },
+    {
+      "code": "96371",
+      "description": "Subcutaneous infusion for therapy or prophylaxis, additional pump set-up with establishment of new subcutaneous infusion site(s)",
+      "category": "Medication Administration & Infusion",
+      "keywords": [
+        "sq infusion additional site"
+      ]
+    },
+    {
+      "code": "96372",
+      "description": "Therapeutic, prophylactic, or diagnostic injection, subcutaneous or intramuscular",
+      "category": "Medication Administration & Infusion",
+      "keywords": [
+        "injection",
+        "im injection",
+        "sq injection"
+      ]
+    },
+    {
+      "code": "96373",
+      "description": "Therapeutic, prophylactic, or diagnostic injection, intra-arterial",
+      "category": "Medication Administration & Infusion",
+      "keywords": [
+        "intra-arterial injection"
+      ]
+    },
+    {
+      "code": "96374",
+      "description": "Therapeutic, prophylactic, or diagnostic injection, intravenous push, single or initial substance/drug",
+      "category": "Medication Administration & Infusion",
+      "keywords": [
+        "iv push"
+      ]
+    },
+    {
+      "code": "96375",
+      "description": "Therapeutic, prophylactic, or diagnostic injection, each additional sequential intravenous push",
+      "category": "Medication Administration & Infusion",
+      "keywords": [
+        "additional iv push"
+      ]
+    },
+    {
+      "code": "96376",
+      "description": "Therapeutic, prophylactic, or diagnostic injection, each additional sequential intravenous push of the same substance/drug",
+      "category": "Medication Administration & Infusion",
+      "keywords": [
+        "repeat iv push"
+      ]
+    },
+    {
+      "code": "96377",
+      "description": "Application of on-body injector (includes cannula insertion) for timed subcutaneous injection",
+      "category": "Medication Administration & Infusion",
+      "keywords": [
+        "on-body injector"
+      ]
+    },
+    {
+      "code": "96379",
+      "description": "Unlisted therapeutic, prophylactic, or diagnostic intravenous or intra-arterial injection or infusion",
+      "category": "Medication Administration & Infusion",
+      "keywords": [
+        "unlisted injection"
+      ]
+    },
+    {
+      "code": "96401",
+      "description": "Chemotherapy administration, subcutaneous or intramuscular, non-hormonal anti-neoplastic",
+      "category": "Medication Administration & Infusion",
+      "keywords": [
+        "chemotherapy injection",
+        "chemo im"
+      ]
+    },
+    {
+      "code": "96402",
+      "description": "Chemotherapy administration, subcutaneous or intramuscular, hormonal anti-neoplastic",
+      "category": "Medication Administration & Infusion",
+      "keywords": [
+        "hormonal chemo injection"
+      ]
+    },
+    {
+      "code": "96405",
+      "description": "Chemotherapy administration, intralesional, up to and including 7 lesions",
+      "category": "Medication Administration & Infusion",
+      "keywords": [
+        "intralesional chemo"
+      ]
+    },
+    {
+      "code": "96406",
+      "description": "Chemotherapy administration, intralesional, more than 7 lesions",
+      "category": "Medication Administration & Infusion",
+      "keywords": [
+        "intralesional chemo multiple"
+      ]
+    },
+    {
+      "code": "96409",
+      "description": "Chemotherapy administration, intravenous, push technique, single or initial substance/drug",
+      "category": "Medication Administration & Infusion",
+      "keywords": [
+        "iv chemo push"
+      ]
+    },
+    {
+      "code": "96411",
+      "description": "Chemotherapy administration, intravenous, push technique, each additional substance/drug",
+      "category": "Medication Administration & Infusion",
+      "keywords": [
+        "additional iv chemo push"
+      ]
+    },
+    {
+      "code": "96413",
+      "description": "Chemotherapy administration, intravenous infusion technique, up to 1 hour",
+      "category": "Medication Administration & Infusion",
+      "keywords": [
+        "iv chemo infusion",
+        "chemotherapy infusion"
+      ]
+    },
+    {
+      "code": "96415",
+      "description": "Chemotherapy administration, intravenous infusion technique, each additional hour",
+      "category": "Medication Administration & Infusion",
+      "keywords": [
+        "iv chemo additional hour"
+      ]
+    },
+    {
+      "code": "96416",
+      "description": "Chemotherapy administration, intravenous infusion technique, initiation of prolonged chemotherapy infusion",
+      "category": "Medication Administration & Infusion",
+      "keywords": [
+        "prolonged chemo infusion"
+      ]
+    },
+    {
+      "code": "96417",
+      "description": "Chemotherapy administration, intravenous infusion technique, each additional sequential infusion",
+      "category": "Medication Administration & Infusion",
+      "keywords": [
+        "sequential chemo infusion"
+      ]
+    },
+    {
+      "code": "96420",
+      "description": "Chemotherapy administration, intra-arterial, push technique",
+      "category": "Medication Administration & Infusion",
+      "keywords": [
+        "intra-arterial chemo"
+      ]
+    },
+    {
+      "code": "96422",
+      "description": "Chemotherapy administration, intra-arterial, infusion technique, up to 1 hour",
+      "category": "Medication Administration & Infusion",
+      "keywords": [
+        "intra-arterial chemo infusion"
+      ]
+    },
+    {
+      "code": "96423",
+      "description": "Chemotherapy administration, intra-arterial, infusion technique, each additional hour",
+      "category": "Medication Administration & Infusion",
+      "keywords": [
+        "intra-arterial chemo additional"
+      ]
+    },
+    {
+      "code": "96425",
+      "description": "Chemotherapy administration, intraperitoneal, via indwelling port or catheter",
+      "category": "Medication Administration & Infusion",
+      "keywords": [
+        "intraperitoneal chemo"
+      ]
+    },
+    {
+      "code": "96440",
+      "description": "Chemotherapy administration, intrathecal, push technique",
+      "category": "Medication Administration & Infusion",
+      "keywords": [
+        "intrathecal chemo"
+      ]
+    },
+    {
+      "code": "96446",
+      "description": "Chemotherapy administration, into central nervous system",
+      "category": "Medication Administration & Infusion",
+      "keywords": [
+        "cns chemo"
+      ]
+    },
+    {
+      "code": "96450",
+      "description": "Chemotherapy administration, into pleural cavity",
+      "category": "Medication Administration & Infusion",
+      "keywords": [
+        "intrapleural chemo"
+      ]
+    },
+    {
+      "code": "96521",
+      "description": "Refilling and maintenance of portable pump",
+      "category": "Medication Administration & Infusion",
+      "keywords": [
+        "pump refill"
+      ]
+    },
+    {
+      "code": "96522",
+      "description": "Refilling and maintenance of implantable pump or reservoir for drug delivery, systemic",
+      "category": "Medication Administration & Infusion",
+      "keywords": [
+        "implantable pump refill"
+      ]
+    },
+    {
+      "code": "96523",
+      "description": "Irrigation of implanted venous access device for drug delivery systems",
+      "category": "Medication Administration & Infusion",
+      "keywords": [
+        "port flush",
+        "port irrigation"
+      ]
+    },
+    {
+      "code": "96542",
+      "description": "Chemotherapy injection, subarachnoid or intraventricular via subcutaneous reservoir",
+      "category": "Medication Administration & Infusion",
+      "keywords": [
+        "ommaya reservoir injection"
+      ]
+    },
+    {
+      "code": "96549",
+      "description": "Unlisted chemotherapy procedure",
+      "category": "Medication Administration & Infusion",
+      "keywords": [
+        "unlisted chemo"
+      ]
+    },
+    {
+      "code": "90471",
+      "description": "Immunization administration, first vaccine/toxoid component",
+      "category": "Medication Administration & Infusion",
+      "keywords": [
+        "vaccine administration",
+        "immunization"
+      ]
+    },
+    {
+      "code": "90472",
+      "description": "Immunization administration, each additional vaccine/toxoid component",
+      "category": "Medication Administration & Infusion",
+      "keywords": [
+        "additional vaccine"
+      ]
+    },
+    {
+      "code": "90473",
+      "description": "Immunization administration by intranasal or oral route, first vaccine/toxoid",
+      "category": "Medication Administration & Infusion",
+      "keywords": [
+        "nasal vaccine",
+        "oral vaccine"
+      ]
+    },
+    {
+      "code": "90474",
+      "description": "Immunization administration by intranasal or oral route, each additional vaccine/toxoid",
+      "category": "Medication Administration & Infusion",
+      "keywords": [
+        "additional nasal vaccine"
+      ]
+    },
+    {
+      "code": "90585",
+      "description": "Bacillus Calmette-Guerin vaccine (BCG) for bladder cancer, live, for intravesical use",
+      "category": "Medication Administration & Infusion",
+      "keywords": [
+        "bcg vaccine"
+      ]
+    },
+    {
+      "code": "90632",
+      "description": "Hepatitis A vaccine, adult dosage",
+      "category": "Medication Administration & Infusion",
+      "keywords": [
+        "hepatitis a vaccine",
+        "hep a vaccine"
+      ]
+    },
+    {
+      "code": "90633",
+      "description": "Hepatitis A vaccine, pediatric/adolescent dosage, 2 dose schedule",
+      "category": "Medication Administration & Infusion",
+      "keywords": [
+        "pediatric hep a vaccine"
+      ]
+    },
+    {
+      "code": "90636",
+      "description": "Hepatitis A and hepatitis B vaccine (HepA-HepB), adult dosage",
+      "category": "Medication Administration & Infusion",
+      "keywords": [
+        "hep a-b combination vaccine"
+      ]
+    },
+    {
+      "code": "90647",
+      "description": "Haemophilus influenzae type b vaccine (Hib), PRP-OMP conjugate, 3 dose schedule",
+      "category": "Medication Administration & Infusion",
+      "keywords": [
+        "hib vaccine"
+      ]
+    },
+    {
+      "code": "90648",
+      "description": "Haemophilus influenzae type b vaccine (Hib), PRP-T conjugate, 4 dose schedule",
+      "category": "Medication Administration & Infusion",
+      "keywords": [
+        "hib vaccine 4 dose"
+      ]
+    },
+    {
+      "code": "90649",
+      "description": "Human Papillomavirus vaccine, types 6, 11, 16, 18 (quadrivalent), 3 dose schedule",
+      "category": "Medication Administration & Infusion",
+      "keywords": [
+        "hpv vaccine",
+        "gardasil"
+      ]
+    },
+    {
+      "code": "90650",
+      "description": "Human Papillomavirus vaccine, types 16, 18, bivalent, 3 dose schedule",
+      "category": "Medication Administration & Infusion",
+      "keywords": [
+        "hpv bivalent vaccine"
+      ]
+    },
+    {
+      "code": "90651",
+      "description": "Human Papillomavirus vaccine types 6, 11, 16, 18, 31, 33, 45, 52, 58, nonavalent (9vHPV), 2 or 3 dose schedule",
+      "category": "Medication Administration & Infusion",
+      "keywords": [
+        "hpv nonavalent vaccine"
+      ]
+    },
+    {
+      "code": "90653",
+      "description": "Influenza vaccine, inactivated (IIV), subunit, adjuvanted",
+      "category": "Medication Administration & Infusion",
+      "keywords": [
+        "flu vaccine adjuvanted"
+      ]
+    }
+  ]
+}

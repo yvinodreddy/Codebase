@@ -1,0 +1,204 @@
+@model RMMS.Models.Inventory.StockAdjustment
+@{
+    ViewData["Title"] = "Stock Adjustment Details";
+}
+
+<div class="container">
+    <h2>
+        <i class="fas fa-adjust"></i>
+        @ViewData["Title"]
+    </h2>
+    <hr />
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card mb-3">
+                <div class="card-header bg-primary text-white">
+                    <h5>Adjustment Information</h5>
+                </div>
+                <div class="card-body">
+                    <dl class="row">
+                        <dt class="col-sm-4">@Html.DisplayNameFor(model => model.AdjustmentCode)</dt>
+                        <dd class="col-sm-8"><strong>@Html.DisplayFor(model => model.AdjustmentCode)</strong></dd>
+
+                        <dt class="col-sm-4">@Html.DisplayNameFor(model => model.AdjustmentDate)</dt>
+                        <dd class="col-sm-8">@Model.AdjustmentDate.ToString("dd MMM yyyy hh:mm tt")</dd>
+
+                        <dt class="col-sm-4">@Html.DisplayNameFor(model => model.AdjustmentType)</dt>
+                        <dd class="col-sm-8">
+                            <span class="badge bg-info">
+                                <i class="fas @Model.AdjustmentIcon"></i> @Model.AdjustmentTypeDisplay
+                            </span>
+                        </dd>
+
+                        <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Reason)</dt>
+                        <dd class="col-sm-8"><span class="badge bg-secondary">@Model.Reason</span></dd>
+
+                        <dt class="col-sm-4">Status</dt>
+                        <dd class="col-sm-8">
+                            <span class="badge @Model.StatusBadgeClass">@Model.StatusDisplay</span>
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+
+            <div class="card mb-3">
+                <div class="card-header bg-info text-white">
+                    <h5>Product & Location</h5>
+                </div>
+                <div class="card-body">
+                    <dl class="row">
+                        <dt class="col-sm-4">Product</dt>
+                        <dd class="col-sm-8">
+                            @Model.Product?.ProductName<br>
+                            <small class="text-muted">@Model.Product?.ProductCode</small>
+                        </dd>
+
+                        <dt class="col-sm-4">Warehouse</dt>
+                        <dd class="col-sm-8">
+                            @Model.Warehouse?.WarehouseName<br>
+                            <small class="text-muted">@Model.Warehouse?.WarehouseCode</small>
+                        </dd>
+
+                        @if (Model.Zone != null)
+                        {
+                            <dt class="col-sm-4">Storage Zone</dt>
+                            <dd class="col-sm-8">@Model.Zone.ZoneName</dd>
+                        }
+                    </dl>
+                </div>
+            </div>
+
+            <div class="card mb-3">
+                <div class="card-header bg-warning">
+                    <h5>Quantity Adjustment</h5>
+                </div>
+                <div class="card-body">
+                    <dl class="row">
+                        <dt class="col-sm-4">Before Quantity</dt>
+                        <dd class="col-sm-8"><strong>@Model.BeforeQuantity.ToString("N2")</strong></dd>
+
+                        <dt class="col-sm-4">Adjustment</dt>
+                        <dd class="col-sm-8">
+                            <strong class="@(Model.AdjustmentType == "Increase" ? "text-success" : "text-danger")">
+                                @(Model.AdjustmentType == "Increase" ? "+" : "-")@Model.Quantity.ToString("N2")
+                            </strong>
+                        </dd>
+
+                        <dt class="col-sm-4">After Quantity</dt>
+                        <dd class="col-sm-8"><strong class="text-primary">@Model.AfterQuantity.ToString("N2")</strong></dd>
+
+                        <dt class="col-sm-4">Net Change</dt>
+                        <dd class="col-sm-8">
+                            <strong>@Model.AdjustmentAmount.ToString("N2")</strong>
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+
+            @if (Model.RequiresApproval)
+            {
+                <div class="card mb-3">
+                    <div class="card-header @(Model.IsApproved ? "bg-success" : Model.IsRejected ? "bg-danger" : "bg-warning") text-white">
+                        <h5>Approval Information</h5>
+                    </div>
+                    <div class="card-body">
+                        <dl class="row">
+                            <dt class="col-sm-4">Requires Approval</dt>
+                            <dd class="col-sm-8">
+                                @(Model.RequiresApproval ? "Yes" : "No")
+                            </dd>
+
+                            @if (Model.IsApproved)
+                            {
+                                <dt class="col-sm-4">Approved By</dt>
+                                <dd class="col-sm-8">@Model.ApprovedBy</dd>
+
+                                <dt class="col-sm-4">Approval Date</dt>
+                                <dd class="col-sm-8">@Model.ApprovalDate?.ToString("dd MMM yyyy hh:mm tt")</dd>
+
+                                @if (!string.IsNullOrEmpty(Model.ApprovalRemarks))
+                                {
+                                    <dt class="col-sm-4">Approval Remarks</dt>
+                                    <dd class="col-sm-8">@Model.ApprovalRemarks</dd>
+                                }
+                            }
+                            else if (Model.IsRejected)
+                            {
+                                <dt class="col-sm-4">Rejection Reason</dt>
+                                <dd class="col-sm-8 text-danger">@Model.RejectionReason</dd>
+                            }
+                            else
+                            {
+                                <dt class="col-sm-4">Status</dt>
+                                <dd class="col-sm-8"><span class="badge bg-warning">Pending Approval</span></dd>
+                            }
+                        </dl>
+                    </div>
+                </div>
+            }
+
+            @if (!string.IsNullOrEmpty(Model.Remarks))
+            {
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h5>Remarks</h5>
+                    </div>
+                    <div class="card-body">
+                        <p>@Model.Remarks</p>
+                    </div>
+                </div>
+            }
+
+            <div class="card">
+                <div class="card-header">
+                    <h5>Audit Information</h5>
+                </div>
+                <div class="card-body">
+                    <dl class="row">
+                        <dt class="col-sm-4">Created By</dt>
+                        <dd class="col-sm-8">@Model.CreatedBy</dd>
+
+                        <dt class="col-sm-4">Created Date</dt>
+                        <dd class="col-sm-8">@Model.CreatedDate.ToString("dd MMM yyyy hh:mm tt")</dd>
+
+                        @if (Model.ModifiedDate.HasValue)
+                        {
+                            <dt class="col-sm-4">Last Modified By</dt>
+                            <dd class="col-sm-8">@Model.ModifiedBy</dd>
+
+                            <dt class="col-sm-4">Last Modified Date</dt>
+                            <dd class="col-sm-8">@Model.ModifiedDate?.ToString("dd MMM yyyy hh:mm tt")</dd>
+                        }
+                    </dl>
+                </div>
+            </div>
+
+            <div class="mt-3 d-flex justify-content-between">
+                <a asp-action="Index" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Back to List
+                </a>
+                <div>
+                    @if (Model.RequiresApproval && !Model.IsApproved && !Model.IsRejected)
+                    {
+                        <a asp-action="Approve" asp-route-id="@Model.Id" class="btn btn-success">
+                            <i class="fas fa-check"></i> Approve
+                        </a>
+                        <a asp-action="Reject" asp-route-id="@Model.Id" class="btn btn-danger">
+                            <i class="fas fa-times"></i> Reject
+                        </a>
+                    }
+                    @if (!Model.IsApproved)
+                    {
+                        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">
+                            <i class="fas fa-edit"></i> Edit
+                        </a>
+                        <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">
+                            <i class="fas fa-trash"></i> Delete
+                        </a>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

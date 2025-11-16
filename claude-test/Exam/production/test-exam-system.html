@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam System Test</title>
+
+    <!-- CryptoJS for Encryption -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+
+        .test-section {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .test-section h2 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        .test-result {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+
+        .test-result.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .test-result.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .test-result.warning {
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeeba;
+        }
+
+        .question-preview {
+            background: #f8f9fa;
+            padding: 15px;
+            margin: 10px 0;
+            border-left: 4px solid #3498db;
+        }
+
+        .code-block {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 14px;
+        }
+
+        button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        button:hover {
+            background: #2980b9;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 32px;
+            font-weight: bold;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <h1>🎯 Exam System Comprehensive Test Suite</h1>
+
+    <div class="test-section">
+        <h2>📊 System Status</h2>
+        <div id="systemStatus"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>🔐 Security Tests</h2>
+        <div id="securityTests"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>🎲 Randomization Tests</h2>
+        <div id="randomizationTests"></div>
+        <button onclick="runRandomizationTest()">Run Randomization Test (5 iterations)</button>
+    </div>
+
+    <div class="test-section">
+        <h2>📝 Question Preview</h2>
+        <div id="questionPreview"></div>
+        <button onclick="showNextQuestion()">Show Next Question</button>
+        <button onclick="showPreviousQuestion()">Show Previous Question</button>
+    </div>
+
+    <div class="test-section">
+        <h2>📈 Exam Statistics</h2>
+        <div id="examStats"></div>
+    </div>
+
+    <!-- Load Question Database -->
+    <script src="questions-database.js"></script>
+    <script src="questions-subjective.js"></script>
+    <script src="exam-integration.js"></script>
+
+    <script>
+        let testExamManager = null;
+
+        // ==================== INITIALIZATION ====================
+        function initializeTests() {
+            console.log('🚀 Starting Test Suite...');
+
+            const statusDiv = document.getElementById('systemStatus');
+
+            try {
+                // Check if CryptoJS is loaded
+                if (typeof CryptoJS === 'undefined') {
+                    throw new Error('CryptoJS not loaded');
+                }
+
+                // Check if question database is loaded
+                if (typeof QUESTION_DATABASE === 'undefined') {
+                    throw new Error('Question database not loaded');
+                }
+
+                // Check if subjective questions are loaded
+                if (typeof PYTHON_SUBJECTIVE === 'undefined' || typeof SQL_SUBJECTIVE === 'undefined') {
+                    throw new Error('Subjective questions not loaded');
+                }
+
+                // Merge subjective questions into main database
+                QUESTION_DATABASE.pythonSubjective = PYTHON_SUBJECTIVE;
+                QUESTION_DATABASE.sqlSubjective = SQL_SUBJECTIVE;
+
+                statusDiv.innerHTML = `
+                    <div class="test-result success">
+                        ✅ All dependencies loaded successfully
+                    </div>
+                    <div class="test-result success">
+                        ✅ CryptoJS: ${typeof CryptoJS !== 'undefined' ? 'Loaded' : 'Missing'}
+                    </div>
+                    <div class="test-result success">
+                        ✅ Python MCQ: ${QUESTION_DATABASE.pythonMCQ.length} questions
+                    </div>
+                    <div class="test-result success">
+                        ✅ SQL MCQ: ${QUESTION_DATABASE.sqlMCQ.length} questions
+                    </div>
+                    <div class="test-result success">
+                        ✅ Python Subjective: ${QUESTION_DATABASE.pythonSubjective.length} questions
+                    </div>
+                    <div class="test-result success">
+                        ✅ SQL Subjective: ${QUESTION_DATABASE.sqlSubjective.length} questions
+                    </div>
+                `;
+
+                // Initialize exam manager
+                testExamManager = initializeExamSystem();
+
+                // Run security tests
+                runSecurityTests();
+
+                // Show stats
+                showExamStats();
+
+            } catch (error) {
+                statusDiv.innerHTML = `
+                    <div class="test-result error">
+                        ❌ Error: ${error.message}
+                    </div>
+                `;
+                console.error(error);
+            }
+        }
+
+        // ==================== SECURITY TESTS ====================
+        function runSecurityTests() {
+            const securityDiv = document.getElementById('securityTests');
+            const results = [];
+
+            // Test 1: Verify encryption
+            const encryptionTest = testExamManager.verifyEncryption();
+            results.push({
+                name: 'Encryption Verification',
+                passed: encryptionTest,
+                message: encryptionTest ?
+                    'All questions properly encrypted' :
+                    'Some questions may not be encrypted'
+            });
+
+            // Test 2: Verify no duplicates
+            const duplicateTest = testExamManager.verifyNoDuplicates();
+            results.push({
+                name: 'No Duplicate Questions',
+                passed: duplicateTest,
+                message: duplicateTest ?
+                    'No duplicate questions found' :
+                    'Duplicate questions detected!'
+            });
+
+            // Test 3: Verify question count
+            const stats = testExamManager.getStats();
+            const countTest = stats.total === 15 &&
+                              stats.objective === 10 &&
+                              stats.subjective === 5;
+            results.push({
+                name: 'Question Count Verification',
+                passed: countTest,
+                message: `Total: ${stats.total}, Objective: ${stats.objective}, Subjective: ${stats.subjective}`
+            });
+
+            // Test 4: Progressive decryption
+            const decryptTest = testExamManager.getCurrentQuestion() !== null;
+            results.push({
+                name: 'Progressive Decryption',
+                passed: decryptTest,
+                message: decryptTest ?
+                    'Successfully decrypted first question' :
+                    'Failed to decrypt question'
+            });
+
+            // Render results
+            securityDiv.innerHTML = results.map(result => `
+                <div class="test-result ${result.passed ? 'success' : 'error'}">
+                    ${result.passed ? '✅' : '❌'} <strong>${result.name}:</strong> ${result.message}
+                </div>
+            `).join('');
+        }
+
+        // ==================== RANDOMIZATION TESTS ====================
+        function runRandomizationTest() {
+            const testsDiv = document.getElementById('randomizationTests');
+            const iterations = 5;
+            const results = [];
+
+            testsDiv.innerHTML = '<div class="test-result warning">Running randomization test...</div>';
+
+            for (let i = 0; i < iterations; i++) {
+                const manager = new ExamQuestionManager();
+                manager.initializeExam();
+
+                const questionIds = manager.selectedQuestions.map(q => q.id);
+                results.push(questionIds);
+            }
+
+            // Check if at least some variation exists
+            const uniqueSets = new Set(results.map(r => JSON.stringify(r)));
+            const hasVariation = uniqueSets.size > 1;
+
+            let html = `
+                <div class="test-result ${hasVariation ? 'success' : 'warning'}">
+                    ${hasVariation ? '✅' : '⚠️'} <strong>Randomization Test:</strong>
+                    Generated ${uniqueSets.size} unique question sets out of ${iterations} iterations
+                </div>
+            `;
+
+            // Show each iteration
+            results.forEach((questionIds, index) => {
+                html += `
+                    <div class="question-preview">
+                        <strong>Iteration ${index + 1}:</strong><br>
+                        <small>${questionIds.join(', ')}</small>
+                    </div>
+                `;
+            });
+
+            testsDiv.innerHTML = html;
+        }
+
+        // ==================== QUESTION NAVIGATION ====================
+        function showNextQuestion() {
+            const question = testExamManager.nextQuestion();
+            displayQuestion(question);
+        }
+
+        function showPreviousQuestion() {
+            const question = testExamManager.previousQuestion();
+            displayQuestion(question);
+        }
+
+        function displayQuestion(question) {
+            const previewDiv = document.getElementById('questionPreview');
+
+            if (!question) {
+                previewDiv.innerHTML = '<div class="test-result warning">No more questions</div>';
+                return;
+            }
+
+            const stats = testExamManager.getStats();
+
+            let html = `
+                <div class="question-preview">
+                    <h3>Question ${stats.current} of ${stats.total}</h3>
+                    <p><strong>Type:</strong> ${question.type} | <strong>Category:</strong> ${question.category} | <strong>Points:</strong> ${question.points}</p>
+                    <p><strong>Question:</strong></p>
+                    <div>${question.question.replace(/\n/g, '<br>')}</div>
+            `;
+
+            if (question.type === 'mcq' && question.options) {
+                html += '<p><strong>Options:</strong></p><ul>';
+                question.options.forEach((opt, idx) => {
+                    html += `<li>${String.fromCharCode(65 + idx)}) ${opt}</li>`;
+                });
+                html += '</ul>';
+
+                if (question.correctAnswer !== undefined) {
+                    html += `<p><strong>Correct Answer:</strong> ${String.fromCharCode(65 + question.correctAnswer)}</p>`;
+                }
+            }
+
+            if (question.starterCode) {
+                html += `
+                    <p><strong>Starter Code:</strong></p>
+                    <div class="code-block">${escapeHtml(question.starterCode)}</div>
+                `;
+            }
+
+            if (question.explanation) {
+                html += `<p><strong>Explanation:</strong> ${question.explanation}</p>`;
+            }
+
+            html += '</div>';
+
+            previewDiv.innerHTML = html;
+        }
+
+        // ==================== STATISTICS DISPLAY ====================
+        function showExamStats() {
+            const statsDiv = document.getElementById('examStats');
+            const stats = testExamManager.getStats();
+
+            statsDiv.innerHTML = `
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value">${stats.total}</div>
+                        <div class="stat-label">Total Questions</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">${stats.objective}</div>
+                        <div class="stat-label">Objective (MCQ)</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">${stats.subjective}</div>
+                        <div class="stat-label">Subjective (Coding)</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">${stats.pythonQuestions}</div>
+                        <div class="stat-label">Python Questions</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">${stats.sqlQuestions}</div>
+                        <div class="stat-label">SQL Questions</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">${stats.current}</div>
+                        <div class="stat-label">Current Question</div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // ==================== UTILITY FUNCTIONS ====================
+        function escapeHtml(text) {
+            const map = {
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#039;'
+            };
+            return text.replace(/[&<>"']/g, m => map[m]);
+        }
+
+        // ==================== AUTO-INITIALIZE ====================
+        window.addEventListener('DOMContentLoaded', () => {
+            console.log('DOM Loaded, initializing tests...');
+            setTimeout(initializeTests, 100);
+        });
+    </script>
+</body>
+</html>

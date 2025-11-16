@@ -1,0 +1,33 @@
+{
+  "phase_id": 4,
+  "name": "Frontend Application",
+  "epic": "Epic 5",
+  "story_points": 47,
+  "priority": "P1",
+  "dependencies": [
+    1,
+    2,
+    3
+  ],
+  "version": "v1.0",
+  "user_stories": [
+    {
+      "story_id": "5.1",
+      "title": "RAG Heat UI",
+      "story_points": 21,
+      "priority": "P1"
+    },
+    {
+      "story_id": "5.2",
+      "title": "SWARMCARE Dashboard",
+      "story_points": 13,
+      "priority": "P1"
+    },
+    {
+      "story_id": "5.3",
+      "title": "Podcast Generation UI",
+      "story_points": 13,
+      "priority": "P1"
+    }
+  ]
+}

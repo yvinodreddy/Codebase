@@ -1,0 +1,267 @@
+{
+  "template_version": "1.0",
+  "last_updated": "2025-10-31",
+  "templates": {
+    "rule_based": {
+      "template_name": "Rule-Based Clinical Explanation",
+      "description": "IF-THEN rules that clinicians can easily understand and validate",
+      "format": "IF {conditions} THEN {prediction} BECAUSE {clinical_reasoning}",
+      "examples": [
+        {
+          "rule_id": "RB001",
+          "condition": "IF respiratory_rate > 24 AND oxygen_saturation < 92 AND age > 65",
+          "prediction": "THEN risk_level = HIGH",
+          "confidence": 0.88,
+          "clinical_reasoning": "Tachypnea with hypoxemia in elderly patients indicates respiratory compromise requiring urgent intervention",
+          "evidence_base": "Aligned with Modified Early Warning Score (MEWS) criteria",
+          "actionable_steps": [
+            "Initiate supplemental oxygen",
+            "Obtain arterial blood gas",
+            "Consider chest imaging",
+            "Notify physician immediately"
+          ]
+        },
+        {
+          "rule_id": "RB002",
+          "condition": "IF systolic_bp > 160 AND heart_rate > 100 AND comorbidity_count >= 3",
+          "prediction": "THEN intervention_urgency = IMMEDIATE",
+          "confidence": 0.91,
+          "clinical_reasoning": "Hemodynamic instability in complex patient suggests multi-system stress and risk of decompensation",
+          "evidence_base": "Consistent with American Heart Association hypertensive emergency criteria",
+          "actionable_steps": [
+            "Activate rapid response team",
+            "Continuous cardiac monitoring",
+            "Stat basic metabolic panel",
+            "Antihypertensive therapy consideration"
+          ]
+        },
+        {
+          "rule_id": "RB003",
+          "condition": "IF temperature > 38.3 AND white_blood_count > 12000 AND indwelling_catheter = TRUE",
+          "prediction": "THEN infection_risk = CATHETER_ASSOCIATED",
+          "confidence": 0.84,
+          "clinical_reasoning": "Fever with leukocytosis in presence of indwelling device suggests device-related infection",
+          "evidence_base": "CDC healthcare-associated infection criteria",
+          "actionable_steps": [
+            "Blood cultures before antibiotics",
+            "Urinalysis and urine culture",
+            "Consider catheter removal",
+            "Initiate empiric antibiotic therapy"
+          ]
+        }
+      ],
+      "customization_options": {
+        "threshold_adjustment": "Clinical thresholds can be adjusted based on patient population",
+        "rule_combination": "Multiple rules can be combined with AND/OR logic",
+        "priority_weighting": "Rules can be weighted by clinical significance"
+      }
+    },
+    "counterfactual": {
+      "template_name": "Counterfactual Explanation",
+      "description": "Shows what would need to change to alter the prediction",
+      "format": "To change the prediction from {current} to {desired}, the following changes would be needed: {minimal_changes}",
+      "examples": [
+        {
+          "counterfactual_id": "CF001",
+          "current_prediction": "High Risk - Immediate Intervention Required",
+          "current_features": {
+            "oxygen_saturation": 89,
+            "respiratory_rate": 28,
+            "heart_rate": 115,
+            "systolic_bp": 165
+          },
+          "desired_prediction": "Medium Risk - Increased Monitoring",
+          "required_changes": {
+            "oxygen_saturation": "increase to >= 92% (minimal change: +3%)",
+            "respiratory_rate": "decrease to <= 22 bpm (minimal change: -6 bpm)"
+          },
+          "clinical_interpretation": "Patient could be downgraded to medium risk by improving oxygenation and reducing respiratory distress. Focus interventions on these two modifiable parameters.",
+          "actionable_interventions": [
+            "Oxygen supplementation to achieve SpO2 >= 92%",
+            "Bronchodilator therapy to reduce work of breathing",
+            "Positioning to optimize respiratory mechanics"
+          ],
+          "feasibility": "High - Changes are clinically achievable with standard interventions"
+        },
+        {
+          "counterfactual_id": "CF002",
+          "current_prediction": "Low Risk - Standard Monitoring",
+          "current_features": {
+            "age": 45,
+            "comorbidity_count": 0,
+            "oxygen_saturation": 97,
+            "heart_rate": 72
+          },
+          "desired_prediction": "Eligible for Discharge",
+          "required_changes": {
+            "vital_stability_hours": "maintain current vitals for additional 6 hours",
+            "ambulation_tolerance": "demonstrate independent ambulation without desaturation"
+          },
+          "clinical_interpretation": "Patient is nearly ready for discharge. Short additional observation period and functional assessment needed.",
+          "actionable_interventions": [
+            "Continue monitoring for 6 more hours",
+            "Physical therapy ambulation assessment",
+            "Ensure discharge planning completed"
+          ],
+          "feasibility": "Very High - Minimal additional requirements"
+        },
+        {
+          "counterfactual_id": "CF003",
+          "current_prediction": "Critical - ICU Transfer Required",
+          "current_features": {
+            "oxygen_saturation": 85,
+            "respiratory_rate": 32,
+            "mental_status": "altered",
+            "lactate": 4.2
+          },
+          "desired_prediction": "Stable - Continue Current Floor Care",
+          "required_changes": {
+            "oxygen_saturation": "increase to >= 95% (change: +10%)",
+            "respiratory_rate": "decrease to <= 20 bpm (change: -12 bpm)",
+            "mental_status": "return to baseline alert and oriented",
+            "lactate": "decrease to < 2.0 mmol/L (change: -2.2)"
+          },
+          "clinical_interpretation": "Multiple critical parameters require improvement. Current trajectory suggests ICU care is appropriate. Counterfactual demonstrates the significant intervention needed to avoid ICU transfer.",
+          "actionable_interventions": "At this level of acuity, ICU transfer is recommended rather than attempting aggressive floor-level interventions",
+          "feasibility": "Low - Multiple critical parameters require ICU-level support"
+        }
+      ],
+      "usage_guidelines": [
+        "Use counterfactuals to identify most impactful intervention targets",
+        "Assess feasibility before pursuing counterfactual changes",
+        "Combine with clinical judgment - some counterfactuals may not be clinically appropriate",
+        "Useful for patient/family education about condition trajectory"
+      ]
+    },
+    "contrastive": {
+      "template_name": "Contrastive Explanation",
+      "description": "Explains why this prediction was made rather than an alternative",
+      "format": "The model predicted {prediction_A} rather than {prediction_B} because {key_differences}",
+      "examples": [
+        {
+          "contrastive_id": "CT001",
+          "prediction_made": "High Risk",
+          "alternative_prediction": "Medium Risk",
+          "key_differentiating_factors": [
+            {
+              "factor": "oxygen_saturation",
+              "current_patient": 90,
+              "typical_medium_risk": 94,
+              "difference_impact": 0.18,
+              "explanation": "Oxygen saturation of 90% is significantly below the typical medium-risk range, indicating more severe respiratory compromise"
+            },
+            {
+              "factor": "comorbidity_count",
+              "current_patient": 4,
+              "typical_medium_risk": 1,
+              "difference_impact": 0.15,
+              "explanation": "Four comorbidities create complex interactions and compound risk, whereas medium-risk patients typically have 0-1 comorbidities"
+            },
+            {
+              "factor": "age",
+              "current_patient": 78,
+              "typical_medium_risk": 62,
+              "difference_impact": 0.12,
+              "explanation": "Advanced age significantly reduces physiological reserve compared to typical medium-risk patients"
+            }
+          ],
+          "clinical_narrative": "This patient was classified as high risk rather than medium risk primarily due to the combination of severe hypoxemia (SpO2 90%), complex comorbidity burden (4 conditions), and advanced age (78). Any single factor might result in medium risk, but the combination elevates concern to high risk level.",
+          "similar_patients_comparison": "Compared to similar patients who were medium risk, this patient has notably worse oxygenation and more complex medical history."
+        },
+        {
+          "contrastive_id": "CT002",
+          "prediction_made": "Immediate Intervention Required",
+          "alternative_prediction": "Increased Monitoring Sufficient",
+          "key_differentiating_factors": [
+            {
+              "factor": "vital_sign_trajectory",
+              "current_patient": "rapidly deteriorating over 2 hours",
+              "typical_monitoring_case": "stable or gradually changing",
+              "difference_impact": 0.24,
+              "explanation": "Rate of change is critical - rapid deterioration suggests active decompensation requiring immediate action"
+            },
+            {
+              "factor": "response_to_initial_interventions",
+              "current_patient": "no improvement with oxygen supplementation",
+              "typical_monitoring_case": "positive response to initial interventions",
+              "difference_impact": 0.19,
+              "explanation": "Lack of response to standard interventions indicates need for escalation"
+            },
+            {
+              "factor": "lactate_trend",
+              "current_patient": "rising from 1.8 to 3.4 mmol/L",
+              "typical_monitoring_case": "stable < 2.0 mmol/L",
+              "difference_impact": 0.16,
+              "explanation": "Rising lactate suggests tissue hypoperfusion and metabolic stress"
+            }
+          ],
+          "clinical_narrative": "Immediate intervention is recommended rather than observation because this patient shows rapid deterioration despite initial treatment, rising lactate indicating metabolic stress, and failure to respond to standard interventions. Patients safe for monitoring typically show stability or improvement with initial measures.",
+          "similar_patients_comparison": "Compared to patients managed successfully with monitoring alone, this patient demonstrates treatment non-response and objective markers of worsening tissue perfusion."
+        },
+        {
+          "contrastive_id": "CT003",
+          "prediction_made": "Low Risk - Consider Discharge",
+          "alternative_prediction": "Continued Hospitalization Needed",
+          "key_differentiating_factors": [
+            {
+              "factor": "vital_sign_stability",
+              "current_patient": "stable for 48 hours",
+              "typical_continued_stay": "instability within past 24 hours",
+              "difference_impact": 0.21,
+              "explanation": "Sustained stability over 48 hours suggests resolution of acute process"
+            },
+            {
+              "factor": "functional_status",
+              "current_patient": "returned to baseline",
+              "typical_continued_stay": "below baseline function",
+              "difference_impact": 0.17,
+              "explanation": "Return to baseline functional status indicates readiness for home environment"
+            },
+            {
+              "factor": "treatment_completion",
+              "current_patient": "can continue treatment at home",
+              "typical_continued_stay": "requires IV therapy or monitoring",
+              "difference_impact": 0.14,
+              "explanation": "Ability to continue treatment in outpatient setting removes barrier to discharge"
+            }
+          ],
+          "clinical_narrative": "This patient is ready for discharge rather than continued hospitalization because vital signs have been stable for 48 hours, functional status has returned to baseline, and remaining treatment can be safely managed outpatient. Patients requiring continued stay typically have ongoing instability or treatment needs requiring hospital resources.",
+          "similar_patients_comparison": "Compared to patients requiring extended hospitalization, this patient has achieved treatment goals and demonstrates stability suitable for home care."
+        }
+      ],
+      "usage_guidelines": [
+        "Use contrastive explanations to clarify decision boundaries",
+        "Particularly useful when prediction differs from clinician's initial assessment",
+        "Helps calibrate understanding of risk categories",
+        "Valuable for teaching and quality improvement discussions"
+      ]
+    }
+  },
+  "template_selection_guidance": {
+    "use_rule_based_when": [
+      "Clinicians need quick, actionable guidance",
+      "Decision must be explainable to patients/families",
+      "Regulatory or documentation requirements exist",
+      "Training new staff on decision protocols"
+    ],
+    "use_counterfactual_when": [
+      "Identifying intervention targets",
+      "Treatment planning and goal setting",
+      "Patient/family education about condition trajectory",
+      "Evaluating feasibility of care level changes"
+    ],
+    "use_contrastive_when": [
+      "Prediction differs from clinical expectation",
+      "Teaching or calibrating clinical judgment",
+      "Quality assurance and case review",
+      "Understanding decision boundaries"
+    ]
+  },
+  "integration_recommendations": {
+    "primary_display": "Rule-based explanations for immediate clinical use",
+    "secondary_access": "Counterfactual and contrastive available on request",
+    "documentation": "Rule-based explanations automatically populate clinical notes",
+    "alerts": "High-confidence rule-based triggers automated notifications",
+    "audit_trail": "All three explanation types logged for quality review"
+  }
+}

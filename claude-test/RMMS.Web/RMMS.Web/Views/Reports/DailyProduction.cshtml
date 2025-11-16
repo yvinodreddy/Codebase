@@ -1,0 +1,304 @@
+@{
+    ViewData["Title"] = "Daily Production Report";
+}
+
+<div class="container-fluid">
+    <div class="row mb-3">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h4 class="mb-0">
+                            <i class="fas fa-calendar-day"></i> Daily Production Report
+                        </h4>
+                        <form method="get" class="form-inline">
+                            <div class="input-group input-group-sm">
+                                <span class="input-group-text">Date</span>
+                                <input type="date" name="date" class="form-control" value="@Context.Request.Query["date"]" />
+                                <button type="submit" class="btn btn-light">
+                                    <i class="fas fa-filter"></i> Filter
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- Date Display -->
+                    <div class="alert alert-info">
+                        <i class="fas fa-calendar-alt"></i>
+                        Report Date: <strong>@ViewBag.ReportDate (@ViewBag.DayName)</strong>
+                    </div>
+
+                    <!-- Summary Cards -->
+                    <div class="row mb-4">
+                        <div class="col-md-3">
+                            <div class="card border-primary">
+                                <div class="card-body text-center">
+                                    <h6 class="text-muted">Total Batches</h6>
+                                    <h2 class="text-primary">@ViewBag.TotalBatches</h2>
+                                    <small class="text-muted">All Batches Today</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card border-success">
+                                <div class="card-body text-center">
+                                    <h6 class="text-muted">Completed</h6>
+                                    <h2 class="text-success">@ViewBag.CompletedBatches</h2>
+                                    <small class="text-muted">Finished Batches</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card border-warning">
+                                <div class="card-body text-center">
+                                    <h6 class="text-muted">In Progress</h6>
+                                    <h2 class="text-warning">@ViewBag.InProgressBatches</h2>
+                                    <small class="text-muted">Active Batches</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card border-info">
+                                <div class="card-body text-center">
+                                    <h6 class="text-muted">Avg Quality</h6>
+                                    <h2 class="text-info">@ViewBag.AvgQuality.ToString("N1")</h2>
+                                    <small class="text-muted">Out of 10</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Production Quantity Cards -->
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <div class="card border-secondary">
+                                <div class="card-body text-center">
+                                    <h6 class="text-muted">Total Input</h6>
+                                    <h2 class="text-secondary">@ViewBag.TotalInput.ToString("N2")</h2>
+                                    <small class="text-muted">Quintals of Paddy</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card border-success">
+                                <div class="card-body text-center">
+                                    <h6 class="text-muted">Total Output</h6>
+                                    <h2 class="text-success">@ViewBag.TotalOutput.ToString("N2")</h2>
+                                    <small class="text-muted">Quintals of Rice</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Batches Table -->
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header bg-secondary text-white">
+                                    <h5 class="mb-0">
+                                        <i class="fas fa-list"></i> Batches Processed Today
+                                    </h5>
+                                </div>
+                                <div class="card-body">
+                                    @if (ViewBag.Batches.Count > 0)
+                                    {
+                                        <table class="table table-striped table-hover" id="batchesTable">
+                                            <thead>
+                                                <tr>
+                                                    <th>Batch #</th>
+                                                    <th>Shift</th>
+                                                    <th>Start Time</th>
+                                                    <th>End Time</th>
+                                                    <th class="text-right">Duration</th>
+                                                    <th class="text-right">Quality</th>
+                                                    <th>Status</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var batch in ViewBag.Batches)
+                                                {
+                                                    <tr>
+                                                        <td><strong>@batch.BatchNumber</strong></td>
+                                                        <td>
+                                                            @if (batch.ShiftType == "Morning")
+                                                            {
+                                                                <span class="badge bg-warning"><i class="fas fa-sun"></i> Morning</span>
+                                                            }
+                                                            else if (batch.ShiftType == "Evening")
+                                                            {
+                                                                <span class="badge bg-info"><i class="fas fa-cloud-sun"></i> Evening</span>
+                                                            }
+                                                            else
+                                                            {
+                                                                <span class="badge bg-primary"><i class="fas fa-moon"></i> Night</span>
+                                                            }
+                                                        </td>
+                                                        <td>@(batch.StartTime?.ToString("hh:mm tt") ?? "N/A")</td>
+                                                        <td>@(batch.EndTime?.ToString("hh:mm tt") ?? "In Progress")</td>
+                                                        <td class="text-right">@(batch.DurationHours?.ToString("N1") ?? "N/A") hrs</td>
+                                                        <td class="text-right">
+                                                            @if (batch.QualityScore >= 8)
+                                                            {
+                                                                <span class="badge bg-success">@batch.QualityScore.Value.ToString("N1")</span>
+                                                            }
+                                                            else if (batch.QualityScore >= 6)
+                                                            {
+                                                                <span class="badge bg-warning">@batch.QualityScore.Value.ToString("N1")</span>
+                                                            }
+                                                            else if (batch.QualityScore.HasValue)
+                                                            {
+                                                                <span class="badge bg-danger">@batch.QualityScore.Value.ToString("N1")</span>
+                                                            }
+                                                            else
+                                                            {
+                                                                <span class="text-muted">N/A</span>
+                                                            }
+                                                        </td>
+                                                        <td>
+                                                            @if (batch.Status == "Completed")
+                                                            {
+                                                                <span class="badge bg-success">@batch.Status</span>
+                                                            }
+                                                            else if (batch.Status == "In Progress")
+                                                            {
+                                                                <span class="badge bg-warning">@batch.Status</span>
+                                                            }
+                                                            else
+                                                            {
+                                                                <span class="badge bg-secondary">@batch.Status</span>
+                                                            }
+                                                        </td>
+                                                        <td>
+                                                            <a href="/ProductionBatches/Details/@batch.Id" class="btn btn-sm btn-info" title="View Details">
+                                                                <i class="fas fa-eye"></i>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    }
+                                    else
+                                    {
+                                        <div class="alert alert-warning">
+                                            <i class="fas fa-exclamation-triangle"></i> No batches found for this date.
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Production Orders Table -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header bg-secondary text-white">
+                                    <h5 class="mb-0">
+                                        <i class="fas fa-clipboard-list"></i> Associated Production Orders
+                                    </h5>
+                                </div>
+                                <div class="card-body">
+                                    @if (ViewBag.Orders.Count > 0)
+                                    {
+                                        <table class="table table-striped table-hover" id="ordersTable">
+                                            <thead>
+                                                <tr>
+                                                    <th>Order #</th>
+                                                    <th>Scheduled Date</th>
+                                                    <th class="text-right">Target Qty</th>
+                                                    <th class="text-right">Actual Qty</th>
+                                                    <th>Status</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var order in ViewBag.Orders)
+                                                {
+                                                    <tr>
+                                                        <td><strong>@order.OrderNumber</strong></td>
+                                                        <td>@order.ScheduledDate.ToString("dd-MMM-yyyy")</td>
+                                                        <td class="text-right">@(order.TargetQuantity?.ToString("N2") ?? "N/A")</td>
+                                                        <td class="text-right">@(order.ActualQuantityProduced?.ToString("N2") ?? "N/A")</td>
+                                                        <td>
+                                                            @if (order.Status == "Completed")
+                                                            {
+                                                                <span class="badge bg-success">@order.Status</span>
+                                                            }
+                                                            else if (order.Status == "In Progress")
+                                                            {
+                                                                <span class="badge bg-warning">@order.Status</span>
+                                                            }
+                                                            else
+                                                            {
+                                                                <span class="badge bg-secondary">@order.Status</span>
+                                                            }
+                                                        </td>
+                                                        <td>
+                                                            <a href="/ProductionOrders/Details/@order.Id" class="btn btn-sm btn-info" title="View Details">
+                                                                <i class="fas fa-eye"></i>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    }
+                                    else
+                                    {
+                                        <div class="alert alert-info">
+                                            <i class="fas fa-info-circle"></i> No production orders found for this date.
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="row mt-3">
+                        <div class="col-12">
+                            <a href="/Reports" class="btn btn-secondary">
+                                <i class="fas fa-arrow-left"></i> Back to Reports
+                            </a>
+                            <button class="btn btn-success" onclick="window.print()">
+                                <i class="fas fa-print"></i> Print Report
+                            </button>
+                            <button class="btn btn-primary" onclick="exportToExcel()">
+                                <i class="fas fa-file-excel"></i> Export to Excel
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    // Initialize DataTables
+    $(document).ready(function() {
+        $('#batchesTable').DataTable({
+            order: [[2, 'asc']],
+            pageLength: 10,
+            responsive: true
+        });
+
+        $('#ordersTable').DataTable({
+            order: [[1, 'desc']],
+            pageLength: 5,
+            responsive: true
+        });
+    });
+
+    // Export to Excel function
+    function exportToExcel() {
+        alert('Excel export functionality will be implemented.');
+        // TODO: Implement Excel export
+    }
+</script>
+}

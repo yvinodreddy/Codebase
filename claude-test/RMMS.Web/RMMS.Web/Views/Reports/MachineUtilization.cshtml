@@ -1,0 +1,353 @@
+@{
+    ViewData["Title"] = "Machine Utilization Report";
+}
+
+<div class="container-fluid">
+    <div class="row mb-3">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h4 class="mb-0">
+                            <i class="fas fa-cogs"></i> Machine Utilization Report
+                        </h4>
+                        <form method="get" class="form-inline">
+                            <div class="input-group input-group-sm">
+                                <span class="input-group-text">From</span>
+                                <input type="date" name="startDate" class="form-control" value="@Context.Request.Query["startDate"]" />
+                                <span class="input-group-text">To</span>
+                                <input type="date" name="endDate" class="form-control" value="@Context.Request.Query["endDate"]" />
+                                <button type="submit" class="btn btn-light">
+                                    <i class="fas fa-filter"></i> Filter
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- Date Range Display -->
+                    <div class="alert alert-info">
+                        <i class="fas fa-calendar-alt"></i>
+                        Report Period: <strong>@ViewBag.StartDate</strong> to <strong>@ViewBag.EndDate</strong>
+                    </div>
+
+                    <!-- Summary Cards -->
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <div class="card border-primary">
+                                <div class="card-body text-center">
+                                    <h6 class="text-muted">Total Machines</h6>
+                                    <h2 class="text-primary">@ViewBag.TotalMachines</h2>
+                                    <small class="text-muted">Registered Machines</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card border-success">
+                                <div class="card-body text-center">
+                                    <h6 class="text-muted">Active Machines</h6>
+                                    <h2 class="text-success">@ViewBag.ActiveMachines</h2>
+                                    <small class="text-muted">Used in This Period</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Utilization Chart -->
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header bg-secondary text-white">
+                                    <h5 class="mb-0">
+                                        <i class="fas fa-chart-bar"></i> Machine Utilization Overview
+                                    </h5>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="utilizationChart" height="80"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Machine Statistics Table -->
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header bg-secondary text-white">
+                                    <h5 class="mb-0">
+                                        <i class="fas fa-table"></i> Machine Performance Statistics
+                                    </h5>
+                                </div>
+                                <div class="card-body">
+                                    @if (ViewBag.MachineStats.Count > 0)
+                                    {
+                                        <table class="table table-striped table-hover" id="machineStatsTable">
+                                            <thead>
+                                                <tr>
+                                                    <th>Machine</th>
+                                                    <th>Code</th>
+                                                    <th class="text-right">Batches</th>
+                                                    <th class="text-right">Total Hours</th>
+                                                    <th class="text-right">Input (Q)</th>
+                                                    <th class="text-right">Output (Q)</th>
+                                                    <th class="text-right">Avg Quality</th>
+                                                    <th class="text-right">Utilization %</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var stat in ViewBag.MachineStats)
+                                                {
+                                                    <tr>
+                                                        <td><strong>@stat.Machine.MachineName</strong></td>
+                                                        <td>@stat.Machine.MachineCode</td>
+                                                        <td class="text-right">
+                                                            @if (stat.BatchCount > 0)
+                                                            {
+                                                                <span class="badge bg-success">@stat.BatchCount</span>
+                                                            }
+                                                            else
+                                                            {
+                                                                <span class="badge bg-secondary">0</span>
+                                                            }
+                                                        </td>
+                                                        <td class="text-right">@stat.TotalHours.ToString("N1")</td>
+                                                        <td class="text-right">@stat.TotalInput.ToString("N2")</td>
+                                                        <td class="text-right">@stat.TotalOutput.ToString("N2")</td>
+                                                        <td class="text-right">
+                                                            @if (stat.AvgQuality >= 8)
+                                                            {
+                                                                <span class="badge bg-success">@stat.AvgQuality.ToString("N1")</span>
+                                                            }
+                                                            else if (stat.AvgQuality >= 6)
+                                                            {
+                                                                <span class="badge bg-warning">@stat.AvgQuality.ToString("N1")</span>
+                                                            }
+                                                            else if (stat.AvgQuality > 0)
+                                                            {
+                                                                <span class="badge bg-danger">@stat.AvgQuality.ToString("N1")</span>
+                                                            }
+                                                            else
+                                                            {
+                                                                <span class="text-muted">N/A</span>
+                                                            }
+                                                        </td>
+                                                        <td class="text-right">
+                                                            @if (stat.Utilization >= 75)
+                                                            {
+                                                                <span class="badge bg-success">@stat.Utilization.ToString("N1")%</span>
+                                                            }
+                                                            else if (stat.Utilization >= 50)
+                                                            {
+                                                                <span class="badge bg-warning">@stat.Utilization.ToString("N1")%</span>
+                                                            }
+                                                            else if (stat.Utilization > 0)
+                                                            {
+                                                                <span class="badge bg-danger">@stat.Utilization.ToString("N1")%</span>
+                                                            }
+                                                            else
+                                                            {
+                                                                <span class="badge bg-secondary">0%</span>
+                                                            }
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    }
+                                    else
+                                    {
+                                        <div class="alert alert-warning">
+                                            <i class="fas fa-exclamation-triangle"></i> No machine statistics available for the selected period.
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Performance Summary -->
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header bg-secondary text-white">
+                                    <h5 class="mb-0">
+                                        <i class="fas fa-award"></i> Performance Summary
+                                    </h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="card border-success mb-3">
+                                                <div class="card-header bg-success text-white">
+                                                    <i class="fas fa-trophy"></i> Top Performer
+                                                </div>
+                                                <div class="card-body">
+                                                    @if (ViewBag.MachineStats.Count > 0)
+                                                    {
+                                                        var topMachine = ViewBag.MachineStats[0];
+                                                        <h5 class="card-title">@topMachine.Machine.MachineName</h5>
+                                                        <p class="card-text">
+                                                            <strong>@topMachine.BatchCount batches</strong> processed<br/>
+                                                            <strong>@topMachine.Utilization.ToString("N1")%</strong> utilization
+                                                        </p>
+                                                    }
+                                                    else
+                                                    {
+                                                        <p class="text-muted">No data available</p>
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="card border-info mb-3">
+                                                <div class="card-header bg-info text-white">
+                                                    <i class="fas fa-clock"></i> Most Utilized
+                                                </div>
+                                                <div class="card-body">
+                                                    @if (ViewBag.MachineStats.Count > 0)
+                                                    {
+                                                        var machineStatsList = (IEnumerable<dynamic>)ViewBag.MachineStats;
+                                                        var mostUsed = machineStatsList.OrderByDescending(m => (decimal)m.TotalHours).FirstOrDefault();
+                                                        if (mostUsed != null)
+                                                        {
+                                                            <h5 class="card-title">@mostUsed.Machine.MachineName</h5>
+                                                            <p class="card-text">
+                                                                <strong>@mostUsed.TotalHours.ToString("N1") hours</strong> running<br/>
+                                                                <strong>@mostUsed.TotalOutput.ToString("N2") Q</strong> output
+                                                            </p>
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        <p class="text-muted">No data available</p>
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="card border-warning mb-3">
+                                                <div class="card-header bg-warning text-dark">
+                                                    <i class="fas fa-exclamation-triangle"></i> Needs Attention
+                                                </div>
+                                                <div class="card-body">
+                                                    @if (ViewBag.MachineStats.Count > 0)
+                                                    {
+                                                        var machineStatsList = (IEnumerable<dynamic>)ViewBag.MachineStats;
+                                                        var leastUsed = machineStatsList.Where(m => (double)m.Utilization > 0).OrderBy(m => (double)m.Utilization).FirstOrDefault();
+                                                        if (leastUsed != null)
+                                                        {
+                                                            <h5 class="card-title">@leastUsed.Machine.MachineName</h5>
+                                                            <p class="card-text">
+                                                                <strong>@leastUsed.Utilization.ToString("N1")%</strong> utilization<br/>
+                                                                <strong>@leastUsed.BatchCount batches</strong> only
+                                                            </p>
+                                                        }
+                                                        else
+                                                        {
+                                                            <p class="text-muted">All machines performing well</p>
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        <p class="text-muted">No data available</p>
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="row mt-3">
+                        <div class="col-12">
+                            <a href="/Reports" class="btn btn-secondary">
+                                <i class="fas fa-arrow-left"></i> Back to Reports
+                            </a>
+                            <button class="btn btn-success" onclick="window.print()">
+                                <i class="fas fa-print"></i> Print Report
+                            </button>
+                            <button class="btn btn-primary" onclick="exportToExcel()">
+                                <i class="fas fa-file-excel"></i> Export to Excel
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    // Machine Utilization Bar Chart
+    var machineStats = @Html.Raw(Json.Serialize(ViewBag.MachineStats));
+    var machineNames = machineStats.map(m => m.machine.machineName);
+    var utilization = machineStats.map(m => m.utilization);
+
+    var ctx = document.getElementById('utilizationChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: machineNames,
+            datasets: [{
+                label: 'Utilization %',
+                data: utilization,
+                backgroundColor: utilization.map(u => {
+                    if (u >= 75) return '#28a745';  // Green
+                    if (u >= 50) return '#ffc107';  // Yellow
+                    if (u > 0) return '#dc3545';    // Red
+                    return '#6c757d';               // Gray
+                }),
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            plugins: {
+                legend: {
+                    display: false
+                },
+                title: {
+                    display: false
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: 100,
+                    title: {
+                        display: true,
+                        text: 'Utilization %'
+                    }
+                },
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Machine'
+                    }
+                }
+            }
+        }
+    });
+
+    // Initialize DataTable
+    $(document).ready(function() {
+        $('#machineStatsTable').DataTable({
+            order: [[2, 'desc']],
+            pageLength: 10,
+            responsive: true
+        });
+    });
+
+    // Export to Excel function
+    function exportToExcel() {
+        alert('Excel export functionality will be implemented.');
+        // TODO: Implement Excel export
+    }
+</script>
+}

@@ -1,0 +1,340 @@
+# Phase 12: Clinical Decision Support - Kubernetes Deployment
+# Production-ready Kubernetes manifests
+
+---
+# Namespace
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: clinical-decision-support
+  labels:
+    name: clinical-decision-support
+    environment: production
+
+---
+# ConfigMap for configuration
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cds-config
+  namespace: clinical-decision-support
+data:
+  LOG_LEVEL: "INFO"
+  AUDIT_LOG_PATH: "/var/log/cds/audit.log"
+  MAX_WORKERS: "4"
+  REQUEST_TIMEOUT: "30"
+  ENCRYPT_AUDIT_LOGS: "true"
+  PHI_DEIDENTIFICATION: "true"
+
+---
+# Secret for sensitive data (create separately with real values)
+apiVersion: v1
+kind: Secret
+metadata:
+  name: cds-secrets
+  namespace: clinical-decision-support
+type: Opaque
+data:
+  # Base64 encoded values - replace with actual values
+  # echo -n "your-endpoint" | base64
+  CONTENT_SAFETY_ENDPOINT: ""
+  # echo -n "your-key" | base64
+  CONTENT_SAFETY_KEY: ""
+
+---
+# PersistentVolumeClaim for audit logs
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: cds-audit-logs-pvc
+  namespace: clinical-decision-support
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+  storageClassName: standard
+
+---
+# Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: clinical-decision-support
+  namespace: clinical-decision-support
+  labels:
+    app: clinical-decision-support
+    version: v1.0
+spec:
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: clinical-decision-support
+  template:
+    metadata:
+      labels:
+        app: clinical-decision-support
+        version: v1.0
+    spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        fsGroup: 1000
+
+      containers:
+      - name: clinical-decision-support
+        image: swarmcare-cds:1.0
+        imagePullPolicy: IfNotPresent
+
+        ports:
+        - containerPort: 8080
+          name: http
+          protocol: TCP
+
+        env:
+        - name: LOG_LEVEL
+          valueFrom:
+            configMapKeyRef:
+              name: cds-config
+              key: LOG_LEVEL
+        - name: AUDIT_LOG_PATH
+          valueFrom:
+            configMapKeyRef:
+              name: cds-config
+              key: AUDIT_LOG_PATH
+        - name: MAX_WORKERS
+          valueFrom:
+            configMapKeyRef:
+              name: cds-config
+              key: MAX_WORKERS
+        - name: REQUEST_TIMEOUT
+          valueFrom:
+            configMapKeyRef:
+              name: cds-config
+              key: REQUEST_TIMEOUT
+        - name: ENCRYPT_AUDIT_LOGS
+          valueFrom:
+            configMapKeyRef:
+              name: cds-config
+              key: ENCRYPT_AUDIT_LOGS
+        - name: CONTENT_SAFETY_ENDPOINT
+          valueFrom:
+            secretKeyRef:
+              name: cds-secrets
+              key: CONTENT_SAFETY_ENDPOINT
+              optional: true
+        - name: CONTENT_SAFETY_KEY
+          valueFrom:
+            secretKeyRef:
+              name: cds-secrets
+              key: CONTENT_SAFETY_KEY
+              optional: true
+
+        resources:
+          requests:
+            cpu: "500m"
+            memory: "1Gi"
+          limits:
+            cpu: "2000m"
+            memory: "4Gi"
+
+        volumeMounts:
+        - name: audit-logs
+          mountPath: /var/log/cds
+
+        livenessProbe:
+          exec:
+            command:
+            - python3
+            - -c
+            - "from code.clinical_decision_support import assess_patient"
+          initialDelaySeconds: 10
+          periodSeconds: 30
+          timeoutSeconds: 5
+          failureThreshold: 3
+
+        readinessProbe:
+          exec:
+            command:
+            - python3
+            - -c
+            - "from code.clinical_decision_support import assess_patient"
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          timeoutSeconds: 3
+          successThreshold: 1
+          failureThreshold: 3
+
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: false
+          capabilities:
+            drop:
+            - ALL
+
+      volumes:
+      - name: audit-logs
+        persistentVolumeClaim:
+          claimName: cds-audit-logs-pvc
+
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                  - clinical-decision-support
+              topologyKey: kubernetes.io/hostname
+
+---
+# Service - ClusterIP (internal)
+apiVersion: v1
+kind: Service
+metadata:
+  name: clinical-decision-support
+  namespace: clinical-decision-support
+  labels:
+    app: clinical-decision-support
+spec:
+  type: ClusterIP
+  selector:
+    app: clinical-decision-support
+  ports:
+  - port: 8080
+    targetPort: 8080
+    protocol: TCP
+    name: http
+  sessionAffinity: ClientIP
+  sessionAffinityConfig:
+    clientIP:
+      timeoutSeconds: 10800
+
+---
+# Service - LoadBalancer (external - optional)
+apiVersion: v1
+kind: Service
+metadata:
+  name: clinical-decision-support-external
+  namespace: clinical-decision-support
+  labels:
+    app: clinical-decision-support
+  annotations:
+    # Cloud provider specific annotations
+    # service.beta.kubernetes.io/aws-load-balancer-type: "nlb"
+    # service.beta.kubernetes.io/azure-load-balancer-internal: "false"
+spec:
+  type: LoadBalancer
+  selector:
+    app: clinical-decision-support
+  ports:
+  - port: 80
+    targetPort: 8080
+    protocol: TCP
+    name: http
+
+---
+# HorizontalPodAutoscaler
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: clinical-decision-support-hpa
+  namespace: clinical-decision-support
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: clinical-decision-support
+  minReplicas: 2
+  maxReplicas: 10
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 70
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: 80
+  behavior:
+    scaleDown:
+      stabilizationWindowSeconds: 300
+      policies:
+      - type: Percent
+        value: 50
+        periodSeconds: 60
+    scaleUp:
+      stabilizationWindowSeconds: 0
+      policies:
+      - type: Percent
+        value: 100
+        periodSeconds: 30
+      - type: Pods
+        value: 2
+        periodSeconds: 30
+      selectPolicy: Max
+
+---
+# PodDisruptionBudget
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: clinical-decision-support-pdb
+  namespace: clinical-decision-support
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: clinical-decision-support
+
+---
+# NetworkPolicy - Restrict traffic
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: clinical-decision-support-netpol
+  namespace: clinical-decision-support
+spec:
+  podSelector:
+    matchLabels:
+      app: clinical-decision-support
+  policyTypes:
+  - Ingress
+  - Egress
+  ingress:
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          name: medical-systems
+    - podSelector:
+        matchLabels:
+          role: api-gateway
+    ports:
+    - protocol: TCP
+      port: 8080
+  egress:
+  - to:
+    - namespaceSelector: {}
+    ports:
+    - protocol: TCP
+      port: 53  # DNS
+    - protocol: UDP
+      port: 53  # DNS
+  - to:
+    - namespaceSelector: {}
+    ports:
+    - protocol: TCP
+      port: 443  # HTTPS for external APIs

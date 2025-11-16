@@ -1,0 +1,1336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Success Roadmap - AI Developer Path</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Fira+Code:wght@400;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.8;
+            color: #1a1a1a;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 30s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .header h1 {
+            font-size: 3em;
+            font-weight: 800;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .header .subtitle {
+            font-size: 1.3em;
+            font-weight: 300;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+        }
+
+        .content {
+            padding: 60px 40px;
+        }
+
+        .section {
+            margin-bottom: 60px;
+            page-break-inside: avoid;
+        }
+
+        .section-title {
+            font-size: 2.2em;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 4px solid #667eea;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-icon {
+            font-size: 1.2em;
+        }
+
+        .executive-summary {
+            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+            padding: 40px;
+            border-radius: 15px;
+            border-left: 8px solid #e17055;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .executive-summary h3 {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            color: #2d3436;
+        }
+
+        .executive-summary p {
+            font-size: 1.1em;
+            line-height: 1.8;
+            color: #2d3436;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #6dd5ed 0%, #2193b0 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .highlight-box h4 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+
+        .success-probability {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            margin: 40px 0;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+
+        .success-probability .percentage {
+            font-size: 5em;
+            font-weight: 800;
+            line-height: 1;
+            margin-bottom: 10px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+        }
+
+        .success-probability .label {
+            font-size: 1.5em;
+            font-weight: 300;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 60px;
+            margin: 40px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 50px;
+            padding: 25px;
+            background: white;
+            border-radius: 12px;
+            border: 2px solid #e0e6ed;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -54px;
+            top: 30px;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #667eea;
+            border: 4px solid white;
+            box-shadow: 0 0 0 4px #667eea;
+        }
+
+        .timeline-item .month {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .timeline-item .activities {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .timeline-item .activities li {
+            padding: 8px 0;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .timeline-item .activities li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #00b894;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .checklist {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .checklist li {
+            padding: 15px 20px;
+            margin: 10px 0;
+            background: #f8f9fa;
+            border-left: 5px solid #667eea;
+            border-radius: 8px;
+            position: relative;
+            padding-left: 50px;
+            transition: all 0.3s ease;
+        }
+
+        .checklist li:hover {
+            background: #e8eaf6;
+            transform: translateX(5px);
+        }
+
+        .checklist li::before {
+            content: '☐';
+            position: absolute;
+            left: 15px;
+            font-size: 1.5em;
+            color: #667eea;
+        }
+
+        .pros-cons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .pros, .cons {
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .pros {
+            background: linear-gradient(135deg, #d4fc79 0%, #96e6a1 100%);
+        }
+
+        .cons {
+            background: linear-gradient(135deg, #ffa8a8 0%, #ff6b6b 100%);
+            color: white;
+        }
+
+        .pros h4, .cons h4 {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .pros ul, .cons ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .pros li, .cons li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .pros li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #00b894;
+            font-weight: bold;
+            font-size: 1.3em;
+        }
+
+        .cons li::before {
+            content: '✗';
+            position: absolute;
+            left: 0;
+            color: #d63031;
+            font-weight: bold;
+            font-size: 1.3em;
+        }
+
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .metric-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border-top: 5px solid #667eea;
+            transition: transform 0.3s ease;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .metric-card .number {
+            font-size: 3em;
+            font-weight: 800;
+            color: #667eea;
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+
+        .metric-card .label {
+            font-size: 1em;
+            color: #636e72;
+            font-weight: 600;
+        }
+
+        .action-steps {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            padding: 40px;
+            border-radius: 15px;
+            margin: 40px 0;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .action-steps h3 {
+            font-size: 2em;
+            margin-bottom: 30px;
+            color: #2d3436;
+        }
+
+        .action-step {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border-left: 6px solid #d63031;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .action-step .step-number {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            background: #667eea;
+            color: white;
+            border-radius: 50%;
+            font-weight: 800;
+            margin-right: 15px;
+            font-size: 1.2em;
+        }
+
+        .action-step h4 {
+            display: inline;
+            font-size: 1.3em;
+            color: #2d3436;
+        }
+
+        .action-step p {
+            margin-top: 15px;
+            padding-left: 55px;
+            color: #636e72;
+        }
+
+        .mnemonic {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            padding: 35px;
+            border-radius: 15px;
+            margin: 30px 0;
+            border: 3px dashed #667eea;
+            text-align: center;
+        }
+
+        .mnemonic h4 {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            color: #2d3436;
+        }
+
+        .mnemonic .acronym {
+            font-size: 3em;
+            font-weight: 800;
+            color: #667eea;
+            letter-spacing: 10px;
+            margin: 20px 0;
+            font-family: 'Fira Code', monospace;
+        }
+
+        .mnemonic .breakdown {
+            text-align: left;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .mnemonic .breakdown div {
+            padding: 12px;
+            margin: 8px 0;
+            background: white;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+
+        .mnemonic .breakdown strong {
+            color: #667eea;
+            font-size: 1.3em;
+            margin-right: 10px;
+        }
+
+        .warning-box {
+            background: #fff3cd;
+            border-left: 8px solid #ffc107;
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 10px;
+        }
+
+        .warning-box h4 {
+            color: #856404;
+            font-size: 1.4em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .success-box {
+            background: #d4edda;
+            border-left: 8px solid #28a745;
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 10px;
+        }
+
+        .success-box h4 {
+            color: #155724;
+            font-size: 1.4em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .flowchart {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            margin: 40px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .flowchart-step {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 30px;
+            border-radius: 12px;
+            margin: 15px auto;
+            max-width: 500px;
+            font-weight: 600;
+            font-size: 1.1em;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .flowchart-arrow {
+            font-size: 2em;
+            color: #667eea;
+            margin: 10px 0;
+        }
+
+        .visa-advantage {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 15px;
+            margin: 40px 0;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+
+        .visa-advantage h3 {
+            font-size: 2em;
+            margin-bottom: 25px;
+        }
+
+        .visa-advantage ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .visa-advantage li {
+            padding: 15px 0;
+            padding-left: 35px;
+            position: relative;
+            font-size: 1.1em;
+        }
+
+        .visa-advantage li::before {
+            content: '🌟';
+            position: absolute;
+            left: 0;
+            font-size: 1.3em;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            text-align: left;
+            font-weight: 700;
+            font-size: 1.1em;
+        }
+
+        td {
+            padding: 20px;
+            border-bottom: 1px solid #e0e6ed;
+            background: white;
+        }
+
+        tr:hover td {
+            background: #f8f9fa;
+        }
+
+        .footer {
+            background: linear-gradient(135deg, #2d3436 0%, #000000 100%);
+            color: white;
+            padding: 50px 40px;
+            text-align: center;
+        }
+
+        .footer h3 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        .footer p {
+            font-size: 1.2em;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+
+            .container {
+                box-shadow: none;
+                border-radius: 0;
+            }
+
+            .section {
+                page-break-inside: avoid;
+            }
+
+            .timeline-item {
+                page-break-inside: avoid;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .pros-cons {
+                grid-template-columns: 1fr;
+            }
+
+            .metric-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .content {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER -->
+        <div class="header">
+            <h1>🚀 Career Success Roadmap</h1>
+            <div class="subtitle">Your Complete Guide to Landing an AI Developer Role</div>
+            <div class="subtitle" style="margin-top: 15px; font-size: 1em; opacity: 0.8;">H4 EAD Visa Holder | Pursuit AI-Native Program | 2025-2026</div>
+        </div>
+
+        <!-- CONTENT -->
+        <div class="content">
+
+            <!-- EXECUTIVE SUMMARY -->
+            <div class="executive-summary">
+                <h3>🎯 Executive Summary</h3>
+                <p><strong>Current Situation:</strong> You have React/HTML/JavaScript foundation from previous Pursuit training but faced interview challenges. Now considering Pursuit's AI-Native program with AWS/Google SMB projects.</p>
+                <p style="margin-top: 15px;"><strong>Recommendation:</strong> <span style="background: #00b894; color: white; padding: 5px 15px; border-radius: 5px; font-weight: 700;">CONDITIONALLY PROCEED</span> with the program ONLY if combined with parallel job search starting NOW (not after program completion).</p>
+                <p style="margin-top: 15px;"><strong>Your Advantage:</strong> H4 EAD work authorization means NO visa sponsorship required - this is a significant competitive edge in the job market.</p>
+            </div>
+
+            <!-- SUCCESS PROBABILITY -->
+            <div class="success-probability">
+                <div class="percentage">60-75%</div>
+                <div class="label">SUCCESS PROBABILITY WITH THIS PLAN</div>
+                <div style="margin-top: 20px; font-size: 1.1em; opacity: 0.9;">
+                    (vs. 15-25% with program alone)
+                </div>
+            </div>
+
+            <!-- SECTION: YOUR UNIQUE ADVANTAGES -->
+            <div class="section">
+                <h2 class="section-title">
+                    <span class="section-icon">🌟</span>
+                    Your Unique Advantages
+                </h2>
+
+                <div class="visa-advantage">
+                    <h3>H4 EAD: Your Secret Weapon</h3>
+                    <ul>
+                        <li>Work for ANY employer without sponsorship (unlike H1B)</li>
+                        <li>Start immediately - no visa processing delays</li>
+                        <li>Change jobs freely - not tied to single sponsor</li>
+                        <li>Pursue freelance/entrepreneurship opportunities</li>
+                        <li>Employers save $5K-$10K in sponsorship costs</li>
+                    </ul>
+                </div>
+
+                <div class="metric-grid">
+                    <div class="metric-card">
+                        <div class="number">22.5</div>
+                        <div class="label">Hours/Week Program Time</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="number">$60-85K</div>
+                        <div class="label">Expected Starting Salary</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="number">6-12</div>
+                        <div class="label">Months to Employment</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="number">100+</div>
+                        <div class="label">Applications to Send</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION: PURSUIT PROGRAM ANALYSIS -->
+            <div class="section">
+                <h2 class="section-title">
+                    <span class="section-icon">🎓</span>
+                    Pursuit AI-Native Program Analysis
+                </h2>
+
+                <div class="highlight-box">
+                    <h4>🔥 GAME-CHANGING ELEMENT</h4>
+                    <p style="font-size: 1.2em; margin-top: 15px;">"Partnered with AWS and Google to match selected Builders from our March cohort with small and medium businesses (SMBs) to develop <strong>real, paid AI-powered projects</strong>"</p>
+                    <p style="margin-top: 15px; font-size: 1.1em;">This is NOT just training—it's <strong>PAID PROJECT EXPERIENCE</strong> that solves the "experience paradox"</p>
+                </div>
+
+                <div class="pros-cons">
+                    <div class="pros">
+                        <h4><span>✓</span> Strengths</h4>
+                        <ul>
+                            <li>Real client work with SMBs</li>
+                            <li>Paid projects (income + credibility)</li>
+                            <li>AWS/Google partnership credentials</li>
+                            <li>Portfolio pieces with measurable impact</li>
+                            <li>AI specialization (high-demand niche)</li>
+                            <li>Structured support from Pursuit staff</li>
+                        </ul>
+                    </div>
+                    <div class="cons">
+                        <h4><span>✗</span> Risks & Challenges</h4>
+                        <ul>
+                            <li>22.5 hrs/week away from Uber income</li>
+                            <li>Selection NOT guaranteed for paid projects</li>
+                            <li>Past training didn't fix interview skills</li>
+                            <li>Market slow for entry-level positions</li>
+                            <li>Visa timeline pressure (H4 EAD dependency)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="warning-box">
+                    <h4>⚠️ Critical Questions for Your 1:1 with Pursuit (Before Nov 15)</h4>
+                    <ul style="list-style: none; padding-left: 0; margin-top: 15px;">
+                        <li style="padding: 10px 0;">1. "What % of March cohort got selected for paid SMB projects?" (Need >60%)</li>
+                        <li style="padding: 10px 0;">2. "What % of past AI-Native graduates got jobs within 6 months?" (Need >50%)</li>
+                        <li style="padding: 10px 0;">3. "What's the average starting salary for graduates?" (Should be $60K+)</li>
+                        <li style="padding: 10px 0;">4. "Can I contact 2-3 past graduates for reference?" (If they refuse = red flag)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- SECTION: THE SUCCESS FORMULA -->
+            <div class="section">
+                <h2 class="section-title">
+                    <span class="section-icon">🎯</span>
+                    The Success Formula: S.M.A.R.T.E.R.
+                </h2>
+
+                <div class="mnemonic">
+                    <h4>Remember This Forever:</h4>
+                    <div class="acronym">SMARTER</div>
+                    <div class="breakdown">
+                        <div><strong>S</strong>kills - Master AI + React through Pursuit program</div>
+                        <div><strong>M</strong>arket - Apply to 10+ jobs/week DURING program</div>
+                        <div><strong>A</strong>lgorithms - Practice 3-5 LeetCode problems weekly</div>
+                        <div><strong>R</strong>eferrals - Network at 1 meetup/week, 5 LinkedIn connections/week</div>
+                        <div><strong>T</strong>esting - Do 2 mock interviews/week to improve</div>
+                        <div><strong>E</strong>xperience - Build 3 portfolio projects with measurable impact</div>
+                        <div><strong>R</strong>esilience - Each "no" brings you closer to "yes"</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION: 6-12 MONTH TIMELINE -->
+            <div class="section">
+                <h2 class="section-title">
+                    <span class="section-icon">📅</span>
+                    Your 6-12 Month Roadmap to Success
+                </h2>
+
+                <div class="timeline">
+                    <!-- MONTH 1 -->
+                    <div class="timeline-item">
+                        <div class="month">📌 Month 1: Foundation & Decision (November 2025)</div>
+                        <ul class="activities">
+                            <li>Calculate finances: Can you afford 22.5 hrs/week away from Uber?</li>
+                            <li>Attend Pursuit 1:1 - Ask critical questions (see above)</li>
+                            <li>Contact 2-3 past graduates for honest feedback</li>
+                            <li>Review H4 EAD expiration + spouse's H1B status</li>
+                            <li>Decide by Nov 15, 5 PM - Reply to Pursuit if proceeding</li>
+                            <li>Virtual Orientation: Nov 21</li>
+                            <li>Systems Onboarding: Dec 1 (in-person at Pursuit HQ)</li>
+                        </ul>
+                    </div>
+
+                    <!-- MONTH 2 -->
+                    <div class="timeline-item">
+                        <div class="month">🚀 Month 2: Program Launch + Skill Building (December 2025)</div>
+                        <ul class="activities">
+                            <li>Program starts Dec 6 (Sat-Sun 10 AM-4 PM, Mon-Wed 6:30-10 PM)</li>
+                            <li>START daily LeetCode practice (1 problem/day = 30 min)</li>
+                            <li>Build first AI project for portfolio</li>
+                            <li>Update LinkedIn: "AI Native Builder @ Pursuit + AWS/Google"</li>
+                            <li>Set up GitHub profile with pinned repositories</li>
+                            <li>Complete Month 1 program assignments with 100% effort</li>
+                        </ul>
+                    </div>
+
+                    <!-- MONTH 3 -->
+                    <div class="timeline-item">
+                        <div class="month">📝 Month 3: Applications Begin (January 2026)</div>
+                        <ul class="activities">
+                            <li>START job applications: 10/week minimum (Don't wait!)</li>
+                            <li>Deploy first portfolio project to Vercel (live demo)</li>
+                            <li>Attend first tech meetup (AI, React, Web Dev)</li>
+                            <li>Do 4 mock interviews on Pramp.com (free)</li>
+                            <li>COMPETE for paid SMB project selection in program</li>
+                            <li>Goal: 40 applications sent, first interviews scheduled</li>
+                        </ul>
+                    </div>
+
+                    <!-- MONTH 4 -->
+                    <div class="timeline-item">
+                        <div class="month">🎯 Month 4: Momentum Building (February 2026)</div>
+                        <ul class="activities">
+                            <li>Continue 10 applications/week (80 total by month-end)</li>
+                            <li>If selected: Start paid SMB project (CRITICAL for resume)</li>
+                            <li>Build second portfolio project (React + AI integration)</li>
+                            <li>Attend 4 meetups, make 20+ LinkedIn connections</li>
+                            <li>Do 8 mock interviews (improve from feedback)</li>
+                            <li>Goal: 5-10 real interviews completed</li>
+                        </ul>
+                    </div>
+
+                    <!-- MONTH 5-6 -->
+                    <div class="timeline-item">
+                        <div class="month">💼 Months 5-6: Interview Phase (March-April 2026)</div>
+                        <ul class="activities">
+                            <li>Continue applications (100+ total)</li>
+                            <li>Finalize SMB project with measurable results ("Reduced X by 70%")</li>
+                            <li>Complete third portfolio project</li>
+                            <li>Intensive interview preparation (should be smooth by now)</li>
+                            <li>2 informational interviews/month (networking pays off)</li>
+                            <li>Goal: Multiple interview loops, first offers arriving</li>
+                        </ul>
+                    </div>
+
+                    <!-- MONTH 6-9 -->
+                    <div class="timeline-item">
+                        <div class="month">🎊 Months 6-9: Offer & Negotiation (May-July 2026)</div>
+                        <ul class="activities">
+                            <li>Receive multiple offers (if following plan diligently)</li>
+                            <li>Research salaries on Glassdoor/Levels.fyi</li>
+                            <li>Negotiate for 10-15% above first offer</li>
+                            <li>Highlight: Pursuit program, AWS/Google projects, H4 EAD advantage</li>
+                            <li>Accept offer: $60K-$85K range expected</li>
+                            <li>START NEW JOB! 🎉</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION: WEEKLY TIME COMMITMENT -->
+            <div class="section">
+                <h2 class="section-title">
+                    <span class="section-icon">⏰</span>
+                    Weekly Time Commitment (45.5 Hours)
+                </h2>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Activity</th>
+                            <th>Hours/Week</th>
+                            <th>When</th>
+                            <th>Why Critical</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Pursuit Program</strong></td>
+                            <td>22.5 hrs</td>
+                            <td>Sat-Sun 10-4, Mon-Wed 6:30-10</td>
+                            <td>Learn AI skills, build projects, get AWS/Google credentials</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Interview Prep</strong></td>
+                            <td>5 hrs</td>
+                            <td>Tue/Thu mornings or nights</td>
+                            <td>Fix past interview failures - algorithms + behavioral</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Job Applications</strong></td>
+                            <td>10 hrs</td>
+                            <td>Starts Week 3, ongoing</td>
+                            <td>Volume matters - need 100+ applications for success</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Portfolio Projects</strong></td>
+                            <td>5 hrs</td>
+                            <td>Weekends/evenings</td>
+                            <td>Stand out from bootcamp grads - show measurable impact</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Networking</strong></td>
+                            <td>3 hrs</td>
+                            <td>1 meetup/week</td>
+                            <td>Referrals = 40% higher interview rate than cold apply</td>
+                        </tr>
+                        <tr>
+                            <td><strong>TOTAL</strong></td>
+                            <td><strong>45.5 hrs</strong></td>
+                            <td colspan="2"><strong>This is your full-time job for 6-12 months</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="warning-box" style="margin-top: 30px;">
+                    <h4>⚠️ Financial Reality Check</h4>
+                    <p>With 45.5 hours committed to career development, you'll have significantly less time for Uber/deliveries. Calculate your minimum monthly expenses and ensure you have 6-12 months of runway through savings, family support, or potential program income from paid SMB projects.</p>
+                </div>
+            </div>
+
+            <!-- SECTION: THE 3 PORTFOLIO PROJECTS -->
+            <div class="section">
+                <h2 class="section-title">
+                    <span class="section-icon">💻</span>
+                    Your 3 Must-Build Portfolio Projects
+                </h2>
+
+                <div class="action-steps">
+                    <h3>Build These to Stand Out</h3>
+
+                    <div class="action-step">
+                        <span class="step-number">1</span>
+                        <h4>AI-Powered Tool for SMBs</h4>
+                        <p><strong>Example:</strong> "Invoice Parser using GPT-4 Vision API"</p>
+                        <p><strong>Why:</strong> Shows AI integration skills, solves real business problem, demonstrates value creation</p>
+                        <p><strong>Must Have:</strong> Live demo on Vercel, GitHub repo with README, measurable impact ("Reduces manual data entry by 70%"), video walkthrough</p>
+                    </div>
+
+                    <div class="action-step">
+                        <span class="step-number">2</span>
+                        <h4>Full-Stack React + AI Application</h4>
+                        <p><strong>Example:</strong> "Job Description Analyzer for H4 EAD Workers"</p>
+                        <p><strong>Why:</strong> Personal relevance (shows passion), complex tech stack (React + Node + OpenAI API + Database), mobile responsive, demonstrates full capabilities</p>
+                        <p><strong>Must Have:</strong> Unit tests, error handling, analytics/metrics, professional UI/UX</p>
+                    </div>
+
+                    <div class="action-step">
+                        <span class="step-number">3</span>
+                        <h4>Open Source Contribution</h4>
+                        <p><strong>Example:</strong> Contribute to LangChain, OpenAI libraries, or React ecosystem</p>
+                        <p><strong>Why:</strong> Builds credibility, shows collaboration skills, demonstrates ability to work with existing codebases</p>
+                        <p><strong>Must Have:</strong> Merged pull request, documentation updates, test coverage</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION: DECISION FLOWCHART -->
+            <div class="section">
+                <h2 class="section-title">
+                    <span class="section-icon">🗺️</span>
+                    Should You Join Pursuit? Decision Flowchart
+                </h2>
+
+                <div class="flowchart">
+                    <div class="flowchart-step">Can you afford 22.5 hrs/week away from Uber income?</div>
+                    <div class="flowchart-arrow">↓ YES</div>
+                    <div class="flowchart-step">Will you apply for jobs DURING program (not after)?</div>
+                    <div class="flowchart-arrow">↓ YES</div>
+                    <div class="flowchart-step">Can you commit 5 hrs/week to interview prep?</div>
+                    <div class="flowchart-arrow">↓ YES</div>
+                    <div class="flowchart-step">Do you have 6-12 month financial runway?</div>
+                    <div class="flowchart-arrow">↓ YES</div>
+                    <div class="flowchart-step" style="background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);">
+                        ✅ JOIN PURSUIT - Follow this roadmap to success
+                    </div>
+                </div>
+
+                <div class="warning-box" style="margin-top: 40px;">
+                    <h4>⚠️ If ANY Answer is NO:</h4>
+                    <p style="margin-top: 15px; font-size: 1.1em;">Consider alternative paths: Freelance bridge (Upwork/Fiverr), Adjacent tech roles (QA, Support → Developer), or Self-taught + portfolio building. Half-hearted program participation = Same outcome as last time = Frustration + wasted time.</p>
+                </div>
+            </div>
+
+            <!-- SECTION: IMMEDIATE ACTION ITEMS -->
+            <div class="section">
+                <h2 class="section-title">
+                    <span class="section-icon">🎯</span>
+                    THIS WEEK: Action Items (Before Nov 15)
+                </h2>
+
+                <div class="success-box">
+                    <h4>✅ Priority 1: DO IMMEDIATELY (48 Hours)</h4>
+                    <ul class="checklist">
+                        <li>Calculate monthly expenses vs. Uber income vs. reduced hours during program</li>
+                        <li>Schedule mandatory 1:1 with Pursuit staff - ask the 4 critical questions</li>
+                        <li>Request contact info for 2-3 past AI-Native cohort graduates</li>
+                        <li>Review H4 EAD expiration date + spouse's H1B status</li>
+                    </ul>
+                </div>
+
+                <div class="success-box">
+                    <h4>✅ Priority 2: DO BEFORE DECISION (This Week)</h4>
+                    <ul class="checklist">
+                        <li>Solve 3 LeetCode Easy problems to assess current technical level</li>
+                        <li>Record yourself answering "Tell me about yourself" - watch for communication gaps</li>
+                        <li>Update LinkedIn profile (start building visibility NOW)</li>
+                        <li>Research AI developer jobs on LinkedIn - filter by "Entry Level" + your location</li>
+                    </ul>
+                </div>
+
+                <div class="success-box">
+                    <h4>✅ Priority 3: IF PROCEEDING (After Decision)</h4>
+                    <ul class="checklist">
+                        <li>Reply to Pursuit by Nov 15, 5:00 PM</li>
+                        <li>Mark calendar: Virtual Orientation (Nov 21, 5:30-6:00 PM)</li>
+                        <li>Mark calendar: Systems Onboarding (Dec 1 at Pursuit HQ, in-person)</li>
+                        <li>Start daily LeetCode practice from Dec 2 onwards</li>
+                        <li>Create GitHub account if don't have one, clean up profile</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- SECTION: OVERCOMING PAST FRUSTRATION -->
+            <div class="section">
+                <h2 class="section-title">
+                    <span class="section-icon">💪</span>
+                    Overcoming Past Frustration: Mental Resilience
+                </h2>
+
+                <div class="highlight-box">
+                    <h4>🧠 Reframe Your Story</h4>
+                    <div style="margin-top: 20px; font-size: 1.1em;">
+                        <p><strong>❌ OLD STORY:</strong> "I failed for 1.5 years. I'm not good enough."</p>
+                        <p style="margin-top: 20px;"><strong>✅ NEW STORY:</strong> "I built a React foundation and learned what NOT to do. Now I'm specializing in high-demand AI with AWS/Google backing and H4 EAD advantage."</p>
+                    </div>
+                </div>
+
+                <div class="metric-grid" style="margin-top: 40px;">
+                    <div class="metric-card">
+                        <div class="number">1</div>
+                        <div class="label">You Only Need ONE YES</div>
+                        <p style="margin-top: 15px; color: #636e72; font-size: 0.9em;">Out of 100 applications, you only need 1 company to say yes. That's a 1% success rate for life-changing outcome.</p>
+                    </div>
+                    <div class="metric-card">
+                        <div class="number">100%</div>
+                        <div class="label">Legal Work Authorization</div>
+                        <p style="margin-top: 15px; color: #636e72; font-size: 0.9em;">H4 EAD = No sponsorship needed. This opens doors that are closed to others.</p>
+                    </div>
+                    <div class="metric-card">
+                        <div class="number">0</div>
+                        <div class="label">Cost of Trying Again</div>
+                        <p style="margin-top: 15px; color: #636e72; font-size: 0.9em;">Past time taught valuable lessons. This time you know what to fix: Interview skills + parallel job search.</p>
+                    </div>
+                </div>
+
+                <div class="mnemonic" style="margin-top: 40px;">
+                    <h4>Daily Affirmations (Say These Every Morning):</h4>
+                    <div class="breakdown">
+                        <div>💪 "I'm legally authorized to work - H4 EAD is my advantage"</div>
+                        <div>🚀 "I'm building AI skills with AWS/Google backing"</div>
+                        <div>🎯 "Each interview is practice, not a final exam"</div>
+                        <div>✅ "I only need ONE yes out of 100 applications"</div>
+                        <div>🌟 "Thousands of bootcamp grads succeeded - I can too"</div>
+                        <div>🔥 "Every 'no' brings me closer to 'yes'"</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION: THE TRUTH ABOUT 100% SUCCESS -->
+            <div class="section">
+                <h2 class="section-title">
+                    <span class="section-icon">🎲</span>
+                    The Truth About "100% Success Rate"
+                </h2>
+
+                <div class="warning-box">
+                    <h4>⚠️ Reality Check: No Program Guarantees 100% Job Success</h4>
+                    <p style="margin-top: 15px; font-size: 1.1em;">The job market has variables you cannot control: Competition, hiring freezes, economic conditions, company budgets, internal candidates, etc.</p>
+                </div>
+
+                <div class="highlight-box" style="margin-top: 30px;">
+                    <h4>✅ However, You CAN Achieve 100% In:</h4>
+                    <ul style="text-align: left; margin-top: 20px; font-size: 1.1em; line-height: 2;">
+                        <li><strong>Effort:</strong> Show up every single day</li>
+                        <li><strong>Consistency:</strong> Code daily, apply weekly, practice interviews</li>
+                        <li><strong>Learning:</strong> Improve from each rejection</li>
+                        <li><strong>Persistence:</strong> Keep applying until you get offers</li>
+                        <li><strong>Adaptation:</strong> Change strategy if not working after 50 applications</li>
+                    </ul>
+                </div>
+
+                <div style="background: white; padding: 40px; border-radius: 15px; margin-top: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); text-align: center;">
+                    <h3 style="font-size: 1.8em; color: #667eea; margin-bottom: 30px;">The Success Formula</h3>
+                    <div style="font-family: 'Fira Code', monospace; font-size: 1.2em; padding: 30px; background: #f8f9fa; border-radius: 10px; line-height: 2;">
+                        Success Rate = <br>
+                        <span style="color: #00b894;">(Skills × Interview Prep × Applications × Time × Network)</span><br>
+                        ÷<br>
+                        <span style="color: #d63031;">(Competition × Market Conditions)</span>
+                    </div>
+                    <div style="margin-top: 30px; font-size: 1.1em; color: #636e72;">
+                        <strong>Maximize what you CAN control</strong> (top 5 factors)<br>
+                        <strong>Accept what you CANNOT control</strong> (bottom 2 factors)<br>
+                        <strong>Result:</strong> 60-75% success probability
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION: RESOURCES -->
+            <div class="section">
+                <h2 class="section-title">
+                    <span class="section-icon">📚</span>
+                    Essential Resources (Free & Paid)
+                </h2>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Resource</th>
+                            <th>Cost</th>
+                            <th>Purpose</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td rowspan="3"><strong>Interview Prep</strong></td>
+                            <td>LeetCode.com</td>
+                            <td>Free tier</td>
+                            <td>Algorithm practice (3-5 problems/week)</td>
+                        </tr>
+                        <tr>
+                            <td>Pramp.com</td>
+                            <td>Free</td>
+                            <td>Peer mock interviews (2/week)</td>
+                        </tr>
+                        <tr>
+                            <td>InterviewCake.com</td>
+                            <td>$149 (optional)</td>
+                            <td>Systematic interview prep</td>
+                        </tr>
+                        <tr>
+                            <td rowspan="2"><strong>Learning</strong></td>
+                            <td>FreeCodeCamp.org</td>
+                            <td>Free</td>
+                            <td>Full curriculum if need backup learning</td>
+                        </tr>
+                        <tr>
+                            <td>Coursera.org</td>
+                            <td>Free (audit)</td>
+                            <td>AI/ML courses to supplement Pursuit</td>
+                        </tr>
+                        <tr>
+                            <td rowspan="4"><strong>Job Search</strong></td>
+                            <td>Simplify.jobs</td>
+                            <td>Free</td>
+                            <td>Entry-level job aggregator</td>
+                        </tr>
+                        <tr>
+                            <td>Wellfound.com</td>
+                            <td>Free</td>
+                            <td>Startup jobs (H4 EAD friendly)</td>
+                        </tr>
+                        <tr>
+                            <td>LinkedIn Easy Apply</td>
+                            <td>Free</td>
+                            <td>Volume applications</td>
+                        </tr>
+                        <tr>
+                            <td>Glassdoor.com</td>
+                            <td>Free</td>
+                            <td>Salary research for negotiation</td>
+                        </tr>
+                        <tr>
+                            <td rowspan="2"><strong>Networking</strong></td>
+                            <td>Meetup.com</td>
+                            <td>Free</td>
+                            <td>Local tech events (1/week)</td>
+                        </tr>
+                        <tr>
+                            <td>LinkedIn</td>
+                            <td>Free</td>
+                            <td>Connect with 5 people/week</td>
+                        </tr>
+                        <tr>
+                            <td rowspan="2"><strong>Visa Support</strong></td>
+                            <td>USCIS.gov</td>
+                            <td>Free</td>
+                            <td>Official EAD information</td>
+                        </tr>
+                        <tr>
+                            <td>Immigration lawyer</td>
+                            <td>$200-500</td>
+                            <td>Consultation if EAD at risk</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- SECTION: SAMPLE INTERVIEW RESPONSES -->
+            <div class="section">
+                <h2 class="section-title">
+                    <span class="section-icon">🎤</span>
+                    Sample Interview Responses (Use These!)
+                </h2>
+
+                <div class="action-steps">
+                    <h3>Memorize & Customize These Responses</h3>
+
+                    <div class="action-step">
+                        <span class="step-number">1</span>
+                        <h4>"Tell me about yourself"</h4>
+                        <p style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-top: 15px; font-style: italic;">
+                        "I'm a software developer specializing in AI and React applications. I'm currently part of Pursuit's AI-Native program, where I'm working on real projects with AWS and Google partners.<br><br>
+                        Previously, I completed training in React and built several full-stack applications. I'm authorized to work for any employer through my EAD, so no sponsorship is needed.<br><br>
+                        I'm passionate about using AI to solve real business problems—like the invoice parser I built that reduced manual data entry for small businesses by 70%. I'm excited about this role because [connect to company's AI work]. What excites me most is [specific aspect of job description]."
+                        </p>
+                    </div>
+
+                    <div class="action-step">
+                        <span class="step-number">2</span>
+                        <h4>"Why should we hire you?"</h4>
+                        <p style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-top: 15px; font-style: italic;">
+                        "Three reasons: First, I have hands-on experience building AI applications through Pursuit's program with AWS and Google—including a project that [specific measurable impact].<br><br>
+                        Second, I bring both frontend expertise in React and AI integration skills, which is perfect for [company's specific need mentioned in job description].<br><br>
+                        Third, I'm authorized to work immediately with no visa sponsorship needed, and I'm hungry to prove myself. I'm ready to contribute from day one and grow with your team."
+                        </p>
+                    </div>
+
+                    <div class="action-step">
+                        <span class="step-number">3</span>
+                        <h4>"What's your biggest weakness?"</h4>
+                        <p style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-top: 15px; font-style: italic;">
+                        "Early on, I struggled with LeetCode-style algorithm questions. Instead of avoiding them, I committed to solving 3 problems every week and participating in mock interviews. After 3 months of deliberate practice, I can now solve medium-level problems confidently. This taught me that I improve fastest when I face challenges head-on rather than avoiding them."
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION: FINANCIAL WORKSHEET -->
+            <div class="section">
+                <h2 class="section-title">
+                    <span class="section-icon">💰</span>
+                    Financial Calculation Worksheet
+                </h2>
+
+                <div style="background: white; padding: 40px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+                    <h3 style="color: #667eea; margin-bottom: 30px;">Can You Afford This Program?</h3>
+
+                    <table style="margin-bottom: 30px;">
+                        <thead>
+                            <tr>
+                                <th>Monthly Expenses</th>
+                                <th>Amount ($)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Rent</td><td>_______</td></tr>
+                            <tr><td>Utilities</td><td>_______</td></tr>
+                            <tr><td>Food</td><td>_______</td></tr>
+                            <tr><td>Transportation</td><td>_______</td></tr>
+                            <tr><td>Phone/Internet</td><td>_______</td></tr>
+                            <tr><td>Insurance</td><td>_______</td></tr>
+                            <tr><td>Other</td><td>_______</td></tr>
+                            <tr style="background: #667eea; color: white;">
+                                <td><strong>TOTAL MONTHLY EXPENSES</strong></td>
+                                <td><strong>_______</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <table style="margin-bottom: 30px;">
+                        <thead>
+                            <tr>
+                                <th>Income Analysis</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Current Uber hours/week</td><td>_______ hrs</td></tr>
+                            <tr><td>Current hourly rate</td><td>$_______ /hr</td></tr>
+                            <tr><td>Current monthly income</td><td>$_______</td></tr>
+                            <tr style="background: #ffeaa7;">
+                                <td>Available hours after program (minus 22.5)</td>
+                                <td>_______ hrs/week</td>
+                            </tr>
+                            <tr style="background: #ffeaa7;">
+                                <td><strong>Reduced monthly income</strong></td>
+                                <td><strong>$_______</strong></td>
+                            </tr>
+                            <tr style="background: #ff6b6b; color: white;">
+                                <td><strong>Monthly shortfall</strong></td>
+                                <td><strong>$_______</strong></td>
+                            </tr>
+                            <tr style="background: #ff6b6b; color: white;">
+                                <td><strong>Total shortfall (6 months × monthly)</strong></td>
+                                <td><strong>$_______</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Resources Available</th>
+                                <th>Amount ($)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Current savings</td><td>_______</td></tr>
+                            <tr><td>Family support (if available)</td><td>_______</td></tr>
+                            <tr><td>Paid SMB project (if selected)</td><td>_______</td></tr>
+                            <tr style="background: #00b894; color: white;">
+                                <td><strong>TOTAL RESOURCES</strong></td>
+                                <td><strong>_______</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div style="margin-top: 40px; padding: 30px; background: #f8f9fa; border-radius: 12px; border-left: 6px solid #667eea;">
+                        <h4 style="font-size: 1.5em; margin-bottom: 20px; color: #2d3436;">Decision:</h4>
+                        <p style="font-size: 1.1em; line-height: 2;">
+                            ☐ <strong>Can afford</strong> (Total Resources ≥ Total Shortfall) → PROCEED<br>
+                            ☐ <strong>Cannot afford</strong> (Total Resources < Total Shortfall) → RECONSIDER or negotiate part-time<br>
+                            ☐ <strong>Borderline</strong> → Discuss with Pursuit about part-time options or payment plans
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- FOOTER -->
+        <div class="footer">
+            <h3>🔥 Remember This Forever 🔥</h3>
+            <p style="margin-top: 30px;">
+                <strong>You only need ONE company to say yes.</strong><br>
+                Every "no" gets you closer to "yes".<br>
+                Your H4 EAD is a competitive advantage.<br>
+                Thousands of bootcamp grads succeeded before you.<br>
+                Combining React + AI = Powerful career niche.<br><br>
+                <strong style="font-size: 1.3em;">Success = Persistence + Strategy + Action</strong>
+            </p>
+            <p style="margin-top: 40px; font-size: 0.9em; opacity: 0.7;">
+                Generated: November 2025 | For: H4 EAD Visa Holder pursuing AI Developer career via Pursuit AI-Native Program<br>
+                Print this document (File → Print → Save as PDF) and review weekly to stay on track.
+            </p>
+        </div>
+    </div>
+</body>
+</html>

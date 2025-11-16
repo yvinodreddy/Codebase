@@ -1,0 +1,150 @@
+﻿@{
+    ViewData["Title"] = "Reports";
+}
+
+<div class="container-fluid">
+    <h2 class="mb-4">Reports Dashboard</h2>
+
+    <div class="row">
+        <!-- Sales Reports -->
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-header bg-primary text-white">
+                    <i class="fas fa-chart-line"></i> Sales Reports
+                </div>
+                <div class="card-body">
+                    <div class="list-group list-group-flush">
+                        <a href="@Url.Action("DailySales", "Reports")" class="list-group-item list-group-item-action">
+                            <i class="fas fa-calendar-day"></i> Daily Sales Report
+                        </a>
+                        <a href="@Url.Action("MonthlySales", "Reports")" class="list-group-item list-group-item-action">
+                            <i class="fas fa-calendar-alt"></i> Monthly Sales Report
+                        </a>
+                        <a href="@Url.Action("CustomerWiseSales", "Reports")" class="list-group-item list-group-item-action">
+                            <i class="fas fa-users"></i> Customer-wise Sales
+                        </a>
+                        <a href="@Url.Action("ProductWiseSales", "Reports")" class="list-group-item list-group-item-action">
+                            <i class="fas fa-box"></i> Product-wise Sales
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Financial Reports -->
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-header bg-success text-white">
+                    <i class="fas fa-rupee-sign"></i> Financial Reports
+                </div>
+                <div class="card-body">
+                    <div class="list-group list-group-flush">
+                        <a href="@Url.Action("ProfitLoss", "Reports")" class="list-group-item list-group-item-action">
+                            <i class="fas fa-balance-scale"></i> Profit & Loss Statement
+                        </a>
+                        <a href="@Url.Action("CashFlow", "Reports")" class="list-group-item list-group-item-action">
+                            <i class="fas fa-money-bill-wave"></i> Cash Flow Report
+                        </a>
+                        <a href="@Url.Action("OutstandingPayments", "Reports")" class="list-group-item list-group-item-action">
+                            <i class="fas fa-exclamation-circle"></i> Outstanding Payments
+                        </a>
+                        <a href="@Url.Action("GSTReport", "Reports")" class="list-group-item list-group-item-action">
+                            <i class="fas fa-file-invoice"></i> GST Report
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Inventory Reports -->
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-header bg-warning text-dark">
+                    <i class="fas fa-warehouse"></i> Inventory Reports
+                </div>
+                <div class="card-body">
+                    <div class="list-group list-group-flush">
+                        <a href="@Url.Action("StockSummary", "Reports")" class="list-group-item list-group-item-action">
+                            <i class="fas fa-cubes"></i> Stock Summary
+                        </a>
+                        <a href="@Url.Action("PaddyStock", "Reports")" class="list-group-item list-group-item-action">
+                            <i class="fas fa-seedling"></i> Paddy Stock Report
+                        </a>
+                        <a href="@Url.Action("RiceStock", "Reports")" class="list-group-item list-group-item-action">
+                            <i class="fas fa-bowl-rice"></i> Rice Stock Report
+                        </a>
+                        <a href="@Url.Action("StockMovement", "Reports")" class="list-group-item list-group-item-action">
+                            <i class="fas fa-exchange-alt"></i> Stock Movement Report
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <!-- Production Reports -->
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-header bg-danger text-white">
+                    <i class="fas fa-industry"></i> Production Reports
+                </div>
+                <div class="card-body">
+                    <div class="list-group list-group-flush">
+                        <a href="@Url.Action("ProductionSummary", "Reports")" class="list-group-item list-group-item-action">
+                            <i class="fas fa-chart-pie"></i> Production Summary
+                        </a>
+                        <a href="@Url.Action("DailyProduction", "Reports")" class="list-group-item list-group-item-action">
+                            <i class="fas fa-calendar-day"></i> Daily Production
+                        </a>
+                        <a href="@Url.Action("MachineUtilization", "Reports")" class="list-group-item list-group-item-action">
+                            <i class="fas fa-cogs"></i> Machine Utilization
+                        </a>
+                        <a href="@Url.Action("ProductionEfficiency", "Reports")" class="list-group-item list-group-item-action">
+                            <i class="fas fa-chart-line"></i> Production Efficiency
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-info text-white">
+                    <i class="fas fa-cog"></i> Custom Reports
+                </div>
+                <div class="card-body">
+                    <form method="get" action="@Url.Action("CustomReport", "Reports")">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label>Report Type</label>
+                                <select class="form-control" name="reportType">
+                                    <option value="">Select Report</option>
+                                    <option value="sales">Sales Analysis</option>
+                                    <option value="procurement">Procurement Analysis</option>
+                                    <option value="financial">Financial Summary</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label>From Date</label>
+                                <input type="date" class="form-control" name="fromDate" />
+                            </div>
+                            <div class="col-md-3">
+                                <label>To Date</label>
+                                <input type="date" class="form-control" name="toDate" />
+                            </div>
+                            <div class="col-md-3">
+                                <label>&nbsp;</label>
+                                <button type="submit" class="btn btn-primary d-block">
+                                    <i class="fas fa-search"></i> Generate Report
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

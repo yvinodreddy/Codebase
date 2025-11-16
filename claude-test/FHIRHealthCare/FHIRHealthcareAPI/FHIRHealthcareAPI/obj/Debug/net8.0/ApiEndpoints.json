@@ -1,0 +1,941 @@
+[
+  {
+    "ContainingType": "FHIRHealthcareAPI.Controllers.AuthController",
+    "Method": "DebugHeaders",
+    "RelativePath": "api/Auth/debug-headers",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FHIRHealthcareAPI.Controllers.AuthController",
+    "Method": "Login",
+    "RelativePath": "api/Auth/login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "FHIRHealthcareAPI.Controllers.LoginRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FHIRHealthcareAPI.Controllers.AuthController",
+    "Method": "GetCurrentUser",
+    "RelativePath": "api/Auth/me",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FHIRHealthcareAPI.Controllers.AuthController",
+    "Method": "Register",
+    "RelativePath": "api/Auth/register",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "FHIRHealthcareAPI.Controllers.RegisterRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FHIRHealthcareAPI.Controllers.AuthController",
+    "Method": "SimpleTest",
+    "RelativePath": "api/Auth/simple-test",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FHIRHealthcareAPI.Controllers.AuthController",
+    "Method": "TestAuth",
+    "RelativePath": "api/Auth/test-auth",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FHIRHealthcareAPI.Controllers.AuthController",
+    "Method": "TestNoAuth",
+    "RelativePath": "api/Auth/test-no-auth",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FHIRHealthcareAPI.Controllers.CarePlanController",
+    "Method": "UpdateActivityStatus",
+    "RelativePath": "api/care-plan/{carePlanId}/activity/{activityIndex}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "carePlanId",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "activityIndex",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "request",
+        "Type": "FHIRHealthcareAPI.Controllers.UpdateActivityRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FHIRHealthcareAPI.Controllers.CarePlanController",
+    "Method": "GetProgressReport",
+    "RelativePath": "api/care-plan/{carePlanId}/progress",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "carePlanId",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FHIRHealthcareAPI.Controllers.CarePlanController",
+    "Method": "CreateDiabetesCarePlan",
+    "RelativePath": "api/care-plan/diabetes",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "FHIRHealthcareAPI.Controllers.CreateDiabetesCarePlanRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FHIRHealthcareAPI.Controllers.CarePlanController",
+    "Method": "CreateHypertensionCarePlan",
+    "RelativePath": "api/care-plan/hypertension",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "FHIRHealthcareAPI.Controllers.CreateHypertensionCarePlanRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FHIRHealthcareAPI.Controllers.ClinicalDecisionSupportController",
+    "Method": "GetCriticalAlerts",
+    "RelativePath": "api/clinical-decision-support/alerts/{patientId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "patientId",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FHIRHealthcareAPI.Controllers.ClinicalDecisionSupportController",
+    "Method": "GetComprehensiveAnalysis",
+    "RelativePath": "api/clinical-decision-support/analysis/{patientId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "patientId",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FHIRHealthcareAPI.Controllers.ConditionController",
+    "Method": "RecordDiagnosis",
+    "RelativePath": "api/fhir/Condition",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "FHIRHealthcareAPI.Controllers.DiagnosisRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FHIRHealthcareAPI.Controllers.ConditionController",
+    "Method": "RecordDiabetes",
+    "RelativePath": "api/fhir/Condition/diabetes",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "FHIRHealthcareAPI.Controllers.DiabetesRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FHIRHealthcareAPI.Controllers.ConditionController",
+    "Method": "RecordHypertension",
+    "RelativePath": "api/fhir/Condition/hypertension",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "FHIRHealthcareAPI.Controllers.HypertensionRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FHIRHealthcareAPI.Controllers.ConditionController",
+    "Method": "GetActiveConditions",
+    "RelativePath": "api/fhir/Condition/patient/{patientId}/active",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "patientId",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FHIRHealthcareAPI.Controllers.ConditionController",
+    "Method": "GetMedicalHistory",
+    "RelativePath": "api/fhir/Condition/patient/{patientId}/history",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "patientId",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FHIRHealthcareAPI.Controllers.DecisionSupportController",
+    "Method": "GetCareGaps",
+    "RelativePath": "api/fhir/decision-support/care-gaps/{patientId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "patientId",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FHIRHealthcareAPI.Controllers.DecisionSupportController",
+    "Method": "CheckContraindications",
+    "RelativePath": "api/fhir/decision-support/check-contraindications",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "FHIRHealthcareAPI.Controllers.ContraindicationCheckRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FHIRHealthcareAPI.Controllers.DecisionSupportController",
+    "Method": "CheckDuplicateTherapy",
+    "RelativePath": "api/fhir/decision-support/check-duplicate",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "FHIRHealthcareAPI.Controllers.DuplicateCheckRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FHIRHealthcareAPI.Controllers.DecisionSupportController",
+    "Method": "CheckDrugInteractions",
+    "RelativePath": "api/fhir/decision-support/check-interactions",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "FHIRHealthcareAPI.Controllers.InteractionCheckRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FHIRHealthcareAPI.Controllers.DecisionSupportController",
+    "Method": "ComprehensivePrescriptionCheck",
+    "RelativePath": "api/fhir/decision-support/comprehensive-check",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "FHIRHealthcareAPI.Controllers.PrescriptionCheckRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FHIRHealthcareAPI.Controllers.DecisionSupportController",
+    "Method": "GetCriticalValues",
+    "RelativePath": "api/fhir/decision-support/critical-values/{patientId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "patientId",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FHIRHealthcareAPI.Controllers.MedicationController",
+    "Method": "GetPatientMedications",
+    "RelativePath": "api/fhir/Medication/patient/{patientId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "patientId",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FHIRHealthcareAPI.Controllers.MedicationController",
+    "Method": "PrescribeMedication",
+    "RelativePath": "api/fhir/Medication/prescribe",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "FHIRHealthcareAPI.Controllers.PrescriptionRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FHIRHealthcareAPI.Controllers.MedicationController",
+    "Method": "PrescribeValidated",
+    "RelativePath": "api/fhir/Medication/prescribe-validated",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "FHIRHealthcareAPI.Controllers.PrescriptionRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FHIRHealthcareAPI.Controllers.MedicationController",
+    "Method": "RecordMedicationStatement",
+    "RelativePath": "api/fhir/Medication/statement",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "FHIRHealthcareAPI.Controllers.MedicationStatementRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FHIRHealthcareAPI.Controllers.ObservationController",
+    "Method": "RecordBloodPressure",
+    "RelativePath": "api/fhir/Observation/blood-pressure",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "FHIRHealthcareAPI.Controllers.BloodPressureRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FHIRHealthcareAPI.Controllers.ObservationController",
+    "Method": "RecordGlucose",
+    "RelativePath": "api/fhir/Observation/glucose",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "FHIRHealthcareAPI.Controllers.GlucoseRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FHIRHealthcareAPI.Controllers.ObservationController",
+    "Method": "RecordHbA1c",
+    "RelativePath": "api/fhir/Observation/hba1c",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "FHIRHealthcareAPI.Controllers.HbA1cRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FHIRHealthcareAPI.Controllers.ObservationController",
+    "Method": "GetPatientObservations",
+    "RelativePath": "api/fhir/Observation/patient/{patientId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "patientId",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "type",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FHIRHealthcareAPI.Controllers.PatientController",
+    "Method": "GetPatient",
+    "RelativePath": "api/fhir/Patient/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FHIRHealthcareAPI.Controllers.PatientController",
+    "Method": "SearchPatients",
+    "RelativePath": "api/fhir/Patient/search",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "name",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FHIRHealthcareAPI.Controllers.PatientController",
+    "Method": "CreateTestPatient",
+    "RelativePath": "api/fhir/Patient/test-create",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FHIRHealthcareAPI.Modules.KnowledgeGraph.Controllers.KnowledgeGraphController",
+    "Method": "GetRelatedConditions",
+    "RelativePath": "api/knowledge-graph/conditions/{snomedCode}/related",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "snomedCode",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FHIRHealthcareAPI.Modules.KnowledgeGraph.Controllers.KnowledgeGraphController",
+    "Method": "GetRelatedMedications",
+    "RelativePath": "api/knowledge-graph/medications/{rxNormCui}/related",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "rxNormCui",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FHIRHealthcareAPI.Modules.KnowledgeGraph.Controllers.KnowledgeGraphController",
+    "Method": "CheckDrugInteractions",
+    "RelativePath": "api/knowledge-graph/medications/check-interactions",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "FHIRHealthcareAPI.Modules.KnowledgeGraph.Controllers.DrugInteractionCheckRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FHIRHealthcareAPI.Modules.KnowledgeGraph.Controllers.KnowledgeGraphController",
+    "Method": "SyncPatientConditions",
+    "RelativePath": "api/knowledge-graph/patient/{patientId}/conditions/sync",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "patientId",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FHIRHealthcareAPI.Modules.KnowledgeGraph.Controllers.KnowledgeGraphController",
+    "Method": "ConvertPatientToKnowledgeGraph",
+    "RelativePath": "api/knowledge-graph/patient/{patientId}/convert",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "patientId",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FHIRHealthcareAPI.Modules.KnowledgeGraph.Controllers.KnowledgeGraphController",
+    "Method": "AddMedicationToKnowledgeGraph",
+    "RelativePath": "api/knowledge-graph/patient/{patientId}/medication/add",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "patientId",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "request",
+        "Type": "FHIRHealthcareAPI.Modules.KnowledgeGraph.Controllers.AddMedicationRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FHIRHealthcareAPI.Modules.KnowledgeGraph.Controllers.KnowledgeGraphController",
+    "Method": "SyncPatientMedications",
+    "RelativePath": "api/knowledge-graph/patient/{patientId}/medications/sync",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "patientId",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FHIRHealthcareAPI.Modules.KnowledgeGraph.Controllers.KnowledgeGraphController",
+    "Method": "GetPatientKnowledgeSummary",
+    "RelativePath": "api/knowledge-graph/patient/{patientId}/summary",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "patientId",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "LoincCurrentController",
+    "Method": "TestCurrentService",
+    "RelativePath": "api/loinc-current/{loincCode}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "loincCode",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FHIRHealthcareAPI.Controllers.LoincTestController",
+    "Method": "DebugLoincCode",
+    "RelativePath": "api/loinc-test/debug/{loincCode}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "loincCode",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FHIRHealthcareAPI.Controllers.LoincTestController",
+    "Method": "GetLabTestDetails",
+    "RelativePath": "api/loinc-test/details/{loincCode}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "loincCode",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FHIRHealthcareAPI.Controllers.LoincTestController",
+    "Method": "TestCommonLabCodes",
+    "RelativePath": "api/loinc-test/test-common",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FHIRHealthcareAPI.Controllers.LoincTestController",
+    "Method": "ValidateLoincCode",
+    "RelativePath": "api/loinc-test/validate/{loincCode}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "loincCode",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FHIRHealthcareAPI.Controllers.HealthMonitoringController",
+    "Method": "GetHealth",
+    "RelativePath": "api/monitoring/health",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FHIRHealthcareAPI.Controllers.HealthMonitoringController",
+    "Method": "GetPerformanceMetrics",
+    "RelativePath": "api/monitoring/performance",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FHIRHealthcareAPI.Controllers.HealthMonitoringController",
+    "Method": "GetSystemStatus",
+    "RelativePath": "api/monitoring/status",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FHIRHealthcareAPI.Controllers.RxNormLiveController",
+    "Method": "GetDrugInfo",
+    "RelativePath": "api/rxnorm-live/drug/{rxcui}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "rxcui",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FHIRHealthcareAPI.Controllers.RxNormLiveController",
+    "Method": "CheckInteractions",
+    "RelativePath": "api/rxnorm-live/interactions",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "FHIRHealthcareAPI.Controllers.RxNormInteractionRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FHIRHealthcareAPI.Controllers.RxNormLiveController",
+    "Method": "SearchMedications",
+    "RelativePath": "api/rxnorm-live/search",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "maxResults",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FHIRHealthcareAPI.Controllers.SnomedTestController",
+    "Method": "TestCommonConditions",
+    "RelativePath": "api/snomed-test/test-common",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FHIRHealthcareAPI.Controllers.SnomedTestController",
+    "Method": "ValidateSnomedCode",
+    "RelativePath": "api/snomed-test/validate/{snomedCode}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "snomedCode",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FHIRHealthcareAPI.Controllers.GraphDBTestController",
+    "Method": "CheckHealth",
+    "RelativePath": "api/test/graphdb/health",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FHIRHealthcareAPI.Controllers.GraphDBTestController",
+    "Method": "TestConnection",
+    "RelativePath": "api/test/graphdb/test-connection",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FHIRHealthcareAPI.Controllers.TestTerminologyController",
+    "Method": "GetDrugInfo",
+    "RelativePath": "api/test/terminology/drug/{rxcui}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "rxcui",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FHIRHealthcareAPI.Controllers.TestTerminologyController",
+    "Method": "CheckInteractions",
+    "RelativePath": "api/test/terminology/interactions",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "FHIRHealthcareAPI.Controllers.InteractionRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FHIRHealthcareAPI.Controllers.TestTerminologyController",
+    "Method": "ValidateLoincCode",
+    "RelativePath": "api/test/terminology/loinc/{code}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "code",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FHIRHealthcareAPI.Controllers.ValidatedLabController",
+    "Method": "RecordValidatedLab",
+    "RelativePath": "api/validated-lab/record",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "FHIRHealthcareAPI.Controllers.LabResultRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

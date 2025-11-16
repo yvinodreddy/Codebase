@@ -1,0 +1,14 @@
+This is a comprehensive test prompt to verify that ultrathinkc can handle prompts of substantial length without any issues. The system should process this through all guardrails layers, verification systems, and context management components. This is simulating a real-world scenario where a developer needs to provide detailed requirements for a complex feature implementation.
+
+PROJECT CONTEXT:
+We are building a distributed microservices architecture for a healthcare application that needs to handle patient records, appointment scheduling, billing integration, and real-time notifications. The system must comply with HIPAA regulations and achieve 99.9% uptime.
+
+REQUIREMENTS:
+1. Implement a secure authentication service using OAuth 2.0 with refresh tokens
+2. Create a patient management API with CRUD operations and search functionality
+3. Build an appointment scheduling system with conflict detection and automated reminders
+4. Integrate with third-party billing systems using RESTful APIs
+5. Implement real-time notifications using WebSockets
+6. Add comprehensive logging and monitoring with distributed tracing
+7. Ensure all data is encrypted at rest and in transit
+8. Create detailed API documentation using OpenAPI 3.0 specification

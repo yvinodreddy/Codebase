@@ -1,0 +1,96 @@
+@{
+    ViewData["Title"] = "Seed Phase 4 Data";
+}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card shadow-lg">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0"><i class="fas fa-database"></i> Seed Phase 4 Data</h3>
+                </div>
+                <div class="card-body">
+                    @if (TempData["Success"] != null)
+                    {
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            @Html.Raw(TempData["Success"])
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        </div>
+                    }
+
+                    @if (TempData["Error"] != null)
+                    {
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <i class="fas fa-exclamation-circle"></i> @TempData["Error"]
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        </div>
+                    }
+
+                    <div class="mb-4">
+                        <h5>This will populate all Phase 4 tables with test data:</h5>
+                        <ul class="list-group mt-3">
+                            <li class="list-group-item">
+                                <i class="fas fa-key text-primary"></i> <strong>4 API Keys</strong>
+                                <small class="text-muted">- Including keys with 199%+ utilization</small>
+                            </li>
+                            <li class="list-group-item">
+                                <i class="fas fa-webhook text-success"></i> <strong>5 Webhooks</strong>
+                                <small class="text-muted">- Various event types (active & inactive)</small>
+                            </li>
+                            <li class="list-group-item">
+                                <i class="fas fa-mobile-alt text-info"></i> <strong>7 Mobile Devices</strong>
+                                <small class="text-muted">- 4 Android, 3 iOS devices</small>
+                            </li>
+                            <li class="list-group-item">
+                                <i class="fas fa-bell text-warning"></i> <strong>9 Push Notifications</strong>
+                                <small class="text-muted">- Sent, delivered, pending, and failed states</small>
+                            </li>
+                            <li class="list-group-item">
+                                <i class="fas fa-chart-line text-danger"></i> <strong>50 Analytics Events</strong>
+                                <small class="text-muted">- Screen views, clicks, performance metrics</small>
+                            </li>
+                            <li class="list-group-item">
+                                <i class="fas fa-tachometer-alt text-secondary"></i> <strong>30 Realtime Metrics</strong>
+                                <small class="text-muted">- System performance data</small>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="alert alert-warning">
+                        <i class="fas fa-exclamation-triangle"></i> <strong>Warning:</strong> This will DELETE all existing Phase 4 data and replace it with test data.
+                    </div>
+
+                    <form asp-action="SeedAll" method="post" onsubmit="return confirm('Are you sure you want to seed all Phase 4 data? This will replace existing data.');">
+                        <button type="submit" class="btn btn-primary btn-lg w-100">
+                            <i class="fas fa-play-circle"></i> Seed All Phase 4 Data
+                        </button>
+                    </form>
+
+                    <div class="mt-4">
+                        <h6>Quick Links to Phase 4 Pages:</h6>
+                        <div class="btn-group-vertical w-100" role="group">
+                            <a href="/ApiKeys" class="btn btn-outline-primary">
+                                <i class="fas fa-key"></i> API Keys Management
+                            </a>
+                            <a href="/Webhooks" class="btn btn-outline-success">
+                                <i class="fas fa-webhook"></i> Webhooks Management
+                            </a>
+                            <a href="/PushNotifications" class="btn btn-outline-info">
+                                <i class="fas fa-bell"></i> Push Notifications
+                            </a>
+                            <a href="/MobileDashboard" class="btn btn-outline-warning">
+                                <i class="fas fa-mobile-alt"></i> Mobile Analytics Dashboard
+                            </a>
+                            <a href="/RealtimeMonitoring" class="btn btn-outline-danger">
+                                <i class="fas fa-tachometer-alt"></i> Real-time Monitoring
+                            </a>
+                            <a href="/SignalRConsole" class="btn btn-outline-secondary">
+                                <i class="fas fa-broadcast-tower"></i> SignalR Console
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

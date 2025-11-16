@@ -1,0 +1,139 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: patient-xai
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: patient-xai-config
+  namespace: patient-xai
+data:
+  config.json: |
+    {
+      "hipaa_mode": "enabled",
+      "audit_logging": "enabled",
+      "default_language": "en",
+      "max_batch_size": 100
+    }
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: patient-xai
+  namespace: patient-xai
+  labels:
+    app: patient-xai
+    version: v1.0.0
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: patient-xai
+  template:
+    metadata:
+      labels:
+        app: patient-xai
+        version: v1.0.0
+    spec:
+      containers:
+      - name: patient-xai
+        image: patient-xai:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
+          name: http
+          protocol: TCP
+        - containerPort: 9090
+          name: metrics
+          protocol: TCP
+        env:
+        - name: HIPAA_MODE
+          value: "enabled"
+        - name: AUDIT_LOGGING
+          value: "enabled"
+        - name: LOG_LEVEL
+          value: "INFO"
+        volumeMounts:
+        - name: config
+          mountPath: /app/config.json
+          subPath: config.json
+        - name: logs
+          mountPath: /var/log/patient-xai
+        livenessProbe:
+          exec:
+            command:
+            - python3
+            - -c
+            - "from implementation import Phase25Implementation; print('ok')"
+          initialDelaySeconds: 30
+          periodSeconds: 30
+          timeoutSeconds: 10
+        readinessProbe:
+          exec:
+            command:
+            - python3
+            - -c
+            - "from implementation import Phase25Implementation; print('ok')"
+          initialDelaySeconds: 10
+          periodSeconds: 10
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+      volumes:
+      - name: config
+        configMap:
+          name: patient-xai-config
+      - name: logs
+        emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: patient-xai-service
+  namespace: patient-xai
+  labels:
+    app: patient-xai
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 8080
+    protocol: TCP
+    name: http
+  - port: 9090
+    targetPort: 9090
+    protocol: TCP
+    name: metrics
+  selector:
+    app: patient-xai
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: patient-xai-hpa
+  namespace: patient-xai
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: patient-xai
+  minReplicas: 3
+  maxReplicas: 10
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 70
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: 80

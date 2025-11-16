@@ -1,0 +1,334 @@
+@{
+    ViewData["Title"] = "Financial Analytics";
+    var productMargins = ViewBag.ProductMargins as List<RMMS.Services.Services.Analytics.ProductMarginDto>;
+    var customerProfitability = ViewBag.CustomerProfitability as List<RMMS.Services.Services.Analytics.CustomerProfitabilityDto>;
+    var costAnalysis = ViewBag.CostAnalysis as List<RMMS.Services.Services.Analytics.CostAnalysisDto>;
+    var revenueBreakdown = ViewBag.RevenueBreakdown as List<RMMS.Services.Services.Analytics.RevenueBreakdownDto>;
+}
+
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <h2>Financial Analytics Dashboard</h2>
+            <p class="text-muted">Profit margins, cost analysis, and profitability insights</p>
+        </div>
+        <div class="col-md-4 text-end">
+            <a href="@Url.Action("Index", "Analytics")" class="btn btn-secondary">
+                <i class="bi bi-arrow-left"></i> Back to Analytics
+            </a>
+        </div>
+    </div>
+
+    <!-- Date Range Filter -->
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <form method="get" class="row g-3">
+                        <div class="col-md-4">
+                            <label class="form-label">Start Date</label>
+                            <input type="date" name="startDate" class="form-control" value="@ViewBag.StartDate?.ToString("yyyy-MM-dd")">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">End Date</label>
+                            <input type="date" name="endDate" class="form-control" value="@ViewBag.EndDate?.ToString("yyyy-MM-dd")">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">&nbsp;</label>
+                            <button type="submit" class="btn btn-primary w-100">Apply</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Key Financial Metrics -->
+    @if (productMargins != null && productMargins.Any())
+    {
+        var totalRevenue = productMargins.Sum(p => p.Revenue);
+        var totalCOGS = productMargins.Sum(p => p.COGS);
+        var totalGrossMargin = productMargins.Sum(p => p.GrossMargin);
+        var avgMarginPercentage = totalRevenue > 0 ? (totalGrossMargin / totalRevenue * 100) : 0;
+
+        <div class="row mb-4">
+            <div class="col-md-3">
+                <div class="card bg-primary text-white">
+                    <div class="card-body">
+                        <h6>Total Revenue</h6>
+                        <h3>$@totalRevenue.ToString("N2")</h3>
+                        <small>Period revenue</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card bg-warning">
+                    <div class="card-body">
+                        <h6>Cost of Goods Sold</h6>
+                        <h3>$@totalCOGS.ToString("N2")</h3>
+                        <small>Total COGS</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card bg-success text-white">
+                    <div class="card-body">
+                        <h6>Gross Profit</h6>
+                        <h3>$@totalGrossMargin.ToString("N2")</h3>
+                        <small>Revenue - COGS</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card bg-info text-white">
+                    <div class="card-body">
+                        <h6>Gross Margin %</h6>
+                        <h3>@avgMarginPercentage.ToString("N1")%</h3>
+                        <small>Profit percentage</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product Margins -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0">Product Margin Analysis</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Product</th>
+                                        <th>Revenue</th>
+                                        <th>COGS</th>
+                                        <th>Gross Margin</th>
+                                        <th>Margin %</th>
+                                        <th>Net Margin %</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var product in productMargins.Take(15))
+                                    {
+                                        var marginClass = product.GrossMarginPercentage >= 40 ? "success" :
+                                                         product.GrossMarginPercentage >= 25 ? "info" :
+                                                         product.GrossMarginPercentage >= 15 ? "warning" : "danger";
+
+                                        <tr>
+                                            <td>@product.ProductName</td>
+                                            <td>$@product.Revenue.ToString("N2")</td>
+                                            <td>$@product.COGS.ToString("N2")</td>
+                                            <td>$@product.GrossMargin.ToString("N2")</td>
+                                            <td>
+                                                <span class="badge bg-@marginClass">
+                                                    @product.GrossMarginPercentage.ToString("N1")%
+                                                </span>
+                                            </td>
+                                            <td>@product.NetMarginPercentage.ToString("N1")%</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    <!-- Customer Profitability -->
+    @if (customerProfitability != null && customerProfitability.Any())
+    {
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header bg-success text-white">
+                        <h5 class="mb-0">Top 10 Customers by Profitability</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Customer</th>
+                                        <th>Revenue</th>
+                                        <th>Profit</th>
+                                        <th>Margin %</th>
+                                        <th>Tier</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var customer in customerProfitability.Take(10))
+                                    {
+                                        var tierClass = customer.ProfitabilityTier switch
+                                        {
+                                            "High" => "success",
+                                            "Medium" => "info",
+                                            _ => "warning"
+                                        };
+
+                                        <tr>
+                                            <td>@customer.CustomerName</td>
+                                            <td>$@customer.TotalRevenue.ToString("N2")</td>
+                                            <td>$@customer.GrossProfit.ToString("N2")</td>
+                                            <td>@customer.ProfitMargin.ToString("N1")%</td>
+                                            <td><span class="badge bg-@tierClass">@customer.ProfitabilityTier</span></td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @if (costAnalysis != null && costAnalysis.Any())
+            {
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header bg-warning">
+                            <h5 class="mb-0">Cost Breakdown</h5>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="costChart" height="200"></canvas>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+
+    <!-- Revenue Breakdown -->
+    @if (revenueBreakdown != null && revenueBreakdown.Any())
+    {
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header bg-info text-white">
+                        <h5 class="mb-0">Revenue Breakdown by Category</h5>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="revenueChart" height="200"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header bg-secondary text-white">
+                        <h5 class="mb-0">Revenue Details</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Category</th>
+                                        <th>Amount</th>
+                                        <th>Percentage</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in revenueBreakdown)
+                                    {
+                                        <tr>
+                                            <td>@item.Category</td>
+                                            <td>$@item.Amount.ToString("N2")</td>
+                                            <td>
+                                                <div class="progress" style="height: 20px;">
+                                                    <div class="progress-bar" role="progressbar"
+                                                         style="width: @item.Percentage%">
+                                                        @item.Percentage.ToString("N1")%
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    <!-- Quick Links -->
+    <div class="row">
+        <div class="col-md-4">
+            <a href="@Url.Action("CostAnalysis", "Analytics")" class="btn btn-outline-primary w-100 mb-2">
+                <i class="bi bi-calculator"></i> Detailed Cost Analysis
+            </a>
+        </div>
+        <div class="col-md-4">
+            <a href="@Url.Action("Suppliers", "Analytics")" class="btn btn-outline-success w-100 mb-2">
+                <i class="bi bi-truck"></i> Supplier Performance
+            </a>
+        </div>
+        <div class="col-md-4">
+            <a href="@Url.Action("Executive", "Analytics")" class="btn btn-outline-info w-100 mb-2">
+                <i class="bi bi-briefcase"></i> Executive Dashboard
+            </a>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        @if (costAnalysis != null && costAnalysis.Any())
+        {
+            <text>
+            // Cost Breakdown Chart
+            const costCtx = document.getElementById('costChart').getContext('2d');
+            new Chart(costCtx, {
+                type: 'pie',
+                data: {
+                    labels: [@Html.Raw(string.Join(",", costAnalysis.Select(c => $"'{c.CostCategory}'")))],
+                    datasets: [{
+                        data: [@Html.Raw(string.Join(",", costAnalysis.Select(c => c.TotalCosts)))],
+                        backgroundColor: ['#007bff', '#28a745', '#ffc107', '#dc3545', '#17a2b8']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
+            </text>
+        }
+
+        @if (revenueBreakdown != null && revenueBreakdown.Any())
+        {
+            <text>
+            // Revenue Breakdown Chart
+            const revenueCtx = document.getElementById('revenueChart').getContext('2d');
+            new Chart(revenueCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: [@Html.Raw(string.Join(",", revenueBreakdown.Select(r => $"'{r.Category}'")))],
+                    datasets: [{
+                        data: [@Html.Raw(string.Join(",", revenueBreakdown.Select(r => r.Amount)))],
+                        backgroundColor: ['#007bff', '#28a745', '#ffc107']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
+            </text>
+        }
+    </script>
+}

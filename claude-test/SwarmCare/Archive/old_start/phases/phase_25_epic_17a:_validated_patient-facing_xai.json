@@ -1,0 +1,25 @@
+{
+  "phase_id": 25,
+  "name": "Epic 17A: Validated Patient-Facing XAI",
+  "epic": "Epic 17A",
+  "story_points": 8,
+  "priority": "P0",
+  "dependencies": [
+    16
+  ],
+  "version": "v2.1",
+  "user_stories": [
+    {
+      "story_id": "17A.1",
+      "title": "Patient-Friendly Explanations (8th Grade Reading Level)",
+      "story_points": 5,
+      "priority": "P0"
+    },
+    {
+      "story_id": "17A.2",
+      "title": "IRB-Approved Patient Explanation Validation",
+      "story_points": 3,
+      "priority": "P0"
+    }
+  ]
+}

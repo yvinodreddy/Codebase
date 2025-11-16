@@ -1,0 +1,278 @@
+﻿@using System.Linq
+@{
+    ViewData["Title"] = "Customer-wise Sales Report";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var customerGroupsList = ViewBag.CustomerGroups as IEnumerable<dynamic> ?? Enumerable.Empty<dynamic>();
+    var customerGroups = customerGroupsList.ToList();
+}
+
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-header bg-info text-white">
+            <h3><i class="fas fa-users"></i> Customer-wise Sales Report</h3>
+            <small>Generated at: @ViewBag.ReportGeneratedAt</small>
+        </div>
+
+        <div class="card-body">
+            <!-- Filter Section -->
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <form method="get" action="@Url.Action("CustomerWiseSales", "Reports")">
+                        <div class="input-group">
+                            <input type="text" name="customerName" class="form-control"
+                                   placeholder="Search by customer name..." value="@ViewBag.CustomerFilter">
+                            <button class="btn btn-primary" type="submit">
+                                <i class="fas fa-search"></i> Search
+                            </button>
+                            @if (!string.IsNullOrEmpty(ViewBag.CustomerFilter))
+                            {
+                                <a href="@Url.Action("CustomerWiseSales", "Reports")" class="btn btn-secondary">
+                                    <i class="fas fa-times"></i> Clear
+                                </a>
+                            }
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-6 text-end">
+                    <div class="badge bg-primary p-2">
+                        Total Customers: @ViewBag.TotalCustomers
+                    </div>
+                    <div class="badge bg-success p-2 ms-2">
+                        Total Revenue: ₹ @string.Format("{0:N2}", ViewBag.TotalRevenue)
+                    </div>
+                </div>
+            </div>
+
+            <!-- Customer Performance Cards -->
+            @if (customerGroups.Count > 0)
+            {
+                <div class="row mb-4">
+                    @{
+                        int topCustomerIndex = 1;
+                    }
+                    @foreach (var customer in customerGroups.Take(3))
+                    {
+                        <div class="col-md-4">
+                            <div class="card border-primary">
+                                <div class="card-body">
+                                    <h6 class="card-subtitle mb-2 text-muted">Top Customer #@topCustomerIndex</h6>
+                                    <h5 class="card-title">@customer.CustomerName</h5>
+                                    <p class="card-text">
+                                        <strong>Total Sales:</strong> ₹ @customer.TotalSales.ToString("N2")<br>
+                                        <strong>Orders:</strong> @customer.NumberOfOrders<br>
+                                        <strong>Avg Order:</strong> ₹ @customer.AverageOrderValue.ToString("N2")
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        topCustomerIndex++;
+                    }
+                </div>
+            }
+
+            <!-- Detailed Customer Table -->
+            <div class="table-responsive">
+                <table class="table table-hover table-striped" id="customerTable">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Rank</th>
+                            <th>Customer Name</th>
+                            <th>Total Sales (₹)</th>
+                            <th>Total Quantity (kg)</th>
+                            <th>Number of Orders</th>
+                            <th>Average Order Value</th>
+                            <th>Last Order Date</th>
+                            <th>% of Total Sales</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (customerGroups.Count > 0)
+                        {
+                            int rank = 1;
+                            decimal totalRevenue = ViewBag.TotalRevenue > 0 ? ViewBag.TotalRevenue : 1;
+
+                            foreach (var customer in customerGroups)
+                            {
+                                decimal percentage = (customer.TotalSales / totalRevenue) * 100;
+
+                                <tr>
+                                    <td>
+                                        @if (rank <= 3)
+                                        {
+                                            <span class="badge bg-warning">@rank</span>
+                                        }
+                                        else
+                                        {
+                                            @rank
+                                        }
+                                    </td>
+                                    <td><strong>@customer.CustomerName</strong></td>
+                                    <td>₹ @customer.TotalSales.ToString("N2")</td>
+                                    <td>@customer.TotalQuantity.ToString("N2")</td>
+                                    <td>@customer.NumberOfOrders</td>
+                                    <td>₹ @customer.AverageOrderValue.ToString("N2")</td>
+                                    <td>@customer.LastOrderDate.ToString("dd-MMM-yyyy")</td>
+                                    <td>
+                                        <div class="progress" style="height: 20px;">
+                                            <div class="progress-bar" role="progressbar"
+                                                 style="width: @percentage%"
+                                                 aria-valuenow="@percentage"
+                                                 aria-valuemin="0"
+                                                 aria-valuemax="100">
+                                                @percentage.ToString("N1")%
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-sm btn-info" onclick="viewCustomerDetails('@customer.CustomerName')">
+                                            <i class="fas fa-eye"></i> Details
+                                        </button>
+                                    </td>
+                                </tr>
+                                rank++;
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="9" class="text-center">
+                                    <div class="alert alert-info mb-0">
+                                        No customer sales data available for the selected criteria.
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Customer Distribution Chart -->
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Top 5 Customers - Sales Distribution</h5>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="customerPieChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Customer Purchase Frequency</h5>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="frequencyChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="mt-4">
+                <a href="@Url.Action("Index", "Reports")" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Back to Reports
+                </a>
+                <button class="btn btn-primary" onclick="window.print()">
+                    <i class="fas fa-print"></i> Print Report
+                </button>
+                <button class="btn btn-success" onclick="exportReport()">
+                    <i class="fas fa-file-excel"></i> Export to Excel
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Initialize DataTable with pagination, sorting, and 16 rows
+        $(document).ready(function() {
+            $('#customerTable').DataTable({
+                "paging": true,
+                "pageLength": 16,
+                "ordering": true,
+                "searching": true,
+                "lengthChange": true,
+                "lengthMenu": [[10, 16, 25, 50, 100, -1], [10, 16, 25, 50, 100, "All"]],
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+                "language": {
+                    "search": "Search customers:",
+                    "lengthMenu": "Show _MENU_ customers",
+                    "info": "Showing _START_ to _END_ of _TOTAL_ customers"
+                },
+                "order": [[2, "desc"]] // Sort by Total Sales descending
+            });
+        });
+
+        function viewCustomerDetails(customerName) {
+            // Navigate to RiceSales index filtered by customer name
+            window.location.href = '@Url.Action("Index", "RiceSales")?customerFilter=' + encodeURIComponent(customerName);
+        }
+
+        function exportReport() {
+            alert('Export functionality will be available once database is connected');
+        }
+
+        // Prepare chart data
+        var customerData = @Html.Raw(Json.Serialize(customerGroups));
+
+        // Create pie chart for top 5 customers
+        if (customerData.length > 0) {
+            var topFive = customerData.slice(0, 5);
+            var pieCtx = document.getElementById('customerPieChart').getContext('2d');
+            new Chart(pieCtx, {
+                type: 'pie',
+                data: {
+                    labels: topFive.map(c => c.customerName),
+                    datasets: [{
+                        data: topFive.map(c => c.totalSales),
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.8)',
+                            'rgba(54, 162, 235, 0.8)',
+                            'rgba(255, 206, 86, 0.8)',
+                            'rgba(75, 192, 192, 0.8)',
+                            'rgba(153, 102, 255, 0.8)'
+                        ]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
+
+            // Create bar chart for purchase frequency
+            var freqCtx = document.getElementById('frequencyChart').getContext('2d');
+            new Chart(freqCtx, {
+                type: 'bar',
+                data: {
+                    labels: topFive.map(c => c.customerName),
+                    datasets: [{
+                        label: 'Number of Orders',
+                        data: topFive.map(c => c.numberOfOrders),
+                        backgroundColor: 'rgba(75, 192, 192, 0.8)'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+}

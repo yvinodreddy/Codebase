@@ -1,0 +1,220 @@
+@model Dictionary<string, object>
+@{
+    ViewData["Title"] = "Analytics Dashboard";
+}
+
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col-12">
+            <h2 class="mb-3">Analytics Dashboard</h2>
+            <p class="text-muted">Comprehensive business intelligence and analytics</p>
+        </div>
+    </div>
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            @TempData["ErrorMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    <!-- Quick Navigation -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card border-primary">
+                <div class="card-body text-center">
+                    <i class="bi bi-gear-fill text-primary" style="font-size: 2rem;"></i>
+                    <h5 class="card-title mt-2">Production</h5>
+                    <p class="card-text">Machine efficiency, OEE, quality metrics</p>
+                    <a href="@Url.Action("Production", "Analytics")" class="btn btn-primary">View</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-success">
+                <div class="card-body text-center">
+                    <i class="bi bi-box-seam text-success" style="font-size: 2rem;"></i>
+                    <h5 class="card-title mt-2">Inventory</h5>
+                    <p class="card-text">Stock levels, ABC analysis, alerts</p>
+                    <a href="@Url.Action("Inventory", "Analytics")" class="btn btn-success">View</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-info">
+                <div class="card-body text-center">
+                    <i class="bi bi-graph-up text-info" style="font-size: 2rem;"></i>
+                    <h5 class="card-title mt-2">Sales</h5>
+                    <p class="card-text">Trends, customer behavior, forecasts</p>
+                    <a href="@Url.Action("Sales", "Analytics")" class="btn btn-info">View</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-warning">
+                <div class="card-body text-center">
+                    <i class="bi bi-currency-dollar text-warning" style="font-size: 2rem;"></i>
+                    <h5 class="card-title mt-2">Financial</h5>
+                    <p class="card-text">Margins, costs, profitability</p>
+                    <a href="@Url.Action("Financial", "Analytics")" class="btn btn-warning">View</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Executive Summary -->
+    @if (Model != null && Model.ContainsKey("KPIs"))
+    {
+        var kpis = Model["KPIs"] as List<RMMS.Services.Services.Analytics.ExecutiveKPIDto>;
+        if (kpis != null && kpis.Any())
+        {
+            <div class="row mb-4">
+                <div class="col-12">
+                    <h4>Key Performance Indicators</h4>
+                </div>
+                @foreach (var kpi in kpis)
+                {
+                    var badgeClass = kpi.Status switch
+                    {
+                        "Excellent" => "bg-success",
+                        "OnTrack" => "bg-info",
+                        "NeedsAttention" => "bg-warning",
+                        "Critical" => "bg-danger",
+                        _ => "bg-secondary"
+                    };
+
+                    <div class="col-md-4 mb-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <h6 class="card-subtitle mb-2 text-muted">@kpi.KPIName</h6>
+                                <h3 class="card-title">@kpi.CurrentValue.ToString("N2")</h3>
+                                <div class="progress mb-2" style="height: 8px;">
+                                    <div class="progress-bar @badgeClass" role="progressbar"
+                                         style="width: @(Math.Min(100, kpi.Achievement))%"></div>
+                                </div>
+                                <small class="text-muted">
+                                    Target: @kpi.TargetValue.ToString("N2") |
+                                    Achievement: @kpi.Achievement.ToString("N1")%
+                                    <span class="badge @badgeClass ms-2">@kpi.Status</span>
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+    }
+
+    <!-- Quick Stats -->
+    @if (Model != null)
+    {
+        <div class="row mb-4">
+            @if (Model.ContainsKey("TotalRevenue"))
+            {
+                <div class="col-md-3 mb-3">
+                    <div class="card bg-primary text-white">
+                        <div class="card-body">
+                            <h6 class="card-subtitle mb-2">Monthly Revenue</h6>
+                            <h4 class="card-title">$@(Convert.ToDecimal(Model["TotalRevenue"]).ToString("N2"))</h4>
+                        </div>
+                    </div>
+                </div>
+            }
+            @if (Model.ContainsKey("TotalOrders"))
+            {
+                <div class="col-md-3 mb-3">
+                    <div class="card bg-success text-white">
+                        <div class="card-body">
+                            <h6 class="card-subtitle mb-2">Total Orders</h6>
+                            <h4 class="card-title">@Model["TotalOrders"]</h4>
+                        </div>
+                    </div>
+                </div>
+            }
+            @if (Model.ContainsKey("TotalInventoryValue"))
+            {
+                <div class="col-md-3 mb-3">
+                    <div class="card bg-info text-white">
+                        <div class="card-body">
+                            <h6 class="card-subtitle mb-2">Inventory Value</h6>
+                            <h4 class="card-title">$@(Convert.ToDecimal(Model["TotalInventoryValue"]).ToString("N2"))</h4>
+                        </div>
+                    </div>
+                </div>
+            }
+            @if (Model.ContainsKey("ProductionEfficiency"))
+            {
+                <div class="col-md-3 mb-3">
+                    <div class="card bg-warning text-white">
+                        <div class="card-body">
+                            <h6 class="card-subtitle mb-2">Production Efficiency</h6>
+                            <h4 class="card-title">@(Convert.ToDecimal(Model["ProductionEfficiency"]).ToString("N1"))%</h4>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+
+    <!-- Additional Quick Links -->
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">More Analytics</h5>
+                </div>
+                <div class="list-group list-group-flush">
+                    <a href="@Url.Action("Suppliers", "Analytics")" class="list-group-item list-group-item-action">
+                        <i class="bi bi-truck"></i> Supplier Performance
+                    </a>
+                    <a href="@Url.Action("CustomerBehavior", "Analytics")" class="list-group-item list-group-item-action">
+                        <i class="bi bi-people"></i> Customer Behavior Analysis
+                    </a>
+                    <a href="@Url.Action("CostAnalysis", "Analytics")" class="list-group-item list-group-item-action">
+                        <i class="bi bi-calculator"></i> Cost Analysis & Budget Variance
+                    </a>
+                    <a href="@Url.Action("Executive", "Analytics")" class="list-group-item list-group-item-action">
+                        <i class="bi bi-briefcase"></i> Executive Dashboard
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        @if (Model != null && Model.ContainsKey("LowStockCount"))
+        {
+            <div class="col-md-6 mb-3">
+                <div class="card">
+                    <div class="card-header bg-warning">
+                        <h5 class="mb-0">Alerts & Notifications</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="alert alert-warning mb-2">
+                            <i class="bi bi-exclamation-triangle"></i>
+                            <strong>@Model["LowStockCount"]</strong> items with low stock
+                        </div>
+                        @if (Model.ContainsKey("OutOfStockCount"))
+                        {
+                            <div class="alert alert-danger mb-2">
+                                <i class="bi bi-x-circle"></i>
+                                <strong>@Model["OutOfStockCount"]</strong> items out of stock
+                            </div>
+                        }
+                        <a href="@Url.Action("StockAlerts", "Analytics")" class="btn btn-outline-warning">
+                            View All Alerts
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Auto-refresh dashboard every 5 minutes
+        setTimeout(function() {
+            location.reload();
+        }, 300000);
+    </script>
+}

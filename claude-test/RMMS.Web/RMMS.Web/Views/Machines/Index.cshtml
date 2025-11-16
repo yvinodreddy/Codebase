@@ -1,0 +1,235 @@
+@model RMMS.Common.Pagination.PagedResult<RMMS.Models.Production.Machine>
+@{
+    ViewData["Title"] = "Machines";
+    string GetSortIcon(string columnName)
+    {
+        if (ViewBag.CurrentSort != columnName)
+            return "<i class='fas fa-sort text-muted'></i>";
+
+        return ViewBag.CurrentOrder == "asc"
+            ? "<i class='fas fa-sort-up'></i>"
+            : "<i class='fas fa-sort-down'></i>";
+    }
+
+    string GetSortUrl(string columnName)
+    {
+        var order = ViewBag.CurrentSort == columnName && ViewBag.CurrentOrder == "asc" ? "desc" : "asc";
+        return $"?searchTerm={ViewBag.SearchTerm}&sortBy={columnName}&sortOrder={order}&page=1";
+    }
+}
+
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2><i class="fas fa-cogs"></i> Machines & Equipment</h2>
+        <a asp-action="Create" class="btn btn-success">
+            <i class="fas fa-plus"></i> New Machine
+        </a>
+    </div>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show">
+            @TempData["Success"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show">
+            @TempData["Error"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    <!-- Summary Cards -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card bg-primary text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Total Machines</h5>
+                    <h3>@(ViewBag.TotalMachines ?? 0)</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-success text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Operational</h5>
+                    <h3>@(ViewBag.OperationalCount ?? 0)</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-warning text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Under Maintenance</h5>
+                    <h3>@(ViewBag.MaintenanceCount ?? 0)</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-info text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Total Value</h5>
+                    <h3>₹@(ViewBag.TotalValue?.ToString("N0") ?? "0")</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5 class="mb-0"><i class="fas fa-list"></i> Machine List</h5>
+                </div>
+                <div class="col-md-6 text-end">
+                    <span class="badge bg-light text-dark">Total: @Model.TotalItems</span>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <!-- Search Form -->
+            <form method="get" class="row g-3 mb-3">
+                <div class="col-md-10">
+                    <input type="text" name="searchTerm" value="@ViewBag.SearchTerm"
+                           class="form-control" placeholder="Search by machine name, code, or type...">
+                    <input type="hidden" name="sortBy" value="@ViewBag.CurrentSort" />
+                    <input type="hidden" name="sortOrder" value="@ViewBag.CurrentOrder" />
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary w-100">
+                        <i class="fas fa-search"></i> Search
+                    </button>
+                </div>
+            </form>
+
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>
+                                <a href="@GetSortUrl("MachineCode")" class="text-white text-decoration-none">
+                                    Code @Html.Raw(GetSortIcon("MachineCode"))
+                                </a>
+                            </th>
+                            <th>
+                                <a href="@GetSortUrl("MachineName")" class="text-white text-decoration-none">
+                                    Name @Html.Raw(GetSortIcon("MachineName"))
+                                </a>
+                            </th>
+                            <th>
+                                <a href="@GetSortUrl("MachineType")" class="text-white text-decoration-none">
+                                    Type @Html.Raw(GetSortIcon("MachineType"))
+                                </a>
+                            </th>
+                            <th>
+                                <a href="@GetSortUrl("Capacity")" class="text-white text-decoration-none">
+                                    Capacity @Html.Raw(GetSortIcon("Capacity"))
+                                </a>
+                            </th>
+                            <th>Location</th>
+                            <th>
+                                <a href="@GetSortUrl("Status")" class="text-white text-decoration-none">
+                                    Status @Html.Raw(GetSortIcon("Status"))
+                                </a>
+                            </th>
+                            <th>Running Hours</th>
+                            <th>Maintenance</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.Items.Any())
+                        {
+                            @foreach (var machine in Model.Items)
+                            {
+                                <tr>
+                                    <td><strong>@machine.MachineCode</strong></td>
+                                    <td>
+                                        <i class="fas @machine.TypeIcon"></i> @machine.MachineName<br>
+                                        <small class="text-muted">@machine.Manufacturer</small>
+                                    </td>
+                                    <td><span class="badge bg-secondary">@machine.MachineType</span></td>
+                                    <td><strong>@machine.CapacityDisplay</strong></td>
+                                    <td>@machine.Location</td>
+                                    <td>
+                                        <span class="badge @machine.StatusBadgeClass">
+                                            <i class="fas @machine.StatusIcon"></i> @machine.Status
+                                        </span>
+                                    </td>
+                                    <td>@machine.RunningHours.ToString("N0") hrs</td>
+                                    <td>
+                                        @if (machine.IsMaintenanceDue)
+                                        {
+                                            <span class="badge bg-danger">
+                                                <i class="fas fa-exclamation-triangle"></i> Due
+                                            </span>
+                                        }
+                                        else if (machine.NextMaintenanceDue.HasValue)
+                                        {
+                                            <small>@machine.NextMaintenanceDue.Value.ToString("dd-MMM-yyyy")</small>
+                                        }
+                                        else
+                                        {
+                                            <small class="text-muted">Not scheduled</small>
+                                        }
+                                    </td>
+                                    <td>
+                                        <div class="btn-group btn-group-sm" role="group">
+                                            <a asp-action="Details" asp-route-id="@machine.Id" class="btn btn-info" title="Details">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+                                            <a asp-action="Edit" asp-route-id="@machine.Id" class="btn btn-warning" title="Edit">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            @if (machine.Status == "Maintenance" || machine.IsMaintenanceDue)
+                                            {
+                                                <a asp-action="Maintenance" asp-route-id="@machine.Id" class="btn btn-success" title="Record Maintenance">
+                                                    <i class="fas fa-wrench"></i>
+                                                </a>
+                                            }
+                                            <a asp-action="Delete" asp-route-id="@machine.Id" class="btn btn-danger" title="Delete">
+                                                <i class="fas fa-trash"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="9" class="text-center py-4">
+                                    <i class="fas fa-inbox fa-3x text-muted mb-3"></i>
+                                    <p class="text-muted">No machines found</p>
+                                    @if (!string.IsNullOrEmpty(ViewBag.SearchTerm))
+                                    {
+                                        <a href="@Url.Action("Index")" class="btn btn-sm btn-outline-primary">Clear Search</a>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="card-footer">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <strong>Showing @Model.Items.Count of @Model.TotalItems machines</strong>
+                    @if (ViewBag.MaintenanceDueCount > 0)
+                    {
+                        <span class="text-danger ms-2">
+                            <i class="fas fa-exclamation-triangle"></i> @ViewBag.MaintenanceDueCount machine(s) due for maintenance
+                        </span>
+                    }
+                </div>
+                <div class="col-md-6">
+                    @await Html.PartialAsync("_PaginationPartial", Model)
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

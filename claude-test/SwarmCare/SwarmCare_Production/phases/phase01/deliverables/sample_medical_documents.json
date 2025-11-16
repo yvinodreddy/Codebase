@@ -1,0 +1,1402 @@
+[
+  {
+    "document_id": "endo_001",
+    "title": "Type 2 Diabetes Management - Case 1",
+    "content": "First-line therapy for type 2 diabetes includes metformin 500mg twice daily with meals. Lifestyle modifications including diet and exercise are essential. Target HbA1c is <7% for most patients. Monitor fasting glucose and HbA1c every 3 months. Screen for complications including retinopathy, nephropathy, and neuropathy annually. Patient case study 1 demonstrates typical presentation and treatment response.",
+    "document_type": "clinical_guideline",
+    "source": "Endocrinology Department",
+    "metadata": {
+      "specialty": "Endocrinology",
+      "category": "guideline",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.108812"
+  },
+  {
+    "document_id": "endo_002",
+    "title": "Hyperthyroidism Treatment - Case 2",
+    "content": "Graves disease is the most common cause of hyperthyroidism. Treatment options include antithyroid medications (methimazole preferred), radioactive iodine, or thyroidectomy. Beta blockers control symptoms. Monitor TSH and free T4 every 4-6 weeks during treatment. Patient case study 2 demonstrates typical presentation and treatment response.",
+    "document_type": "clinical_guideline",
+    "source": "Endocrinology Department",
+    "metadata": {
+      "specialty": "Endocrinology",
+      "category": "guideline",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.108839"
+  },
+  {
+    "document_id": "endo_003",
+    "title": "Hypothyroidism Protocol - Case 3",
+    "content": "Primary hypothyroidism requires levothyroxine replacement. Start with 1.6 mcg/kg/day. Check TSH after 6-8 weeks and adjust dose. Target TSH 0.5-2.5 mIU/L. Lifelong treatment required. Take medication on empty stomach. Patient case study 3 demonstrates typical presentation and treatment response.",
+    "document_type": "clinical_guideline",
+    "source": "Endocrinology Department",
+    "metadata": {
+      "specialty": "Endocrinology",
+      "category": "guideline",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.108847"
+  },
+  {
+    "document_id": "endo_004",
+    "title": "Diabetic Ketoacidosis - Case 4",
+    "content": "DKA requires aggressive IV fluids, insulin infusion, and electrolyte replacement. Check glucose, ketones, and electrolytes hourly. Close gap between anion gap and bicarb. Treat underlying cause. ICU monitoring recommended. Patient case study 4 demonstrates typical presentation and treatment response.",
+    "document_type": "clinical_guideline",
+    "source": "Endocrinology Department",
+    "metadata": {
+      "specialty": "Endocrinology",
+      "category": "guideline",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.108856"
+  },
+  {
+    "document_id": "endo_005",
+    "title": "Hyperlipidemia Management - Case 5",
+    "content": "Statin therapy reduces cardiovascular risk. Target LDL <100 mg/dL for most, <70 mg/dL for high risk. Atorvastatin 20-40mg daily. Monitor lipid panel every 3 months initially. Check liver enzymes baseline and periodically. Patient case study 5 demonstrates typical presentation and treatment response.",
+    "document_type": "clinical_guideline",
+    "source": "Endocrinology Department",
+    "metadata": {
+      "specialty": "Endocrinology",
+      "category": "guideline",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.108860"
+  },
+  {
+    "document_id": "endo_006",
+    "title": "Type 2 Diabetes Management - Case 6",
+    "content": "First-line therapy for type 2 diabetes includes metformin 500mg twice daily with meals. Lifestyle modifications including diet and exercise are essential. Target HbA1c is <7% for most patients. Monitor fasting glucose and HbA1c every 3 months. Screen for complications including retinopathy, nephropathy, and neuropathy annually. Patient case study 6 demonstrates typical presentation and treatment response.",
+    "document_type": "clinical_guideline",
+    "source": "Endocrinology Department",
+    "metadata": {
+      "specialty": "Endocrinology",
+      "category": "guideline",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.108873"
+  },
+  {
+    "document_id": "endo_007",
+    "title": "Hyperthyroidism Treatment - Case 7",
+    "content": "Graves disease is the most common cause of hyperthyroidism. Treatment options include antithyroid medications (methimazole preferred), radioactive iodine, or thyroidectomy. Beta blockers control symptoms. Monitor TSH and free T4 every 4-6 weeks during treatment. Patient case study 7 demonstrates typical presentation and treatment response.",
+    "document_type": "clinical_guideline",
+    "source": "Endocrinology Department",
+    "metadata": {
+      "specialty": "Endocrinology",
+      "category": "guideline",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.108876"
+  },
+  {
+    "document_id": "endo_008",
+    "title": "Hypothyroidism Protocol - Case 8",
+    "content": "Primary hypothyroidism requires levothyroxine replacement. Start with 1.6 mcg/kg/day. Check TSH after 6-8 weeks and adjust dose. Target TSH 0.5-2.5 mIU/L. Lifelong treatment required. Take medication on empty stomach. Patient case study 8 demonstrates typical presentation and treatment response.",
+    "document_type": "clinical_guideline",
+    "source": "Endocrinology Department",
+    "metadata": {
+      "specialty": "Endocrinology",
+      "category": "guideline",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.108880"
+  },
+  {
+    "document_id": "endo_009",
+    "title": "Diabetic Ketoacidosis - Case 9",
+    "content": "DKA requires aggressive IV fluids, insulin infusion, and electrolyte replacement. Check glucose, ketones, and electrolytes hourly. Close gap between anion gap and bicarb. Treat underlying cause. ICU monitoring recommended. Patient case study 9 demonstrates typical presentation and treatment response.",
+    "document_type": "clinical_guideline",
+    "source": "Endocrinology Department",
+    "metadata": {
+      "specialty": "Endocrinology",
+      "category": "guideline",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.108883"
+  },
+  {
+    "document_id": "endo_010",
+    "title": "Hyperlipidemia Management - Case 10",
+    "content": "Statin therapy reduces cardiovascular risk. Target LDL <100 mg/dL for most, <70 mg/dL for high risk. Atorvastatin 20-40mg daily. Monitor lipid panel every 3 months initially. Check liver enzymes baseline and periodically. Patient case study 10 demonstrates typical presentation and treatment response.",
+    "document_type": "clinical_guideline",
+    "source": "Endocrinology Department",
+    "metadata": {
+      "specialty": "Endocrinology",
+      "category": "guideline",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.108886"
+  },
+  {
+    "document_id": "endo_011",
+    "title": "Type 2 Diabetes Management - Case 11",
+    "content": "First-line therapy for type 2 diabetes includes metformin 500mg twice daily with meals. Lifestyle modifications including diet and exercise are essential. Target HbA1c is <7% for most patients. Monitor fasting glucose and HbA1c every 3 months. Screen for complications including retinopathy, nephropathy, and neuropathy annually. Patient case study 11 demonstrates typical presentation and treatment response.",
+    "document_type": "clinical_guideline",
+    "source": "Endocrinology Department",
+    "metadata": {
+      "specialty": "Endocrinology",
+      "category": "guideline",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.108890"
+  },
+  {
+    "document_id": "endo_012",
+    "title": "Hyperthyroidism Treatment - Case 12",
+    "content": "Graves disease is the most common cause of hyperthyroidism. Treatment options include antithyroid medications (methimazole preferred), radioactive iodine, or thyroidectomy. Beta blockers control symptoms. Monitor TSH and free T4 every 4-6 weeks during treatment. Patient case study 12 demonstrates typical presentation and treatment response.",
+    "document_type": "clinical_guideline",
+    "source": "Endocrinology Department",
+    "metadata": {
+      "specialty": "Endocrinology",
+      "category": "guideline",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.108894"
+  },
+  {
+    "document_id": "endo_013",
+    "title": "Hypothyroidism Protocol - Case 13",
+    "content": "Primary hypothyroidism requires levothyroxine replacement. Start with 1.6 mcg/kg/day. Check TSH after 6-8 weeks and adjust dose. Target TSH 0.5-2.5 mIU/L. Lifelong treatment required. Take medication on empty stomach. Patient case study 13 demonstrates typical presentation and treatment response.",
+    "document_type": "clinical_guideline",
+    "source": "Endocrinology Department",
+    "metadata": {
+      "specialty": "Endocrinology",
+      "category": "guideline",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.108898"
+  },
+  {
+    "document_id": "endo_014",
+    "title": "Diabetic Ketoacidosis - Case 14",
+    "content": "DKA requires aggressive IV fluids, insulin infusion, and electrolyte replacement. Check glucose, ketones, and electrolytes hourly. Close gap between anion gap and bicarb. Treat underlying cause. ICU monitoring recommended. Patient case study 14 demonstrates typical presentation and treatment response.",
+    "document_type": "clinical_guideline",
+    "source": "Endocrinology Department",
+    "metadata": {
+      "specialty": "Endocrinology",
+      "category": "guideline",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.108901"
+  },
+  {
+    "document_id": "endo_015",
+    "title": "Hyperlipidemia Management - Case 15",
+    "content": "Statin therapy reduces cardiovascular risk. Target LDL <100 mg/dL for most, <70 mg/dL for high risk. Atorvastatin 20-40mg daily. Monitor lipid panel every 3 months initially. Check liver enzymes baseline and periodically. Patient case study 15 demonstrates typical presentation and treatment response.",
+    "document_type": "clinical_guideline",
+    "source": "Endocrinology Department",
+    "metadata": {
+      "specialty": "Endocrinology",
+      "category": "guideline",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.108903"
+  },
+  {
+    "document_id": "endo_016",
+    "title": "Type 2 Diabetes Management - Case 16",
+    "content": "First-line therapy for type 2 diabetes includes metformin 500mg twice daily with meals. Lifestyle modifications including diet and exercise are essential. Target HbA1c is <7% for most patients. Monitor fasting glucose and HbA1c every 3 months. Screen for complications including retinopathy, nephropathy, and neuropathy annually. Patient case study 16 demonstrates typical presentation and treatment response.",
+    "document_type": "clinical_guideline",
+    "source": "Endocrinology Department",
+    "metadata": {
+      "specialty": "Endocrinology",
+      "category": "guideline",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.108907"
+  },
+  {
+    "document_id": "endo_017",
+    "title": "Hyperthyroidism Treatment - Case 17",
+    "content": "Graves disease is the most common cause of hyperthyroidism. Treatment options include antithyroid medications (methimazole preferred), radioactive iodine, or thyroidectomy. Beta blockers control symptoms. Monitor TSH and free T4 every 4-6 weeks during treatment. Patient case study 17 demonstrates typical presentation and treatment response.",
+    "document_type": "clinical_guideline",
+    "source": "Endocrinology Department",
+    "metadata": {
+      "specialty": "Endocrinology",
+      "category": "guideline",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.108910"
+  },
+  {
+    "document_id": "endo_018",
+    "title": "Hypothyroidism Protocol - Case 18",
+    "content": "Primary hypothyroidism requires levothyroxine replacement. Start with 1.6 mcg/kg/day. Check TSH after 6-8 weeks and adjust dose. Target TSH 0.5-2.5 mIU/L. Lifelong treatment required. Take medication on empty stomach. Patient case study 18 demonstrates typical presentation and treatment response.",
+    "document_type": "clinical_guideline",
+    "source": "Endocrinology Department",
+    "metadata": {
+      "specialty": "Endocrinology",
+      "category": "guideline",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.108920"
+  },
+  {
+    "document_id": "endo_019",
+    "title": "Diabetic Ketoacidosis - Case 19",
+    "content": "DKA requires aggressive IV fluids, insulin infusion, and electrolyte replacement. Check glucose, ketones, and electrolytes hourly. Close gap between anion gap and bicarb. Treat underlying cause. ICU monitoring recommended. Patient case study 19 demonstrates typical presentation and treatment response.",
+    "document_type": "clinical_guideline",
+    "source": "Endocrinology Department",
+    "metadata": {
+      "specialty": "Endocrinology",
+      "category": "guideline",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.108925"
+  },
+  {
+    "document_id": "endo_020",
+    "title": "Hyperlipidemia Management - Case 20",
+    "content": "Statin therapy reduces cardiovascular risk. Target LDL <100 mg/dL for most, <70 mg/dL for high risk. Atorvastatin 20-40mg daily. Monitor lipid panel every 3 months initially. Check liver enzymes baseline and periodically. Patient case study 20 demonstrates typical presentation and treatment response.",
+    "document_type": "clinical_guideline",
+    "source": "Endocrinology Department",
+    "metadata": {
+      "specialty": "Endocrinology",
+      "category": "guideline",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.108929"
+  },
+  {
+    "document_id": "cardio_001",
+    "title": "Hypertension Management - Protocol 1",
+    "content": "Blood pressure goal <130/80 mmHg. First-line agents: ACE inhibitors, ARBs, calcium channel blockers, thiazides. Lifestyle modifications essential. Monitor BP weekly initially. Check electrolytes and renal function. Combination therapy often needed. Clinical protocol 1 based on current AHA/ACC guidelines.",
+    "document_type": "clinical_protocol",
+    "source": "Cardiology Department",
+    "metadata": {
+      "specialty": "Cardiology",
+      "category": "protocol",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.108946"
+  },
+  {
+    "document_id": "cardio_002",
+    "title": "Acute Myocardial Infarction - Protocol 2",
+    "content": "STEMI requires immediate reperfusion - primary PCI preferred within 90 minutes. Aspirin 325mg, clopidogrel loading, heparin. Door-to-balloon time critical. Post-MI management includes dual antiplatelet therapy, beta blocker, statin, ACE inhibitor. Clinical protocol 2 based on current AHA/ACC guidelines.",
+    "document_type": "clinical_protocol",
+    "source": "Cardiology Department",
+    "metadata": {
+      "specialty": "Cardiology",
+      "category": "protocol",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.108957"
+  },
+  {
+    "document_id": "cardio_003",
+    "title": "Heart Failure Treatment - Protocol 3",
+    "content": "Chronic HFrEF managed with guideline-directed medical therapy: ACE inhibitor/ARB, beta blocker, aldosterone antagonist. Consider ARNI for persistent symptoms. Loop diuretics for volume management. Device therapy if EF <35%. Clinical protocol 3 based on current AHA/ACC guidelines.",
+    "document_type": "clinical_protocol",
+    "source": "Cardiology Department",
+    "metadata": {
+      "specialty": "Cardiology",
+      "category": "protocol",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.108961"
+  },
+  {
+    "document_id": "cardio_004",
+    "title": "Atrial Fibrillation - Protocol 4",
+    "content": "Rate control with beta blocker or calcium channel blocker. Anticoagulation based on CHA2DS2-VASc score. Consider rhythm control in symptomatic patients. Catheter ablation option for medication-refractory cases. Clinical protocol 4 based on current AHA/ACC guidelines.",
+    "document_type": "clinical_protocol",
+    "source": "Cardiology Department",
+    "metadata": {
+      "specialty": "Cardiology",
+      "category": "protocol",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.108965"
+  },
+  {
+    "document_id": "cardio_005",
+    "title": "Acute Coronary Syndrome - Protocol 5",
+    "content": "Unstable angina or NSTEMI requires dual antiplatelet therapy, anticoagulation, beta blocker, statin. Risk stratification with TIMI or GRACE score. Early invasive strategy if high risk. Cardiac catheterization within 24-72 hours. Clinical protocol 5 based on current AHA/ACC guidelines.",
+    "document_type": "clinical_protocol",
+    "source": "Cardiology Department",
+    "metadata": {
+      "specialty": "Cardiology",
+      "category": "protocol",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.108969"
+  },
+  {
+    "document_id": "cardio_006",
+    "title": "Hypertension Management - Protocol 6",
+    "content": "Blood pressure goal <130/80 mmHg. First-line agents: ACE inhibitors, ARBs, calcium channel blockers, thiazides. Lifestyle modifications essential. Monitor BP weekly initially. Check electrolytes and renal function. Combination therapy often needed. Clinical protocol 6 based on current AHA/ACC guidelines.",
+    "document_type": "clinical_protocol",
+    "source": "Cardiology Department",
+    "metadata": {
+      "specialty": "Cardiology",
+      "category": "protocol",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.108972"
+  },
+  {
+    "document_id": "cardio_007",
+    "title": "Acute Myocardial Infarction - Protocol 7",
+    "content": "STEMI requires immediate reperfusion - primary PCI preferred within 90 minutes. Aspirin 325mg, clopidogrel loading, heparin. Door-to-balloon time critical. Post-MI management includes dual antiplatelet therapy, beta blocker, statin, ACE inhibitor. Clinical protocol 7 based on current AHA/ACC guidelines.",
+    "document_type": "clinical_protocol",
+    "source": "Cardiology Department",
+    "metadata": {
+      "specialty": "Cardiology",
+      "category": "protocol",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.108975"
+  },
+  {
+    "document_id": "cardio_008",
+    "title": "Heart Failure Treatment - Protocol 8",
+    "content": "Chronic HFrEF managed with guideline-directed medical therapy: ACE inhibitor/ARB, beta blocker, aldosterone antagonist. Consider ARNI for persistent symptoms. Loop diuretics for volume management. Device therapy if EF <35%. Clinical protocol 8 based on current AHA/ACC guidelines.",
+    "document_type": "clinical_protocol",
+    "source": "Cardiology Department",
+    "metadata": {
+      "specialty": "Cardiology",
+      "category": "protocol",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.108978"
+  },
+  {
+    "document_id": "cardio_009",
+    "title": "Atrial Fibrillation - Protocol 9",
+    "content": "Rate control with beta blocker or calcium channel blocker. Anticoagulation based on CHA2DS2-VASc score. Consider rhythm control in symptomatic patients. Catheter ablation option for medication-refractory cases. Clinical protocol 9 based on current AHA/ACC guidelines.",
+    "document_type": "clinical_protocol",
+    "source": "Cardiology Department",
+    "metadata": {
+      "specialty": "Cardiology",
+      "category": "protocol",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.108981"
+  },
+  {
+    "document_id": "cardio_010",
+    "title": "Acute Coronary Syndrome - Protocol 10",
+    "content": "Unstable angina or NSTEMI requires dual antiplatelet therapy, anticoagulation, beta blocker, statin. Risk stratification with TIMI or GRACE score. Early invasive strategy if high risk. Cardiac catheterization within 24-72 hours. Clinical protocol 10 based on current AHA/ACC guidelines.",
+    "document_type": "clinical_protocol",
+    "source": "Cardiology Department",
+    "metadata": {
+      "specialty": "Cardiology",
+      "category": "protocol",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.108984"
+  },
+  {
+    "document_id": "cardio_011",
+    "title": "Hypertension Management - Protocol 11",
+    "content": "Blood pressure goal <130/80 mmHg. First-line agents: ACE inhibitors, ARBs, calcium channel blockers, thiazides. Lifestyle modifications essential. Monitor BP weekly initially. Check electrolytes and renal function. Combination therapy often needed. Clinical protocol 11 based on current AHA/ACC guidelines.",
+    "document_type": "clinical_protocol",
+    "source": "Cardiology Department",
+    "metadata": {
+      "specialty": "Cardiology",
+      "category": "protocol",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.108987"
+  },
+  {
+    "document_id": "cardio_012",
+    "title": "Acute Myocardial Infarction - Protocol 12",
+    "content": "STEMI requires immediate reperfusion - primary PCI preferred within 90 minutes. Aspirin 325mg, clopidogrel loading, heparin. Door-to-balloon time critical. Post-MI management includes dual antiplatelet therapy, beta blocker, statin, ACE inhibitor. Clinical protocol 12 based on current AHA/ACC guidelines.",
+    "document_type": "clinical_protocol",
+    "source": "Cardiology Department",
+    "metadata": {
+      "specialty": "Cardiology",
+      "category": "protocol",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.108989"
+  },
+  {
+    "document_id": "cardio_013",
+    "title": "Heart Failure Treatment - Protocol 13",
+    "content": "Chronic HFrEF managed with guideline-directed medical therapy: ACE inhibitor/ARB, beta blocker, aldosterone antagonist. Consider ARNI for persistent symptoms. Loop diuretics for volume management. Device therapy if EF <35%. Clinical protocol 13 based on current AHA/ACC guidelines.",
+    "document_type": "clinical_protocol",
+    "source": "Cardiology Department",
+    "metadata": {
+      "specialty": "Cardiology",
+      "category": "protocol",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.108993"
+  },
+  {
+    "document_id": "cardio_014",
+    "title": "Atrial Fibrillation - Protocol 14",
+    "content": "Rate control with beta blocker or calcium channel blocker. Anticoagulation based on CHA2DS2-VASc score. Consider rhythm control in symptomatic patients. Catheter ablation option for medication-refractory cases. Clinical protocol 14 based on current AHA/ACC guidelines.",
+    "document_type": "clinical_protocol",
+    "source": "Cardiology Department",
+    "metadata": {
+      "specialty": "Cardiology",
+      "category": "protocol",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.108997"
+  },
+  {
+    "document_id": "cardio_015",
+    "title": "Acute Coronary Syndrome - Protocol 15",
+    "content": "Unstable angina or NSTEMI requires dual antiplatelet therapy, anticoagulation, beta blocker, statin. Risk stratification with TIMI or GRACE score. Early invasive strategy if high risk. Cardiac catheterization within 24-72 hours. Clinical protocol 15 based on current AHA/ACC guidelines.",
+    "document_type": "clinical_protocol",
+    "source": "Cardiology Department",
+    "metadata": {
+      "specialty": "Cardiology",
+      "category": "protocol",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.109000"
+  },
+  {
+    "document_id": "cardio_016",
+    "title": "Hypertension Management - Protocol 16",
+    "content": "Blood pressure goal <130/80 mmHg. First-line agents: ACE inhibitors, ARBs, calcium channel blockers, thiazides. Lifestyle modifications essential. Monitor BP weekly initially. Check electrolytes and renal function. Combination therapy often needed. Clinical protocol 16 based on current AHA/ACC guidelines.",
+    "document_type": "clinical_protocol",
+    "source": "Cardiology Department",
+    "metadata": {
+      "specialty": "Cardiology",
+      "category": "protocol",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.109003"
+  },
+  {
+    "document_id": "cardio_017",
+    "title": "Acute Myocardial Infarction - Protocol 17",
+    "content": "STEMI requires immediate reperfusion - primary PCI preferred within 90 minutes. Aspirin 325mg, clopidogrel loading, heparin. Door-to-balloon time critical. Post-MI management includes dual antiplatelet therapy, beta blocker, statin, ACE inhibitor. Clinical protocol 17 based on current AHA/ACC guidelines.",
+    "document_type": "clinical_protocol",
+    "source": "Cardiology Department",
+    "metadata": {
+      "specialty": "Cardiology",
+      "category": "protocol",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.109006"
+  },
+  {
+    "document_id": "cardio_018",
+    "title": "Heart Failure Treatment - Protocol 18",
+    "content": "Chronic HFrEF managed with guideline-directed medical therapy: ACE inhibitor/ARB, beta blocker, aldosterone antagonist. Consider ARNI for persistent symptoms. Loop diuretics for volume management. Device therapy if EF <35%. Clinical protocol 18 based on current AHA/ACC guidelines.",
+    "document_type": "clinical_protocol",
+    "source": "Cardiology Department",
+    "metadata": {
+      "specialty": "Cardiology",
+      "category": "protocol",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.109013"
+  },
+  {
+    "document_id": "cardio_019",
+    "title": "Atrial Fibrillation - Protocol 19",
+    "content": "Rate control with beta blocker or calcium channel blocker. Anticoagulation based on CHA2DS2-VASc score. Consider rhythm control in symptomatic patients. Catheter ablation option for medication-refractory cases. Clinical protocol 19 based on current AHA/ACC guidelines.",
+    "document_type": "clinical_protocol",
+    "source": "Cardiology Department",
+    "metadata": {
+      "specialty": "Cardiology",
+      "category": "protocol",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.109016"
+  },
+  {
+    "document_id": "cardio_020",
+    "title": "Acute Coronary Syndrome - Protocol 20",
+    "content": "Unstable angina or NSTEMI requires dual antiplatelet therapy, anticoagulation, beta blocker, statin. Risk stratification with TIMI or GRACE score. Early invasive strategy if high risk. Cardiac catheterization within 24-72 hours. Clinical protocol 20 based on current AHA/ACC guidelines.",
+    "document_type": "clinical_protocol",
+    "source": "Cardiology Department",
+    "metadata": {
+      "specialty": "Cardiology",
+      "category": "protocol",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.109020"
+  },
+  {
+    "document_id": "pulm_001",
+    "title": "Community-Acquired Pneumonia - Guideline 1",
+    "content": "CAP severity assessment with CURB-65 or PSI. Outpatient: amoxicillin or doxycycline. Inpatient: ceftriaxone + azithromycin. Duration 5-7 days. Chest X-ray for diagnosis. Blood cultures if severe. Evidence-based guideline 1 from thoracic society recommendations.",
+    "document_type": "clinical_guideline",
+    "source": "Pulmonology Department",
+    "metadata": {
+      "specialty": "Pulmonology",
+      "category": "guideline",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.109029"
+  },
+  {
+    "document_id": "pulm_002",
+    "title": "Asthma Exacerbation - Guideline 2",
+    "content": "Assess severity with peak flow. Oxygen to maintain SpO2 >90%. Albuterol nebulizer every 20 minutes. Systemic corticosteroids prednisone 40-60mg for 5 days. Consider ipratropium if severe. Admit if poor response. Evidence-based guideline 2 from thoracic society recommendations.",
+    "document_type": "clinical_guideline",
+    "source": "Pulmonology Department",
+    "metadata": {
+      "specialty": "Pulmonology",
+      "category": "guideline",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.109035"
+  },
+  {
+    "document_id": "pulm_003",
+    "title": "COPD Management - Guideline 3",
+    "content": "Bronchodilators cornerstone of therapy. LABA/LAMA combination for symptomatic patients. Inhaled corticosteroids if frequent exacerbations. Smoking cessation critical. Pulmonary rehabilitation. Oxygen if chronic hypoxemia. Evidence-based guideline 3 from thoracic society recommendations.",
+    "document_type": "clinical_guideline",
+    "source": "Pulmonology Department",
+    "metadata": {
+      "specialty": "Pulmonology",
+      "category": "guideline",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.109043"
+  },
+  {
+    "document_id": "pulm_004",
+    "title": "Pulmonary Embolism - Guideline 4",
+    "content": "Wells score risk stratification. D-dimer if low/intermediate risk. CT angiography for diagnosis. Anticoagulation with DOAC or warfarin. Thrombolysis if massive PE with hemodynamic instability. IVC filter rarely indicated. Evidence-based guideline 4 from thoracic society recommendations.",
+    "document_type": "clinical_guideline",
+    "source": "Pulmonology Department",
+    "metadata": {
+      "specialty": "Pulmonology",
+      "category": "guideline",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.109046"
+  },
+  {
+    "document_id": "pulm_005",
+    "title": "Pleural Effusion - Guideline 5",
+    "content": "Diagnostic thoracentesis for new effusions. Light's criteria distinguish transudate vs exudate. Treat underlying cause. Therapeutic thoracentesis for symptomatic relief. Chest tube if empyema or hemothorax. Evidence-based guideline 5 from thoracic society recommendations.",
+    "document_type": "clinical_guideline",
+    "source": "Pulmonology Department",
+    "metadata": {
+      "specialty": "Pulmonology",
+      "category": "guideline",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.109049"
+  },
+  {
+    "document_id": "pulm_006",
+    "title": "Community-Acquired Pneumonia - Guideline 6",
+    "content": "CAP severity assessment with CURB-65 or PSI. Outpatient: amoxicillin or doxycycline. Inpatient: ceftriaxone + azithromycin. Duration 5-7 days. Chest X-ray for diagnosis. Blood cultures if severe. Evidence-based guideline 6 from thoracic society recommendations.",
+    "document_type": "clinical_guideline",
+    "source": "Pulmonology Department",
+    "metadata": {
+      "specialty": "Pulmonology",
+      "category": "guideline",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.109052"
+  },
+  {
+    "document_id": "pulm_007",
+    "title": "Asthma Exacerbation - Guideline 7",
+    "content": "Assess severity with peak flow. Oxygen to maintain SpO2 >90%. Albuterol nebulizer every 20 minutes. Systemic corticosteroids prednisone 40-60mg for 5 days. Consider ipratropium if severe. Admit if poor response. Evidence-based guideline 7 from thoracic society recommendations.",
+    "document_type": "clinical_guideline",
+    "source": "Pulmonology Department",
+    "metadata": {
+      "specialty": "Pulmonology",
+      "category": "guideline",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.109684"
+  },
+  {
+    "document_id": "pulm_008",
+    "title": "COPD Management - Guideline 8",
+    "content": "Bronchodilators cornerstone of therapy. LABA/LAMA combination for symptomatic patients. Inhaled corticosteroids if frequent exacerbations. Smoking cessation critical. Pulmonary rehabilitation. Oxygen if chronic hypoxemia. Evidence-based guideline 8 from thoracic society recommendations.",
+    "document_type": "clinical_guideline",
+    "source": "Pulmonology Department",
+    "metadata": {
+      "specialty": "Pulmonology",
+      "category": "guideline",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.109759"
+  },
+  {
+    "document_id": "pulm_009",
+    "title": "Pulmonary Embolism - Guideline 9",
+    "content": "Wells score risk stratification. D-dimer if low/intermediate risk. CT angiography for diagnosis. Anticoagulation with DOAC or warfarin. Thrombolysis if massive PE with hemodynamic instability. IVC filter rarely indicated. Evidence-based guideline 9 from thoracic society recommendations.",
+    "document_type": "clinical_guideline",
+    "source": "Pulmonology Department",
+    "metadata": {
+      "specialty": "Pulmonology",
+      "category": "guideline",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.109766"
+  },
+  {
+    "document_id": "pulm_010",
+    "title": "Pleural Effusion - Guideline 10",
+    "content": "Diagnostic thoracentesis for new effusions. Light's criteria distinguish transudate vs exudate. Treat underlying cause. Therapeutic thoracentesis for symptomatic relief. Chest tube if empyema or hemothorax. Evidence-based guideline 10 from thoracic society recommendations.",
+    "document_type": "clinical_guideline",
+    "source": "Pulmonology Department",
+    "metadata": {
+      "specialty": "Pulmonology",
+      "category": "guideline",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.109774"
+  },
+  {
+    "document_id": "pulm_011",
+    "title": "Community-Acquired Pneumonia - Guideline 11",
+    "content": "CAP severity assessment with CURB-65 or PSI. Outpatient: amoxicillin or doxycycline. Inpatient: ceftriaxone + azithromycin. Duration 5-7 days. Chest X-ray for diagnosis. Blood cultures if severe. Evidence-based guideline 11 from thoracic society recommendations.",
+    "document_type": "clinical_guideline",
+    "source": "Pulmonology Department",
+    "metadata": {
+      "specialty": "Pulmonology",
+      "category": "guideline",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.109781"
+  },
+  {
+    "document_id": "pulm_012",
+    "title": "Asthma Exacerbation - Guideline 12",
+    "content": "Assess severity with peak flow. Oxygen to maintain SpO2 >90%. Albuterol nebulizer every 20 minutes. Systemic corticosteroids prednisone 40-60mg for 5 days. Consider ipratropium if severe. Admit if poor response. Evidence-based guideline 12 from thoracic society recommendations.",
+    "document_type": "clinical_guideline",
+    "source": "Pulmonology Department",
+    "metadata": {
+      "specialty": "Pulmonology",
+      "category": "guideline",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.109787"
+  },
+  {
+    "document_id": "pulm_013",
+    "title": "COPD Management - Guideline 13",
+    "content": "Bronchodilators cornerstone of therapy. LABA/LAMA combination for symptomatic patients. Inhaled corticosteroids if frequent exacerbations. Smoking cessation critical. Pulmonary rehabilitation. Oxygen if chronic hypoxemia. Evidence-based guideline 13 from thoracic society recommendations.",
+    "document_type": "clinical_guideline",
+    "source": "Pulmonology Department",
+    "metadata": {
+      "specialty": "Pulmonology",
+      "category": "guideline",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.109795"
+  },
+  {
+    "document_id": "pulm_014",
+    "title": "Pulmonary Embolism - Guideline 14",
+    "content": "Wells score risk stratification. D-dimer if low/intermediate risk. CT angiography for diagnosis. Anticoagulation with DOAC or warfarin. Thrombolysis if massive PE with hemodynamic instability. IVC filter rarely indicated. Evidence-based guideline 14 from thoracic society recommendations.",
+    "document_type": "clinical_guideline",
+    "source": "Pulmonology Department",
+    "metadata": {
+      "specialty": "Pulmonology",
+      "category": "guideline",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.109801"
+  },
+  {
+    "document_id": "pulm_015",
+    "title": "Pleural Effusion - Guideline 15",
+    "content": "Diagnostic thoracentesis for new effusions. Light's criteria distinguish transudate vs exudate. Treat underlying cause. Therapeutic thoracentesis for symptomatic relief. Chest tube if empyema or hemothorax. Evidence-based guideline 15 from thoracic society recommendations.",
+    "document_type": "clinical_guideline",
+    "source": "Pulmonology Department",
+    "metadata": {
+      "specialty": "Pulmonology",
+      "category": "guideline",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.109809"
+  },
+  {
+    "document_id": "pulm_016",
+    "title": "Community-Acquired Pneumonia - Guideline 16",
+    "content": "CAP severity assessment with CURB-65 or PSI. Outpatient: amoxicillin or doxycycline. Inpatient: ceftriaxone + azithromycin. Duration 5-7 days. Chest X-ray for diagnosis. Blood cultures if severe. Evidence-based guideline 16 from thoracic society recommendations.",
+    "document_type": "clinical_guideline",
+    "source": "Pulmonology Department",
+    "metadata": {
+      "specialty": "Pulmonology",
+      "category": "guideline",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.109821"
+  },
+  {
+    "document_id": "pulm_017",
+    "title": "Asthma Exacerbation - Guideline 17",
+    "content": "Assess severity with peak flow. Oxygen to maintain SpO2 >90%. Albuterol nebulizer every 20 minutes. Systemic corticosteroids prednisone 40-60mg for 5 days. Consider ipratropium if severe. Admit if poor response. Evidence-based guideline 17 from thoracic society recommendations.",
+    "document_type": "clinical_guideline",
+    "source": "Pulmonology Department",
+    "metadata": {
+      "specialty": "Pulmonology",
+      "category": "guideline",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.109831"
+  },
+  {
+    "document_id": "pulm_018",
+    "title": "COPD Management - Guideline 18",
+    "content": "Bronchodilators cornerstone of therapy. LABA/LAMA combination for symptomatic patients. Inhaled corticosteroids if frequent exacerbations. Smoking cessation critical. Pulmonary rehabilitation. Oxygen if chronic hypoxemia. Evidence-based guideline 18 from thoracic society recommendations.",
+    "document_type": "clinical_guideline",
+    "source": "Pulmonology Department",
+    "metadata": {
+      "specialty": "Pulmonology",
+      "category": "guideline",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.109840"
+  },
+  {
+    "document_id": "pulm_019",
+    "title": "Pulmonary Embolism - Guideline 19",
+    "content": "Wells score risk stratification. D-dimer if low/intermediate risk. CT angiography for diagnosis. Anticoagulation with DOAC or warfarin. Thrombolysis if massive PE with hemodynamic instability. IVC filter rarely indicated. Evidence-based guideline 19 from thoracic society recommendations.",
+    "document_type": "clinical_guideline",
+    "source": "Pulmonology Department",
+    "metadata": {
+      "specialty": "Pulmonology",
+      "category": "guideline",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.109847"
+  },
+  {
+    "document_id": "pulm_020",
+    "title": "Pleural Effusion - Guideline 20",
+    "content": "Diagnostic thoracentesis for new effusions. Light's criteria distinguish transudate vs exudate. Treat underlying cause. Therapeutic thoracentesis for symptomatic relief. Chest tube if empyema or hemothorax. Evidence-based guideline 20 from thoracic society recommendations.",
+    "document_type": "clinical_guideline",
+    "source": "Pulmonology Department",
+    "metadata": {
+      "specialty": "Pulmonology",
+      "category": "guideline",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.109851"
+  },
+  {
+    "document_id": "neuro_001",
+    "title": "Acute Ischemic Stroke - Clinical Note 1",
+    "content": "Time is brain - door-to-needle <60 minutes. tPA if within 4.5 hours and eligible. Mechanical thrombectomy for large vessel occlusion within 24 hours. Blood pressure management. Aspirin after thrombolysis. Stroke unit care. Neurology clinical note 1 documenting assessment and treatment plan.",
+    "document_type": "clinical_note",
+    "source": "Neurology Department",
+    "metadata": {
+      "specialty": "Neurology",
+      "category": "clinical_note",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.109928"
+  },
+  {
+    "document_id": "neuro_002",
+    "title": "Migraine Treatment - Clinical Note 2",
+    "content": "Acute: triptans or NSAIDs. Preventive if \u22654 headache days/month. Options: topiramate, propranolol, amitriptyline. CGRP antagonists for refractory cases. Identify and avoid triggers. Lifestyle modifications. Neurology clinical note 2 documenting assessment and treatment plan.",
+    "document_type": "clinical_note",
+    "source": "Neurology Department",
+    "metadata": {
+      "specialty": "Neurology",
+      "category": "clinical_note",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.109943"
+  },
+  {
+    "document_id": "neuro_003",
+    "title": "Seizure Management - Clinical Note 3",
+    "content": "First seizure: evaluate with MRI and EEG. Start antiepileptic if high recurrence risk. Levetiracetam or lamotrigine common first-line. Monotherapy preferred. Titrate slowly. Monitor drug levels. Driving restrictions. Neurology clinical note 3 documenting assessment and treatment plan.",
+    "document_type": "clinical_note",
+    "source": "Neurology Department",
+    "metadata": {
+      "specialty": "Neurology",
+      "category": "clinical_note",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.109948"
+  },
+  {
+    "document_id": "neuro_004",
+    "title": "Parkinson Disease - Clinical Note 4",
+    "content": "Carbidopa-levodopa gold standard. Start when symptoms impact quality of life. Dopamine agonists alternative in younger patients. MAO-B inhibitors adjunct therapy. Physical therapy important. Manage motor fluctuations. Neurology clinical note 4 documenting assessment and treatment plan.",
+    "document_type": "clinical_note",
+    "source": "Neurology Department",
+    "metadata": {
+      "specialty": "Neurology",
+      "category": "clinical_note",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.110014"
+  },
+  {
+    "document_id": "neuro_005",
+    "title": "Multiple Sclerosis - Clinical Note 5",
+    "content": "Disease-modifying therapy reduces relapse rate and progression. High-efficacy DMT for active disease. Corticosteroids for acute relapses. Symptom management: spasticity, fatigue, bladder dysfunction. MRI monitoring annually. Neurology clinical note 5 documenting assessment and treatment plan.",
+    "document_type": "clinical_note",
+    "source": "Neurology Department",
+    "metadata": {
+      "specialty": "Neurology",
+      "category": "clinical_note",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.110025"
+  },
+  {
+    "document_id": "neuro_006",
+    "title": "Acute Ischemic Stroke - Clinical Note 6",
+    "content": "Time is brain - door-to-needle <60 minutes. tPA if within 4.5 hours and eligible. Mechanical thrombectomy for large vessel occlusion within 24 hours. Blood pressure management. Aspirin after thrombolysis. Stroke unit care. Neurology clinical note 6 documenting assessment and treatment plan.",
+    "document_type": "clinical_note",
+    "source": "Neurology Department",
+    "metadata": {
+      "specialty": "Neurology",
+      "category": "clinical_note",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.110031"
+  },
+  {
+    "document_id": "neuro_007",
+    "title": "Migraine Treatment - Clinical Note 7",
+    "content": "Acute: triptans or NSAIDs. Preventive if \u22654 headache days/month. Options: topiramate, propranolol, amitriptyline. CGRP antagonists for refractory cases. Identify and avoid triggers. Lifestyle modifications. Neurology clinical note 7 documenting assessment and treatment plan.",
+    "document_type": "clinical_note",
+    "source": "Neurology Department",
+    "metadata": {
+      "specialty": "Neurology",
+      "category": "clinical_note",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.110037"
+  },
+  {
+    "document_id": "neuro_008",
+    "title": "Seizure Management - Clinical Note 8",
+    "content": "First seizure: evaluate with MRI and EEG. Start antiepileptic if high recurrence risk. Levetiracetam or lamotrigine common first-line. Monotherapy preferred. Titrate slowly. Monitor drug levels. Driving restrictions. Neurology clinical note 8 documenting assessment and treatment plan.",
+    "document_type": "clinical_note",
+    "source": "Neurology Department",
+    "metadata": {
+      "specialty": "Neurology",
+      "category": "clinical_note",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.110042"
+  },
+  {
+    "document_id": "neuro_009",
+    "title": "Parkinson Disease - Clinical Note 9",
+    "content": "Carbidopa-levodopa gold standard. Start when symptoms impact quality of life. Dopamine agonists alternative in younger patients. MAO-B inhibitors adjunct therapy. Physical therapy important. Manage motor fluctuations. Neurology clinical note 9 documenting assessment and treatment plan.",
+    "document_type": "clinical_note",
+    "source": "Neurology Department",
+    "metadata": {
+      "specialty": "Neurology",
+      "category": "clinical_note",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.110048"
+  },
+  {
+    "document_id": "neuro_010",
+    "title": "Multiple Sclerosis - Clinical Note 10",
+    "content": "Disease-modifying therapy reduces relapse rate and progression. High-efficacy DMT for active disease. Corticosteroids for acute relapses. Symptom management: spasticity, fatigue, bladder dysfunction. MRI monitoring annually. Neurology clinical note 10 documenting assessment and treatment plan.",
+    "document_type": "clinical_note",
+    "source": "Neurology Department",
+    "metadata": {
+      "specialty": "Neurology",
+      "category": "clinical_note",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.110058"
+  },
+  {
+    "document_id": "neuro_011",
+    "title": "Acute Ischemic Stroke - Clinical Note 11",
+    "content": "Time is brain - door-to-needle <60 minutes. tPA if within 4.5 hours and eligible. Mechanical thrombectomy for large vessel occlusion within 24 hours. Blood pressure management. Aspirin after thrombolysis. Stroke unit care. Neurology clinical note 11 documenting assessment and treatment plan.",
+    "document_type": "clinical_note",
+    "source": "Neurology Department",
+    "metadata": {
+      "specialty": "Neurology",
+      "category": "clinical_note",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.110072"
+  },
+  {
+    "document_id": "neuro_012",
+    "title": "Migraine Treatment - Clinical Note 12",
+    "content": "Acute: triptans or NSAIDs. Preventive if \u22654 headache days/month. Options: topiramate, propranolol, amitriptyline. CGRP antagonists for refractory cases. Identify and avoid triggers. Lifestyle modifications. Neurology clinical note 12 documenting assessment and treatment plan.",
+    "document_type": "clinical_note",
+    "source": "Neurology Department",
+    "metadata": {
+      "specialty": "Neurology",
+      "category": "clinical_note",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.110082"
+  },
+  {
+    "document_id": "neuro_013",
+    "title": "Seizure Management - Clinical Note 13",
+    "content": "First seizure: evaluate with MRI and EEG. Start antiepileptic if high recurrence risk. Levetiracetam or lamotrigine common first-line. Monotherapy preferred. Titrate slowly. Monitor drug levels. Driving restrictions. Neurology clinical note 13 documenting assessment and treatment plan.",
+    "document_type": "clinical_note",
+    "source": "Neurology Department",
+    "metadata": {
+      "specialty": "Neurology",
+      "category": "clinical_note",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.110085"
+  },
+  {
+    "document_id": "neuro_014",
+    "title": "Parkinson Disease - Clinical Note 14",
+    "content": "Carbidopa-levodopa gold standard. Start when symptoms impact quality of life. Dopamine agonists alternative in younger patients. MAO-B inhibitors adjunct therapy. Physical therapy important. Manage motor fluctuations. Neurology clinical note 14 documenting assessment and treatment plan.",
+    "document_type": "clinical_note",
+    "source": "Neurology Department",
+    "metadata": {
+      "specialty": "Neurology",
+      "category": "clinical_note",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.110098"
+  },
+  {
+    "document_id": "neuro_015",
+    "title": "Multiple Sclerosis - Clinical Note 15",
+    "content": "Disease-modifying therapy reduces relapse rate and progression. High-efficacy DMT for active disease. Corticosteroids for acute relapses. Symptom management: spasticity, fatigue, bladder dysfunction. MRI monitoring annually. Neurology clinical note 15 documenting assessment and treatment plan.",
+    "document_type": "clinical_note",
+    "source": "Neurology Department",
+    "metadata": {
+      "specialty": "Neurology",
+      "category": "clinical_note",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.110101"
+  },
+  {
+    "document_id": "neuro_016",
+    "title": "Acute Ischemic Stroke - Clinical Note 16",
+    "content": "Time is brain - door-to-needle <60 minutes. tPA if within 4.5 hours and eligible. Mechanical thrombectomy for large vessel occlusion within 24 hours. Blood pressure management. Aspirin after thrombolysis. Stroke unit care. Neurology clinical note 16 documenting assessment and treatment plan.",
+    "document_type": "clinical_note",
+    "source": "Neurology Department",
+    "metadata": {
+      "specialty": "Neurology",
+      "category": "clinical_note",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.110104"
+  },
+  {
+    "document_id": "neuro_017",
+    "title": "Migraine Treatment - Clinical Note 17",
+    "content": "Acute: triptans or NSAIDs. Preventive if \u22654 headache days/month. Options: topiramate, propranolol, amitriptyline. CGRP antagonists for refractory cases. Identify and avoid triggers. Lifestyle modifications. Neurology clinical note 17 documenting assessment and treatment plan.",
+    "document_type": "clinical_note",
+    "source": "Neurology Department",
+    "metadata": {
+      "specialty": "Neurology",
+      "category": "clinical_note",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.110106"
+  },
+  {
+    "document_id": "neuro_018",
+    "title": "Seizure Management - Clinical Note 18",
+    "content": "First seizure: evaluate with MRI and EEG. Start antiepileptic if high recurrence risk. Levetiracetam or lamotrigine common first-line. Monotherapy preferred. Titrate slowly. Monitor drug levels. Driving restrictions. Neurology clinical note 18 documenting assessment and treatment plan.",
+    "document_type": "clinical_note",
+    "source": "Neurology Department",
+    "metadata": {
+      "specialty": "Neurology",
+      "category": "clinical_note",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.110111"
+  },
+  {
+    "document_id": "neuro_019",
+    "title": "Parkinson Disease - Clinical Note 19",
+    "content": "Carbidopa-levodopa gold standard. Start when symptoms impact quality of life. Dopamine agonists alternative in younger patients. MAO-B inhibitors adjunct therapy. Physical therapy important. Manage motor fluctuations. Neurology clinical note 19 documenting assessment and treatment plan.",
+    "document_type": "clinical_note",
+    "source": "Neurology Department",
+    "metadata": {
+      "specialty": "Neurology",
+      "category": "clinical_note",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.110172"
+  },
+  {
+    "document_id": "neuro_020",
+    "title": "Multiple Sclerosis - Clinical Note 20",
+    "content": "Disease-modifying therapy reduces relapse rate and progression. High-efficacy DMT for active disease. Corticosteroids for acute relapses. Symptom management: spasticity, fatigue, bladder dysfunction. MRI monitoring annually. Neurology clinical note 20 documenting assessment and treatment plan.",
+    "document_type": "clinical_note",
+    "source": "Neurology Department",
+    "metadata": {
+      "specialty": "Neurology",
+      "category": "clinical_note",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.110176"
+  },
+  {
+    "document_id": "gi_001",
+    "title": "GERD Management - Treatment Plan 1",
+    "content": "Lifestyle modifications first-line. PPI therapy for symptomatic relief. Omeprazole 20mg daily before breakfast. Trial off PPI after 8 weeks if asymptomatic. Step-down to H2 blocker. Endoscopy if alarm features. Gastroenterology treatment plan 1 with evidence-based approach.",
+    "document_type": "treatment_plan",
+    "source": "Gastroenterology Department",
+    "metadata": {
+      "specialty": "Gastroenterology",
+      "category": "treatment_plan",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.110191"
+  },
+  {
+    "document_id": "gi_002",
+    "title": "Inflammatory Bowel Disease - Treatment Plan 2",
+    "content": "Crohn disease: immunosuppression with biologics (anti-TNF) for moderate-severe. Ulcerative colitis: 5-ASA for mild, immunosuppression for moderate. Monitor inflammatory markers. Colonoscopy surveillance. Nutrition support. Gastroenterology treatment plan 2 with evidence-based approach.",
+    "document_type": "treatment_plan",
+    "source": "Gastroenterology Department",
+    "metadata": {
+      "specialty": "Gastroenterology",
+      "category": "treatment_plan",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.110195"
+  },
+  {
+    "document_id": "gi_003",
+    "title": "Cirrhosis Complications - Treatment Plan 3",
+    "content": "Screen for varices with endoscopy. Beta blockers for primary prophylaxis. Diuretics for ascites (spironolactone + furosemide). Lactulose for hepatic encephalopathy. Avoid nephrotoxins and NSAIDs. HCC screening with ultrasound q6mo. Gastroenterology treatment plan 3 with evidence-based approach.",
+    "document_type": "treatment_plan",
+    "source": "Gastroenterology Department",
+    "metadata": {
+      "specialty": "Gastroenterology",
+      "category": "treatment_plan",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.110199"
+  },
+  {
+    "document_id": "gi_004",
+    "title": "Acute Pancreatitis - Treatment Plan 4",
+    "content": "NPO initially, aggressive IV fluids 250-500 mL/hr. Pain control. Nutrition within 24-48 hours if tolerated. Avoid antibiotics unless infected necrosis. CT with contrast if severe or not improving. Identify and treat etiology. Gastroenterology treatment plan 4 with evidence-based approach.",
+    "document_type": "treatment_plan",
+    "source": "Gastroenterology Department",
+    "metadata": {
+      "specialty": "Gastroenterology",
+      "category": "treatment_plan",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.110206"
+  },
+  {
+    "document_id": "gi_005",
+    "title": "Peptic Ulcer Disease - Treatment Plan 5",
+    "content": "Test and treat H. pylori. Triple therapy: PPI + amoxicillin + clarithromycin for 14 days. Confirm eradication with stool antigen. Stop NSAIDs if possible. PPI for NSAID users. Endoscopy for complicated ulcers. Gastroenterology treatment plan 5 with evidence-based approach.",
+    "document_type": "treatment_plan",
+    "source": "Gastroenterology Department",
+    "metadata": {
+      "specialty": "Gastroenterology",
+      "category": "treatment_plan",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.110210"
+  },
+  {
+    "document_id": "gi_006",
+    "title": "GERD Management - Treatment Plan 6",
+    "content": "Lifestyle modifications first-line. PPI therapy for symptomatic relief. Omeprazole 20mg daily before breakfast. Trial off PPI after 8 weeks if asymptomatic. Step-down to H2 blocker. Endoscopy if alarm features. Gastroenterology treatment plan 6 with evidence-based approach.",
+    "document_type": "treatment_plan",
+    "source": "Gastroenterology Department",
+    "metadata": {
+      "specialty": "Gastroenterology",
+      "category": "treatment_plan",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.110214"
+  },
+  {
+    "document_id": "gi_007",
+    "title": "Inflammatory Bowel Disease - Treatment Plan 7",
+    "content": "Crohn disease: immunosuppression with biologics (anti-TNF) for moderate-severe. Ulcerative colitis: 5-ASA for mild, immunosuppression for moderate. Monitor inflammatory markers. Colonoscopy surveillance. Nutrition support. Gastroenterology treatment plan 7 with evidence-based approach.",
+    "document_type": "treatment_plan",
+    "source": "Gastroenterology Department",
+    "metadata": {
+      "specialty": "Gastroenterology",
+      "category": "treatment_plan",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.110227"
+  },
+  {
+    "document_id": "gi_008",
+    "title": "Cirrhosis Complications - Treatment Plan 8",
+    "content": "Screen for varices with endoscopy. Beta blockers for primary prophylaxis. Diuretics for ascites (spironolactone + furosemide). Lactulose for hepatic encephalopathy. Avoid nephrotoxins and NSAIDs. HCC screening with ultrasound q6mo. Gastroenterology treatment plan 8 with evidence-based approach.",
+    "document_type": "treatment_plan",
+    "source": "Gastroenterology Department",
+    "metadata": {
+      "specialty": "Gastroenterology",
+      "category": "treatment_plan",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.110230"
+  },
+  {
+    "document_id": "gi_009",
+    "title": "Acute Pancreatitis - Treatment Plan 9",
+    "content": "NPO initially, aggressive IV fluids 250-500 mL/hr. Pain control. Nutrition within 24-48 hours if tolerated. Avoid antibiotics unless infected necrosis. CT with contrast if severe or not improving. Identify and treat etiology. Gastroenterology treatment plan 9 with evidence-based approach.",
+    "document_type": "treatment_plan",
+    "source": "Gastroenterology Department",
+    "metadata": {
+      "specialty": "Gastroenterology",
+      "category": "treatment_plan",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.110234"
+  },
+  {
+    "document_id": "gi_010",
+    "title": "Peptic Ulcer Disease - Treatment Plan 10",
+    "content": "Test and treat H. pylori. Triple therapy: PPI + amoxicillin + clarithromycin for 14 days. Confirm eradication with stool antigen. Stop NSAIDs if possible. PPI for NSAID users. Endoscopy for complicated ulcers. Gastroenterology treatment plan 10 with evidence-based approach.",
+    "document_type": "treatment_plan",
+    "source": "Gastroenterology Department",
+    "metadata": {
+      "specialty": "Gastroenterology",
+      "category": "treatment_plan",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.110237"
+  },
+  {
+    "document_id": "gi_011",
+    "title": "GERD Management - Treatment Plan 11",
+    "content": "Lifestyle modifications first-line. PPI therapy for symptomatic relief. Omeprazole 20mg daily before breakfast. Trial off PPI after 8 weeks if asymptomatic. Step-down to H2 blocker. Endoscopy if alarm features. Gastroenterology treatment plan 11 with evidence-based approach.",
+    "document_type": "treatment_plan",
+    "source": "Gastroenterology Department",
+    "metadata": {
+      "specialty": "Gastroenterology",
+      "category": "treatment_plan",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.110244"
+  },
+  {
+    "document_id": "gi_012",
+    "title": "Inflammatory Bowel Disease - Treatment Plan 12",
+    "content": "Crohn disease: immunosuppression with biologics (anti-TNF) for moderate-severe. Ulcerative colitis: 5-ASA for mild, immunosuppression for moderate. Monitor inflammatory markers. Colonoscopy surveillance. Nutrition support. Gastroenterology treatment plan 12 with evidence-based approach.",
+    "document_type": "treatment_plan",
+    "source": "Gastroenterology Department",
+    "metadata": {
+      "specialty": "Gastroenterology",
+      "category": "treatment_plan",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.110247"
+  },
+  {
+    "document_id": "gi_013",
+    "title": "Cirrhosis Complications - Treatment Plan 13",
+    "content": "Screen for varices with endoscopy. Beta blockers for primary prophylaxis. Diuretics for ascites (spironolactone + furosemide). Lactulose for hepatic encephalopathy. Avoid nephrotoxins and NSAIDs. HCC screening with ultrasound q6mo. Gastroenterology treatment plan 13 with evidence-based approach.",
+    "document_type": "treatment_plan",
+    "source": "Gastroenterology Department",
+    "metadata": {
+      "specialty": "Gastroenterology",
+      "category": "treatment_plan",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.110250"
+  },
+  {
+    "document_id": "gi_014",
+    "title": "Acute Pancreatitis - Treatment Plan 14",
+    "content": "NPO initially, aggressive IV fluids 250-500 mL/hr. Pain control. Nutrition within 24-48 hours if tolerated. Avoid antibiotics unless infected necrosis. CT with contrast if severe or not improving. Identify and treat etiology. Gastroenterology treatment plan 14 with evidence-based approach.",
+    "document_type": "treatment_plan",
+    "source": "Gastroenterology Department",
+    "metadata": {
+      "specialty": "Gastroenterology",
+      "category": "treatment_plan",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.110257"
+  },
+  {
+    "document_id": "gi_015",
+    "title": "Peptic Ulcer Disease - Treatment Plan 15",
+    "content": "Test and treat H. pylori. Triple therapy: PPI + amoxicillin + clarithromycin for 14 days. Confirm eradication with stool antigen. Stop NSAIDs if possible. PPI for NSAID users. Endoscopy for complicated ulcers. Gastroenterology treatment plan 15 with evidence-based approach.",
+    "document_type": "treatment_plan",
+    "source": "Gastroenterology Department",
+    "metadata": {
+      "specialty": "Gastroenterology",
+      "category": "treatment_plan",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.110260"
+  },
+  {
+    "document_id": "gi_016",
+    "title": "GERD Management - Treatment Plan 16",
+    "content": "Lifestyle modifications first-line. PPI therapy for symptomatic relief. Omeprazole 20mg daily before breakfast. Trial off PPI after 8 weeks if asymptomatic. Step-down to H2 blocker. Endoscopy if alarm features. Gastroenterology treatment plan 16 with evidence-based approach.",
+    "document_type": "treatment_plan",
+    "source": "Gastroenterology Department",
+    "metadata": {
+      "specialty": "Gastroenterology",
+      "category": "treatment_plan",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.110263"
+  },
+  {
+    "document_id": "gi_017",
+    "title": "Inflammatory Bowel Disease - Treatment Plan 17",
+    "content": "Crohn disease: immunosuppression with biologics (anti-TNF) for moderate-severe. Ulcerative colitis: 5-ASA for mild, immunosuppression for moderate. Monitor inflammatory markers. Colonoscopy surveillance. Nutrition support. Gastroenterology treatment plan 17 with evidence-based approach.",
+    "document_type": "treatment_plan",
+    "source": "Gastroenterology Department",
+    "metadata": {
+      "specialty": "Gastroenterology",
+      "category": "treatment_plan",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.110265"
+  },
+  {
+    "document_id": "gi_018",
+    "title": "Cirrhosis Complications - Treatment Plan 18",
+    "content": "Screen for varices with endoscopy. Beta blockers for primary prophylaxis. Diuretics for ascites (spironolactone + furosemide). Lactulose for hepatic encephalopathy. Avoid nephrotoxins and NSAIDs. HCC screening with ultrasound q6mo. Gastroenterology treatment plan 18 with evidence-based approach.",
+    "document_type": "treatment_plan",
+    "source": "Gastroenterology Department",
+    "metadata": {
+      "specialty": "Gastroenterology",
+      "category": "treatment_plan",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.110271"
+  },
+  {
+    "document_id": "gi_019",
+    "title": "Acute Pancreatitis - Treatment Plan 19",
+    "content": "NPO initially, aggressive IV fluids 250-500 mL/hr. Pain control. Nutrition within 24-48 hours if tolerated. Avoid antibiotics unless infected necrosis. CT with contrast if severe or not improving. Identify and treat etiology. Gastroenterology treatment plan 19 with evidence-based approach.",
+    "document_type": "treatment_plan",
+    "source": "Gastroenterology Department",
+    "metadata": {
+      "specialty": "Gastroenterology",
+      "category": "treatment_plan",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.110274"
+  },
+  {
+    "document_id": "gi_020",
+    "title": "Peptic Ulcer Disease - Treatment Plan 20",
+    "content": "Test and treat H. pylori. Triple therapy: PPI + amoxicillin + clarithromycin for 14 days. Confirm eradication with stool antigen. Stop NSAIDs if possible. PPI for NSAID users. Endoscopy for complicated ulcers. Gastroenterology treatment plan 20 with evidence-based approach.",
+    "document_type": "treatment_plan",
+    "source": "Gastroenterology Department",
+    "metadata": {
+      "specialty": "Gastroenterology",
+      "category": "treatment_plan",
+      "version": "2024"
+    },
+    "ontology_tags": [],
+    "created_at": "2025-10-28T07:20:08.110277"
+  }
+]

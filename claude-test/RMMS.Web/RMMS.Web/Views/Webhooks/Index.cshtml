@@ -1,0 +1,186 @@
+@model List<RMMS.Models.API.Webhook>
+@{
+    ViewData["Title"] = "Webhooks Management";
+}
+
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col-12">
+            <h2><i class="fas fa-webhook"></i> Webhooks Management</h2>
+            <p class="text-muted">Configure and manage webhook subscriptions for real-time event notifications</p>
+        </div>
+    </div>
+
+    <!-- STATISTICS DASHBOARD -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card bg-primary text-white">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="fas fa-webhook"></i> Total Webhooks</h5>
+                    <h2>@ViewBag.TotalWebhooks</h2>
+                    <small>Configured webhooks</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-success text-white">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="fas fa-check-circle"></i> Active</h5>
+                    <h2>@ViewBag.ActiveWebhooks</h2>
+                    <small>Currently active</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-secondary text-white">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="fas fa-pause-circle"></i> Inactive</h5>
+                    <h2>@ViewBag.InactiveWebhooks</h2>
+                    <small>Paused webhooks</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-info text-white">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="fas fa-clock"></i> Recently Triggered</h5>
+                    <h2>@ViewBag.RecentlyTriggered</h2>
+                    <small>Last 24 hours</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ACTION BUTTONS -->
+    <div class="row mb-3">
+        <div class="col-12">
+            <a href="@Url.Action("Create", "Webhooks")" class="btn btn-primary">
+                <i class="fas fa-plus"></i> Create New Webhook
+            </a>
+            <a href="@Url.Action("GetStatistics", "Webhooks")" class="btn btn-info" target="_blank">
+                <i class="fas fa-chart-bar"></i> View Statistics
+            </a>
+        </div>
+    </div>
+
+    <!-- WEBHOOKS TABLE -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header bg-light">
+                    <h5 class="mb-0"><i class="fas fa-list"></i> Webhooks List (@Model.Count)</h5>
+                </div>
+                <div class="card-body">
+                    @if (Model.Any())
+                    {
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>URL</th>
+                                        <th>Event Type</th>
+                                        <th>Method</th>
+                                        <th>Last Triggered</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var webhook in Model)
+                                    {
+                                        var statusClass = webhook.IsActive ? "success" : "secondary";
+                                        <tr>
+                                            <td><strong>@webhook.Name</strong></td>
+                                            <td><code>@webhook.Url</code></td>
+                                            <td><span class="badge bg-primary">@webhook.EventType</span></td>
+                                            <td><span class="badge bg-info">@webhook.Method</span></td>
+                                            <td>
+                                                @if (webhook.LastTriggered.HasValue)
+                                                {
+                                                    @webhook.LastTriggered.Value.ToString("yyyy-MM-dd HH:mm:ss")
+                                                }
+                                                else
+                                                {
+                                                    <span class="text-muted">Never</span>
+                                                }
+                                            </td>
+                                            <td><span class="badge bg-@statusClass">@(webhook.IsActive ? "Active" : "Inactive")</span></td>
+                                            <td>
+                                                <form method="post" asp-action="TestWebhook" asp-route-id="@webhook.Id" style="display: inline;">
+                                                    <button type="submit" class="btn btn-sm btn-primary" title="Test Webhook">
+                                                        <i class="fas fa-vial"></i>
+                                                    </button>
+                                                </form>
+                                                <form method="post" asp-action="ToggleStatus" asp-route-id="@webhook.Id" style="display: inline;">
+                                                    <button type="submit" class="btn btn-sm btn-warning" title="Toggle Status">
+                                                        <i class="fas fa-power-off"></i>
+                                                    </button>
+                                                </form>
+                                                <a href="@Url.Action("Edit", "Webhooks", new { id = webhook.Id })" class="btn btn-sm btn-info" title="Edit">
+                                                    <i class="fas fa-edit"></i>
+                                                </a>
+                                                <form method="post" asp-action="Delete" asp-route-id="@webhook.Id" style="display: inline;">
+                                                    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Delete this webhook?');" title="Delete">
+                                                        <i class="fas fa-trash"></i>
+                                                    </button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle"></i> No webhooks configured. Create your first webhook to receive real-time event notifications.
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- EVENT TYPES INFO -->
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header bg-light">
+                    <h5 class="mb-0"><i class="fas fa-info-circle"></i> Available Event Types</h5>
+                </div>
+                <div class="card-body">
+                    <p>Webhooks can subscribe to the following event types:</p>
+                    <div class="row">
+                        @if (ViewBag.EventTypes != null)
+                        {
+                            @foreach (var eventType in ViewBag.EventTypes)
+                            {
+                                <div class="col-md-3 mb-2">
+                                    <span class="badge bg-secondary">@eventType</span>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["Success"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        @TempData["Error"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}

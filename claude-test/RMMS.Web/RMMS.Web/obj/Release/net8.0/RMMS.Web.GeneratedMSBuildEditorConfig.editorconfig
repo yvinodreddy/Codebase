@@ -1,0 +1,1023 @@
+is_global = true
+build_property.TargetFramework = net8.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = RMMS.Web
+build_property.RootNamespace = RMMS.Web
+build_property.ProjectDir = /home/user01/claude-test/RMMS.Web/RMMS.Web/
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 8.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = /home/user01/claude-test/RMMS.Web/RMMS.Web
+build_property._RazorSourceGeneratorDebug = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Account/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWNjb3VudC9Mb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Analytics/Executive.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQW5hbHl0aWNzL0V4ZWN1dGl2ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Analytics/Financial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQW5hbHl0aWNzL0ZpbmFuY2lhbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Analytics/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQW5hbHl0aWNzL0luZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Analytics/Inventory.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQW5hbHl0aWNzL0ludmVudG9yeS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Analytics/Production.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQW5hbHl0aWNzL1Byb2R1Y3Rpb24uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Analytics/Sales.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQW5hbHl0aWNzL1NhbGVzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Analytics/Suppliers.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQW5hbHl0aWNzL1N1cHBsaWVycy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/ApiAnalytics/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQXBpQW5hbHl0aWNzL0NyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/ApiAnalytics/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQXBpQW5hbHl0aWNzL0RldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/ApiAnalytics/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQXBpQW5hbHl0aWNzL0luZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/ApiKeys/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQXBpS2V5cy9DcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/ApiKeys/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQXBpS2V5cy9EZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/ApiKeys/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQXBpS2V5cy9JbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/AuditTrail/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQXVkaXRUcmFpbC9DcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/AuditTrail/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQXVkaXRUcmFpbC9EZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/AuditTrail/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQXVkaXRUcmFpbC9JbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/BankTransactions/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQmFua1RyYW5zYWN0aW9ucy9DcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/BankTransactions/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQmFua1RyYW5zYWN0aW9ucy9EZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/BankTransactions/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQmFua1RyYW5zYWN0aW9ucy9FZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/BankTransactions/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQmFua1RyYW5zYWN0aW9ucy9JbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/BulkOperations/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQnVsa09wZXJhdGlvbnMvQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/BulkOperations/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQnVsa09wZXJhdGlvbnMvRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/BulkOperations/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQnVsa09wZXJhdGlvbnMvSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/ByProductSales/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQnlQcm9kdWN0U2FsZXMvQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/ByProductSales/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQnlQcm9kdWN0U2FsZXMvRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/ByProductSales/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQnlQcm9kdWN0U2FsZXMvRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/ByProductSales/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQnlQcm9kdWN0U2FsZXMvSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/CashBook/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ2FzaEJvb2svQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/CashBook/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ2FzaEJvb2svRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/CashBook/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ2FzaEJvb2svRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/CashBook/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ2FzaEJvb2svSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/ComparisonReports/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ29tcGFyaXNvblJlcG9ydHMvQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/ComparisonReports/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ29tcGFyaXNvblJlcG9ydHMvRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/ComparisonReports/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ29tcGFyaXNvblJlcG9ydHMvSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Customers/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ3VzdG9tZXJzL0NyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Customers/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ3VzdG9tZXJzL0RlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Customers/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ3VzdG9tZXJzL0RldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Customers/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ3VzdG9tZXJzL0VkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Customers/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ3VzdG9tZXJzL0luZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/CustomReportBuilder/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ3VzdG9tUmVwb3J0QnVpbGRlci9DcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/CustomReportBuilder/Execute.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ3VzdG9tUmVwb3J0QnVpbGRlci9FeGVjdXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/CustomReportBuilder/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ3VzdG9tUmVwb3J0QnVpbGRlci9JbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/CustomReportBuilder/Results.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ3VzdG9tUmVwb3J0QnVpbGRlci9SZXN1bHRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/DataArchival/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRGF0YUFyY2hpdmFsL0NyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/DataArchival/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRGF0YUFyY2hpdmFsL0RldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/DataArchival/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRGF0YUFyY2hpdmFsL0luZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/DataBackup/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRGF0YUJhY2t1cC9DcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/DataBackup/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRGF0YUJhY2t1cC9EZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/DataBackup/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRGF0YUJhY2t1cC9JbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/DataCleansing/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRGF0YUNsZWFuc2luZy9DcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/DataCleansing/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRGF0YUNsZWFuc2luZy9EZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/DataCleansing/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRGF0YUNsZWFuc2luZy9JbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/DataValidation/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRGF0YVZhbGlkYXRpb24vQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/DataValidation/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRGF0YVZhbGlkYXRpb24vRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/DataValidation/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRGF0YVZhbGlkYXRpb24vSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/DrilldownReports/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRHJpbGxkb3duUmVwb3J0cy9DcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/DrilldownReports/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRHJpbGxkb3duUmVwb3J0cy9EZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/DrilldownReports/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRHJpbGxkb3duUmVwb3J0cy9JbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Employees/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRW1wbG95ZWVzL0NyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Employees/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRW1wbG95ZWVzL0RlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Employees/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRW1wbG95ZWVzL0RldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Employees/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRW1wbG95ZWVzL0VkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Employees/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRW1wbG95ZWVzL0luZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/ExportCenter/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRXhwb3J0Q2VudGVyL0NyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/ExportCenter/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRXhwb3J0Q2VudGVyL0RldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/ExportCenter/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRXhwb3J0Q2VudGVyL0luZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/ExternalRiceSales/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRXh0ZXJuYWxSaWNlU2FsZXMvQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/ExternalRiceSales/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRXh0ZXJuYWxSaWNlU2FsZXMvRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/ExternalRiceSales/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRXh0ZXJuYWxSaWNlU2FsZXMvRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/ExternalRiceSales/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRXh0ZXJuYWxSaWNlU2FsZXMvSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/FixedAssets/CalculateDepreciation.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRml4ZWRBc3NldHMvQ2FsY3VsYXRlRGVwcmVjaWF0aW9uLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/FixedAssets/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRml4ZWRBc3NldHMvQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/FixedAssets/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRml4ZWRBc3NldHMvRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/FixedAssets/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRml4ZWRBc3NldHMvRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/FixedAssets/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRml4ZWRBc3NldHMvSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9JbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9Qcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Home/ProfessionalDemo.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9Qcm9mZXNzaW9uYWxEZW1vLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Inquiries/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSW5xdWlyaWVzL0NyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Inquiries/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSW5xdWlyaWVzL0RlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Inquiries/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSW5xdWlyaWVzL0RldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Inquiries/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSW5xdWlyaWVzL0VkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Inquiries/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSW5xdWlyaWVzL0luZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Integrations/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSW50ZWdyYXRpb25zL0NyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Integrations/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSW50ZWdyYXRpb25zL0RldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Integrations/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSW50ZWdyYXRpb25zL0luZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/InteractiveDashboards/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSW50ZXJhY3RpdmVEYXNoYm9hcmRzL0NyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/InteractiveDashboards/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSW50ZXJhY3RpdmVEYXNoYm9hcmRzL0RldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/InteractiveDashboards/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSW50ZXJhY3RpdmVEYXNoYm9hcmRzL0luZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Inventory/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSW52ZW50b3J5L0NyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Inventory/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSW52ZW50b3J5L0RlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Inventory/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSW52ZW50b3J5L0RldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Inventory/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSW52ZW50b3J5L0VkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Inventory/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSW52ZW50b3J5L0luZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Invoices/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSW52b2ljZXMvSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Invoices/Template1.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSW52b2ljZXMvVGVtcGxhdGUxLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Invoices/Template2.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSW52b2ljZXMvVGVtcGxhdGUyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Invoices/Template3.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSW52b2ljZXMvVGVtcGxhdGUzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Invoices/Template4.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSW52b2ljZXMvVGVtcGxhdGU0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Invoices/Template5.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSW52b2ljZXMvVGVtcGxhdGU1LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Invoices/Template6.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSW52b2ljZXMvVGVtcGxhdGU2LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/LoansAdvances/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTG9hbnNBZHZhbmNlcy9DcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/LoansAdvances/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTG9hbnNBZHZhbmNlcy9EZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/LoansAdvances/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTG9hbnNBZHZhbmNlcy9FZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/LoansAdvances/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTG9hbnNBZHZhbmNlcy9JbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/LoansAdvances/RecordRepayment.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTG9hbnNBZHZhbmNlcy9SZWNvcmRSZXBheW1lbnQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Machines/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTWFjaGluZXMvQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Machines/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTWFjaGluZXMvRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Machines/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTWFjaGluZXMvRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Machines/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTWFjaGluZXMvRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Machines/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTWFjaGluZXMvSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Machines/Maintenance.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTWFjaGluZXMvTWFpbnRlbmFuY2UuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/MasterData/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTWFzdGVyRGF0YS9DcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/MasterData/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTWFzdGVyRGF0YS9EZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/MasterData/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTWFzdGVyRGF0YS9JbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/MobileDashboard/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTW9iaWxlRGFzaGJvYXJkL0NyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/MobileDashboard/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTW9iaWxlRGFzaGJvYXJkL0RldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/MobileDashboard/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTW9iaWxlRGFzaGJvYXJkL0luZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/PaddyProcurement/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUGFkZHlQcm9jdXJlbWVudC9DcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/PaddyProcurement/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUGFkZHlQcm9jdXJlbWVudC9EZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/PaddyProcurement/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUGFkZHlQcm9jdXJlbWVudC9EZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/PaddyProcurement/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUGFkZHlQcm9jdXJlbWVudC9FZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/PaddyProcurement/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUGFkZHlQcm9jdXJlbWVudC9JbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/PaddyProcurement/StockSummary.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUGFkZHlQcm9jdXJlbWVudC9TdG9ja1N1bW1hcnkuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/PaddyProcurement/_ProcurementTable.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUGFkZHlQcm9jdXJlbWVudC9fUHJvY3VyZW1lbnRUYWJsZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/PayablesOverdue/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUGF5YWJsZXNPdmVyZHVlL0NyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/PayablesOverdue/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUGF5YWJsZXNPdmVyZHVlL0RldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/PayablesOverdue/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUGF5YWJsZXNPdmVyZHVlL0VkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/PayablesOverdue/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUGF5YWJsZXNPdmVyZHVlL0luZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/PayablesOverdue/RecordPayment.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUGF5YWJsZXNPdmVyZHVlL1JlY29yZFBheW1lbnQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/ProductionBatches/Complete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJvZHVjdGlvbkJhdGNoZXMvQ29tcGxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/ProductionBatches/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJvZHVjdGlvbkJhdGNoZXMvQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/ProductionBatches/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJvZHVjdGlvbkJhdGNoZXMvRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/ProductionBatches/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJvZHVjdGlvbkJhdGNoZXMvRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/ProductionBatches/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJvZHVjdGlvbkJhdGNoZXMvRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/ProductionBatches/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJvZHVjdGlvbkJhdGNoZXMvSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/ProductionOrders/Cancel.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJvZHVjdGlvbk9yZGVycy9DYW5jZWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/ProductionOrders/Complete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJvZHVjdGlvbk9yZGVycy9Db21wbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/ProductionOrders/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJvZHVjdGlvbk9yZGVycy9DcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/ProductionOrders/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJvZHVjdGlvbk9yZGVycy9EZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/ProductionOrders/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJvZHVjdGlvbk9yZGVycy9EZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/ProductionOrders/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJvZHVjdGlvbk9yZGVycy9FZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/ProductionOrders/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJvZHVjdGlvbk9yZGVycy9JbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Products/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJvZHVjdHMvQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Products/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJvZHVjdHMvRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Products/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJvZHVjdHMvRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Products/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJvZHVjdHMvRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Products/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJvZHVjdHMvSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/PushNotifications/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHVzaE5vdGlmaWNhdGlvbnMvQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/PushNotifications/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHVzaE5vdGlmaWNhdGlvbnMvRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/PushNotifications/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHVzaE5vdGlmaWNhdGlvbnMvSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Quotations/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUXVvdGF0aW9ucy9DcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Quotations/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUXVvdGF0aW9ucy9EZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Quotations/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUXVvdGF0aW9ucy9EZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Quotations/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUXVvdGF0aW9ucy9FZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Quotations/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUXVvdGF0aW9ucy9JbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/RealtimeMonitoring/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmVhbHRpbWVNb25pdG9yaW5nL0NyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/RealtimeMonitoring/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmVhbHRpbWVNb25pdG9yaW5nL0RldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/RealtimeMonitoring/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmVhbHRpbWVNb25pdG9yaW5nL0luZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/ReceivablesOverdue/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmVjZWl2YWJsZXNPdmVyZHVlL0NyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/ReceivablesOverdue/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmVjZWl2YWJsZXNPdmVyZHVlL0RldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/ReceivablesOverdue/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmVjZWl2YWJsZXNPdmVyZHVlL0VkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/ReceivablesOverdue/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmVjZWl2YWJsZXNPdmVyZHVlL0luZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/ReceivablesOverdue/RecordPayment.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmVjZWl2YWJsZXNPdmVyZHVlL1JlY29yZFBheW1lbnQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Reports/CashFlow.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmVwb3J0cy9DYXNoRmxvdy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Reports/CustomerWiseSales.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmVwb3J0cy9DdXN0b21lcldpc2VTYWxlcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Reports/CustomReport.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmVwb3J0cy9DdXN0b21SZXBvcnQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Reports/DailyProduction.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmVwb3J0cy9EYWlseVByb2R1Y3Rpb24uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Reports/DailySales.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmVwb3J0cy9EYWlseVNhbGVzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Reports/GSTReport.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmVwb3J0cy9HU1RSZXBvcnQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Reports/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmVwb3J0cy9JbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Reports/MachineUtilization.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmVwb3J0cy9NYWNoaW5lVXRpbGl6YXRpb24uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Reports/MonthlySales.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmVwb3J0cy9Nb250aGx5U2FsZXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Reports/OutstandingPayments.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmVwb3J0cy9PdXRzdGFuZGluZ1BheW1lbnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Reports/PaddyStock.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmVwb3J0cy9QYWRkeVN0b2NrLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Reports/ProductionEfficiency.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmVwb3J0cy9Qcm9kdWN0aW9uRWZmaWNpZW5jeS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Reports/ProductionSummary.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmVwb3J0cy9Qcm9kdWN0aW9uU3VtbWFyeS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Reports/ProductWiseSales.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmVwb3J0cy9Qcm9kdWN0V2lzZVNhbGVzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Reports/ProfitLoss.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmVwb3J0cy9Qcm9maXRMb3NzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Reports/ReportTemplate.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmVwb3J0cy9SZXBvcnRUZW1wbGF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Reports/RiceStock.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmVwb3J0cy9SaWNlU3RvY2suY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Reports/StockMovement.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmVwb3J0cy9TdG9ja01vdmVtZW50LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Reports/StockSummary.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmVwb3J0cy9TdG9ja1N1bW1hcnkuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/RiceProcurementExternal/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmljZVByb2N1cmVtZW50RXh0ZXJuYWwvQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/RiceProcurementExternal/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmljZVByb2N1cmVtZW50RXh0ZXJuYWwvSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/RiceSales/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmljZVNhbGVzL0NyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/RiceSales/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmljZVNhbGVzL0RldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/RiceSales/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmljZVNhbGVzL0VkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/RiceSales/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmljZVNhbGVzL0luZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/SalesOrders/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2FsZXNPcmRlcnMvQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/SalesOrders/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2FsZXNPcmRlcnMvRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/SalesOrders/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2FsZXNPcmRlcnMvRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/SalesOrders/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2FsZXNPcmRlcnMvRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/SalesOrders/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2FsZXNPcmRlcnMvSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Schedule/Calendar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2NoZWR1bGUvQ2FsZW5kYXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/ScheduledReports/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2NoZWR1bGVkUmVwb3J0cy9DcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/ScheduledReports/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2NoZWR1bGVkUmVwb3J0cy9EZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/ScheduledReports/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2NoZWR1bGVkUmVwb3J0cy9JbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Seed/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2VlZC9JbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/SeedPhase4Data/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2VlZFBoYXNlNERhdGEvSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Settings/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2V0dGluZ3MvSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Shared/ComingSoon.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0NvbWluZ1Nvb24uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0Vycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Shared/_PaginationPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19QYWdpbmF0aW9uUGFydGlhbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/SignalRConsole/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2lnbmFsUkNvbnNvbGUvQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/SignalRConsole/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2lnbmFsUkNvbnNvbGUvRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/SignalRConsole/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2lnbmFsUkNvbnNvbGUvSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/StockAdjustments/Approve.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU3RvY2tBZGp1c3RtZW50cy9BcHByb3ZlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/StockAdjustments/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU3RvY2tBZGp1c3RtZW50cy9DcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/StockAdjustments/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU3RvY2tBZGp1c3RtZW50cy9EZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/StockAdjustments/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU3RvY2tBZGp1c3RtZW50cy9EZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/StockAdjustments/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU3RvY2tBZGp1c3RtZW50cy9FZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/StockAdjustments/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU3RvY2tBZGp1c3RtZW50cy9JbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/StockAdjustments/Reject.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU3RvY2tBZGp1c3RtZW50cy9SZWplY3QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/StockMovements/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU3RvY2tNb3ZlbWVudHMvQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/StockMovements/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU3RvY2tNb3ZlbWVudHMvRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/StockMovements/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU3RvY2tNb3ZlbWVudHMvRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/StockMovements/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU3RvY2tNb3ZlbWVudHMvSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Vendors/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVmVuZG9ycy9DcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Vendors/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVmVuZG9ycy9EZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Vendors/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVmVuZG9ycy9EZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Vendors/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVmVuZG9ycy9FZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Vendors/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVmVuZG9ycy9JbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/VersionControl/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVmVyc2lvbkNvbnRyb2wvQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/VersionControl/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVmVyc2lvbkNvbnRyb2wvRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/VersionControl/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVmVyc2lvbkNvbnRyb2wvSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Vouchers/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVm91Y2hlcnMvQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Vouchers/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVm91Y2hlcnMvRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Vouchers/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVm91Y2hlcnMvRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Vouchers/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVm91Y2hlcnMvSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Warehouses/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvV2FyZWhvdXNlcy9DcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Warehouses/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvV2FyZWhvdXNlcy9EZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Warehouses/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvV2FyZWhvdXNlcy9EZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Warehouses/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvV2FyZWhvdXNlcy9FZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Warehouses/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvV2FyZWhvdXNlcy9JbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Webhooks/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvV2ViaG9va3MvQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Webhooks/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvV2ViaG9va3MvRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Webhooks/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvV2ViaG9va3MvSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/YieldAnalysis/ByMachine.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvWWllbGRBbmFseXNpcy9CeU1hY2hpbmUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/YieldAnalysis/ByVariety.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvWWllbGRBbmFseXNpcy9CeVZhcmlldHkuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/YieldAnalysis/HighYield.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvWWllbGRBbmFseXNpcy9IaWdoWWllbGQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/YieldAnalysis/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvWWllbGRBbmFseXNpcy9JbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/YieldAnalysis/LowYield.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvWWllbGRBbmFseXNpcy9Mb3dZaWVsZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/YieldAnalysis/Performance.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvWWllbGRBbmFseXNpcy9QZXJmb3JtYW5jZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/YieldAnalysis/Trends.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvWWllbGRBbmFseXNpcy9UcmVuZHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/YieldAnalysis/Variance.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvWWllbGRBbmFseXNpcy9WYXJpYW5jZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/user01/claude-test/RMMS.Web/RMMS.Web/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-g8xtsssy5g

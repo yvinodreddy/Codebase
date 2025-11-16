@@ -1,0 +1,91 @@
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                                                                              ║
+║              HOW TO VIEW HIDDEN .claude FOLDER IN WINDOWS EXPLORER          ║
+║                                                                              ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+PROBLEM:
+The .claude folder is hidden in Windows Explorer because it starts with a dot (.)
+
+SOLUTION 1: Enable "Show Hidden Files" in Windows Explorer
+════════════════════════════════════════════════════════════════════════════════
+
+Step 1: Open Windows File Explorer
+
+Step 2: Navigate to:
+   \\wsl.localhost\Ubuntu\home\user01\claude-test\
+
+Step 3: Click on "View" in the top menu
+
+Step 4: Click "Show" → Check "Hidden items"
+
+   OR (Windows 11):
+   Click "View" → "Show" → Enable "Hidden items"
+
+   OR (Older Windows):
+   Click "View" tab → Check "Hidden items" checkbox
+
+Step 5: You should now see the .claude folder!
+
+Step 6: Navigate to:
+   \\wsl.localhost\Ubuntu\home\user01\claude-test\.claude\commands\
+
+You'll see:
+   - laptop-comparison.md (33KB)
+   - README.md (2.5KB)
+
+
+SOLUTION 2: Copy Files to Visible Folder
+════════════════════════════════════════════════════════════════════════════════
+
+We've created a copy of the command files in a VISIBLE folder for you:
+
+   \\wsl.localhost\Ubuntu\home\user01\claude-test\BuyComputerLaptop\CommandFiles\
+
+This folder contains copies of:
+   - laptop-comparison.md
+   - README.md
+   - QUICK_START.txt
+
+You can view these files without enabling hidden files!
+
+
+WINDOWS EXPLORER PATH:
+════════════════════════════════════════════════════════════════════════════════
+
+Full path to .claude folder (after enabling hidden files):
+   \\wsl.localhost\Ubuntu\home\user01\claude-test\.claude\commands\
+
+Full path to visible copy:
+   \\wsl.localhost\Ubuntu\home\user01\claude-test\BuyComputerLaptop\CommandFiles\
+
+
+HOW TO OPEN FILES:
+════════════════════════════════════════════════════════════════════════════════
+
+Option 1: Right-click → "Open with" → Notepad
+Option 2: Right-click → "Open with" → VS Code (if installed)
+Option 3: Right-click → "Open with" → Any text editor
+
+
+TROUBLESHOOTING:
+════════════════════════════════════════════════════════════════════════════════
+
+Q: I still don't see .claude folder after enabling hidden files
+A: Make sure you're in the correct directory:
+   \\wsl.localhost\Ubuntu\home\user01\claude-test\
+   (NOT in the BuyComputerLaptop subfolder)
+
+Q: Can I edit these files?
+A: Yes! Edit either the original (.claude/commands/) or the copy (CommandFiles/)
+   Both work the same way.
+
+Q: Which files do I need to view?
+A:
+   - laptop-comparison.md = The reusable command (most important!)
+   - README.md = Instructions
+   - QUICK_START.txt = Quick reference guide
+
+
+════════════════════════════════════════════════════════════════════════════════
+Created: October 20, 2025

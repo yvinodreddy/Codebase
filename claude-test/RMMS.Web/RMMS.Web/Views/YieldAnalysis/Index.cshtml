@@ -1,0 +1,274 @@
+@using RMMS.Services.Interfaces.Production
+@{
+    ViewData["Title"] = "Yield Analysis Dashboard";
+    var statistics = ViewBag.Statistics as YieldStatistics;
+    var comparison = ViewBag.Comparison as YieldComparisonData;
+    var summary = ViewBag.Summary as ProductionSummaryData;
+    var fromDate = ViewBag.FromDate as DateTime?;
+    var toDate = ViewBag.ToDate as DateTime?;
+}
+
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2><i class="fas fa-chart-line"></i> Yield Analysis Dashboard</h2>
+        <div>
+            <a asp-action="Trends" class="btn btn-outline-primary btn-sm">
+                <i class="fas fa-chart-area"></i> Trends
+            </a>
+            <a asp-action="ByVariety" class="btn btn-outline-success btn-sm">
+                <i class="fas fa-leaf"></i> By Variety
+            </a>
+            <a asp-action="ByMachine" class="btn btn-outline-info btn-sm">
+                <i class="fas fa-cog"></i> By Machine
+            </a>
+        </div>
+    </div>
+
+    <!-- Date Filter -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <form method="get" class="row g-3">
+                <div class="col-md-4">
+                    <label class="form-label">From Date</label>
+                    <input type="date" name="fromDate" class="form-control" value="@fromDate?.ToString("yyyy-MM-dd")" />
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">To Date</label>
+                    <input type="date" name="toDate" class="form-control" value="@toDate?.ToString("yyyy-MM-dd")" />
+                </div>
+                <div class="col-md-4 d-flex align-items-end">
+                    <button type="submit" class="btn btn-primary me-2">
+                        <i class="fas fa-filter"></i> Apply Filter
+                    </button>
+                    <a asp-action="Index" class="btn btn-secondary">
+                        <i class="fas fa-redo"></i> Reset
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    @if (statistics != null && statistics.TotalBatches > 0)
+    {
+        <!-- Statistics Cards -->
+        <div class="row mb-4">
+            <div class="col-xl-3 col-md-6 mb-3">
+                <div class="card border-primary">
+                    <div class="card-body">
+                        <h5 class="card-title text-muted">Average Yield</h5>
+                        <h2 class="text-primary">@statistics.AverageYieldPercent.ToString("F2")%</h2>
+                        <small class="text-muted">Standard: @statistics.StandardYieldPercent.ToString("F1")%</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6 mb-3">
+                <div class="card border-success">
+                    <div class="card-body">
+                        <h5 class="card-title text-muted">Total Batches</h5>
+                        <h2 class="text-success">@statistics.TotalBatches</h2>
+                        <small class="text-success">
+                            <i class="fas fa-arrow-up"></i> @statistics.BatchesAboveStandard above standard
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6 mb-3">
+                <div class="card border-info">
+                    <div class="card-body">
+                        <h5 class="card-title text-muted">Input Processed</h5>
+                        <h2 class="text-info">@statistics.TotalInputQuantity.ToString("N0") kg</h2>
+                        <small class="text-muted">Output: @statistics.TotalOutputQuantity.ToString("N0") kg</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6 mb-3">
+                <div class="card @(statistics.YieldVariance >= 0 ? "border-success" : "border-warning")">
+                    <div class="card-body">
+                        <h5 class="card-title text-muted">Yield Variance</h5>
+                        <h2 class="@(statistics.YieldVariance >= 0 ? "text-success" : "text-warning")">
+                            @(statistics.YieldVariance >= 0 ? "+" : "")@statistics.YieldVariance.ToString("F2")%
+                        </h2>
+                        <small class="text-muted">vs Standard Yield</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Yield Range -->
+        <div class="row mb-4">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header bg-light">
+                        <h5 class="mb-0"><i class="fas fa-chart-bar"></i> Yield Range</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4 text-center">
+                                <h6 class="text-muted">Minimum Yield</h6>
+                                <h3 class="text-danger">@statistics.MinYieldPercent.ToString("F2")%</h3>
+                            </div>
+                            <div class="col-md-4 text-center">
+                                <h6 class="text-muted">Average Yield</h6>
+                                <h3 class="text-primary">@statistics.AverageYieldPercent.ToString("F2")%</h3>
+                            </div>
+                            <div class="col-md-4 text-center">
+                                <h6 class="text-muted">Maximum Yield</h6>
+                                <h3 class="text-success">@statistics.MaxYieldPercent.ToString("F2")%</h3>
+                            </div>
+                        </div>
+                        <div class="progress mt-3" style="height: 30px;">
+                            <div class="progress-bar bg-danger" style="width: 33.33%">
+                                Min: @statistics.MinYieldPercent.ToString("F1")%
+                            </div>
+                            <div class="progress-bar bg-primary" style="width: 33.33%">
+                                Avg: @statistics.AverageYieldPercent.ToString("F1")%
+                            </div>
+                            <div class="progress-bar bg-success" style="width: 33.33%">
+                                Max: @statistics.MaxYieldPercent.ToString("F1")%
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @if (comparison != null)
+        {
+            <!-- Trend Comparison -->
+            <div class="row mb-4">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header bg-light">
+                            <h5 class="mb-0"><i class="fas fa-chart-line"></i> Trend Analysis</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-3 text-center">
+                                    <h6 class="text-muted">Current Period</h6>
+                                    <h3 class="text-primary">@comparison.CurrentPeriodAverage.ToString("F2")%</h3>
+                                    <small>@comparison.CurrentPeriodBatches batches</small>
+                                </div>
+                                <div class="col-md-3 text-center">
+                                    <h6 class="text-muted">Previous Period</h6>
+                                    <h3 class="text-secondary">@comparison.PreviousPeriodAverage.ToString("F2")%</h3>
+                                    <small>@comparison.PreviousPeriodBatches batches</small>
+                                </div>
+                                <div class="col-md-3 text-center">
+                                    <h6 class="text-muted">Change</h6>
+                                    <h3 class="@(comparison.PercentChange >= 0 ? "text-success" : "text-danger")">
+                                        @(comparison.PercentChange >= 0 ? "+" : "")@comparison.PercentChange.ToString("F1")%
+                                    </h3>
+                                    <small>@(comparison.PercentChange >= 0 ? "Improvement" : "Decline")</small>
+                                </div>
+                                <div class="col-md-3 text-center">
+                                    <h6 class="text-muted">Trend</h6>
+                                    <h3>
+                                        @if (comparison.Trend == "Improving")
+                                        {
+                                            <span class="badge bg-success"><i class="fas fa-arrow-up"></i> Improving</span>
+                                        }
+                                        else if (comparison.Trend == "Declining")
+                                        {
+                                            <span class="badge bg-danger"><i class="fas fa-arrow-down"></i> Declining</span>
+                                        }
+                                        else if (comparison.Trend == "Stable")
+                                        {
+                                            <span class="badge bg-primary"><i class="fas fa-minus"></i> Stable</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge bg-secondary">@comparison.Trend</span>
+                                        }
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+        @if (summary != null)
+        {
+            <!-- Production Summary -->
+            <div class="row mb-4">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header bg-light">
+                            <h5 class="mb-0"><i class="fas fa-industry"></i> Production Summary</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <h6 class="text-muted">Total Paddy Processed</h6>
+                                    <h4>@summary.TotalPaddyProcessed.ToString("N0") kg</h4>
+                                </div>
+                                <div class="col-md-3">
+                                    <h6 class="text-muted">Total Rice Produced</h6>
+                                    <h4>@summary.TotalRiceProduced.ToString("N0") kg</h4>
+                                    <small class="text-muted">Broken: @summary.TotalBrokenRice.ToString("N0") kg</small>
+                                </div>
+                                <div class="col-md-3">
+                                    <h6 class="text-muted">By-Products</h6>
+                                    <p class="mb-1"><strong>Bran:</strong> @summary.TotalBranProduced.ToString("N0") kg</p>
+                                    <p class="mb-0"><strong>Husk:</strong> @summary.TotalHuskProduced.ToString("N0") kg</p>
+                                </div>
+                                <div class="col-md-3">
+                                    <h6 class="text-muted">Processing Time</h6>
+                                    <h4>@summary.TotalProcessingHours.ToString("N1") hrs</h4>
+                                    <small class="text-muted">Avg: @summary.AverageBatchDuration.ToString("N1") hrs/batch</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+        <!-- Quick Links -->
+        <div class="row">
+            <div class="col-md-4 mb-3">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <i class="fas fa-exclamation-triangle text-warning fa-3x mb-3"></i>
+                        <h5>Low Yield Batches</h5>
+                        <p class="text-muted">@statistics.BatchesBelowStandard batches below standard</p>
+                        <a asp-action="LowYield" asp-route-threshold="@statistics.StandardYieldPercent" class="btn btn-warning">
+                            <i class="fas fa-search"></i> View Details
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-3">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <i class="fas fa-chart-line text-primary fa-3x mb-3"></i>
+                        <h5>Variance Analysis</h5>
+                        <p class="text-muted">Analyze yield deviations</p>
+                        <a asp-action="Variance" class="btn btn-primary">
+                            <i class="fas fa-chart-bar"></i> View Report
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-3">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <i class="fas fa-star text-success fa-3x mb-3"></i>
+                        <h5>High Performers</h5>
+                        <p class="text-muted">@statistics.BatchesAboveStandard excellent batches</p>
+                        <a asp-action="HighYield" asp-route-threshold="70" class="btn btn-success">
+                            <i class="fas fa-trophy"></i> View Details
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info">
+            <i class="fas fa-info-circle"></i> No production data available for the selected period. Please adjust the date range or complete some production batches first.
+        </div>
+    }
+</div>

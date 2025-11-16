@@ -1,0 +1,161 @@
+﻿@{
+    ViewData["Title"] = ViewBag.ReportTitle ?? "Custom Report";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var reportData = ViewBag.ReportData as dynamic;
+}
+
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-header bg-secondary text-white">
+            <h3><i class="fas fa-chart-pie"></i> @ViewBag.ReportTitle</h3>
+            @if (!string.IsNullOrEmpty(ViewBag.FromDate as string) && !string.IsNullOrEmpty(ViewBag.ToDate as string))
+            {
+                <p class="mb-0">Period: @ViewBag.FromDate to @ViewBag.ToDate</p>
+            }
+        </div>
+
+        <div class="card-body">
+            @if (!string.IsNullOrEmpty(ViewBag.ReportType as string))
+            {
+                <!-- Display report content based on type -->
+                switch (ViewBag.ReportType)
+                {
+                    case "sales":
+                        <div class="alert alert-success">
+                            <h5>Sales Analysis Results</h5>
+                            <p>Total Sales Amount: ₹ @string.Format("{0:N2}", ViewBag.TotalAmount ?? 0)</p>
+                        </div>
+                        break;
+
+                    case "financial":
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="card bg-light">
+                                    <div class="card-body">
+                                        <h6>Revenue</h6>
+                                        <h4>₹ @string.Format("{0:N2}", ViewBag.Revenue ?? 0)</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card bg-light">
+                                    <div class="card-body">
+                                        <h6>Expenses</h6>
+                                        <h4>₹ @string.Format("{0:N2}", ViewBag.Expenses ?? 0)</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card bg-light">
+                                    <div class="card-body">
+                                        <h6>Net Income</h6>
+                                        <h4>₹ @string.Format("{0:N2}", ViewBag.NetIncome ?? 0)</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        break;
+
+                    default:
+                        <div class="alert alert-info">
+                            <p>Custom report data will be displayed here based on your selection.</p>
+                        </div>
+                        break;
+                }
+
+                <!-- Display any report data if available -->
+                @if (reportData?.Count > 0)
+                {
+                    <div class="table-responsive mt-4">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Description</th>
+                                    <th>Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in reportData!)
+                                {
+                                    <tr>
+                                        <td>@(item?.SaleDate ?? DateTime.MinValue)</td>
+                                        <td>@(item?.BuyerName ?? "Unknown")</td>
+                                        <td>₹ @(item?.GrossInvoiceAmount ?? 0)</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+            }
+            else
+            {
+                <!-- Report parameter selection form when no parameters are provided -->
+                <div class="alert alert-warning">
+                    <h5>Generate Custom Report</h5>
+                    <p>Please select report parameters to generate your custom report.</p>
+                </div>
+
+                <form method="get" action="@Url.Action("CustomReport", "Reports")">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Report Type</label>
+                                <select name="reportType" class="form-control" required>
+                                    <option value="">-- Select Report Type --</option>
+                                    <option value="sales">Sales Analysis</option>
+                                    <option value="procurement">Procurement Analysis</option>
+                                    <option value="financial">Financial Summary</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>From Date</label>
+                                <input type="date" name="fromDate" class="form-control" required />
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>To Date</label>
+                                <input type="date" name="toDate" class="form-control" required />
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>&nbsp;</label>
+                                <button type="submit" class="btn btn-primary d-block w-100">
+                                    <i class="fas fa-chart-line"></i> Generate
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            }
+
+            <div class="mt-4">
+                <a href="@Url.Action("Index", "Reports")" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Back to Reports
+                </a>
+                @if (!string.IsNullOrEmpty(ViewBag.ReportType as string))
+                {
+                    <button class="btn btn-primary" onclick="window.print()">
+                        <i class="fas fa-print"></i> Print Report
+                    </button>
+                    <a href="@Url.Action("ExportCustomReportExcel", "Reports", new { reportType = ViewBag.ReportType, fromDate = ViewBag.FromDate, toDate = ViewBag.ToDate })" class="btn btn-success">
+                        <i class="fas fa-file-excel"></i> Export to Excel
+                    </a>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function exportReport() {
+            alert('Export functionality will be implemented based on report type');
+        }
+    </script>
+}

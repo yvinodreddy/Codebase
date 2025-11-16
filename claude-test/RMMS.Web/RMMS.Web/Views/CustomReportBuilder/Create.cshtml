@@ -1,0 +1,480 @@
+@model RMMS.Models.Reporting.CustomReportDefinition
+
+@{
+    ViewData["Title"] = "Create Custom Report";
+}
+
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="@Url.Action("Index")">Custom Report Builder</a></li>
+                    <li class="breadcrumb-item active">Create New Report</li>
+                </ol>
+            </nav>
+            <h2><i class="fas fa-plus-circle me-2"></i>Create Custom Report</h2>
+            <p class="text-muted">Design a custom report with drag-and-drop fields, filters, and grouping</p>
+        </div>
+    </div>
+
+    <form asp-action="Create" method="post" id="reportForm">
+        <div class="row">
+            <!-- Left Column - Report Configuration -->
+            <div class="col-lg-8">
+                <!-- Basic Information -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="mb-0"><i class="fas fa-info-circle me-2"></i>Basic Information</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="ReportName" class="form-label">Report Name *</label>
+                                <input asp-for="ReportName" class="form-control" placeholder="Enter report name" required />
+                                <span asp-validation-for="ReportName" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="DataSource" class="form-label">Data Source *</label>
+                                <select asp-for="DataSource" class="form-select" id="dataSourceSelect" required>
+                                    <option value="">-- Select Data Source --</option>
+                                    @foreach (var ds in ViewBag.DataSources ?? new List<string>())
+                                    {
+                                        <option value="@ds">@ds</option>
+                                    }
+                                </select>
+                                <span asp-validation-for="DataSource" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <label asp-for="Description" class="form-label">Description</label>
+                                <textarea asp-for="Description" class="form-control" rows="3"
+                                          placeholder="Describe the purpose of this report"></textarea>
+                                <span asp-validation-for="Description" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Field Selection -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="mb-0"><i class="fas fa-columns me-2"></i>Field Selection</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label class="form-label">Available Fields</label>
+                                <div id="availableFields" class="field-list border rounded p-3" style="min-height: 300px;">
+                                    <p class="text-muted">Select a data source to see available fields</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Selected Fields</label>
+                                <div id="selectedFields" class="field-list border rounded p-3" style="min-height: 300px;">
+                                    <p class="text-muted">Drag fields here or double-click to add</p>
+                                </div>
+                                <input asp-for="SelectedColumns" type="hidden" id="selectedColumnsInput" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Filters -->
+                <div class="card mb-4">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0"><i class="fas fa-filter me-2"></i>Filters</h5>
+                        <button type="button" class="btn btn-sm btn-primary" onclick="addFilter()">
+                            <i class="fas fa-plus me-1"></i>Add Filter
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <div id="filtersContainer">
+                            <p class="text-muted">No filters added yet. Click "Add Filter" to create conditions.</p>
+                        </div>
+                        <input asp-for="FilterDefinition" type="hidden" id="filterDefinitionInput" />
+                    </div>
+                </div>
+
+                <!-- Grouping and Sorting -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="mb-0"><i class="fas fa-sort me-2"></i>Grouping & Sorting</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="GroupByColumns" class="form-label">Group By</label>
+                                <select asp-for="GroupByColumns" class="form-select" id="groupBySelect" multiple>
+                                    <!-- Populated dynamically -->
+                                </select>
+                                <small class="text-muted">Hold Ctrl/Cmd to select multiple</small>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="SortColumns" class="form-label">Sort By</label>
+                                <select asp-for="SortColumns" class="form-select" id="sortBySelect" multiple>
+                                    <!-- Populated dynamically -->
+                                </select>
+                                <small class="text-muted">Hold Ctrl/Cmd to select multiple</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Aggregations -->
+                <div class="card mb-4">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0"><i class="fas fa-calculator me-2"></i>Aggregations</h5>
+                        <button type="button" class="btn btn-sm btn-primary" onclick="addAggregation()">
+                            <i class="fas fa-plus me-1"></i>Add Aggregation
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <div id="aggregationsContainer">
+                            <p class="text-muted">No aggregations added yet. Add SUM, AVG, COUNT, etc.</p>
+                        </div>
+                        <input asp-for="Aggregations" type="hidden" id="aggregationsInput" />
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column - Preview & Settings -->
+            <div class="col-lg-4">
+                <!-- Output Settings -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="mb-0"><i class="fas fa-cog me-2"></i>Output Settings</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label asp-for="OutputType" class="form-label">Output Type</label>
+                            <select asp-for="OutputType" class="form-select">
+                                <option value="Table">Table</option>
+                                <option value="Chart">Chart</option>
+                                <option value="Pivot">Pivot Table</option>
+                                <option value="JSON">JSON</option>
+                                <option value="CSV">CSV</option>
+                                <option value="Excel">Excel</option>
+                                <option value="PDF">PDF</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="chartType" class="form-label">Chart Type</label>
+                            <select id="chartType" class="form-select">
+                                <option value="">-- Select Chart Type --</option>
+                                <option value="bar">Bar Chart</option>
+                                <option value="line">Line Chart</option>
+                                <option value="pie">Pie Chart</option>
+                                <option value="doughnut">Doughnut Chart</option>
+                                <option value="area">Area Chart</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="form-check form-switch">
+                                <input asp-for="IsActive" class="form-check-input" type="checkbox" checked />
+                                <label asp-for="IsActive" class="form-check-label">Active</label>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="form-check form-switch">
+                                <input type="checkbox" class="form-check-input" id="enablePaging" />
+                                <label class="form-check-label" for="enablePaging">Enable Paging</label>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="rowLimit" class="form-label">Row Limit</label>
+                            <input type="number" id="rowLimit" class="form-control" placeholder="1000" value="1000" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SQL Preview -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="mb-0"><i class="fas fa-code me-2"></i>SQL Preview</h5>
+                    </div>
+                    <div class="card-body">
+                        <pre id="sqlPreview" class="bg-light p-3 rounded" style="font-size: 0.85rem;"><code>-- SQL will be generated here</code></pre>
+                        <button type="button" class="btn btn-sm btn-secondary" onclick="generateSQLPreview()">
+                            <i class="fas fa-sync me-1"></i>Refresh Preview
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Actions -->
+                <div class="card">
+                    <div class="card-body">
+                        <button type="submit" class="btn btn-primary w-100 mb-2">
+                            <i class="fas fa-save me-2"></i>Save Report Definition
+                        </button>
+                        <button type="button" class="btn btn-success w-100 mb-2" onclick="saveAndExecute()">
+                            <i class="fas fa-play me-2"></i>Save & Execute
+                        </button>
+                        <a href="@Url.Action("Index")" class="btn btn-secondary w-100">
+                            <i class="fas fa-times me-2"></i>Cancel
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <script>
+        let availableColumns = [];
+        let selectedColumns = [];
+        let filters = [];
+        let aggregations = [];
+
+        $(document).ready(function () {
+            // Initialize Select2 for better dropdowns
+            $('#dataSourceSelect, #groupBySelect, #sortBySelect').select2({
+                theme: 'bootstrap-5'
+            });
+
+            // Load columns when data source changes
+            $('#dataSourceSelect').change(function () {
+                loadAvailableColumns($(this).val());
+            });
+
+            // Enable drag and drop for fields
+            enableDragAndDrop();
+        });
+
+        function loadAvailableColumns(dataSource) {
+            if (!dataSource) return;
+
+            $.get('@Url.Action("GetColumns")', { dataSource: dataSource }, function (response) {
+                if (response.success) {
+                    availableColumns = response.columns;
+                    renderAvailableFields();
+                    updateGroupSortOptions();
+                }
+            });
+        }
+
+        function renderAvailableFields() {
+            let html = '';
+            availableColumns.forEach(col => {
+                if (!selectedColumns.includes(col)) {
+                    html += `<div class="field-item draggable p-2 mb-2 bg-light border rounded" draggable="true" data-field="${col}">
+                                <i class="fas fa-grip-vertical me-2"></i>${col}
+                             </div>`;
+                }
+            });
+            $('#availableFields').html(html || '<p class="text-muted">No fields available</p>');
+            enableDragAndDrop();
+        }
+
+        function renderSelectedFields() {
+            let html = '';
+            selectedColumns.forEach((col, index) => {
+                html += `<div class="field-item p-2 mb-2 bg-primary text-white border rounded d-flex justify-content-between align-items-center">
+                            <span><i class="fas fa-grip-vertical me-2"></i>${col}</span>
+                            <button type="button" class="btn btn-sm btn-light" onclick="removeField(${index})">
+                                <i class="fas fa-times"></i>
+                            </button>
+                         </div>`;
+            });
+            $('#selectedFields').html(html || '<p class="text-muted">No fields selected</p>');
+            $('#selectedColumnsInput').val(selectedColumns.join(','));
+            updateGroupSortOptions();
+        }
+
+        function removeField(index) {
+            selectedColumns.splice(index, 1);
+            renderSelectedFields();
+            renderAvailableFields();
+        }
+
+        function enableDragAndDrop() {
+            const draggables = document.querySelectorAll('.draggable');
+            const selectedContainer = document.getElementById('selectedFields');
+
+            draggables.forEach(draggable => {
+                draggable.addEventListener('dragstart', () => {
+                    draggable.classList.add('dragging');
+                });
+
+                draggable.addEventListener('dragend', () => {
+                    draggable.classList.remove('dragging');
+                });
+
+                draggable.addEventListener('dblclick', function () {
+                    const field = this.getAttribute('data-field');
+                    if (!selectedColumns.includes(field)) {
+                        selectedColumns.push(field);
+                        renderSelectedFields();
+                        renderAvailableFields();
+                    }
+                });
+            });
+
+            selectedContainer.addEventListener('dragover', e => {
+                e.preventDefault();
+            });
+
+            selectedContainer.addEventListener('drop', e => {
+                e.preventDefault();
+                const field = document.querySelector('.dragging')?.getAttribute('data-field');
+                if (field && !selectedColumns.includes(field)) {
+                    selectedColumns.push(field);
+                    renderSelectedFields();
+                    renderAvailableFields();
+                }
+            });
+        }
+
+        function addFilter() {
+            const filterHtml = `
+                <div class="filter-row p-3 mb-2 border rounded">
+                    <div class="row">
+                        <div class="col-md-4 mb-2">
+                            <select class="form-select filter-field">
+                                <option value="">-- Field --</option>
+                                ${availableColumns.map(c => `<option value="${c}">${c}</option>`).join('')}
+                            </select>
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <select class="form-select filter-operator">
+                                <option value="=">=</option>
+                                <option value="!=">!=</option>
+                                <option value=">">></option>
+                                <option value="<"><</option>
+                                <option value=">=">>=</option>
+                                <option value="<="><=</option>
+                                <option value="LIKE">LIKE</option>
+                                <option value="IN">IN</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4 mb-2">
+                            <input type="text" class="form-control filter-value" placeholder="Value" />
+                        </div>
+                        <div class="col-md-1 mb-2">
+                            <button type="button" class="btn btn-danger btn-sm" onclick="$(this).closest('.filter-row').remove()">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            $('#filtersContainer').append(filterHtml);
+        }
+
+        function addAggregation() {
+            const aggHtml = `
+                <div class="aggregation-row p-3 mb-2 border rounded">
+                    <div class="row">
+                        <div class="col-md-4 mb-2">
+                            <select class="form-select agg-function">
+                                <option value="SUM">SUM</option>
+                                <option value="AVG">AVG</option>
+                                <option value="COUNT">COUNT</option>
+                                <option value="MIN">MIN</option>
+                                <option value="MAX">MAX</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4 mb-2">
+                            <select class="form-select agg-field">
+                                <option value="">-- Field --</option>
+                                ${availableColumns.map(c => `<option value="${c}">${c}</option>`).join('')}
+                            </select>
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <input type="text" class="form-control agg-alias" placeholder="Alias" />
+                        </div>
+                        <div class="col-md-1 mb-2">
+                            <button type="button" class="btn btn-danger btn-sm" onclick="$(this).closest('.aggregation-row').remove()">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            $('#aggregationsContainer').append(aggHtml);
+        }
+
+        function updateGroupSortOptions() {
+            const options = selectedColumns.map(c => `<option value="${c}">${c}</option>`).join('');
+            $('#groupBySelect, #sortBySelect').html(options);
+        }
+
+        function generateSQLPreview() {
+            const dataSource = $('#dataSourceSelect').val();
+            if (!dataSource || selectedColumns.length === 0) {
+                $('#sqlPreview code').text('-- Select data source and fields to generate SQL');
+                return;
+            }
+
+            let sql = `SELECT ${selectedColumns.join(', ')}\nFROM ${dataSource}`;
+
+            // Add filters
+            const filterConditions = [];
+            $('.filter-row').each(function () {
+                const field = $(this).find('.filter-field').val();
+                const operator = $(this).find('.filter-operator').val();
+                const value = $(this).find('.filter-value').val();
+                if (field && value) {
+                    filterConditions.push(`${field} ${operator} '${value}'`);
+                }
+            });
+
+            if (filterConditions.length > 0) {
+                sql += `\nWHERE ${filterConditions.join(' AND ')}`;
+            }
+
+            // Add group by
+            const groupBy = $('#groupBySelect').val();
+            if (groupBy && groupBy.length > 0) {
+                sql += `\nGROUP BY ${groupBy.join(', ')}`;
+            }
+
+            // Add order by
+            const orderBy = $('#sortBySelect').val();
+            if (orderBy && orderBy.length > 0) {
+                sql += `\nORDER BY ${orderBy.join(', ')}`;
+            }
+
+            // Add limit
+            const limit = $('#rowLimit').val();
+            if (limit) {
+                sql += `\nLIMIT ${limit}`;
+            }
+
+            $('#sqlPreview code').text(sql);
+        }
+
+        function saveAndExecute() {
+            $('#reportForm').append('<input type="hidden" name="executeAfterSave" value="true" />');
+            $('#reportForm').submit();
+        }
+
+        // Auto-generate preview when changes are made
+        $('#dataSourceSelect, #groupBySelect, #sortBySelect, #rowLimit').change(generateSQLPreview);
+    </script>
+
+    <style>
+        .field-item {
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+            .field-item:hover {
+                transform: translateX(3px);
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+
+        .dragging {
+            opacity: 0.5;
+        }
+
+        .field-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+    </style>
+}

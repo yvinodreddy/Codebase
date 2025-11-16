@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam Results - Semantic Data Services</title>
+    <!--[if mso]>
+    <style type="text/css">
+    body, table, td {font-family: Arial, sans-serif !important;}
+    </style>
+    <![endif]-->
+</head>
+<body style="margin: 0; padding: 0; background-color: #f5f5f5; font-family: Arial, Helvetica, sans-serif;">
+
+    <!-- Main Container -->
+    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: #f5f5f5;">
+        <tr>
+            <td style="padding: 20px 10px;">
+
+                <!-- Email Container (700px max width) -->
+                <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="max-width: 700px; margin: 0 auto; background-color: #ffffff; border: 3px solid #d3cbb7; border-radius: 12px;">
+
+                    <!-- HEADER SECTION - HIGH CONTRAST WHITE TEXT -->
+                    <tr>
+                        <td style="background-color: #268bd2; padding: 50px 30px; text-align: center;">
+                            <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                                <tr>
+                                    <td style="font-size: 64px; padding-bottom: 20px;">🎓</td>
+                                </tr>
+                                <tr>
+                                    <td style="color: #FFFFFF; font-size: 36px; font-weight: bold; padding-bottom: 12px; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">
+                                        Examination Results
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="color: #FFFFFF; font-size: 18px; font-weight: 600;">
+                                        Semantic Data Services Pvt Ltd
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+
+                    <!-- CONTENT AREA -->
+                    <tr>
+                        <td style="padding: 40px 30px; background-color: #fdf6e3;">
+
+                            <!-- Candidate Information Card -->
+                            <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: #ffffff; border: 2px solid #d3cbb7; border-radius: 10px; margin-bottom: 28px;">
+                                <tr>
+                                    <td style="padding: 28px;">
+                                        <!-- Card Header -->
+                                        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                                            <tr>
+                                                <td style="padding-bottom: 20px; border-bottom: 3px solid #eee8d5;">
+                                                    <span style="font-size: 32px; margin-right: 10px;">👤</span>
+                                                    <span style="font-size: 22px; font-weight: bold; color: #073642;">Candidate Information</span>
+                                                </td>
+                                            </tr>
+                                        </table>
+
+                                        <!-- Info Grid -->
+                                        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin-top: 24px;">
+                                            <tr>
+                                                <td width="50%" style="padding: 18px; background-color: #fdf6e3; border-left: 4px solid #268bd2; border-radius: 8px; vertical-align: top;">
+                                                    <div style="font-size: 12px; color: #839496; font-weight: bold; text-transform: uppercase; margin-bottom: 6px;">FULL NAME</div>
+                                                    <div style="font-size: 17px; color: #073642; font-weight: bold;">{{student_name}}</div>
+                                                </td>
+                                                <td width="10"></td>
+                                                <td width="50%" style="padding: 18px; background-color: #fdf6e3; border-left: 4px solid #268bd2; border-radius: 8px; vertical-align: top;">
+                                                    <div style="font-size: 12px; color: #839496; font-weight: bold; text-transform: uppercase; margin-bottom: 6px;">EMAIL ADDRESS</div>
+                                                    <div style="font-size: 17px; color: #073642; font-weight: bold; word-break: break-all;">{{student_email}}</div>
+                                                </td>
+                                            </tr>
+                                            <tr><td colspan="3" height="18"></td></tr>
+                                            <tr>
+                                                <td width="50%" style="padding: 18px; background-color: #fdf6e3; border-left: 4px solid #268bd2; border-radius: 8px; vertical-align: top;">
+                                                    <div style="font-size: 12px; color: #839496; font-weight: bold; text-transform: uppercase; margin-bottom: 6px;">SESSION ID</div>
+                                                    <div style="font-size: 14px; color: #073642; font-weight: bold; font-family: 'Courier New', monospace;">{{session_id}}</div>
+                                                </td>
+                                                <td width="10"></td>
+                                                <td width="50%" style="padding: 18px; background-color: #fdf6e3; border-left: 4px solid #268bd2; border-radius: 8px; vertical-align: top;">
+                                                    <div style="font-size: 12px; color: #839496; font-weight: bold; text-transform: uppercase; margin-bottom: 6px;">SUBMISSION TIME</div>
+                                                    <div style="font-size: 15px; color: #073642; font-weight: bold;">{{submission_timestamp}}</div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <!-- Exam Timeline Card -->
+                            <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: #ffffff; border: 2px solid #d3cbb7; border-radius: 10px; margin-bottom: 28px;">
+                                <tr>
+                                    <td style="padding: 28px;">
+                                        <!-- Card Header -->
+                                        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                                            <tr>
+                                                <td style="padding-bottom: 20px; border-bottom: 3px solid #eee8d5;">
+                                                    <span style="font-size: 32px; margin-right: 10px;">⏱️</span>
+                                                    <span style="font-size: 22px; font-weight: bold; color: #073642;">Exam Timeline</span>
+                                                </td>
+                                            </tr>
+                                        </table>
+
+                                        <!-- Timeline Info Grid -->
+                                        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin-top: 24px;">
+                                            <tr>
+                                                <td width="50%" style="padding: 18px; background-color: #fdf6e3; border-left: 4px solid #268bd2; border-radius: 8px; vertical-align: top;">
+                                                    <div style="font-size: 12px; color: #839496; font-weight: bold; text-transform: uppercase; margin-bottom: 6px;">STARTED</div>
+                                                    <div style="font-size: 15px; color: #073642; font-weight: bold;">{{start_time}}</div>
+                                                </td>
+                                                <td width="10"></td>
+                                                <td width="50%" style="padding: 18px; background-color: #fdf6e3; border-left: 4px solid #268bd2; border-radius: 8px; vertical-align: top;">
+                                                    <div style="font-size: 12px; color: #839496; font-weight: bold; text-transform: uppercase; margin-bottom: 6px;">COMPLETED</div>
+                                                    <div style="font-size: 15px; color: #073642; font-weight: bold;">{{end_time}}</div>
+                                                </td>
+                                            </tr>
+                                            <tr><td colspan="3" height="18"></td></tr>
+                                            <tr>
+                                                <td width="50%" style="padding: 18px; background-color: #fdf6e3; border-left: 4px solid #268bd2; border-radius: 8px; vertical-align: top;">
+                                                    <div style="font-size: 12px; color: #839496; font-weight: bold; text-transform: uppercase; margin-bottom: 6px;">DURATION</div>
+                                                    <div style="font-size: 17px; color: #073642; font-weight: bold;">{{duration}}</div>
+                                                </td>
+                                                <td width="10"></td>
+                                                <td width="50%" style="padding: 18px; background-color: #fdf6e3; border-left: 4px solid #268bd2; border-radius: 8px; vertical-align: top;">
+                                                    <div style="font-size: 12px; color: #839496; font-weight: bold; text-transform: uppercase; margin-bottom: 6px;">PROGRESS</div>
+                                                    <div style="font-size: 17px; color: #073642; font-weight: bold;">{{answered_questions}} / {{total_questions}} Questions</div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <!-- PERFORMANCE SCORE CARD - FIXED PERCENTAGE -->
+                            <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: #ffffff; border: 4px solid #268bd2; border-radius: 12px; margin-bottom: 28px;">
+                                <tr>
+                                    <td style="padding: 40px; text-align: center;">
+                                        <!-- Main Score -->
+                                        <div style="font-size: 72px; font-weight: bold; color: #268bd2; line-height: 1; margin-bottom: 12px;">
+                                            {{percentage}}%
+                                        </div>
+                                        <div style="font-size: 18px; color: #073642; font-weight: bold; margin-bottom: 20px;">
+                                            Completion Rate
+                                        </div>
+
+                                        <!-- Divider -->
+                                        <div style="height: 2px; background-color: #eee8d5; margin: 20px 0;"></div>
+
+                                        <!-- Score Details -->
+                                        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                                            <tr>
+                                                <td width="50%" style="text-align: center; padding: 10px;">
+                                                    <div style="font-size: 13px; color: #839496; font-weight: bold; text-transform: uppercase; margin-bottom: 4px;">MCQ SCORE</div>
+                                                    <div style="font-size: 20px; color: #073642; font-weight: bold;">{{mcq_score}}</div>
+                                                </td>
+                                                <td width="50%" style="text-align: center; padding: 10px;">
+                                                    <div style="font-size: 13px; color: #839496; font-weight: bold; text-transform: uppercase; margin-bottom: 4px;">CAMERA STATUS</div>
+                                                    <div style="font-size: 20px; color: #073642; font-weight: bold;">{{camera_status}}</div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <!-- VIDEO RECORDING SECTION -->
+                            {{#video_link}}
+                            <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: #ffffff; border: 3px solid #2aa198; border-radius: 10px; margin-bottom: 28px;">
+                                <tr>
+                                    <td style="padding: 32px;">
+                                        <!-- Card Header -->
+                                        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                                            <tr>
+                                                <td style="padding-bottom: 20px;">
+                                                    <span style="font-size: 32px; margin-right: 10px;">🎬</span>
+                                                    <span style="font-size: 22px; font-weight: bold; color: #073642;">Exam Video Recording</span>
+                                                </td>
+                                            </tr>
+                                        </table>
+
+                                        <!-- Video Available Badge -->
+                                        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: #d4edda; border: 2px solid #859900; border-radius: 8px; margin-bottom: 24px;">
+                                            <tr>
+                                                <td style="padding: 18px 24px;">
+                                                    <span style="font-size: 28px; margin-right: 14px;">✅</span>
+                                                    <span style="font-size: 16px; font-weight: bold; color: #073642;">Video Successfully Uploaded & Available for Review</span>
+                                                </td>
+                                            </tr>
+                                        </table>
+
+                                        <!-- Video Info -->
+                                        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: #fdf6e3; border-left: 4px solid #2aa198; border-radius: 8px; padding: 20px; margin-bottom: 24px;">
+                                            <tr>
+                                                <td style="padding: 8px 0;">
+                                                    <span style="font-weight: bold; color: #073642; min-width: 80px; display: inline-block;">Filename:</span>
+                                                    <span style="color: #268bd2; font-family: 'Courier New', monospace; font-size: 14px; word-break: break-all;">{{video_filename}}</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding: 8px 0;">
+                                                    <span style="font-weight: bold; color: #073642; min-width: 80px; display: inline-block;">Status:</span>
+                                                    <span style="background-color: #d4edda; color: #4a5d00; padding: 6px 16px; border-radius: 20px; font-size: 13px; font-weight: bold; border: 2px solid #859900;">AVAILABLE FOR DOWNLOAD</span>
+                                                </td>
+                                            </tr>
+                                        </table>
+
+                                        <!-- BULLETPROOF BUTTONS - HIGH CONTRAST WHITE TEXT -->
+                                        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                                            <tr>
+                                                <!-- Watch/Download Button -->
+                                                <td width="48%" style="vertical-align: top;">
+                                                    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                                                        <tr>
+                                                            <td style="background-color: #268bd2; border-radius: 8px; text-align: center;">
+                                                                <a href="{{video_link}}" style="display: block; padding: 16px 20px; color: #FFFFFF; font-size: 16px; font-weight: bold; text-decoration: none; font-family: Arial, sans-serif;">
+                                                                    🎥 Watch/Download Video
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                                <td width="4%"></td>
+                                                <!-- View All Recordings Button -->
+                                                <td width="48%" style="vertical-align: top;">
+                                                    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                                                        <tr>
+                                                            <td style="background-color: #859900; border-radius: 8px; text-align: center;">
+                                                                <a href="{{video_folder_link}}" style="display: block; padding: 16px 20px; color: #FFFFFF; font-size: 16px; font-weight: bold; text-decoration: none; font-family: Arial, sans-serif;">
+                                                                    📁 View All Recordings
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </table>
+
+                                        <!-- Info Alert -->
+                                        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: rgba(38, 139, 210, 0.08); border-left: 5px solid #268bd2; border-radius: 8px; margin-top: 24px;">
+                                            <tr>
+                                                <td style="padding: 20px 24px;">
+                                                    <div style="font-size: 16px; font-weight: bold; color: #073642; margin-bottom: 8px;">📌 When to Review Video:</div>
+                                                    <ul style="margin: 12px 0 0 0; padding-left: 24px; color: #586e75; font-size: 15px; line-height: 1.8;">
+                                                        <li style="margin-bottom: 8px;">Risk Score above 60 (High Risk)</li>
+                                                        <li style="margin-bottom: 8px;">Multiple tab switches detected</li>
+                                                        <li style="margin-bottom: 8px;">Suspicious paste attempts</li>
+                                                        <li>Performance doesn't match skill level</li>
+                                                    </ul>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                            {{/video_link}}
+
+                            <!-- No Video Warning -->
+                            {{^video_link}}
+                            <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: rgba(181, 137, 0, 0.08); border-left: 5px solid #b58900; border-radius: 8px; margin-bottom: 28px;">
+                                <tr>
+                                    <td style="padding: 20px 24px;">
+                                        <div style="font-size: 16px; font-weight: bold; color: #073642; margin-bottom: 8px;">⚠️ Video Recording Not Available</div>
+                                        <p style="margin: 8px 0 0 0; color: #586e75; font-size: 15px;">The exam video was not uploaded. Camera Status: {{camera_status}}</p>
+                                    </td>
+                                </tr>
+                            </table>
+                            {{/video_link}}
+
+                            <!-- Security Report Card -->
+                            <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: #ffffff; border: 2px solid #d3cbb7; border-radius: 10px; margin-bottom: 28px;">
+                                <tr>
+                                    <td style="padding: 28px;">
+                                        <!-- Card Header -->
+                                        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                                            <tr>
+                                                <td style="padding-bottom: 20px; border-bottom: 3px solid #eee8d5;">
+                                                    <span style="font-size: 32px; margin-right: 10px;">🔒</span>
+                                                    <span style="font-size: 22px; font-weight: bold; color: #073642;">Security & Integrity Report</span>
+                                                </td>
+                                            </tr>
+                                        </table>
+
+                                        <!-- Risk Score -->
+                                        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin: 24px 0;">
+                                            <tr>
+                                                <td style="padding: 18px; background-color: #fdf6e3; border-left: 4px solid #268bd2; border-radius: 8px;">
+                                                    <div style="font-size: 12px; color: #839496; font-weight: bold; text-transform: uppercase; margin-bottom: 6px;">OVERALL RISK SCORE</div>
+                                                    <div style="font-size: 42px; color: #dc322f; font-weight: bold; margin-bottom: 12px;">{{risk_score}} / 100</div>
+                                                    <div style="font-size: 14px; color: #839496; font-weight: 600;">
+                                                        <span style="color: #859900;">●</span> 0-30 = Low &nbsp;|&nbsp;
+                                                        <span style="color: #b58900;">●</span> 31-60 = Medium &nbsp;|&nbsp;
+                                                        <span style="color: #dc322f;">●</span> 61-100 = High
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+
+                                        <!-- Security Table -->
+                                        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="border: 2px solid #d3cbb7; border-radius: 8px; overflow: hidden;">
+                                            <tr style="background-color: #268bd2;">
+                                                <td style="padding: 16px; color: #FFFFFF; font-weight: bold; font-size: 14px; text-transform: uppercase;">Activity Type</td>
+                                                <td style="padding: 16px; color: #FFFFFF; font-weight: bold; font-size: 14px; text-transform: uppercase; text-align: center;">Count</td>
+                                                <td style="padding: 16px; color: #FFFFFF; font-weight: bold; font-size: 14px; text-transform: uppercase; text-align: center;">Severity</td>
+                                            </tr>
+                                            <tr style="background-color: #ffffff;">
+                                                <td style="padding: 16px; border-bottom: 1px solid #eee8d5; color: #586e75; font-size: 15px;">Tab Switches / Minimizing</td>
+                                                <td style="padding: 16px; border-bottom: 1px solid #eee8d5; color: #073642; font-weight: bold; text-align: center;">{{tab_switches}}</td>
+                                                <td style="padding: 16px; border-bottom: 1px solid #eee8d5; text-align: center;">
+                                                    <span style="background-color: rgba(220, 50, 47, 0.2); color: #8a1e1b; padding: 6px 16px; border-radius: 20px; font-size: 13px; font-weight: bold; border: 2px solid #dc322f;">HIGH</span>
+                                                </td>
+                                            </tr>
+                                            <tr style="background-color: #fdf6e3;">
+                                                <td style="padding: 16px; border-bottom: 1px solid #eee8d5; color: #586e75; font-size: 15px;">Window Focus Loss</td>
+                                                <td style="padding: 16px; border-bottom: 1px solid #eee8d5; color: #073642; font-weight: bold; text-align: center;">{{focus_loss_count}}</td>
+                                                <td style="padding: 16px; border-bottom: 1px solid #eee8d5; text-align: center;">
+                                                    <span style="background-color: rgba(181, 137, 0, 0.2); color: #6a5000; padding: 6px 16px; border-radius: 20px; font-size: 13px; font-weight: bold; border: 2px solid #b58900;">MEDIUM</span>
+                                                </td>
+                                            </tr>
+                                            <tr style="background-color: #ffffff;">
+                                                <td style="padding: 16px; border-bottom: 1px solid #eee8d5; color: #586e75; font-size: 15px;">Paste Attempts</td>
+                                                <td style="padding: 16px; border-bottom: 1px solid #eee8d5; color: #073642; font-weight: bold; text-align: center;">{{paste_attempts}}</td>
+                                                <td style="padding: 16px; border-bottom: 1px solid #eee8d5; text-align: center;">
+                                                    <span style="background-color: rgba(220, 50, 47, 0.2); color: #8a1e1b; padding: 6px 16px; border-radius: 20px; font-size: 13px; font-weight: bold; border: 2px solid #dc322f;">HIGH</span>
+                                                </td>
+                                            </tr>
+                                            <tr style="background-color: #fdf6e3;">
+                                                <td style="padding: 16px; color: #586e75; font-size: 15px;">DevTools Detected</td>
+                                                <td style="padding: 16px; color: #073642; font-weight: bold; text-align: center;">{{devtools_detected}}</td>
+                                                <td style="padding: 16px; text-align: center;">
+                                                    <span style="background-color: rgba(220, 50, 47, 0.2); color: #8a1e1b; padding: 6px 16px; border-radius: 20px; font-size: 13px; font-weight: bold; border: 2px solid #dc322f;">CRITICAL</span>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <!-- Evaluation Checklist -->
+                            <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: rgba(133, 153, 0, 0.08); border: 3px solid #859900; border-radius: 10px; margin-bottom: 28px;">
+                                <tr>
+                                    <td style="padding: 28px;">
+                                        <div style="color: #073642; font-size: 20px; font-weight: bold; margin-bottom: 20px;">
+                                            📋 Evaluation Checklist
+                                        </div>
+                                        <ol style="margin: 0; padding-left: 28px; color: #586e75; font-size: 16px; line-height: 1.8;">
+                                            <li style="margin-bottom: 14px;">✅ Review MCQ Score: <strong style="color: #073642;">{{mcq_score}}/50 ({{percentage}}%)</strong></li>
+                                            <li style="margin-bottom: 14px;">🎬 Watch video recording if Risk Score > 30</li>
+                                            <li style="margin-bottom: 14px;">🔍 Analyze security violations and suspicious activities</li>
+                                            <li style="margin-bottom: 14px;">💻 Manually evaluate coding solutions</li>
+                                            <li style="margin-bottom: 14px;">📝 Review subjective answers thoroughly</li>
+                                            <li style="margin-bottom: 14px;">🎯 Calculate final composite score</li>
+                                            <li>📧 Send official results to candidate</li>
+                                        </ol>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <!-- Detailed Answers Section -->
+                            <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: #ffffff; border: 2px solid #d3cbb7; border-radius: 10px;">
+                                <tr>
+                                    <td style="padding: 28px;">
+                                        <!-- Card Header -->
+                                        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                                            <tr>
+                                                <td style="padding-bottom: 20px; border-bottom: 3px solid #eee8d5;">
+                                                    <span style="font-size: 32px; margin-right: 10px;">✍️</span>
+                                                    <span style="font-size: 22px; font-weight: bold; color: #073642;">Detailed Answers</span>
+                                                </td>
+                                            </tr>
+                                        </table>
+
+                                        <!-- Answers Content -->
+                                        <div style="background-color: #fdf6e3; padding: 24px; border-radius: 10px; max-height: 500px; overflow-y: auto; font-family: 'Courier New', monospace; font-size: 14px; border: 2px solid #d3cbb7; line-height: 1.6; margin-top: 20px;">
+                                            {{{answers_summary}}}
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+
+                        </td>
+                    </tr>
+
+                    <!-- FOOTER -->
+                    <tr>
+                        <td style="background-color: #eee8d5; padding: 40px; text-align: center; border-top: 3px solid #d3cbb7;">
+                            <div style="font-size: 32px; margin-bottom: 12px;">🔐</div>
+                            <div style="font-size: 18px; font-weight: bold; color: #268bd2; margin-bottom: 8px;">Semantic Data Services Pvt Ltd</div>
+                            <p style="margin: 10px 0; font-size: 14px; color: #586e75; font-weight: 600;">Automated Examination System • Session: {{session_id}}</p>
+                            <p style="margin: 10px 0; font-size: 14px; color: #586e75;">This exam uses comprehensive anti-cheat monitoring and video proctoring</p>
+                            <p style="margin-top: 20px; font-size: 13px; color: #839496;">© 2025 Semantic Data Services. All rights reserved.</p>
+                        </td>
+                    </tr>
+
+                </table>
+
+            </td>
+        </tr>
+    </table>
+
+</body>
+</html>

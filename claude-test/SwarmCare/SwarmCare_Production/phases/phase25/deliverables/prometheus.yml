@@ -1,0 +1,12 @@
+# Prometheus Configuration for Patient-Facing XAI
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  - job_name: 'patient-xai'
+    static_configs:
+      - targets: ['patient-xai:9090']
+        labels:
+          service: 'patient-xai'
+          phase: '25'

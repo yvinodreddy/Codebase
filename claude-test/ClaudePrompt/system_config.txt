@@ -1,0 +1,441 @@
+
+================================================================================
+CLAUDEPROMPT SYSTEM DISCOVERY REPORT
+================================================================================
+
+Generated: Sat Nov 15 01:04:42 PM EST 2025
+Purpose: Gather system configuration for ClaudePrompt deployment
+
+
+================================================================================
+1. OPERATING SYSTEM INFORMATION
+================================================================================
+
+[0;34m[INFO][0m OS Type: Linux
+[0;34m[INFO][0m OS Version: 6.8.0-87-generic
+[0;34m[INFO][0m Architecture: x86_64
+[0;34m[INFO][0m Hostname: semanticraj-Standard-PC-Q35-ICH9-2009
+
+Distribution Details:
+PRETTY_NAME="Ubuntu 22.04.5 LTS"
+NAME="Ubuntu"
+VERSION_ID="22.04"
+VERSION="22.04.5 LTS (Jammy Jellyfish)"
+VERSION_CODENAME=jammy
+ID=ubuntu
+ID_LIKE=debian
+HOME_URL="https://www.ubuntu.com/"
+SUPPORT_URL="https://help.ubuntu.com/"
+BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
+PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
+UBUNTU_CODENAME=jammy
+
+LSB Release Info:
+Distributor ID:	Ubuntu
+Description:	Ubuntu 22.04.5 LTS
+Release:	22.04
+Codename:	jammy
+
+[0;34m[INFO][0m Virtualization: qemu
+
+================================================================================
+2. USER AND HOME DIRECTORY INFORMATION
+================================================================================
+
+[0;34m[INFO][0m Current User: semanticraj
+[0;34m[INFO][0m Home Directory: /home/semanticraj
+[0;34m[INFO][0m Working Directory: /home/semanticraj/project
+[0;34m[INFO][0m User ID: 1000
+[0;34m[INFO][0m Group ID: 1000
+[0;34m[INFO][0m All Groups: semanticraj adm cdrom sudo dip plugdev lpadmin lxd sambashare docker
+
+Home Directory Permissions:
+total 280
+
+Disk Space - Home Directory:
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/sda2        78G   17G   57G  24% /
+
+================================================================================
+3. SHELL CONFIGURATION
+================================================================================
+
+[0;34m[INFO][0m Current Shell: /bin/bash
+[0;34m[INFO][0m Bash Version: 5.1.16(1)-release
+
+Shell Configuration Files:
+[0;32m[✓][0m Found: /home/semanticraj/.bashrc (158 lines)
+[0;32m[✓][0m Found: /home/semanticraj/.bash_profile (7 lines)
+[0;32m[✓][0m Found: /home/semanticraj/.profile (27 lines)
+
+Current Aliases:
+
+Current Environment Variables (filtered):
+CLAUDECODE=1
+CLAUDE_CODE_ENTRYPOINT=cli
+CLAUDE_CODE_MAX_OUTPUT_TOKENS=100000
+HOME=/home/semanticraj
+LANG=en_US.UTF-8
+PATH=/home/semanticraj/.pyenv/shims:/home/semanticraj/.pyenv/bin:/home/semanticraj/.npm-global/bin:/home/semanticraj/.local/bin:/home/semanticraj/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin
+SHELL=/bin/bash
+USERNAME=semanticraj
+USER=semanticraj
+
+================================================================================
+4. PYTHON INSTALLATION
+================================================================================
+
+[0;32m[✓][0m Python3 installed: Python 3.10.12
+[0;34m[INFO][0m Python3 Path: /usr/bin/python3
+
+Python Executable: /usr/bin/python3
+Python Version: 3.10.12 (main, Aug 15 2025, 14:32:43) [GCC 11.4.0]
+Platform: linux
+[0;32m[✓][0m pip3 installed: pip 22.0.2 from /usr/lib/python3/dist-packages/pip (python 3.10)
+[0;34m[INFO][0m pip3 Path: /usr/bin/pip3
+
+Python User Site Packages:
+sys.path = [
+    '/home/semanticraj/project',
+    '/usr/lib/python310.zip',
+    '/usr/lib/python3.10',
+    '/usr/lib/python3.10/lib-dynload',
+    '/usr/local/lib/python3.10/dist-packages',
+    '/usr/lib/python3/dist-packages',
+]
+USER_BASE: '/home/semanticraj/.local' (exists)
+USER_SITE: '/home/semanticraj/.local/lib/python3.10/site-packages' (doesn't exist)
+ENABLE_USER_SITE: True
+
+================================================================================
+5. INSTALLED PYTHON PACKAGES
+================================================================================
+
+Installed Packages (pip list):
+
+Package               Version
+--------------------- ----------------
+apturl                0.5.2
+bcrypt                3.2.0
+blinker               1.4
+Brlapi                0.8.3
+certifi               2020.6.20
+chardet               4.0.0
+click                 8.0.3
+colorama              0.4.4
+command-not-found     0.3
+cryptography          3.4.8
+cupshelpers           1.0
+dbus-python           1.2.18
+defer                 1.0.6
+distro                1.7.0
+distro-info           1.1+ubuntu0.2
+duplicity             0.8.21
+fasteners             0.14.1
+future                0.18.2
+httplib2              0.20.2
+idna                  3.3
+importlib-metadata    4.6.4
+iotop                 0.6
+jeepney               0.7.1
+keyring               23.5.0
+language-selector     0.1
+launchpadlib          1.10.16
+lazr.restfulclient    0.14.4
+lazr.uri              1.0.6
+lockfile              0.12.2
+louis                 3.20.0
+macaroonbakery        1.3.1
+Mako                  1.1.3
+MarkupSafe            2.0.1
+monotonic             1.6
+more-itertools        8.10.0
+netifaces             0.11.0
+oauthlib              3.2.0
+olefile               0.46
+paramiko              2.9.3
+pexpect               4.8.0
+Pillow                9.0.1
+pip                   22.0.2
+protobuf              3.12.4
+ptyprocess            0.7.0
+pycairo               1.20.1
+pycups                2.0.1
+Pygments              2.11.2
+PyGObject             3.42.1
+PyJWT                 2.3.0
+pymacaroons           0.13.0
+PyNaCl                1.5.0
+pyparsing             2.4.7
+pyRFC3339             1.1
+python-apt            2.4.0+ubuntu4
+python-dateutil       2.8.1
+python-debian         0.1.43+ubuntu1.1
+pytz                  2022.1
+pyxdg                 0.27
+PyYAML                5.4.1
+reportlab             3.6.8
+requests              2.25.1
+SecretStorage         3.3.1
+setuptools            59.6.0
+six                   1.16.0
+systemd-python        234
+ubuntu-drivers-common 0.0.0
+ubuntu-pro-client     8001
+ufw                   0.36.1
+unattended-upgrades   0.1
+urllib3               1.26.5
+usb-creator           0.3.7
+wadllib               1.3.6
+wheel                 0.37.1
+xdg                   5
+xkit                  0.0.0
+zipp                  1.0.0
+
+Checking Critical Packages:
+[1;33m[!][0m anthropic NOT installed
+[0;32m[✓][0m requests version 2.25.1
+[0;32m[✓][0m pyyaml version 5.4.1
+[1;33m[!][0m pytest NOT installed
+[1;33m[!][0m python-dotenv NOT installed
+
+================================================================================
+6. CLAUDE CODE INSTALLATION
+================================================================================
+
+[0;32m[✓][0m Claude Code installed
+[0;34m[INFO][0m Claude Path: /home/semanticraj/.npm-global/bin/claude
+
+Claude Version:
+2.0.42 (Claude Code)
+
+Claude Help (first 30 lines):
+Usage: claude [options] [command] [prompt]
+
+Claude Code - starts an interactive session by default, use -p/--print for
+non-interactive output
+
+Arguments:
+  prompt                                            Your prompt
+
+Options:
+  -d, --debug [filter]                              Enable debug mode with optional category filtering (e.g., "api,hooks" or "!statsig,!file")
+  --verbose                                         Override verbose mode setting from config
+  -p, --print                                       Print response and exit (useful for pipes). Note: The workspace trust dialog is skipped when Claude is run with the -p mode. Only use this flag in directories you trust.
+  --output-format <format>                          Output format (only works with --print): "text" (default), "json" (single result), or "stream-json" (realtime streaming) (choices: "text", "json", "stream-json")
+  --include-partial-messages                        Include partial message chunks as they arrive (only works with --print and --output-format=stream-json)
+  --input-format <format>                           Input format (only works with --print): "text" (default), or "stream-json" (realtime streaming input) (choices: "text", "stream-json")
+  --mcp-debug                                       [DEPRECATED. Use --debug instead] Enable MCP debug mode (shows MCP server errors)
+  --dangerously-skip-permissions                    Bypass all permission checks. Recommended only for sandboxes with no internet access.
+  --allow-dangerously-skip-permissions              Enable bypassing all permission checks as an option, without it being enabled by default. Recommended only for sandboxes with no internet access.
+  --replay-user-messages                            Re-emit user messages from stdin back on stdout for acknowledgment (only works with --input-format=stream-json and --output-format=stream-json)
+  --allowedTools, --allowed-tools <tools...>        Comma or space-separated list of tool names to allow (e.g. "Bash(git:*) Edit")
+  --tools <tools...>                                Specify the list of available tools from the built-in set. Use "" to disable all tools, "default" to use all tools, or specify tool names (e.g. "Bash,Edit,Read"). Only works with --print mode.
+  --disallowedTools, --disallowed-tools <tools...>  Comma or space-separated list of tool names to deny (e.g. "Bash(git:*) Edit")
+  --mcp-config <configs...>                         Load MCP servers from JSON files or strings (space-separated)
+  --system-prompt <prompt>                          System prompt to use for the session
+  --append-system-prompt <prompt>                   Append a system prompt to the default system prompt
+  --permission-mode <mode>                          Permission mode to use for the session (choices: "acceptEdits", "bypassPermissions", "default", "plan")
+  -c, --continue                                    Continue the most recent conversation
+  -r, --resume [sessionId]                          Resume a conversation - provide a session ID or interactively select a conversation to resume
+  --fork-session                                    When resuming, create a new session ID instead of reusing the original (use with --resume or --continue)
+  --model <model>                                   Model for the current session. Provide an alias for the latest model (e.g. 'sonnet' or 'opus') or a model's full name (e.g. 'claude-sonnet-4-5-20250929').
+
+[0;32m[✓][0m ANTHROPIC_API_KEY not set (correct - we use Claude Code, not API)
+
+================================================================================
+7. EXISTING ULTRATHINK/CLAUDEPROMPT INSTALLATIONS
+================================================================================
+
+Searching for existing installations:
+
+Searching for existing CLAUDE.md files:
+
+Checking for existing ULTRATHINK commands:
+[1;33m[!][0m Command 'cpp' exists at: /usr/bin/cpp
+
+================================================================================
+8. SYSTEM RESOURCES
+================================================================================
+
+Memory Information:
+               total        used        free      shared  buff/cache   available
+Mem:           7.8Gi       3.4Gi       1.4Gi       163Mi       3.0Gi       4.0Gi
+Swap:          2.0Gi          0B       2.0Gi
+
+CPU Information:
+[0;34m[INFO][0m CPU Model: Intel Core Processor (Skylake)
+[0;34m[INFO][0m CPU Cores: 4
+
+Disk Space - All Mounted Filesystems:
+Filesystem      Size  Used Avail Use% Mounted on
+tmpfs           794M  1.7M  793M   1% /run
+/dev/sda2        78G   17G   57G  24% /
+tmpfs           3.9G   79M  3.8G   2% /dev/shm
+tmpfs           5.0M  4.0K  5.0M   1% /run/lock
+efivarfs        256K   39K  213K  16% /sys/firmware/efi/efivars
+/dev/sda1       511M  6.1M  505M   2% /boot/efi
+tmpfs           794M  136K  794M   1% /run/user/1000
+
+================================================================================
+9. NETWORK CONFIGURATION
+================================================================================
+
+[0;34m[INFO][0m Hostname: semanticraj-Standard-PC-Q35-ICH9-2009
+
+Network Interfaces:
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    inet 127.0.0.1/8 scope host lo
+2: enp0s1: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    inet 192.168.64.3/24 brd 192.168.64.255 scope global dynamic noprefixroute enp0s1
+3: docker0: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc noqueue state DOWN group default 
+    inet 172.17.0.1/16 brd 172.17.255.255 scope global docker0
+
+DNS Configuration:
+nameserver 127.0.0.53
+options edns0 trust-ad
+search .
+
+Internet Connectivity Test:
+[0;32m[✓][0m Internet connectivity: OK
+
+================================================================================
+10. FILE SYSTEM PERMISSIONS
+================================================================================
+
+Checking write permissions for key directories:
+[0;32m[✓][0m Writable: /home/semanticraj
+  Directory does not exist: /home/semanticraj/bin
+[0;32m[✓][0m Writable: /tmp
+[1;33m[!][0m Not writable: /usr/local
+[1;33m[!][0m Not writable: /opt
+
+umask setting:
+[0;34m[INFO][0m Current umask: 0002
+
+================================================================================
+11. DEVELOPMENT TOOLS
+================================================================================
+
+[0;32m[✓][0m git: git version 2.34.1
+[0;32m[✓][0m curl: curl 7.81.0 (x86_64-pc-linux-gnu) libcurl/7.81.0 OpenSSL/3.0.2 zlib/1.2.11 brotli/1.0.9 zstd/1.4.8 libidn2/2.3.2 libpsl/0.21.0 (+libidn2/2.3.2) libssh/0.9.6/openssl/zlib nghttp2/1.43.0 librtmp/2.3 OpenLDAP/2.5.19
+[0;32m[✓][0m wget: GNU Wget 1.21.2 built on linux-gnu.
+[0;32m[✓][0m unzip: caution:  both -n and -o specified; ignoring -o
+[0;32m[✓][0m tar: tar (GNU tar) 1.34
+[0;32m[✓][0m gzip: gzip 1.10
+[0;32m[✓][0m make: GNU Make 4.3
+[0;32m[✓][0m gcc: gcc (Ubuntu 11.4.0-1ubuntu1~22.04.2) 11.4.0
+
+================================================================================
+12. PACKAGE MANAGERS
+================================================================================
+
+[0;32m[✓][0m APT (Debian/Ubuntu) package manager available
+[0;34m[INFO][0m APT Version: apt 2.4.14 (amd64)
+[0;32m[✓][0m Snap package manager available
+
+================================================================================
+13. PATH CONFIGURATION
+================================================================================
+
+Current PATH:
+     1	/home/semanticraj/.pyenv/shims
+     2	/home/semanticraj/.pyenv/bin
+     3	/home/semanticraj/.npm-global/bin
+     4	/home/semanticraj/.local/bin
+     5	/home/semanticraj/.local/bin
+     6	/usr/local/sbin
+     7	/usr/local/bin
+     8	/usr/sbin
+     9	/usr/bin
+    10	/sbin
+    11	/bin
+    12	/usr/games
+    13	/usr/local/games
+    14	/snap/bin
+    15	/snap/bin
+
+Executable Directories in PATH:
+  /home/semanticraj/.pyenv/shims (0 executables)
+  /home/semanticraj/.pyenv/bin (0 executables)
+  /home/semanticraj/.npm-global/bin (0 executables)
+  /home/semanticraj/.local/bin (4 executables)
+  /home/semanticraj/.local/bin (4 executables)
+  /usr/local/sbin (0 executables)
+  /usr/local/bin (0 executables)
+  /usr/sbin (290 executables)
+  /usr/bin (1299 executables)
+  /sbin (0 executables)
+  /bin (0 executables)
+  /usr/games (6 executables)
+  /usr/local/games (0 executables)
+  /snap/bin (0 executables)
+  /snap/bin (0 executables)
+
+================================================================================
+14. SECURITY AND PERMISSIONS SETTINGS
+================================================================================
+
+User Security Context:
+uid=1000(semanticraj) gid=1000(semanticraj) groups=1000(semanticraj),4(adm),24(cdrom),27(sudo),30(dip),46(plugdev),122(lpadmin),135(lxd),136(sambashare),999(docker)
+
+Sudo Access:
+[1;33m[!][0m No sudo access
+
+SELinux Status:
+  SELinux not installed
+
+================================================================================
+15. TIMEZONE AND LOCALE
+================================================================================
+
+[0;34m[INFO][0m Timezone: EST
+[0;34m[INFO][0m Current Time: Sat Nov 15 01:05:04 PM EST 2025
+
+Locale Settings:
+LANG=en_US.UTF-8
+LANGUAGE=
+LC_CTYPE="en_US.UTF-8"
+LC_NUMERIC="en_US.UTF-8"
+LC_TIME="en_US.UTF-8"
+LC_COLLATE="en_US.UTF-8"
+LC_MONETARY="en_US.UTF-8"
+LC_MESSAGES="en_US.UTF-8"
+LC_PAPER="en_US.UTF-8"
+LC_NAME="en_US.UTF-8"
+LC_ADDRESS="en_US.UTF-8"
+LC_TELEPHONE="en_US.UTF-8"
+LC_MEASUREMENT="en_US.UTF-8"
+LC_IDENTIFICATION="en_US.UTF-8"
+LC_ALL=
+
+================================================================================
+16. RECOMMENDED DEPLOYMENT PATH
+================================================================================
+
+Based on current system configuration:
+
+[0;34m[INFO][0m Recommended Base Directory: /home/semanticraj/claude-test
+[0;34m[INFO][0m ClaudePrompt Directory: /home/semanticraj/claude-test/ClaudePrompt
+[0;34m[INFO][0m TestPrompt Directory: /home/semanticraj/claude-test/TestPrompt
+
+Directory Creation Test:
+[0;32m[✓][0m Can create directories in /home/semanticraj
+
+================================================================================
+SYSTEM DISCOVERY COMPLETE
+================================================================================
+
+
+Report generated: Sat Nov 15 01:05:05 PM EST 2025
+
+NEXT STEPS:
+1. Save this output to a file: system_config.txt
+2. Send the complete output to Claude Code
+3. Claude will analyze the configuration and create tailored deployment instructions
+
+Command to save output:
+  bash system_discovery.sh > system_config.txt
+
+================================================================================
+

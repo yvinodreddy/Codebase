@@ -1,0 +1,231 @@
+@model List<RMMS.Services.Interfaces.Production.YieldByVarietyData>
+@{
+    ViewData["Title"] = "Yield by Paddy Variety";
+    var fromDate = ViewBag.FromDate as DateTime?;
+    var toDate = ViewBag.ToDate as DateTime?;
+}
+
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2><i class="fas fa-leaf"></i> Yield by Paddy Variety</h2>
+        <a asp-action="Index" class="btn btn-outline-secondary">
+            <i class="fas fa-arrow-left"></i> Back to Dashboard
+        </a>
+    </div>
+
+    <!-- Date Filter -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <form method="get" class="row g-3">
+                <div class="col-md-4">
+                    <label class="form-label">From Date</label>
+                    <input type="date" name="fromDate" class="form-control" value="@fromDate?.ToString("yyyy-MM-dd")" />
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">To Date</label>
+                    <input type="date" name="toDate" class="form-control" value="@toDate?.ToString("yyyy-MM-dd")" />
+                </div>
+                <div class="col-md-4 d-flex align-items-end">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-filter"></i> Apply Filter
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    @if (Model != null && Model.Any())
+    {
+        <!-- Yield by Variety Chart -->
+        <div class="card mb-4">
+            <div class="card-header bg-light">
+                <h5 class="mb-0"><i class="fas fa-chart-bar"></i> Average Yield by Variety</h5>
+            </div>
+            <div class="card-body">
+                <canvas id="varietyChart" height="80"></canvas>
+            </div>
+        </div>
+
+        <!-- Summary Cards -->
+        <div class="row mb-4">
+            <div class="col-md-4">
+                <div class="card border-success">
+                    <div class="card-body text-center">
+                        <h6 class="text-muted">Best Performing Variety</h6>
+                        <h3 class="text-success">@Model.First().PaddyVariety</h3>
+                        <p class="mb-0">Average Yield: <strong>@Model.First().AverageYieldPercent.ToString("F2")%</strong></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card border-info">
+                    <div class="card-body text-center">
+                        <h6 class="text-muted">Total Varieties</h6>
+                        <h3 class="text-info">@Model.Count</h3>
+                        <p class="mb-0">Processed in period</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card border-primary">
+                    <div class="card-body text-center">
+                        <h6 class="text-muted">Overall Average</h6>
+                        <h3 class="text-primary">@Model.Average(v => v.AverageYieldPercent).ToString("F2")%</h3>
+                        <p class="mb-0">Across all varieties</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Detailed Table -->
+        <div class="card">
+            <div class="card-header bg-light">
+                <h5 class="mb-0"><i class="fas fa-table"></i> Detailed Variety Analysis</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="ms-datatable table table-striped table-hover" data-export="true" data-page-length="16">
+                        <thead>
+                            <tr>
+                                <th>Rank</th>
+                                <th>Paddy Variety</th>
+                                <th>Batches</th>
+                                <th>Total Input (kg)</th>
+                                <th>Total Output (kg)</th>
+                                <th>Avg Yield %</th>
+                                <th>Best Yield %</th>
+                                <th>Worst Yield %</th>
+                                <th>Yield Range</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                int rank = 1;
+                                foreach (var variety in Model)
+                                {
+                                    var yieldRange = variety.BestYieldPercent - variety.WorstYieldPercent;
+                                    <tr>
+                                        <td>
+                                            @if (rank == 1)
+                                            {
+                                                <span class="badge bg-warning"><i class="fas fa-trophy"></i> @rank</span>
+                                            }
+                                            else
+                                            {
+                                                <strong>@rank</strong>
+                                            }
+                                        </td>
+                                        <td><strong>@variety.PaddyVariety</strong></td>
+                                        <td>@variety.BatchCount</td>
+                                        <td>@variety.TotalInputQuantity.ToString("N0")</td>
+                                        <td>@variety.TotalOutputQuantity.ToString("N0")</td>
+                                        <td>
+                                            <span class="badge @(variety.AverageYieldPercent >= 65 ? "bg-success" : variety.AverageYieldPercent >= 55 ? "bg-warning" : "bg-danger")">
+                                                @variety.AverageYieldPercent.ToString("F2")%
+                                            </span>
+                                        </td>
+                                        <td class="text-success">@variety.BestYieldPercent.ToString("F2")%</td>
+                                        <td class="text-danger">@variety.WorstYieldPercent.ToString("F2")%</td>
+                                        <td>
+                                            <div class="progress" style="height: 20px;">
+                                                <div class="progress-bar bg-success" style="width: @((variety.AverageYieldPercent / 100 * 100).ToString("F0"))%">
+                                                    ±@yieldRange.ToString("F1")%
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    rank++;
+                                }
+                            }
+                        </tbody>
+                        <tfoot class="table-secondary">
+                            <tr>
+                                <td colspan="2"><strong>Overall Total</strong></td>
+                                <td><strong>@Model.Sum(v => v.BatchCount)</strong></td>
+                                <td><strong>@Model.Sum(v => v.TotalInputQuantity).ToString("N0")</strong></td>
+                                <td><strong>@Model.Sum(v => v.TotalOutputQuantity).ToString("N0")</strong></td>
+                                <td><strong>@Model.Average(v => v.AverageYieldPercent).ToString("F2")%</strong></td>
+                                <td><strong>@Model.Max(v => v.BestYieldPercent).ToString("F2")%</strong></td>
+                                <td><strong>@Model.Min(v => v.WorstYieldPercent).ToString("F2")%</strong></td>
+                                <td></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info">
+            <i class="fas fa-info-circle"></i> No variety data available for the selected period. Complete some production batches to see yield analysis by paddy variety.
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    @if (Model != null && Model.Any())
+    {
+        <script>
+            var ctx = document.getElementById('varietyChart').getContext('2d');
+            var varietyChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: [@Html.Raw(string.Join(",", Model.Select(v => $"'{v.PaddyVariety}'")))],
+                    datasets: [{
+                        label: 'Average Yield %',
+                        data: [@string.Join(",", Model.Select(v => v.AverageYieldPercent))],
+                        backgroundColor: [
+                            'rgba(75, 192, 192, 0.8)',
+                            'rgba(54, 162, 235, 0.8)',
+                            'rgba(255, 206, 86, 0.8)',
+                            'rgba(153, 102, 255, 0.8)',
+                            'rgba(255, 159, 64, 0.8)',
+                            'rgba(255, 99, 132, 0.8)'
+                        ],
+                        borderColor: [
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)',
+                            'rgba(255, 99, 132, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Average Yield by Paddy Variety'
+                        },
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            min: 50,
+                            max: 75,
+                            title: {
+                                display: true,
+                                text: 'Yield %'
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Paddy Variety'
+                            }
+                        }
+                    }
+                }
+            });
+        </script>
+    }
+}

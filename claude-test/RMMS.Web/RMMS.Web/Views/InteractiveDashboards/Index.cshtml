@@ -1,0 +1,350 @@
+@model IEnumerable<RMMS.Models.Reporting.DashboardDefinition>
+
+@{
+    ViewData["Title"] = "Interactive Dashboards";
+}
+
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h2><i class="fas fa-tachometer-alt me-2"></i>Interactive Dashboards</h2>
+                    <p class="text-muted">Create and manage real-time interactive dashboards with drag-and-drop widgets</p>
+                </div>
+                <div class="btn-group">
+                    <a href="@Url.Action("Create")" class="btn btn-primary">
+                        <i class="fas fa-plus me-2"></i>Create Dashboard
+                    </a>
+                    <button class="btn btn-success" onclick="viewLiveDashboard()">
+                        <i class="fas fa-eye me-2"></i>View Live
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dashboard Gallery -->
+    <div class="row mb-4">
+        @if (Model != null && Model.Any())
+        {
+            @foreach (var dashboard in Model)
+            {
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card dashboard-card h-100">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0">@dashboard.Name</h5>
+                            @if (dashboard.IsActive)
+                            {
+                                <span class="badge bg-success">Active</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-secondary">Inactive</span>
+                            }
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">@dashboard.Description</p>
+                            <div class="dashboard-preview bg-light border rounded p-3 mb-3" style="min-height: 150px;">
+                                <div class="row g-2">
+                                    <div class="col-6">
+                                        <div class="widget-preview bg-primary bg-opacity-10 p-2 rounded text-center">
+                                            <i class="fas fa-chart-line fa-2x text-primary"></i>
+                                            <small class="d-block mt-1">Chart Widget</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="widget-preview bg-success bg-opacity-10 p-2 rounded text-center">
+                                            <i class="fas fa-table fa-2x text-success"></i>
+                                            <small class="d-block mt-1">Table Widget</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="widget-preview bg-info bg-opacity-10 p-2 rounded text-center">
+                                            <i class="fas fa-tachometer-alt fa-2x text-info"></i>
+                                            <small class="d-block mt-1">Metrics Widget</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <small class="text-muted">
+                                    <i class="fas fa-calendar me-1"></i>@dashboard.CreatedDate.ToString("MMM dd, yyyy")
+                                </small>
+                                <div class="btn-group btn-group-sm">
+                                    <a href="@Url.Action("View", new { id = dashboard.Id })" class="btn btn-success" title="View">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                    <a href="@Url.Action("Edit", new { id = dashboard.Id })" class="btn btn-primary" title="Edit">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <button onclick="shareDashboard(@dashboard.Id)" class="btn btn-info" title="Share">
+                                        <i class="fas fa-share-alt"></i>
+                                    </button>
+                                    <button onclick="deleteDashboard(@dashboard.Id, '@dashboard.Name')" class="btn btn-danger" title="Delete">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="col-12">
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle me-2"></i>No dashboards created yet. Click "Create Dashboard" to get started.
+                </div>
+            </div>
+        }
+    </div>
+
+    <!-- Dashboard Templates -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="mb-0"><i class="fas fa-th-large me-2"></i>Dashboard Templates</h5>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <div class="card border-primary">
+                        <div class="card-body text-center">
+                            <i class="fas fa-chart-bar fa-3x text-primary mb-3"></i>
+                            <h6>Sales Performance</h6>
+                            <p class="small text-muted">Track sales metrics, revenue, and trends</p>
+                            <button class="btn btn-sm btn-primary" onclick="createFromTemplate('sales')">
+                                <i class="fas fa-plus me-1"></i>Use Template
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="card border-success">
+                        <div class="card-body text-center">
+                            <i class="fas fa-industry fa-3x text-success mb-3"></i>
+                            <h6>Production Overview</h6>
+                            <p class="small text-muted">Monitor production KPIs and efficiency</p>
+                            <button class="btn btn-sm btn-success" onclick="createFromTemplate('production')">
+                                <i class="fas fa-plus me-1"></i>Use Template
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="card border-info">
+                        <div class="card-body text-center">
+                            <i class="fas fa-users fa-3x text-info mb-3"></i>
+                            <h6>Customer Analytics</h6>
+                            <p class="small text-muted">Analyze customer behavior and satisfaction</p>
+                            <button class="btn btn-sm btn-info" onclick="createFromTemplate('customer')">
+                                <i class="fas fa-plus me-1"></i>Use Template
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Live Dashboard Preview (Modal) -->
+    <div class="modal fade" id="liveDashboardModal" tabindex="-1">
+        <div class="modal-dialog modal-fullscreen">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="fas fa-tachometer-alt me-2"></i>Live Dashboard</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <h6>Total Sales</h6>
+                                    <h2 class="mb-0">$125,430</h2>
+                                    <small class="text-success"><i class="fas fa-arrow-up"></i> 12.5% vs last month</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <h6>Active Orders</h6>
+                                    <h2 class="mb-0">342</h2>
+                                    <small class="text-danger"><i class="fas fa-arrow-down"></i> 3.2% vs last week</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <h6>Customer Satisfaction</h6>
+                                    <h2 class="mb-0">4.8/5.0</h2>
+                                    <small class="text-muted"><i class="fas fa-minus"></i> No change</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card">
+                                <div class="card-header">Sales Trend</div>
+                                <div class="card-body">
+                                    <canvas id="salesTrendChart" height="100"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-header">Category Distribution</div>
+                                <div class="card-body">
+                                    <canvas id="categoryChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script>
+        function viewLiveDashboard() {
+            $('#liveDashboardModal').modal('show');
+            setTimeout(() => {
+                initializeLiveCharts();
+            }, 500);
+        }
+
+        function initializeLiveCharts() {
+            // Sales Trend Chart
+            const ctx1 = document.getElementById('salesTrendChart');
+            if (ctx1) {
+                new Chart(ctx1, {
+                    type: 'line',
+                    data: {
+                        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                        datasets: [{
+                            label: 'Sales',
+                            data: [12000, 19000, 15000, 25000, 22000, 30000],
+                            borderColor: 'rgb(0, 144, 210)',
+                            backgroundColor: 'rgba(0, 144, 210, 0.1)',
+                            fill: true
+                        }]
+                    }
+                });
+            }
+
+            // Category Chart
+            const ctx2 = document.getElementById('categoryChart');
+            if (ctx2) {
+                new Chart(ctx2, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Category A', 'Category B', 'Category C'],
+                        datasets: [{
+                            data: [300, 150, 100],
+                            backgroundColor: ['#0090d2', '#28a745', '#ffc107']
+                        }]
+                    }
+                });
+            }
+        }
+
+        function shareDashboard(id) {
+            Swal.fire({
+                title: 'Share Dashboard',
+                html: `
+                    <div class="text-start">
+                        <div class="mb-3">
+                            <label class="form-label">Share Link</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" value="https://rmms.local/dashboard/${id}" id="shareLink" readonly />
+                                <button class="btn btn-outline-secondary" onclick="copyShareLink()">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Share with Users</label>
+                            <input type="email" class="form-control" placeholder="email@example.com" />
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="publicAccess" />
+                            <label class="form-check-label" for="publicAccess">Allow public access</label>
+                        </div>
+                    </div>
+                `,
+                showCancelButton: true,
+                confirmButtonText: 'Share'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    toastr.success('Dashboard shared successfully');
+                }
+            });
+        }
+
+        function copyShareLink() {
+            const link = document.getElementById('shareLink');
+            link.select();
+            document.execCommand('copy');
+            toastr.success('Link copied to clipboard');
+        }
+
+        function createFromTemplate(template) {
+            Swal.fire({
+                title: 'Create from Template',
+                text: `This will create a new dashboard based on the ${template} template.`,
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Create'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    toastr.success('Creating dashboard from template...');
+                    setTimeout(() => {
+                        window.location.href = '@Url.Action("Create")' + '?template=' + template;
+                    }, 1000);
+                }
+            });
+        }
+
+        function deleteDashboard(id, name) {
+            Swal.fire({
+                title: 'Delete Dashboard?',
+                text: `Are you sure you want to delete "${name}"?`,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.post('@Url.Action("Delete")', { id: id }, function () {
+                        toastr.success('Dashboard deleted');
+                        location.reload();
+                    });
+                }
+            });
+        }
+    </script>
+
+    <style>
+        .dashboard-card {
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+
+        .widget-preview {
+            transition: all 0.2s;
+        }
+
+        .widget-preview:hover {
+            transform: scale(1.05);
+        }
+    </style>
+}
