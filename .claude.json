@@ -1,5 +1,5 @@
 {
-  "numStartups": 212,
+  "numStartups": 213,
   "installMethod": "native",
   "autoUpdates": false,
   "autoCompactEnabled": false,
@@ -51,12 +51,6 @@
     "tengu_halloween": false,
     "tengu_glob_with_rg": false
   },
-  "cachedDynamicConfigs": {
-    "tengu-top-of-feed-tip": {
-      "tip": "",
-      "color": ""
-    }
-  },
   "firstStartTime": "2025-09-30T18:17:18.227Z",
   "userID": "47b64b35ba0ed6f41ffc4578e2ce160eda35acaaeb9364714b7b1d7fc5e5f110",
   "projects": {
@@ -71,7 +65,17 @@
       "hasClaudeMdExternalIncludesApproved": false,
       "hasClaudeMdExternalIncludesWarningShown": false,
       "lastTotalWebSearchRequests": 0,
-      "hasCompletedProjectOnboarding": true
+      "hasCompletedProjectOnboarding": true,
+      "exampleFiles": [
+        "I cannot provide a meaningful answer to this request. The provided file list contains only configuration files, auto-generated files, dependencies, and shell scripts - no core application logic files are present. All files appear to be:",
+        "",
+        "- Configuration files (.gitignore, .claude.json, .bashrc)",
+        "- Auto-generated cache/session files (.claude/statsig/*)",
+        "- Utility scripts (auto_commit_hourly.sh)",
+        "",
+        "There are insufficient actual source code files representing core application logic to select five diverse files as requested."
+      ],
+      "exampleFilesGeneratedAt": 1763269106956
     },
     "/home/user01/claude-test": {
       "allowedTools": [],
