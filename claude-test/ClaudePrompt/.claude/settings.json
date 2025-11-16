@@ -1,11 +1,11 @@
 {
   "statusLine": {
-    "command": "/home/user01/claude-test/ClaudePrompt/statusline_with_metrics.sh"
+    "command": "/home/user01/claude-test/ClaudePrompt/statusline_production_ready.sh"
   },
   "hooks": {
     "PostToolUse": {
-      "capture_metrics": {
-        "command": "/home/user01/claude-test/ClaudePrompt/.claude/hooks/PostToolUse/capture_metrics.sh",
+      "capture_live_context_enhanced": {
+        "command": "/home/user01/claude-test/ClaudePrompt/.claude/hooks/PostToolUse/capture_live_context_enhanced.sh",
         "timeout": 1000
       }
     }

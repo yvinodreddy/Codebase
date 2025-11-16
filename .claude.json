@@ -1,5 +1,5 @@
 {
-  "numStartups": 221,
+  "numStartups": 227,
   "installMethod": "native",
   "autoUpdates": false,
   "autoCompactEnabled": false,
@@ -23,20 +23,20 @@
     "prompt-queue": 7,
     "enter-to-steer-in-relatime": 216,
     "todo-list": 217,
-    "# for memory": 215,
+    "# for memory": 226,
     "install-github-app": 215,
     "drag-and-drop-images": 220,
     "double-esc-code-restore": 220,
     "continue": 220,
     "shift-tab": 220,
-    "image-paste": 212,
+    "image-paste": 226,
     "shift-enter": 7,
     "custom-agents": 212,
     "permissions": 219,
     "custom-commands": 212,
-    "tab-toggle-thinking": 221,
+    "tab-toggle-thinking": 223,
     "ultrathink-keyword": 218,
-    "git-worktrees": 214,
+    "git-worktrees": 226,
     "stickers-command": 207
   },
   "memoryUsageCount": 1,
@@ -191,7 +191,7 @@
     "5f40691d-ecf2-4e8b-bded-e094c6691947": {
       "hasAccess": false,
       "hasAccessNotAsDefault": false,
-      "timestamp": 1763273899444
+      "timestamp": 1763277799151
     },
     "9a16b879-6de2-4b4c-9c55-3c6035aad238": {
       "hasAccess": false,

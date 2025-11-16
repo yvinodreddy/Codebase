@@ -29,3 +29,9 @@ Timestamp,Prompt,Agents,Context_Tokens,Context_Pct,Iterations,Confidence,Time_Se
 "2025-11-16 01:11:27","
 
   Why is it showing something like this which is...",25/30,200000,0.0,0,100,2.1
+"2025-11-16 02:11:11","what is 2+2",8/30,200000,0.0,0,100,0.9
+"2025-11-16 02:13:14","
+
+The statusline is showing old format:
+[Sonnet 4....",25/30,200000,0.0,0,100,3.1
+"2025-11-16 02:24:58","what is quantum computing and you do a market anal...",12/30,200000,0.0,0,100,1.1

@@ -51,7 +51,7 @@ VERIFIER="/home/user01/claude-test/ClaudePrompt/multi_source_metrics_verifier.py
 # 5. Select most reliable source using confidence scoring
 # 6. Return verified metrics
 
-VERIFIED_METRICS=$(echo "$INPUT_JSON" | python3 "$VERIFIER" --json --json-input "$INPUT_JSON" 2>/dev/null)
+VERIFIED_METRICS=$(echo "$INPUT_JSON" | python3 "$VERIFIER" --json --stdin 2>/dev/null)
 
 # Extract individual metrics from verified output
 if [[ -n "$VERIFIED_METRICS" ]]; then
