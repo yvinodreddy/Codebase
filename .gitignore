@@ -69,3 +69,16 @@ claude-test-backup-*/
 .nuget/packages/
 *.nupkg
 
+# Build outputs (large binaries) - Exclude from future commits
+**/bin/Debug/**/runtimes/
+**/bin/Release/**/runtimes/
+**/bin/**/native/
+*.dylib
+*.so
+libMklImports.*
+MklImports.dll
+
+# Large log files
+**/logs/prompt_history.json
+**/logs/*.json
+
