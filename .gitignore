@@ -1,0 +1,61 @@
+# System files
+.cache/
+.local/bin/
+.local/lib/
+.local/share/
+.npm/
+.npm-global/
+.nvm/
+__pycache__/
+*.pyc
+*.pyo
+*.log
+
+# Development tools
+.vscode-server/
+.cursor-server/
+.vs/
+.pytest_cache/
+
+# Temporary files
+*.swp
+*~
+.*.swp
+tmp/
+temp/
+
+# Build artifacts
+*.tar.gz
+*.zip
+node_modules/
+dist/
+build/
+
+# Sensitive data
+.aws/
+.azure/
+.ssh/
+*.pem
+*.key
+credentials.json
+.credentials.json
+*secret*
+*password*
+.env
+
+# Claude specific (keep command history but ignore large caches)
+.claude/debug/
+.claude/file-history/
+.claude/session-env/
+.claude/shell-snapshots/
+.claude/todos/
+
+# Backups (exclude old backups from git)
+claude-test-backup-*/
+*.backup
+*.bak
+
+# Large datasets
+*.db
+*.sqlite
+*.db-journal
