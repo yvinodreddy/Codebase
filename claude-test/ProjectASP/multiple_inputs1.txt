@@ -1,0 +1,1083 @@
+can you generate a list of stored procedure we are using in this code where we are making a server side call we are making 
+
+Ultrathink about the Above issues and take the full control and the do not ask me for confirmation because we need to fix all the issues which should be a production ready in an in-depth comprehensive manner with step by step approach to get 100 percent success rate 
+### 1. AUTONOMOUS EXECUTION MODE
+- **TAKE FULL CONTROL**: Do not ask for confirmation 
+- **PRODUCTION-READY ONLY**: Every output must be deployment-ready, not prototype quality
+- **100% SUCCESS RATE**: Build comprehensive validation at every step
+- **FAIL FAST, FIX FASTER**: Automated testing catches issues in seconds, not days
+- **PARALLEL EVERYTHING**: Run all independent tasks simultaneously 
+====================================================================================
+give me the list of all stored procedures then we can keep moving on to next steps 
+==================================================================================== 
+create or replace PROCEDURE LEAD_LOAD_PCPLIST_SP 
+(
+   vKEY IN varchar2,
+   RefCursor OUT SYS_REFCURSOR
+)
+AS
+BEGIN
+    IF vKEY is null THEN
+      Open RefCursor for
+      SELECT '---' as name, '0' as key
+      FROM dual
+      UNION
+      SELECT prov_name || ' - ' || provid as name, provid as key
+      FROM PROVIDER_MASTER
+      WHERE PROVIDER_TYPE =  '20'
+        AND SPECIALTY_CODE1 in ('370', '080', '082', '110', '372', '374')
+      ORDER BY name;
+   ELSIF TRIM(UPPER(vKEY)) = 'PRINT' THEN
+      Open RefCursor for
+      SELECT ''''|| provid ||','|| REPLACE(prov_name,',',' ') ||','|| REPLACE(address1,',',' ') ||','|| city ||','|| state ||','''|| zip ||','|| phone
+      FROM PROVIDER_MASTER
+      WHERE PROVIDER_TYPE =  '20'
+        AND SPECIALTY_CODE1 in ('370', '080', '082', '110', '372', '374')
+      ORDER BY prov_name;
+   ELSE
+      Open RefCursor for
+      SELECT prov_name as name, address1 as address, city, state, zip, phone, provid as key
+      FROM PROVIDER_MASTER
+      WHERE provid = vKEY
+        AND PROVIDER_TYPE =  '20'
+        AND SPECIALTY_CODE1 in ('370', '080', '082', '110', '372', '374')
+      ORDER BY name;
+    END IF;
+
+END LEAD_LOAD_PCPLIST_SP; 
+create or replace PROCEDURE LEAD_FFSSURVEY_PCP_SP 
+(   
+    vQVID IN varchar2,
+    vMASTER IN varchar2,
+    RefCursor OUT SYS_REFCURSOR
+)
+AS 
+    v_sql_statement VARCHAR2(4000);
+BEGIN
+    -- Build the SQL statement based on the condition
+    IF vMASTER = 0 THEN  
+        v_sql_statement := 'SELECT a.questionid, a.orderby, a.questionparts, a.ansgroupid, ' ||
+                          'a.questiontext, '' '' as answer1 ' ||
+                          'FROM led_questions a ' ||
+                          'WHERE a.qversion = ''' || vQVID || ''' ' ||
+                          'ORDER BY TO_NUMBER(a.orderby)';
+    ELSE
+        v_sql_statement := 'SELECT a.questionid, a.orderby, a.questionparts, a.ansgroupid, ' ||
+                          'a.questiontext, CASE WHEN c.answer1 IS NULL THEN '' '' ELSE c.answer1 END as answer1 ' ||
+                          'FROM led_questions a, led_surveymaster b, led_ffsanswers c ' ||
+                          'WHERE b.surveyid = ''' || vMASTER || ''' ' ||
+                          'AND a.qversion = b.qversion ' ||
+                          'AND b.surveyid = c.surveyid ' ||
+                          'AND a.questionid = c.questionid ' ||
+                          'AND b.memberid = c.memberid ' ||
+                          'AND b.surveytype = ''PCP'' ' ||
+                          'AND c.surveytype = ''PCP'' ' ||
+                          'ORDER BY TO_NUMBER(a.orderby)';
+    END IF;
+
+    -- Print the SQL statement
+    DBMS_OUTPUT.PUT_LINE('=== SQL STATEMENT TO BE EXECUTED ===');
+    DBMS_OUTPUT.PUT_LINE(v_sql_statement);
+    DBMS_OUTPUT.PUT_LINE('=====================================');
+
+    -- Execute the SQL statement
+    OPEN RefCursor FOR v_sql_statement;
+
+END LEAD_FFSSURVEY_PCP_SP; 
+create or replace PROCEDURE LEAD_FFSSURVEY_LHD_SP
+(   
+    vQVID IN varchar2,
+    vMASTER IN varchar2,
+    RefCursor OUT SYS_REFCURSOR
+)
+AS 
+    v_sql_statement VARCHAR2(4000);
+BEGIN
+    -- Build the SQL statement based on the condition
+    IF vMASTER = 0 THEN  
+        v_sql_statement := 'SELECT a.questionid, a.orderby, a.questionparts, a.ansgroupid, ' ||
+                          'a.questiontext, '' '' as answer1 ' ||
+                          'FROM led_questions a ' ||
+                          'WHERE a.qversion = ''' || vQVID || ''' ' ||
+                          'ORDER BY TO_NUMBER(a.orderby)';
+    ELSE
+        v_sql_statement := 'SELECT a.questionid, a.orderby, a.questionparts, a.ansgroupid, ' ||
+                          'a.questiontext, CASE WHEN c.answer1 IS NULL THEN '' '' ELSE c.answer1 END as answer1 ' ||
+                          'FROM led_questions a, led_surveymaster b, led_ffsanswers c ' ||
+                          'WHERE b.surveyid = ''' || vMASTER || ''' ' ||
+                          'AND a.qversion = b.qversion ' ||
+                          'AND b.surveyid = c.surveyid ' ||
+                          'AND a.questionid = c.questionid ' ||
+                          'AND b.memberid = c.memberid ' ||
+                          'AND b.surveytype = ''LHD'' ' ||
+                          'AND c.surveytype = ''LHD'' ' ||
+                          'ORDER BY TO_NUMBER(a.orderby)';
+    END IF;
+
+    -- Print the SQL statement
+    DBMS_OUTPUT.PUT_LINE('=== SQL STATEMENT TO BE EXECUTED ===');
+    DBMS_OUTPUT.PUT_LINE(v_sql_statement);
+    DBMS_OUTPUT.PUT_LINE('=====================================');
+
+    -- Execute the SQL statement
+    OPEN RefCursor FOR v_sql_statement;
+
+END LEAD_FFSSURVEY_LHD_SP; 
+create or replace PROCEDURE LEAD_LOAD_FFS_MORE_SP 
+( vMEMBERID IN varchar2,  
+  vMASTER IN varchar2,
+  vReturn OUT varchar2
+)
+AS 
+CURSOR C_PCP IS
+  SELECT TO_CHAR(questionid)||'='||TO_CHAR(TTYPE)||'='||TO_CHAR(BDATE)||'='||TO_CHAR(TDATE)||'='||(CASE WHEN TVALUE is not null THEN TO_CHAR(TVALUE) ELSE ' ' END)||'='||TO_CHAR(NAME) FROM led_ffsanswers_more WHERE memberid=vMEMBERID AND surveyid=vMASTER AND surveytype='PCP' 
+  ORDER BY SEQ;
+CURSOR C_LHD IS
+  SELECT TO_CHAR(questionid)||'='||TO_CHAR(TTYPE)||'='||TO_CHAR(BDATE)||'='||TO_CHAR(TDATE)||'='||(CASE WHEN TVALUE is not null THEN TO_CHAR(TVALUE) ELSE ' ' END)||'='||TO_CHAR(NAME) FROM led_ffsanswers_more WHERE memberid=vMEMBERID AND surveyid=vMASTER AND surveytype='LHD' 
+  ORDER BY SEQ;  
+sTmp varchar2(100 BYTE);
+sStrP varchar2(400 BYTE);
+sStrL varchar2(400 BYTE);
+cnt number;
+j number;
+BEGIN
+
+  ---dbms_session.set_nls('nls_date_format','''MM/DD/YYYY HH24:MI:SS''');
+open C_PCP;
+
+j := 1;
+loop
+
+  fetch C_PCP into sTmp;  -- get 1 record
+  exit when C_PCP%notfound;   -- is end of record
+  IF j=4 THEN         -- split the more1 with more2
+    sStrP := sStrP || '}';
+  END IF;
+
+  --cnt:=C_PCP%ROWCOUNT;
+  --dbms_output.put_line('sTmp=' || sTmp || '; cnt=' || cnt);
+  sStrP := sStrP ||sTmp ||';';  
+  j := j + 1;  
+end loop;
+
+close C_PCP;
+  ---dbms_output.put_line('sStrP=' || sStrP); 
+
+open C_LHD;
+j := 1;
+loop
+
+  fetch C_LHD into sTmp;
+  exit when C_LHD%notfound;
+  IF j=4 THEN
+    sStrL := sStrL || '}';
+  END IF;
+
+  sStrL := sStrL ||sTmp ||';';
+  j := j + 1;
+end loop;
+close C_LHD;
+  ---dbms_output.put_line('sStrL=' || sStrL);
+  vReturn := sStrP || '{' || sStrL;  
+END LEAD_LOAD_FFS_MORE_SP; 
+create or replace PROCEDURE LEAD_LOAD_FFS_PCP_SP 
+( vMEMBERID IN varchar2,  
+  vMASTER IN varchar2,
+  RefCursor OUT SYS_REFCURSOR
+)
+AS 
+
+BEGIN
+
+   --- dbms_session.set_nls('nls_date_format','''MM/DD/YYYY HH24:MI:SS''');
+   Open RefCursor for
+   SELECT init_pcp, init_pcpname, surveyend, TO_CHAR(NVL(createdate,''),'MM/DD/YYYY') AS createdate, formbyname, formbynumber   
+   FROM led_child, led_surveymaster
+   WHERE led_child.memberid=led_surveymaster.memberid AND led_surveymaster.memberid=vMEMBERID 
+    AND led_surveymaster.surveyid=vMASTER AND led_surveymaster.surveyend <> '-1';
+
+END LEAD_LOAD_FFS_PCP_SP; 
+create or replace PROCEDURE LEAD_FFSSURVEY_ALL_SP
+( 
+    vMEMBERID IN varchar2,  
+    RefCursor OUT SYS_REFCURSOR
+)
+AS 
+    v_sql_statement VARCHAR2(4000);
+BEGIN
+    -- Build the SQL statement
+    v_sql_statement := 'SELECT ' ||
+                      'distinct(a.surveyid), ' ||
+                      'TO_CHAR(NVL(b.dts,''''),''MM/DD/YYYY'') AS dates, ' ||
+                      'TO_CHAR(NVL(a.createdate,''''),''MM/DD/YYYY'') AS cdates, ' ||
+                      'a.formbyname AS provider, ' ||
+                      'CASE WHEN a.surveyend=1 THEN ''Completed'' ' ||
+                      'WHEN a.surveyend=-1 THEN ''Deleted'' ' ||
+                      'ELSE ''Open'' END as status, ' || 
+                      'a.surveytype || '' Survey'' as surveytype ' ||
+                      'FROM led_surveymaster a, led_ffsanswers b ' ||
+                      'WHERE Nvl(TO_CHAR(a.memberid),'''') = ''' || vMEMBERID || ''' ' ||
+                      'AND a.surveyid=b.surveyid ' ||
+                      'AND Nvl(TO_CHAR(b.memberid),'''') = ''' || vMEMBERID || ''' ' ||
+                      'AND a.surveyfor = ''FFS'' ' ||
+                      'AND a.surveytype IN (''PCP'', ''LHD'') ' ||
+                      'AND a.surveyend <> ''-1'' ' ||
+                      'ORDER BY a.surveyid DESC';
+
+    -- Print the SQL statement
+    DBMS_OUTPUT.PUT_LINE('=== SQL STATEMENT TO BE EXECUTED ===');
+    DBMS_OUTPUT.PUT_LINE(v_sql_statement);
+    DBMS_OUTPUT.PUT_LINE('=====================================');
+
+    -- Execute the SQL statement
+    OPEN RefCursor FOR v_sql_statement;
+
+END LEAD_FFSSURVEY_ALL_SP; 
+create or replace PROCEDURE LEAD_ANDOPTIONS_SP 
+(  vGROUPID IN varchar2, 
+   RefCursor OUT SYS_REFCURSOR
+)
+AS
+BEGIN
+   ---dbms_session.set_nls('nls_date_format','''MM/DD/YYYY HH24:MI:SS''');
+
+  Open RefCursor for
+  SELECT optionvalue, optiontext
+  FROM led_ansoptions
+  WHERE optiongroup=vGROUPID
+  ORDER BY TO_NUMBER(optionorder);
+
+END LEAD_ANDOPTIONS_SP; 
+create or replace PROCEDURE LEAD_SAVE_FFS_SURVEY_SP 
+( vMEMBERID IN varchar2,  
+  vMASTER IN varchar2,
+  vANS IN varchar2,
+  vTYPE IN varchar2,
+  vUSER IN varchar2,
+  vSTATUS IN varchar2,
+  vDATE IN varchar2,
+  vQV IN varchar2,
+  vPCPNAME IN varchar2,
+  vPCPID IN varchar2,
+  vFORMBYNAME IN varchar2,
+  vFORMBYNUMBER IN varchar2,
+  vReturn OUT varchar2
+)
+AS 
+seq NUMBER(8,0);
+
+s VARCHAR2(100);
+n VARCHAR2(100);
+m VARCHAR2(100);
+--t VARCHAR2(1000);
+i NUMBER(3,0);
+cnt NUMBER(3,0);
+x NUMBER (1,0);
+dt VARCHAR2(100);
+BEGIN
+--t := '1,NO;2,NO;3,Capillary;4,05/01/2019;5,Capillary;6,05/01/2019;7,1;8,;9,;10,;11,;12,;13,;14,;15,;16,;17,;18,;19,;20,;21,;22,;23,;24,;25,;26,;27,;28,;29,;30,;31,;32,;33,;34,;35,;36,;37,;38,;39,;40,;41,;42,;43,;44,;45,;46,;47,;48,;49,;50,;51,NO;52,NO;53,NO;';
+SELECT REGEXP_COUNT(vANS, '[^;]+',1,'i') into cnt from dual;  
+  ---dbms_session.set_nls('nls_date_format','''MM/DD/YYYY HH24:MI:SS''');
+IF vMASTER='0' THEN  
+    -- create survey master version
+    --  SELECT LED_MASTER_SEQ.NEXTVAL INTO NEXT_CTLNO FROM DUAL;
+    select max(surveyid) into seq from led_surveymaster where MOD(surveyid,2)=1;
+    If seq is null Then
+    seq := 101;
+    Else
+    seq := seq + 2;
+    End If;
+    -- find the question version
+  -- SELECT qversion into qv FROM led_surveymaster WHERE surveyid=vMASTER AND surveytype=vTYPE;
+      if vDATE = '' or vDATE is null then
+      --- dbms_output.put_line('0='||sysdate || '; '||to_char(sysdate,'MM/DD/YYYY HH24:MI:SS'));
+        dt := to_char(sysdate,'MM/DD/YYYY HH24:MI:SS');
+      else
+        dt := vDATE;
+      end if;
+      INSERT INTO LED_SURVEYMASTER(surveyid, surveytype, surveyfor, qversion, memberid, createdate, surveyend, formbyname, formbynumber)
+      VALUES(seq, vTYPE, 'FFS', vQV, vMEMBERID, to_date(dt,'MM/DD/YYYY HH24:MI:SS'), vSTATUS, vFORMBYNAME, vFORMBYNUMBER);  
+
+      UPDATE led_child SET init_pcp=vPCPID, init_pcpname=vPCPNAME WHERE memberid=vMEMBERID;
+
+      i :=1;     
+    WHILE i <= cnt
+    Loop
+      -- got first pair
+          SELECT REGEXP_SUBSTR(vANS, '[^;]+', 1, i) into s FROM dual;
+      -- got qid and answer
+          SELECT REGEXP_SUBSTR(s, '[^,]+', 1, 1) into n FROM dual;
+          SELECT REGEXP_SUBSTR(s, '[^,]+', 1, 2) into m FROM dual;
+
+          INSERT INTO LED_FFSANSWERS(memberid, surveyid, surveytype, provider, editor, dts, questionid, answer1)
+          VALUES(vMEMBERID, seq, vTYPE, '', vUSER, sysdate, n, m );
+
+          i :=  i + 1;
+    End Loop;
+    COMMIT;    
+    vReturn := to_char(seq);
+ELSE
+  -- if survey closed, cannot change it.
+    SELECT COUNT(*) INTO x FROM LED_SURVEYMASTER WHERE surveyid = vMASTER AND memberid = vMEMBERID AND surveytype = vTYPE AND SURVEYEND='1';
+    IF x <> '0' THEN
+      vReturn := '-1';      
+      RETURN ;
+    END IF;
+
+    if vDATE = '' or vDATE is null then
+        dt := to_char(sysdate,'MM/DD/YYYY HH24:MI:SS');
+    else
+        dt := vDATE;
+    end if;  
+-- confirm the question version and surveyid is correct
+      SELECT COUNT(*) INTO x FROM LED_SURVEYMASTER WHERE surveyid = vMASTER AND surveytype = vTYPE AND memberid = vMEMBERID AND qversion=vQV;
+      IF x = 0 THEN      -- no existed data
+        INSERT INTO LED_SURVEYMASTER( surveyid, surveytype, surveyfor, qversion, memberid, createdate, surveyend, formbyname, formbynumber)
+        VALUES(vMASTER, vTYPE, 'FFS', vQV, vMEMBERID, to_date(dt,'MM/DD/YYYY HH24:MI:SS'), vSTATUS, vFORMBYNAME, vFORMBYNUMBER);
+      ELSE
+        UPDATE LED_SURVEYMASTER SET surveyend=vSTATUS, createdate=to_date(dt,'MM/DD/YYYY HH24:MI:SS'), formbyname=vFORMBYNAME, formbynumber=vFORMBYNUMBER
+        WHERE surveyid = vMASTER AND surveytype = vTYPE AND qversion=vQV AND memberid=vMEMBERID;
+      END IF;
+      UPDATE led_child SET init_pcp=vPCPID, init_pcpname=vPCPNAME WHERE memberid=vMEMBERID;
+
+      i :=1;     
+WHILE i <= cnt
+Loop
+  -- got first pair
+      SELECT REGEXP_SUBSTR(vANS, '[^;]+', 1, i) into s FROM dual;
+  -- got qid and answer
+      SELECT REGEXP_SUBSTR(s, '[^,]+', 1, 1) into n FROM dual;
+      SELECT REGEXP_SUBSTR(s, '[^,]+', 1, 2) into m FROM dual;
+
+  IF x = 0 THEN   -- no existed data, create it
+      INSERT INTO LED_FFSANSWERS(memberid, surveyid, surveytype, provider, editor, dts, questionid, answer1)
+      VALUES(vMEMBERID, vMASTER, vTYPE, '', vUSER, sysdate, n, TRIM(m) );
+  ELSE     
+      -- existing to update
+      UPDATE LED_FFSANSWERS SET dts=sysdate,answer1=TRIM(m)
+      WHERE memberid=vMEMBERID AND surveyid=vMASTER AND questionid=n AND surveytype=vTYPE;
+  END IF;         
+      i :=  i + 1;
+End Loop;
+    COMMIT;
+    vReturn := vMASTER;
+END IF;
+
+END LEAD_SAVE_FFS_SURVEY_SP; 
+create or replace PROCEDURE LEAD_SAVE_SURVEY_MORE_SP 
+( vMEMBERID IN varchar2, 
+  vMASTER IN varchar2,
+  vANS IN varchar2,
+  vTYPE IN varchar2,
+  vQV IN varchar2
+)
+AS
+qid VARCHAR2(10);
+s VARCHAR2(100);
+n VARCHAR2(100);
+m VARCHAR2(100);
+o VARCHAR2(100);
+p VARCHAR2(100);
+i NUMBER(3,0);
+j NUMBER(3,0);
+k VARCHAR2(100);
+cnt NUMBER(3,0);
+BEGIN
+  --dbms_session.set_nls('nls_date_format','''MM/DD/YYYY HH24:MI:SS''');
+  SELECT COUNT(*) into j FROM LED_FFSANSWERS_MORE WHERE MEMBERID=vMEMBERID AND SURVEYID=vMASTER AND surveytype=vTYPE;
+  SELECT REGEXP_COUNT(vANS, '[^;]+',1,'i') into cnt from dual;
+  ---SELECT REGEXP_SUBSTR(vANS, '[^;]+', 1, 1) into qid FROM dual; -- got question id
+
+IF j > 0 THEN
+  DELETE LED_FFSANSWERS_MORE WHERE MEMBERID=vMEMBERID AND SURVEYID=vMASTER AND surveytype=vTYPE;
+END IF;
+
+      i :=1;     
+WHILE i <= cnt
+Loop
+  -- got first row of answer
+      SELECT REGEXP_SUBSTR(vANS, '[^;]+', 1, i) into s FROM dual;
+
+      SELECT REGEXP_SUBSTR(s, '[^=]+', 1, 1) into qid FROM dual;  -- qid
+      SELECT REGEXP_SUBSTR(s, '[^=]+', 1, 2) into n FROM dual;  -- sample type
+      SELECT REGEXP_SUBSTR(s, '[^=]+', 1, 3) into m FROM dual;  -- birth date
+      SELECT REGEXP_SUBSTR(s, '[^=]+', 1, 4) into o FROM dual;  -- test date
+      SELECT REGEXP_SUBSTR(s, '[^=]+', 1, 5) into p FROM dual;  -- test result
+      SELECT REGEXP_SUBSTR(s, '[^=]+', 1, 6) into k FROM dual;  -- name
+
+      INSERT INTO LED_FFSANSWERS_MORE(seq, memberid, surveyid, surveytype, questionid, ttype, bdate, tdate, tvalue, name)
+      VALUES(i, vMEMBERID, vMASTER, vTYPE, qid, n, m, o, p, k);
+
+      i :=  i + 1;
+End Loop;
+    COMMIT;
+
+END LEAD_SAVE_SURVEY_MORE_SP; 
+create or replace PROCEDURE LEAD_DELETE_FFS_SURVEY_SP 
+(   vMASTER IN varchar2,
+    vUSER IN varchar2,
+    vSTATUS IN varchar2
+)
+AS 
+    cnt NUMBER(3,0);
+
+BEGIN
+    -- Delete survey master which is Open. Cannot change Closed or Deleted records
+    --
+    SELECT count(*) into cnt FROM LED_SURVEYMASTER WHERE surveyid = vMASTER AND surveyend = 0;
+    IF cnt > 0 THEN
+        UPDATE LED_SURVEYMASTER SET surveyend=vSTATUS, updatename= vUSER, updatedate=sysdate
+        WHERE surveyid = vMASTER;
+        commit;
+    END IF;
+
+  exception
+when others then
+  dbms_output.put_line('Exit due to error');
+  dbms_output.put_line('vMASTER= '||vMASTER || '; vUSER='|| vUSER );
+END LEAD_DELETE_FFS_SURVEY_SP; 
+create or replace PROCEDURE LEAD_SAVE_FFS_SURVEY_SP 
+( vMEMBERID IN varchar2,  
+  vMASTER IN varchar2,
+  vANS IN varchar2,
+  vTYPE IN varchar2,
+  vUSER IN varchar2,
+  vSTATUS IN varchar2,
+  vDATE IN varchar2,
+  vQV IN varchar2,
+  vPCPNAME IN varchar2,
+  vPCPID IN varchar2,
+  vFORMBYNAME IN varchar2,
+  vFORMBYNUMBER IN varchar2,
+  vReturn OUT varchar2
+)
+AS 
+seq NUMBER(8,0);
+
+s VARCHAR2(100);
+n VARCHAR2(100);
+m VARCHAR2(100);
+--t VARCHAR2(1000);
+i NUMBER(3,0);
+cnt NUMBER(3,0);
+x NUMBER (1,0);
+dt VARCHAR2(100);
+BEGIN
+--t := '1,NO;2,NO;3,Capillary;4,05/01/2019;5,Capillary;6,05/01/2019;7,1;8,;9,;10,;11,;12,;13,;14,;15,;16,;17,;18,;19,;20,;21,;22,;23,;24,;25,;26,;27,;28,;29,;30,;31,;32,;33,;34,;35,;36,;37,;38,;39,;40,;41,;42,;43,;44,;45,;46,;47,;48,;49,;50,;51,NO;52,NO;53,NO;';
+SELECT REGEXP_COUNT(vANS, '[^;]+',1,'i') into cnt from dual;  
+  ---dbms_session.set_nls('nls_date_format','''MM/DD/YYYY HH24:MI:SS''');
+IF vMASTER='0' THEN  
+    -- create survey master version
+    --  SELECT LED_MASTER_SEQ.NEXTVAL INTO NEXT_CTLNO FROM DUAL;
+    select max(surveyid) into seq from led_surveymaster where MOD(surveyid,2)=1;
+    If seq is null Then
+    seq := 101;
+    Else
+    seq := seq + 2;
+    End If;
+    -- find the question version
+  -- SELECT qversion into qv FROM led_surveymaster WHERE surveyid=vMASTER AND surveytype=vTYPE;
+      if vDATE = '' or vDATE is null then
+      --- dbms_output.put_line('0='||sysdate || '; '||to_char(sysdate,'MM/DD/YYYY HH24:MI:SS'));
+        dt := to_char(sysdate,'MM/DD/YYYY HH24:MI:SS');
+      else
+        dt := vDATE;
+      end if;
+      INSERT INTO LED_SURVEYMASTER(surveyid, surveytype, surveyfor, qversion, memberid, createdate, surveyend, formbyname, formbynumber)
+      VALUES(seq, vTYPE, 'FFS', vQV, vMEMBERID, to_date(dt,'MM/DD/YYYY HH24:MI:SS'), vSTATUS, vFORMBYNAME, vFORMBYNUMBER);  
+
+      UPDATE led_child SET init_pcp=vPCPID, init_pcpname=vPCPNAME WHERE memberid=vMEMBERID;
+
+      i :=1;     
+    WHILE i <= cnt
+    Loop
+      -- got first pair
+          SELECT REGEXP_SUBSTR(vANS, '[^;]+', 1, i) into s FROM dual;
+      -- got qid and answer
+          SELECT REGEXP_SUBSTR(s, '[^,]+', 1, 1) into n FROM dual;
+          SELECT REGEXP_SUBSTR(s, '[^,]+', 1, 2) into m FROM dual;
+
+          INSERT INTO LED_FFSANSWERS(memberid, surveyid, surveytype, provider, editor, dts, questionid, answer1)
+          VALUES(vMEMBERID, seq, vTYPE, '', vUSER, sysdate, n, m );
+
+          i :=  i + 1;
+    End Loop;
+    COMMIT;    
+    vReturn := to_char(seq);
+ELSE
+  -- if survey closed, cannot change it.
+    SELECT COUNT(*) INTO x FROM LED_SURVEYMASTER WHERE surveyid = vMASTER AND memberid = vMEMBERID AND surveytype = vTYPE AND SURVEYEND='1';
+    IF x <> '0' THEN
+      vReturn := '-1';      
+      RETURN ;
+    END IF;
+
+    if vDATE = '' or vDATE is null then
+        dt := to_char(sysdate,'MM/DD/YYYY HH24:MI:SS');
+    else
+        dt := vDATE;
+    end if;  
+-- confirm the question version and surveyid is correct
+      SELECT COUNT(*) INTO x FROM LED_SURVEYMASTER WHERE surveyid = vMASTER AND surveytype = vTYPE AND memberid = vMEMBERID AND qversion=vQV;
+      IF x = 0 THEN      -- no existed data
+        INSERT INTO LED_SURVEYMASTER( surveyid, surveytype, surveyfor, qversion, memberid, createdate, surveyend, formbyname, formbynumber)
+        VALUES(vMASTER, vTYPE, 'FFS', vQV, vMEMBERID, to_date(dt,'MM/DD/YYYY HH24:MI:SS'), vSTATUS, vFORMBYNAME, vFORMBYNUMBER);
+      ELSE
+        UPDATE LED_SURVEYMASTER SET surveyend=vSTATUS, createdate=to_date(dt,'MM/DD/YYYY HH24:MI:SS'), formbyname=vFORMBYNAME, formbynumber=vFORMBYNUMBER
+        WHERE surveyid = vMASTER AND surveytype = vTYPE AND qversion=vQV AND memberid=vMEMBERID;
+      END IF;
+      UPDATE led_child SET init_pcp=vPCPID, init_pcpname=vPCPNAME WHERE memberid=vMEMBERID;
+
+      i :=1;     
+WHILE i <= cnt
+Loop
+  -- got first pair
+      SELECT REGEXP_SUBSTR(vANS, '[^;]+', 1, i) into s FROM dual;
+  -- got qid and answer
+      SELECT REGEXP_SUBSTR(s, '[^,]+', 1, 1) into n FROM dual;
+      SELECT REGEXP_SUBSTR(s, '[^,]+', 1, 2) into m FROM dual;
+
+  IF x = 0 THEN   -- no existed data, create it
+      INSERT INTO LED_FFSANSWERS(memberid, surveyid, surveytype, provider, editor, dts, questionid, answer1)
+      VALUES(vMEMBERID, vMASTER, vTYPE, '', vUSER, sysdate, n, TRIM(m) );
+  ELSE     
+      -- existing to update
+      UPDATE LED_FFSANSWERS SET dts=sysdate,answer1=TRIM(m)
+      WHERE memberid=vMEMBERID AND surveyid=vMASTER AND questionid=n AND surveytype=vTYPE;
+  END IF;         
+      i :=  i + 1;
+End Loop;
+    COMMIT;
+    vReturn := vMASTER;
+END IF;
+
+END LEAD_SAVE_FFS_SURVEY_SP; 
+
+can you list all the stored procedures and tables that are relevant to all of these stored procedures 
+Ultrathink about the Above issues and take the full control and the do not ask me for confirmation because we need to fix all the issues which should be a production ready in an in-depth comprehensive manner with step by step approach to get 100 percent success rate 
+### 1. AUTONOMOUS EXECUTION MODE
+- **TAKE FULL CONTROL**: Do not ask for confirmation 
+- **PRODUCTION-READY ONLY**: Every output must be deployment-ready, not prototype quality
+- **100% SUCCESS RATE**: Build comprehensive validation at every step
+- **FAIL FAST, FIX FASTER**: Automated testing catches issues in seconds, not days
+- **PARALLEL EVERYTHING**: Run all independent tasks simultaneously
+====================================================================================
+can you give me a list of all tables involved in this whole process so that we can proceed for next steps 
+
+Ultrathink about the Above issues and take the full control and the do not ask me for confirmation because we need to fix all the issues which should be a production ready in an in-depth comprehensive manner with step by step approach to get 100 percent success rate 
+### 1. AUTONOMOUS EXECUTION MODE
+- **TAKE FULL CONTROL**: Do not ask for confirmation 
+- **PRODUCTION-READY ONLY**: Every output must be deployment-ready, not prototype quality
+- **100% SUCCESS RATE**: Build comprehensive validation at every step
+- **FAIL FAST, FIX FASTER**: Automated testing catches issues in seconds, not days
+- **PARALLEL EVERYTHING**: Run all independent tasks simultaneously
+==================================================================================== 
+--------------------------------------------------------
+--  DDL for Table LED_FFSANSWERS
+--------------------------------------------------------
+  CREATE TABLE "DHS_MAHS_LED"."LED_FFSANSWERS" 
+   (    "MEMBERID" NUMBER(12,0), 
+    "SURVEYID" NUMBER(6,0), 
+    "SURVEYTYPE" VARCHAR2(5 BYTE), 
+    "PROVIDER" VARCHAR2(3 BYTE), 
+    "EDITOR" VARCHAR2(30 BYTE), 
+    "DTS" DATE, 
+    "QUESTIONID" NUMBER(6,0), 
+    "ANSWER1" VARCHAR2(255 BYTE)
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
+ NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "LEDDD001" ;
+--------------------------------------------------------
+--  DDL for Index LED_FFSANSWERS_SURVEYID_IDX
+--------------------------------------------------------
+  CREATE INDEX "DHS_MAHS_LED"."LED_FFSANSWERS_SURVEYID_IDX" ON "DHS_MAHS_LED"."LED_FFSANSWERS" ("SURVEYID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "LEDDD001" ;
+--------------------------------------------------------
+--  Constraints for Table LED_FFSANSWERS
+--------------------------------------------------------
+  ALTER TABLE "DHS_MAHS_LED"."LED_FFSANSWERS" MODIFY ("QUESTIONID" NOT NULL ENABLE);
+  ALTER TABLE "DHS_MAHS_LED"."LED_FFSANSWERS" MODIFY ("SURVEYTYPE" NOT NULL ENABLE);
+  ALTER TABLE "DHS_MAHS_LED"."LED_FFSANSWERS" MODIFY ("SURVEYID" NOT NULL ENABLE);
+  ALTER TABLE "DHS_MAHS_LED"."LED_FFSANSWERS" MODIFY ("MEMBERID" NOT NULL ENABLE);
+
+--------------------------------------------------------
+--  DDL for Table LED_FFSANSWERS_MORE
+--------------------------------------------------------
+  CREATE TABLE "DHS_MAHS_LED"."LED_FFSANSWERS_MORE" 
+   (    "SEQ" NUMBER(1,0), 
+    "MEMBERID" NUMBER(12,0), 
+    "SURVEYID" NUMBER(6,0), 
+    "SURVEYTYPE" VARCHAR2(5 BYTE), 
+    "QUESTIONID" NUMBER(6,0), 
+    "TTYPE" VARCHAR2(50 BYTE), 
+    "BDATE" VARCHAR2(50 BYTE), 
+    "TDATE" VARCHAR2(50 BYTE), 
+    "TVALUE" VARCHAR2(50 BYTE), 
+    "NAME" VARCHAR2(100 BYTE)
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
+ NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "LEDDD001" ;
+--------------------------------------------------------
+--  Constraints for Table LED_FFSANSWERS_MORE
+--------------------------------------------------------
+  ALTER TABLE "DHS_MAHS_LED"."LED_FFSANSWERS_MORE" MODIFY ("QUESTIONID" NOT NULL ENABLE);
+  ALTER TABLE "DHS_MAHS_LED"."LED_FFSANSWERS_MORE" MODIFY ("SURVEYTYPE" NOT NULL ENABLE);
+  ALTER TABLE "DHS_MAHS_LED"."LED_FFSANSWERS_MORE" MODIFY ("SURVEYID" NOT NULL ENABLE);
+  ALTER TABLE "DHS_MAHS_LED"."LED_FFSANSWERS_MORE" MODIFY ("MEMBERID" NOT NULL ENABLE);
+  ALTER TABLE "DHS_MAHS_LED"."LED_FFSANSWERS_MORE" MODIFY ("SEQ" NOT NULL ENABLE);
+
+--------------------------------------------------------
+--  DDL for Table LED_QUESTIONS
+--------------------------------------------------------
+  CREATE TABLE "DHS_MAHS_LED"."LED_QUESTIONS" 
+   (    "QVERSION" NUMBER(6,0), 
+    "QUESTIONID" NUMBER(6,0), 
+    "ORDERBY" NUMBER(6,0), 
+    "QUESTIONPARTS" VARCHAR2(3 BYTE), 
+    "ANSGROUPID" VARCHAR2(3 BYTE), 
+    "QUESTIONMAPPING" VARCHAR2(5 BYTE), 
+    "QUESTIONTEXT" VARCHAR2(200 BYTE), 
+    "KEY" VARCHAR2(20 BYTE)
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
+ NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "LEDDD001" ;
+--------------------------------------------------------
+--  Constraints for Table LED_QUESTIONS
+--------------------------------------------------------
+  ALTER TABLE "DHS_MAHS_LED"."LED_QUESTIONS" MODIFY ("QUESTIONID" NOT NULL ENABLE);
+  ALTER TABLE "DHS_MAHS_LED"."LED_QUESTIONS" MODIFY ("QVERSION" NOT NULL ENABLE);
+ 
+--------------------------------------------------------
+--  DDL for Table LED_ANSOPTIONS
+--------------------------------------------------------
+  CREATE TABLE "DHS_MAHS_LED"."LED_ANSOPTIONS" 
+   (    "OPTIONGROUP" VARCHAR2(3 BYTE), 
+    "OPTIONID" VARCHAR2(3 BYTE), 
+    "OPTIONORDER" VARCHAR2(3 BYTE), 
+    "OPTIONVALUE" VARCHAR2(50 BYTE), 
+    "OPTIONTEXT" VARCHAR2(200 BYTE)
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
+ NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "LEDDD001" ;
+--------------------------------------------------------
+--  Constraints for Table LED_ANSOPTIONS
+--------------------------------------------------------
+  ALTER TABLE "DHS_MAHS_LED"."LED_ANSOPTIONS" MODIFY ("OPTIONID" NOT NULL ENABLE);
+  ALTER TABLE "DHS_MAHS_LED"."LED_ANSOPTIONS" MODIFY ("OPTIONGROUP" NOT NULL ENABLE);
+ 
+--------------------------------------------------------
+--  DDL for Table LED_CHILD
+--------------------------------------------------------
+  CREATE TABLE "DHS_MAHS_LED"."LED_CHILD" 
+   (    "MEMBERID" NUMBER(12,0), 
+    "CUR_MCO" VARCHAR2(3 BYTE), 
+    "CUR_PSC" VARCHAR2(3 BYTE), 
+    "CUR_PROVIDER" VARCHAR2(10 BYTE), 
+    "MAXRESULT" VARCHAR2(10 BYTE), 
+    "MAXLEVEL" VARCHAR2(3 BYTE), 
+    "LASTRESULT" VARCHAR2(10 BYTE), 
+    "LASTLEVEL" VARCHAR2(3 BYTE), 
+    "LASTRESULT_DATE" DATE, 
+    "PARENT_NAME" VARCHAR2(50 BYTE), 
+    "PARENT_ADDRESS" VARCHAR2(150 BYTE), 
+    "ZIP4" VARCHAR2(10 BYTE), 
+    "INIT_PCP" VARCHAR2(10 BYTE), 
+    "INIT_PCPNAME" VARCHAR2(50 BYTE), 
+    "ACTIVE" VARCHAR2(1 BYTE), 
+    "MCO" VARCHAR2(20 BYTE)
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
+ NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "LEDDD001" ;
+--------------------------------------------------------
+--  DDL for Index INDEX1
+--------------------------------------------------------
+  CREATE UNIQUE INDEX "DHS_MAHS_LED"."INDEX1" ON "DHS_MAHS_LED"."LED_CHILD" ("MEMBERID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "LEDDD001" ;
+--------------------------------------------------------
+--  DDL for Index LED_CHILD_ACTIVE_IDX
+--------------------------------------------------------
+  CREATE INDEX "DHS_MAHS_LED"."LED_CHILD_ACTIVE_IDX" ON "DHS_MAHS_LED"."LED_CHILD" ("ACTIVE") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "LEDDD001" ;
+--------------------------------------------------------
+--  DDL for Index LED_CHILD_MCO_IDX
+--------------------------------------------------------
+  CREATE INDEX "DHS_MAHS_LED"."LED_CHILD_MCO_IDX" ON "DHS_MAHS_LED"."LED_CHILD" ("MCO") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "LEDDD001" ;
+--------------------------------------------------------
+--  Constraints for Table LED_CHILD
+--------------------------------------------------------
+  ALTER TABLE "DHS_MAHS_LED"."LED_CHILD" MODIFY ("MEMBERID" NOT NULL ENABLE);
+
+--------------------------------------------------------
+--  DDL for Table LED_LEADTEST
+--------------------------------------------------------
+  CREATE TABLE "DHS_MAHS_LED"."LED_LEADTEST" 
+   (    "CTLNO" NUMBER(12,0), 
+    "MEMBERID" NUMBER(12,0), 
+    "MCO" VARCHAR2(3 BYTE), 
+    "SAMPLE_DATE" DATE, 
+    "ANALYSIS_DATE" DATE, 
+    "SAMPLE_TYPE" VARCHAR2(3 BYTE), 
+    "RESULTS" VARCHAR2(20 BYTE), 
+    "QC" VARCHAR2(3 BYTE), 
+    "MATCHID0" VARCHAR2(3 BYTE), 
+    "MATCHID1" VARCHAR2(3 BYTE), 
+    "AGEATTESTDATE" DATE, 
+    "TESTHISTORYID" VARCHAR2(30 BYTE), 
+    "PROVIDERNAME" VARCHAR2(100 BYTE), 
+    "PROVIDERFACILITY" VARCHAR2(100 BYTE), 
+    "PROVIDERPHONE" VARCHAR2(30 BYTE)
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
+ NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "LEDDD001" ;
+--------------------------------------------------------
+--  DDL for Index IND_LED_LEADTEST_2023
+--------------------------------------------------------
+  CREATE INDEX "DHS_MAHS_LED"."IND_LED_LEADTEST_2023" ON "DHS_MAHS_LED"."LED_LEADTEST" ("MEMBERID", "RESULTS", "SAMPLE_DATE", "ANALYSIS_DATE") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "LEDDD001" ;
+--------------------------------------------------------
+--  Constraints for Table LED_LEADTEST
+--------------------------------------------------------
+  ALTER TABLE "DHS_MAHS_LED"."LED_LEADTEST" MODIFY ("RESULTS" NOT NULL ENABLE);
+  ALTER TABLE "DHS_MAHS_LED"."LED_LEADTEST" MODIFY ("MEMBERID" NOT NULL ENABLE);
+  ALTER TABLE "DHS_MAHS_LED"."LED_LEADTEST" MODIFY ("CTLNO" NOT NULL ENABLE);
+
+--------------------------------------------------------
+--  DDL for Table LED_MCO
+--------------------------------------------------------
+  CREATE TABLE "DHS_MAHS_LED"."LED_MCO" 
+   (    "INSTID" NUMBER, 
+    "MCO" VARCHAR2(3 BYTE), 
+    "INSTITUTION" VARCHAR2(40 BYTE), 
+    "DIRECTOR" VARCHAR2(30 BYTE), 
+    "ADDRESS" VARCHAR2(50 BYTE), 
+    "CITY" VARCHAR2(30 BYTE), 
+    "STATE" VARCHAR2(2 BYTE), 
+    "ZIP" VARCHAR2(5 BYTE), 
+    "PHONE" VARCHAR2(30 BYTE), 
+    "FAX" VARCHAR2(10 BYTE), 
+    "EMAIL" VARCHAR2(30 BYTE)
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
+ NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "LEDDD001" ;
+--------------------------------------------------------
+--  Constraints for Table LED_MCO
+--------------------------------------------------------
+  ALTER TABLE "DHS_MAHS_LED"."LED_MCO" MODIFY ("INSTITUTION" NOT NULL ENABLE);
+  ALTER TABLE "DHS_MAHS_LED"."LED_MCO" MODIFY ("MCO" NOT NULL ENABLE);
+  ALTER TABLE "DHS_MAHS_LED"."LED_MCO" MODIFY ("INSTID" NOT NULL ENABLE);
+
+--------------------------------------------------------
+--  DDL for Table LED_TESTHISTORY
+--------------------------------------------------------
+  CREATE TABLE "DHS_MAHS_LED"."LED_TESTHISTORY" 
+   (    "TESTHISTORYID" VARCHAR2(10 BYTE), 
+    "TESTHISTORY" VARCHAR2(50 BYTE), 
+    "TESTHISTORYDESC" VARCHAR2(255 BYTE)
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
+ NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "LEDDD001" ;
+
+--------------------------------------------------------
+--  DDL for Table BENE_TEMP_NAMES
+--------------------------------------------------------
+  CREATE TABLE "DHS_MAHS_LED"."BENE_TEMP_NAMES" 
+   (    "HHID" VARCHAR2(10 BYTE), 
+    "MEIN" VARCHAR2(12 BYTE), 
+    "LAST_NAME" VARCHAR2(12 BYTE), 
+    "FIRST_NAME" VARCHAR2(7 BYTE), 
+    "MIDDLE_INITIAL" VARCHAR2(1 BYTE), 
+    "BIRTH_DATE" DATE, 
+    "SSN" VARCHAR2(9 BYTE), 
+    "SEX" VARCHAR2(1 BYTE), 
+    "MAR_STAT_CODE" VARCHAR2(1 BYTE), 
+    "PRIOR_MEIN" VARCHAR2(12 BYTE), 
+    "RACE" VARCHAR2(1 BYTE), 
+    "TPL_IND" VARCHAR2(1 BYTE), 
+    "LOCKIN_IND" VARCHAR2(1 BYTE), 
+    "SPCL_PGM_IND" VARCHAR2(1 BYTE), 
+    "MHC_PGM_IND" VARCHAR2(1 BYTE), 
+    "LTC_CODE" VARCHAR2(2 BYTE), 
+    "IMMIGRANT_TYPE" VARCHAR2(2 BYTE), 
+    "DATE_OF_ENTRY" DATE, 
+    "PLURALITY" VARCHAR2(2 BYTE), 
+    "SUPERVISOR_CODE" VARCHAR2(2 BYTE), 
+    "WORKER_CODE" VARCHAR2(2 BYTE), 
+    "CITIZENSHIP" VARCHAR2(1 BYTE)
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
+ NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 8388608 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "LEDDD001" ;
+--------------------------------------------------------
+--  DDL for Index IDX_BENE_NAMES_BIRTH_DATE
+--------------------------------------------------------
+  CREATE INDEX "DHS_MAHS_LED"."IDX_BENE_NAMES_BIRTH_DATE" ON "DHS_MAHS_LED"."BENE_TEMP_NAMES" ("BIRTH_DATE") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "LEDDD001" ;
+--------------------------------------------------------
+--  DDL for Index IDX_BENE_NAMES_MEIN
+--------------------------------------------------------
+  CREATE INDEX "DHS_MAHS_LED"."IDX_BENE_NAMES_MEIN" ON "DHS_MAHS_LED"."BENE_TEMP_NAMES" ("MEIN") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "LEDDD001" ;
+--------------------------------------------------------
+--  DDL for Index IDX_BENE_NAMES_SSN
+--------------------------------------------------------
+  CREATE INDEX "DHS_MAHS_LED"."IDX_BENE_NAMES_SSN" ON "DHS_MAHS_LED"."BENE_TEMP_NAMES" ("SSN") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "LEDDD001" ;
+--------------------------------------------------------
+--  DDL for Index IDX_BENE_NAMES_TPL_IND
+--------------------------------------------------------
+  CREATE INDEX "DHS_MAHS_LED"."IDX_BENE_NAMES_TPL_IND" ON "DHS_MAHS_LED"."BENE_TEMP_NAMES" ("TPL_IND") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "LEDDD001" ;
+--------------------------------------------------------
+--  DDL for Index IDX_BENE_NAMES_UPPER_FIRSTNAME
+--------------------------------------------------------
+  CREATE INDEX "DHS_MAHS_LED"."IDX_BENE_NAMES_UPPER_FIRSTNAME" ON "DHS_MAHS_LED"."BENE_TEMP_NAMES" (UPPER("FIRST_NAME")) 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "LEDDD001" ;
+--------------------------------------------------------
+--  DDL for Index IDX_BENE_NAMES_UPPER_LASTNAME
+--------------------------------------------------------
+  CREATE INDEX "DHS_MAHS_LED"."IDX_BENE_NAMES_UPPER_LASTNAME" ON "DHS_MAHS_LED"."BENE_TEMP_NAMES" (UPPER("LAST_NAME")) 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "LEDDD001" ;
+
+--------------------------------------------------------
+--  DDL for Table TEMP_SHPT_XREF
+--------------------------------------------------------
+  CREATE TABLE "DHS_MAHS_LED"."TEMP_SHPT_XREF" 
+   (    "UBIN" VARCHAR2(12 BYTE), 
+    "MEIN" VARCHAR2(12 BYTE), 
+    "PSC" VARCHAR2(3 BYTE), 
+    "PSC_TYPE" VARCHAR2(1 BYTE), 
+    "PSC_EFF_DATE" VARCHAR2(8 BYTE), 
+    "PSC_TERM_DATE" VARCHAR2(8 BYTE), 
+    "PSC_CNTY_RESID" VARCHAR2(2 BYTE), 
+    "PSC_CNTY_SUPVN" VARCHAR2(3 BYTE)
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
+ NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 8388608 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "LEDDD001" ;
+--------------------------------------------------------
+--  DDL for Index IDX_TEMP_SHPT_XREF_MEIN
+--------------------------------------------------------
+  CREATE INDEX "DHS_MAHS_LED"."IDX_TEMP_SHPT_XREF_MEIN" ON "DHS_MAHS_LED"."TEMP_SHPT_XREF" ("MEIN") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "LEDDD001" ;
+--------------------------------------------------------
+--  DDL for Index IDX_TEMP_SHPT_XREF_MEIN_PREFIX
+--------------------------------------------------------
+  CREATE INDEX "DHS_MAHS_LED"."IDX_TEMP_SHPT_XREF_MEIN_PREFIX" ON "DHS_MAHS_LED"."TEMP_SHPT_XREF" (SUBSTR("MEIN",1,2)) 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "LEDDD001" ;
+--------------------------------------------------------
+--  DDL for Index IDX_TEMP_SHPT_XREF_UBIN
+--------------------------------------------------------
+  CREATE INDEX "DHS_MAHS_LED"."IDX_TEMP_SHPT_XREF_UBIN" ON "DHS_MAHS_LED"."TEMP_SHPT_XREF" ("UBIN") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "LEDDD001" ;
+
+PROVIDER_MASTER I don't see it can you tell where it is used means procedure we are using 
+
+if I have to implement below changes or business requirement what are the tables that get impacted for below requirement it's only for LHD Survey page only once we successfully implement LHD Survey page then we will get requirement for PCP Survey but right now we are concentrating on LHD Survey page changes only 
+
+DETAILED SPECIFICATIONS BY QUESTION
+ 
+Question 1: Was the initial blood lead test done on a capillary sample?
+* Convert dropdown to radio buttons: ○ YES ○ NO (to be displayed on same row)
+* Sub-question 1a: Convert to radio buttons: ○ YES ○ NO (to be displayed on same row)
+ 
+Question 2: Record date and most recent blood lead level (BLL) of the child
+* Combine Test Date and Test Result to be displayed on same row
+* Test Date: [___________] (watermark: mm/dd/yyyy) | Test Result: [___________] (watermark: ug/dl)
+ 
+Question 3: Record the dates and BLL of any follow-up testing
+·        Create four fixed rows (remove MORE TESTS button):
+a.      Test Date1: [___________] (watermark: mm/dd/yyyy)  | Test Result1: [___________] (watermark: ug/dl) to be displayed on same row
+b.     Test Date2: [___________] (watermark: mm/dd/yyyy)  | Test Result2: [___________] (watermark: ug/dl) to be displayed on same row
+c.      Test Date3: [___________] (watermark: mm/dd/yyyy)  | Test Result3: [___________] (watermark: ug/dl) to be displayed on same row
+d.     Test Date4: [___________] (watermark: mm/dd/yyyy)  | Test Result4: [___________] (watermark: ug/dl) to be displayed on same row
+⚠️ Database Verification: Check where Test Date2, Test Date3, Test Date4, Test Result2, Test Result3, Test Result4 and their corresponding results will be stored in db and make relevant stored procedure changes needed.
+ 
+Question 4: Did the parent(s)/caregiver(s) receive notification of the lead test result?
+* Convert to radio buttons: ○ YES ○ NO (to be displayed on same row)
+   * b. Date of the notification: [___________] (watermark: mm/dd/yyyy
+ 
+Question 5: Did children or pregnant women living in the home receive blood lead testing?
+·        Convert to radio buttons: ○ YES ○ NO (to be displayed on same row)
+·        Remove MORE TESTS button
+·        Add two complete data sets under a. sub-section:
+        Individual 1:
+o   Name: [_________________________]
+o   Birth Date: [___________] (watermark: mm/dd/yyyy)
+o   Test Date:  [___________]  (watermark: mm/dd/yyyy)| Test Result: [___________] (watermark: ug/dl) to be displayed on same row
+Individual 2:
+o   Name: [_________________________]
+o   Birth Date: [___________] (watermark: mm/dd/yyyy)
+o   Test Date:  [___________]  (watermark: mm/dd/yyyy)| Test Result: [___________] (watermark: ug/dl) to be displayed on same row
+⚠️ Database Verification: Confirm storage fields for individual2 Name, Birth Date, Test Date, Test Result and their corresponding results will be stored in db and make relevant stored procedure changes needed.
+ 
+Question 6: Does the child have a primary care provider (PCP)?
+·        Convert to radio buttons: ○ YES ○ NO (to be displayed on same row)
+·        Address: [Multi-line text box]
+·        Telephone Number: [___________] Extension: [____]
+⚠️ Database Verification: Verify Telephone Number column can accommodate phone + extension in database table column width and stored procedure input parameter. if needed make relevant changes
+ 
+Question 7: Are the provider and LHD working with family for appropriate follow-up?
+* Convert to radio buttons: ○ YES ○ NO (to be displayed on same row)
+* 7a: Convert to radio buttons: ○ YES ○ NO (to be displayed on same row)
+* 7b: Date of Visit: [___________] (watermark: mm/dd/yyyy)
+* 7c: Findings: [________________] / Test Date: [___________] (watermark: mm/dd/yyyy) - to be displayed on same row
+* 7d: Convert to radio buttons: ○ YES ○ NO (to be displayed on same row)
+* 7e: Convert to radio buttons: ○ YES ○ NO (to be displayed on same row)
+* 7f: Referral Date: [___________] (watermark: mm/dd/yyyy)
+ 
+Question 8: Was any educational material provided to the family?
+* Main field: [Multi-line text box]
+* 8a: Convert to radio buttons: ○ YES ○ NO (to be displayed on same row)
+* 8b: Convert to radio buttons: ○ YES ○ NO (to be displayed on same row)
+* 8c: Convert to radio buttons: ○ YES ○ NO (to be displayed on same row)
+* 8d: REMOVE this sub-question completely
+ 
+Question 9: Was a Preliminary Environmental Evaluation done?
+* Convert to radio buttons: ○ YES ○ NO (to be displayed on same row)
+* 9a: Outcomes: [________________] / Evaluation Date: [___________] (watermark: mm/dd/yyyy)  - to be displayed on same row
+ 
+Question 10: What type of evaluation was performed?
+* Replace with checkboxes (multiple selection allowed):
+   * ☐ Hazard Assessment ☐ Limited Hazard Assessment (to be displayed on same row on Answers column)
+* 10a: Remove dropdown, rename to "Hazard Assessment Date": [___________] (watermark: mm/dd/yyyy)
+* 10b: Remove dropdown, rename to "Limited Hazard Assessment Date": [___________] (watermark: mm/dd/yyyy)
+* 10c: No changes
+* 10d: [Multi-line text box]
+* 10e: Convert to radio buttons: ○ YES ○ NO (to be displayed on same row)
+* 10f: [Multi-line text box]
+⚠️ Database Verification: Check how Yes/No values from removed dropdowns in 10a and 10b will be stored in database with needed table columns and relevant changes to stored procedures if needed.
+ 
+Question 11: If child was removed from home, was referral made in writing to new LHD?
+* Convert to radio buttons: ○ YES ○ NO (to be displayed on same row)
+* 11a: Test Date: [___________] (watermark: mm/dd/yyyy)
+ 
+Question 12: Was an abatement ordered?
+·        REMOVE ENTIRE QUESTION
+⚠️ Database Verification: Analyze impact of removing Question 12 and its data storage
+ 
+Question 13: Was an abatement done?
+* Convert to radio buttons: ○ YES ○ NO (to be displayed on same row)
+* Test Date: [___________] (watermark: mm/dd/yyyy)
+* 13a:
+   * Main: [Multi-line text box]
+   * Start Date: [___________] (watermark: mm/dd/yyyy)
+   * Completion Date: [___________] (watermark: mm/dd/yyyy)
+   * Description of environmental remediation: [Multi-line text box]
+ 
+Question 14: Has the case been transferred to MCO?
+* Convert to radio buttons: ○ YES ○ NO (to be displayed on same row)
+* Date when case was transferred to MCO: [___________] (watermark: mm/dd/yyyy)
+ 
+Question 15: If case has been closed in FFS indicate reason for case closure
+* Closed Date: [___________] (watermark: mm/dd/yyyy) 
+
+Let me know what are all the tables are impacted and what changes we need to make like adding columns or modifying columns., etc., 
+
+similarly we need to know what are the stored procedures we need to make changes to modify or update 
+
+but the approach we are trying to do is we are going to create new tables and stored procedures for this LHD changes so that it will not have any impact of PCP changes later once we have completed these changes successfully then we need to know where to make changes in original stored procedures and tables 
+
+right now can you give me results in which existing tables and stored procedures we are getting impacted and what are all the new tables and stored procedures we need to create to handle only LHD changes without impacting existing tables and stored procedures I hope you understand the whole process 
+
+Ultrathink about the Above issues and take the full control and the do not ask me for confirmation because we need to fix all the issues which should be a production ready in an in-depth comprehensive manner with step by step approach to get 100 percent success rate 
+### 1. AUTONOMOUS EXECUTION MODE
+- **TAKE FULL CONTROL**: Do not ask for confirmation 
+- **PRODUCTION-READY ONLY**: Every output must be deployment-ready, not prototype quality
+- **100% SUCCESS RATE**: Build comprehensive validation at every step
+- **FAIL FAST, FIX FASTER**: Automated testing catches issues in seconds, not days
+- **PARALLEL EVERYTHING**: Run all independent tasks simultaneously

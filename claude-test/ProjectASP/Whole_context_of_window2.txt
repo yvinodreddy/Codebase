@@ -1,577 +1,81 @@
-can you generate a list of stored procedure we are using in this code where we are making a server side call we are making 
+Looking at your FFS survey system comprehensively, I've identified every database table that's involved in your entire survey workflow process. Let me provide you with the complete inventory organized by their functional role in your application, which will help us understand the data architecture as we move forward with fixing the issues.
 
-Ultrathink about the Above issues and take the full control and the do not ask me for confirmation because we need to fix all the issues which should be a production ready in an in-depth comprehensive manner with step by step approach to get 100 percent success rate 
-### 1. AUTONOMOUS EXECUTION MODE
-- **TAKE FULL CONTROL**: Do not ask for confirmation 
-- **PRODUCTION-READY ONLY**: Every output must be deployment-ready, not prototype quality
-- **100% SUCCESS RATE**: Build comprehensive validation at every step
-- **FAIL FAST, FIX FASTER**: Automated testing catches issues in seconds, not days
-- **PARALLEL EVERYTHING**: Run all independent tasks simultaneously 
-====================================================================================
-give me the list of all stored procedures then we can keep moving on to next steps 
-==================================================================================== 
-create or replace PROCEDURE LEAD_LOAD_PCPLIST_SP 
-(
-   vKEY IN varchar2,
-   RefCursor OUT SYS_REFCURSOR
-)
-AS
-BEGIN
-    IF vKEY is null THEN
-      Open RefCursor for
-      SELECT '---' as name, '0' as key
-      FROM dual
-      UNION
-      SELECT prov_name || ' - ' || provid as name, provid as key
-      FROM PROVIDER_MASTER
-      WHERE PROVIDER_TYPE =  '20'
-        AND SPECIALTY_CODE1 in ('370', '080', '082', '110', '372', '374')
-      ORDER BY name;
-   ELSIF TRIM(UPPER(vKEY)) = 'PRINT' THEN
-      Open RefCursor for
-      SELECT ''''|| provid ||','|| REPLACE(prov_name,',',' ') ||','|| REPLACE(address1,',',' ') ||','|| city ||','|| state ||','''|| zip ||','|| phone
-      FROM PROVIDER_MASTER
-      WHERE PROVIDER_TYPE =  '20'
-        AND SPECIALTY_CODE1 in ('370', '080', '082', '110', '372', '374')
-      ORDER BY prov_name;
-   ELSE
-      Open RefCursor for
-      SELECT prov_name as name, address1 as address, city, state, zip, phone, provid as key
-      FROM PROVIDER_MASTER
-      WHERE provid = vKEY
-        AND PROVIDER_TYPE =  '20'
-        AND SPECIALTY_CODE1 in ('370', '080', '082', '110', '372', '374')
-      ORDER BY name;
-    END IF;
+COMPLETE TABLE INVENTORY FOR FFS SURVEY SYSTEM
+Primary Survey Tables (Core Business Logic)
+The heart of your survey system revolves around three main tables that store the actual survey data. The LED_SURVEYMASTER table acts as the parent record for each survey instance, tracking who created it, when it was created, and its current status. This table uses the surveyid as its primary key and maintains the lifecycle state of each survey through the surveyend field.
 
-END LEAD_LOAD_PCPLIST_SP; 
-create or replace PROCEDURE LEAD_FFSSURVEY_PCP_SP 
-(   
-    vQVID IN varchar2,
-    vMASTER IN varchar2,
-    RefCursor OUT SYS_REFCURSOR
-)
-AS 
-    v_sql_statement VARCHAR2(4000);
-BEGIN
-    -- Build the SQL statement based on the condition
-    IF vMASTER = 0 THEN  
-        v_sql_statement := 'SELECT a.questionid, a.orderby, a.questionparts, a.ansgroupid, ' ||
-                          'a.questiontext, '' '' as answer1 ' ||
-                          'FROM led_questions a ' ||
-                          'WHERE a.qversion = ''' || vQVID || ''' ' ||
-                          'ORDER BY TO_NUMBER(a.orderby)';
-    ELSE
-        v_sql_statement := 'SELECT a.questionid, a.orderby, a.questionparts, a.ansgroupid, ' ||
-                          'a.questiontext, CASE WHEN c.answer1 IS NULL THEN '' '' ELSE c.answer1 END as answer1 ' ||
-                          'FROM led_questions a, led_surveymaster b, led_ffsanswers c ' ||
-                          'WHERE b.surveyid = ''' || vMASTER || ''' ' ||
-                          'AND a.qversion = b.qversion ' ||
-                          'AND b.surveyid = c.surveyid ' ||
-                          'AND a.questionid = c.questionid ' ||
-                          'AND b.memberid = c.memberid ' ||
-                          'AND b.surveytype = ''PCP'' ' ||
-                          'AND c.surveytype = ''PCP'' ' ||
-                          'ORDER BY TO_NUMBER(a.orderby)';
-    END IF;
+The LED_FFSANSWERS table stores the actual responses to survey questions. Each row represents one answer to one question, linked back to the survey master through the surveyid. This design allows flexibility in handling different question types and makes it easy to track changes over time through the dts (timestamp) field.
 
-    -- Print the SQL statement
-    DBMS_OUTPUT.PUT_LINE('=== SQL STATEMENT TO BE EXECUTED ===');
-    DBMS_OUTPUT.PUT_LINE(v_sql_statement);
-    DBMS_OUTPUT.PUT_LINE('=====================================');
+The LED_FFSANSWERS_MORE table handles the additional data that users enter through popup windows. This separation of concerns keeps the main answer table clean while still allowing for extended data collection when needed.
 
-    -- Execute the SQL statement
-    OPEN RefCursor FOR v_sql_statement;
+sql
+LED_SURVEYMASTER        -- Survey header/master records
+LED_FFSANSWERS         -- Main survey answers
+LED_FFSANSWERS_MORE    -- Additional popup window data
+LED_QUESTIONS          -- Survey question definitions
+LED_ANSOPTIONS         -- Dropdown answer options
+Member and Provider Tables
+These tables contain the reference data about the people involved in the survey process. The LED_CHILD table stores member information and links to their primary care provider. The PROVIDER_MASTER table contains the complete provider directory that populates your dropdown lists.
 
-END LEAD_FFSSURVEY_PCP_SP; 
-create or replace PROCEDURE LEAD_FFSSURVEY_LHD_SP
-(   
-    vQVID IN varchar2,
-    vMASTER IN varchar2,
-    RefCursor OUT SYS_REFCURSOR
-)
-AS 
-    v_sql_statement VARCHAR2(4000);
-BEGIN
-    -- Build the SQL statement based on the condition
-    IF vMASTER = 0 THEN  
-        v_sql_statement := 'SELECT a.questionid, a.orderby, a.questionparts, a.ansgroupid, ' ||
-                          'a.questiontext, '' '' as answer1 ' ||
-                          'FROM led_questions a ' ||
-                          'WHERE a.qversion = ''' || vQVID || ''' ' ||
-                          'ORDER BY TO_NUMBER(a.orderby)';
-    ELSE
-        v_sql_statement := 'SELECT a.questionid, a.orderby, a.questionparts, a.ansgroupid, ' ||
-                          'a.questiontext, CASE WHEN c.answer1 IS NULL THEN '' '' ELSE c.answer1 END as answer1 ' ||
-                          'FROM led_questions a, led_surveymaster b, led_ffsanswers c ' ||
-                          'WHERE b.surveyid = ''' || vMASTER || ''' ' ||
-                          'AND a.qversion = b.qversion ' ||
-                          'AND b.surveyid = c.surveyid ' ||
-                          'AND a.questionid = c.questionid ' ||
-                          'AND b.memberid = c.memberid ' ||
-                          'AND b.surveytype = ''LHD'' ' ||
-                          'AND c.surveytype = ''LHD'' ' ||
-                          'ORDER BY TO_NUMBER(a.orderby)';
-    END IF;
+sql
+LED_CHILD              -- Member/child information
+PROVIDER_MASTER        -- Provider directory and details
+Lead Testing Tables
+The lead testing subsystem has its own set of tables that track medical test results. These appear in the survey form to provide context about the member's medical history.
 
-    -- Print the SQL statement
-    DBMS_OUTPUT.PUT_LINE('=== SQL STATEMENT TO BE EXECUTED ===');
-    DBMS_OUTPUT.PUT_LINE(v_sql_statement);
-    DBMS_OUTPUT.PUT_LINE('=====================================');
+sql
+LED_LEADTEST           -- Lead test results
+LED_MCO                -- MCO (Managed Care Organization) mappings
+LED_TESTHISTORY        -- Test history tracking
+Cross-Reference and Demographic Tables
+These tables provide the demographic and identification cross-references needed to link members across different systems. What's particularly interesting here is that these tables use database links in non-production environments, which is likely contributing to some of your environment-specific issues.
 
-    -- Execute the SQL statement
-    OPEN RefCursor FOR v_sql_statement;
+sql
+BENE_TEMP_NAMES        -- Member demographic/birth data
+TEMP_SHPT_XREF         -- Member ID cross-reference (UBIN to MEIN mapping)
+System Tables
+Oracle's system tables that your procedures use for environment detection and configuration.
 
-END LEAD_FFSSURVEY_LHD_SP; 
-create or replace PROCEDURE LEAD_LOAD_FFS_MORE_SP 
-( vMEMBERID IN varchar2,  
-  vMASTER IN varchar2,
-  vReturn OUT varchar2
-)
-AS 
-CURSOR C_PCP IS
-  SELECT TO_CHAR(questionid)||'='||TO_CHAR(TTYPE)||'='||TO_CHAR(BDATE)||'='||TO_CHAR(TDATE)||'='||(CASE WHEN TVALUE is not null THEN TO_CHAR(TVALUE) ELSE ' ' END)||'='||TO_CHAR(NAME) FROM led_ffsanswers_more WHERE memberid=vMEMBERID AND surveyid=vMASTER AND surveytype='PCP' 
-  ORDER BY SEQ;
-CURSOR C_LHD IS
-  SELECT TO_CHAR(questionid)||'='||TO_CHAR(TTYPE)||'='||TO_CHAR(BDATE)||'='||TO_CHAR(TDATE)||'='||(CASE WHEN TVALUE is not null THEN TO_CHAR(TVALUE) ELSE ' ' END)||'='||TO_CHAR(NAME) FROM led_ffsanswers_more WHERE memberid=vMEMBERID AND surveyid=vMASTER AND surveytype='LHD' 
-  ORDER BY SEQ;  
-sTmp varchar2(100 BYTE);
-sStrP varchar2(400 BYTE);
-sStrL varchar2(400 BYTE);
-cnt number;
-j number;
-BEGIN
+sql
+V$DATABASE             -- Oracle system view for environment detection
+TABLE DEPENDENCY HIERARCHY
+Understanding how these tables relate to each other is crucial for maintaining data integrity. Here's the hierarchical structure of your data model:
 
-  ---dbms_session.set_nls('nls_date_format','''MM/DD/YYYY HH24:MI:SS''');
-open C_PCP;
+Level 1 - Master Records: The LED_SURVEYMASTER table sits at the top of the hierarchy. Every survey operation starts here, and this table controls the overall state of each survey.
 
-j := 1;
-loop
+Level 2 - Detail Records: The LED_FFSANSWERS and LED_FFSANSWERS_MORE tables depend on LED_SURVEYMASTER. They cannot exist without a parent survey record, and they're meaningless in isolation.
 
-  fetch C_PCP into sTmp;  -- get 1 record
-  exit when C_PCP%notfound;   -- is end of record
-  IF j=4 THEN         -- split the more1 with more2
-    sStrP := sStrP || '}';
-  END IF;
+Level 3 - Reference Data: The LED_QUESTIONS and LED_ANSOPTIONS tables provide the structure for surveys. These are relatively static and define what questions appear and what answers are available.
 
-  --cnt:=C_PCP%ROWCOUNT;
-  --dbms_output.put_line('sTmp=' || sTmp || '; cnt=' || cnt);
-  sStrP := sStrP ||sTmp ||';';  
-  j := j + 1;  
-end loop;
+Level 4 - External References: The PROVIDER_MASTER, LED_CHILD, and member demographic tables provide context but aren't strictly part of the survey transaction flow.
 
-close C_PCP;
-  ---dbms_output.put_line('sStrP=' || sStrP); 
+CRITICAL DATA INTEGRITY POINTS
+As we prepare to address the production issues, these are the critical data relationships that must be maintained:
 
-open C_LHD;
-j := 1;
-loop
+The surveyid field is the lynchpin of your entire system. It connects the master record to all answer records. The current method of generating these IDs using MAX() + 2 is problematic in a multi-user environment and needs immediate attention.
 
-  fetch C_LHD into sTmp;
-  exit when C_LHD%notfound;
-  IF j=4 THEN
-    sStrL := sStrL || '}';
-  END IF;
+The memberid field provides the person context. Every survey is tied to a specific member, and this relationship must be preserved across all operations.
 
-  sStrL := sStrL ||sTmp ||';';
-  j := j + 1;
-end loop;
-close C_LHD;
-  ---dbms_output.put_line('sStrL=' || sStrL);
-  vReturn := sStrP || '{' || sStrL;  
-END LEAD_LOAD_FFS_MORE_SP; 
-create or replace PROCEDURE LEAD_LOAD_FFS_PCP_SP 
-( vMEMBERID IN varchar2,  
-  vMASTER IN varchar2,
-  RefCursor OUT SYS_REFCURSOR
-)
-AS 
+The surveytype field (PCP or LHD) creates a logical partition in your data. The business rule that only one open survey of each type can exist per member is enforced through application logic but should ideally be enforced at the database level as well.
 
-BEGIN
+The qversion field (12 for PCP, 13 for LHD) links surveys to specific versions of questions. This versioning system allows for survey evolution over time without breaking historical data.
 
-   --- dbms_session.set_nls('nls_date_format','''MM/DD/YYYY HH24:MI:SS''');
-   Open RefCursor for
-   SELECT init_pcp, init_pcpname, surveyend, TO_CHAR(NVL(createdate,''),'MM/DD/YYYY') AS createdate, formbyname, formbynumber   
-   FROM led_child, led_surveymaster
-   WHERE led_child.memberid=led_surveymaster.memberid AND led_surveymaster.memberid=vMEMBERID 
-    AND led_surveymaster.surveyid=vMASTER AND led_surveymaster.surveyend <> '-1';
+ENVIRONMENT-SPECIFIC CONSIDERATIONS
+Your stored procedures show that certain tables behave differently across environments. In DEVE and TEST environments, the BENE_TEMP_NAMES and TEMP_SHPT_XREF tables are accessed through the @LED_DETL_LINK.WORLD database link, while in production they're accessed directly. This architectural decision likely reflects a need to isolate test data from production data, but it creates complexity that must be carefully managed.
 
-END LEAD_LOAD_FFS_PCP_SP; 
-create or replace PROCEDURE LEAD_FFSSURVEY_ALL_SP
-( 
-    vMEMBERID IN varchar2,  
-    RefCursor OUT SYS_REFCURSOR
-)
-AS 
-    v_sql_statement VARCHAR2(4000);
-BEGIN
-    -- Build the SQL statement
-    v_sql_statement := 'SELECT ' ||
-                      'distinct(a.surveyid), ' ||
-                      'TO_CHAR(NVL(b.dts,''''),''MM/DD/YYYY'') AS dates, ' ||
-                      'TO_CHAR(NVL(a.createdate,''''),''MM/DD/YYYY'') AS cdates, ' ||
-                      'a.formbyname AS provider, ' ||
-                      'CASE WHEN a.surveyend=1 THEN ''Completed'' ' ||
-                      'WHEN a.surveyend=-1 THEN ''Deleted'' ' ||
-                      'ELSE ''Open'' END as status, ' || 
-                      'a.surveytype || '' Survey'' as surveytype ' ||
-                      'FROM led_surveymaster a, led_ffsanswers b ' ||
-                      'WHERE Nvl(TO_CHAR(a.memberid),'''') = ''' || vMEMBERID || ''' ' ||
-                      'AND a.surveyid=b.surveyid ' ||
-                      'AND Nvl(TO_CHAR(b.memberid),'''') = ''' || vMEMBERID || ''' ' ||
-                      'AND a.surveyfor = ''FFS'' ' ||
-                      'AND a.surveytype IN (''PCP'', ''LHD'') ' ||
-                      'AND a.surveyend <> ''-1'' ' ||
-                      'ORDER BY a.surveyid DESC';
+MISSING TABLES OR POTENTIAL ISSUES
+Based on the stored procedure analysis, I notice there might be a discrepancy in one table name. The production version of LEAD_TEST_ALL_SP references "TEMP_SHPT_XRE" (without the F), while the TEST/DEVE version uses "TEMP_SHPT_XREF". This could be a typo in the stored procedure or might indicate different table names across environments, which would be a significant configuration management issue.
 
-    -- Print the SQL statement
-    DBMS_OUTPUT.PUT_LINE('=== SQL STATEMENT TO BE EXECUTED ===');
-    DBMS_OUTPUT.PUT_LINE(v_sql_statement);
-    DBMS_OUTPUT.PUT_LINE('=====================================');
+DATA VOLUME CONSIDERATIONS
+Looking at the table structures and query patterns, certain tables will grow continuously over time (LED_SURVEYMASTER, LED_FFSANSWERS, LED_LEADTEST), while others remain relatively static (LED_QUESTIONS, LED_ANSOPTIONS, PROVIDER_MASTER). This distinction is important for planning indexes, partitioning strategies, and archival processes.
 
-    -- Execute the SQL statement
-    OPEN RefCursor FOR v_sql_statement;
+This complete table inventory gives us the foundation to understand exactly what data structures we're working with. Each table plays a specific role in the survey workflow, and understanding these roles is essential as we move forward with resolving the stored procedure execution issues and implementing production-ready fixes. The relationships between these tables form a complex but logical data model that supports the entire FFS survey process from creation through completion.
 
-END LEAD_FFSSURVEY_ALL_SP; 
-create or replace PROCEDURE LEAD_ANDOPTIONS_SP 
-(  vGROUPID IN varchar2, 
-   RefCursor OUT SYS_REFCURSOR
-)
-AS
-BEGIN
-   ---dbms_session.set_nls('nls_date_format','''MM/DD/YYYY HH24:MI:SS''');
 
-  Open RefCursor for
-  SELECT optionvalue, optiontext
-  FROM led_ansoptions
-  WHERE optiongroup=vGROUPID
-  ORDER BY TO_NUMBER(optionorder);
+-------------------------------------------------------- -- DDL for Table LED_SURVEYMASTER -------------------------------------------------------- CREATE TABLE "DHS_MAHS_LED"."LED_SURVEYMASTER" ( "SURVEYID" NUMBER(12,0), "SURVEYTYPE" VARCHAR2(5 BYTE), "SURVEYFOR" VARCHAR2(5 BYTE)
 
-END LEAD_ANDOPTIONS_SP; 
-create or replace PROCEDURE LEAD_SAVE_FFS_SURVEY_SP 
-( vMEMBERID IN varchar2,  
-  vMASTER IN varchar2,
-  vANS IN varchar2,
-  vTYPE IN varchar2,
-  vUSER IN varchar2,
-  vSTATUS IN varchar2,
-  vDATE IN varchar2,
-  vQV IN varchar2,
-  vPCPNAME IN varchar2,
-  vPCPID IN varchar2,
-  vFORMBYNAME IN varchar2,
-  vFORMBYNUMBER IN varchar2,
-  vReturn OUT varchar2
-)
-AS 
-seq NUMBER(8,0);
+pasted
 
-s VARCHAR2(100);
-n VARCHAR2(100);
-m VARCHAR2(100);
---t VARCHAR2(1000);
-i NUMBER(3,0);
-cnt NUMBER(3,0);
-x NUMBER (1,0);
-dt VARCHAR2(100);
-BEGIN
---t := '1,NO;2,NO;3,Capillary;4,05/01/2019;5,Capillary;6,05/01/2019;7,1;8,;9,;10,;11,;12,;13,;14,;15,;16,;17,;18,;19,;20,;21,;22,;23,;24,;25,;26,;27,;28,;29,;30,;31,;32,;33,;34,;35,;36,;37,;38,;39,;40,;41,;42,;43,;44,;45,;46,;47,;48,;49,;50,;51,NO;52,NO;53,NO;';
-SELECT REGEXP_COUNT(vANS, '[^;]+',1,'i') into cnt from dual;  
-  ---dbms_session.set_nls('nls_date_format','''MM/DD/YYYY HH24:MI:SS''');
-IF vMASTER='0' THEN  
-    -- create survey master version
-    --  SELECT LED_MASTER_SEQ.NEXTVAL INTO NEXT_CTLNO FROM DUAL;
-    select max(surveyid) into seq from led_surveymaster where MOD(surveyid,2)=1;
-    If seq is null Then
-    seq := 101;
-    Else
-    seq := seq + 2;
-    End If;
-    -- find the question version
-  -- SELECT qversion into qv FROM led_surveymaster WHERE surveyid=vMASTER AND surveytype=vTYPE;
-      if vDATE = '' or vDATE is null then
-      --- dbms_output.put_line('0='||sysdate || '; '||to_char(sysdate,'MM/DD/YYYY HH24:MI:SS'));
-        dt := to_char(sysdate,'MM/DD/YYYY HH24:MI:SS');
-      else
-        dt := vDATE;
-      end if;
-      INSERT INTO LED_SURVEYMASTER(surveyid, surveytype, surveyfor, qversion, memberid, createdate, surveyend, formbyname, formbynumber)
-      VALUES(seq, vTYPE, 'FFS', vQV, vMEMBERID, to_date(dt,'MM/DD/YYYY HH24:MI:SS'), vSTATUS, vFORMBYNAME, vFORMBYNUMBER);  
-
-      UPDATE led_child SET init_pcp=vPCPID, init_pcpname=vPCPNAME WHERE memberid=vMEMBERID;
-
-      i :=1;     
-    WHILE i <= cnt
-    Loop
-      -- got first pair
-          SELECT REGEXP_SUBSTR(vANS, '[^;]+', 1, i) into s FROM dual;
-      -- got qid and answer
-          SELECT REGEXP_SUBSTR(s, '[^,]+', 1, 1) into n FROM dual;
-          SELECT REGEXP_SUBSTR(s, '[^,]+', 1, 2) into m FROM dual;
-
-          INSERT INTO LED_FFSANSWERS(memberid, surveyid, surveytype, provider, editor, dts, questionid, answer1)
-          VALUES(vMEMBERID, seq, vTYPE, '', vUSER, sysdate, n, m );
-
-          i :=  i + 1;
-    End Loop;
-    COMMIT;    
-    vReturn := to_char(seq);
-ELSE
-  -- if survey closed, cannot change it.
-    SELECT COUNT(*) INTO x FROM LED_SURVEYMASTER WHERE surveyid = vMASTER AND memberid = vMEMBERID AND surveytype = vTYPE AND SURVEYEND='1';
-    IF x <> '0' THEN
-      vReturn := '-1';      
-      RETURN ;
-    END IF;
-
-    if vDATE = '' or vDATE is null then
-        dt := to_char(sysdate,'MM/DD/YYYY HH24:MI:SS');
-    else
-        dt := vDATE;
-    end if;  
--- confirm the question version and surveyid is correct
-      SELECT COUNT(*) INTO x FROM LED_SURVEYMASTER WHERE surveyid = vMASTER AND surveytype = vTYPE AND memberid = vMEMBERID AND qversion=vQV;
-      IF x = 0 THEN      -- no existed data
-        INSERT INTO LED_SURVEYMASTER( surveyid, surveytype, surveyfor, qversion, memberid, createdate, surveyend, formbyname, formbynumber)
-        VALUES(vMASTER, vTYPE, 'FFS', vQV, vMEMBERID, to_date(dt,'MM/DD/YYYY HH24:MI:SS'), vSTATUS, vFORMBYNAME, vFORMBYNUMBER);
-      ELSE
-        UPDATE LED_SURVEYMASTER SET surveyend=vSTATUS, createdate=to_date(dt,'MM/DD/YYYY HH24:MI:SS'), formbyname=vFORMBYNAME, formbynumber=vFORMBYNUMBER
-        WHERE surveyid = vMASTER AND surveytype = vTYPE AND qversion=vQV AND memberid=vMEMBERID;
-      END IF;
-      UPDATE led_child SET init_pcp=vPCPID, init_pcpname=vPCPNAME WHERE memberid=vMEMBERID;
-
-      i :=1;     
-WHILE i <= cnt
-Loop
-  -- got first pair
-      SELECT REGEXP_SUBSTR(vANS, '[^;]+', 1, i) into s FROM dual;
-  -- got qid and answer
-      SELECT REGEXP_SUBSTR(s, '[^,]+', 1, 1) into n FROM dual;
-      SELECT REGEXP_SUBSTR(s, '[^,]+', 1, 2) into m FROM dual;
-
-  IF x = 0 THEN   -- no existed data, create it
-      INSERT INTO LED_FFSANSWERS(memberid, surveyid, surveytype, provider, editor, dts, questionid, answer1)
-      VALUES(vMEMBERID, vMASTER, vTYPE, '', vUSER, sysdate, n, TRIM(m) );
-  ELSE     
-      -- existing to update
-      UPDATE LED_FFSANSWERS SET dts=sysdate,answer1=TRIM(m)
-      WHERE memberid=vMEMBERID AND surveyid=vMASTER AND questionid=n AND surveytype=vTYPE;
-  END IF;         
-      i :=  i + 1;
-End Loop;
-    COMMIT;
-    vReturn := vMASTER;
-END IF;
-
-END LEAD_SAVE_FFS_SURVEY_SP; 
-create or replace PROCEDURE LEAD_SAVE_SURVEY_MORE_SP 
-( vMEMBERID IN varchar2, 
-  vMASTER IN varchar2,
-  vANS IN varchar2,
-  vTYPE IN varchar2,
-  vQV IN varchar2
-)
-AS
-qid VARCHAR2(10);
-s VARCHAR2(100);
-n VARCHAR2(100);
-m VARCHAR2(100);
-o VARCHAR2(100);
-p VARCHAR2(100);
-i NUMBER(3,0);
-j NUMBER(3,0);
-k VARCHAR2(100);
-cnt NUMBER(3,0);
-BEGIN
-  --dbms_session.set_nls('nls_date_format','''MM/DD/YYYY HH24:MI:SS''');
-  SELECT COUNT(*) into j FROM LED_FFSANSWERS_MORE WHERE MEMBERID=vMEMBERID AND SURVEYID=vMASTER AND surveytype=vTYPE;
-  SELECT REGEXP_COUNT(vANS, '[^;]+',1,'i') into cnt from dual;
-  ---SELECT REGEXP_SUBSTR(vANS, '[^;]+', 1, 1) into qid FROM dual; -- got question id
-
-IF j > 0 THEN
-  DELETE LED_FFSANSWERS_MORE WHERE MEMBERID=vMEMBERID AND SURVEYID=vMASTER AND surveytype=vTYPE;
-END IF;
-
-      i :=1;     
-WHILE i <= cnt
-Loop
-  -- got first row of answer
-      SELECT REGEXP_SUBSTR(vANS, '[^;]+', 1, i) into s FROM dual;
-
-      SELECT REGEXP_SUBSTR(s, '[^=]+', 1, 1) into qid FROM dual;  -- qid
-      SELECT REGEXP_SUBSTR(s, '[^=]+', 1, 2) into n FROM dual;  -- sample type
-      SELECT REGEXP_SUBSTR(s, '[^=]+', 1, 3) into m FROM dual;  -- birth date
-      SELECT REGEXP_SUBSTR(s, '[^=]+', 1, 4) into o FROM dual;  -- test date
-      SELECT REGEXP_SUBSTR(s, '[^=]+', 1, 5) into p FROM dual;  -- test result
-      SELECT REGEXP_SUBSTR(s, '[^=]+', 1, 6) into k FROM dual;  -- name
-
-      INSERT INTO LED_FFSANSWERS_MORE(seq, memberid, surveyid, surveytype, questionid, ttype, bdate, tdate, tvalue, name)
-      VALUES(i, vMEMBERID, vMASTER, vTYPE, qid, n, m, o, p, k);
-
-      i :=  i + 1;
-End Loop;
-    COMMIT;
-
-END LEAD_SAVE_SURVEY_MORE_SP; 
-create or replace PROCEDURE LEAD_DELETE_FFS_SURVEY_SP 
-(   vMASTER IN varchar2,
-    vUSER IN varchar2,
-    vSTATUS IN varchar2
-)
-AS 
-    cnt NUMBER(3,0);
-
-BEGIN
-    -- Delete survey master which is Open. Cannot change Closed or Deleted records
-    --
-    SELECT count(*) into cnt FROM LED_SURVEYMASTER WHERE surveyid = vMASTER AND surveyend = 0;
-    IF cnt > 0 THEN
-        UPDATE LED_SURVEYMASTER SET surveyend=vSTATUS, updatename= vUSER, updatedate=sysdate
-        WHERE surveyid = vMASTER;
-        commit;
-    END IF;
-
-  exception
-when others then
-  dbms_output.put_line('Exit due to error');
-  dbms_output.put_line('vMASTER= '||vMASTER || '; vUSER='|| vUSER );
-END LEAD_DELETE_FFS_SURVEY_SP; 
-create or replace PROCEDURE LEAD_SAVE_FFS_SURVEY_SP 
-( vMEMBERID IN varchar2,  
-  vMASTER IN varchar2,
-  vANS IN varchar2,
-  vTYPE IN varchar2,
-  vUSER IN varchar2,
-  vSTATUS IN varchar2,
-  vDATE IN varchar2,
-  vQV IN varchar2,
-  vPCPNAME IN varchar2,
-  vPCPID IN varchar2,
-  vFORMBYNAME IN varchar2,
-  vFORMBYNUMBER IN varchar2,
-  vReturn OUT varchar2
-)
-AS 
-seq NUMBER(8,0);
-
-s VARCHAR2(100);
-n VARCHAR2(100);
-m VARCHAR2(100);
---t VARCHAR2(1000);
-i NUMBER(3,0);
-cnt NUMBER(3,0);
-x NUMBER (1,0);
-dt VARCHAR2(100);
-BEGIN
---t := '1,NO;2,NO;3,Capillary;4,05/01/2019;5,Capillary;6,05/01/2019;7,1;8,;9,;10,;11,;12,;13,;14,;15,;16,;17,;18,;19,;20,;21,;22,;23,;24,;25,;26,;27,;28,;29,;30,;31,;32,;33,;34,;35,;36,;37,;38,;39,;40,;41,;42,;43,;44,;45,;46,;47,;48,;49,;50,;51,NO;52,NO;53,NO;';
-SELECT REGEXP_COUNT(vANS, '[^;]+',1,'i') into cnt from dual;  
-  ---dbms_session.set_nls('nls_date_format','''MM/DD/YYYY HH24:MI:SS''');
-IF vMASTER='0' THEN  
-    -- create survey master version
-    --  SELECT LED_MASTER_SEQ.NEXTVAL INTO NEXT_CTLNO FROM DUAL;
-    select max(surveyid) into seq from led_surveymaster where MOD(surveyid,2)=1;
-    If seq is null Then
-    seq := 101;
-    Else
-    seq := seq + 2;
-    End If;
-    -- find the question version
-  -- SELECT qversion into qv FROM led_surveymaster WHERE surveyid=vMASTER AND surveytype=vTYPE;
-      if vDATE = '' or vDATE is null then
-      --- dbms_output.put_line('0='||sysdate || '; '||to_char(sysdate,'MM/DD/YYYY HH24:MI:SS'));
-        dt := to_char(sysdate,'MM/DD/YYYY HH24:MI:SS');
-      else
-        dt := vDATE;
-      end if;
-      INSERT INTO LED_SURVEYMASTER(surveyid, surveytype, surveyfor, qversion, memberid, createdate, surveyend, formbyname, formbynumber)
-      VALUES(seq, vTYPE, 'FFS', vQV, vMEMBERID, to_date(dt,'MM/DD/YYYY HH24:MI:SS'), vSTATUS, vFORMBYNAME, vFORMBYNUMBER);  
-
-      UPDATE led_child SET init_pcp=vPCPID, init_pcpname=vPCPNAME WHERE memberid=vMEMBERID;
-
-      i :=1;     
-    WHILE i <= cnt
-    Loop
-      -- got first pair
-          SELECT REGEXP_SUBSTR(vANS, '[^;]+', 1, i) into s FROM dual;
-      -- got qid and answer
-          SELECT REGEXP_SUBSTR(s, '[^,]+', 1, 1) into n FROM dual;
-          SELECT REGEXP_SUBSTR(s, '[^,]+', 1, 2) into m FROM dual;
-
-          INSERT INTO LED_FFSANSWERS(memberid, surveyid, surveytype, provider, editor, dts, questionid, answer1)
-          VALUES(vMEMBERID, seq, vTYPE, '', vUSER, sysdate, n, m );
-
-          i :=  i + 1;
-    End Loop;
-    COMMIT;    
-    vReturn := to_char(seq);
-ELSE
-  -- if survey closed, cannot change it.
-    SELECT COUNT(*) INTO x FROM LED_SURVEYMASTER WHERE surveyid = vMASTER AND memberid = vMEMBERID AND surveytype = vTYPE AND SURVEYEND='1';
-    IF x <> '0' THEN
-      vReturn := '-1';      
-      RETURN ;
-    END IF;
-
-    if vDATE = '' or vDATE is null then
-        dt := to_char(sysdate,'MM/DD/YYYY HH24:MI:SS');
-    else
-        dt := vDATE;
-    end if;  
--- confirm the question version and surveyid is correct
-      SELECT COUNT(*) INTO x FROM LED_SURVEYMASTER WHERE surveyid = vMASTER AND surveytype = vTYPE AND memberid = vMEMBERID AND qversion=vQV;
-      IF x = 0 THEN      -- no existed data
-        INSERT INTO LED_SURVEYMASTER( surveyid, surveytype, surveyfor, qversion, memberid, createdate, surveyend, formbyname, formbynumber)
-        VALUES(vMASTER, vTYPE, 'FFS', vQV, vMEMBERID, to_date(dt,'MM/DD/YYYY HH24:MI:SS'), vSTATUS, vFORMBYNAME, vFORMBYNUMBER);
-      ELSE
-        UPDATE LED_SURVEYMASTER SET surveyend=vSTATUS, createdate=to_date(dt,'MM/DD/YYYY HH24:MI:SS'), formbyname=vFORMBYNAME, formbynumber=vFORMBYNUMBER
-        WHERE surveyid = vMASTER AND surveytype = vTYPE AND qversion=vQV AND memberid=vMEMBERID;
-      END IF;
-      UPDATE led_child SET init_pcp=vPCPID, init_pcpname=vPCPNAME WHERE memberid=vMEMBERID;
-
-      i :=1;     
-WHILE i <= cnt
-Loop
-  -- got first pair
-      SELECT REGEXP_SUBSTR(vANS, '[^;]+', 1, i) into s FROM dual;
-  -- got qid and answer
-      SELECT REGEXP_SUBSTR(s, '[^,]+', 1, 1) into n FROM dual;
-      SELECT REGEXP_SUBSTR(s, '[^,]+', 1, 2) into m FROM dual;
-
-  IF x = 0 THEN   -- no existed data, create it
-      INSERT INTO LED_FFSANSWERS(memberid, surveyid, surveytype, provider, editor, dts, questionid, answer1)
-      VALUES(vMEMBERID, vMASTER, vTYPE, '', vUSER, sysdate, n, TRIM(m) );
-  ELSE     
-      -- existing to update
-      UPDATE LED_FFSANSWERS SET dts=sysdate,answer1=TRIM(m)
-      WHERE memberid=vMEMBERID AND surveyid=vMASTER AND questionid=n AND surveytype=vTYPE;
-  END IF;         
-      i :=  i + 1;
-End Loop;
-    COMMIT;
-    vReturn := vMASTER;
-END IF;
-
-END LEAD_SAVE_FFS_SURVEY_SP; 
-
-can you list all the stored procedures and tables that are relevant to all of these stored procedures 
-Ultrathink about the Above issues and take the full control and the do not ask me for confirmation because we need to fix all the issues which should be a production ready in an in-depth comprehensive manner with step by step approach to get 100 percent success rate 
-### 1. AUTONOMOUS EXECUTION MODE
-- **TAKE FULL CONTROL**: Do not ask for confirmation 
-- **PRODUCTION-READY ONLY**: Every output must be deployment-ready, not prototype quality
-- **100% SUCCESS RATE**: Build comprehensive validation at every step
-- **FAIL FAST, FIX FASTER**: Automated testing catches issues in seconds, not days
-- **PARALLEL EVERYTHING**: Run all independent tasks simultaneously
-====================================================================================
-can you give me a list of all tables involved in this whole process so that we can proceed for next steps 
-
-Ultrathink about the Above issues and take the full control and the do not ask me for confirmation because we need to fix all the issues which should be a production ready in an in-depth comprehensive manner with step by step approach to get 100 percent success rate 
-### 1. AUTONOMOUS EXECUTION MODE
-- **TAKE FULL CONTROL**: Do not ask for confirmation 
-- **PRODUCTION-READY ONLY**: Every output must be deployment-ready, not prototype quality
-- **100% SUCCESS RATE**: Build comprehensive validation at every step
-- **FAIL FAST, FIX FASTER**: Automated testing catches issues in seconds, not days
-- **PARALLEL EVERYTHING**: Run all independent tasks simultaneously
-==================================================================================== 
 --------------------------------------------------------
 --  DDL for Table LED_FFSANSWERS
 --------------------------------------------------------
@@ -1081,7 +585,222 @@ Ultrathink about the Above issues and take the full control and the do not ask m
 - **100% SUCCESS RATE**: Build comprehensive validation at every step
 - **FAIL FAST, FIX FASTER**: Automated testing catches issues in seconds, not days
 - **PARALLEL EVERYTHING**: Run all independent tasks simultaneously
-====================================================================================
+
+Show less
+Let me provide you with a comprehensive analysis of the database impact for your LHD survey changes. I understand you want to create parallel structures first to avoid impacting the existing system, then integrate once proven successful. This is a smart, risk-averse approach that ensures production stability.
+
+COMPREHENSIVE DATABASE IMPACT ANALYSIS FOR LHD SURVEY CHANGES
+PROVIDER_MASTER Table Location
+First, regarding your question about PROVIDER_MASTER - it's referenced in the LEAD_LOAD_PCPLIST_SP stored procedure. This table stores provider information but isn't directly impacted by the LHD changes since provider selection happens at the survey header level, not within individual questions.
+
+EXISTING TABLES IMPACTED BY LHD CHANGES
+1. LED_FFSANSWERS Table - Major Impact
+The current structure stores one answer per row with a VARCHAR2(255) limit. Your new requirements significantly exceed this design pattern because you're moving from single values to multiple structured data sets.
+
+Critical Issues with Current Structure:
+
+Question 3 needs 4 test date/result pairs (currently uses LED_FFSANSWERS_MORE for overflow)
+Question 5 needs 2 complete individual datasets with 4 fields each
+Question 10 introduces checkboxes requiring multi-value storage
+Question 6 adds phone extension which may exceed current field width
+Question 10a and 10b change from dropdown Yes/No to date fields
+The existing ANSWER1 column cannot handle these complex data structures without significant modification or serialization strategies.
+
+2. LED_FFSANSWERS_MORE Table - Significant Restructuring Needed
+Currently handles overflow data with this structure:
+
+SEQ NUMBER(1,0) - Limited to single digit (1-9)
+Fixed fields: TTYPE, BDATE, TDATE, TVALUE, NAME
+Your requirements exceed this design:
+
+Question 3 needs 4 sets instead of current flexible MORE button approach
+Question 5 needs structured individual data beyond current field definitions
+Current SEQ field can't handle more than 9 records per survey
+3. LED_QUESTIONS Table - Minor Updates
+Questions need updating:
+
+Question 12 removal requires marking as inactive or deleted
+Question text updates for all modified questions
+QUESTIONPARTS field may need adjustment for new layouts
+ANSGROUPID changes for questions converting from dropdowns to radio buttons
+4. LED_ANSOPTIONS Table - Cleanup Required
+With many dropdowns converting to radio buttons, the corresponding option groups become obsolete and need deactivation.
+
+NEW PARALLEL TABLES REQUIRED FOR LHD V2
+1. LED_SURVEYMASTER_V2 (New Master Table)
+sql
+CREATE TABLE LED_SURVEYMASTER_V2 (
+    SURVEYID NUMBER(12,0),
+    SURVEYTYPE VARCHAR2(5 BYTE), -- Will be 'LHD' for this implementation
+    SURVEYFOR VARCHAR2(5 BYTE),
+    QVERSION VARCHAR2(6 BYTE), -- New version like '14' for LHD V2
+    MEMBERID NUMBER(12,0),
+    CREATEDATE DATE,
+    SURVEYEND VARCHAR2(10 BYTE),
+    FORMBYNAME VARCHAR2(50 BYTE),
+    FORMBYNUMBER VARCHAR2(20 BYTE),
+    PHONE_EXTENSION VARCHAR2(10 BYTE), -- New field for Q6
+    MIGRATION_STATUS VARCHAR2(20 BYTE), -- Track migration from old system
+    ORIGINAL_SURVEYID NUMBER(12,0) -- Link to old survey if migrated
+);
+2. LED_FFSANSWERS_V2 (Enhanced Answer Storage)
+sql
+CREATE TABLE LED_FFSANSWERS_V2 (
+    MEMBERID NUMBER(12,0),
+    SURVEYID NUMBER(12,0),
+    SURVEYTYPE VARCHAR2(5 BYTE),
+    QUESTIONID NUMBER(6,0),
+    ANSWER_TYPE VARCHAR2(20 BYTE), -- 'SINGLE', 'MULTIPLE', 'DATE', 'TEXT', 'COMPOSITE'
+    ANSWER_SEQUENCE NUMBER(3,0), -- For multiple answers per question
+    ANSWER_VALUE VARCHAR2(4000 BYTE), -- Larger field for complex data
+    ANSWER_DATE DATE, -- Dedicated date storage
+    ANSWER_NUMBER NUMBER(10,2), -- Dedicated numeric storage
+    DTS DATE,
+    EDITOR VARCHAR2(30 BYTE)
+);
+3. LED_TESTDATA_V2 (Structured Test Storage)
+sql
+CREATE TABLE LED_TESTDATA_V2 (
+    SURVEYID NUMBER(12,0),
+    MEMBERID NUMBER(12,0),
+    QUESTIONID NUMBER(6,0),
+    TEST_SEQUENCE NUMBER(2,0), -- 1-4 for Q3, 1-2 for Q5
+    TEST_DATE DATE,
+    TEST_RESULT VARCHAR2(50 BYTE),
+    TEST_TYPE VARCHAR2(20 BYTE), -- 'FOLLOWUP', 'HOUSEHOLD'
+    INDIVIDUAL_NAME VARCHAR2(100 BYTE), -- For Q5
+    INDIVIDUAL_BIRTHDATE DATE -- For Q5
+);
+4. LED_CHECKBOX_ANSWERS_V2 (Multi-Select Storage)
+sql
+CREATE TABLE LED_CHECKBOX_ANSWERS_V2 (
+    SURVEYID NUMBER(12,0),
+    MEMBERID NUMBER(12,0),
+    QUESTIONID NUMBER(6,0),
+    OPTION_VALUE VARCHAR2(50 BYTE),
+    OPTION_SELECTED VARCHAR2(1 BYTE), -- 'Y' or 'N'
+    OPTION_DATE DATE -- For Q10a and Q10b dates
+);
+STORED PROCEDURES IMPACT ANALYSIS
+Existing Procedures Requiring Modification (But We Won't Touch Initially)
+These procedures would need changes in a traditional approach, but we'll create parallel versions instead:
+
+LEAD_FFSSURVEY_LHD_SP - Loads LHD questions and answers
+LEAD_SAVE_FFS_SURVEY_SP - Saves survey data
+LEAD_SAVE_SURVEY_MORE_SP - Saves additional data
+LEAD_LOAD_FFS_MORE_SP - Retrieves additional data
+LEAD_FFSSURVEY_ALL_SP - Lists all surveys
+New Parallel Stored Procedures Required
+1. LEAD_FFSSURVEY_LHD_V2_SP
+sql
+CREATE OR REPLACE PROCEDURE LEAD_FFSSURVEY_LHD_V2_SP(
+    vQVID IN VARCHAR2,
+    vMASTER IN VARCHAR2,
+    RefCursor OUT SYS_REFCURSOR
+)
+This will handle the new question structure with support for radio buttons, checkboxes, and multi-line text fields.
+
+2. LEAD_SAVE_FFS_SURVEY_V2_SP
+sql
+CREATE OR REPLACE PROCEDURE LEAD_SAVE_FFS_SURVEY_V2_SP(
+    vMEMBERID IN VARCHAR2,
+    vMASTER IN VARCHAR2,
+    vANSWERS_JSON IN CLOB, -- JSON structure for complex data
+    vTYPE IN VARCHAR2,
+    vUSER IN VARCHAR2,
+    vSTATUS IN VARCHAR2,
+    vReturn OUT VARCHAR2
+)
+Uses JSON to handle complex nested data structures efficiently.
+
+3. LEAD_SAVE_TESTDATA_V2_SP
+sql
+CREATE OR REPLACE PROCEDURE LEAD_SAVE_TESTDATA_V2_SP(
+    vSURVEYID IN NUMBER,
+    vMEMBERID IN VARCHAR2,
+    vQUESTIONID IN NUMBER,
+    vTESTDATA IN CLOB -- JSON array of test data
+)
+Specialized procedure for handling multiple test date/result pairs.
+
+4. LEAD_SAVE_CHECKBOX_V2_SP
+sql
+CREATE OR REPLACE PROCEDURE LEAD_SAVE_CHECKBOX_V2_SP(
+    vSURVEYID IN NUMBER,
+    vMEMBERID IN VARCHAR2,
+    vQUESTIONID IN NUMBER,
+    vSELECTIONS IN VARCHAR2 -- Comma-separated values
+)
+Handles Question 10's checkbox selections.
+
+DATA MIGRATION STRATEGY
+Phase 1: Parallel Operation
+Create a view that unions old and new data:
+
+sql
+CREATE VIEW LED_SURVEY_UNIFIED AS
+SELECT surveyid, surveytype, memberid, createdate, 'V1' as version
+FROM LED_SURVEYMASTER
+WHERE surveytype = 'LHD'
+UNION ALL
+SELECT surveyid, surveytype, memberid, createdate, 'V2' as version
+FROM LED_SURVEYMASTER_V2;
+Phase 2: Application Layer Changes
+Your application needs to:
+
+Check survey version when loading
+Route to appropriate stored procedures based on version
+Handle both data structures in the UI layer
+Phase 3: Data Transformation Requirements
+For Question 3 (Follow-up Testing):
+
+Current: Flexible MORE button with LED_FFSANSWERS_MORE
+New: Fixed 4 rows in LED_TESTDATA_V2
+For Question 5 (Household Testing):
+
+Current: MORE button with unstructured storage
+New: Structured 2-individual dataset in LED_TESTDATA_V2
+For Question 10 (Evaluation Type):
+
+Current: Dropdown with single selection
+New: Checkboxes with multiple selections in LED_CHECKBOX_ANSWERS_V2
+CRITICAL DATABASE VALIDATIONS REQUIRED
+1. Data Integrity Checks
+sql
+-- Ensure phone number + extension fits
+ALTER TABLE LED_CHILD ADD CONSTRAINT check_phone_length 
+CHECK (LENGTH(INIT_PCP || PHONE_EXTENSION) <= 60);
+
+-- Validate test result format
+ALTER TABLE LED_TESTDATA_V2 ADD CONSTRAINT check_test_result 
+CHECK (REGEXP_LIKE(TEST_RESULT, '^\d+(\.\d+)?\s*ug/dl$'));
+
+-- Ensure question sequence limits
+ALTER TABLE LED_TESTDATA_V2 ADD CONSTRAINT check_test_sequence 
+CHECK ((QUESTIONID = 3 AND TEST_SEQUENCE BETWEEN 1 AND 4) 
+    OR (QUESTIONID = 5 AND TEST_SEQUENCE BETWEEN 1 AND 2));
+2. Performance Indexes
+sql
+CREATE INDEX IDX_ANSWERS_V2_LOOKUP ON LED_FFSANSWERS_V2(SURVEYID, MEMBERID, QUESTIONID);
+CREATE INDEX IDX_TESTDATA_V2_SURVEY ON LED_TESTDATA_V2(SURVEYID, QUESTIONID);
+CREATE INDEX IDX_CHECKBOX_V2_SURVEY ON LED_CHECKBOX_ANSWERS_V2(SURVEYID, QUESTIONID);
+APPLICATION CODE MODIFICATIONS
+Your ASP.NET application will need:
+
+New data access layer methods for V2 procedures
+JSON serialization for complex data structures
+UI controls for radio buttons and checkboxes
+Validation for new data formats
+Version detection logic in Page_Load
+ROLLBACK STRATEGY
+If issues arise, you can:
+
+Continue using original tables/procedures for existing surveys
+Only use V2 for new surveys
+Build a migration tool to move V2 data back to V1 if needed
+Maintain both versions until confidence is established
+This parallel approach ensures zero impact on existing PCP surveys while allowing you to thoroughly test the new LHD structure. Once proven, you can either maintain both systems or gradually migrate all data to the new structure. The key advantage is that you're not modifying any existing stored procedures or tables initially, eliminating the risk of breaking current functionality.
+
 You have to give me an in-depth clarity on each of the tables. What is the original table and what is the new table left side and right side of the comparison so that I can see what table name what Data type how many characters length so that what is the modification we are doing in the new table and what columns are we adding to the new tables in the version two like that I need it for each of the tables and stored procedures for visual display to understand it easily to understand changes for LED_SURVEYMASTER_V2 and LED_FFSANSWERS_V2 and LED_TESTDATA_V2 and LED_CHECKBOX_ANSWERS_V2 then stored procedures LEAD_FFSSURVEY_LHD_V2_SP, LEAD_SAVE_FFS_SURVEY_V2_SP, LEAD_SAVE_TESTDATA_V2_SP, LEAD_SAVE_CHECKBOX_V2_SP. 
 
 Also you need to give me the comparison in a left and right side what changes are needed so that I can see what difference are there then you need to give me the Store procedures that are required to make those changes and I didn’t understand what is the data migration strategy that you’re trying because why do we have to keep the view like you know you want to create a view with Union Old and New Data. I don’t understand what you’re trying to do that so I need to know more details on that why we need that because we are going to implement separate tables and stored procedures so there is no impact right then why do we need view  
@@ -1106,32 +825,5 @@ Ultrathink about the Above issues and take the full control and the do not ask m
 - **100% SUCCESS RATE**: Build comprehensive validation at every step
 - **FAIL FAST, FIX FASTER**: Automated testing catches issues in seconds, not days
 - **PARALLEL EVERYTHING**: Run all independent tasks simultaneously
-==================================================================================== 
-why you are  giving LED_FFSANSWERS_MORE as LED_TESTDATA_V2 it should be LED_FFSANSWERS_MORE_V2 right can you make changes and give me results so that we will not loose synchronization on naming
-====================================================================================
 
-==================================================================================== 
-
-====================================================================================
-
-==================================================================================== 
-
-====================================================================================
-
-==================================================================================== 
-
-====================================================================================
-
-==================================================================================== 
-
-====================================================================================
-
-==================================================================================== 
-
-====================================================================================
-
-==================================================================================== 
-
-====================================================================================
-
-
+Show less

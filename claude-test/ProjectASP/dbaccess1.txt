@@ -1,0 +1,1229 @@
+using System;
+using System.Data;
+using System.Web;
+using System.Configuration;
+using System.Collections.Generic;
+using Oracle.DataAccess.Client;
+using System.Collections;
+using Lead_Application.Reports;
+
+
+
+namespace DataAccess
+{
+    public class DB_DataAccess
+    {
+        
+        private string strConnString;               
+
+        private OracleConnection GetConnection()
+        {    
+            try
+            {
+                if (clsCommon.pAppPassword == null)
+                {
+                    getPassword();
+                }
+                strConnString = "data source=" + clsCommon.pAppDataSource + ";user id=" + clsCommon.pAppUserID + ";password=" + clsCommon.pAppPassword + ";";
+                OracleConnection objDbConnect = new OracleConnection(strConnString);
+                
+                return objDbConnect;
+            }
+            catch (Exception ex)
+            {    //throw ex
+                HttpContext.Current.Response.Write("connection error! " + ex);
+                return null;
+            }
+        }
+        private void getPassword()
+        {
+            /*
+             * This is password for DEVE server, default in web.config
+             */
+            if (clsCommon.pDBOwnerMode.ToUpper() == "ON")
+            {
+                clsCommon.pAppPassword = ConfigurationManager.AppSettings["APP_PWD"];
+                clsCommon.pASMPassword = ConfigurationManager.AppSettings["ASM_PWD"];
+
+                return;
+            }
+
+            /* 
+             * If on TEST server, ASM password got from getPassword DLL, default the AppPassword on web.config
+             * For PROD, both configure is not existed from web.config, will obtain dynamically.
+             */
+            try
+            {
+                if (clsCommon.pDBOwnerMode.ToUpper() == "OFF")
+                {
+                    if ((clsCommon.pASMPassword == "") || (clsCommon.pASMPassword == null))
+                    {   //Update database password from Password dll
+                        clsCommon.pASMPassword = Password.Password.GetPassword();
+                    }
+                    if ((clsCommon.pAppPassword == "") || (clsCommon.pAppPassword == null))
+                    {
+                        //Update database password from Password dll
+                        clsCommon.pAppPassword = Password.Password.GetPassword();
+                        
+                        //Update password date
+                        clsCommon.pPasswordDate = DateTime.Now.ToShortDateString();
+                    }
+                }
+                //Old design is not working on PROD.
+                //if the shared m_Password variable is blank or it's value is outdated, 
+                //get the latest password value from the file.
+                /*
+                 * *
+                if ((clsCommon.pAppPassword == "") || (string.Compare(clsCommon.pPasswordDate, DateTime.Now.ToShortDateString(), true) != 0))
+                {
+                    clsCommon.pASMPassword = Password.Password.GetPassword();
+
+                    temp = Password.Password.GetPassword();
+                    //Only update the password and password date if the password actually changed
+                    
+                    if (temp != clsCommon.pAppPassword)
+                    {
+                        //Update database password
+                        clsCommon.pAppPassword = temp;
+                        
+                        //Update password date
+                        clsCommon.pPasswordDate = DateTime.Now.ToShortDateString();
+                    }
+                }
+                 * 
+                 * */
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("AppDBPassword Error. " + ex);
+            }
+        }
+        private OracleConnection GetASMConnection()
+        {
+            try
+            {
+                if (clsCommon.pASMPassword == null)
+                {
+                    getPassword();
+                }
+
+                if (clsCommon.pDBOwnerMode.ToUpper() == "OFF")
+                {   //for TEST server
+                   // strConnString = "data source=" + clsCommon.pASMSource + ";user id=" + clsCommon.pASMUserID + ";password=P10510800000000000000000000000;";
+                    strConnString = "data source=" + clsCommon.pASMSource + ";user id=" + clsCommon.pASMUserID + ";password=" + clsCommon.pASMPassword + ";";
+                }
+                else
+                {
+                    strConnString = "data source=" + clsCommon.pASMSource + ";user id=" + clsCommon.pASMUserID + ";password=" + clsCommon.pASMPassword + ";";
+                }
+                OracleConnection objDbConnect = new OracleConnection(strConnString);
+
+                return objDbConnect;
+            }
+            catch (Exception ex)
+            {    //throw ex
+                HttpContext.Current.Response.Write("ASM connection error! " +ex);
+                return null;
+            }
+        }
+        //
+        // Get login user roles from ASM, ie FULL_ACCESS, READ_ONLY
+        //
+        public DataSet GetUserRole(string iACRONYM,string iLOGINID)
+        {
+            OracleDataAdapter dataAdapter = new OracleDataAdapter(); 
+            var cnn = GetASMConnection();
+            OracleCommand command = new OracleCommand("ASM_SEL_USERROLE_SP", cnn);
+            DataSet ds = new DataSet();
+
+            try
+            {            
+                command.CommandType = CommandType.StoredProcedure;
+                
+                OracleParameter vACRONYM = new OracleParameter();
+                vACRONYM.ParameterName = "@vACRONYM";
+                vACRONYM.Direction = ParameterDirection.Input;
+                vACRONYM.OracleDbType = OracleDbType.Varchar2;
+                vACRONYM.Value = iACRONYM;
+                command.Parameters.Add(vACRONYM);
+
+                OracleParameter vLOGINID = new OracleParameter();
+                vLOGINID.ParameterName = "@vLOGINID";
+                vLOGINID.Direction = ParameterDirection.Input;
+                vLOGINID.OracleDbType = OracleDbType.Varchar2;
+                vLOGINID.Value = iLOGINID;
+                command.Parameters.Add(vLOGINID);
+
+                OracleParameter m_cur = new OracleParameter();
+                m_cur.ParameterName = "RefCursor";
+                m_cur.Direction = ParameterDirection.Output;
+                m_cur.OracleDbType = OracleDbType.RefCursor;
+                command.Parameters.Add(m_cur);
+                
+                dataAdapter.SelectCommand = command;
+
+                dataAdapter.Fill(ds);
+            }
+            catch (Exception ex)
+            {
+                HttpContext.Current.Response.Write("<div style='border: 1px solid black'><b>Get user information failure in Database.</b><br /><br />");
+                HttpContext.Current.Response.Write("Error: " + ex + "<br /><br /> Description:" + ex.Message + "</div><br /><br />");
+            }
+            finally
+            {
+                command.Dispose();
+                cnn.Close();
+                dataAdapter = null;
+            }
+
+            return ds;
+
+        }
+        //
+        // Get login user permissions from ASM
+        //
+        public DataSet GetUserPermissions(long iRoleID)
+        {
+            OracleDataAdapter dataAdapter = new OracleDataAdapter(); 
+            var cnn = GetASMConnection();
+            OracleCommand command = new OracleCommand("ASM_SEL_PERMS_SP", cnn);
+            DataSet ds = new DataSet();
+            try
+            {            
+                command.CommandType = CommandType.StoredProcedure;
+
+                OracleParameter vROLEID = new OracleParameter();
+                vROLEID.ParameterName = "@ROLEID";
+                vROLEID.Direction = ParameterDirection.Input;
+                vROLEID.OracleDbType = OracleDbType.Varchar2;
+                vROLEID.Value = iRoleID;
+                command.Parameters.Add(vROLEID);
+
+                OracleParameter m_cur = new OracleParameter();
+                m_cur.ParameterName = "RefCursor";
+                m_cur.Direction = ParameterDirection.Output;
+                m_cur.OracleDbType = OracleDbType.RefCursor;
+                command.Parameters.Add(m_cur);
+                
+                dataAdapter.SelectCommand = command;
+
+                dataAdapter.Fill(ds);
+            }
+            catch (Exception ex)
+            {
+                HttpContext.Current.Response.Write("<div style='border: 1px solid black'><b>Member Searching failure in Database.</b><br /><br />");
+                HttpContext.Current.Response.Write("Error: " + ex + "<br /><br /> Description:" + ex.Message + "</div><br /><br />");
+            }
+            finally
+            {
+                command.Dispose();
+                cnn.Close();
+                dataAdapter = null;
+            }
+            return ds;
+        }
+        public DataSet LoadMemberList(string iUBIN, string iMEIN, string iFName, string iLName, string iSSN, string iDOBDate1, string iDOBDate2, string iLRDate1, string iLRDate2, string iBlankDate, string iMCO, 
+                    string iBlankMCO, string iSortBy, string iMinResult, string iMaxResult, string iCountyCode, string iZIPCode,
+                    string iNoTPL, string iPlanA, string iAge72mo, string iNo3560)
+        {
+            OracleDataAdapter dataAdapter = new OracleDataAdapter(); 
+            var cnn = GetConnection();
+            OracleCommand command = new OracleCommand("LEAD_SEARCH_SP", cnn);
+            DataSet ds = new DataSet();
+            try
+            {
+                command.CommandType = CommandType.StoredProcedure;
+                
+                OracleParameter vUBIN = new OracleParameter();
+                vUBIN.ParameterName = "@vUBIN";
+                vUBIN.Direction = ParameterDirection.Input;
+                vUBIN.OracleDbType = OracleDbType.Varchar2;
+                vUBIN.Value = iUBIN;
+                command.Parameters.Add(vUBIN);
+
+                OracleParameter vMEIN = new OracleParameter();
+                vMEIN.ParameterName = "@vMEIN";
+                vMEIN.Direction = ParameterDirection.Input;
+                vMEIN.OracleDbType = OracleDbType.Varchar2;
+                vMEIN.Value = iMEIN;
+                command.Parameters.Add(vMEIN);
+
+                OracleParameter vFName = new OracleParameter();
+                vFName.ParameterName = "@vFNAME";
+                vFName.Direction = ParameterDirection.Input;
+                vFName.OracleDbType = OracleDbType.Varchar2;
+                vFName.Value = iFName;
+                command.Parameters.Add(vFName);
+
+                OracleParameter vLName = new OracleParameter();
+                vLName.ParameterName = "@vLNAME";
+                vLName.Direction = ParameterDirection.Input;
+                vLName.OracleDbType = OracleDbType.Varchar2;
+                vLName.Value = iLName;
+                command.Parameters.Add(vLName);
+
+                OracleParameter vSSN = new OracleParameter();
+                vSSN.ParameterName = "@vSSN";
+                vSSN.Direction = ParameterDirection.Input;
+                vSSN.OracleDbType = OracleDbType.Varchar2;
+                vSSN.Value = iSSN;
+                command.Parameters.Add(vSSN);
+
+                OracleParameter vDOBDate1 = new OracleParameter();
+                vDOBDate1.ParameterName = "@vDOBDate1";
+                vDOBDate1.Direction = ParameterDirection.Input;
+                vDOBDate1.OracleDbType = OracleDbType.Varchar2;
+                vDOBDate1.Value = iDOBDate1;
+                command.Parameters.Add(vDOBDate1);
+
+                OracleParameter vDOBDate2 = new OracleParameter();
+                vDOBDate2.ParameterName = "@vDOBDate2";
+                vDOBDate2.Direction = ParameterDirection.Input;
+                vDOBDate2.OracleDbType = OracleDbType.Varchar2;
+                vDOBDate2.Value = iDOBDate2;
+                command.Parameters.Add(vDOBDate2);
+
+                OracleParameter vLRDate1 = new OracleParameter();
+                vLRDate1.ParameterName = "@vLRDate1";
+                vLRDate1.Direction = ParameterDirection.Input;
+                vLRDate1.OracleDbType = OracleDbType.Varchar2;
+                vLRDate1.Value = iLRDate1;
+                command.Parameters.Add(vLRDate1);
+
+                OracleParameter vLRDate2 = new OracleParameter();
+                vLRDate2.ParameterName = "@vLRDate2";
+                vLRDate2.Direction = ParameterDirection.Input;
+                vLRDate2.OracleDbType = OracleDbType.Varchar2;
+                vLRDate2.Value = iLRDate2;
+                command.Parameters.Add(vLRDate2);
+
+                OracleParameter vBlankDate = new OracleParameter();
+                vBlankDate.ParameterName = "@vBlankDate";
+                vBlankDate.Direction = ParameterDirection.Input;
+                vBlankDate.OracleDbType = OracleDbType.Varchar2;
+                vBlankDate.Value = iBlankDate;
+                command.Parameters.Add(vBlankDate);
+
+                OracleParameter vMCO = new OracleParameter();
+                vMCO.ParameterName = "@vMCO";
+                vMCO.Direction = ParameterDirection.Input;
+                vMCO.OracleDbType = OracleDbType.Varchar2;
+                vMCO.Value = iMCO;
+                command.Parameters.Add(vMCO);
+
+                OracleParameter vBlankMCO = new OracleParameter();
+                vBlankMCO.ParameterName = "@vBlankMCO";
+                vBlankMCO.Direction = ParameterDirection.Input;
+                vBlankMCO.OracleDbType = OracleDbType.Varchar2;
+                vBlankMCO.Value = iBlankMCO;
+                command.Parameters.Add(vBlankMCO);
+
+                OracleParameter vMinResult = new OracleParameter();
+                vMinResult.ParameterName = "@vMinResult";
+                vMinResult.Direction = ParameterDirection.Input;
+                vMinResult.OracleDbType = OracleDbType.Varchar2;
+                vMinResult.Value = iMinResult;
+                command.Parameters.Add(vMinResult);
+
+                OracleParameter vMaxResult = new OracleParameter();
+                vMaxResult.ParameterName = "@vMaxResult";
+                vMaxResult.Direction = ParameterDirection.Input;
+                vMaxResult.OracleDbType = OracleDbType.Varchar2;
+                vMaxResult.Value = iMaxResult;
+                command.Parameters.Add(vMaxResult);
+
+                OracleParameter vCountyCode = new OracleParameter();
+                vCountyCode.ParameterName = "@vCountyCode";
+                vCountyCode.Direction = ParameterDirection.Input;
+                vCountyCode.OracleDbType = OracleDbType.Varchar2;
+                vCountyCode.Value = iCountyCode;
+                command.Parameters.Add(vCountyCode);
+
+                OracleParameter vZIPCode = new OracleParameter();
+                vZIPCode.ParameterName = "@vZIPCode";
+                vZIPCode.Direction = ParameterDirection.Input;
+                vZIPCode.OracleDbType = OracleDbType.Varchar2;
+                vZIPCode.Value = iZIPCode;
+                command.Parameters.Add(vZIPCode);
+
+                
+                OracleParameter vNoTPL = new OracleParameter();
+                vNoTPL.ParameterName = "@vNoTPL";
+                vNoTPL.Direction = ParameterDirection.Input;
+                vNoTPL.OracleDbType = OracleDbType.Varchar2;
+                vNoTPL.Value = iNoTPL;
+                command.Parameters.Add(vNoTPL);
+
+                OracleParameter vPlanA = new OracleParameter();
+                vPlanA.ParameterName = "@vPlanA";
+                vPlanA.Direction = ParameterDirection.Input;
+                vPlanA.OracleDbType = OracleDbType.Varchar2;
+                vPlanA.Value = iPlanA;
+                command.Parameters.Add(vPlanA);
+
+                OracleParameter vAge72mo = new OracleParameter();
+                vAge72mo.ParameterName = "@vAge72mo";
+                vAge72mo.Direction = ParameterDirection.Input;
+                vAge72mo.OracleDbType = OracleDbType.Varchar2;
+                vAge72mo.Value = iAge72mo;
+                command.Parameters.Add(vAge72mo);
+
+                OracleParameter vNo3560 = new OracleParameter();
+                vNo3560.ParameterName = "@vNo3560";
+                vNo3560.Direction = ParameterDirection.Input;
+                vNo3560.OracleDbType = OracleDbType.Varchar2;
+                vNo3560.Value = iNo3560;
+                command.Parameters.Add(vNo3560);
+
+
+                OracleParameter vSortBy = new OracleParameter();
+                vSortBy.ParameterName = "@vSortBy";
+                vSortBy.Direction = ParameterDirection.Input;
+                vSortBy.OracleDbType = OracleDbType.Varchar2;
+                vSortBy.Value = iSortBy;
+                command.Parameters.Add(vSortBy);
+
+                OracleParameter m_cur = new OracleParameter();
+                m_cur.ParameterName = "RefCursor";
+                m_cur.Direction = ParameterDirection.Output;
+                m_cur.OracleDbType = OracleDbType.RefCursor;
+                command.Parameters.Add(m_cur);
+
+                dataAdapter.SelectCommand = command;
+
+                dataAdapter.Fill(ds);
+            }
+            catch (Exception ex)
+            {
+                HttpContext.Current.Response.Write("<div style='border: 1px solid black'><b>Member Searching failure in Database.</b><br /><br />");
+                HttpContext.Current.Response.Write("Error: " + ex + "<br /><br /> Description:" + ex.Message + "</div><br /><br />");
+            }
+            finally
+            {
+                command.Dispose();
+                cnn.Close();
+                dataAdapter = null;
+            }
+            return ds;
+        }       //LoadMemberList
+        //
+        // Loading memeber personal information
+        //
+        public DataSet LoadMemberInfo(string iUBIN, string iMEIN)
+        {
+            OracleDataAdapter dataAdapter = new OracleDataAdapter();
+            var cnn = GetConnection();
+            OracleCommand command = new OracleCommand("LEAD_MEMBER_SEARCH_SP", cnn);
+            DataSet ds = new DataSet();
+
+            try
+            {   command.CommandType = CommandType.StoredProcedure;
+
+                OracleParameter vUBIN = new OracleParameter();
+                vUBIN.ParameterName = "@vMEMBERID";
+                vUBIN.Direction = ParameterDirection.Input;
+                vUBIN.OracleDbType = OracleDbType.Varchar2;
+                vUBIN.Value = iUBIN;
+                command.Parameters.Add(vUBIN);
+
+                OracleParameter vMEIN = new OracleParameter();
+                vMEIN.ParameterName = "@vMEIN";
+                vMEIN.Direction = ParameterDirection.Input;
+                vMEIN.OracleDbType = OracleDbType.Varchar2;
+                vMEIN.Value = iMEIN;
+                command.Parameters.Add(vMEIN);
+
+                OracleParameter m_cur = new OracleParameter();
+                m_cur.ParameterName = "RefCursor";
+                m_cur.Direction = ParameterDirection.Output;
+                m_cur.OracleDbType = OracleDbType.RefCursor;
+                command.Parameters.Add(m_cur);
+                
+                dataAdapter.SelectCommand = command;
+
+                dataAdapter.Fill(ds);
+            }
+            catch (Exception ex)
+            {
+                HttpContext.Current.Response.Write("<div style='border: 1px solid black'><b>Member Searching failure in Database.</b><br /><br />");
+                HttpContext.Current.Response.Write("Error: " + ex + "<br /><br /> Description:" + ex.Message + "</div><br /><br />");
+            }
+            finally
+            {
+                command.Dispose();
+                cnn.Close();
+                dataAdapter = null;
+            }
+            return ds;
+        }
+        //
+        // Loading HMO eligibility history information
+        //
+        public DataSet LoadHMOInfo(string iUBIN)
+        {
+            OracleDataAdapter dataAdapter = new OracleDataAdapter();
+            var cnn = GetConnection();
+            OracleCommand command = new OracleCommand("LEAD_MEMBER_HMOLIST_SP", cnn);
+            DataSet ds = new DataSet();
+
+            try
+            {
+                command.CommandType = CommandType.StoredProcedure;
+
+                OracleParameter vUBIN = new OracleParameter();
+                vUBIN.ParameterName = "@vMEMBERID";
+                vUBIN.Direction = ParameterDirection.Input;
+                vUBIN.OracleDbType = OracleDbType.Varchar2;
+                vUBIN.Value = iUBIN;
+                command.Parameters.Add(vUBIN);
+
+                OracleParameter m_cur = new OracleParameter();
+                m_cur.ParameterName = "RefCursor";
+                m_cur.Direction = ParameterDirection.Output;
+                m_cur.OracleDbType = OracleDbType.RefCursor;
+                command.Parameters.Add(m_cur);
+
+                dataAdapter.SelectCommand = command;
+
+                dataAdapter.Fill(ds);
+            }
+            catch (Exception ex)
+            {
+                HttpContext.Current.Response.Write("<div style='border: 1px solid black'><b>HMO List Searching failure in Database.</b><br /><br />");
+                HttpContext.Current.Response.Write("Error: " + ex + "<br /><br /> Description:" + ex.Message + "</div><br /><br />");
+            }
+            finally
+            {
+                command.Dispose();
+                cnn.Close();
+                dataAdapter = null;
+            }
+            return ds;
+        }
+        //
+        // Loading PSC eligibility history information
+        //
+        public DataSet LoadPSCInfo(string iUBIN)
+        {
+            OracleDataAdapter dataAdapter = new OracleDataAdapter();
+            var cnn = GetConnection();
+            OracleCommand command = new OracleCommand("LEAD_MEMBER_PSCLIST_SP", cnn);
+            DataSet ds = new DataSet();
+
+            try
+            {
+                command.CommandType = CommandType.StoredProcedure;
+
+                OracleParameter vUBIN = new OracleParameter();
+                vUBIN.ParameterName = "@vMEMBERID";
+                vUBIN.Direction = ParameterDirection.Input;
+                vUBIN.OracleDbType = OracleDbType.Varchar2;
+                vUBIN.Value = iUBIN;
+                command.Parameters.Add(vUBIN);
+
+                OracleParameter m_cur = new OracleParameter();
+                m_cur.ParameterName = "RefCursor";
+                m_cur.Direction = ParameterDirection.Output;
+                m_cur.OracleDbType = OracleDbType.RefCursor;
+                command.Parameters.Add(m_cur);
+
+                dataAdapter.SelectCommand = command;
+
+                dataAdapter.Fill(ds);
+            }
+            catch (Exception ex)
+            {
+                HttpContext.Current.Response.Write("<div style='border: 1px solid black'><b>HMO List Searching failure in Database.</b><br /><br />");
+                HttpContext.Current.Response.Write("Error: " + ex + "<br /><br /> Description:" + ex.Message + "</div><br /><br />");
+            }
+            finally
+            {
+                command.Dispose();
+                cnn.Close();
+                dataAdapter = null;
+            }
+            return ds;
+        }
+
+
+        //
+        // Loading Report Data from database 
+        //
+        public DataTable GetReport(string parameters, string storedProcedureName)
+        {
+            DataTable resultTable = new DataTable();
+            GenerateReport.LogMessage(String.Format("GetReport called with stored procedure: {0}", storedProcedureName));
+            try
+            {
+                GenerateReport.LogMessage("Attempting to retrieve report using DataReader1 approach");
+                resultTable = GetReportReader(parameters, storedProcedureName);
+            }
+            catch (Exception ex)
+            {
+
+                GenerateReport.LogMessage(String.Format("DataReader1 approach failed: {0}", ex.Message));
+                GenerateReport.LogMessage("Falling back to DataAdapter1 approach");
+                resultTable = GetReportAdapter(parameters, storedProcedureName);
+
+            }
+            GenerateReport.LogMessage(String.Format("GetReport completed. Rows retrieved: {0}", resultTable.Rows.Count));
+            return resultTable;
+        }
+
+        //
+        // Loading Report Data from database using datareader
+        //
+        public DataTable GetReportReader(string parameters, string storedProcedureName)
+        {
+            DataTable resultTable = new DataTable();
+            GenerateReport.LogMessage(String.Format("GetReportReader called with stored procedure: {0}", storedProcedureName));
+
+            if (clsCommon.pAppPassword == null)
+            {
+                GenerateReport.LogMessage("Application password not set. Getting password.");
+                getPassword();
+            }
+
+            strConnString = "data source=" + clsCommon.pAppDataSource + ";user id=" + clsCommon.pAppUserID + ";password=" + clsCommon.pAppPassword + ";";
+            GenerateReport.LogMessage(String.Format("Connection string prepared for data source: {0}", clsCommon.pAppDataSource));
+
+            using (OracleConnection conn = new OracleConnection(strConnString))
+            {
+                try
+                {
+                    GenerateReport.LogMessage("Attempting to open database connection");
+                    conn.Open();
+                    GenerateReport.LogMessage("Database connection opened successfully");
+
+                    using (OracleCommand cmd = new OracleCommand(storedProcedureName, conn))
+                    {
+                        GenerateReport.LogMessage("Creating command with stored procedure");
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        if (storedProcedureName == "LEAD_HOSPITALIZED_ONE_SP")
+                            cmd.Parameters.Add("vMEMBERID", OracleDbType.Varchar2).Value = parameters;
+                        else  
+                            cmd.Parameters.Add("VSTR", OracleDbType.Varchar2).Value = parameters;
+                        GenerateReport.LogMessage("Added VSTR parameter"); 
+
+                        OracleParameter refCursorParam = new OracleParameter
+                        {
+                            ParameterName = "RefCur",
+                            OracleDbType = OracleDbType.RefCursor,
+                            Direction = ParameterDirection.Output
+                        };
+                        cmd.Parameters.Add(refCursorParam);
+                        GenerateReport.LogMessage("Added RefCur parameter");
+
+                        GenerateReport.LogMessage("Executing reader");
+                        using (OracleDataReader reader = cmd.ExecuteReader(CommandBehavior.CloseConnection))
+                        {
+                            GenerateReport.LogMessage("Reader executed successfully, loading data into table");
+                            resultTable.Load(reader);
+                            GenerateReport.LogMessage(String.Format("Retrieved {0} rows from database", resultTable.Rows.Count));
+                        }
+                    }
+                }
+                catch (OracleException ex)
+                {
+                    GenerateReport.LogMessage(String.Format("Oracle Error in GetReportReader: {0}", ex.Message));
+                    GenerateReport.LogMessage(String.Format("Oracle Error Code: {0}", ex.ErrorCode));
+                    GenerateReport.LogMessage(String.Format("Oracle Error Details: {0}", ex.ToString()));
+                    GenerateReport.LogMessage("Returning empty DataTable due to Oracle error");
+                    return new DataTable();
+                }
+                catch (Exception ex)
+                {
+                    GenerateReport.LogMessage(String.Format("General Error in GetReportReader: {0}", ex.Message));
+                    GenerateReport.LogMessage(String.Format("Error Type: {0}", ex.GetType().Name));
+                    GenerateReport.LogMessage(String.Format("Error Details: {0}", ex.ToString()));
+                    GenerateReport.LogMessage("Returning empty DataTable due to general error");
+                    return new DataTable();
+                }
+            }
+
+            GenerateReport.LogMessage(String.Format("GetReportReader completed successfully. Rows retrieved: {0}", resultTable.Rows.Count));
+            return resultTable;
+        }
+
+        public DataTable GetReportAdapter(string parameters, string storedProcedureName)
+        {
+            GenerateReport.LogMessage(String.Format("GetReportAdapter called with stored procedure: {0}", storedProcedureName));
+            OracleDataAdapter dataAdapter = new OracleDataAdapter();
+            var cnn = GetConnection();
+            GenerateReport.LogMessage("Connection object obtained");
+
+            try
+            {
+                GenerateReport.LogMessage("Attempting to open database connection");
+                cnn.Open();
+                GenerateReport.LogMessage("Database connection opened successfully");
+            }
+            catch (Exception ex)
+            {
+                GenerateReport.LogMessage(String.Format("Failed to open connection: {0}", ex.Message));
+                GenerateReport.LogMessage(String.Format("Connection error details: {0}", ex.ToString()));
+                return new DataTable();
+            }
+
+            OracleCommand command = new OracleCommand(storedProcedureName, cnn);
+            DataSet ds = new DataSet();
+            DataTable resultTable = new DataTable();
+
+            try
+            {
+                GenerateReport.LogMessage("Configuring command object for stored procedure");
+                command.CommandType = CommandType.StoredProcedure;
+
+                OracleParameter vSTR = new OracleParameter();
+                if (storedProcedureName == "LEAD_HOSPITALIZED_ONE_SP")
+                    vSTR.ParameterName = "vMEMBERID";
+                else  
+                    vSTR.ParameterName = "@VSTR";
+                vSTR.Direction = ParameterDirection.Input;
+                vSTR.OracleDbType = OracleDbType.Varchar2;
+                vSTR.Value = parameters;
+                command.Parameters.Add(vSTR);
+                GenerateReport.LogMessage("Added @VSTR parameter");
+
+                OracleParameter m_cur = new OracleParameter();
+                m_cur.ParameterName = "RefCur";
+                m_cur.Direction = ParameterDirection.Output;
+                m_cur.OracleDbType = OracleDbType.RefCursor;
+                command.Parameters.Add(m_cur);
+                GenerateReport.LogMessage("Added RefCur parameter");
+
+                dataAdapter.SelectCommand = command;
+                GenerateReport.LogMessage("Configured data adapter, attempting to fill dataset");
+                dataAdapter.Fill(ds);
+                GenerateReport.LogMessage("Dataset filled successfully");
+
+                if ((ds != null) && (ds.Tables.Count > 0))
+                {
+                    resultTable = ds.Tables[0];
+                    GenerateReport.LogMessage(String.Format("Retrieved {0} rows from database", resultTable.Rows.Count));
+                }
+                else
+                {
+                    GenerateReport.LogMessage("Dataset is empty or null. No data retrieved.");
+                }
+            }
+            catch (OracleException ex)
+            {
+                GenerateReport.LogMessage(String.Format("Oracle Error in GetReportAdapter: {0}", ex.Message));
+                GenerateReport.LogMessage(String.Format("Oracle Error Code: {0}", ex.ErrorCode));
+                GenerateReport.LogMessage(String.Format("Oracle Error Details: {0}", ex.ToString()));
+            }
+            catch (Exception ex)
+            {
+                GenerateReport.LogMessage(String.Format("General Error in GetReportAdapter: {0}", ex.Message));
+                GenerateReport.LogMessage(String.Format("Error Type: {0}", ex.GetType().Name));
+                GenerateReport.LogMessage(String.Format("Error Details: {0}", ex.ToString()));
+            }
+            finally
+            {
+                GenerateReport.LogMessage("Cleaning up resources");
+                command.Dispose();
+                GenerateReport.LogMessage("Command disposed");
+
+                try
+                {
+                    cnn.Close();
+                    GenerateReport.LogMessage("Connection closed");
+                }
+                catch (Exception ex)
+                {
+                    GenerateReport.LogMessage(String.Format("Error closing connection: {0}", ex.Message));
+                }
+
+                dataAdapter = null;
+                GenerateReport.LogMessage("Data adapter set to null");
+            }
+
+            GenerateReport.LogMessage(String.Format("GetReportAdapter completed. Rows retrieved: {0}", resultTable.Rows.Count));
+            return resultTable;
+        }
+
+
+        //
+        // Loading lead test result history information
+        //
+        public DataSet LoadLeadTestAll(string iMEIN, string iCNT)
+        {
+            OracleDataAdapter dataAdapter = new OracleDataAdapter();
+            var cnn = GetConnection();
+            OracleCommand command = new OracleCommand("LEAD_TEST_ALL_SP", cnn);
+            DataSet ds = new DataSet();
+
+            try
+            {
+                command.CommandType = CommandType.StoredProcedure;
+
+                OracleParameter vMEIN = new OracleParameter();
+                vMEIN.ParameterName = "@vMEMBERID";
+                vMEIN.Direction = ParameterDirection.Input;
+                vMEIN.OracleDbType = OracleDbType.Varchar2;
+                vMEIN.Value = iMEIN;
+                command.Parameters.Add(vMEIN);
+
+                OracleParameter vCNT = new OracleParameter();
+                vCNT.ParameterName = "@vCNT";
+                vCNT.Direction = ParameterDirection.Input;
+                vCNT.OracleDbType = OracleDbType.Varchar2;
+                vCNT.Value = iCNT;
+                command.Parameters.Add(vCNT);
+
+                OracleParameter m_cur = new OracleParameter();
+                m_cur.ParameterName = "RefCursor";
+                m_cur.Direction = ParameterDirection.Output;
+                m_cur.OracleDbType = OracleDbType.RefCursor;
+                command.Parameters.Add(m_cur);
+
+                dataAdapter.SelectCommand = command;
+
+                dataAdapter.Fill(ds);
+            }
+            catch (Exception ex)
+            {
+                HttpContext.Current.Response.Write("<div style='border: 1px solid black'><b>HMO List Searching failure in Database.</b><br /><br />");
+                HttpContext.Current.Response.Write("Error: " + ex + "<br /><br /> Description:" + ex.Message + "</div><br /><br />");
+            }
+            finally
+            {
+                command.Dispose();
+                cnn.Close();
+                dataAdapter = null;
+            }
+            return ds;
+        }
+
+        //
+        // Loading given lead test result history information
+        //
+        public DataSet LoadLeadTestOne(string iMEIN, string iMYID)
+        {
+            OracleDataAdapter dataAdapter = new OracleDataAdapter();
+            var cnn = GetConnection();
+            OracleCommand command = new OracleCommand("LEAD_TEST_ONE_SP", cnn);
+            DataSet ds = new DataSet();
+
+            try
+            {
+                command.CommandType = CommandType.StoredProcedure;
+
+                OracleParameter vMEIN = new OracleParameter();
+                vMEIN.ParameterName = "@vMEMBERID";
+                vMEIN.Direction = ParameterDirection.Input;
+                vMEIN.OracleDbType = OracleDbType.Varchar2;
+                vMEIN.Value = iMEIN;
+                command.Parameters.Add(vMEIN);
+
+                OracleParameter vMYID = new OracleParameter();
+                vMYID.ParameterName = "@vMYID";
+                vMYID.Direction = ParameterDirection.Input;
+                vMYID.OracleDbType = OracleDbType.Varchar2;
+                vMYID.Value = iMYID;
+                command.Parameters.Add(vMYID); 
+                
+                OracleParameter m_cur = new OracleParameter();
+                m_cur.ParameterName = "RefCursor";
+                m_cur.Direction = ParameterDirection.Output;
+                m_cur.OracleDbType = OracleDbType.RefCursor;
+                command.Parameters.Add(m_cur);
+
+                dataAdapter.SelectCommand = command;
+
+                dataAdapter.Fill(ds);
+            }
+            catch (Exception ex)
+            {
+                HttpContext.Current.Response.Write("<div style='border: 1px solid black'><b>HMO List Searching failure in Database.</b><br /><br />");
+                HttpContext.Current.Response.Write("Error: " + ex + "<br /><br /> Description:" + ex.Message + "</div><br /><br />");
+            }
+            finally
+            {
+                command.Dispose();
+                cnn.Close();
+                dataAdapter = null;
+            }
+            return ds;
+        }
+        
+        //
+        // Loading given member notes content
+        //
+        public DataSet LoadNotesData(string iMEIN, string iTYPE, string iCTLNO)
+        {
+            OracleDataAdapter dataAdapter = new OracleDataAdapter();
+            var cnn = GetConnection();
+            OracleCommand command = new OracleCommand("LEAD_LOADNOTES_SP", cnn);
+            DataSet ds = new DataSet();
+
+            try
+            {
+                command.CommandType = CommandType.StoredProcedure;
+
+                OracleParameter vMEIN = new OracleParameter();
+                vMEIN.ParameterName = "@vMEMBERID";
+                vMEIN.Direction = ParameterDirection.Input;
+                vMEIN.OracleDbType = OracleDbType.Varchar2;
+                vMEIN.Value = iMEIN;
+                command.Parameters.Add(vMEIN);
+
+                OracleParameter vTYPE = new OracleParameter();
+                vTYPE.ParameterName = "@vTYPE";
+                vTYPE.Direction = ParameterDirection.Input;
+                vTYPE.OracleDbType = OracleDbType.Varchar2;
+                vTYPE.Value = iTYPE;
+                command.Parameters.Add(vTYPE);
+
+                OracleParameter vCTLNO = new OracleParameter();
+                vCTLNO.ParameterName = "@vCTLNO";
+                vCTLNO.Direction = ParameterDirection.Input;
+                vCTLNO.OracleDbType = OracleDbType.Varchar2;
+                vCTLNO.Value = iCTLNO;
+                command.Parameters.Add(vCTLNO); 
+
+                OracleParameter m_cur = new OracleParameter();
+                m_cur.ParameterName = "RefCursor";
+                m_cur.Direction = ParameterDirection.Output;
+                m_cur.OracleDbType = OracleDbType.RefCursor;
+                command.Parameters.Add(m_cur);
+
+                dataAdapter.SelectCommand = command;
+
+                dataAdapter.Fill(ds);
+            }
+            catch (Exception ex)
+            {
+                HttpContext.Current.Response.Write("<div style='border: 1px solid black'><b>Retrieve Notes data failure in Database.</b><br /><br />");
+                HttpContext.Current.Response.Write("Error: " + ex + "<br /><br /> Description:" + ex.Message + "</div><br /><br />");
+            }
+            finally
+            {
+                command.Dispose();
+                cnn.Close();
+                dataAdapter = null;
+            }
+            return ds;
+        }
+
+        //
+        // Loading given member notes content
+        //
+        public bool SaveNotesData(string iMEIN, string iTYPE, string iCTLNO, string iUSER, string iNotes)
+        {            
+            var cnn = GetConnection();
+            OracleCommand command = new OracleCommand("LEAD_SAVENOTES_SP", cnn);            
+
+            try
+            {
+                command.CommandType = CommandType.StoredProcedure;
+
+                OracleParameter vMEIN = new OracleParameter();
+                vMEIN.ParameterName = "@vMEMBERID";
+                vMEIN.Direction = ParameterDirection.Input;
+                vMEIN.OracleDbType = OracleDbType.Varchar2;
+                vMEIN.Value = iMEIN;
+                command.Parameters.Add(vMEIN);
+
+                OracleParameter vTYPE = new OracleParameter();
+                vTYPE.ParameterName = "@vTYPE";
+                vTYPE.Direction = ParameterDirection.Input;
+                vTYPE.OracleDbType = OracleDbType.Varchar2;
+                vTYPE.Value = iTYPE;
+                command.Parameters.Add(vTYPE);
+
+                OracleParameter vCTLNO = new OracleParameter();
+                vCTLNO.ParameterName = "@vCTLNO";
+                vCTLNO.Direction = ParameterDirection.Input;
+                vCTLNO.OracleDbType = OracleDbType.Varchar2;
+                vCTLNO.Value = iCTLNO;
+                command.Parameters.Add(vCTLNO);
+
+                OracleParameter vUSER = new OracleParameter();
+                vUSER.ParameterName = "@vUSER";
+                vUSER.Direction = ParameterDirection.Input;
+                vUSER.OracleDbType = OracleDbType.Varchar2;
+                vUSER.Value = iUSER;
+                command.Parameters.Add(vUSER);
+
+                OracleParameter vNOTES = new OracleParameter();
+                vNOTES.ParameterName = "@vNOTES";
+                vNOTES.Direction = ParameterDirection.Input;
+                vNOTES.OracleDbType = OracleDbType.Varchar2;
+                vNOTES.Value = iNotes;
+                command.Parameters.Add(vNOTES);
+
+                if (cnn.State != ConnectionState.Open)
+                {   cnn.Open();
+                }
+
+                command.ExecuteNonQuery();
+                
+            }
+            catch (Exception ex)
+            {
+                HttpContext.Current.Response.Write("<div style='border: 1px solid black'><b>Retrieve Notes data failure in Database.</b><br /><br />");
+                HttpContext.Current.Response.Write("Error: " + ex + "<br /><br /> Description:" + ex.Message + "</div><br /><br />");
+                return false;
+            }
+            finally
+            {
+                command.Dispose();
+                cnn.Close();
+            }
+            return true;
+        }
+
+        //
+        // Loading MCO Survey history information
+        //
+        public DataSet LoadMCOSurveyAll(string iMEIN)
+        {
+            OracleDataAdapter dataAdapter = new OracleDataAdapter();
+            var cnn = GetConnection();
+            OracleCommand command = new OracleCommand("LEAD_MCOSURVEY_ALL_SP", cnn);
+            DataSet ds = new DataSet();
+
+            try
+            {
+                command.CommandType = CommandType.StoredProcedure;
+
+                OracleParameter vMEIN = new OracleParameter();
+                vMEIN.ParameterName = "@vMEMBERID";
+                vMEIN.Direction = ParameterDirection.Input;
+                vMEIN.OracleDbType = OracleDbType.Varchar2;
+                vMEIN.Value = iMEIN;
+                command.Parameters.Add(vMEIN);
+
+                OracleParameter m_cur = new OracleParameter();
+                m_cur.ParameterName = "RefCursor";
+                m_cur.Direction = ParameterDirection.Output;
+                m_cur.OracleDbType = OracleDbType.RefCursor;
+                command.Parameters.Add(m_cur);
+
+                dataAdapter.SelectCommand = command;
+                dataAdapter.Fill(ds);
+                if (ds==null)
+                {
+                    HttpContext.Current.Response.Write("<div style='border: 1px solid black'><b>Cannot find MCO survey information.</b><br /><br />");
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                HttpContext.Current.Response.Write("<div style='border: 1px solid black'><b>HMO List Searching failure in Database.</b><br /><br />");
+                HttpContext.Current.Response.Write("Error: " + ex + "<br /><br /> Description:" + ex.Message + "</div><br /><br />");
+            }
+            finally
+            {
+                command.Dispose();
+                cnn.Close();
+                dataAdapter = null;
+            }
+            return ds;
+        }
+
+        //
+        // Loading given MCO Survey result information
+        //
+        public DataSet LoadMCOSurveyOne(string iMEIN, string iMYID)
+        {
+            OracleDataAdapter dataAdapter = new OracleDataAdapter();
+            var cnn = GetConnection();
+            OracleCommand command = new OracleCommand("LEAD_MCOSURVEY_ONE_SP", cnn);
+            DataSet ds = new DataSet();
+
+            try
+            {
+                command.CommandType = CommandType.StoredProcedure;
+
+                OracleParameter vMEIN = new OracleParameter();
+                vMEIN.ParameterName = "@vMEMBERID";
+                vMEIN.Direction = ParameterDirection.Input;
+                vMEIN.OracleDbType = OracleDbType.Varchar2;
+                vMEIN.Value = iMEIN;
+                command.Parameters.Add(vMEIN);
+
+                OracleParameter vMYID = new OracleParameter();
+                vMYID.ParameterName = "@vMYID";
+                vMYID.Direction = ParameterDirection.Input;
+                vMYID.OracleDbType = OracleDbType.Varchar2;
+                vMYID.Value = iMYID;
+                command.Parameters.Add(vMYID);
+
+                OracleParameter m_cur = new OracleParameter();
+                m_cur.ParameterName = "RefCursor";
+                m_cur.Direction = ParameterDirection.Output;
+                m_cur.OracleDbType = OracleDbType.RefCursor;
+                command.Parameters.Add(m_cur);
+
+                dataAdapter.SelectCommand = command;
+
+                dataAdapter.Fill(ds);
+            }
+            catch (Exception ex)
+            {
+                HttpContext.Current.Response.Write("<div style='border: 1px solid black'><b>HMO List Searching failure in Database.</b><br /><br />");
+                HttpContext.Current.Response.Write("Error: " + ex + "<br /><br /> Description:" + ex.Message + "</div><br /><br />");
+            }
+            finally
+            {
+                command.Dispose();
+                cnn.Close();
+                dataAdapter = null;
+            }
+            return ds;
+        }
+
+        //
+        // Loading blank FFS PCP Survey sheet
+        //
+        public DataSet LoadFFSSurveyBlank1(string iMEIN, string iQVID, string iMASTER)
+        {
+            OracleDataAdapter dataAdapter = new OracleDataAdapter();
+            var cnn = GetConnection();
+            OracleCommand command = new OracleCommand("LEAD_FFSSURVEY_PCP_SP", cnn);
+            DataSet ds = new DataSet();
+
+            try
+            {
+                command.CommandType = CommandType.StoredProcedure;
+
+                OracleParameter vQVID = new OracleParameter();
+                vQVID.ParameterName = "@vQVID";
+                vQVID.Direction = ParameterDirection.Input;
+                vQVID.OracleDbType = OracleDbType.Varchar2;
+                vQVID.Value = iQVID;
+                vQVID.Size = 10;
+                command.Parameters.Add(vQVID);
+
+                OracleParameter vMASTER = new OracleParameter();
+                vMASTER.ParameterName = "@vMASTER";
+                vMASTER.Direction = ParameterDirection.Input;
+                vMASTER.OracleDbType = OracleDbType.Varchar2;
+                vMASTER.Value = iMASTER;
+                vMASTER.Size = 10;
+                command.Parameters.Add(vMASTER);
+
+                OracleParameter m_cur = new OracleParameter();
+                m_cur.ParameterName = "RefCursor";
+                m_cur.Direction = ParameterDirection.Output;
+                m_cur.OracleDbType = OracleDbType.RefCursor;
+                command.Parameters.Add(m_cur);
+
+                dataAdapter.SelectCommand = command;
+
+                dataAdapter.Fill(ds);
+            }
+            catch (Exception ex)
+            {
+                HttpContext.Current.Response.Write("<div style='border: 1px solid black'><b>PCP survey form loading failure in Database.</b><br /><br />");
+                HttpContext.Current.Response.Write("Error: " + ex + "<br /><br /> Description:" + ex.Message + "</div><br /><br />");
+            }
+            finally
+            {
+                command.Dispose();
+                cnn.Close();
+                dataAdapter = null;
+            }
+            return ds;
+        }
+
+        //
+        // Loading blank FFS LHD Survey sheet
+        //
+        public DataSet LoadFFSSurveyBlank2(string iMEIN, string iQVID, string iMASTER)
+        {
+            OracleDataAdapter dataAdapter = new OracleDataAdapter();
+            var cnn = GetConnection();
+            OracleCommand command = new OracleCommand("LEAD_FFSSURVEY_LHD_SP", cnn);
+            DataSet ds = new DataSet();
+
+            try
+            {
+                command.CommandType = CommandType.StoredProcedure;
+
+                OracleParameter vQVID = new OracleParameter();
+                vQVID.ParameterName = "@vQVID";
+                vQVID.Direction = ParameterDirection.Input;
+                vQVID.OracleDbType = OracleDbType.Varchar2;
+                vQVID.Value = iQVID;
+                vQVID.Size = 10;
+                command.Parameters.Add(vQVID);
+
+                OracleParameter vMASTER = new OracleParameter();
+                vMASTER.ParameterName = "@vMASTER";
+                vMASTER.Direction = ParameterDirection.Input;
+                vMASTER.OracleDbType = OracleDbType.Varchar2;
+                vMASTER.Value = iMASTER;
+                vMASTER.Size = 10;
+                command.Parameters.Add(vMASTER);
+
+                OracleParameter m_cur = new OracleParameter();
+                m_cur.ParameterName = "RefCursor";
+                m_cur.Direction = ParameterDirection.Output;
+                m_cur.OracleDbType = OracleDbType.RefCursor;
+                command.Parameters.Add(m_cur);
+
+                dataAdapter.SelectCommand = command;
+
+                dataAdapter.Fill(ds);
+            }
+            catch (Exception ex)
+            {
+                HttpContext.Current.Response.Write("<div style='border: 1px solid black'><b>LHD survey form loading failure in Database.</b><br /><br />");
+                HttpContext.Current.Response.Write("Error: " + ex + "<br /><br /> Description:" + ex.Message + "</div><br /><br />");
+            }
+            finally
+            {
+                command.Dispose();
+                cnn.Close();
+                dataAdapter = null;
+            }
+            return ds;
+        }        
+        //
+        // Loading dropdown list values
+        //
+        public DataSet LoadOptions(string iGID)
+        {
+            OracleDataAdapter dataAdapter = new OracleDataAdapter();
+            var cnn = GetConnection();
+            OracleCommand command = new OracleCommand("LEAD_ANDOPTIONS_SP", cnn);
+            DataSet ds = new DataSet();
+
+            try
+            {
+                command.CommandType = CommandType.StoredProcedure;
+
+                OracleParameter vGROUPID = new OracleParameter();
+                vGROUPID.ParameterName = "@vGROUPID";
+                vGROUPID.Direction = ParameterDirection.Input;
+                vGROUPID.OracleDbType = OracleDbType.Varchar2;
+                vGROUPID.Value = iGID;
+                command.Parameters.Add(vGROUPID); 
+                
+                OracleParameter m_cur = new OracleParameter();
+                m_cur.ParameterName = "RefCursor";
+                m_cur.Direction = ParameterDirection.Output;
+                m_cur.OracleDbType = OracleDbType.RefCursor;
+                command.Parameters.Add(m_cur);
+
+                dataAdapter.SelectCommand = command;
+
+                dataAdapter.Fill(ds);
+            }
+            catch (Exception ex)
+            {
+                HttpContext.Current.Response.Write("<div style='border: 1px solid black'><b>LHD survey form loading failure in Database.</b><br /><br />");
+                HttpContext.Current.Response.Write("Error: " + ex + "<br /><br /> Description:" + ex.Message + "</div><br /><br />");
+            }
+            finally
+            {
+                command.Dispose();
+                cnn.Close();
+                dataAdapter = null;
+            }
+            return ds;
+        }

@@ -1,0 +1,337 @@
+create or replace PROCEDURE LEAD_TEST_ALL_SP
+( vMEMBERID IN varchar2,
+  vCNT IN varchar2,
+  RefCursor OUT SYS_REFCURSOR
+)
+
+AS 
+
+    curDate SYS_REFCURSOR;
+    curTmp SYS_REFCURSOR;
+    vDOB VARCHAR2(20);
+    found number;
+    srv varchar2(10);
+    mysql VARCHAR2(5000);
+    
+BEGIN
+  
+  ---dbms_session.set_nls('nls_date_format','''MM/DD/YYYY HH24:MI:SS''');
+  Select name into srv from v$database;
+
+IF srv = 'DEVE' OR srv = 'TEST' THEN  
+    mysql := 'SELECT count(a.birth_date) FROM bene_temp_NAMES@LED_DETL_LINK.WORLD a, TEMP_SHPT_XREF@LED_DETL_LINK.WORLD b
+        WHERE b.ubin=''' ||vMEMBERID|| ''' AND a.mein=b.mein AND rownum=1';
+ELSE
+    mysql := 'SELECT count(a.birth_date) FROM bene_temp_NAMES a, TEMP_SHPT_XRE b
+        WHERE b.ubin=''' ||vMEMBERID|| ''' AND a.mein=b.mein AND rownum=1';
+
+END IF;
+    Open curTmp for mysql;
+  
+loop
+  fetch curTmp into found;
+  
+  exit when curTmp%notfound;  
+  
+    If found > 0 Then
+        IF srv = 'DEVE' OR srv = 'TEST' THEN   
+                mysql := 'SELECT distinct(TO_CHAR(NVL(a.birth_date,''''),''MM/DD/YYYY'')) FROM bene_temp_NAMES@LED_DETL_LINK.WORLD a, TEMP_SHPT_XREF@LED_DETL_LINK.WORLD b
+                WHERE b.ubin=''' ||vMEMBERID|| ''' AND a.mein=b.mein AND rownum=1';
+        ELSE
+                mysql := 'SELECT distinct(TO_CHAR(NVL(a.birth_date,''''),''MM/DD/YYYY'')) FROM bene_temp_NAMES a, TEMP_SHPT_XREF b
+                WHERE b.ubin=''' ||vMEMBERID|| ''' AND a.mein=b.mein AND rownum=1';
+        END IF;
+     
+    --- dbms_output.put_line ('mysql=' || mysql);
+     
+     Open curDate for mysql;
+  
+        loop
+          fetch curDate into vDOB;
+          
+          exit when curDate%notfound; 
+          
+        end loop;
+    
+    Else
+        vDOB := '';
+    End If;
+
+end loop;
+    -- retrieve ll test records on member detail page
+  IF vCNT = '0' THEN   
+      mysql := 'SELECT 
+                distinct(ctlno),  --0
+                TO_CHAR(NVL(sample_date,''''),''MM/DD/YYYY'') AS sampledate,    --1
+                led_mco.institution || '' / '' ||led_mco.mco AS mco,    -- 2
+                providername, --3
+                results,  --4
+                sample_type,  --5    
+                ageattestdate, -- 6
+                CASE WHEN analysis_date IS NULL THEN '''' ELSE TO_CHAR(analysis_date,''MM/DD/YYYY'') END AS analysisdate,    --7
+                ROUND(((CASE WHEN sample_date is null THEN analysis_date ELSE sample_date END) - TO_DATE(TO_CHAR(NVL(a.birth_date,''''),''MM/DD/YYYY''), ''MM/DD/YYYY''))/365, 0) AS age,  -- 8
+                matchid1, -- 9
+                memberid,  -- 10
+                led_testhistory.testhistory, --11
+                ROUND(CASE WHEN analysis_date IS NULL THEN 0 ELSE (analysis_date - TO_DATE(''' ||vDOB|| ''', ''MM/DD/YYYY'')) END,1)AS days--12
+                ';
+        IF srv = 'DEVE' OR srv = 'TEST' THEN 
+            mysql := mysql ||' FROM led_leadtest, led_mco, led_testhistory, bene_temp_NAMES@LED_DETL_LINK.WORLD a, TEMP_SHPT_XREF@LED_DETL_LINK.WORLD b';
+        ELSE    --- PROD
+            mysql := mysql ||' FROM led_leadtest, led_mco, led_testhistory, bene_temp_NAMES  a, TEMP_SHPT_XREF  b';
+        END IF;
+            mysql := mysql ||' WHERE a.mein=b.mein AND b.ubin = ''' || vMEMBERID || '''
+                                AND (NVL(TO_CHAR(led_leadtest.mco),''%'') Like (''%''||led_mco.instid(+))) 
+                                AND Nvl(TO_CHAR(led_leadtest.memberid),'''') = ''' || vMEMBERID || '''
+                                AND led_leadtest.testhistoryid=led_testhistory.testhistoryid(+)
+                                AND led_leadtest.sample_date is not null
+                            ORDER BY TO_DATE(sampledate, ''MM/DD/YYYY'') DESC';
+      
+      dbms_output.put_line ('mysql=' || mysql);
+
+      Open RefCursor for mysql;  
+  END IF;
+      --- Retrieve 4 TEST records used by Survey Page displaying
+  IF vCNT = '4' THEN
+    Open RefCursor for
+      SELECT (CASE WHEN analysis_date IS NULL THEN TO_CHAR(sample_date,'mm/dd/yyyy') ELSE TO_CHAR(analysis_date,'MM/DD/YYYY') END || ' -- ' || results || ' ug\dl') AS rlist   --1
+      FROM led_leadtest
+      WHERE Nvl(TO_CHAR(led_leadtest.memberid),'') = vMEMBERID
+        AND rownum < 5
+      ORDER BY sample_date DESC;
+      
+  END IF;
+  
+
+END LEAD_TEST_ALL_SP; 
+
+
+=================================================================================== 
+
+create or replace PROCEDURE LEAD_TEST_ALL_SP
+( vMEMBERID IN varchar2,
+  vCNT IN varchar2,
+  RefCursor OUT SYS_REFCURSOR
+)
+
+AS 
+
+    curDate SYS_REFCURSOR;
+    curTmp SYS_REFCURSOR;
+    vDOB VARCHAR2(20);
+    found number;
+    srv varchar2(10);
+    mysql VARCHAR2(5000);
+    
+BEGIN
+  
+  ---dbms_session.set_nls('nls_date_format','''MM/DD/YYYY HH24:MI:SS''');
+  Select name into srv from v$database;
+
+IF srv = 'DEVE' OR srv = 'TEST' THEN  
+    mysql := 'SELECT count(a.birth_date) FROM bene_temp_NAMES@LED_DETL_LINK.WORLD a, TEMP_SHPT_XREF@LED_DETL_LINK.WORLD b
+        WHERE b.ubin=''' ||vMEMBERID|| ''' AND a.mein=b.mein AND rownum=1';
+ELSE
+    mysql := 'SELECT count(a.birth_date) FROM bene_temp_NAMES a, TEMP_SHPT_XRE b
+        WHERE b.ubin=''' ||vMEMBERID|| ''' AND a.mein=b.mein AND rownum=1';
+
+END IF;
+    Open curTmp for mysql;
+  
+loop
+  fetch curTmp into found;
+  
+  exit when curTmp%notfound;  
+  
+    If found > 0 Then
+        IF srv = 'DEVE' OR srv = 'TEST' THEN   
+                mysql := 'SELECT distinct(TO_CHAR(NVL(a.birth_date,''''),''MM/DD/YYYY'')) FROM bene_temp_NAMES@LED_DETL_LINK.WORLD a, TEMP_SHPT_XREF@LED_DETL_LINK.WORLD b
+                WHERE b.ubin=''' ||vMEMBERID|| ''' AND a.mein=b.mein AND rownum=1';
+        ELSE
+                mysql := 'SELECT distinct(TO_CHAR(NVL(a.birth_date,''''),''MM/DD/YYYY'')) FROM bene_temp_NAMES a, TEMP_SHPT_XREF b
+                WHERE b.ubin=''' ||vMEMBERID|| ''' AND a.mein=b.mein AND rownum=1';
+        END IF;
+     
+    --- dbms_output.put_line ('mysql=' || mysql);
+     
+     Open curDate for mysql;
+  
+        loop
+          fetch curDate into vDOB;
+          
+          exit when curDate%notfound; 
+          
+        end loop;
+    
+    Else
+        vDOB := '';
+    End If;
+
+end loop;
+    -- retrieve ll test records on member detail page
+  IF vCNT = '0' THEN   
+      mysql := 'SELECT 
+                distinct(ctlno),  --0
+                TO_CHAR(NVL(sample_date,''''),''MM/DD/YYYY'') AS sampledate,    --1
+                led_mco.institution || '' / '' ||led_mco.mco AS mco,    -- 2
+                providername, --3
+                results,  --4
+                sample_type,  --5    
+                ageattestdate, -- 6
+                CASE WHEN analysis_date IS NULL THEN '''' ELSE TO_CHAR(analysis_date,''MM/DD/YYYY'') END AS analysisdate,    --7
+                ROUND(((CASE WHEN sample_date is null THEN analysis_date ELSE sample_date END) - TO_DATE(TO_CHAR(NVL(a.birth_date,''''),''MM/DD/YYYY''), ''MM/DD/YYYY''))/365, 0) AS age,  -- 8
+                matchid1, -- 9
+                memberid,  -- 10
+                led_testhistory.testhistory, --11
+                ROUND(CASE WHEN analysis_date IS NULL THEN 0 ELSE (analysis_date - TO_DATE(''' ||vDOB|| ''', ''MM/DD/YYYY'')) END,1)AS days--12
+                ';
+        IF srv = 'DEVE' OR srv = 'TEST' THEN 
+            mysql := mysql ||' FROM led_leadtest, led_mco, led_testhistory, bene_temp_NAMES@LED_DETL_LINK.WORLD a, TEMP_SHPT_XREF@LED_DETL_LINK.WORLD b';
+        ELSE    --- PROD
+            mysql := mysql ||' FROM led_leadtest, led_mco, led_testhistory, bene_temp_NAMES  a, TEMP_SHPT_XREF  b';
+        END IF;
+            mysql := mysql ||' WHERE a.mein=b.mein AND b.ubin = ''' || vMEMBERID || '''
+                                AND (NVL(TO_CHAR(led_leadtest.mco),''%'') Like (''%''||led_mco.instid(+))) 
+                                AND Nvl(TO_CHAR(led_leadtest.memberid),'''') = ''' || vMEMBERID || '''
+                                AND led_leadtest.testhistoryid=led_testhistory.testhistoryid(+)
+                                AND led_leadtest.sample_date is not null
+                            ORDER BY TO_DATE(sampledate, ''MM/DD/YYYY'') DESC';
+      
+      dbms_output.put_line ('mysql=' || mysql);
+
+      Open RefCursor for mysql;  
+  END IF;
+      --- Retrieve 4 TEST records used by Survey Page displaying
+  IF vCNT = '4' THEN
+    Open RefCursor for
+      SELECT (CASE WHEN analysis_date IS NULL THEN TO_CHAR(sample_date,'mm/dd/yyyy') ELSE TO_CHAR(analysis_date,'MM/DD/YYYY') END || ' -- ' || results || ' ug\dl') AS rlist   --1
+      FROM led_leadtest
+      WHERE Nvl(TO_CHAR(led_leadtest.memberid),'') = vMEMBERID
+        AND rownum < 5
+      ORDER BY sample_date DESC;
+      
+  END IF;
+  
+
+END LEAD_TEST_ALL_SP; 
+
+=================================================================================== 
+
+--------------------------------------------------------
+--  DDL for Table LED_SURVEYMASTER
+--------------------------------------------------------
+
+  CREATE TABLE "DHS_MAHS_LED"."LED_SURVEYMASTER" 
+   (	"SURVEYID" NUMBER(12,0), 
+	"SURVEYTYPE" VARCHAR2(5 BYTE), 
+	"SURVEYFOR" VARCHAR2(5 BYTE), 
+	"QVERSION" VARCHAR2(6 BYTE), 
+	"MEMBERID" NUMBER(12,0), 
+	"CREATEDATE" DATE, 
+	"SURVEYEND" VARCHAR2(10 BYTE), 
+	"FORMBYNAME" VARCHAR2(50 BYTE), 
+	"FORMBYNUMBER" VARCHAR2(20 BYTE), 
+	"SURVEYREVIEW" VARCHAR2(3 BYTE), 
+	"UPDATENAME" VARCHAR2(50 BYTE), 
+	"UPDATEDATE" DATE, 
+	"PROVIDER" VARCHAR2(5 BYTE), 
+	"IS_HOSPITALIZED" VARCHAR2(5 BYTE), 
+	"IS_CASECLOSED" VARCHAR2(5 BYTE), 
+	"IS_FOLLOWUP" VARCHAR2(5 BYTE)
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
+ NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "LEDDD001" ;
+--------------------------------------------------------
+--  DDL for Index LED_SURVEYMASTER_IDX
+--------------------------------------------------------
+
+  CREATE INDEX "DHS_MAHS_LED"."LED_SURVEYMASTER_IDX" ON "DHS_MAHS_LED"."LED_SURVEYMASTER" ("MEMBERID", "SURVEYID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "LEDDD001" ;
+--------------------------------------------------------
+--  DDL for Index LED_SURVEYMASTER_IDX1
+--------------------------------------------------------
+
+  CREATE INDEX "DHS_MAHS_LED"."LED_SURVEYMASTER_IDX1" ON "DHS_MAHS_LED"."LED_SURVEYMASTER" ("SURVEYID", "IS_CASECLOSED") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "LEDDD001" ;
+--------------------------------------------------------
+--  DDL for Index LED_SURVEYMASTER_IDX2
+--------------------------------------------------------
+
+  CREATE INDEX "DHS_MAHS_LED"."LED_SURVEYMASTER_IDX2" ON "DHS_MAHS_LED"."LED_SURVEYMASTER" ("SURVEYID", "IS_HOSPITALIZED") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "LEDDD001" ;
+--------------------------------------------------------
+--  DDL for Index LED_SURVEYMASTER_IDX3
+--------------------------------------------------------
+
+  CREATE INDEX "DHS_MAHS_LED"."LED_SURVEYMASTER_IDX3" ON "DHS_MAHS_LED"."LED_SURVEYMASTER" ("SURVEYID", "SURVEYREVIEW") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "LEDDD001" ;
+--------------------------------------------------------
+--  DDL for Index LED_SURVEYMASTER_IDX4
+--------------------------------------------------------
+
+  CREATE INDEX "DHS_MAHS_LED"."LED_SURVEYMASTER_IDX4" ON "DHS_MAHS_LED"."LED_SURVEYMASTER" ("SURVEYID", "IS_FOLLOWUP") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "LEDDD001" ;
+--------------------------------------------------------
+--  Constraints for Table LED_SURVEYMASTER
+--------------------------------------------------------
+
+  ALTER TABLE "DHS_MAHS_LED"."LED_SURVEYMASTER" MODIFY ("MEMBERID" NOT NULL ENABLE);
+  ALTER TABLE "DHS_MAHS_LED"."LED_SURVEYMASTER" MODIFY ("QVERSION" NOT NULL ENABLE);
+  ALTER TABLE "DHS_MAHS_LED"."LED_SURVEYMASTER" MODIFY ("SURVEYFOR" NOT NULL ENABLE);
+  ALTER TABLE "DHS_MAHS_LED"."LED_SURVEYMASTER" MODIFY ("SURVEYTYPE" NOT NULL ENABLE);
+  ALTER TABLE "DHS_MAHS_LED"."LED_SURVEYMASTER" MODIFY ("CREATEDATE" NOT NULL ENABLE);
+
+=================================================================================== 
+
+=================================================================================== 
+
+=================================================================================== 
+
+=================================================================================== 
+
+=================================================================================== 
+
+=================================================================================== 
+
+=================================================================================== 
+
+=================================================================================== 
+
+=================================================================================== 
+
+=================================================================================== 
+
+=================================================================================== 
+
+=================================================================================== 
+
+=================================================================================== 
+
+=================================================================================== 
+
+=================================================================================== 
+
