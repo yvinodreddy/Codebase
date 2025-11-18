@@ -1,0 +1,1032 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Data;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Collections;
+using Oracle.DataAccess.Client;
+using DataAccess;
+
+namespace Lead_Application.Forms
+{
+    public partial class frmFFSNewSurvey : System.Web.UI.Page
+    {
+        int idx = 0;
+        private void InitializeComponent()
+        {   // Do not delete
+        }
+        protected void Page_Init(Object sender, EventArgs e)
+        {   //CODEGEN: This method call is required by the Web Form Designer
+            //Do not modify it using the code editor.
+            InitializeComponent();
+        }
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            btnSearch.Click += new EventHandler(this.btnSearch_Click);
+            btnHelp.Click += new EventHandler(this.btnHelp_Click);
+            btnHome.Click += new EventHandler(this.btnHome_Click);
+            btnFFSCase.Click += new EventHandler(this.btnFFSCase_Click);
+            btnSaveSurvey.Click += new EventHandler(this.btnSaveSurvey_Click);
+            btnCompletedSurvey.Click += new EventHandler(this.btnCompletedSurvey_Click);
+            btnCancelSurvey.Click += new EventHandler(this.btnCancelSurvey_Click);
+            btnCopySurvey.Click += new EventHandler(this.btnCopySurvey_Click);
+            //btnReports.Click += new EventHandler(this.btnReports_Click);
+            btnDeleteSurvey.Click += new EventHandler(btnDeleteSurvey_Click);
+
+            Dropdownlist2.SelectedIndexChanged += new EventHandler(this.Dropdownlist2_Click);
+
+            OnLoad(e);
+            //
+            // Check user role
+            if ((string)Session["RoleName"] == "READ_ONLY")
+            {
+                btnSaveSurvey.CssClass = "hideme";
+                btnCompletedSurvey.CssClass = "hideme";
+                btnCopySurvey.CssClass = "hideme";
+                btnDeleteSurvey.CssClass = "hideme";
+            }
+            tbAnswer_Date.Focus();
+        }
+        //
+        // OnLoad method could be called from Page_Load event
+        //
+        protected void OnLoad(EventArgs e)
+        {
+            DB_DataAccess db = (DB_DataAccess)Session["myDB"];
+            if (db == null)
+            {
+                Response.Redirect("Welcome.aspx",false);
+            }
+
+            strLName.Text = clsCommon.pLastName;
+            strFName.Text = clsCommon.pFirstName;
+            strMEIN.Text = clsCommon.pMEMBERID;
+            strAGE.Text = clsCommon.pAge;
+            strDOB.Text = clsCommon.pBirthDate;
+            //
+            //  Retrieve Memeber test result information
+            //
+            DataSet dsLeadTest = db.LoadLeadTestAll(clsCommon.pMEMBERID, "4");
+            if ((dsLeadTest != null) && (dsLeadTest.Tables.Count > 0))
+            {
+                idx = 0;
+                DataView dvDetail = dsLeadTest.Tables[0].DefaultView;
+                dlResultList.DataSource = dvDetail;
+                dlResultList.DataBind();
+            }
+            
+            
+            if (!IsPostBack)
+            {
+                string surveyid = Request.QueryString["sid"];
+                string surveytype = Request.QueryString["surveytype"];
+                string existingSurveyType = "";
+
+                if (surveyid != "0" && !string.IsNullOrEmpty(surveyid))
+                {
+                    existingSurveyType = GetExistingSurveyType(surveyid);
+                    hdnExistingSurveyType.Value = existingSurveyType;
+                    SURVEYID.Value = surveyid;
+                } 
+
+                // Check if surveytype parameter exists and set the appropriate tab
+                if (!string.IsNullOrEmpty(surveytype))
+                {
+                    ViewState["SurveyType"] = surveytype.ToUpper();
+
+                    if (surveytype.ToUpper() == "PCP")
+                    {
+                        // For PCP survey, show only PCP tab
+                        MainView.ActiveViewIndex = 0;
+                        Tab1.CssClass = "Clicked";
+                        Tab2.CssClass = "Initial";
+
+                        // IMPORTANT: Hide the LHD tab completely
+                        Tab2.Visible = false;
+                        Tab1.Enabled = false; // Disable clicking since only one type
+                    }
+                    else if (surveytype.ToUpper() == "LHD")
+                    {
+                        // For LHD survey, show only LHD tab
+                        MainView.ActiveViewIndex = 1;
+                        Tab2.CssClass = "Clicked";
+                        Tab1.CssClass = "Initial";
+
+                        // IMPORTANT: Hide the PCP tab completely
+                        Tab1.Visible = false;
+                        Tab2.Enabled = false; // Disable clicking since only one type
+                    }
+                }
+                else
+                {
+                    // When editing existing survey or no type specified
+                    if (!string.IsNullOrEmpty(existingSurveyType))
+                    {
+                        ViewState["SurveyType"] = existingSurveyType;
+
+                        if (existingSurveyType == "PCP")
+                        {
+                            MainView.ActiveViewIndex = 0;
+                            Tab1.CssClass = "Clicked";
+                            Tab2.CssClass = "Initial";
+                            Tab2.Visible = false;
+                        }
+                        else if (existingSurveyType == "LHD")
+                        {
+                            MainView.ActiveViewIndex = 1;
+                            Tab2.CssClass = "Clicked";
+                            Tab1.CssClass = "Initial";
+                            Tab1.Visible = false;
+                        }
+                        else
+                        {
+                            // Both types - show both tabs
+                            Tab1.CssClass = "Clicked";
+                            Tab2.CssClass = "Initial";
+                            MainView.ActiveViewIndex = 0;
+                        }
+                    }
+                    else
+                    {
+                        // Default behavior - show both tabs (for backward compatibility)
+                        ViewState["SurveyType"] = "BOTH";
+                        Tab1.CssClass = "Clicked";
+                        Tab2.CssClass = "Initial";
+                        MainView.ActiveViewIndex = 0;
+                    }
+                }
+                DataSet ds = null;
+                ds = db.LoadPCPName(null);  //load full list of PCO on top section
+                if ((ds != null) && (ds.Tables.Count > 0) && (ds.Tables[0].Rows.Count > 0))
+                {
+                    DataView dvDetail = ds.Tables[0].DefaultView;
+                    try
+                    {
+                        Dropdownlist2.DataTextField = ds.Tables[0].Columns["name"].ToString(); // text field name of table dispalyed in dropdown
+                        Dropdownlist2.DataValueField = ds.Tables[0].Columns["key"].ToString();             // to retrive specific  textfield name 
+                        Dropdownlist2.DataSource = ds.Tables[0];      //assigning datasource to the dropdownlist
+                        Dropdownlist2.DataBind();
+                    }
+                    catch (Exception ex)
+                    {
+                        HttpContext.Current.Response.Write("<div style='border: 1px solid black'><b>State loading failure in Database.</b><br /><br />");
+                        HttpContext.Current.Response.Write("Error: " + ex + "<br /><br /> Description:" + ex.Message + "</div><br /><br />");
+                    }
+                }
+
+                if ((surveyid == "") || (surveyid == null))
+                { surveyid = "0"; }
+
+                 // After the tab visibility code, modify the data loading:
+                string surveyTypeToLoad = ViewState["SurveyType"] as string ?? "BOTH";
+
+                // Load PCP data only if needed
+                if (surveyTypeToLoad == "PCP" || surveyTypeToLoad == "BOTH")
+                {
+                    // New survey - load both as blank
+                    if (qvPCP.Value == "")
+                    {
+                        qvPCP.Value = clsCommon.pFFSQV_PCP;
+                    }
+                    DataSet dsDetail1 = db.LoadFFSSurveyBlank1(clsCommon.pMEMBERID, qvPCP.Value, surveyid);
+                    if ((dsDetail1 != null) && (dsDetail1.Tables.Count > 0))
+                    {
+                        idx = 0;
+                        DataView dvDetail = dsDetail1.Tables[0].DefaultView;
+                        dgDetailPCP.DataSource = dvDetail;
+                        dgDetailPCP.DataBind();
+                    }
+                }
+
+                if (surveyTypeToLoad == "LHD" || surveyTypeToLoad == "BOTH")
+                {
+                    if (qvLHD.Value == "")
+                    {
+                        qvLHD.Value = clsCommon.pFFSQV_LHD;
+                    }
+                    DataSet dsDetail2 = db.LoadFFSSurveyBlank2(clsCommon.pMEMBERID, qvLHD.Value, surveyid);
+                    if ((dsDetail2 != null) && (dsDetail2.Tables.Count > 0))
+                    {
+                        idx = 0;
+                        DataView dvDetail = dsDetail2.Tables[0].DefaultView;
+                        dgDetailLHD.DataSource = dvDetail;
+                        dgDetailLHD.DataBind();
+                    }
+                }
+                 
+                //
+                //  Loading MORE answers if surveyid is not null
+                //  Currently, we have 2 MORE in PCP and 2 MORE in LHD page. Will need to change if there are extra MORE data question added to page in the future.
+                //
+                if (surveyid != "0")
+                {
+                    string s = db.LoadFFSSurveyMORE(clsCommon.pMEMBERID, surveyid);
+                    if (s != "")
+                    {
+                        string[] arry = s.Split('{');   //split PCP and LHD
+                        if (arry[0] != "")
+                        {
+                            string[] arryP = arry[0].Split('}');    //Split each data stream from PCP answers  
+                            if ((arryP.Length > 0) && (arryP[0] != ""))
+                            {
+                                tbMoreDataP1.Text = arryP[0];
+                            }
+                            if ((arryP.Length > 1) && (arryP[1] != ""))
+                            {
+                                tbMoreDataP2.Text = arryP[1];
+                            }                                                      
+                        }
+
+                        if (arry[1] != "")
+                        {
+                            string[] arryL = arry[1].Split('}');    //Split each data stream from LHD answers  
+                            if ((arryL.Length > 0) && (arryL[0] != ""))
+                            {
+                                tbMoreDataL1.Text = arryL[0];
+                            }
+                            if ((arryL.Length > 1) && (arryL[1] != ""))
+                            {
+                                tbMoreDataL2.Text = arryL[1];
+                            }                             
+                        }
+                    }       // if (s)
+                }   // surveyid
+                SURVEYID.Value = surveyid;
+
+                //
+                //  Loading default PCP provider and survey status
+                //
+                if (surveyid != "0")
+                {
+                    DataSet dsDefPCP = db.LoadDefaultPCP(clsCommon.pMEMBERID, surveyid);
+                    if ((dsDefPCP != null) && (dsDefPCP.Tables.Count > 0))
+                    {
+                        tbPCPId.Text = dsDefPCP.Tables[0].Rows[0]["INIT_PCP"].ToString();
+                        tbPCPName.Text = dsDefPCP.Tables[0].Rows[0]["INIT_PCPNAME"].ToString();
+                        SURVEYSTATUS.Value = dsDefPCP.Tables[0].Rows[0]["SURVEYEND"].ToString();
+                        tbAnswer_Date.Text = dsDefPCP.Tables[0].Rows[0]["CREATEDATE"].ToString();
+                        tbFormByName.Text = dsDefPCP.Tables[0].Rows[0]["FORMBYNAME"].ToString();
+                        tbFormByNumber.Text = dsDefPCP.Tables[0].Rows[0]["FORMBYNUMBER"].ToString();
+                        if (SURVEYSTATUS.Value == "1")
+                        {   // Survey has been completed
+                            btnCopySurvey.CssClass = "showme";
+                            btnSaveSurvey.CssClass = "hideme";
+                            btnCompletedSurvey.CssClass = "hideme";
+                            btnDeleteSurvey.CssClass = "hideme";
+                        }                        
+                    }
+                }
+                else
+                {   //Loading new survey
+                    btnDeleteSurvey.CssClass = "hideme";
+                }
+     
+            }
+        }
+        public DataView FillDropDown(object o)
+        {
+            string gid = "0";
+            if (o != null)
+            { gid = (string)o; }            
+
+            DB_DataAccess db = (DB_DataAccess)Session["myDB"];
+            if (db != null)
+            {
+                DataSet dsOption = db.LoadOptions(gid);
+                if ((dsOption != null) && (dsOption.Tables.Count > 0))
+                {
+                    return dsOption.Tables[0].DefaultView;
+                }
+            }
+            return null;
+        }        
+
+        void btnSearch_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("frmSearch.aspx",false);
+        }
+
+        void btnHome_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Welcome.aspx",false);
+        }
+        void btnHelp_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("App_Data\\Lead_Application_Help.docx",false);
+        }
+                
+        void btnCancelSurvey_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("frmCaseDetail.aspx",false);
+        }
+
+        void btnFFSCase_Click(object sender, EventArgs e)
+        {
+            string surveyType = Request.QueryString["surveytype"];
+            if (!string.IsNullOrEmpty(surveyType))
+            {
+                Response.Redirect("frmFFSCase.aspx?lastsurveytype=" + surveyType, false);
+            }
+            else
+            {
+                Response.Redirect("frmFFSCase.aspx", false);
+            }
+        } 
+
+        void btnOQAReports_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("frmOQAReports.aspx",false);
+        } 
+
+        void btnFFSReports_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("frmFFSReports.aspx", false);
+        }
+
+        protected void Tab1_Click(object sender, EventArgs e)
+        {
+            string surveyType = ViewState["SurveyType"] as string;
+            if (surveyType == "PCP" || surveyType == "LHD")
+            {
+                // Don't allow tab switching in single survey mode
+                return;
+            }
+
+            Tab1.CssClass = "Clicked";
+            Tab2.CssClass = "Initial";
+            MainView.ActiveViewIndex = 0;
+        }
+
+        protected void Tab2_Click(object sender, EventArgs e)
+        {
+            string surveyType = ViewState["SurveyType"] as string;
+            if (surveyType == "PCP" || surveyType == "LHD")
+            {
+                // Don't allow tab switching in single survey mode
+                return;
+            }
+
+            Tab1.CssClass = "Initial";
+            Tab2.CssClass = "Clicked";
+            MainView.ActiveViewIndex = 1;
+        }
+        protected string Iif(object o)
+        {
+            string s = (string)o;
+            if (s == "1")
+            {
+                idx += 1;
+                return (idx).ToString();
+            }
+            else
+            {
+                return "";
+            }              
+        }
+        protected string Iifs(object o)
+        {
+            string s = (string)o;
+            if (s == "3")
+            {                
+                return "qStyle3";
+            }
+            if (s == "2")
+            {
+                return "qStyle2";
+            }
+            if (s == "5")
+            {
+                return "hideme";
+            }
+            return "qStyle1";
+        }
+        protected string Iif(object o, string g, string y, string n )
+        {
+            string s = (string)o;
+            if (s == g)
+            { return y; }
+            else      // (s != g)
+            {
+                if (s == "0")
+                {
+                    return "hideme";
+                }
+                return n; 
+            }
+        }
+        protected string Iif(object o, string g, string y, object n)
+        {
+            string blank = " ";
+            string s = (string)o;
+            if (s != g)
+            {
+                if ((string)n == blank)
+                {
+                    return blank;
+                }
+                if (n != null)
+                { return (string)n; } 
+            }
+            return blank;
+            
+        }
+        protected string Iif(object o, string g, object n, string y )
+        {
+            string s = (string)o;
+            if (s == g)
+            {
+                return (string)n;
+            }
+            return y;
+
+        }
+        protected string Iifb(object o)
+        {
+            string s = (string)o;
+            if (s == "5")
+            {
+                return "showme";
+            }
+            return "hideme";
+        }
+
+        protected string HasOpenSurvey(string sRequestFrom)
+        {
+            DB_DataAccess db = new DB_DataAccess();
+            DataSet dsHistory = new DataSet();
+            DataTable SurveyData = new DataTable();
+            DataView dv;
+            DataRow dRow;
+            string sStatus = "";
+            string sResult = "false";
+
+            // Track open surveys by type
+            int openPCPCount = 0;
+            int openLHDCount = 0;
+            string currentSurveyType = "";
+
+            try
+            {
+                db = (DB_DataAccess)Session["myDB"];
+                string sid = Request.QueryString["sid"];
+                string requestedSurveyType = Request.QueryString["stype"]; // Get the survey type being created/edited
+                
+                // Get the active tab to determine which survey type we're working with
+                int activeTab = MainView.ActiveViewIndex;
+                string activeTabType = activeTab == 0 ? "PCP" : "LHD";
+
+                // Override with ViewState if available (for single survey type mode)
+                string viewStateSurveyType = ViewState["SurveyType"] as string;
+                if (!string.IsNullOrEmpty(viewStateSurveyType) && viewStateSurveyType != "BOTH")
+                {
+                    activeTabType = viewStateSurveyType;
+                }
+
+                if (db != null)
+                {
+                    dsHistory = db.LoadFFSSurveyAll(clsCommon.pMEMBERID);
+                    if ((dsHistory != null) && (dsHistory.Tables.Count > 0))
+                    {
+                        // First, count open surveys by type
+                        foreach (DataRow row in dsHistory.Tables[0].Rows)
+                        {
+                            if (row["STATUS"] != null && row["STATUS"].ToString().ToLower() == "open")
+                            {
+                                string surveyType = row["SURVEYTYPE"] != null ? row["SURVEYTYPE"].ToString().Replace(" Survey", "").Trim().ToUpper() : "";
+                                string surveyId = row["SURVEYID"] != null ? row["SURVEYID"].ToString() : "";
+
+                                // Don't count the current survey if we're editing it
+                                if (!string.IsNullOrEmpty(sid) && surveyId == sid)
+                                {
+                                    currentSurveyType = surveyType;
+                                    continue;
+                                }
+
+                                if (surveyType == "PCP")
+                                    openPCPCount++;
+                                else if (surveyType == "LHD")
+                                    openLHDCount++;
+                            }
+                        }
+
+                        if (sid != null && sid != "0")
+                        {
+                            // Editing existing survey - always allow
+                            sResult = "false";
+                        }
+                        else
+                        {
+                            // Creating new survey or saving from a tab
+                            // Determine which type we're trying to save based on active tab
+                            string targetSurveyType = "";
+
+                            if (!string.IsNullOrEmpty(requestedSurveyType))
+                            {
+                                targetSurveyType = requestedSurveyType.ToUpper();
+                            }
+                            else
+                            {
+                                // Use active tab to determine survey type
+                                targetSurveyType = activeTabType;
+                            }
+
+                            // Check if there's already an open survey of the same type
+                            if ((targetSurveyType == "PCP" && openPCPCount > 0) ||
+                                (targetSurveyType == "LHD" && openLHDCount > 0))
+                            {
+                                sResult = "true"; // Block creation/save
+                            }
+                        }
+
+                    }
+                }
+            }
+            catch (Exception)
+            { }
+            finally
+            {
+                db = null;
+                dsHistory = null;
+                SurveyData = null;
+                dv = null;
+                dRow = null;
+            }
+
+            return sResult;
+        }
+
+        protected string GetExistingSurveyType(string surveyId)
+        {
+            DB_DataAccess db = new DB_DataAccess();
+            DataSet dsHistory = new DataSet();
+            string sResult = "";
+            List<string> foundTypes = new List<string>(); // Track all types found
+
+            try
+            {
+                if (string.IsNullOrEmpty(surveyId) || surveyId == "0")
+                    return "";
+
+                db = (DB_DataAccess)Session["myDB"];
+                if (db != null)
+                {
+                    dsHistory = db.LoadFFSSurveyAll(clsCommon.pMEMBERID);
+                    if ((dsHistory != null) && (dsHistory.Tables.Count > 0))
+                    {
+                        foreach (DataRow row in dsHistory.Tables[0].Rows)
+                        {
+                            string rowSurveyId = row["SURVEYID"] != null ? row["SURVEYID"].ToString() : "";
+                            if (rowSurveyId == surveyId)
+                            {
+                                string surveyType = row["SURVEYTYPE"] != null ?
+                                    row["SURVEYTYPE"].ToString().Replace(" Survey", "").Trim().ToUpper() : "";
+
+                                if (!string.IsNullOrEmpty(surveyType) && !foundTypes.Contains(surveyType))
+                                {
+                                    foundTypes.Add(surveyType);
+                                }
+                            }
+                        }
+
+                        // If multiple types found, this indicates data corruption
+                        if (foundTypes.Count > 1)
+                        {
+                            // Log this as an error - survey ID has multiple types
+                            // For now, return the first type found
+                            sResult = foundTypes[0];
+                        }
+                        else if (foundTypes.Count == 1)
+                        {
+                            sResult = foundTypes[0];
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            { }
+            finally
+            {
+                db = null;
+                dsHistory = null;
+                foundTypes = null;
+            }
+
+            return sResult;
+        }
+
+        void btnCompletedSurvey_Click(object sender, EventArgs e)
+        {
+            DB_DataAccess db = (DB_DataAccess)Session["myDB"];
+            string surveyid = Request.Form["SURVEYID"];
+            if (surveyid=="")
+            { surveyid = "0"; }
+            string dt = Request.Form["tbAnswer_Date"];            
+            string pcpname = Request.Form["tbPCPName"];
+            string pcpid = Request.Form["tbPCPID"];
+            string qv1 = Request.Form["qvPCP"];
+            string qv2 = Request.Form["qvLHD"];
+            string surveyend = Request.Form["surveystatus"];
+            string formByName = Request.Form["tbFormByName"];
+            string formByNumber = Request.Form["tbFormByNumber"];
+
+            string rc;
+            // Check which tab is active
+            int activeTab = MainView.ActiveViewIndex;
+            string currentSurveyType = activeTab == 0 ? "PCP" : "LHD"; 
+
+            if (surveyend=="1")
+            { return; } 
+            
+            //
+            // Save FFS-PCP answer data but not closed it, with existed surveyid (if first time, create it)
+            //
+            if (db != null)
+            {
+
+                // Check if survey ID already exists with different type
+                if (surveyid != "0")
+                {
+                    string existingSurveyType = GetExistingSurveyType(surveyid);
+                    if (!string.IsNullOrEmpty(existingSurveyType) && existingSurveyType != currentSurveyType)
+                    {
+                        ClientScript.RegisterStartupScript(this.GetType(),
+                            "SurveyTypeError",
+                            "alert('Survey ID " + surveyid + " already exists as " + existingSurveyType +
+                            " survey. Cannot save as " + currentSurveyType + " survey.');",
+                            true);
+                        return;
+                    }
+                }
+
+                // Check if any survey is already open
+                string sHasOpenSurvey = HasOpenSurvey("");
+                if (sHasOpenSurvey == "true")
+                {
+                    // Found another open survey
+                    ClientScript.RegisterStartupScript(this.GetType(),
+                        "OpenSurveyError",
+                        "alert('Please complete the existing open survey before creating a new one.');",
+                        true);
+                    return;
+                }
+                string surveyTypeToSave = ViewState["SurveyType"] as string ?? "BOTH";
+
+                if (surveyTypeToSave == "BOTH")
+                {
+                    if (activeTab == 0)
+                    {
+                        string ans1 = doReturnAnswers(dgDetailPCP);
+                        surveyid = db.doSaveFFS(surveyid, ans1, "PCP", clsCommon.pUserLoginID, "1", dt, qv1, pcpname, pcpid, formByName, formByNumber);
+
+                        if ((surveyid == "-1") || (surveyid == "-2"))
+                        { return; }
+                        string ansmore1 = tbMoreDataP1.Text + tbMoreDataP2.Text;
+                        if (ansmore1 != "")
+                        {
+                            rc = db.doSaveFFSMore(surveyid, ansmore1, "PCP", qv1);
+                            if (rc == "0")
+                            { return; }
+                        }
+                    }
+                    else if (activeTab == 1)
+                    {
+                        //
+                        // Save FFS-LHD answer data but not closed it, with existed surveyid (if first time, create it)
+                        //   
+                        string ans2 = doReturnAnswers(dgDetailLHD);
+                        surveyid = db.doSaveFFS(surveyid, ans2, "LHD", clsCommon.pUserLoginID, "1", dt, qv2, pcpname, pcpid, formByName, formByNumber);
+                        string ansmore2 = tbMoreDataL1.Text + tbMoreDataL2.Text;
+                        if (ansmore2 != "")
+                        {
+                            rc = db.doSaveFFSMore(surveyid, ansmore2, "LHD", qv2);
+                            if (rc == "0")
+                            { return; }
+                        }
+                    }
+                } 
+                else if (surveyTypeToSave == "PCP")
+                {
+                    string ans1 = doReturnAnswers(dgDetailPCP);
+                    surveyid = db.doSaveFFS(surveyid, ans1, "PCP", clsCommon.pUserLoginID, "1", dt, qv1, pcpname, pcpid, formByName, formByNumber);
+                    if ((surveyid == "-1") || (surveyid == "-2"))
+                    { return; }
+                    string ansmore1 = tbMoreDataP1.Text + tbMoreDataP2.Text;
+                    if (ansmore1 != "")
+                    {
+                        rc = db.doSaveFFSMore(surveyid, ansmore1, "PCP", qv1);
+                        if (rc == "0")
+                        { return; }
+                    }
+                }
+                else if (surveyTypeToSave == "LHD")
+                {
+                    string ans2 = doReturnAnswers(dgDetailLHD);
+                    surveyid = db.doSaveFFS(surveyid, ans2, "LHD", clsCommon.pUserLoginID, "1", dt, qv2, pcpname, pcpid, formByName, formByNumber);
+                    string ansmore2 = tbMoreDataL1.Text + tbMoreDataL2.Text;
+                    if (ansmore2 != "")
+                    {
+                        rc = db.doSaveFFSMore(surveyid, ansmore2, "LHD", qv2);
+                        if (rc == "0")
+                        { return; }
+                    }
+                } 
+
+                SURVEYID.Value = surveyid;
+                SURVEYSTATUS.Value = "1";
+                btnCopySurvey.CssClass = "showme";
+                btnCompletedSurvey.CssClass = "hideme";
+                btnSaveSurvey.CssClass = "hideme";
+                btnDeleteSurvey.CssClass = "hideme";
+
+                Response.Redirect("frmFFSCase.aspx", false);
+            }
+        }
+        protected void btnSaveSurvey_Click(object sender, EventArgs e)
+        {
+            string surveyid = Request.Form["SURVEYID"];
+            if (surveyid == "")
+            { surveyid = "0"; }
+            string dt = Request.Form["tbAnswer_Date"];
+            string pcpname = Request.Form["tbPCPName"];
+            string pcpid = Request.Form["tbPCPID"];
+            string qv1 = Request.Form["qvPCP"];
+            string qv2 = Request.Form["qvLHD"];
+            string surveyend = Request.Form["surveystatus"];
+            string formByName = Request.Form["tbFormByName"];
+            string formByNumber = Request.Form["tbFormByNumber"];
+            // Check which tab is active
+            int activeTab = MainView.ActiveViewIndex;
+            string currentSurveyType = activeTab == 0 ? "PCP" : "LHD"; 
+
+            string rc;
+
+            if (surveyend=="1")
+            { return; }
+            //
+            // Save FFS-PCP answer data but not closed it, with existed surveyid (if first time, create it)
+            //
+            DB_DataAccess db = (DB_DataAccess)Session["myDB"];
+            if (db != null)
+            {
+                // Check if survey ID already exists with different type
+                if (surveyid != "0")
+                {
+                    string existingSurveyType = GetExistingSurveyType(surveyid);
+                    if (!string.IsNullOrEmpty(existingSurveyType) && existingSurveyType != currentSurveyType)
+                    {
+                        ClientScript.RegisterStartupScript(this.GetType(),
+                            "SurveyTypeError",
+                            "alert('Survey ID " + surveyid + " already exists as " + existingSurveyType +
+                            " survey. Cannot save as " + currentSurveyType + " survey.');",
+                            true);
+                        return;
+                    }
+                }
+                // Check if any survey is already open
+                string sHasOpenSurvey = HasOpenSurvey("");
+                if(sHasOpenSurvey == "true")
+                {
+                    // Found another open survey
+                    ClientScript.RegisterStartupScript(this.GetType(),
+                        "OpenSurveyError",
+                        "alert('Please complete the existing open survey before creating a new one.');",
+                        true);
+                    return;
+                }
+
+                string surveyTypeToSave = ViewState["SurveyType"] as string ?? "BOTH";
+
+                if (surveyTypeToSave == "BOTH")
+                {
+                    if (activeTab == 0)
+                    {
+                        string ans1 = doReturnAnswers(dgDetailPCP);
+                        surveyid = db.doSaveFFS(surveyid, ans1, "PCP", clsCommon.pUserLoginID, "0", dt, qv1, pcpname, pcpid, formByName, formByNumber);
+
+                        if ((surveyid == "-1") || (surveyid == "-2"))
+                        { return; }
+                        string ansmore1 = tbMoreDataP1.Text + tbMoreDataP2.Text;
+                        if (ansmore1 != "")
+                        {
+                            rc = db.doSaveFFSMore(surveyid, ansmore1, "PCP", qv1);
+                            if (rc == "0")
+                            { return; }
+                        }
+                    }
+                    else if (activeTab == 1)
+                    {
+                        //
+                        // Save FFS-LHD answer data but not closed it, with existed surveyid (if first time, create it)
+                        //   
+                        string ans2 = doReturnAnswers(dgDetailLHD);
+                        surveyid = db.doSaveFFS(surveyid, ans2, "LHD", clsCommon.pUserLoginID, "0", dt, qv2, pcpname, pcpid, formByName, formByNumber);
+                        string ansmore2 = tbMoreDataL1.Text + tbMoreDataL2.Text;
+                        if (ansmore2 != "")
+                        {
+                            rc = db.doSaveFFSMore(surveyid, ansmore2, "LHD", qv2);
+                            if (rc == "0")
+                            { return; }
+                        }
+                    }
+                }
+                else if (surveyTypeToSave == "PCP")
+                {
+                    string ans1 = doReturnAnswers(dgDetailPCP);
+                    surveyid = db.doSaveFFS(surveyid, ans1, "PCP", clsCommon.pUserLoginID, "0", dt, qv1, pcpname, pcpid, formByName, formByNumber);
+                    if ((surveyid == "-1") || (surveyid == "-2"))
+                    { return; }
+                    string ansmore1 = tbMoreDataP1.Text + tbMoreDataP2.Text;
+                    if (ansmore1 != "")
+                    {
+                        rc = db.doSaveFFSMore(surveyid, ansmore1, "PCP", qv1);
+                        if (rc == "0")
+                        { return; }
+                    }
+                }
+                else if (surveyTypeToSave == "LHD")
+                {
+                    string ans2 = doReturnAnswers(dgDetailLHD);
+                    surveyid = db.doSaveFFS(surveyid, ans2, "LHD", clsCommon.pUserLoginID, "0", dt, qv2, pcpname, pcpid, formByName, formByNumber);
+                    string ansmore2 = tbMoreDataL1.Text + tbMoreDataL2.Text;
+                    if (ansmore2 != "")
+                    {
+                        rc = db.doSaveFFSMore(surveyid, ansmore2, "LHD", qv2);
+                        if (rc == "0")
+                        { return; }
+                    }
+                }
+                SURVEYID.Value = surveyid;
+                Response.Redirect("frmFFSCase.aspx", false);
+            }
+        }
+        // Mark as delete, set SURVEYEND= -1
+        void btnDeleteSurvey_Click(object sender, EventArgs e)
+        {
+            string surveyid = Request.Form["SURVEYID"];
+            string surveyend = Request.Form["surveystatus"];
+
+            if (surveyid == "")
+            { surveyid = "0"; }
+
+            if (surveyend == "1")
+            { return; }
+            //
+            // Save FFS-PCP answer data but not closed it, with existed surveyid (if first time, create it)
+            //
+            DB_DataAccess db = (DB_DataAccess)Session["myDB"];
+            if (db != null)
+            {
+                db.doDeleteFFS(surveyid, clsCommon.pUserLoginID, "-1");
+
+                Response.Redirect("frmFFSCase.aspx", false);
+            }
+        }
+
+        private string doReturnAnswers(DataGrid did)
+        {
+            string ans = ""; 
+            foreach (DataGridItem item in did.Items)
+            {
+                
+                string css = ((TextBox)item.FindControl("tbAnswer")).CssClass.ToString();
+                string value = "";
+                if (css == "showme")
+                {
+                    value = ((TextBox)item.FindControl("tbAnswer")).Text;
+                }
+                else
+                {
+                    css = ((DropDownList)item.FindControl("Dropdownlist1")).CssClass.ToString();
+                    if (css == "showme")
+                    {
+                        value = ((DropDownList)item.FindControl("Dropdownlist1")).SelectedItem.Value;
+                    }
+                }
+                string qid = ((TextBox)item.FindControl("QID")).Text;
+                ans += qid + "," + value + ";";
+
+            } //foreach
+            return ans;
+        }
+        protected void btnCopySurvey_Click(object sender, EventArgs e)
+        {
+            string surveyid = "0";
+            string dt = Request.Form["tbAnswer_Date"];
+            string pcpname = Request.Form["tbPCPName"];
+            string pcpid = Request.Form["tbPCPID"];
+            string qv1 = Request.Form["qvPCP"];
+            string qv2 = Request.Form["qvLHD"];
+            string formByName = Request.Form["tbFormByName"];
+            string formByNumber = Request.Form["tbFormByNumber"];
+
+            //
+            // Save Copy existed answer data to a new survey
+            //
+            DB_DataAccess db = (DB_DataAccess)Session["myDB"];
+            if (db != null)
+            {
+                // Check if any survey is already open
+                string sHasOpenSurvey = HasOpenSurvey("copy");
+                if (sHasOpenSurvey == "true")
+                {
+                    // Found another open survey
+                    ClientScript.RegisterStartupScript(this.GetType(),
+                        "OpenSurveyError",
+                        "alert('Please complete the existing open survey before creating a new one.');",
+                        true);
+                    return;
+                }
+ 
+                string ans1 = doReturnAnswers(dgDetailPCP);
+                surveyid = db.doSaveFFS(surveyid, ans1, "PCP", clsCommon.pUserLoginID, "0", dt, qv1, pcpname, pcpid, formByName, formByNumber);
+
+                if ((surveyid == "-1") || (surveyid == "-2"))
+                { return; }
+                string ansmore1 = tbMoreDataP1.Text + tbMoreDataP2.Text;
+                if (ansmore1 != "")
+                {
+                    db.doSaveFFSMore(surveyid, ansmore1, "PCP", qv1);
+                }
+                //
+                // Save FFS-LHD answer data but not closed it, with existed surveyid (if first time, create it)
+                //   
+                string ans2 = doReturnAnswers(dgDetailLHD);
+                surveyid = db.doSaveFFS(surveyid, ans2, "LHD", clsCommon.pUserLoginID, "0", dt, qv2, pcpname, pcpid, formByName, formByNumber);
+                string ansmore2 = tbMoreDataL1.Text + tbMoreDataL2.Text;
+                if (ansmore2 != "")
+                {
+                    db.doSaveFFSMore(surveyid, ansmore2, "LHD", qv2);
+                }
+                SURVEYID.Value = surveyid;
+                //
+                // After duplicate current survey, closed this page and redirect
+                //
+                Response.Redirect("frmFFSCase.aspx", false);
+            }
+        }
+
+        protected void Dropdownlist2_Click(object sender, EventArgs e)
+        {
+            string key = Dropdownlist2.SelectedValue;
+
+            if (key == "0")
+            {
+                return;
+            }
+            DB_DataAccess db = (DB_DataAccess)Session["myDB"];
+            if (db != null)
+            {
+                DataSet ds = null;
+
+                ds = db.LoadPCPName(key);
+                if ((ds != null) && (ds.Tables.Count > 0) && (ds.Tables[0].Rows.Count > 0))
+                {
+                    try
+                    {
+                        tbPCPName.Text = ds.Tables[0].Rows[0]["name"].ToString();
+                        tbPCPId.Text = ds.Tables[0].Rows[0]["key"].ToString();
+                        tbPCPAddr.Text = ds.Tables[0].Rows[0]["address"].ToString() + ", " + ds.Tables[0].Rows[0]["City"].ToString() + ", " + ds.Tables[0].Rows[0]["State"].ToString() + " " + ds.Tables[0].Rows[0]["zip"].ToString();
+                        tbPCPPhone.Text = ds.Tables[0].Rows[0]["phone"].ToString();
+                    }
+                    catch (Exception ex)
+                    {
+                        HttpContext.Current.Response.Write("<div style='border: 1px solid black'><b>State loading failure in Database.</b><br /><br />");
+                        HttpContext.Current.Response.Write("Error: " + ex + "<br /><br /> Description:" + ex.Message + "</div><br /><br />");
+                    }
+                }
+            }
+        }
+        //
+        // Fill SEND TO dropdown list
+        //
+        private void FillDropDownName()
+        {
+            DB_DataAccess db = (DB_DataAccess)Session["myDB"];
+            if (db != null)
+            {
+                DataSet ds = null;
+
+                ds = db.LoadPCPName(null);
+
+                if ((ds != null) && (ds.Tables.Count > 0) && (ds.Tables[0].Rows.Count > 0))
+                {
+                    DataView dvDetail = ds.Tables[0].DefaultView;
+                    try
+                    {
+                        Dropdownlist2.DataTextField = ds.Tables[0].Columns["name"].ToString(); // text field name of table dispalyed in dropdown
+                        Dropdownlist2.DataValueField = ds.Tables[0].Columns["key"].ToString();             // to retrive specific  textfield name 
+                        Dropdownlist2.DataSource = ds.Tables[0];      //assigning datasource to the dropdownlist
+                        Dropdownlist2.DataBind();
+                    }
+                    catch (Exception ex)
+                    {
+                        HttpContext.Current.Response.Write("<div style='border: 1px solid black'><b>State loading failure in Database.</b><br /><br />");
+                        HttpContext.Current.Response.Write("Error: " + ex + "<br /><br /> Description:" + ex.Message + "</div><br /><br />");
+                    }
+                }
+            }
+        }   //FillDropDownName
+    }
+}

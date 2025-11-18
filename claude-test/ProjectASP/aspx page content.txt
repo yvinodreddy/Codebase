@@ -1,0 +1,344 @@
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="frmFFSNewSurvey.aspx.cs" Inherits="Lead_Application.Forms.frmFFSNewSurvey" %>
+<%@ Register TagPrefix="uc1" TagName="Header" Src="../ucLibrary/Header.ascx" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head runat="server">
+    <title>New FFS Case Tracking Window</title>
+    <meta name="GENERATOR" content="Microsoft Visual Studio .NET" />
+    <meta name="CODE_LANGUAGE" content="C# .NET 8" />
+    <meta name="vs_defaultClientScript" content="JavaScript" />
+	<meta name="vs_targetSchema" content="http://schemas.microsoft.com/intellisense/ie5" />
+	<meta content="http://schemas.microsoft.com/intellisense/ie5" name="vs_targetSchema" />
+	<meta name="CREATOR" content="Ben Roun 3/2019" />
+	
+    <link href="../Styles.css" type="text/css" rel="STYLESHEET" />
+    <script type="text/javascript" src="../jscode.js"> </script>
+<script type="text/javascript">
+    var winobj = null, cur_m = "0";
+    function doAlert() {
+        if (document.getElementById("SURVEYSTATUS").value == "1")
+        { return true; }
+        
+        if (confirm("If you did not SAVE data after pages changed, you will lost what you entered. \n\nDo you want to leave now?") == true) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    } 
+    function doAlertDel() {
+        if (document.getElementById("SURVEYSTATUS").value == "1") {
+            alert("Survey has been closed, you cannot remove it."); 
+            return true; }
+
+        if (confirm("After suvey is deleted, you cannot recover this page. \n\nDo you want to delete this survey?") == true) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    function doClickurlMORE(obj, p) { 
+        var n = obj.name;
+        var m = "0";
+        // The n is questionid, referred to database. LED_QUESTIONS table
+        // The p is PCP or LHD
+         
+        //
+        // We hardcode the question id code with question version. If we change question order in the future, we need to add more hardcode here.
+        //        
+        var qvPCP = document.getElementById("qvPCP").value;
+        var qvLHD = document.getElementById("qvLHD").value;
+        
+        // Check the specific version for the tab you're on
+        var isValidPCP = (p == "PCP" && qvPCP == "12");
+        var isValidLHD = (p == "LHD" && qvLHD == "13");
+        
+        if (isValidPCP || isValidLHD) {
+            if ((p == "PCP") && (n == "9"))
+            { m = "1"; }
+            if ((p == "PCP") && (n == "19"))
+            { m = "2"; }
+            if ((p == "LHD") && (n == "9"))
+            { m = "3"; }
+            if ((p == "LHD") && (n == "19"))
+            { m = "4"; }
+            
+            // Make sure window exists AND is still open
+            if (winobj != null && !winobj.closed) {
+                if (cur_m == m) {
+                    winobj.focus();
+                    return false;
+                }
+                else {
+                    winobj.close();
+                }
+            }
+            winobj = window.open("frmFFSPopupWindow.aspx?qid=" + n + "&pg=" + p + "&mo=" + m, "myNotes", "height=300px,width=850px,resizable=0,scrollbars=0,menubar=0,toolbar=0,status=0");
+            cur_m = m;
+        }
+        
+        return false;
+    }
+   function hasOpenSurvey() 
+   { 
+        var blnHasOpenSurvey  = <%= HasOpenSurvey("").ToLower() %>;
+        
+        if (blnHasOpenSurvey === true || blnHasOpenSurvey === 'true') {
+            // Get the active tab to show more specific message
+            var activeTab = <%= MainView.ActiveViewIndex %>;
+            var surveyType = activeTab === 0 ? 'PCP' : 'LHD';
+            
+            alert('An open ' + surveyType + ' survey already exists. Please complete it before creating a new ' + surveyType + ' survey.');
+            return false; // Prevent postback
+        }
+        
+        return true; // Allow postback
+   } 
+   function validateSurveyType() 
+   { 
+        var currentSurveyId = document.getElementById('<%= SURVEYID.ClientID %>').value;
+        var existingSurveyType = document.getElementById('<%= hdnExistingSurveyType.ClientID %>').value;
+        
+        // Only validate if we have a survey ID and it's not a new survey
+        if (currentSurveyId && currentSurveyId !== "0" && existingSurveyType) {
+            // Get the active tab to determine which type we're trying to save
+            var activeTab = <%= MainView.ActiveViewIndex %>;
+            var currentTabType = activeTab === 0 ? 'PCP' : 'LHD';
+            
+            // Check if we're trying to save a different type
+            if (existingSurveyType !== currentTabType) {
+                alert('Survey ID ' + currentSurveyId + ' is already a ' + existingSurveyType + 
+                      ' survey. You cannot save it as a ' + currentTabType + ' survey.');
+                return false; // Prevent postback
+            }
+        }
+        
+        return true; // Allow postback
+   }
+   
+   function validateBeforeSave() 
+   { 
+        // Check if already completed
+        if (document.getElementById("SURVEYSTATUS").value == "1") { 
+            alert("This survey has already been completed.");
+            return false; 
+        } 
+        
+        // Check survey type consistency
+        if (!validateSurveyType()) {
+            return false;
+        }
+        
+        return hasOpenSurvey();
+    } 
+   function validateBeforeCopyAndComplete() 
+   { 
+        // Check survey type consistency
+        if (!validateSurveyType()) {
+            return false;
+        }
+        return hasOpenSurvey();
+   }
+    function doClose() {
+        if (winobj != null) {
+            winobj.close();
+        }
+    }
+    function doOpenOQAReport() {
+        rptobj = window.open("frmOQAReports.aspx", "myReportWindow", "height=410px,width=900px,resizable=1,scrollbars=1,menubar=0,toolbar=0,status=0");
+        return false;
+    }
+    function doOpenFFSReport() {
+        rptobj = window.open("frmFFSReports.aspx", "myReportWindow", "height=410px,width=900px,resizable=1,scrollbars=1,menubar=0,toolbar=0,status=0");
+        return false;
+    }
+    function doPrintWindow() {
+        this.window.print();
+        return false;
+    }
+
+    function doOpen() { 
+        winobj = window.open("frmLeadNotes.aspx?pg=SURVEY&ctlno="+document.getElementById('SURVEYID').value+"&readonly="+document.getElementById("SURVEYSTATUS").value, "myNotes", "height=680px,width=900px,resizable=1,scrollbars=1,menubar=0,toolbar=0,status=0");
+        return false;
+    }    
+</script>
+</head>
+<body onunload="doClose();">
+<form id="FormNewFFS" runat="server"  method="post">
+   <uc1:Header id="Header1" runat="server"></uc1:Header>
+   <br />
+   <asp:button id="btnHome" runat="server" Height="25px" Width="72px" Text="Home" Font-Bold="True" tabIndex="99" UseSubmitBehavior="true" onClientClick="return doAlert();" ToolTip="Find Memeber"></asp:button>
+   <asp:button id="btnSearch" runat="server" Height="25px" Width="144px" Text="Search Member" Font-Bold="True" tabIndex="1" UseSubmitBehavior="true" onClientClick="return doAlert();" ToolTip="Find Memeber"></asp:button>     
+   <asp:button id="btnFFSCase" runat="server" Height="25px" Width="144px" Text="Back to FFS Cases" Font-Bold="True" tabIndex="2" UseSubmitBehavior="true" onClientClick="return doAlert();" ToolTip="Back to Survey"></asp:button>
+   <asp:button id="btnOQAReports" runat="server" Height="25px" Width="144px" Text="OQA Reports" Font-Bold="True" tabIndex="3" UseSubmitBehavior="false" OnClientClick="return doOpenOQAReport();" ToolTip="Create OQA Reports"></asp:button> 
+   <asp:button id="btnFFSReports" runat="server" Height="25px" Width="144px" Text="FFS Reports" Font-Bold="True" tabIndex="4" UseSubmitBehavior="false" OnClientClick="return doOpenFFSReport();" ToolTip="Create FFS Reports"></asp:button> 
+   <asp:button id="btnHelp" runat="server" Height="25px" Width="72px" Text="Help" Font-Bold="True" tabIndex="5" UseSubmitBehavior="false" onClientClick='return openDialogWindow("app_files/Lead_Application_Help.pdf");' ToolTip="Help Detail Information"></asp:button>
+   
+<table id="Table1" runat="server" style="HEIGHT: 56px;width:1050px;border:1px solid #F5F5F5;background-color:#C0C0C0;">
+<tbody>
+<tr id="Panel1">
+    <td align="left">
+        <div class="sec_title">FFS Tracking Window</div>
+    <table id="Table2" runat="server" style="width: 100%;background-color:#d1d2c8;border:1px solid black;" border="0" cellpadding="2" cellspacing="2">
+    <tbody>
+    <tr>
+        <td style="width:80px" class="labelcell">Child's Name:</td>
+        <td ><u><asp:Label runat="server" ID="strFName" ></asp:Label> <asp:Label runat="server" ID="strMName" ></asp:Label>
+        <asp:Label runat="server" ID="strLName" ></asp:Label></u></td>
+        <td class="labelcell" style="width:80px">Member ID: </td> 
+        <td style="width:150px"><asp:Label runat="server" ID="strMEIN"></asp:Label></td>
+        
+        <td class="labelcell" style="width:40px">DOB: </td> 
+        <td style="width:80px"><asp:Label runat="server" ID="strDOB"></asp:Label></td>   
+        <td class="labelcell" style="width:40px">Age: </td> 
+        <td style="width:60px"><asp:Label runat="server" ID="strAGE"></asp:Label></td>  
+    </tr>    
+    </tbody>
+    </table>
+    </td>
+</tr>
+<tr id="Panel3">
+    <td align="right" style="padding:6px;">
+    <asp:button id="btnCopySurvey" runat="server" Height="25px" Width="80px" Text="Copy" Visible="false" Font-Bold="True" tabIndex="3" ToolTip="Copy a Survey" UseSubmitBehavior="true" CssClass="hideme" OnClientClick="return validateBeforeCopyAndComplete();" ></asp:button>
+    <asp:button id="btnSaveSurvey" runat="server" Height="25px" Width="80px" Text="Save" Font-Bold="True" tabIndex="4" ToolTip="Save Survey" UseSubmitBehavior="true" OnClientClick="return validateBeforeSave();"  ></asp:button>
+    <asp:button id="btnCompletedSurvey" runat="server" Height="25px" Width="80px" Text="Complete" Font-Bold="True" tabIndex="5" ToolTip="Save and Close Survey" UseSubmitBehavior="true" OnClientClick="return validateBeforeCopyAndComplete();" ></asp:button>
+    
+    <asp:button id="btnDeleteSurvey" runat="server" Height="25px" Width="80px" Text="Delete" Font-Bold="True" Visible="false" tabIndex="6" ToolTip="Delete Survey" UseSubmitBehavior="true" OnClientClick="return doAlertDel();" ></asp:button>
+    <asp:button id="btnCancelSurvey" runat="server" Height="25px" Width="190px" Text="Back to FFS Case Details" Font-Bold="True" tabIndex="7" UseSubmitBehavior="true" OnClientClick="return doAlert();" ToolTip="Back to FFS Survey History"></asp:button>
+    <asp:button id="btnPrint" runat="server" Height="25px" Width="80px" Text="Print" Font-Bold="True" tabIndex="8" UseSubmitBehavior="false" OnClientClick="return doPrintWindow();" ToolTip="Window Print"></asp:button>
+    </td>
+</tr>
+<tr><td style="padding-left:10px;font-weight:bold;">
+    <table id="Table3" runat="server" style="border:1px solid #F5F5F5;">
+    <tbody>
+    <tr>
+        <td>Date when case tracking was opened?</td>
+        <td><asp:TextBox runat="server" ID="tbAnswer_Date"></asp:TextBox> (mm/dd/yyyy)</td>
+        <td>Provider List</td>
+        <td><asp:dropdownlist ID="Dropdownlist2" Runat="server" style="width:160px" AutoPostBack="True"></asp:dropdownlist> </td>
+        <td rowspan="4" class="labelcell" valign="top" id="lbTestList" style="width:180px">
+         <asp:DataList runat="server" ID="dlResultList">
+            <ItemTemplate>
+            <asp:Label runat="server" ID="lbList" Text='<%# Eval("rlist")%> ' STYLE="font-weight:normal" ></asp:Label>
+            </ItemTemplate>
+        </asp:DataList>
+        </td>
+    </tr>
+    <tr>
+        <td>Survey Provider: Name</td>
+        <td><asp:TextBox runat="server" ID="tbPCPName" style="width:300px"></asp:TextBox></td>
+        <td>PCP ID </td>
+        <td><asp:TextBox runat="server" ID="tbPCPId"></asp:TextBox></td>
+    </tr>
+    <tr>
+        <td colspan=2>Survey Provider: Address <asp:TextBox runat="server" ID="tbPCPAddr" style="width:370px"></asp:TextBox></td>
+        <td>PCP Phone # </td>
+        <td><asp:TextBox runat="server" ID="tbPCPPhone"></asp:TextBox></td>
+    </tr>
+    <tr>
+        <td>Form Completed By: Name</td>
+        <td><asp:TextBox runat="server" ID="tbFormByName" style="width:300px"></asp:TextBox></td>
+        <td>Telephone Number</td>
+        <td><asp:TextBox runat="server" ID="tbFormByNumber"></asp:TextBox></td>
+    </tr>
+    </tbody>
+    </table>
+    
+    <asp:HiddenField ID="hdnExistingSurveyType" runat="server" />
+    <asp:HiddenField ID="SURVEYID" runat="server" />
+    <asp:HiddenField ID="qvPCP" runat="server" />
+    <asp:HiddenField ID="qvLHD" runat="server" />
+    <asp:HiddenField ID="SURVEYSTATUS" runat="server" />
+</td></tr>
+<tr style="background-color:#FFFFFF" id="Panel2">
+    <td style="background-color:rgb(239, 239, 239)">
+    <asp:Button Text="PCP" BorderStyle="None" ID="Tab1" CssClass="Initial" runat="server" OnClick="Tab1_Click" />
+    <asp:Button Text="LHD" BorderStyle="None" ID="Tab2" CssClass="Initial" runat="server" OnClick="Tab2_Click" />
+    <asp:MultiView ID="MainView" runat="server">
+        <asp:View ID="View1" runat="server" >
+        
+        <table style="width:100%; border-width: 1px; border-color: #666; border-style: solid;background-color:#d1d2c8">
+        <tr>
+           <td>
+           <div class="sec_title">Child's Primary Care Provider  <asp:button id="btnPCPNotes" runat="server" Height="25px" Width="100px" Text="Survey Notes" Font-Bold="True" tabIndex="5" ToolTip="Open Notes Panel" UseSubmitBehavior="false" OnClientClick="doOpen();return false;"></asp:button>
+            </div>
+        <asp:DataGrid ID="dgDetailPCP" CssClass="dgGridLeft" runat="server" AutoGenerateColumns="false" ShowFooter="true" HeaderStyle-HorizontalAlign="center"
+				HeaderStyle-Font-Bold="True" HeaderStyle-BackColor="#B0C4DE" AlternatingItemStyle-BackColor="#ffffff">		
+
+		<Columns>
+		    <asp:TemplateColumn>
+		        <HeaderTemplate>Survey Questions</HeaderTemplate>
+		        <ItemTemplate>
+		        <asp:label ID="lblQuestion" Runat="server" Text='<%# Eval("questiontext")%>' CssClass='<%# Iifs(Eval("questionparts"))%>'></asp:label>
+		        <asp:LinkButton runat="server" ID="urlMORE" Text='<%# Eval("questiontext")%>' name='<%# Eval("questionid") %>' OnClientClick='return doClickurlMORE(this,"PCP");' UseSubmitBehavior="false" CssClass='<%# Iifb(Eval("questionparts"))%>' ToolTip="Click to Add more"></asp:LinkButton>
+		        </ItemTemplate>
+		    </asp:TemplateColumn>														
+		</Columns>
+		<Columns>
+		    <asp:TemplateColumn>
+		        <HeaderTemplate>Answers</HeaderTemplate>
+		        <itemstyle width="200px" VerticalAlign="top" />
+		        <ItemTemplate>		        		        
+		        <asp:textbox ID="tbAnswer" Runat="server" CssClass='<%# Iif (Eval("ansgroupid"),"1","showme","hideme") %>' Text='<%# Iif (Eval("ansgroupid"),"1",Eval("answer1"),"") %>'></asp:textbox>
+		        <asp:dropdownlist ID="Dropdownlist1" Runat="server" DataSource='<%# FillDropDown(Eval("ansgroupid")) %>' DataValueField="OPTIONVALUE" datatextfiled="OPTIONTEXT" CssClass='<%# Iif (Eval("ansgroupid"),"1","hideme","showme") %>' SelectedValue='<%# Iif(Eval("ansgroupid"),"1", " ", Eval("answer1")) %>'></asp:dropdownlist>			                
+		        <asp:textbox ID="QID" runat="server" Text='<%# Eval("questionid") %>' CssClass="hideme" />		        
+		        </ItemTemplate>
+		    </asp:TemplateColumn>														
+		</Columns>
+		</asp:DataGrid>
+		           
+           </td>
+        </tr>
+        </table>
+        </asp:View>
+        <asp:View ID="View2" runat="server">        
+        <table style="width: 100%; border-width: 1px; border-color: #666; border-style: solid;background-color:#d1d2c8">
+        <tr>
+           <td>
+           <div class="sec_title">Child's Local Health Department    <asp:button id="btnLHDNotes" runat="server" Height="25px" Width="100px" Text="Survey Notes" Font-Bold="True" tabIndex="5" ToolTip="Open Notes Panel" UseSubmitBehavior="false" OnClientClick="doOpen();return false;"></asp:button>
+           </div>  
+        <asp:DataGrid ID="dgDetailLHD" CssClass="dgGridLeft" runat="server" AutoGenerateColumns="false" ShowFooter="true" HeaderStyle-HorizontalAlign="center"
+				HeaderStyle-Font-Bold="True" HeaderStyle-BackColor="#B0C4DE" AlternatingItemStyle-BackColor="#ffffff">		
+
+		<Columns>
+		    <asp:TemplateColumn>
+		        <HeaderTemplate>Survey Question</HeaderTemplate>
+		        <ItemTemplate>
+		        <asp:label ID="lblQuestion" Runat="server" Text='<%# Eval("questiontext")%>' CssClass='<%# Iifs(Eval("questionparts"))%>'></asp:label>		        		        
+		        <asp:LinkButton runat="server" ID="urlMORE" Text='<%# Eval("questiontext")%>' name='<%# Eval("questionid") %>' UseSubmitBehavior="false" OnClientClick='return doClickurlMORE(this,"LHD");' CssClass='<%# Iifb(Eval("questionparts"))%>' ToolTip="Click to Add more"></asp:LinkButton>
+		        </ItemTemplate>
+		    </asp:TemplateColumn>														
+		</Columns>
+		<Columns>
+		    <asp:TemplateColumn>
+		        <HeaderTemplate>Answer</HeaderTemplate>
+		        <ItemTemplate>
+		        <asp:textbox ID="tbAnswer" Runat="server" CssClass='<%# Iif (Eval("ansgroupid"),"1","showme","hideme") %>' Text='<%# Iif (Eval("ansgroupid"),"1",Eval("answer1"),"") %>'></asp:textbox>
+		        <asp:dropdownlist ID="Dropdownlist1" Runat="server" DataSource='<%# FillDropDown(Eval("ansgroupid")) %>' DataValueField="OPTIONVALUE" datatextfiled="OPTIONTEXT" CssClass='<%# Iif (Eval("ansgroupid"),"1","hideme","showme") %>' SelectedValue='<%# Iif(Eval("ansgroupid"),"1", " ", Eval("answer1")) %>'></asp:dropdownlist>
+		        <asp:textbox ID="QID" runat="server" Text='<%# Eval("questionid") %>' CssClass="hideme" />
+		        </ItemTemplate>
+		    </asp:TemplateColumn>														
+		</Columns>
+		</asp:DataGrid>
+		           
+           </td>
+        </tr>
+        </table>
+        </asp:View>
+     </asp:MultiView>
+     <!-- temp fields to store MORE data from frmFFSPopupWindow page -->
+     <asp:TextBox ID="tbMoreDataP1" runat="server" CssClass="hideme"></asp:TextBox>
+     <asp:TextBox ID="tbMoreDataP2" runat="server" CssClass="hideme"></asp:TextBox>
+     <asp:TextBox ID="tbMoreDataL1" runat="server" CssClass="hideme"></asp:TextBox>
+     <asp:TextBox ID="tbMoreDataL2" runat="server" CssClass="hideme"></asp:TextBox>
+    </td>
+</tr>
+
+</tbody>    
+</table>
+</form>
+
+</body>
+</html>
