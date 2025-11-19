@@ -146,17 +146,21 @@ fi
 if [[ ! -f "${DB_FILE}" ]]; then
     log_info "Creating new database..."
 
-    # Run schema creation
+    # Run schema creation using Python (no sqlite3 command needed)
     if [[ -f "${DB_DIR}/schema_sqlite.sql" ]]; then
-        sqlite3 "${DB_FILE}" < "${DB_DIR}/schema_sqlite.sql"
-        log_success "Database schema created successfully"
+        if python3 "${DB_DIR}/init_database.py" "${DB_FILE}" "${DB_DIR}/schema_sqlite.sql"; then
+            log_success "Database schema created successfully"
+        else
+            log_error "Failed to create database schema"
+            exit 1
+        fi
     else
         log_error "Schema file not found: ${DB_DIR}/schema_sqlite.sql"
         exit 1
     fi
 
     # Verify database
-    TABLE_COUNT=$(sqlite3 "${DB_FILE}" "SELECT COUNT(*) FROM sqlite_master WHERE type='table';")
+    TABLE_COUNT=$(python3 -c "import sqlite3; conn = sqlite3.connect('${DB_FILE}'); cursor = conn.cursor(); cursor.execute('SELECT COUNT(*) FROM sqlite_master WHERE type=\'table\''); print(cursor.fetchone()[0]); conn.close()")
     log_success "Database initialized with ${TABLE_COUNT} tables"
 else
     log_info "Using existing database"
