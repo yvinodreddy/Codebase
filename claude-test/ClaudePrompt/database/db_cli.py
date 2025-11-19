@@ -336,6 +336,69 @@ class DBCli:
         conn.close()
         print("=" * 80 + "\n")
 
+    def cmd_current(self):
+        """Show current project for working directory."""
+        import os
+
+        conn = self._get_connection()
+        cursor = conn.cursor()
+
+        print("\n" + "=" * 80)
+        print("🎯 CURRENT PROJECT")
+        print("=" * 80 + "\n")
+
+        # Get current working directory
+        current_dir = os.getcwd()
+        print(f"📂 Current Directory: {current_dir}\n")
+
+        # Find projects matching current directory
+        cursor.execute("""
+            SELECT project_id, name, description, created_at,
+                   total_story_points, completed_story_points
+            FROM projects
+            WHERE description LIKE ?
+            ORDER BY created_at DESC
+            LIMIT 5
+        """, (f'%{current_dir}%',))
+
+        projects = cursor.fetchall()
+
+        if not projects:
+            print("❌ No projects found for current directory")
+            print("\nThe current directory has not been used with ULTRATHINK yet.")
+            print("Run './cpp \"your prompt\" -v' to create a project for this directory.")
+        else:
+            print(f"✅ Found {len(projects)} project(s) for this directory:\n")
+
+            for i, row in enumerate(projects, 1):
+                marker = "⭐ MOST RECENT (likely current)" if i == 1 else "   (older)"
+                print(f"[{i}] {marker}")
+                print(f"    Project ID: {row['project_id']}")
+                print(f"    Name: {row['name']}")
+                print(f"    Story Points: {row['completed_story_points']} / {row['total_story_points']}")
+                if row['total_story_points'] > 0:
+                    completion = (row['completed_story_points'] / row['total_story_points']) * 100
+                    print(f"    Completion: {completion:.1f}%")
+                print(f"    Created: {row['created_at']}")
+
+                # Show active instances for this project
+                cursor.execute("""
+                    SELECT COUNT(*) FROM active_instances
+                    WHERE project_id = ? AND status = 'active'
+                """, (row['project_id'],))
+                active_count = cursor.fetchone()[0]
+                if active_count > 0:
+                    print(f"    Active Instances: {active_count}")
+
+                print()
+
+            if len(projects) > 1:
+                print("💡 Multiple projects exist for this directory.")
+                print("   The most recent one is typically the current active project.")
+
+        conn.close()
+        print("=" * 80 + "\n")
+
     def cmd_inspect(self, identifier: str):
         """Inspect specific project or instance details."""
         conn = self._get_connection()
@@ -462,6 +525,7 @@ def main():
         print()
         print("Commands:")
         print("  status              Show system status and overview")
+        print("  current             Show current project for working directory")
         print("  projects            List all projects")
         print("  projects -v         List all projects with instances")
         print("  instances           List all active instances")
@@ -473,6 +537,7 @@ def main():
         print()
         print("Examples:")
         print("  db-cli status")
+        print("  db-cli current")
         print("  db-cli projects -v")
         print("  db-cli instances proj_20251119_153441_e8628e6f")
         print("  db-cli context -p CRITICAL")
@@ -484,6 +549,8 @@ def main():
 
     if command == "status":
         cli.cmd_status()
+    elif command == "current":
+        cli.cmd_current()
     elif command == "projects":
         verbose = "-v" in sys.argv or "--verbose" in sys.argv
         cli.cmd_projects(verbose=verbose)

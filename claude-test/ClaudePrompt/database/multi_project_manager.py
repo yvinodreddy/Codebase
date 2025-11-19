@@ -57,7 +57,8 @@ class MultiProjectManager:
         self,
         name: str,
         description: str,
-        total_story_points: int = 1300
+        total_story_points: int = 1300,
+        project_id: Optional[str] = None
     ) -> str:
         """
         Create a new project.
@@ -66,14 +67,17 @@ class MultiProjectManager:
             name: Project name
             description: Project description
             total_story_points: Total story points for project
+            project_id: Optional project ID to use (if None, generates timestamp-based ID)
 
         Returns:
             project_id of created project
         """
-        # Generate unique project ID
-        timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-        unique_id = uuid.uuid4().hex[:8]
-        project_id = f"proj_{timestamp}_{unique_id}"
+        # Use provided project ID or generate unique one
+        if project_id is None:
+            # Generate timestamp-based ID (legacy behavior)
+            timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+            unique_id = uuid.uuid4().hex[:8]
+            project_id = f"proj_{timestamp}_{unique_id}"
 
         # Insert into database
         conn = self.loader._get_connection()

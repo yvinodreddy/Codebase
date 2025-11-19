@@ -53,24 +53,43 @@ class AutoContextIntegration:
         cwd = Path.cwd()
         project_name = cwd.name or "root"
 
-        # Create a stable project ID based on directory path
-        # This ensures the same directory always gets the same project
-        path_hash = hashlib.md5(str(cwd).encode()).hexdigest()[:8]
-        project_id = f"proj_{project_name}_{path_hash}"
+        # STEP 1: Check if we have an existing mapping for this directory
+        # This handles backward compatibility with timestamp-based project IDs
+        mapping_file = Path.home() / ".ultrathink" / "project_mappings.json"
+        if mapping_file.exists():
+            try:
+                with open(mapping_file, 'r') as f:
+                    mappings = json.load(f)
+                    if str(cwd) in mappings:
+                        existing_project_id = mappings[str(cwd)]
+                        # Verify this project still exists in database
+                        projects = self.manager.get_all_projects()
+                        if any(p['project_id'] == existing_project_id for p in projects):
+                            return existing_project_id, False
+            except:
+                pass  # Continue with normal flow if mapping file is corrupted
 
-        # Check if project exists
+        # STEP 2: Create deterministic project ID based on directory path
+        # This ensures the same directory always gets the same project ID
+        path_hash = hashlib.md5(str(cwd).encode()).hexdigest()[:8]
+        deterministic_project_id = f"proj_{project_name}_{path_hash}"
+
+        # STEP 3: Check if deterministic project exists in database
         projects = self.manager.get_all_projects()
-        existing = next((p for p in projects if p['project_id'] == project_id), None)
+        existing = next((p for p in projects if p['project_id'] == deterministic_project_id), None)
 
         if existing:
-            return project_id, False
+            # Save mapping for faster lookup next time
+            self._save_project_mapping(str(cwd), deterministic_project_id)
+            return deterministic_project_id, False
 
-        # Create new project
-        timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+        # STEP 4: Create new project with deterministic ID
+        # Pass the deterministic ID to create_project() so it uses our ID instead of generating one
         actual_project_id = self.manager.create_project(
             name=f"{project_name} (Auto)",
             description=f"Auto-created project for directory: {cwd}",
-            total_story_points=1300
+            total_story_points=1300,
+            project_id=deterministic_project_id  # Use deterministic ID
         )
 
         # Store mapping for this directory
