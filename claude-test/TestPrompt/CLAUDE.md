@@ -45,8 +45,8 @@ This directory contains the ULTRATHINK system - an advanced orchestration framew
 **MANDATORY BEHAVIOR - ALWAYS FOLLOW THIS BASED ON WHICH COMMAND USER SENDS:**
 
 There are TWO separate ULTRATHINK systems that are FULLY ISOLATED:
-- **TestPrompt**: Commands `ultrathinkc` or `uc` → `/tmp/ultrathink_output.txt`
-- **ClaudePrompt**: Command `cpp` → `/tmp/cppultrathink_output.txt`
+- **TestPrompt**: Commands `ultrathinkc` or `uc`
+- **ClaudePrompt**: Command `cpp`
 
 Each has its OWN output file, answer_to_file.py script, and directory.
 
@@ -54,35 +54,65 @@ Each has its OWN output file, answer_to_file.py script, and directory.
 
 ### 📌 PRIMARY PROTOCOL FOR `ultrathinkc` or `uc` (TestPrompt - THIS DIRECTORY)
 
+**⚠️ CRITICAL - DEFAULT BEHAVIOR AS OF 2025-11-19:**
+**ALL ultrathinkc/uc executions now use TIMESTAMPED OUTPUT by default!**
+
 When the user sends a message containing an `ultrathinkc` command or `uc` command (e.g., `uc "prompt" -v`):
 
-1. **Run the command** using Bash tool: `ultrathinkc "prompt" --verbose 2>&1 > /tmp/ultrathink_output.txt`
+1. **Run the command** with timestamped output:
+   ```bash
+   OUTPUT_FILE=$(python3 /home/user01/claude-test/TestPrompt/get_output_path.py)
+   ultrathinkc "prompt" --verbose 2>&1 > "$OUTPUT_FILE"
+   ```
+
 2. **Generate your answer** to the user's question (apply all ULTRATHINK directives, guardrails, verification)
+
 3. **Append your answer to the file** using this command:
    ```bash
-   python3 /home/user01/claude-test/TestPrompt/answer_to_file.py /tmp/ultrathink_output.txt "Your complete answer here with all details, validation, confidence scores, etc."
+   python3 /home/user01/claude-test/TestPrompt/answer_to_file.py "$OUTPUT_FILE" "Your complete answer here with all details, validation, confidence scores, etc."
    ```
-4. **Tell the user** to read `/tmp/ultrathink_output.txt` from top to bottom
+
+4. **Tell the user** to read the timestamped file from top to bottom
+
 5. **Also display your answer** in the chat (with fire emoji boxes) for immediate visibility
 
-**Output file location:** `/tmp/ultrathink_output.txt`
+**Output file location:** `/home/user01/claude-test/TestPrompt/tmp/ultrathink_output_{timestamp}.txt`
+
+**THIS IS THE DEFAULT - USE TIMESTAMPED OUTPUT FOR EVERY ultrathinkc/uc EXECUTION**
+
+**LEGACY /tmp/ PATH:** Only use `/tmp/ultrathink_output.txt` if user explicitly requests it
 
 ---
 
 ### 📌 ALTERNATIVE PROTOCOL FOR `cpp` (ClaudePrompt)
 
+**⚠️ CRITICAL - DEFAULT BEHAVIOR AS OF 2025-11-12:**
+**ALL cpp executions now use TIMESTAMPED OUTPUT by default!**
+
 When the user sends a message containing a `cpp` command (e.g., `cpp "prompt" -v`):
 
-1. **Run the command** using Bash tool: `cpp "prompt" --verbose 2>&1 > /tmp/cppultrathink_output.txt`
+1. **Run the command** with timestamped output:
+   ```bash
+   OUTPUT_FILE=$(python3 /home/user01/claude-test/ClaudePrompt/get_output_path.py)
+   cd /home/user01/claude-test/ClaudePrompt && ./cpp "prompt" --verbose 2>&1 > "$OUTPUT_FILE"
+   ```
+
 2. **Generate your answer** to the user's question (apply all ULTRATHINK directives, guardrails, verification)
+
 3. **Append your answer to the file** using this command:
    ```bash
-   python3 /home/user01/claude-test/ClaudePrompt/answer_to_file.py /tmp/cppultrathink_output.txt "Your complete answer here with all details, validation, confidence scores, etc."
+   python3 /home/user01/claude-test/ClaudePrompt/answer_to_file.py "$OUTPUT_FILE" "Your complete answer here with all details, validation, confidence scores, etc."
    ```
-4. **Tell the user** to read `/tmp/cppultrathink_output.txt` from top to bottom
+
+4. **Tell the user** to read the timestamped file from top to bottom
+
 5. **Also display your answer** in the chat (with fire emoji boxes) for immediate visibility
 
-**Output file location:** `/tmp/cppultrathink_output.txt`
+**Output file location:** `/home/user01/claude-test/ClaudePrompt/tmp/cppultrathink_output_{timestamp}.txt`
+
+**THIS IS THE DEFAULT - USE TIMESTAMPED OUTPUT FOR EVERY cpp EXECUTION**
+
+**LEGACY /tmp/ PATH:** Only use `/tmp/cppultrathink_output.txt` if user explicitly requests it
 
 ---
 
@@ -90,8 +120,12 @@ When the user sends a message containing a `cpp` command (e.g., `cpp "prompt" -v
 
 | Command | Output File | answer_to_file.py Location |
 |---------|-------------|----------------------------|
-| `ultrathinkc` or `uc` | `/tmp/ultrathink_output.txt` | `/home/user01/claude-test/TestPrompt/answer_to_file.py` |
-| `cpp` | `/tmp/cppultrathink_output.txt` | `/home/user01/claude-test/ClaudePrompt/answer_to_file.py` |
+| `ultrathinkc` or `uc` (DEFAULT) | `/home/user01/claude-test/TestPrompt/tmp/ultrathink_output_{timestamp}.txt` ⭐ | `/home/user01/claude-test/TestPrompt/answer_to_file.py` |
+| `ultrathinkc` or `uc` (legacy - only if requested) | `/tmp/ultrathink_output.txt` | `/home/user01/claude-test/TestPrompt/answer_to_file.py` |
+| `cpp` (DEFAULT) | `/home/user01/claude-test/ClaudePrompt/tmp/cppultrathink_output_{timestamp}.txt` ⭐ | `/home/user01/claude-test/ClaudePrompt/answer_to_file.py` |
+| `cpp` (legacy - only if requested) | `/tmp/cppultrathink_output.txt` | `/home/user01/claude-test/ClaudePrompt/answer_to_file.py` |
+
+**⭐ DEFAULT:** Always use timestamped output for BOTH `ultrathinkc/uc` AND `cpp` unless user explicitly asks for /tmp/ path
 
 **The file will contain:**
 - Part 1: ULTRATHINK system output (all [VERBOSE] stages, guardrails, metrics)
