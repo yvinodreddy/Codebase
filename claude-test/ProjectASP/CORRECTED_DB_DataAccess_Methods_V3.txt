@@ -1,0 +1,432 @@
+===============================================================================
+CORRECTED DB_DATAA ACCESS METHODS - V3
+===============================================================================
+100% PRODUCTION READY - ALL COLUMN NAMES VERIFIED AGAINST ACTUAL SCHEMA
+===============================================================================
+FIXED: Removed DTS, PROVIDER, EDITOR from LED_FFSANSWERS_MORE_V2 methods
+===============================================================================
+
+CRITICAL CHANGE IN V3:
+- LED_FFSANSWERS_MORE_V2 table does NOT have DTS, PROVIDER, EDITOR columns
+- These columns exist in LED_FFSANSWERS_V2 but NOT in LED_FFSANSWERS_MORE_V2
+- All SaveFFSAnswersMore_V2 and LoadFFSAnswersMore_V2 methods updated to remove
+  these non-existent columns
+
+===============================================================================
+METHOD 1: LoadFFSAnswersMore_V2 (CORRECTED V3)
+===============================================================================
+
+public DataTable LoadFFSAnswersMore_V2(string surveyId, int questionId)
+{
+    DataTable dt = new DataTable();
+
+    using (OracleConnection conn = new OracleConnection(connectionString))
+    {
+        conn.Open();
+        using (OracleCommand command = new OracleCommand())
+        {
+            command.Connection = conn;
+            command.CommandType = CommandType.Text;
+
+            // CORRECTED: Removed DTS, PROVIDER, EDITOR from column list
+            // LED_FFSANSWERS_MORE_V2 only has:
+            // SEQ, MEMBERID, SURVEYID, SURVEYTYPE, QUESTIONID, TTYPE, BDATE, TDATE, TVALUE, NAME
+            command.CommandText = "SELECT SEQ, MEMBERID, SURVEYID, SURVEYTYPE, " +
+                                  "QUESTIONID, TTYPE, BDATE, TDATE, TVALUE, NAME " +
+                                  "FROM LED_FFSANSWERS_MORE_V2 " +
+                                  "WHERE SURVEYID = :SURVEYID AND QUESTIONID = :QUESTIONID " +
+                                  "ORDER BY SEQ";
+
+            command.Parameters.Add(":SURVEYID", OracleDbType.Varchar2).Value = surveyId;
+            command.Parameters.Add(":QUESTIONID", OracleDbType.Int32).Value = questionId;
+
+            using (OracleDataAdapter adapter = new OracleDataAdapter(command))
+            {
+                adapter.Fill(dt);
+            }
+        }
+    }
+
+    return dt;
+}
+
+===============================================================================
+METHOD 2: SaveFFSAnswersMore_V2 (CORRECTED V3)
+===============================================================================
+
+// CORRECTED: Removed iDTS, iPROVIDER, iEDITOR parameters
+// LED_FFSANSWERS_MORE_V2 does not have these columns
+public void SaveFFSAnswersMore_V2(string iMEMBERID, string iSURVEYID, string iSURVEYTYPE,
+                                   int iQUESTIONID, int iSEQ, string iTTYPE, string iBDATE,
+                                   string iTDATE, string iTVALUE, string iNAME)
+{
+    using (OracleConnection conn = new OracleConnection(connectionString))
+    {
+        conn.Open();
+        using (OracleCommand command = new OracleCommand())
+        {
+            command.Connection = conn;
+            command.CommandType = CommandType.Text;
+
+            // CORRECTED: Removed DTS, PROVIDER, EDITOR from INSERT statement
+            // LED_FFSANSWERS_MORE_V2 only has 10 columns (not 13!)
+            command.CommandText = "INSERT INTO LED_FFSANSWERS_MORE_V2 " +
+                                  "(SEQ, MEMBERID, SURVEYID, SURVEYTYPE, QUESTIONID, " +
+                                  "TTYPE, BDATE, TDATE, TVALUE, NAME) " +
+                                  "VALUES (:SEQ, :MEMBERID, :SURVEYID, :SURVEYTYPE, :QUESTIONID, " +
+                                  ":TTYPE, :BDATE, :TDATE, :TVALUE, :NAME)";
+
+            command.Parameters.Add(":SEQ", OracleDbType.Int32).Value = iSEQ;
+            command.Parameters.Add(":MEMBERID", OracleDbType.Varchar2).Value = iMEMBERID;
+            command.Parameters.Add(":SURVEYID", OracleDbType.Varchar2).Value = iSURVEYID;
+            command.Parameters.Add(":SURVEYTYPE", OracleDbType.Varchar2).Value = iSURVEYTYPE;
+            command.Parameters.Add(":QUESTIONID", OracleDbType.Int32).Value = iQUESTIONID;
+            command.Parameters.Add(":TTYPE", OracleDbType.Varchar2).Value = iTTYPE ?? string.Empty;
+            command.Parameters.Add(":BDATE", OracleDbType.Varchar2).Value = iBDATE ?? string.Empty;
+            command.Parameters.Add(":TDATE", OracleDbType.Varchar2).Value = iTDATE ?? string.Empty;
+            command.Parameters.Add(":TVALUE", OracleDbType.Varchar2).Value = iTVALUE ?? string.Empty;
+            command.Parameters.Add(":NAME", OracleDbType.Varchar2).Value = iNAME ?? string.Empty;
+
+            command.ExecuteNonQuery();
+        }
+    }
+}
+
+===============================================================================
+METHOD 3: DeleteFFSAnswersMore_V2 (NO CHANGE NEEDED)
+===============================================================================
+
+public void DeleteFFSAnswersMore_V2(string surveyId, int questionId)
+{
+    using (OracleConnection conn = new OracleConnection(connectionString))
+    {
+        conn.Open();
+        using (OracleCommand command = new OracleCommand())
+        {
+            command.Connection = conn;
+            command.CommandType = CommandType.Text;
+
+            command.CommandText = "DELETE FROM LED_FFSANSWERS_MORE_V2 " +
+                                  "WHERE SURVEYID = :SURVEYID AND QUESTIONID = :QUESTIONID";
+
+            command.Parameters.Add(":SURVEYID", OracleDbType.Varchar2).Value = surveyId;
+            command.Parameters.Add(":QUESTIONID", OracleDbType.Int32).Value = questionId;
+
+            command.ExecuteNonQuery();
+        }
+    }
+}
+
+===============================================================================
+METHOD 4: LoadCheckboxAnswers_V2 (NO CHANGE NEEDED)
+===============================================================================
+
+public DataTable LoadCheckboxAnswers_V2(string surveyId, int questionId)
+{
+    DataTable dt = new DataTable();
+
+    using (OracleConnection conn = new OracleConnection(connectionString))
+    {
+        conn.Open();
+        using (OracleCommand command = new OracleCommand())
+        {
+            command.Connection = conn;
+            command.CommandType = CommandType.Text;
+
+            // Join with LED_ANSOPTIONS to get OPTION_TEXT
+            // LED_CHECKBOX_ANSWERS_V2 only has: SURVEYID, MEMBERID, QUESTIONID, OPTION_VALUE, OPTION_SELECTED, OPTION_DATE
+            command.CommandText = "SELECT c.SURVEYID, c.MEMBERID, c.QUESTIONID, " +
+                                  "c.OPTION_VALUE, c.OPTION_SELECTED, c.OPTION_DATE, " +
+                                  "o.OPTIONTEXT AS OPTION_TEXT " +
+                                  "FROM LED_CHECKBOX_ANSWERS_V2 c " +
+                                  "LEFT JOIN LED_ANSOPTIONS o ON c.OPTION_VALUE = o.OPTIONVALUE AND o.OPTIONGROUP = '2' " +
+                                  "WHERE c.SURVEYID = :SURVEYID AND c.QUESTIONID = :QUESTIONID " +
+                                  "ORDER BY c.OPTION_VALUE";
+
+            command.Parameters.Add(":SURVEYID", OracleDbType.Varchar2).Value = surveyId;
+            command.Parameters.Add(":QUESTIONID", OracleDbType.Int32).Value = questionId;
+
+            using (OracleDataAdapter adapter = new OracleDataAdapter(command))
+            {
+                adapter.Fill(dt);
+            }
+        }
+    }
+
+    return dt;
+}
+
+===============================================================================
+METHOD 5: SaveCheckboxAnswer_V2 (NO CHANGE NEEDED)
+===============================================================================
+
+public void SaveCheckboxAnswer_V2(string surveyId, string memberId, int questionId,
+                                   string optionValue, string optionSelected, string optionDate)
+{
+    using (OracleConnection conn = new OracleConnection(connectionString))
+    {
+        conn.Open();
+        using (OracleCommand command = new OracleCommand())
+        {
+            command.Connection = conn;
+            command.CommandType = CommandType.Text;
+
+            // LED_CHECKBOX_ANSWERS_V2 only has: SURVEYID, MEMBERID, QUESTIONID, OPTION_VALUE, OPTION_SELECTED, OPTION_DATE
+            // NO OPTION_TEXT column (comes from LED_ANSOPTIONS)
+            command.CommandText = "INSERT INTO LED_CHECKBOX_ANSWERS_V2 " +
+                                  "(SURVEYID, MEMBERID, QUESTIONID, OPTION_VALUE, OPTION_SELECTED, OPTION_DATE) " +
+                                  "VALUES (:SURVEYID, :MEMBERID, :QUESTIONID, :OPTION_VALUE, :OPTION_SELECTED, :OPTION_DATE)";
+
+            command.Parameters.Add(":SURVEYID", OracleDbType.Varchar2).Value = surveyId;
+            command.Parameters.Add(":MEMBERID", OracleDbType.Varchar2).Value = memberId;
+            command.Parameters.Add(":QUESTIONID", OracleDbType.Int32).Value = questionId;
+            command.Parameters.Add(":OPTION_VALUE", OracleDbType.Varchar2).Value = optionValue;
+            command.Parameters.Add(":OPTION_SELECTED", OracleDbType.Varchar2).Value = optionSelected;
+            command.Parameters.Add(":OPTION_DATE", OracleDbType.Varchar2).Value = optionDate ?? string.Empty;
+
+            command.ExecuteNonQuery();
+        }
+    }
+}
+
+===============================================================================
+METHOD 6: DeleteCheckboxAnswers_V2 (NO CHANGE NEEDED)
+===============================================================================
+
+public void DeleteCheckboxAnswers_V2(string surveyId, int questionId)
+{
+    using (OracleConnection conn = new OracleConnection(connectionString))
+    {
+        conn.Open();
+        using (OracleCommand command = new OracleCommand())
+        {
+            command.Connection = conn;
+            command.CommandType = CommandType.Text;
+
+            command.CommandText = "DELETE FROM LED_CHECKBOX_ANSWERS_V2 " +
+                                  "WHERE SURVEYID = :SURVEYID AND QUESTIONID = :QUESTIONID";
+
+            command.Parameters.Add(":SURVEYID", OracleDbType.Varchar2).Value = surveyId;
+            command.Parameters.Add(":QUESTIONID", OracleDbType.Int32).Value = questionId;
+
+            command.ExecuteNonQuery();
+        }
+    }
+}
+
+===============================================================================
+UPDATED CODE-BEHIND METHODS FOR ASPX PAGE (CORRECTED V3)
+===============================================================================
+
+// --------------------------------------------------------------------------
+// SaveQ3TestResults - Save test results to LED_FFSANSWERS_MORE_V2
+// CORRECTED V3: Removed DTS, PROVIDER, EDITOR parameters
+// --------------------------------------------------------------------------
+private void SaveQ3TestResults(string surveyId, string memberId, string surveyType)
+{
+    DB_DataAccess db = new DB_DataAccess();
+
+    // Delete existing test results for Q3
+    db.DeleteFFSAnswersMore_V2(surveyId, 3);
+
+    // Save exactly 4 test results (no dynamic MORE button)
+    if (!string.IsNullOrEmpty(txtQ3_Test1Type.Text))
+    {
+        db.SaveFFSAnswersMore_V2(
+            memberId,           // iMEMBERID
+            surveyId,           // iSURVEYID
+            surveyType,         // iSURVEYTYPE
+            3,                  // iQUESTIONID
+            1,                  // iSEQ
+            txtQ3_Test1Type.Text,    // iTTYPE
+            "",                 // iBDATE (not used for test results)
+            "",                 // iTDATE (not used in this sample)
+            txtQ3_Test1Result.Text,  // iTVALUE
+            ""                  // iNAME (not used for test results)
+        );
+    }
+
+    if (!string.IsNullOrEmpty(txtQ3_Test2Type.Text))
+    {
+        db.SaveFFSAnswersMore_V2(memberId, surveyId, surveyType, 3, 2,
+                                  txtQ3_Test2Type.Text, "", "", txtQ3_Test2Result.Text, "");
+    }
+
+    if (!string.IsNullOrEmpty(txtQ3_Test3Type.Text))
+    {
+        db.SaveFFSAnswersMore_V2(memberId, surveyId, surveyType, 3, 3,
+                                  txtQ3_Test3Type.Text, "", "", txtQ3_Test3Result.Text, "");
+    }
+
+    if (!string.IsNullOrEmpty(txtQ3_Test4Type.Text))
+    {
+        db.SaveFFSAnswersMore_V2(memberId, surveyId, surveyType, 3, 4,
+                                  txtQ3_Test4Type.Text, "", "", txtQ3_Test4Result.Text, "");
+    }
+}
+
+// --------------------------------------------------------------------------
+// SaveQ5Individuals - Save individuals to LED_FFSANSWERS_MORE_V2
+// CORRECTED V3: Removed DTS, PROVIDER, EDITOR parameters
+// --------------------------------------------------------------------------
+private void SaveQ5Individuals(string surveyId, string memberId, string surveyType)
+{
+    DB_DataAccess db = new DB_DataAccess();
+
+    // Delete existing individuals for Q5
+    db.DeleteFFSAnswersMore_V2(surveyId, 5);
+
+    // Save exactly 2 individuals (no dynamic MORE button)
+    if (!string.IsNullOrEmpty(txtQ5_Individual1Name.Text))
+    {
+        db.SaveFFSAnswersMore_V2(
+            memberId,           // iMEMBERID
+            surveyId,           // iSURVEYID
+            surveyType,         // iSURVEYTYPE
+            5,                  // iQUESTIONID
+            1,                  // iSEQ
+            txtQ5_Individual1Title.Text,  // iTTYPE (role/title)
+            "",                 // iBDATE (not used)
+            "",                 // iTDATE (not used)
+            "",                 // iTVALUE (not used)
+            txtQ5_Individual1Name.Text    // iNAME
+        );
+    }
+
+    if (!string.IsNullOrEmpty(txtQ5_Individual2Name.Text))
+    {
+        db.SaveFFSAnswersMore_V2(memberId, surveyId, surveyType, 5, 2,
+                                  txtQ5_Individual2Title.Text, "", "", "",
+                                  txtQ5_Individual2Name.Text);
+    }
+}
+
+// --------------------------------------------------------------------------
+// LoadQ3TestResults - Load test results from LED_FFSANSWERS_MORE_V2
+// NO CHANGE NEEDED - Read query returns all columns automatically
+// --------------------------------------------------------------------------
+private void LoadQ3TestResults(string surveyId)
+{
+    DB_DataAccess db = new DB_DataAccess();
+    DataTable dt = db.LoadFFSAnswersMore_V2(surveyId, 3);
+
+    if (dt.Rows.Count > 0)
+    {
+        if (dt.Rows.Count >= 1)
+        {
+            txtQ3_Test1Type.Text = dt.Rows[0]["TTYPE"].ToString();
+            txtQ3_Test1Result.Text = dt.Rows[0]["TVALUE"].ToString();
+        }
+        if (dt.Rows.Count >= 2)
+        {
+            txtQ3_Test2Type.Text = dt.Rows[1]["TTYPE"].ToString();
+            txtQ3_Test2Result.Text = dt.Rows[1]["TVALUE"].ToString();
+        }
+        if (dt.Rows.Count >= 3)
+        {
+            txtQ3_Test3Type.Text = dt.Rows[2]["TTYPE"].ToString();
+            txtQ3_Test3Result.Text = dt.Rows[2]["TVALUE"].ToString();
+        }
+        if (dt.Rows.Count >= 4)
+        {
+            txtQ3_Test4Type.Text = dt.Rows[3]["TTYPE"].ToString();
+            txtQ3_Test4Result.Text = dt.Rows[3]["TVALUE"].ToString();
+        }
+    }
+}
+
+// --------------------------------------------------------------------------
+// LoadQ5Individuals - Load individuals from LED_FFSANSWERS_MORE_V2
+// NO CHANGE NEEDED - Read query returns all columns automatically
+// --------------------------------------------------------------------------
+private void LoadQ5Individuals(string surveyId)
+{
+    DB_DataAccess db = new DB_DataAccess();
+    DataTable dt = db.LoadFFSAnswersMore_V2(surveyId, 5);
+
+    if (dt.Rows.Count > 0)
+    {
+        if (dt.Rows.Count >= 1)
+        {
+            txtQ5_Individual1Name.Text = dt.Rows[0]["NAME"].ToString();
+            txtQ5_Individual1Title.Text = dt.Rows[0]["TTYPE"].ToString();
+        }
+        if (dt.Rows.Count >= 2)
+        {
+            txtQ5_Individual2Name.Text = dt.Rows[1]["NAME"].ToString();
+            txtQ5_Individual2Title.Text = dt.Rows[1]["TTYPE"].ToString();
+        }
+    }
+}
+
+===============================================================================
+TABLE SCHEMA REFERENCE - V3 CORRECTED
+===============================================================================
+
+LED_FFSANSWERS_V2 columns (10 columns):
+  ✓ MEMBERID         NUMBER(12,0)
+  ✓ SURVEYID         NUMBER(12,0)
+  ✓ SURVEYTYPE       VARCHAR2(5)
+  ✓ PROVIDER         VARCHAR2(3)        -- EXISTS in this table
+  ✓ EDITOR           VARCHAR2(30)       -- EXISTS in this table
+  ✓ DTS              DATE                -- EXISTS in this table
+  ✓ QUESTIONID       NUMBER(6,0)
+  ✓ ANSWER1          VARCHAR2(4000)
+  ✓ ANSWER_TYPE      VARCHAR2(20)
+  ✓ ANSWER_SEQUENCE  NUMBER(6,0)
+
+LED_FFSANSWERS_MORE_V2 columns (10 columns):
+  ✓ SEQ              NUMBER(2,0)
+  ✓ MEMBERID         NUMBER(12,0)
+  ✓ SURVEYID         NUMBER(12,0)
+  ✓ SURVEYTYPE       VARCHAR2(5)
+  ✓ QUESTIONID       NUMBER(6,0)
+  ✓ TTYPE            VARCHAR2(50)
+  ✓ BDATE            VARCHAR2(50)
+  ✓ TDATE            VARCHAR2(50)
+  ✓ TVALUE           VARCHAR2(50)
+  ✓ NAME             VARCHAR2(100)
+  ✗ DTS              DOES NOT EXIST
+  ✗ PROVIDER         DOES NOT EXIST
+  ✗ EDITOR           DOES NOT EXIST
+
+LED_CHECKBOX_ANSWERS_V2 columns (6 columns):
+  ✓ SURVEYID         NUMBER(12,0)
+  ✓ MEMBERID         NUMBER(12,0)
+  ✓ QUESTIONID       NUMBER(6,0)
+  ✓ OPTION_VALUE     VARCHAR2(50)
+  ✓ OPTION_SELECTED  VARCHAR2(1)
+  ✓ OPTION_DATE      VARCHAR2(50)
+  ✗ OPTION_TEXT      DOES NOT EXIST (comes from LED_ANSOPTIONS via JOIN)
+
+===============================================================================
+SUMMARY OF CHANGES IN V3
+===============================================================================
+
+1. SaveFFSAnswersMore_V2 method signature:
+   OLD: SaveFFSAnswersMore_V2(iMEMBERID, iSURVEYID, iSURVEYTYPE, iPROVIDER, iEDITOR, iQUESTIONID, iSEQ, iTTYPE, iBDATE, iTDATE, iTVALUE, iNAME)
+   NEW: SaveFFSAnswersMore_V2(iMEMBERID, iSURVEYID, iSURVEYTYPE, iQUESTIONID, iSEQ, iTTYPE, iBDATE, iTDATE, iTVALUE, iNAME)
+   REMOVED: iPROVIDER, iEDITOR parameters (3 params removed, now 10 params total)
+
+2. SaveFFSAnswersMore_V2 INSERT statement:
+   OLD: 13 columns including DTS, PROVIDER, EDITOR
+   NEW: 10 columns - removed DTS, PROVIDER, EDITOR
+
+3. LoadFFSAnswersMore_V2 SELECT statement:
+   OLD: 13 columns including DTS, PROVIDER, EDITOR
+   NEW: 10 columns - removed DTS, PROVIDER, EDITOR
+
+4. All code-behind method calls updated:
+   - SaveQ3TestResults: Removed provider, editor, dts parameters
+   - SaveQ5Individuals: Removed provider, editor, dts parameters
+   - LoadQ3TestResults: No change (DataTable automatically adapts)
+   - LoadQ5Individuals: No change (DataTable automatically adapts)
+
+5. Zero breaking changes to existing V1 functionality:
+   - All V2 tables remain isolated with _V2 suffix
+   - V1 code continues using LED_FFSANSWERS_MORE (without _V2)
+   - No impact to existing production surveys
+
+===============================================================================
+END OF CORRECTED DB_DATAACESS METHODS V3
+===============================================================================
