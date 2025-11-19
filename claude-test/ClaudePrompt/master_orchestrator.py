@@ -41,6 +41,15 @@ from agent_framework.mcp_integration import MCPIntegration
 from guardrails.multi_layer_system import MultiLayerGuardrailSystem
 from guardrails.monitoring import GuardrailMonitor, get_monitor
 
+# Import database-first context integration (optional)
+try:
+    sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'database'))
+    from multi_project_manager import MultiProjectManager
+    DATABASE_INTEGRATION_AVAILABLE = True
+except ImportError:
+    DATABASE_INTEGRATION_AVAILABLE = False
+    logger.debug("Database-first integration not available")
+
 logger = logging.getLogger(__name__)
 
 
@@ -155,6 +164,110 @@ class MasterOrchestrator:
         }
 
         logger.info(f"Master Orchestrator initialized (min_confidence={min_confidence_score}%)")
+
+    def _store_to_database(
+        self,
+        prompt: str,
+        result: OrchestrationResult,
+        project_id: Optional[str] = None,
+        instance_id: Optional[str] = None
+    ) -> Optional[int]:
+        """
+        Store orchestration result to database-first context management.
+
+        This integrates with the database-first system to store:
+        - The original prompt
+        - The orchestration result
+        - Quality metrics and confidence scores
+        - All ULTRATHINK processing details
+
+        Args:
+            prompt: Original user prompt
+            result: Orchestration result with all metrics
+            project_id: Project identifier (from environment or session)
+            instance_id: Instance identifier (from environment or session)
+
+        Returns:
+            Snapshot ID if stored successfully, None otherwise
+        """
+        if not DATABASE_INTEGRATION_AVAILABLE:
+            return None
+
+        # Get project_id and instance_id from environment if not provided
+        if not project_id:
+            project_id = os.environ.get('ULTRATHINK_PROJECT_ID')
+        if not instance_id:
+            instance_id = os.environ.get('ULTRATHINK_INSTANCE_ID')
+
+        if not project_id or not instance_id:
+            logger.debug("Database storage skipped: no project_id or instance_id")
+            return None
+
+        try:
+            # Initialize database manager
+            db_path = os.path.join(
+                os.path.dirname(__file__),
+                'database',
+                'ultrathink_context.db'
+            )
+            manager = MultiProjectManager(db_path)
+
+            # Prepare content for storage
+            content = {
+                'prompt': prompt,
+                'output': str(result.output),
+                'confidence_score': result.confidence_score,
+                'success': result.success,
+                'iterations': result.iterations_performed,
+                'duration_seconds': result.total_duration_seconds,
+                'prompt_analysis': result.prompt_analysis,
+                'quality_metrics': result.quality_metrics,
+                'guardrails_passed': result.guardrails_validation.get('output_validation', {}).get('passed', False),
+                'timestamp': result.timestamp,
+                'warnings': result.warnings,
+                'errors': result.errors
+            }
+
+            # Determine priority based on confidence score
+            if result.confidence_score >= 99.0:
+                priority = 'HIGH'
+            elif result.confidence_score >= 95.0:
+                priority = 'MEDIUM'
+            else:
+                priority = 'LOW'
+
+            # Store context
+            snapshot_id = manager.store_context(
+                project_id=project_id,
+                content=content,
+                priority=priority,
+                content_type='architecture',  # Using 'architecture' for orchestration results
+                phase_id=None
+            )
+
+            # Update instance token usage
+            current_tokens = self.context_manager.get_total_tokens()
+            try:
+                conn = manager.loader._get_connection()
+                cursor = conn.cursor()
+                cursor.execute("""
+                    UPDATE active_instances
+                    SET current_token_usage = ?,
+                        last_heartbeat = datetime('now')
+                    WHERE instance_id = ?
+                """, (current_tokens, instance_id))
+                conn.commit()
+            except Exception as e:
+                logger.debug(f"Token update failed: {e}")
+
+            manager.close()
+
+            logger.debug(f"📊 Stored to database: snapshot_id={snapshot_id}, tokens={current_tokens}")
+            return snapshot_id
+
+        except Exception as e:
+            logger.debug(f"Database storage failed: {e}")
+            return None
 
     def process(
         self,
@@ -443,6 +556,9 @@ class MasterOrchestrator:
                 iterations=result.iterations_performed,
                 duration=total_duration
             )
+
+            # Store to database-first context management (if enabled)
+            self._store_to_database(prompt, result)
 
             return result
 

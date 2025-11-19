@@ -1,9 +1,14 @@
 #!/usr/bin/env bash
 #
-# CPP - ClaudePrompt wrapper for ultrathink.py
+# CPP - ClaudePrompt wrapper with Database-First Context Integration
 #
-# This is the ClaudePrompt version of ULTRATHINK, completely isolated from TestPrompt.
-# It calls ultrathink.py with all the same arguments.
+# This wrapper automatically integrates database-first context management:
+# - Auto project detection based on working directory
+# - Auto instance assignment per session
+# - Auto context storage after command execution
+#
+# All integration is transparent and can be disabled with:
+#   export ULTRATHINK_DB_DISABLE=1
 #
 # Usage:
 #   cpp "your prompt"
@@ -11,6 +16,7 @@
 #   cpp --file prompt.txt
 #   cpp --help
 #   cpp "prompt" -v     (verbose mode)
+#   cpp "prompt" --project-id proj_xxx  (use specific project)
 #
 
 # Get the directory where this script is actually located (resolve symlinks)
@@ -22,5 +28,119 @@ while [ -h "$SOURCE" ]; do
 done
 SCRIPT_DIR="$(cd -P "$(dirname "$SOURCE")" && pwd)"
 
-# Call ultrathink.py with all arguments
-exec python3 "$SCRIPT_DIR/ultrathink.py" "$@"
+# Parse command line arguments for --project-id flag
+MANUAL_PROJECT_ID=""
+FILTERED_ARGS=()
+SKIP_NEXT=false
+
+for arg in "$@"; do
+    if [ "$SKIP_NEXT" = true ]; then
+        MANUAL_PROJECT_ID="$arg"
+        SKIP_NEXT=false
+        continue
+    fi
+
+    if [ "$arg" = "--project-id" ]; then
+        SKIP_NEXT=true
+        continue
+    fi
+
+    FILTERED_ARGS+=("$arg")
+done
+
+# Check if database integration is disabled
+if [ "$ULTRATHINK_DB_DISABLE" = "1" ]; then
+    # Run without database integration
+    exec "$SCRIPT_DIR/cpp_core" "${FILTERED_ARGS[@]}"
+fi
+
+# Initialize database-first context
+# This creates/finds project and instance automatically
+if [ -n "$MANUAL_PROJECT_ID" ]; then
+    # Use manually specified project ID
+    DB_INIT_OUTPUT=$(python3 "$SCRIPT_DIR/database/auto_context_integration.py" init "$*" --project-id "$MANUAL_PROJECT_ID" 2>&1)
+else
+    # Auto-detect project from directory
+    DB_INIT_OUTPUT=$(python3 "$SCRIPT_DIR/database/auto_context_integration.py" init "$*" 2>&1)
+fi
+DB_INIT_STATUS=$?
+
+if [ $DB_INIT_STATUS -ne 0 ]; then
+    echo "⚠️  Warning: Database initialization failed, running without context storage" >&2
+    echo "$DB_INIT_OUTPUT" >&2
+    exec "$SCRIPT_DIR/cpp_core" "${FILTERED_ARGS[@]}"
+fi
+
+# Parse project_id and instance_id from output
+# Expected format:
+# Project: proj_xxx_yyy (new) or (existing)
+# Instance: inst_xxx_yyy (new) or (existing)
+PROJECT_ID=$(echo "$DB_INIT_OUTPUT" | grep "^Project:" | awk '{print $2}')
+INSTANCE_ID=$(echo "$DB_INIT_OUTPUT" | grep "^Instance:" | awk '{print $2}')
+
+# Export for potential use by master_orchestrator.py
+export ULTRATHINK_PROJECT_ID="$PROJECT_ID"
+export ULTRATHINK_INSTANCE_ID="$INSTANCE_ID"
+
+# Display project and instance info at the start
+echo "================================================================================"
+echo "📊 DATABASE-FIRST CONTEXT - SESSION INFO"
+echo "================================================================================"
+echo ""
+echo "  📁 Project ID:  $PROJECT_ID"
+echo "  🔹 Instance ID: $INSTANCE_ID"
+echo "  📂 Directory:   $(pwd)"
+echo ""
+echo "  💡 TIP: Use --project-id flag to override auto-detection"
+echo "     Example: cpp \"prompt\" --project-id $PROJECT_ID"
+echo ""
+echo "================================================================================"
+echo ""
+
+# Determine output file for context storage
+# Check if using timestamped output
+if echo "$@" | grep -q -- "--verbose\|-v"; then
+    # For verbose mode, capture output to temp file for storage
+    OUTPUT_CAPTURE=$(mktemp)
+    trap "rm -f $OUTPUT_CAPTURE" EXIT
+
+    # Run core cpp command with output capturing
+    "$SCRIPT_DIR/cpp_core" "${FILTERED_ARGS[@]}" 2>&1 | tee "$OUTPUT_CAPTURE"
+    CPP_EXIT_CODE=${PIPESTATUS[0]}
+
+    # Finalize database context with captured output
+    python3 "$SCRIPT_DIR/database/auto_context_integration.py" finalize \
+        "$PROJECT_ID" "$INSTANCE_ID" "$*" "$OUTPUT_CAPTURE" 2>&1 | \
+        grep -v "^Context stored:" || true
+else
+    # For non-verbose mode, run without output capture
+    "$SCRIPT_DIR/cpp_core" "${FILTERED_ARGS[@]}"
+    CPP_EXIT_CODE=$?
+
+    # Finalize database context without output
+    python3 "$SCRIPT_DIR/database/auto_context_integration.py" finalize \
+        "$PROJECT_ID" "$INSTANCE_ID" "$*" 2>&1 | \
+        grep -v "^Context stored:" || true
+fi
+
+# Display project and instance info at the end
+echo ""
+echo "================================================================================"
+echo "📊 DATABASE-FIRST CONTEXT - SESSION SUMMARY"
+echo "================================================================================"
+echo ""
+echo "  ✅ Context stored successfully"
+echo "  📁 Project ID:  $PROJECT_ID"
+echo "  🔹 Instance ID: $INSTANCE_ID"
+echo ""
+echo "  📊 View status:   ./db-cli status"
+echo "  🔍 Inspect:       ./db-cli inspect $PROJECT_ID"
+echo "  📝 View context:  ./db-cli context --project $PROJECT_ID"
+echo ""
+echo "  💡 Reuse project: cpp \"next prompt\" --project-id $PROJECT_ID"
+echo ""
+echo "================================================================================"
+echo ""
+
+# Exit with same code as cpp_core
+exit $CPP_EXIT_CODE

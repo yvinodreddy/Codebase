@@ -173,7 +173,8 @@ class DBCli:
                     print(f"   Completion: {completion:.1f}%")
                 print(f"   Active Instances: {row['active_instances']}")
                 print(f"   Context Snapshots: {row['total_snapshots']}")
-                print(f"   Total Tokens: {row['total_tokens']:,}")
+                total_tokens = row['total_tokens'] if row['total_tokens'] is not None else 0
+                print(f"   Total Tokens: {total_tokens:,}")
                 print(f"   Created: {row['created_at']}")
 
                 if verbose:

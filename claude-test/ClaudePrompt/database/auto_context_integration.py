@@ -147,7 +147,7 @@ class AutoContextIntegration:
             project_id=project_id,
             content=content,
             priority=priority,
-            content_type='command',
+            content_type='decision',  # Using 'decision' for command execution context
             phase_id=phase_id
         )
 
@@ -245,7 +245,7 @@ class AutoContextIntegration:
         self.manager.close()
 
 
-def initialize_for_command(prompt: str) -> Tuple[str, str, bool, bool]:
+def initialize_for_command(prompt: str, manual_project_id: Optional[str] = None) -> Tuple[str, str, bool, bool]:
     """
     Initialize database-first context for a command.
 
@@ -253,6 +253,7 @@ def initialize_for_command(prompt: str) -> Tuple[str, str, bool, bool]:
 
     Args:
         prompt: The prompt being executed
+        manual_project_id: Optional manual project ID to use instead of auto-detection
 
     Returns:
         Tuple of (project_id, instance_id, project_created, instance_created)
@@ -260,7 +261,20 @@ def initialize_for_command(prompt: str) -> Tuple[str, str, bool, bool]:
     integration = AutoContextIntegration()
 
     # Get or create project
-    project_id, project_created = integration.get_or_create_project()
+    if manual_project_id:
+        # Use manually specified project ID
+        # Verify it exists
+        projects = integration.manager.get_all_projects()
+        if any(p['project_id'] == manual_project_id for p in projects):
+            project_id = manual_project_id
+            project_created = False
+        else:
+            # Project doesn't exist, fall back to auto-detection
+            print(f"⚠️  Warning: Project ID '{manual_project_id}' not found, using auto-detection", file=sys.stderr)
+            project_id, project_created = integration.get_or_create_project()
+    else:
+        # Auto-detect project from directory
+        project_id, project_created = integration.get_or_create_project()
 
     # Get or create instance
     instance_id, instance_created = integration.get_or_create_instance(project_id)
@@ -332,7 +346,15 @@ def main():
 
     if command == "init":
         prompt = sys.argv[2] if len(sys.argv) > 2 else "test prompt"
-        project_id, instance_id, proj_new, inst_new = initialize_for_command(prompt)
+
+        # Check for --project-id flag
+        manual_project_id = None
+        if '--project-id' in sys.argv:
+            proj_idx = sys.argv.index('--project-id')
+            if proj_idx + 1 < len(sys.argv):
+                manual_project_id = sys.argv[proj_idx + 1]
+
+        project_id, instance_id, proj_new, inst_new = initialize_for_command(prompt, manual_project_id)
         print(f"Project: {project_id} {'(new)' if proj_new else '(existing)'}")
         print(f"Instance: {instance_id} {'(new)' if inst_new else '(existing)'}")
 
