@@ -263,6 +263,152 @@ class UltrathinkConfig:
     """
 
     # =========================================================================
+    # DATABASE-FIRST CONTEXT MANAGEMENT (Added 2025-11-19)
+    # =========================================================================
+
+    DB_FIRST_ENABLED = True
+    """
+    Enable database-first context management architecture.
+
+    - True = Use database for context storage (crash-safe, unlimited context)
+    - False = Use traditional in-memory context management
+
+    When enabled:
+    - All context stored in SQLite database
+    - Zero context loss on crash (ACID compliant)
+    - Support for multi-project, multi-instance architecture
+    - Clear+reload token management for unlimited context
+
+    Added: 2025-11-19 for production-ready context management
+    Used by: master_orchestrator.py, context_manager.py
+    """
+
+    DB_PATH = "database/ultrathink_context.db"
+    """
+    Path to SQLite database file for context storage.
+
+    - Relative to ClaudePrompt directory
+    - Auto-created if doesn't exist
+    - File-based (no server required)
+    - ACID compliant (crash-safe)
+
+    Production size estimates:
+    - 1 project (1300 story points): ~100 MB
+    - 5 projects: ~500 MB
+    - 10 projects: ~1 GB
+
+    Used by: sqlite_context_loader.py, multi_project_manager.py
+    """
+
+    DB_POSTGRESQL_URL = None
+    """
+    Optional PostgreSQL connection URL for production scale.
+
+    Format: postgresql://user:password@host:port/database
+
+    - None = Use SQLite (default)
+    - Set URL = Use PostgreSQL for cloud deployments
+
+    PostgreSQL advantages:
+    - Better concurrency (100+ instances)
+    - LISTEN/NOTIFY for real-time sync
+    - Cloud-native (RDS, Cloud SQL, etc.)
+
+    Used by: async_context_loader.py (if PostgreSQL support enabled)
+    """
+
+    DB_REDIS_URL = None
+    """
+    Optional Redis URL for caching context (performance optimization).
+
+    Format: redis://host:port/db
+
+    - None = No caching (load directly from database)
+    - Set URL = Use Redis for faster context retrieval
+
+    Redis is OPTIONAL - database is source of truth.
+    Cache crashes = No data loss (reload from DB).
+
+    Used by: async_context_loader.py (if Redis support enabled)
+    """
+
+    DB_CONTEXT_PRIORITY_CRITICAL_LOAD_TIME_MS = 100
+    """
+    Target load time for CRITICAL priority context (milliseconds).
+
+    - CRITICAL context must load fast (<100ms)
+    - User can start working immediately
+    - Other priorities load in background
+
+    Used by: sqlite_context_loader.py, async_context_loader.py
+    """
+
+    DB_TOKEN_CLEAR_THRESHOLD = 0.85
+    """
+    Auto-clear tokens when usage exceeds this threshold (0.0 to 1.0).
+
+    - 0.85 = Clear at 85% usage (170K tokens)
+    - Leaves 15% buffer (30K tokens)
+    - Prevents mid-response token exhaustion
+
+    Clear+reload strategy:
+    1. Clear tokens to 0
+    2. Context preserved in database (zero loss)
+    3. Reload context from database
+    4. Instance ready with 200K tokens available
+
+    Used by: token_manager.py
+    """
+
+    DB_MAX_PROJECTS = 100
+    """
+    Maximum number of projects (soft limit for monitoring).
+
+    - Not enforced by database (unlimited)
+    - Used for alerting when approaching scale limits
+    - Each project can have unlimited instances
+
+    Used by: multi_project_manager.py
+    """
+
+    DB_MAX_INSTANCES_PER_PROJECT = 10
+    """
+    Maximum instances per project (soft limit for monitoring).
+
+    - Not enforced by database (unlimited)
+    - Recommended limit for SQLite backend
+    - PostgreSQL can handle 100+ instances easily
+
+    Architecture support:
+    - SQLite: 1-10 instances per project (good performance)
+    - PostgreSQL: 100+ instances per project (excellent performance)
+
+    Used by: multi_project_manager.py
+    """
+
+    DB_HEARTBEAT_INTERVAL_SECONDS = 30
+    """
+    Heartbeat interval for instance health monitoring (seconds).
+
+    - Instances send heartbeat every 30 seconds
+    - Used for crash detection
+    - Stale threshold: 10 minutes (300 seconds)
+
+    Used by: sqlite_context_loader.py, multi_project_manager.py
+    """
+
+    DB_CLEANUP_STALE_INSTANCES_SECONDS = 600
+    """
+    Mark instances as crashed if no heartbeat within this time (seconds).
+
+    - 600 seconds = 10 minutes
+    - Instances marked as 'crashed' status
+    - Can be restarted and recover full context from database
+
+    Used by: Database cleanup functions
+    """
+
+    # =========================================================================
     # RESPONSE FORMATTING
     # =========================================================================
 
