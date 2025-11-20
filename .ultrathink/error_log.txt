@@ -831,3 +831,37 @@ NoneType: None
 2025-11-20 11:43:50,467 - LargeScaleErrorHandler - INFO - [unstable_op] Retrying in 0.0s...
 2025-11-20 11:43:50,487 - LargeScaleErrorHandler - INFO - [unstable_op] Attempt 3/5
 2025-11-20 11:43:50,487 - LargeScaleErrorHandler - INFO - [unstable_op] Success on attempt 3
+2025-11-20 14:14:37,071 - LargeScaleErrorHandler - ERROR - [ERR_NETWORK_1763666077070] NETWORK error: Database connection failed
+Context: {
+  "database": "production",
+  "attempt": 1
+}
+Stack trace:
+NoneType: None
+
+2025-11-20 14:14:37,072 - LargeScaleErrorHandler - INFO - [ERR_NETWORK_1763666077070] Recovery successful
+2025-11-20 14:14:37,074 - LargeScaleErrorHandler - INFO - [unstable_op] Attempt 1/5
+2025-11-20 14:14:37,074 - LargeScaleErrorHandler - WARNING - [unstable_op] Attempt 1 failed: Temporary failure
+2025-11-20 14:14:37,074 - LargeScaleErrorHandler - INFO - [unstable_op] Retrying in 0.0s...
+2025-11-20 14:14:37,085 - LargeScaleErrorHandler - INFO - [unstable_op] Attempt 2/5
+2025-11-20 14:14:37,085 - LargeScaleErrorHandler - WARNING - [unstable_op] Attempt 2 failed: Temporary failure
+2025-11-20 14:14:37,085 - LargeScaleErrorHandler - INFO - [unstable_op] Retrying in 0.0s...
+2025-11-20 14:14:37,106 - LargeScaleErrorHandler - INFO - [unstable_op] Attempt 3/5
+2025-11-20 14:14:37,106 - LargeScaleErrorHandler - INFO - [unstable_op] Success on attempt 3
+2025-11-20 14:18:56,321 - LargeScaleErrorHandler - ERROR - [ERR_NETWORK_1763666336321] NETWORK error: Database connection failed
+Context: {
+  "database": "production",
+  "attempt": 1
+}
+Stack trace:
+NoneType: None
+
+2025-11-20 14:18:56,321 - LargeScaleErrorHandler - INFO - [ERR_NETWORK_1763666336321] Recovery successful
+2025-11-20 14:18:56,325 - LargeScaleErrorHandler - INFO - [unstable_op] Attempt 1/5
+2025-11-20 14:18:56,325 - LargeScaleErrorHandler - WARNING - [unstable_op] Attempt 1 failed: Temporary failure
+2025-11-20 14:18:56,325 - LargeScaleErrorHandler - INFO - [unstable_op] Retrying in 0.0s...
+2025-11-20 14:18:56,335 - LargeScaleErrorHandler - INFO - [unstable_op] Attempt 2/5
+2025-11-20 14:18:56,335 - LargeScaleErrorHandler - WARNING - [unstable_op] Attempt 2 failed: Temporary failure
+2025-11-20 14:18:56,336 - LargeScaleErrorHandler - INFO - [unstable_op] Retrying in 0.0s...
+2025-11-20 14:18:56,356 - LargeScaleErrorHandler - INFO - [unstable_op] Attempt 3/5
+2025-11-20 14:18:56,356 - LargeScaleErrorHandler - INFO - [unstable_op] Success on attempt 3

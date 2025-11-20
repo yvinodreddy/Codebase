@@ -138,7 +138,7 @@ Code: if 'execute' in line and ('f"' in line or '%" ' in line or '.format(' in l
 ... and 32 more
 
 ================================================================================
-PERFORMANCE: 906 issues
+PERFORMANCE: 908 issues
 ================================================================================
 
 MEDIUM (59 issues):
@@ -206,7 +206,7 @@ Code: """Get ULTRATHINK details for a track (agents, stages, guardrails)"""
 
 ... and 49 more
 
-LOW (847 issues):
+LOW (849 issues):
 --------------------------------------------------------------------------------
 
 Type: Resource Leak
@@ -269,10 +269,10 @@ Line: 299
 Description: File opened without context manager (may leak file descriptor)
 Code: with open(output_path, 'r') as f:
 
-... and 837 more
+... and 839 more
 
 ================================================================================
-CODE QUALITY: 10713 issues
+CODE QUALITY: 10726 issues
 ================================================================================
 
 MEDIUM (627 issues):
@@ -340,7 +340,7 @@ Code: except:
 
 ... and 617 more
 
-LOW (10086 issues):
+LOW (10099 issues):
 --------------------------------------------------------------------------------
 
 Type: Missing Docstring
@@ -403,7 +403,7 @@ Line: 257
 Description: Using print() instead of logging
 Code: print(extractor.to_text())
 
-... and 10076 more
+... and 10089 more
 
 ================================================================================
 TEST COVERAGE: 5 issues
@@ -417,11 +417,11 @@ File: backups/20251113_091039/archive/old_python/portable_orchestrator.py
 Description: Critical file missing test coverage
 
 Type: Missing Tests
-File: archive/old_python/portable_orchestrator.py
+File: backups/perfection_20251113_092213/backups/20251113_091039/archive/old_python/portable_orchestrator.py
 Description: Critical file missing test coverage
 
 Type: Missing Tests
-File: backups/perfection_20251113_092213/backups/20251113_091039/archive/old_python/portable_orchestrator.py
+File: archive/old_python/portable_orchestrator.py
 Description: Critical file missing test coverage
 
 Type: Missing Tests
@@ -433,14 +433,14 @@ INFO (1 issues):
 
 Type: Test Coverage
 File: Overall
-Description: Test coverage: 92.3% (455/493 files)
-Code: 38 files untested
+Description: Test coverage: 91.7% (453/494 files)
+Code: 41 files untested
 
 ================================================================================
 SUMMARY
 ================================================================================
-Total Issues: 11729
+Total Issues: 11744
   Security: 105
-  Performance: 906
-  Code Quality: 10713
+  Performance: 908
+  Code Quality: 10726
   Test Coverage: 5

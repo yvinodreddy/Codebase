@@ -21,7 +21,7 @@
     "theme-command": 260,
     "status-line": 205,
     "prompt-queue": 7,
-    "enter-to-steer-in-relatime": 259,
+    "enter-to-steer-in-relatime": 260,
     "todo-list": 240,
     "# for memory": 251,
     "install-github-app": 252,
@@ -40,7 +40,7 @@
     "stickers-command": 254
   },
   "memoryUsageCount": 1,
-  "promptQueueUseCount": 186755,
+  "promptQueueUseCount": 186757,
   "showExpandedTodos": true,
   "autoConnectIde": true,
   "cachedStatsigGates": {
