@@ -1482,5 +1482,89 @@
       "verbose": false,
       "quiet": false
     }
+  },
+  {
+    "id": 107,
+    "timestamp": "2025-11-20 06:06:10",
+    "prompt": "test metrics display",
+    "complexity": "SIMPLE",
+    "agents_allocated": 8,
+    "mode": "claude_code",
+    "duration_seconds": 0.002,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 108,
+    "timestamp": "2025-11-20 06:07:40",
+    "prompt": "Write a Python function that calculates the nth Fibonacci number using dynamic programming. The function should:\n1. Handle edge cases (n < 0, n = 0, n = 1)\n2. Use memoization for efficiency\n3. Include proper error handling\n4. Have comprehensive docstring\n5. Include example usage\n\nReturn production-ready code with type hints.",
+    "complexity": "COMPLEX",
+    "agents_allocated": 25,
+    "mode": "claude_code",
+    "duration_seconds": 0.003,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 109,
+    "timestamp": "2025-11-20 06:07:42",
+    "prompt": "Debug this Python code that's causing a RecursionError:\n\n```python\ndef factorial(n):\n    return n * factorial(n - 1)\n```\n\nIdentify the bug, explain why it occurs, and provide the corrected code with proper base case handling.",
+    "complexity": "COMPLEX",
+    "agents_allocated": 25,
+    "mode": "claude_code",
+    "duration_seconds": 0.003,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 110,
+    "timestamp": "2025-11-20 06:07:43",
+    "prompt": "Design an algorithm to find the shortest path in a weighted graph using Dijkstra's algorithm. Requirements:\n1. Implement in Python with type hints\n2. Handle disconnected graphs\n3. Return both path and total distance\n4. Time complexity: O((V+E) log V)\n5. Include test cases\n\nProvide production-ready, well-documented code.",
+    "complexity": "COMPLEX",
+    "agents_allocated": 25,
+    "mode": "claude_code",
+    "duration_seconds": 0.004,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 111,
+    "timestamp": "2025-11-20 06:07:45",
+    "prompt": "Explain the race condition in this multi-threaded code and provide a fix:\n\n```python\ncounter = 0\n\ndef increment():\n    global counter\n    for _ in range(100000):\n        counter += 1\n\nthreads = [Thread(target=increment) for _ in range(10)]\nfor t in threads:\n    t.start()\nfor t in threads:\n    t.join()\n\nprint(counter)  # Expected: 1000000, Actual: varies\n```\n\nExplain why the result is inconsistent and provide thread-safe solution.",
+    "complexity": "COMPLEX",
+    "agents_allocated": 25,
+    "mode": "claude_code",
+    "duration_seconds": 0.006,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 112,
+    "timestamp": "2025-11-20 06:07:46",
+    "prompt": "Create a React component for user authentication with the following features:\n1. Email and password input fields\n2. Form validation\n3. Submit button with loading state\n4. Error message display\n5. TypeScript types\n6. Responsive design\n\nInclude proper error handling and accessibility features.",
+    "complexity": "COMPLEX",
+    "agents_allocated": 25,
+    "mode": "claude_code",
+    "duration_seconds": 0.002,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
   }
 ]
