@@ -21,15 +21,18 @@ SCRIPT_DIR = Path(__file__).parent.parent.resolve()
 LOG_DIR = SCRIPT_DIR / "logs"
 LOG_DIR.mkdir(exist_ok=True)
 
-# Setup logger
-logging.basicConfig(
-    level=getattr(logging, LOG_LEVEL),
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-    handlers=[
-        logging.FileHandler(LOG_DIR / "guardrails.log"),
-        logging.StreamHandler()
-    ]
-)
+# Setup logger with force=True to avoid ResourceWarning
+# Using force=True ensures any existing handlers are closed properly
+if not logging.getLogger().handlers:
+    logging.basicConfig(
+        level=getattr(logging, LOG_LEVEL),
+        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+        handlers=[
+            logging.FileHandler(LOG_DIR / "guardrails.log"),
+            logging.StreamHandler()
+        ],
+        force=True
+    )
 
 logger = logging.getLogger(__name__)
 
