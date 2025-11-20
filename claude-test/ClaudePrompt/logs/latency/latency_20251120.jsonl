@@ -1,0 +1,2 @@
+{"timestamp": "2025-11-20T03:54:57.747939", "prompt_type": "code_generation", "time_to_99_percent": 8.5, "iterations_used": 5, "final_confidence": 99.0, "bottlenecks": {"database_query": 3.2, "guardrails": 2.1, "iteration_loop": 3.2}}
+{"timestamp": "2025-11-20T03:54:57.748401", "prompt_type": "bug_fixing", "time_to_99_percent": 12.3, "iterations_used": 8, "final_confidence": 99.0, "bottlenecks": {"database_query": 5.1, "guardrails": 2.3, "iteration_loop": 4.9}}

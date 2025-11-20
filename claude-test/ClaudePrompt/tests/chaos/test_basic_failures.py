@@ -38,15 +38,16 @@ class TestDatabaseFailures:
         mgr = ContextManagerEnhanced(
             max_tokens=10000,
             compact_threshold=0.85,
-            enable_db_retrieval=True
+            enable_db_retrieval=True,
+            project_id="test_project"
         )
 
         # Add messages to trigger compaction
         for i in range(100):
             mgr.add_message('user', 'x' * 100)
 
-        # Mock database to raise error
-        with patch.object(mgr, 'retriever', None):
+        # Mock database retrieval to raise error
+        with patch('agent_framework.context_manager_enhanced.retrieve_context_for_compaction', side_effect=Exception("Database offline")):
             # Compact should still work (fall back to standard compaction)
             mgr.compact()
 
@@ -61,21 +62,21 @@ class TestDatabaseFailures:
         mgr = ContextManagerEnhanced(
             max_tokens=10000,
             compact_threshold=0.85,
-            enable_db_retrieval=True
+            enable_db_retrieval=True,
+            project_id="test_project"
         )
 
         # Add messages
         for i in range(100):
             mgr.add_message('user', f'Message {i}')
 
-        # Mock retriever to return empty results
-        if mgr.retriever:
-            with patch.object(mgr.retriever, 'load_relevant_context', return_value=[]):
-                mgr.compact()
+        # Mock database retrieval to return empty results
+        with patch('agent_framework.context_manager_enhanced.retrieve_context_for_compaction', return_value=[]):
+            mgr.compact()
 
-                # Compaction should work even with no DB results
-                assert mgr.get_total_tokens() < mgr.max_tokens * 0.85
-                assert True, "Empty database response handled"
+            # Compaction should work even with no DB results
+            assert mgr.get_total_tokens() < mgr.max_tokens * 0.85
+            assert True, "Empty database response handled"
 
 
 class TestGuardrailFailures:
