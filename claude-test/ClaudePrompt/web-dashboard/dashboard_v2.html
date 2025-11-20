@@ -3802,6 +3802,36 @@
     }
     window.charts = {};
     
+    // Destroy existing charts first
+    if (window.charts) {
+        Object.values(window.charts).forEach(chart => {
+            if (chart && typeof chart.destroy === 'function') {
+                chart.destroy();
+            }
+        });
+    }
+    window.charts = {};
+    
+    // Destroy existing charts first
+    if (window.charts) {
+        Object.values(window.charts).forEach(chart => {
+            if (chart && typeof chart.destroy === 'function') {
+                chart.destroy();
+            }
+        });
+    }
+    window.charts = {};
+    
+    // Destroy existing charts first
+    if (window.charts) {
+        Object.values(window.charts).forEach(chart => {
+            if (chart && typeof chart.destroy === 'function') {
+                chart.destroy();
+            }
+        });
+    }
+    window.charts = {};
+    
             // Success Rate Trend Chart
             const successCtx = document.getElementById('successRateChart').getContext('2d');
             charts.successRate = new Chart(successCtx, {

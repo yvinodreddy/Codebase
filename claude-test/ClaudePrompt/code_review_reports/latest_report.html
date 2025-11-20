@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Code Quality Report - 2025-11-20 15:33:23</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; margin: 40px; background: #f5f5f5; }
+        .container { max-width: 1200px; margin: 0 auto; background: white; padding: 40px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        h1 { color: #333; border-bottom: 3px solid #4CAF50; padding-bottom: 10px; }
+        h2 { color: #555; margin-top: 30px; }
+        .metric-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 20px 0; }
+        .metric-card { padding: 20px; border-radius: 8px; background: #f9f9f9; border-left: 4px solid #4CAF50; }
+        .metric-card.warning { border-left-color: #ff9800; }
+        .metric-card.error { border-left-color: #f44336; }
+        .metric-label { font-size: 14px; color: #666; text-transform: uppercase; }
+        .metric-value { font-size: 32px; font-weight: bold; color: #333; margin: 10px 0; }
+        .status { display: inline-block; padding: 5px 15px; border-radius: 20px; font-weight: bold; }
+        .status.pass { background: #4CAF50; color: white; }
+        .status.fail { background: #f44336; color: white; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }
+        th { background: #f0f0f0; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 Code Quality Report</h1>
+        <p style="color: #666;">Generated: 2025-11-20 15:33:23</p>
+
+        <h2>📊 Overview</h2>
+        <div class="metric-grid">
+            <div class="metric-card">
+                <div class="metric-label">Test Coverage</div>
+                <div class="metric-value">28.2%</div>
+                <span class="status fail">
+                    ❌ NEEDS IMPROVEMENT
+                </span>
+            </div>
+
+            <div class="metric-card">
+                <div class="metric-label">Pylint Score</div>
+                <div class="metric-value">0.00/10</div>
+                <span class="status fail">
+                    ❌ NEEDS IMPROVEMENT
+                </span>
+            </div>
+
+            <div class="metric-card">
+                <div class="metric-label">Tests Passed</div>
+                <div class="metric-value">727/738</div>
+                <span class="status fail">
+                    11 failed
+                </span>
+            </div>
+
+            <div class="metric-card ">
+                <div class="metric-label">Security Issues</div>
+                <div class="metric-value">0</div>
+                <span class="status pass">
+                    High Severity
+                </span>
+            </div>
+        </div>
+
+        <h2>🎨 Code Formatting</h2>
+        <table>
+            <tr>
+                <th>Tool</th>
+                <th>Status</th>
+                <th>Issues</th>
+            </tr>
+            <tr>
+                <td><strong>Black</strong> (Code Formatter)</td>
+                <td><span class="status fail">
+                    ❌ Needs Formatting</span></td>
+                <td>0 files</td>
+            </tr>
+            <tr>
+                <td><strong>Isort</strong> (Import Sorter)</td>
+                <td><span class="status fail">
+                    ❌ Needs Sorting</span></td>
+                <td>0 files</td>
+            </tr>
+        </table>
+
+        <h2>🔬 Type Checking</h2>
+        <table>
+            <tr>
+                <th>Tool</th>
+                <th>Errors</th>
+                <th>Warnings</th>
+            </tr>
+            <tr>
+                <td><strong>Mypy</strong></td>
+                <td>0</td>
+                <td>0</td>
+            </tr>
+        </table>
+
+        <h2>🔒 Security</h2>
+        <table>
+            <tr>
+                <th>Severity</th>
+                <th>Count</th>
+            </tr>
+            <tr>
+                <td><strong>High</strong></td>
+                <td style="color: #f44336; font-weight: bold;">0</td>
+            </tr>
+            <tr>
+                <td><strong>Medium</strong></td>
+                <td style="color: #ff9800; font-weight: bold;">0</td>
+            </tr>
+            <tr>
+                <td><strong>Low</strong></td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td><strong>Vulnerable Dependencies</strong></td>
+                <td style="color: #f44336; font-weight: bold;">0</td>
+            </tr>
+        </table>
+
+        <h2>📈 Action Items</h2>
+        <ul>
+            ❌ Increase test coverage from 28.221579613229714% to 90%+
+            <br>
+            ❌ Fix 0 files that need black formatting
+            <br>
+            ✅ No mypy type errors
+            <br>
+            ✅ No high severity security issues
+        </ul>
+    </div>
+</body>
+</html>
