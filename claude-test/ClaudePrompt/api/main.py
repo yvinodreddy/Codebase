@@ -9,23 +9,23 @@ import time
 from datetime import datetime
 
 # Import orchestrator bridge
-from orchestrator_integration import bridge
+from api.orchestrator_integration import bridge
 
 app = FastAPI(
-
-# Initialize distributed tracing
-try:
-    from infrastructure.tracing import tracing
-    tracer = tracing.initialize()
-    tracing.instrument_fastapi(app)
-except ImportError:
-    pass  # Tracing optional
     title="ULTRATHINK API",
     description="Production-Ready AI Orchestration API with 8-layer guardrails",
     version="2.0.0",
     docs_url="/docs",
     redoc_url="/redoc"
 )
+
+# Initialize distributed tracing (optional)
+try:
+    from infrastructure.tracing import tracing
+    tracer = tracing.initialize()
+    tracing.instrument_fastapi(app)
+except ImportError:
+    pass  # Tracing optional
 
 # CORS middleware
 app.add_middleware(
