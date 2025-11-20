@@ -1,0 +1,8 @@
+Write a Python function that calculates the nth Fibonacci number using dynamic programming. The function should:
+1. Handle edge cases (n < 0, n = 0, n = 1)
+2. Use memoization for efficiency
+3. Include proper error handling
+4. Have comprehensive docstring
+5. Include example usage
+
+Return production-ready code with type hints.

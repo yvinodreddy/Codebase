@@ -1,0 +1,9 @@
+Create a React component for user authentication with the following features:
+1. Email and password input fields
+2. Form validation
+3. Submit button with loading state
+4. Error message display
+5. TypeScript types
+6. Responsive design
+
+Include proper error handling and accessibility features.

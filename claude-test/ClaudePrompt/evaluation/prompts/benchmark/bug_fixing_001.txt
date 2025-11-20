@@ -1,0 +1,8 @@
+Debug this Python code that's causing a RecursionError:
+
+```python
+def factorial(n):
+    return n * factorial(n - 1)
+```
+
+Identify the bug, explain why it occurs, and provide the corrected code with proper base case handling.
