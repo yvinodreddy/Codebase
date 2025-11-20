@@ -272,7 +272,7 @@ Code: with open(output_path, 'r') as f:
 ... and 837 more
 
 ================================================================================
-CODE QUALITY: 10693 issues
+CODE QUALITY: 10713 issues
 ================================================================================
 
 MEDIUM (627 issues):
@@ -340,7 +340,7 @@ Code: except:
 
 ... and 617 more
 
-LOW (10066 issues):
+LOW (10086 issues):
 --------------------------------------------------------------------------------
 
 Type: Missing Docstring
@@ -403,7 +403,7 @@ Line: 257
 Description: Using print() instead of logging
 Code: print(extractor.to_text())
 
-... and 10056 more
+... and 10076 more
 
 ================================================================================
 TEST COVERAGE: 5 issues
@@ -413,7 +413,7 @@ MEDIUM (4 issues):
 --------------------------------------------------------------------------------
 
 Type: Missing Tests
-File: backups/perfection_20251113_092213/backups/20251113_091039/archive/old_python/portable_orchestrator.py
+File: backups/20251113_091039/archive/old_python/portable_orchestrator.py
 Description: Critical file missing test coverage
 
 Type: Missing Tests
@@ -421,7 +421,7 @@ File: archive/old_python/portable_orchestrator.py
 Description: Critical file missing test coverage
 
 Type: Missing Tests
-File: backups/20251113_091039/archive/old_python/portable_orchestrator.py
+File: backups/perfection_20251113_092213/backups/20251113_091039/archive/old_python/portable_orchestrator.py
 Description: Critical file missing test coverage
 
 Type: Missing Tests
@@ -433,14 +433,14 @@ INFO (1 issues):
 
 Type: Test Coverage
 File: Overall
-Description: Test coverage: 92.1% (453/492 files)
-Code: 39 files untested
+Description: Test coverage: 92.3% (455/493 files)
+Code: 38 files untested
 
 ================================================================================
 SUMMARY
 ================================================================================
-Total Issues: 11709
+Total Issues: 11729
   Security: 105
   Performance: 906
-  Code Quality: 10693
+  Code Quality: 10713
   Test Coverage: 5

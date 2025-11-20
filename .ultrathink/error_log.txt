@@ -746,3 +746,88 @@ NoneType: None
 2025-11-20 10:58:14,485 - LargeScaleErrorHandler - INFO - [unstable_op] Retrying in 0.0s...
 2025-11-20 10:58:14,506 - LargeScaleErrorHandler - INFO - [unstable_op] Attempt 3/5
 2025-11-20 10:58:14,506 - LargeScaleErrorHandler - INFO - [unstable_op] Success on attempt 3
+2025-11-20 11:02:40,067 - LargeScaleErrorHandler - ERROR - [ERR_NETWORK_1763654560067] NETWORK error: Database connection failed
+Context: {
+  "database": "production",
+  "attempt": 1
+}
+Stack trace:
+NoneType: None
+
+2025-11-20 11:02:40,068 - LargeScaleErrorHandler - INFO - [ERR_NETWORK_1763654560067] Recovery successful
+2025-11-20 11:02:40,071 - LargeScaleErrorHandler - INFO - [unstable_op] Attempt 1/5
+2025-11-20 11:02:40,071 - LargeScaleErrorHandler - WARNING - [unstable_op] Attempt 1 failed: Temporary failure
+2025-11-20 11:02:40,071 - LargeScaleErrorHandler - INFO - [unstable_op] Retrying in 0.0s...
+2025-11-20 11:02:40,081 - LargeScaleErrorHandler - INFO - [unstable_op] Attempt 2/5
+2025-11-20 11:02:40,082 - LargeScaleErrorHandler - WARNING - [unstable_op] Attempt 2 failed: Temporary failure
+2025-11-20 11:02:40,082 - LargeScaleErrorHandler - INFO - [unstable_op] Retrying in 0.0s...
+2025-11-20 11:02:40,102 - LargeScaleErrorHandler - INFO - [unstable_op] Attempt 3/5
+2025-11-20 11:02:40,102 - LargeScaleErrorHandler - INFO - [unstable_op] Success on attempt 3
+2025-11-20 11:13:34,307 - LargeScaleErrorHandler - ERROR - [ERR_NETWORK_1763655214307] NETWORK error: Database connection failed
+Context: {
+  "database": "production",
+  "attempt": 1
+}
+Stack trace:
+NoneType: None
+
+2025-11-20 11:13:34,307 - LargeScaleErrorHandler - INFO - [ERR_NETWORK_1763655214307] Recovery successful
+2025-11-20 11:13:34,309 - LargeScaleErrorHandler - INFO - [unstable_op] Attempt 1/5
+2025-11-20 11:13:34,310 - LargeScaleErrorHandler - WARNING - [unstable_op] Attempt 1 failed: Temporary failure
+2025-11-20 11:13:34,310 - LargeScaleErrorHandler - INFO - [unstable_op] Retrying in 0.0s...
+2025-11-20 11:13:34,320 - LargeScaleErrorHandler - INFO - [unstable_op] Attempt 2/5
+2025-11-20 11:13:34,320 - LargeScaleErrorHandler - WARNING - [unstable_op] Attempt 2 failed: Temporary failure
+2025-11-20 11:13:34,321 - LargeScaleErrorHandler - INFO - [unstable_op] Retrying in 0.0s...
+2025-11-20 11:13:34,341 - LargeScaleErrorHandler - INFO - [unstable_op] Attempt 3/5
+2025-11-20 11:13:34,341 - LargeScaleErrorHandler - INFO - [unstable_op] Success on attempt 3
+2025-11-20 11:23:49,994 - LargeScaleErrorHandler - ERROR - [ERR_NETWORK_1763655829993] NETWORK error: Database connection failed
+Context: {
+  "database": "production",
+  "attempt": 1
+}
+Stack trace:
+NoneType: None
+
+2025-11-20 11:23:49,994 - LargeScaleErrorHandler - INFO - [ERR_NETWORK_1763655829993] Recovery successful
+2025-11-20 11:23:49,996 - LargeScaleErrorHandler - INFO - [unstable_op] Attempt 1/5
+2025-11-20 11:23:49,996 - LargeScaleErrorHandler - WARNING - [unstable_op] Attempt 1 failed: Temporary failure
+2025-11-20 11:23:49,996 - LargeScaleErrorHandler - INFO - [unstable_op] Retrying in 0.0s...
+2025-11-20 11:23:50,007 - LargeScaleErrorHandler - INFO - [unstable_op] Attempt 2/5
+2025-11-20 11:23:50,008 - LargeScaleErrorHandler - WARNING - [unstable_op] Attempt 2 failed: Temporary failure
+2025-11-20 11:23:50,008 - LargeScaleErrorHandler - INFO - [unstable_op] Retrying in 0.0s...
+2025-11-20 11:23:50,029 - LargeScaleErrorHandler - INFO - [unstable_op] Attempt 3/5
+2025-11-20 11:23:50,029 - LargeScaleErrorHandler - INFO - [unstable_op] Success on attempt 3
+2025-11-20 11:27:20,573 - LargeScaleErrorHandler - ERROR - [ERR_NETWORK_1763656040573] NETWORK error: Database connection failed
+Context: {
+  "database": "production",
+  "attempt": 1
+}
+Stack trace:
+NoneType: None
+
+2025-11-20 11:27:20,573 - LargeScaleErrorHandler - INFO - [ERR_NETWORK_1763656040573] Recovery successful
+2025-11-20 11:27:20,576 - LargeScaleErrorHandler - INFO - [unstable_op] Attempt 1/5
+2025-11-20 11:27:20,576 - LargeScaleErrorHandler - WARNING - [unstable_op] Attempt 1 failed: Temporary failure
+2025-11-20 11:27:20,577 - LargeScaleErrorHandler - INFO - [unstable_op] Retrying in 0.0s...
+2025-11-20 11:27:20,587 - LargeScaleErrorHandler - INFO - [unstable_op] Attempt 2/5
+2025-11-20 11:27:20,587 - LargeScaleErrorHandler - WARNING - [unstable_op] Attempt 2 failed: Temporary failure
+2025-11-20 11:27:20,587 - LargeScaleErrorHandler - INFO - [unstable_op] Retrying in 0.0s...
+2025-11-20 11:27:20,608 - LargeScaleErrorHandler - INFO - [unstable_op] Attempt 3/5
+2025-11-20 11:27:20,608 - LargeScaleErrorHandler - INFO - [unstable_op] Success on attempt 3
+2025-11-20 11:43:50,453 - LargeScaleErrorHandler - ERROR - [ERR_NETWORK_1763657030453] NETWORK error: Database connection failed
+Context: {
+  "database": "production",
+  "attempt": 1
+}
+Stack trace:
+NoneType: None
+
+2025-11-20 11:43:50,454 - LargeScaleErrorHandler - INFO - [ERR_NETWORK_1763657030453] Recovery successful
+2025-11-20 11:43:50,456 - LargeScaleErrorHandler - INFO - [unstable_op] Attempt 1/5
+2025-11-20 11:43:50,456 - LargeScaleErrorHandler - WARNING - [unstable_op] Attempt 1 failed: Temporary failure
+2025-11-20 11:43:50,456 - LargeScaleErrorHandler - INFO - [unstable_op] Retrying in 0.0s...
+2025-11-20 11:43:50,466 - LargeScaleErrorHandler - INFO - [unstable_op] Attempt 2/5
+2025-11-20 11:43:50,467 - LargeScaleErrorHandler - WARNING - [unstable_op] Attempt 2 failed: Temporary failure
+2025-11-20 11:43:50,467 - LargeScaleErrorHandler - INFO - [unstable_op] Retrying in 0.0s...
+2025-11-20 11:43:50,487 - LargeScaleErrorHandler - INFO - [unstable_op] Attempt 3/5
+2025-11-20 11:43:50,487 - LargeScaleErrorHandler - INFO - [unstable_op] Success on attempt 3

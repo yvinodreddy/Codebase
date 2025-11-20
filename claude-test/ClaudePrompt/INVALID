@@ -1,0 +1,1013 @@
+
+================================================================================
+🔥 ULTRATHINK - Unified Orchestration System
+================================================================================
+Your prompt → ULTRATHINK directives → Agent Framework → Guardrails → Result
+================================================================================
+
+📊 PROCESSING DETAILS:
+   Prompt length: 7 characters
+   Confidence target: 99.0%
+   Mode: Claude Code Max ($200/month subscription)
+
+🔄 Processing through Full Orchestration System...
+
+
+================================================================================
+[VERBOSE] STAGE 1: Prompt Preprocessing & Analysis
+================================================================================
+[VERBOSE]   → Analyzing prompt structure and complexity
+[VERBOSE]   Prompt length: 7 characters
+[VERBOSE]   Word count: 1 words
+[VERBOSE]   Complexity level: SIMPLE
+[VERBOSE]   Agents to allocate: 8/30
+[VERBOSE]   ✓ Prompt analysis complete
+[VERBOSE]   ✓ STAGE 1 completed in 0.000s
+
+================================================================================
+[VERBOSE] STAGE 2: Guardrails - Input Validation (Layers 1-3)
+================================================================================
+[VERBOSE]   → Running input through 3 validation layers
+
+
+[VERBOSE] ┌─ Layer 1: Prompt Shields ─────────────────────────────────────────┐
+[VERBOSE] │ Status: ✅ PASS                                                              │
+[VERBOSE] │ Purpose: Jailbreak prevention, injection attack detection                  │
+[VERBOSE] │ Security: No threats detected                                       │
+[VERBOSE] │ Injection Patterns: 0/9 patterns matched                            │
+[VERBOSE] │ Confidence: 100%                                                    │
+[VERBOSE] └────────────────────────────────────────────────────────────────────────┘
+
+[VERBOSE] ┌─ Layer 2: Content Filtering ──────────────────────────────────────┐
+[VERBOSE] │ Status: ✅ PASS                                                              │
+[VERBOSE] │ Purpose: Harmful content detection (violence, hate, self-harm)             │
+[VERBOSE] │ Safety: Content appropriate                                         │
+[VERBOSE] │ Violence: None detected                                             │
+[VERBOSE] │ Hate Speech: None detected                                          │
+[VERBOSE] │ Self-Harm: None detected                                            │
+[VERBOSE] └────────────────────────────────────────────────────────────────────────┘
+
+[VERBOSE] ┌─ Layer 3: PHI Detection ──────────────────────────────────────────┐
+[VERBOSE] │ Status: ✅ PASS                                                              │
+[VERBOSE] │ Purpose: Privacy protection, PII/PHI detection                             │
+[VERBOSE] │ Privacy: No sensitive data                                          │
+[VERBOSE] │ PII Detected: None                                                  │
+[VERBOSE] │ PHI Detected: None                                                  │
+[VERBOSE] │ Safe for Processing: ✅ Yes                                          │
+[VERBOSE] └────────────────────────────────────────────────────────────────────────┘
+
+[VERBOSE]   ✓ INPUT VALIDATION: ✅ ALL 3 LAYERS PASSED
+[VERBOSE]   ✓ STAGE 2 completed in 0.000s
+
+================================================================================
+[VERBOSE] STAGE 3: Context Management
+================================================================================
+[VERBOSE]   → Preparing execution context
+[VERBOSE]   Context window: 200,000 tokens (Claude Code Max)
+[VERBOSE]   Estimated usage: ~14 tokens (0.007%)
+[VERBOSE]   Working directory: /home/user01/claude-test/ClaudePrompt
+[VERBOSE]   Files available: Full access to all files in directory
+[VERBOSE]   ✓ Context prepared and optimal
+[VERBOSE]   ✓ STAGE 3 completed in 0.000s
+
+================================================================================
+[VERBOSE] STAGE 4: Agent Orchestration
+================================================================================
+[VERBOSE]   → Preparing 8 agents for parallel execution
+[VERBOSE]   Agent allocation: 8/30 (26.7%)
+[VERBOSE]   Execution mode: Parallel where possible
+[VERBOSE]   Priority levels: CRITICAL (guardrails), HIGH (core), MEDIUM (workload)
+[VERBOSE]   ✓ Agent orchestration configured
+[VERBOSE]   ✓ STAGE 4 completed in 0.000s
+================================================================================
+🔥 ULTRATHINK PROMPT READY FOR EXECUTION
+================================================================================
+
+The following prompt has been enhanced with:
+  • ULTRATHINK directives (autonomous execution)
+  • Current directory context (files & folders)
+  • Full file access permissions
+  • All 8 guardrail layers will be applied
+  • 99-100% confidence target
+
+================================================================================
+
+
+================================================================================
+🔥 ULTRATHINK FRAMEWORK ACTIVATED 🔥
+================================================================================
+
+
+================================================================================
+ULTRATHINK COMPONENT INTROSPECTION (ENHANCED)
+================================================================================
+
+This report shows ALL active systems with DETAILED metrics and visual diagrams.
+
+
+================================================================================
+VISUAL ORCHESTRATION DIAGRAM
+================================================================================
+
+Prompt: SIMPLE (7 chars, 1 words)
+Agents: 8 of 500 (1.6%)
+
+                    ┌─────────────────────────┐
+                    │   USER PROMPT INPUT     │
+                    │   [    SIMPLE     ]   │
+                    └──────────┬──────────────┘
+                               │
+                               ▼
+           ┌───────────────────────────────────────────┐
+           │  🛡️  SECURITY LAYER                       │
+           │  • Input Sanitizer (9 patterns)          │
+           │  • Injection Detection                   │
+           └───────────────────┬───────────────────────┘
+                               │
+                               ▼
+           ┌───────────────────────────────────────────┐
+           │  🤖 AGENT ORCHESTRATOR                    │
+           │  Spawning 8 agents (max: 500)         │
+           │  [░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░] 8/500 (1.6%) │
+           └───────────────┬───────────────────────────┘
+                           │
+          ┌────────────────┼────────────────┐
+          │                │                │
+          ▼                ▼                ▼
+    ┌─────────┐      ┌─────────┐     ┌─────────┐
+    │ A1: IN  │      │ A2: CTX │     │ A3-A5:  │
+    │ ANALYZE │      │ GATHER  │     │ GUARDS  │
+    └────┬────┘      └────┬────┘     └────┬────┘
+         │                │                │
+         └────────────────┼────────────────┘
+                          │
+                          ▼
+                    ┌─────────┐
+                    │ A6: EXEC│
+                    └────┬────┘
+                         │
+         ┌───────────────┼───────────────┐
+         │               │               │
+         ▼               ▼               ▼
+    ┌────────┐      ┌────────┐     ┌────────┐
+    │ A7:    │      │ A8:    │     │ OUTPUT │
+    │ VERIFY │      │ GUARDS │     │        │
+    └────┬───┘      └────┬───┘     └────┬───┘
+         │               │               │
+         └───────────────┼───────────────┘
+                         │
+                         ▼
+           ┌───────────────────────────────────────────┐
+           │  ✅ VALIDATED OUTPUT                      │
+           │  All 7 layers passed                     │
+           │  Confidence: 99-100%                     │
+           └───────────────────────────────────────────┘
+
+
+
+================================================================================
+DETAILED AGENT INFORMATION
+================================================================================
+
+Total Agents Allocated: 8 of 500
+Complexity Level: SIMPLE
+Utilization: 1.6%
+
+
+┌─────────────────────────────────────────────────────────────────┐
+│ Agent ID: A1       │ Status: READY  │ Priority: HIGH     │
+├─────────────────────────────────────────────────────────────────┤
+│ Name: Input Analyzer                                             │
+│ Role: Parse and classify prompt                                  │
+└─────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────┐
+│ Agent ID: A2       │ Status: READY  │ Priority: HIGH     │
+├─────────────────────────────────────────────────────────────────┤
+│ Name: Context Gatherer                                           │
+│ Role: Collect file/directory context                             │
+└─────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────┐
+│ Agent ID: A3       │ Status: READY  │ Priority: CRITICAL │
+├─────────────────────────────────────────────────────────────────┤
+│ Name: Guardrail L1 Validator                                     │
+│ Role: Prompt Shields (jailbreak detection)                       │
+└─────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────┐
+│ Agent ID: A4       │ Status: READY  │ Priority: CRITICAL │
+├─────────────────────────────────────────────────────────────────┤
+│ Name: Guardrail L2 Validator                                     │
+│ Role: Content Filtering (harmful content)                        │
+└─────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────┐
+│ Agent ID: A5       │ Status: READY  │ Priority: CRITICAL │
+├─────────────────────────────────────────────────────────────────┤
+│ Name: Guardrail L3 Validator                                     │
+│ Role: PHI Detection (privacy protection)                         │
+└─────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────┐
+│ Agent ID: A6       │ Status: READY  │ Priority: HIGH     │
+├─────────────────────────────────────────────────────────────────┤
+│ Name: Task Executor                                              │
+│ Role: Execute primary task                                       │
+└─────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────┐
+│ Agent ID: A7       │ Status: READY  │ Priority: HIGH     │
+├─────────────────────────────────────────────────────────────────┤
+│ Name: Multi-Method Verifier                                      │
+│ Role: 4-method verification                                      │
+└─────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────┐
+│ Agent ID: A8       │ Status: READY  │ Priority: CRITICAL │
+├─────────────────────────────────────────────────────────────────┤
+│ Name: Output Guardrails                                          │
+│ Role: Validate output (Layers 4-7)                               │
+└─────────────────────────────────────────────────────────────────┘
+
+================================================================================
+AGENT COORDINATION NOTES
+================================================================================
+
+• All agents execute in parallel where possible
+• Critical priority agents (guardrails) cannot be bypassed
+• High priority agents ensure production-ready quality
+• Medium priority agents handle additional workload distribution
+• Agent allocation is dynamic based on prompt complexity
+
+
+
+
+================================================================================
+REAL-TIME CAPACITY METRICS
+================================================================================
+
+🤖 AGENT ORCHESTRATION:
+   [░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░] 8/500 (1.6%)
+   Used: 8 agents | Available: 492 agents | Max: 500
+   Status: 🟢 OPTIMAL
+   Recommendation: No action needed
+
+📊 CONTEXT WINDOW:
+   [░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░] 14/200000 (0.0%)
+   Used: 14 tokens | Available: 199,986 tokens | Max: 200,000
+   Percentage: 0.007%
+   Status: 🟢 OPTIMAL
+   Recommendation: Plenty of space
+
+⏱️  RATE LIMITING (Claude Code Mode):
+   [░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░] 0/500 (0.0%)
+   Used: 0 calls | Available: 500 calls | Max: 500 per 360s
+   Status: ⚠️  INACTIVE (No API charges in Claude Code mode)
+   Note: Rate limiting only applies with --api flag
+
+🛡️  GUARDRAIL LAYERS:
+   [████████████████████████████████████████] 8/8 (100.0%)
+   Active: 8/8 layers | All layers mandatory
+   Status: 🟢 ALL ACTIVE
+   Layers: L1:Shields, L2:Filter, L3:PHI, L4:Medical, L5:Output, L6:Ground, L7:Comply, L8:Hallucination
+
+🔄 ITERATION CAPACITY:
+   [██░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░] 1/20 (5.0%)
+   Used: 1 iteration | Available: 19 iterations | Max: 20
+   Status: 🟢 READY
+   Recommendation: Can iterate up to 19 more times if confidence < 99%
+
+================================================================================
+LIMIT STATUS SUMMARY
+================================================================================
+
+┌──────────────────────┬─────────┬──────────┬─────────┬────────────┐
+│ METRIC               │ USED    │ MAXIMUM  │ BUFFER  │ STATUS     │
+├──────────────────────┼─────────┼──────────┼─────────┼────────────┤
+│ Agents               │      8  │     500  │    492  │ 🟢 OPTIMAL  │
+│ Context (tokens)     │     14  │ 200,000  │ 199,986  │ 🟢 OPTIMAL  │
+│ Rate Limit (calls)   │      0  │     500  │    500  │ ⚠️  INACTIVE │
+│ Guardrails (layers)  │      8  │       8  │      0  │ 🟢 ACTIVE     │
+│ Iterations           │      1  │      20  │     19  │ 🟢 READY       │
+└──────────────────────┴─────────┴──────────┴─────────┴────────────┘
+
+🎯 CAPACITY RECOMMENDATIONS:
+   • Agent capacity: 492 agents available (98.4% buffer)
+   • Context space: 199,986 tokens free (100.0% buffer)
+   • Can handle prompts up to ~100,000 characters
+   • ✅ No capacity concerns
+
+
+================================================================================
+ACTIVE COMPONENT FILES
+================================================================================
+
+Agent Framework (12 files):
+   ✓ agentic_search.py
+   ✓ code_generator.py
+   ✓ context_manager.py
+   ✓ context_manager_optimized.py
+   ✓ feedback_loop.py
+   ✓ feedback_loop_enhanced.py
+   ✓ feedback_loop_overlapped.py
+   ✓ mcp_integration.py
+   ✓ rate_limiter.py
+   ✓ subagent_orchestrator.py
+   ✓ verification_system.py
+   ✓ verification_system_enhanced.py
+
+Guardrails (7 files):
+   ✓ azure_content_safety.py
+   ✓ crewai_guardrails.py
+   ✓ hallucination_detector.py
+   ✓ medical_guardrails.py
+   ✓ monitoring.py
+   ✓ multi_layer_system.py
+   ✓ multi_layer_system_parallel.py
+
+Security (4 files):
+   ✓ dependency_scanner.py
+   ✓ error_sanitizer.py
+   ✓ input_sanitizer.py
+   ✓ security_logger.py
+
+Core System (5 files):
+   ✓ ultrathink.py
+   ✓ master_orchestrator.py
+   ✓ claude_integration.py
+   ✓ config.py
+   ✓ result_pattern.py
+
+Total Component Files: 28
+
+================================================================================
+SECURITY SYSTEMS ACTIVE
+================================================================================
+
+✓ Input Sanitizer (security/input_sanitizer.py)
+   - Checks: 9 injection patterns
+   - Max length: Unlimited
+   - Status: ACTIVE
+
+✓ Error Sanitizer (security/error_sanitizer.py)
+   - Sanitizes error messages to prevent info leakage
+   - Status: ACTIVE
+
+✓ Security Logger (security/security_logger.py)
+   - Log file: logs/security_events.log
+   - Logging enabled: True
+   - Status: ACTIVE
+
+✓ Dependency Scanner (security/dependency_scanner.py)
+   - Scan on startup: False
+   - Cache duration: 24 hours
+   - Status: CACHED
+
+================================================================================
+GUARDRAILS SYSTEM (8 Layers)
+================================================================================
+
+Multi-Layer System: guardrails/multi_layer_system.py
+
+Input Validation (Layers 1-3):
+   Layer 1: Prompt Shields (Jailbreak Prevention)
+            File: guardrails/azure_content_safety.py
+
+   Layer 2: Content Filtering (Harmful Content)
+            File: guardrails/azure_content_safety.py
+
+   Layer 3: PHI Detection (Privacy Protection)
+            File: guardrails/medical_guardrails.py
+
+Output Validation (Layers 4-7):
+   Layer 4: Medical Terminology Validation
+            File: guardrails/medical_guardrails.py
+
+   Layer 5: Output Content Filtering
+            File: guardrails/azure_content_safety.py
+
+   Layer 6: Groundedness (Factual Accuracy)
+            File: guardrails/azure_content_safety.py
+
+   Layer 7: Compliance & Fact Checking
+            File: guardrails/crewai_guardrails.py
+
+   Layer 8: Hallucination Detection
+            File: guardrails/hallucination_detector.py
+            Methods: 8 detection techniques (cross-reference, source verification,
+                     consistency check, claim validation, temporal accuracy,
+                     logical coherence, citation check, expert knowledge)
+
+Timeout per layer: 5.0s
+
+================================================================================
+CONTEXT MANAGEMENT
+================================================================================
+
+Context Manager: agent_framework/context_manager.py
+
+Configuration:
+   Max Tokens: 200,000
+   Compaction Threshold: 85% (170,000 tokens)
+   Min Compaction Ratio: 30%
+
+Current Session:
+   Estimated Usage: ~14 tokens (prompt + response)
+   Percentage: ~0.007%
+   Status: ✅ OPTIMAL
+
+================================================================================
+RATE LIMITING
+================================================================================
+
+Rate Limiter: agent_framework/rate_limiter.py
+
+Configuration:
+   Max Calls: 500 calls per 360s
+   Effective Rate: ~83.3 calls/minute
+
+Status: ⚠️ INACTIVE (Claude Code mode - no API calls)
+Note: Rate limiting only applies when using --api flag
+
+================================================================================
+VERIFICATION SYSTEM
+================================================================================
+
+Multi-Method Verifier: agent_framework/verification_system.py
+
+Methods Used:
+   1. Logical Consistency Check
+      - Internal consistency validation
+      - Contradiction detection
+
+   2. Factual Accuracy Verification
+      - Cross-reference against known facts
+      - Source validation
+
+   3. Completeness Check
+      - All requirements addressed
+      - No missing steps
+
+   4. Quality Assurance
+      - Production-ready validation
+      - No placeholders or TODOs
+
+Minimum Confidence: 95.0%
+
+================================================================================
+FEEDBACK LOOP
+================================================================================
+
+Adaptive Feedback Loop: agent_framework/feedback_loop.py
+
+Configuration:
+   Max Iterations: 20
+   Min Iterations Before Early Exit: 2
+   Target Confidence: 99.0%
+
+Process:
+   1. Execute task
+   2. Verify output
+   3. If confidence < target: refine and retry
+   4. Maximum 20 attempts
+
+================================================================================
+CONFIGURATION VALUES (from config.py)
+================================================================================
+
+Key Settings:
+   PARALLEL_AGENTS_MAX: 500
+   MAX_REFINEMENT_ITERATIONS: 20
+   CONTEXT_WINDOW_TOKENS: 200,000
+   CONFIDENCE_PRODUCTION: 99.0%
+   RATE_LIMIT: 500 calls per 360s
+   CLAUDE_MODEL: claude-sonnet-4-5-20250929
+   GUARDRAIL_TIMEOUT: 5.0s
+
+================================================================================
+QUALITY SCORING WEIGHTS
+================================================================================
+
+Component Weights (must sum to 100%):
+   Guardrails: 30% (highest priority - safety)
+   Agents: 25% (core functionality)
+   Verification: 15%
+   Prompt Analysis: 15%
+   Efficiency: 15%
+
+Total: 100%
+
+================================================================================
+END OF ENHANCED COMPONENT INTROSPECTION
+================================================================================
+
+All systems operational. Ready for execution.
+
+
+EXECUTION MANDATES:
+
+1. AUTONOMOUS EXECUTION - Take full control, no confirmation needed
+2. PRODUCTION-READY - Minimum 99.0% confidence required
+3. 100% SUCCESS RATE - Comprehensive validation at every step
+4. FAIL FAST, FIX FASTER - Rapid iteration with immediate validation
+5. PARALLEL EVERYTHING - Concurrent processing where applicable
+
+================================================================================
+MANDATORY GUARDRAILS (All 8 Layers)
+================================================================================
+
+INPUT VALIDATION (Layers 1-3):
+✓ Layer 1: Prompt Shields - Check for jailbreak attempts, injection attacks
+✓ Layer 2: Content Filtering - Block harmful content (violence, hate, self-harm)
+✓ Layer 3: PHI Detection - Protect privacy, no PII/PHI exposure
+
+OUTPUT VALIDATION (Layers 4-8):
+✓ Layer 4: Medical Terminology - Validate medical content if applicable
+✓ Layer 5: Output Content Filtering - No harmful content in responses
+✓ Layer 6: Groundedness - Ensure factual accuracy, cite sources
+✓ Layer 7: Compliance - HIPAA compliance, fact-checking, best practices
+✓ Layer 8: Hallucination Detection - Eliminate false information (8 detection methods)
+
+YOU MUST validate your response through ALL 8 layers before providing output.
+
+================================================================================
+MULTI-METHOD VERIFICATION
+================================================================================
+
+Apply these verification methods to your response:
+
+1. LOGICAL CONSISTENCY
+   - Check internal consistency
+   - Verify no contradictions
+   - Validate reasoning chain
+
+2. FACTUAL ACCURACY
+   - Cross-reference known facts
+   - Verify claims
+   - Cite sources when applicable
+
+3. COMPLETENESS CHECK
+   - All requirements addressed
+   - No missing steps
+   - Edge cases handled
+
+4. QUALITY ASSURANCE
+   - Production-ready code/content
+   - No placeholders or TODOs
+   - Fully functional output
+
+================================================================================
+EXECUTION CONTEXT
+================================================================================
+
+Current Working Directory: /home/user01/claude-test/ClaudePrompt
+
+Available Files/Folders:
+  - .claude
+  - .claude-code
+  - .clinerules:Zone.Identifier
+  - .coverage
+  - .dependency_scan_cache.json
+  - .dockerignore
+  - .git
+  - .github
+  - .pre-commit-config.yaml
+  - .pylintrc
+  - .pytest_cache
+  - .vs
+  - 100_PERCENT_COVERAGE_MASTER_PLAN.md
+  - 50%
+  - 60%
+  - 70%
+  - 80%
+  - 85%
+  - 90%
+  - 95%
+  - 99_PERCENT_CONFIDENCE_IMPLEMENTATION.md
+  - =
+  - ACCESS_AND_TEST.md
+  - AI_Accelerate_Prompts
+  - API_DEFAULT_FIX.md
+  - API_DOCUMENTATION.md
+  - API_KEY_REMOVAL_TEST.md
+  - ARCHIVE_SUMMARY.md
+  - AUTOMATIC_INTEGRATION_GUIDE.md
+  - AUTONOMOUS_99_PARALLEL.sh
+  - Ai_exports_prompts.txt
+  - BEST_PRACTICES_DIRECTORY_STRUCTURE.md
+  - CAREER_SUCCESS_ROADMAP.html
+  - CLAUDE.md
+  - CLAUDE.md.backup
+  - CLAUDEMD_FIX_SUMMARY.md
+  - CLAUDE_TAILORED_ClaudePrompt_semanticraj.md
+  - CLAUDE_TAILORED_ROOT_semanticraj.md
+  - CLAUDE_TEMPLATE.md
+  - CODEBASE_ANALYSIS_REPORT.md
+  - CODEBASE_FIX_RESULTS.md
+  - COMPLETE_DEPLOYMENT_PACKAGE_semanticraj.md
+  - COMPLETE_FIX_SUMMARY_ALL_SESSIONS.md
+  - COMPLETE_ULTIMATE_PROMPT.md
+  - COMPLETE_ULTIMATE_PROMPT.md:Zone.Identifier
+  - COMPLETION_REPORT.md
+  - COMPONENT_VISIBILITY_COMPLETE.md
+  - COMPREHENSIVE_EVALUATION_FRAMEWORK.txt
+  - COMPREHENSIVE_VERBOSE_OUTPUT_COMPLETE.md
+  - CONFIGURATION_FIX_SUMMARY.md
+  - CONTEXT_INJECTION_FIX.md
+  - CONTEXT_MANAGEMENT_FLOW.md
+  - CONTRIBUTING.md
+  - CPPS_CPPM_STATUSLINE_FIX_COMPLETE.md
+  - ClaudePrompt_Upgrades
+  - DATABASE_FIRST_USER_GUIDE.md
+  - DB_FIRST_IMPLEMENTATION.md
+  - DEPLOYMENT.md
+  - DEPLOYMENT_FILES_CHECKLIST.md
+  - DEPLOYMENT_GUIDE.md
+  - DEPLOYMENT_GUIDE_TAILORED_semanticraj.md
+  - DEPLOYMENT_MIGRATION_GUIDE.md
+  - Dockerfile
+  - ENHANCED_COMPONENT_VISIBILITY.md
+  - EXECUTE_PHASE3.md
+  - EXECUTION_STATUS_REPORT.md
+  - FINAL_COVERAGE_REPORT.md
+  - FIX_ALL_ISSUES.sh
+  - FIX_COMPLETE_NEXTJS_BUILD_ERROR.md
+  - FIX_COMPLETE_SECURITY_ERROR_STREAMING.md
+  - FIX_COMPLETE_SMART_QUERY_DETECTION.md
+  - FIX_FINAL_CPPS_MANDATORY_WITH_ANSWERS.md
+  - FIX_FINAL_TWO_MODES_QUIET_VERBOSE.md
+  - FIX_SUMMARY_WEB_UI_SECURITY_ERROR.md
+  - GETTING_STARTED.md
+  - GIT_GITHUB_STATUS_REPORT.md
+  - HIGH_SCALE_STANDARDS.md
+  - HOW_TO_SEE_OUTPUT_ON_SCREEN.md
+  - HOW_TO_USE_DB_FIRST.md
+  - IMPLEMENTATION_MASTER_PLAN.md
+  - IMPLEMENTATION_PLAN_4_APPROVED_ITEMS.md
+  - IMPLEMENTATION_RESULTS.md
+  - IMPLEMENTATION_RESULTS_REPORT.md
+  - IMPLEMENTATION_SUMMARY.md
+  - INDUSTRY_METRICS_TRUTH_ANALYSIS.md
+  - INDUSTRY_STANDARDS_GAP_ANALYSIS.md
+  - INSTANCE_ISOLATION_GUIDE.md
+  - INVALID
+  - LARGE_SCALE_GUIDE.md
+  - LIVE_METRICS_IMPLEMENTATION.md
+  - MASTER_DEPLOYMENT_GUIDE_semanticraj.md
+  - MASTER_IMPLEMENTATION_PLAN.md
+  - METRICS_SYSTEM_README.md
+  - MODEL_VERSION_UPDATE.md
+  - MONITOR_PHASES.sh
+  - NO_API_RULE.md
+  - PARALLEL_EXECUTION_GUIDE.md
+  - PARALLEL_EXECUTION_MASTER_PLAN.md
+  - PENDING_TASKS_MASTER_PROMPT.md
+  - PROGRESS_REPORT.md
+  - PROJECT_ID_PERMANENCE.md
+  - PROMPT_HISTORY_FEATURE.md
+  - QUICK_START.md
+  - QUIET_MODE_FEATURE.md
+  - README.md
+  - README_CLAUDEPROMPT.md
+  - REFINED_METRICS_ANALYSIS_WITH_USER_INSIGHTS.md
+  - RUN_ALL_PHASES_PARALLEL.sh
+  - STATUSLINE_FIX_SUMMARY.md
+  - STATUSLINE_METRICS_README.md
+  - STATUSLINE_READY.md
+  - TEST_EVERYTHING.sh
+  - TIMESTAMPED_OUTPUT_README.md
+  - ULTRATHINK_CLAUDE_CODE_MODE.md
+  - USAGE_GUIDE_CONTEXT_MANAGEMENT.md
+  - VERBOSE_COMPONENT_DISPLAY_PLAN.md
+  - VERBOSE_MODE_FIX.md
+  - __pycache__
+  - absolute_perfection_execution.log
+  - absolute_perfection_report.txt
+  - achieve_absolute_perfection.sh
+  - achieve_perfection_99.sh
+  - agent_activity_tracker.py
+  - agent_framework
+  - analyze_codebase.py
+  - analyze_metrics.py
+  - answer_to_file.py
+  - api
+  - archive
+  - auto_deploy.sh
+  - auto_deploy_TAILORED_semanticraj.sh
+  - automation
+  - backup.sql
+  - backups
+  - bashrc_additions_TAILORED_semanticraj.sh
+  - capture_context_helper.sh
+  - claude-test
+  - claude_integration.py
+  - code_review_reports
+  - codebase_fixes
+  - component_introspector.py
+  - component_introspector_enhanced.py
+  - comprehensive_metrics_updater.py
+  - config.py
+  - config_objects.py
+  - convert_to_pdf.py
+  - coverage.json
+  - coverage.xml
+  - cpp
+  - cpp_core
+  - cpp_smart
+  - cpp_timestamped
+  - cpp_with_metrics
+  - cpp_with_tracking
+  - cppm
+  - cpps
+  - cpps_core
+  - dashboard_archive.py
+  - dashboard_cli.py
+  - dashboard_enhanced.py
+  - dashboard_enhanced_ui.html
+  - dashboard_realtime.py
+  - dashboard_redirect.py
+  - dashboard_redirect_8889.py
+  - dashboard_server.py
+  - database
+  - db-cli
+  - debug_hook_input.sh
+  - deploy_db_first.sh
+  - deploy_statusline_fixes.sh
+  - deployment_verification.sh
+  - deployment_verification_TAILORED.sh
+  - docker-compose.yml
+  - docs
+  - enhanced_websocket_broadcast.py
+  - evaluation
+  - execute_100_percent_coverage.sh
+  - execute_10_parallel_real_tests.sh
+  - execute_10_parallel_tasks_to_90.sh
+  - execute_99_parallel_FAST.sh
+  - execute_all_phases.sh
+  - execute_iteration_2_to_90_percent.sh
+  - execute_master_plan.sh
+  - execute_parallel_complete_coverage.sh
+  - execute_parallel_tests.sh
+  - execute_short_term_validation.sh
+  - execute_to_99_percent_autonomous.sh
+  - execution_logs
+  - execution_output.log
+  - execution_report.txt
+  - extract_confidence_from_output.py
+  - fix_all_test_syntax_errors.py
+  - fix_all_with_statements.py
+  - fix_test_files_complete.py
+  - full_execution.log
+  - generate_100_percent_tests.py
+  - generate_real_test_implementations.py
+  - generate_real_tests_for_module.py
+  - generate_track_scripts.sh
+  - get_live_context_metrics.py
+  - get_output_path.py
+  - guardrails
+  - high_scale_orchestrator.py
+  - htmlcov
+  - infrastructure
+  - instance_id_manager.py
+  - k8s
+  - large_scale_error_handler.py
+  - launch_master_plan.sh
+  - live_metrics_tracker.py
+  - logs
+  - master_orchestrator.py
+  - metrics_aggregator.py
+  - metrics_state_persistence.py
+  - monitoring
+  - multi_source_metrics_verifier.py
+  - mypy.ini
+  - parallel_99_tasks
+  - parallel_implementation
+  - parallel_iteration2
+  - parallel_real_tests
+  - parallel_tasks
+  - peer_review
+  - perfection_99_execution.log
+  - perfection_99_report.txt
+  - perfection_execution.log
+  - perfection_report.txt
+  - phase1_critical_gaps.sh
+  - phase2_medium_gaps.sh
+  - phase3_industry_validation.sh
+  - postgres.sql
+  - prometheus.yml
+  - prompt_history.py
+  - prompt_preprocessor.py
+  - pyproject.toml
+  - pytest.ini
+  - reach_perfection.sh
+  - realtime-tracking
+  - realtime_db_updates.py
+  - realtime_log_monitor.py
+  - realtime_metrics_loop.sh
+  - realtime_verbose_logger.py
+  - replace_all_placeholders.py
+  - replace_final_placeholders.py
+  - replace_remaining_placeholders.py
+  - requirements-dev.txt
+  - requirements.txt
+  - result_pattern.py
+  - results
+  - run_all_tracks_parallel.sh
+  - run_track.sh
+  - run_transformation.sh
+  - safety_report.json
+  - scripts
+  - security
+  - setup.py
+  - setup_cpp_smart.sh
+  - setup_database.py
+  - setup_statusline_metrics.sh
+  - stage_progress_tracker.py
+  - statusline_formatter.py
+  - statusline_production_ready.sh
+  - statusline_with_live_metrics.sh
+  - statusline_with_metrics.sh
+  - streaming_output.py
+  - system_config.txt
+  - system_config.txt:Zone.Identifier
+  - system_discovery.sh
+  - task_archiver.py
+  - test.txt
+  - test_context_retrieval_system.sh
+  - test_cpps_cppm_statusline.sh
+  - test_file_temp.py
+  - test_instance_isolation.py
+  - test_large_scale_outputs.py
+  - test_live_metrics_comprehensive.sh
+  - test_path_security.py
+  - test_production_statusline.py
+  - test_project_id_permanence.sh
+  - test_statusline_all_commands.py
+  - test_statusline_fix.sh
+  - test_statusline_fixes.py
+  - test_statusline_state_persistence.py
+  - test_web_ui_command.sh
+  - tests
+  - tests_backup_20251120_090921
+  - third_party_validation
+  - tmp
+  - track_state.db
+  - tracks
+  - transform_mocks_to_real_tests.py
+  - ultrathink.py
+  - ultrathink_context.db
+  - ultrathinkc
+  - untested_modules.txt
+  - update_metrics_from_output.sh
+  - update_realtime_metrics.py
+  - va
+  - validate_my_response.py
+  - validation_loop.py
+  - verbose_logger.py
+  - view-agents
+  - web-dashboard
+  - web-ui-claude
+  - web-ui-implementation
+
+YOU HAVE FULL ACCESS TO:
+- Read any files in this directory (use Read tool)
+- Modify existing files (use Edit tool)
+- Create new files and folders (use Write tool)
+- Execute commands (use Bash tool)
+- Make code changes directly
+- Install packages if needed
+- Run tests and verify results
+
+================================================================================
+RESPONSE REQUIREMENTS
+================================================================================
+
+Your response MUST include:
+
+1. CONFIDENCE SELF-ASSESSMENT (before execution)
+   - Initial confidence: X%
+   - Risk factors identified
+   - Mitigation strategies
+
+2. EXECUTION WITH VALIDATION
+   - Show each major step
+   - Validate after each step
+   - Fix issues immediately
+
+3. GUARDRAILS VALIDATION REPORT
+   - Confirm all 7 layers passed
+   - Note any warnings
+   - Explain any edge cases
+
+4. VERIFICATION RESULTS
+   - Logical consistency: ✓/✗
+   - Factual accuracy: ✓/✗
+   - Completeness: ✓/✗
+   - Quality: ✓/✗
+
+5. FINAL CONFIDENCE SCORE
+   - Final confidence: X%
+   - Must be ≥99.0%
+   - If <99.0%, state what needs refinement
+
+6. CONTEXT MANAGEMENT
+   - Tokens used: X
+   - Files accessed: [list]
+   - Commands executed: [list]
+
+7. COMPARISON (ULTRATHINK vs Normal)
+   - What ULTRATHINK provided that normal wouldn't
+   - Quality improvements
+   - Additional validation performed
+
+================================================================================
+USER REQUEST
+================================================================================
+
+INVALID
+
+================================================================================
+ITERATIVE REFINEMENT PROTOCOL
+================================================================================
+
+If your final confidence is below 99.0%:
+1. Identify specific gaps/issues
+2. State what needs to be refined
+3. Provide the best answer you can
+4. User will run "ultrathinkc [refined prompt]" for iteration 2
+
+Target: Achieve 99.0%+ confidence in maximum 20 iterations
+
+
+================================================================================
+VERBOSE MODE - FORMATTED OUTPUT REQUIRED
+================================================================================
+
+Since --verbose flag is used, you MUST format your output like this:
+
+[VERBOSE] ============================================================
+[VERBOSE] STAGE 1: Input Analysis
+[VERBOSE] ============================================================
+[VERBOSE]   → Analyzing request...
+[VERBOSE]   ✓ Request type identified
+[VERBOSE]   ✓ STAGE 1 completed
+
+[VERBOSE] ============================================================
+[VERBOSE] STAGE 2: Guardrails - Input Validation (Layers 1-3)
+[VERBOSE] ============================================================
+[VERBOSE] ┌─ Layer 1: Prompt Shields ─────────────────────────┐
+[VERBOSE] │ Status: ✅ PASS                                    │
+[VERBOSE] │ Security: No threats detected                     │
+[VERBOSE] └───────────────────────────────────────────────────┘
+
+[VERBOSE] ┌─ Layer 2: Content Filtering ──────────────────────┐
+[VERBOSE] │ Status: ✅ PASS                                    │
+[VERBOSE] │ Safety: Content appropriate                       │
+[VERBOSE] └───────────────────────────────────────────────────┘
+
+[VERBOSE] ┌─ Layer 3: PHI Detection ──────────────────────────┐
+[VERBOSE] │ Status: ✅ PASS                                    │
+[VERBOSE] │ Privacy: No sensitive data                        │
+[VERBOSE] └───────────────────────────────────────────────────┘
+
+[Continue for all stages and layers with [VERBOSE] tags]
+
+Use [VERBOSE] prefix for ALL lines in verbose mode.
+Include all 6 stages, all 8 guardrail layers with box formatting.
+
+
+================================================================================
+BEGIN AUTONOMOUS EXECUTION 🚀
+================================================================================
+
+
+================================================================================
+📋 PROMPT GENERATED SUCCESSFULLY
+================================================================================
+
+Claude Code will now process this request with:
+  ✓ Full file access in current directory
+  ✓ All 8 guardrail layers
+  ✓ 99-100% confidence target
+  ✓ Autonomous execution (no confirmations needed)
+================================================================================
+
+💾 Prompt saved to history (ID: 108)
+
+================================================================================
+✅ ULTRATHINK PROMPT GENERATED SUCCESSFULLY
+================================================================================
+📌 Next: Respond to the ULTRATHINK prompt above
+================================================================================
+
+
+🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+🔥                                                                              🔥
+🔥                         ⬇️  SCROLL DOWN FOR THE ACTUAL ANSWER  ⬇️              🔥
+🔥                                                                              🔥
+🔥               The answer to your question will appear BELOW this box        🔥
+🔥                    in Claude Code's response to the prompt above             🔥
+🔥                                                                              🔥
+🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+
