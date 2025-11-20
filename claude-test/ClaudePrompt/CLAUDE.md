@@ -946,3 +946,43 @@ This testing standard is PERMANENT and MANDATORY.
 
 **END OF MANDATORY TESTING STANDARDS**
 
+
+================================================================================
+⚠️  CRITICAL MANDATORY RULE - EFFECTIVE IMMEDIATELY ⚠️
+================================================================================
+
+**PERMANENT, NON-NEGOTIABLE, ZERO EXCEPTIONS:**
+
+## EVERY NEW PYTHON FILE MUST HAVE A TEST FILE
+
+When creating OR modifying ANY Python file:
+
+**STEP 1:** Create the Python source file
+**STEP 2:** IMMEDIATELY create corresponding test file (BEFORE moving on)
+**STEP 3:** Achieve 90%+ coverage for that file
+**STEP 4:** Only then proceed to next task
+
+**Format:**
+```
+Source:  module/feature.py
+Test:    tests/unit/test_feature.py
+```
+
+**Enforcement:**
+- ❌ Creating a .py file without a test file is FORBIDDEN
+- ❌ Committing code without tests is BLOCKED (pre-commit hook)
+- ❌ Merging PRs without tests is BLOCKED (CI/CD)
+- ✅ Test file must be created IN THE SAME commit as source file
+
+**Rationale:**
+"If the file is getting created then test also needs to be get created with that 
+otherwise it is not worth it." - User requirement
+
+**This is MANDATORY and applies to:**
+- All new Python files
+- All modified Python files  
+- All project contributors
+- All development sessions
+- NOW and FOREVER
+
+================================================================================

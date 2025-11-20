@@ -4,67 +4,75 @@ CODEBASE ANALYSIS REPORT
 
 
 ================================================================================
-SECURITY: 18 issues
+SECURITY: 105 issues
 ================================================================================
 
-CRITICAL (9 issues):
+CRITICAL (63 issues):
 --------------------------------------------------------------------------------
 
 Type: Hardcoded Secret
-File: tests/unit/test_mcp_integration.py
+File: backups/perfection_99_20251113_093052/tests/unit/test_mcp_integration.py
 Line: 430
 Description: Potential hardcoded secret detected
 Code: *** REDACTED ***
 
 Type: Hardcoded Secret
-File: tests/unit/test_mcp_integration.py
+File: backups/perfection_99_20251113_093052/tests/unit/test_mcp_integration.py
 Line: 435
 Description: Potential hardcoded secret detected
 Code: *** REDACTED ***
 
 Type: Hardcoded Secret
-File: tests/unit/test_mcp_integration.py
+File: backups/perfection_99_20251113_093052/tests/unit/test_mcp_integration.py
 Line: 445
 Description: Potential hardcoded secret detected
 Code: *** REDACTED ***
 
 Type: Hardcoded Secret
-File: tests/unit/test_mcp_integration.py
+File: backups/perfection_99_20251113_093052/tests/unit/test_mcp_integration.py
 Line: 456
 Description: Potential hardcoded secret detected
 Code: *** REDACTED ***
 
 Type: Hardcoded Secret
-File: tests/unit/test_mcp_integration.py
+File: backups/perfection_99_20251113_093052/tests/unit/test_mcp_integration.py
 Line: 474
 Description: Potential hardcoded secret detected
 Code: *** REDACTED ***
 
 Type: Hardcoded Secret
-File: tests/unit/test_mcp_integration.py
+File: backups/perfection_99_20251113_093052/tests/unit/test_mcp_integration.py
 Line: 479
 Description: Potential hardcoded secret detected
 Code: *** REDACTED ***
 
 Type: Hardcoded Secret
-File: tests/unit/test_mcp_integration.py
+File: backups/perfection_99_20251113_093052/tests/unit/test_mcp_integration.py
 Line: 489
 Description: Potential hardcoded secret detected
 Code: *** REDACTED ***
 
 Type: Hardcoded Secret
-File: tests/unit/test_mcp_integration.py
+File: backups/perfection_99_20251113_093052/tests/unit/test_mcp_integration.py
 Line: 500
 Description: Potential hardcoded secret detected
 Code: *** REDACTED ***
 
 Type: Hardcoded Secret
-File: tests/unit/test_claude_integration.py
+File: backups/perfection_99_20251113_093052/tests/unit/test_claude_integration.py
 Line: 166
 Description: Potential hardcoded secret detected
 Code: *** REDACTED ***
 
-HIGH (9 issues):
+Type: Hardcoded Secret
+File: backups/absolute_perfection_20251113_094806/tests/unit/test_mcp_integration.py
+Line: 430
+Description: Potential hardcoded secret detected
+Code: *** REDACTED ***
+
+... and 53 more
+
+HIGH (42 issues):
 --------------------------------------------------------------------------------
 
 Type: SQL Injection Risk
@@ -121,11 +129,19 @@ Line: 18
 Description: Using shell=True or os.system can lead to command injection
 Code: result = subprocess.run(cmd, shell=True, capture_output=True, text=True)
 
+Type: SQL Injection Risk
+File: backups/perfection_99_20251113_093052/analyze_codebase.py
+Line: 40
+Description: SQL query uses string formatting instead of parameterized queries
+Code: if 'execute' in line and ('f"' in line or '%" ' in line or '.format(' in line):
+
+... and 32 more
+
 ================================================================================
-PERFORMANCE: 114 issues
+PERFORMANCE: 906 issues
 ================================================================================
 
-MEDIUM (11 issues):
+MEDIUM (59 issues):
 --------------------------------------------------------------------------------
 
 Type: N+1 Query Pattern
@@ -188,10 +204,40 @@ Line: 465
 Description: Potential N+1 query pattern (query inside loop)
 Code: """Get ULTRATHINK details for a track (agents, stages, guardrails)"""
 
-... and 1 more
+... and 49 more
 
-LOW (103 issues):
+LOW (847 issues):
 --------------------------------------------------------------------------------
+
+Type: Resource Leak
+File: update_realtime_metrics.py
+Line: 37
+Description: File opened without context manager (may leak file descriptor)
+Code: with open(METRICS_FILE, 'r') as f:
+
+Type: Resource Leak
+File: update_realtime_metrics.py
+Line: 78
+Description: File opened without context manager (may leak file descriptor)
+Code: with open(temp_file, 'w') as f:
+
+Type: Resource Leak
+File: update_realtime_metrics.py
+Line: 99
+Description: File opened without context manager (may leak file descriptor)
+Code: with open(METRICS_FILE, 'r') as f:
+
+Type: Resource Leak
+File: update_realtime_metrics.py
+Line: 122
+Description: File opened without context manager (may leak file descriptor)
+Code: with open(METRICS_FILE, 'w') as f:
+
+Type: Resource Leak
+File: get_live_context_metrics.py
+Line: 244
+Description: File opened without context manager (may leak file descriptor)
+Code: with open(args.input, 'r') as f:
 
 Type: Resource Leak
 File: streaming_output.py
@@ -223,43 +269,13 @@ Line: 299
 Description: File opened without context manager (may leak file descriptor)
 Code: with open(output_path, 'r') as f:
 
-Type: Resource Leak
-File: streaming_output.py
-Line: 326
-Description: File opened without context manager (may leak file descriptor)
-Code: with open(output_path, 'r') as f:
-
-Type: Resource Leak
-File: streaming_output.py
-Line: 339
-Description: File opened without context manager (may leak file descriptor)
-Code: with open(output_path, 'r') as f:
-
-Type: Resource Leak
-File: ultrathink.py
-Line: 1535
-Description: File opened without context manager (may leak file descriptor)
-Code: with open(file_path, 'r') as f:
-
-Type: Resource Leak
-File: realtime_log_monitor.py
-Line: 31
-Description: File opened without context manager (may leak file descriptor)
-Code: with open(self.log_file, 'r') as f:
-
-Type: Resource Leak
-File: dashboard_archive.py
-Line: 84
-Description: File opened without context manager (may leak file descriptor)
-Code: with open(self.output_file, 'r', encoding='utf-8', errors='ignore') as f:
-
-... and 93 more
+... and 837 more
 
 ================================================================================
-CODE QUALITY: 1874 issues
+CODE QUALITY: 10693 issues
 ================================================================================
 
-MEDIUM (15 issues):
+MEDIUM (627 issues):
 --------------------------------------------------------------------------------
 
 Type: Bare Except Clause
@@ -293,123 +309,111 @@ Description: Bare except clause catches all exceptions (use specific exceptions)
 Code: except:
 
 Type: Bare Except Clause
-File: analyze_codebase.py
-Line: 221
+File: multi_source_metrics_verifier.py
+Line: 605
 Description: Bare except clause catches all exceptions (use specific exceptions)
 Code: except:
 
 Type: Bare Except Clause
-File: realtime-tracking/websocket_server.py
-Line: 480
+File: multi_source_metrics_verifier.py
+Line: 613
 Description: Bare except clause catches all exceptions (use specific exceptions)
 Code: except:
 
 Type: Bare Except Clause
-File: realtime-tracking/websocket_server.py
-Line: 485
+File: live_metrics_tracker.py
+Line: 136
 Description: Bare except clause catches all exceptions (use specific exceptions)
 Code: except:
 
 Type: Bare Except Clause
-File: realtime-tracking/websocket_server.py
-Line: 490
+File: live_metrics_tracker.py
+Line: 238
 Description: Bare except clause catches all exceptions (use specific exceptions)
 Code: except:
 
 Type: Bare Except Clause
-File: tests/e2e_framework.py
-Line: 207
-Description: Bare except clause catches all exceptions (use specific exceptions)
-Code: except:
-
-... and 5 more
-
-LOW (1859 issues):
---------------------------------------------------------------------------------
-
-Type: Print Statement
-File: streaming_output.py
-Line: 119
-Description: Using print() instead of logging
-Code: print(line, end='', flush=True)
-
-Type: Print Statement
-File: streaming_output.py
-Line: 124
-Description: Using print() instead of logging
-Code: print(f"[Progress: {line_num} lines written...]", flush=True)
-
-Type: Print Statement
-File: streaming_output.py
-Line: 243
-Description: Using print() instead of logging
-Code: >>> print(f"Generated {stream_out.line_count} lines")
-
-Type: Print Statement
-File: streaming_output.py
-Line: 286
-Description: Using print() instead of logging
-Code: print(f"❌ ERROR: Output file not found: {output_file}")
-
-Type: Print Statement
-File: streaming_output.py
+File: live_metrics_tracker.py
 Line: 295
-Description: Using print() instead of logging
-Code: print("\n" + "="*80)
+Description: Bare except clause catches all exceptions (use specific exceptions)
+Code: except:
+
+... and 617 more
+
+LOW (10066 issues):
+--------------------------------------------------------------------------------
+
+Type: Missing Docstring
+File: update_realtime_metrics.py
+Line: 127
+Description: FunctionDef 'main' missing docstring
+Code: def main...
 
 Type: Print Statement
-File: streaming_output.py
-Line: 296
+File: update_realtime_metrics.py
+Line: 83
 Description: Using print() instead of logging
-Code: print(f"📄 FULL OUTPUT ({line_count} lines)")
+Code: print(f"Error writing metrics: {e}", file=sys.stderr)
 
 Type: Print Statement
-File: streaming_output.py
-Line: 297
+File: update_realtime_metrics.py
+Line: 143
 Description: Using print() instead of logging
-Code: print("="*80 + "\n")
+Code: print("✓ Metrics reset successfully")
 
 Type: Print Statement
-File: streaming_output.py
-Line: 300
+File: update_realtime_metrics.py
+Line: 145
 Description: Using print() instead of logging
-Code: print(f.read())
+Code: print("✗ Failed to reset metrics", file=sys.stderr)
 
 Type: Print Statement
-File: streaming_output.py
-Line: 304
+File: update_realtime_metrics.py
+Line: 156
 Description: Using print() instead of logging
-Code: print("\n" + "="*80)
+Code: print("✓ Metrics updated successfully")
 
 Type: Print Statement
-File: streaming_output.py
-Line: 305
+File: update_realtime_metrics.py
+Line: 158
 Description: Using print() instead of logging
-Code: print(f"📊 LARGE OUTPUT SUMMARY ({line_count:,} lines)")
+Code: print("✗ Failed to update metrics", file=sys.stderr)
 
-... and 1849 more
+Type: Missing Docstring
+File: get_live_context_metrics.py
+Line: 30
+Description: FunctionDef '__init__' missing docstring
+Code: def __init__...
+
+Type: Print Statement
+File: get_live_context_metrics.py
+Line: 248
+Description: Using print() instead of logging
+Code: print(json.dumps({'status': 'error', 'error': str(e)}))
+
+Type: Print Statement
+File: get_live_context_metrics.py
+Line: 255
+Description: Using print() instead of logging
+Code: print(extractor.to_json())
+
+Type: Print Statement
+File: get_live_context_metrics.py
+Line: 257
+Description: Using print() instead of logging
+Code: print(extractor.to_text())
+
+... and 10056 more
 
 ================================================================================
-TEST COVERAGE: 13 issues
+TEST COVERAGE: 5 issues
 ================================================================================
 
-MEDIUM (12 issues):
+MEDIUM (4 issues):
 --------------------------------------------------------------------------------
 
 Type: Missing Tests
-File: guardrails/medical_guardrails.py
-Description: Critical file missing test coverage
-
-Type: Missing Tests
-File: guardrails/crewai_guardrails.py
-Description: Critical file missing test coverage
-
-Type: Missing Tests
-File: parallel_implementation/phase3_guardrails_fixes.py
-Description: Critical file missing test coverage
-
-Type: Missing Tests
-File: security/security_headers.py
+File: backups/perfection_20251113_092213/backups/20251113_091039/archive/old_python/portable_orchestrator.py
 Description: Critical file missing test coverage
 
 Type: Missing Tests
@@ -417,40 +421,26 @@ File: archive/old_python/portable_orchestrator.py
 Description: Critical file missing test coverage
 
 Type: Missing Tests
-File: guardrails/hallucination_detector.py
+File: backups/20251113_091039/archive/old_python/portable_orchestrator.py
 Description: Critical file missing test coverage
 
 Type: Missing Tests
-File: agent_framework/subagent_orchestrator.py
+File: backups/perfection_20251113_092213/archive/old_python/portable_orchestrator.py
 Description: Critical file missing test coverage
-
-Type: Missing Tests
-File: guardrails/azure_content_safety.py
-Description: Critical file missing test coverage
-
-Type: Missing Tests
-File: security/dependency_scanner.py
-Description: Critical file missing test coverage
-
-Type: Missing Tests
-File: guardrails/multi_layer_system.py
-Description: Critical file missing test coverage
-
-... and 2 more
 
 INFO (1 issues):
 --------------------------------------------------------------------------------
 
 Type: Test Coverage
 File: Overall
-Description: Test coverage: 38.8% (33/85 files)
-Code: 52 files untested
+Description: Test coverage: 92.1% (453/492 files)
+Code: 39 files untested
 
 ================================================================================
 SUMMARY
 ================================================================================
-Total Issues: 2019
-  Security: 18
-  Performance: 114
-  Code Quality: 1874
-  Test Coverage: 13
+Total Issues: 11709
+  Security: 105
+  Performance: 906
+  Code Quality: 10693
+  Test Coverage: 5

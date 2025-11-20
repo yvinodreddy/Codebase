@@ -399,3 +399,27 @@ When creating OR modifying ANY Python file:
 
 **YOU MUST CREATE TESTS FOR EVERY PYTHON FILE. NO EXCEPTIONS.**
 
+
+================================================================================
+⚠️  CRITICAL MANDATORY RULE - EFFECTIVE IMMEDIATELY ⚠️
+================================================================================
+
+**PERMANENT, NON-NEGOTIABLE, ZERO EXCEPTIONS:**
+
+## EVERY NEW PYTHON FILE MUST HAVE A TEST FILE
+
+When creating ANY Python file:
+
+1. Create the source file
+2. IMMEDIATELY create test file (same commit)
+3. Achieve 90%+ coverage
+4. Only then proceed
+
+**NO EXCEPTIONS. NO SHORTCUTS.**
+
+If file created → test MUST be created
+Otherwise it's not worth it.
+
+This applies to ALL Python files in ALL projects.
+
+================================================================================
