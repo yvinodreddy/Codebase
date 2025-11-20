@@ -2273,6 +2273,26 @@
         // ============================================
         function initializeCharts() {
     // Destroy existing charts first
+        if (window.charts) {
+            Object.values(window.charts).forEach(chart => {
+                if (chart && typeof chart.destroy === 'function') {
+                    chart.destroy();
+                }
+            });
+        }
+        window.charts = {};
+        
+    // Destroy existing charts first
+        if (window.charts) {
+            Object.values(window.charts).forEach(chart => {
+                if (chart && typeof chart.destroy === 'function') {
+                    chart.destroy();
+                }
+            });
+        }
+        window.charts = {};
+        
+    // Destroy existing charts first
     if (window.charts) {
         Object.values(window.charts).forEach(chart => {
             if (chart && typeof chart.destroy === 'function') {
