@@ -7,9 +7,12 @@
     "new-user-warmup": 1,
     "plan-mode-for-complex-tasks": 1,
     "terminal-setup": 1,
-    "memory-command": 2
+    "memory-command": 2,
+    "stickers-command": 2,
+    "prompt-queue": 2,
+    "enter-to-steer-in-relatime": 2
   },
-  "promptQueueUseCount": 3,
+  "promptQueueUseCount": 4,
   "cachedStatsigGates": {
     "tengu_disable_bypass_permissions_mode": false,
     "tengu_tool_pear": false,
