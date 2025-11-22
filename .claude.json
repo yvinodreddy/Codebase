@@ -1,23 +1,26 @@
 {
-  "numStartups": 4,
+  "numStartups": 5,
   "installMethod": "unknown",
   "autoUpdates": true,
   "tipsHistory": {
-    "theme-command": 4,
-    "new-user-warmup": 1,
+    "theme-command": 5,
+    "new-user-warmup": 5,
     "plan-mode-for-complex-tasks": 1,
     "terminal-setup": 1,
     "memory-command": 2,
     "stickers-command": 2,
     "prompt-queue": 2,
-    "enter-to-steer-in-relatime": 4,
+    "enter-to-steer-in-relatime": 5,
     "todo-list": 3,
     "# for memory": 3,
     "install-github-app": 3,
     "drag-and-drop-images": 3,
     "double-esc-code-restore": 3,
     "continue": 4,
-    "shift-tab": 4
+    "shift-tab": 4,
+    "image-paste": 5,
+    "tab-toggle-thinking": 5,
+    "ultrathink-keyword": 5
   },
   "promptQueueUseCount": 9,
   "cachedStatsigGates": {

@@ -1,8 +1,4 @@
 {
-  "statusLine": {
-    "type": "command",
-    "command": "/home/user01/claude-test/ClaudePrompt/statusline_production_ready.sh"
-  },
   "hooks": {
     "PostToolUse": [
       {
@@ -16,5 +12,10 @@
       }
     ]
   },
-  "alwaysThinkingEnabled": true
+  "statusLine": {
+    "type": "command",
+    "command": "/home/user01/claude-test/ClaudePrompt/statusline_production_ready.sh"
+  },
+  "alwaysThinkingEnabled": true,
+  "model": "opus"
 }
