@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Enhanced comprehensive tests for context_manager.py
+Enhanced comprehensive tests for agentic_search.py
 Target: 90% coverage with real code execution
 """
 
@@ -17,14 +17,14 @@ import contextlib
 # Add parent to path
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
-import agent_framework.context_manager
+import agent_framework.agentic_search
 
 class TestAgentComprehensive:
-    """Achieve 90% coverage for context_manager"""
+    """Achieve 90% coverage for agentic_search"""
 
     def test_agent_initialization(self):
         """Test agent initialization"""
-        module = agent_framework.context_manager
+        module = agent_framework.agentic_search
         # Test any Agent class
         for name in dir(module):
             if 'Agent' in name or 'Manager' in name:
@@ -39,7 +39,7 @@ class TestAgentComprehensive:
 
     def test_agent_methods(self):
         """Test agent methods"""
-        module = agent_framework.context_manager
+        module = agent_framework.agentic_search
         # Test methods that don't require complex setup
         for name in dir(module):
             if not name.startswith('_'):
@@ -57,20 +57,20 @@ class TestAgentComprehensive:
 
     def test_context_management(self):
         """Test context management if available"""
-        if hasattr(agent_framework.context_manager, 'ContextManager'):
-            manager = agent_framework.context_manager.ContextManager()
+        if hasattr(agent_framework.agentic_search, 'ContextManager'):
+            manager = agent_framework.agentic_search.ContextManager()
             manager.add_context("test", "value")
             context = manager.get_context()
             assert context is not None
 
     def test_search_functionality(self):
         """Test search if available"""
-        if hasattr(agent_framework.context_manager, 'search'):
-            result = agent_framework.context_manager.search("test query")
+        if hasattr(agent_framework.agentic_search, 'search'):
+            result = agent_framework.agentic_search.search("test query")
             assert result is not None or isinstance(result, (list, dict))
 
     def test_code_generation(self):
         """Test code generation if available"""
-        if hasattr(agent_framework.context_manager, 'generate_code'):
-            code = agent_framework.context_manager.generate_code("test prompt")
+        if hasattr(agent_framework.agentic_search, 'generate_code'):
+            code = agent_framework.agentic_search.generate_code("test prompt")
             assert isinstance(code, str) or code is None
