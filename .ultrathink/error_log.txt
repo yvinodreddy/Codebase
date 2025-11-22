@@ -1225,3 +1225,4 @@ NoneType: None
 2025-11-20 17:19:07,533 - LargeScaleErrorHandler - INFO - [unstable_op] Retrying in 0.0s...
 2025-11-20 17:19:08,421 - LargeScaleErrorHandler - INFO - [unstable_op] Attempt 3/5
 2025-11-20 17:19:08,421 - LargeScaleErrorHandler - INFO - [unstable_op] Success on attempt 3
+2025-11-22 09:25:04,027 - LargeScaleErrorHandler - ERROR - Failed to export error log: argument should be a str or an os.PathLike object where __fspath__ returns a str, not 'NoneType'

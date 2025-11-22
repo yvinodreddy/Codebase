@@ -1,11 +1,11 @@
 {
-  "numStartups": 5,
+  "numStartups": 10,
   "installMethod": "unknown",
   "autoUpdates": true,
   "tipsHistory": {
     "theme-command": 5,
-    "new-user-warmup": 5,
-    "plan-mode-for-complex-tasks": 1,
+    "new-user-warmup": 10,
+    "plan-mode-for-complex-tasks": 10,
     "terminal-setup": 1,
     "memory-command": 2,
     "stickers-command": 2,
@@ -20,7 +20,8 @@
     "shift-tab": 4,
     "image-paste": 5,
     "tab-toggle-thinking": 5,
-    "ultrathink-keyword": 5
+    "ultrathink-keyword": 5,
+    "custom-agents": 10
   },
   "promptQueueUseCount": 9,
   "cachedStatsigGates": {
@@ -181,14 +182,14 @@
     "5f40691d-ecf2-4e8b-bded-e094c6691947": {
       "eligible": false,
       "referral_code_details": null,
-      "timestamp": 1763814102679
+      "timestamp": 1763820113566
     }
   },
   "s1mAccessCache": {
     "5f40691d-ecf2-4e8b-bded-e094c6691947": {
       "hasAccess": false,
       "hasAccessNotAsDefault": false,
-      "timestamp": 1763814106297
+      "timestamp": 1763820115875
     }
   },
   "feedbackSurveyState": {

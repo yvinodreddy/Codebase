@@ -1,5 +1,5 @@
 {
-  "timestamp": "2025-11-22T07:58:30.091766",
+  "timestamp": "2025-11-22T09:33:20.023916",
   "total_tests": 6,
   "passed": 2,
   "failed": 4,
@@ -7,11 +7,11 @@
     {
       "test_name": "small_output",
       "success": false,
-      "duration_seconds": 1.894200086593628,
-      "output_lines": 1036,
+      "duration_seconds": 1.8873112201690674,
+      "output_lines": 1049,
       "error_message": "Found ERROR in output",
       "details": {
-        "output_file": "/tmp/ultrathink_test_dyk5zutm/small_output_output.txt",
+        "output_file": "/tmp/ultrathink_test_6qhn_af2/small_output_output.txt",
         "return_code": 0,
         "prompt_length": 11
       }
@@ -19,11 +19,11 @@
     {
       "test_name": "medium_output",
       "success": false,
-      "duration_seconds": 1.9290902614593506,
-      "output_lines": 1192,
+      "duration_seconds": 1.8387513160705566,
+      "output_lines": 1205,
       "error_message": "Found ERROR in output",
       "details": {
-        "output_file": "/tmp/ultrathink_test_dyk5zutm/medium_output_output.txt",
+        "output_file": "/tmp/ultrathink_test_6qhn_af2/medium_output_output.txt",
         "return_code": 0,
         "prompt_length": 272
       }
@@ -31,11 +31,11 @@
     {
       "test_name": "large_output",
       "success": false,
-      "duration_seconds": 1.8270952701568604,
-      "output_lines": 1196,
+      "duration_seconds": 1.4745614528656006,
+      "output_lines": 1209,
       "error_message": "Found ERROR in output",
       "details": {
-        "output_file": "/tmp/ultrathink_test_dyk5zutm/large_output_output.txt",
+        "output_file": "/tmp/ultrathink_test_6qhn_af2/large_output_output.txt",
         "return_code": 0,
         "prompt_length": 442
       }
@@ -43,27 +43,27 @@
     {
       "test_name": "file_based_prompt",
       "success": false,
-      "duration_seconds": 1.479344367980957,
+      "duration_seconds": 1.5840718746185303,
       "output_lines": 5,
       "error_message": "File-based prompt test failed (return_code: 1, lines: 5)",
       "details": {
         "return_code": 1,
-        "output_file": "/tmp/ultrathink_test_dyk5zutm/file_based_output.txt"
+        "output_file": "/tmp/ultrathink_test_6qhn_af2/file_based_output.txt"
       }
     },
     {
       "test_name": "verbose_flag_shorthand",
       "success": true,
-      "duration_seconds": 1.527707576751709,
-      "output_lines": 1036,
+      "duration_seconds": 1.7373013496398926,
+      "output_lines": 1049,
       "error_message": null,
       "details": {}
     },
     {
       "test_name": "backward_compatibility",
       "success": true,
-      "duration_seconds": 1.6745703220367432,
-      "output_lines": 508,
+      "duration_seconds": 1.6908068656921387,
+      "output_lines": 521,
       "error_message": null,
       "details": {}
     }

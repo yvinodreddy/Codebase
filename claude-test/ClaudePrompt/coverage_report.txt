@@ -1,0 +1,35 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-8.4.2, pluggy-1.6.0
+rootdir: /home/user01/claude-test/ClaudePrompt
+configfile: pytest.ini
+plugins: cov-7.0.0, anyio-4.11.0, timeout-2.4.0
+timeout: 300.0s
+timeout method: signal
+timeout func_only: False
+collected 393 items / 1 error
+
+==================================== ERRORS ====================================
+______ ERROR collecting tests/unit_instance3/test_get_coverage_quickly.py ______
+tests/unit_instance3/test_get_coverage_quickly.py:19: in <module>
+    from get_coverage_quickly import *
+get_coverage_quickly.py:15: in <module>
+    result = subprocess.run(
+/usr/lib/python3.12/subprocess.py:550: in run
+    stdout, stderr = process.communicate(input, timeout=timeout)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/subprocess.py:1209: in communicate
+    stdout, stderr = self._communicate(input, endtime, timeout)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/subprocess.py:2116: in _communicate
+    self._check_timeout(endtime, orig_timeout, stdout, stderr)
+/usr/lib/python3.12/subprocess.py:1253: in _check_timeout
+    raise TimeoutExpired(
+E   subprocess.TimeoutExpired: Command '['pytest', 'tests/unit_real_coverage/', '--cov=.', '--cov-report=json', '-q', '--tb=no']' timed out after 120 seconds
+------------------------------- Captured stdout --------------------------------
+🔧 Running pytest with coverage measurement...
+   This may take 1-2 minutes...
+
+=========================== short test summary info ============================
+ERROR tests/unit_instance3/test_get_coverage_quickly.py - subprocess.TimeoutE...
+!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
+========================= 1 error in 138.16s (0:02:18) =========================
