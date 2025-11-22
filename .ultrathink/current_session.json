@@ -1,8 +1,8 @@
 {
-  "project_id": null,
-  "instance_id": "inst_20251122_055535_f9f854b8",
-  "started_at": "2025-11-22T05:56:05.913502",
+  "project_id": "proj_20251119_170839_effd0fa6",
+  "instance_id": "inst_20251122_064300_8209cf5a",
+  "started_at": "2025-11-22T06:43:01.002728",
   "hostname": "User01",
-  "process_id": 832207,
+  "process_id": 837912,
   "working_directory": "/home/user01/claude-test/ClaudePrompt"
 }
