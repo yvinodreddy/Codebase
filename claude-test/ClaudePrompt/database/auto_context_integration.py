@@ -25,7 +25,7 @@ import json
 # Add database directory to path
 sys.path.insert(0, str(Path(__file__).parent))
 
-from database.multi_project_manager import MultiProjectManager
+from multi_project_manager import MultiProjectManager
 
 
 class AutoContextIntegration:

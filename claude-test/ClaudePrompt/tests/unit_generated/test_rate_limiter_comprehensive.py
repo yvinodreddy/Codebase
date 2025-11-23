@@ -72,13 +72,7 @@ class TestStandaloneFunctions:
             result = mock_func("self_value", "verbose_value")
             assert result is not None
             mock_func.assert_called_once_with("self_value", "verbose_value")
-        """Test wait_if_needed edge cases - REAL IMPLEMENTATION"""
-        # Test with None values
-        with patch('rate_limiter.wait_if_needed') as mock_func:
-            mock_func(None)
-            assert mock_func.called
-        # Test with empty strings
-        with patch('rate_limiter.wait_if_needed') as mock_func:
+
     def test_wait_if_needed_edge_cases(self):
         """Test wait_if_needed edge cases"""
         # REAL IMPLEMENTATION - Edge cases for wait_if_needed
@@ -107,13 +101,7 @@ class TestStandaloneFunctions:
             result = mock_func("self_value")
             assert result is not None
             mock_func.assert_called_once_with("self_value")
-        """Test get_current_usage edge cases - REAL IMPLEMENTATION"""
-        # Test with None values
-        with patch('rate_limiter.get_current_usage') as mock_func:
-            mock_func(None)
-            assert mock_func.called
-        # Test with empty strings
-        with patch('rate_limiter.get_current_usage') as mock_func:
+
     def test_get_current_usage_edge_cases(self):
         """Test get_current_usage edge cases"""
         # REAL IMPLEMENTATION - Edge cases for get_current_usage
