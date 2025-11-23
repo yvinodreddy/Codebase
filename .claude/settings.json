@@ -16,6 +16,5 @@
     "type": "command",
     "command": "/home/user01/claude-test/ClaudePrompt/statusline_production_ready.sh"
   },
-  "alwaysThinkingEnabled": true,
-  "model": "opus"
+  "alwaysThinkingEnabled": true
 }

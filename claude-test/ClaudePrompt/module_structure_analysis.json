@@ -1,0 +1,1841 @@
+{
+  "fix_test_files_complete.py": {
+    "file": "fix_test_files_complete.py",
+    "functions": [
+      {
+        "name": "fix_file",
+        "args": [
+          "filepath",
+          "start_line",
+          "end_line"
+        ],
+        "lineno": 24,
+        "is_async": false,
+        "docstring": "Remove problematic lines from file",
+        "decorators": []
+      },
+      {
+        "name": "main",
+        "args": [],
+        "lineno": 63,
+        "is_async": false,
+        "docstring": null,
+        "decorators": []
+      }
+    ],
+    "classes": [],
+    "imports": [],
+    "has_main": true,
+    "has_if_name_main": true,
+    "module_docstring": "Complete fix for all test file IndentationErrors.\nRemoves incomplete 'with' statement lines entirely.",
+    "total_lines": 86
+  },
+  "generate_100_percent_tests.py": {
+    "file": "generate_100_percent_tests.py",
+    "functions": [],
+    "classes": [
+      {
+        "name": "ComprehensiveTestGenerator",
+        "lineno": 14,
+        "docstring": "Generates 100% coverage tests for all modules",
+        "methods": [
+          {
+            "name": "__init__",
+            "args": [
+              "self"
+            ],
+            "lineno": 17,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "analyze_module",
+            "args": [
+              "self",
+              "module_path"
+            ],
+            "lineno": 58,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "generate_test_for_module",
+            "args": [
+              "self",
+              "module_path",
+              "package",
+              "estimated_lines"
+            ],
+            "lineno": 86,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "generate_all_tests",
+            "args": [
+              "self"
+            ],
+            "lineno": 274,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          }
+        ],
+        "bases": []
+      }
+    ],
+    "imports": [],
+    "has_main": false,
+    "has_if_name_main": true,
+    "module_docstring": "Autonomous Test Generator - Achieves 100% Test Coverage\nCreates comprehensive test suites for all untested modules.\n\nAUTONOMOUS MODE: No confirmations, 100% completion only",
+    "total_lines": 318
+  },
+  "generate_effective_tests.py": {
+    "file": "generate_effective_tests.py",
+    "functions": [
+      {
+        "name": "analyze_source_file",
+        "args": [
+          "filepath"
+        ],
+        "lineno": 15,
+        "is_async": false,
+        "docstring": "Analyze source file to extract functions, classes, and structure",
+        "decorators": []
+      },
+      {
+        "name": "generate_function_tests",
+        "args": [
+          "func",
+          "module_name"
+        ],
+        "lineno": 72,
+        "is_async": false,
+        "docstring": "Generate comprehensive tests for a function",
+        "decorators": []
+      },
+      {
+        "name": "generate_class_tests",
+        "args": [
+          "cls",
+          "module_name"
+        ],
+        "lineno": 119,
+        "is_async": false,
+        "docstring": "Generate comprehensive tests for a class",
+        "decorators": []
+      },
+      {
+        "name": "generate_comprehensive_test",
+        "args": [
+          "source_file",
+          "test_file"
+        ],
+        "lineno": 193,
+        "is_async": false,
+        "docstring": "Generate comprehensive test file with REAL CODE execution",
+        "decorators": []
+      },
+      {
+        "name": "main",
+        "args": [],
+        "lineno": 310,
+        "is_async": false,
+        "docstring": null,
+        "decorators": []
+      }
+    ],
+    "classes": [],
+    "imports": [],
+    "has_main": true,
+    "has_if_name_main": true,
+    "module_docstring": "EFFECTIVE Test Generator for 99% Coverage\nGenerates REAL tests that execute actual code, not just placeholders",
+    "total_lines": 334
+  },
+  "generate_real_coverage_tests.py": {
+    "file": "generate_real_coverage_tests.py",
+    "functions": [
+      {
+        "name": "main",
+        "args": [],
+        "lineno": 268,
+        "is_async": false,
+        "docstring": "Generate REAL tests for a source file",
+        "decorators": []
+      }
+    ],
+    "classes": [
+      {
+        "name": "RealTestGenerator",
+        "lineno": 15,
+        "docstring": "Generates tests that actually execute code and provide real coverage",
+        "methods": [
+          {
+            "name": "__init__",
+            "args": [
+              "self",
+              "source_file"
+            ],
+            "lineno": 18,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "load_module",
+            "args": [
+              "self"
+            ],
+            "lineno": 25,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "analyze_code",
+            "args": [
+              "self"
+            ],
+            "lineno": 39,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "generate_function_test",
+            "args": [
+              "self",
+              "func_name",
+              "func_obj"
+            ],
+            "lineno": 50,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "generate_class_test",
+            "args": [
+              "self",
+              "class_name",
+              "class_obj"
+            ],
+            "lineno": 140,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "generate_test_file",
+            "args": [
+              "self"
+            ],
+            "lineno": 203,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          }
+        ],
+        "bases": []
+      }
+    ],
+    "imports": [],
+    "has_main": true,
+    "has_if_name_main": true,
+    "module_docstring": "EFFECTIVE Test Generator - Generates REAL CODE tests that execute actual functions\nNOT placeholder tests - this generates tests that call functions and achieve real coverage",
+    "total_lines": 290
+  },
+  "generate_real_test_fixed.py": {
+    "file": "generate_real_test_fixed.py",
+    "functions": [
+      {
+        "name": "sanitize_module_path",
+        "args": [
+          "filepath"
+        ],
+        "lineno": 12,
+        "is_async": false,
+        "docstring": "Convert file path to valid Python import path",
+        "decorators": []
+      },
+      {
+        "name": "get_module_name_from_path",
+        "args": [
+          "filepath"
+        ],
+        "lineno": 24,
+        "is_async": false,
+        "docstring": "Get the last component of the module path",
+        "decorators": []
+      },
+      {
+        "name": "generate_test",
+        "args": [
+          "source_file",
+          "test_file",
+          "task_id"
+        ],
+        "lineno": 28,
+        "is_async": false,
+        "docstring": "Generate REAL CODE test with proper import handling",
+        "decorators": []
+      }
+    ],
+    "classes": [],
+    "imports": [],
+    "has_main": false,
+    "has_if_name_main": true,
+    "module_docstring": "FIXED Test Generator for 99% Coverage\nHandles hyphenated paths, validates syntax, REAL CODE testing",
+    "total_lines": 152
+  },
+  "generate_real_test_implementations.py": {
+    "file": "generate_real_test_implementations.py",
+    "functions": [],
+    "classes": [
+      {
+        "name": "IntelligentTestGenerator",
+        "lineno": 15,
+        "docstring": "Generates REAL test implementations by analyzing source code",
+        "methods": [
+          {
+            "name": "__init__",
+            "args": [
+              "self"
+            ],
+            "lineno": 18,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "analyze_function",
+            "args": [
+              "self",
+              "func_node",
+              "source_code"
+            ],
+            "lineno": 22,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "generate_real_test_for_function",
+            "args": [
+              "self",
+              "func_name",
+              "analysis",
+              "module_name"
+            ],
+            "lineno": 53,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "generate_real_test_for_class",
+            "args": [
+              "self",
+              "class_name",
+              "methods",
+              "module_name"
+            ],
+            "lineno": 163,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "generate_real_integration_tests",
+            "args": [
+              "self",
+              "module_name"
+            ],
+            "lineno": 236,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "generate_real_edge_case_tests",
+            "args": [
+              "self",
+              "module_name"
+            ],
+            "lineno": 309,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "generate_real_security_tests",
+            "args": [
+              "self",
+              "module_name"
+            ],
+            "lineno": 397,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "generate_real_performance_tests",
+            "args": [
+              "self",
+              "module_name"
+            ],
+            "lineno": 467,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "replace_placeholders_in_file",
+            "args": [
+              "self",
+              "test_file_path",
+              "module_path"
+            ],
+            "lineno": 538,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "replace_all_placeholders",
+            "args": [
+              "self"
+            ],
+            "lineno": 639,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          }
+        ],
+        "bases": []
+      }
+    ],
+    "imports": [],
+    "has_main": false,
+    "has_if_name_main": true,
+    "module_docstring": "Intelligent Test Implementation Generator\nReplaces ALL placeholder tests with REAL implementations.\n\nAUTONOMOUS MODE: No confirmations, 100% real implementations only",
+    "total_lines": 682
+  },
+  "generate_real_tests_for_module.py": {
+    "file": "generate_real_tests_for_module.py",
+    "functions": [
+      {
+        "name": "analyze_module",
+        "args": [
+          "module_file"
+        ],
+        "lineno": 14,
+        "is_async": false,
+        "docstring": "Analyze a Python module to understand what to test",
+        "decorators": []
+      },
+      {
+        "name": "generate_function_test",
+        "args": [
+          "module_path",
+          "func_info"
+        ],
+        "lineno": 49,
+        "is_async": false,
+        "docstring": "Generate real code test for a function",
+        "decorators": []
+      },
+      {
+        "name": "generate_class_test",
+        "args": [
+          "module_path",
+          "class_info"
+        ],
+        "lineno": 108,
+        "is_async": false,
+        "docstring": "Generate real code test for a class",
+        "decorators": []
+      },
+      {
+        "name": "generate_test_file",
+        "args": [
+          "module_file",
+          "output_file"
+        ],
+        "lineno": 158,
+        "is_async": false,
+        "docstring": "Generate complete test file for a module",
+        "decorators": []
+      }
+    ],
+    "classes": [],
+    "imports": [],
+    "has_main": false,
+    "has_if_name_main": true,
+    "module_docstring": "Generate Real Code Tests for a Module\n======================================\n\nCreates comprehensive tests that actually execute real code (not mocks).",
+    "total_lines": 221
+  },
+  "get_coverage_quickly.py": {
+    "file": "get_coverage_quickly.py",
+    "functions": [],
+    "classes": [],
+    "imports": [],
+    "has_main": false,
+    "has_if_name_main": false,
+    "module_docstring": "Quick coverage measurement script\nRuns pytest with coverage and reports results",
+    "total_lines": 52
+  },
+  "get_live_context_metrics.py": {
+    "file": "get_live_context_metrics.py",
+    "functions": [
+      {
+        "name": "main",
+        "args": [],
+        "lineno": 227,
+        "is_async": false,
+        "docstring": "Main execution.",
+        "decorators": []
+      }
+    ],
+    "classes": [
+      {
+        "name": "LiveContextMetrics",
+        "lineno": 27,
+        "docstring": "Extract live metrics from /context command.",
+        "methods": [
+          {
+            "name": "__init__",
+            "args": [
+              "self"
+            ],
+            "lineno": 30,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "get_context_output",
+            "args": [
+              "self"
+            ],
+            "lineno": 47,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "parse_context_output",
+            "args": [
+              "self",
+              "output"
+            ],
+            "lineno": 71,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "_convert_model_name",
+            "args": [
+              "self",
+              "model_full"
+            ],
+            "lineno": 147,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "parse_from_stdin",
+            "args": [
+              "self"
+            ],
+            "lineno": 168,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "get_metrics",
+            "args": [
+              "self"
+            ],
+            "lineno": 188,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "to_json",
+            "args": [
+              "self"
+            ],
+            "lineno": 197,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "to_text",
+            "args": [
+              "self"
+            ],
+            "lineno": 206,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          }
+        ],
+        "bases": []
+      }
+    ],
+    "imports": [],
+    "has_main": true,
+    "has_if_name_main": true,
+    "module_docstring": "get_live_context_metrics.py - Live Context Metrics Extractor\n\nParses the output of `/context` command to extract real-time metrics:\n- Model name\n- Token usage (used/total)\n- Token percentage\n- Context breakdown (system, tools, memory, messages)\n\nThis ensures statusline displays LIVE metrics, not cached/hardcoded values.\n\nUsage:\n    python3 get_live_context_metrics.py [--json]\n\nReturns:\n    JSON object with live metrics or formatted text",
+    "total_lines": 261
+  },
+  "high_scale_orchestrator.py": {
+    "file": "high_scale_orchestrator.py",
+    "functions": [
+      {
+        "name": "create_high_scale_orchestrator",
+        "args": [
+          "max_agents",
+          "strategy",
+          "memory_limit_gb"
+        ],
+        "lineno": 401,
+        "is_async": false,
+        "docstring": "Create high-scale orchestrator with recommended settings.\n\nArgs:\n    max_agents: Maximum parallel agents (default 500)\n    strategy: \"BREADTH_FIRST\", \"DEPTH_FIRST\", or \"HYBRID\"\n    memory_limit_gb: Memory limit in GB (default 8GB)\n\nReturns:\n    Configured HighScaleOrchestrator instance",
+        "decorators": []
+      },
+      {
+        "name": "test_task",
+        "args": [
+          "task_num"
+        ],
+        "lineno": 447,
+        "is_async": false,
+        "docstring": null,
+        "decorators": []
+      }
+    ],
+    "classes": [
+      {
+        "name": "SearchStrategy",
+        "lineno": 39,
+        "docstring": "Search strategy for agent orchestration",
+        "methods": [],
+        "bases": [
+          "Enum"
+        ]
+      },
+      {
+        "name": "AgentPriority",
+        "lineno": 46,
+        "docstring": "Agent execution priority",
+        "methods": [],
+        "bases": [
+          "Enum"
+        ]
+      },
+      {
+        "name": "AgentTask",
+        "lineno": 55,
+        "docstring": "Represents a task for an agent to execute",
+        "methods": [],
+        "bases": []
+      },
+      {
+        "name": "ResourceMetrics",
+        "lineno": 72,
+        "docstring": "System resource usage metrics",
+        "methods": [],
+        "bases": []
+      },
+      {
+        "name": "HighScaleOrchestrator",
+        "lineno": 83,
+        "docstring": "Enterprise-grade orchestrator for 500 parallel agents.\n\nHandles 1000+ task projects with 99-100% confidence targets.",
+        "methods": [
+          {
+            "name": "__init__",
+            "args": [
+              "self",
+              "max_agents",
+              "strategy",
+              "memory_limit_mb",
+              "enable_realtime_display"
+            ],
+            "lineno": 90,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "add_task",
+            "args": [
+              "self",
+              "name",
+              "function",
+              "args",
+              "kwargs",
+              "priority",
+              "dependencies"
+            ],
+            "lineno": 134,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "_can_execute_task",
+            "args": [
+              "self",
+              "task"
+            ],
+            "lineno": 170,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "_get_ready_tasks",
+            "args": [
+              "self"
+            ],
+            "lineno": 177,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "_execute_task",
+            "args": [
+              "self",
+              "task"
+            ],
+            "lineno": 188,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "_monitor_resources",
+            "args": [
+              "self"
+            ],
+            "lineno": 205,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "_display_progress",
+            "args": [
+              "self",
+              "metrics"
+            ],
+            "lineno": 232,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "_adaptive_agent_count",
+            "args": [
+              "self"
+            ],
+            "lineno": 253,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "execute_all",
+            "args": [
+              "self",
+              "max_workers"
+            ],
+            "lineno": 276,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "_execute_breadth_first",
+            "args": [
+              "self",
+              "max_workers"
+            ],
+            "lineno": 327,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "_execute_depth_first",
+            "args": [
+              "self",
+              "max_workers"
+            ],
+            "lineno": 357,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "_execute_hybrid",
+            "args": [
+              "self",
+              "max_workers"
+            ],
+            "lineno": 362,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "_compile_results",
+            "args": [
+              "self"
+            ],
+            "lineno": 367,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "get_statistics",
+            "args": [
+              "self"
+            ],
+            "lineno": 392,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          }
+        ],
+        "bases": []
+      }
+    ],
+    "imports": [],
+    "has_main": false,
+    "has_if_name_main": true,
+    "module_docstring": "High-Scale Agent Orchestrator - 500 Agent Parallel Processing\n\nThis module implements enterprise-grade orchestration for 1000+ task projects\nwith 99-100% mandatory confidence targets.\n\nKey Features:\n- 500 parallel agents (up from 30)\n- Breadth-first AND depth-first search strategies\n- Dynamic resource management\n- Memory-efficient processing\n- Real-time output display\n- Hallucination detection\n- 99-100% confidence guarantee (non-negotiable)\n\nArchitecture:\n- Work-stealing thread pool\n- Priority-based task queue\n- Adaptive agent allocation\n- Memory pressure monitoring\n- Real-time progress streaming",
+    "total_lines": 478
+  },
+  "instance_id_manager.py": {
+    "file": "instance_id_manager.py",
+    "functions": [
+      {
+        "name": "main",
+        "args": [],
+        "lineno": 410,
+        "is_async": false,
+        "docstring": "CLI interface for testing.",
+        "decorators": []
+      }
+    ],
+    "classes": [
+      {
+        "name": "InstanceIDManager",
+        "lineno": 60,
+        "docstring": "Singleton manager for instance ID generation and tracking.\n\nManages instance lifecycle:\n1. Generate unique ID on first access\n2. Create lock file to register instance\n3. Track all active instances\n4. Cleanup stale instances (>1 hour inactive)\n5. Remove lock file on exit",
+        "methods": [
+          {
+            "name": "__init__",
+            "args": [
+              "self",
+              "lock_dir"
+            ],
+            "lineno": 78,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "get_instance",
+            "args": [
+              "cls",
+              "lock_dir"
+            ],
+            "lineno": 96,
+            "is_async": false,
+            "is_property": false,
+            "decorators": [
+              "classmethod"
+            ]
+          },
+          {
+            "name": "generate_instance_id",
+            "args": [
+              "self"
+            ],
+            "lineno": 110,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "get_instance_id",
+            "args": [
+              "self",
+              "auto_register"
+            ],
+            "lineno": 143,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "register_instance",
+            "args": [
+              "self",
+              "metadata"
+            ],
+            "lineno": 161,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "update_heartbeat",
+            "args": [
+              "self"
+            ],
+            "lineno": 212,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "list_active_instances",
+            "args": [
+              "self",
+              "max_age_seconds"
+            ],
+            "lineno": 251,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "cleanup_stale_instances",
+            "args": [
+              "self",
+              "max_age_seconds"
+            ],
+            "lineno": 289,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "cleanup",
+            "args": [
+              "self"
+            ],
+            "lineno": 349,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "get_instance_file_path",
+            "args": [
+              "self",
+              "base_name",
+              "extension"
+            ],
+            "lineno": 369,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "get_all_instance_files",
+            "args": [
+              "self",
+              "base_name",
+              "extension"
+            ],
+            "lineno": 390,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          }
+        ],
+        "bases": []
+      }
+    ],
+    "imports": [],
+    "has_main": true,
+    "has_if_name_main": true,
+    "module_docstring": "instance_id_manager.py - Instance Isolation and ID Management\n\nPRODUCTION-READY IMPLEMENTATION (2025-11-16)\n============================================\n\nPURPOSE:\n- Generate unique instance IDs for each Claude Code window/session\n- Register and track active instances across the system\n- Provide cleanup mechanisms for stale instances\n- Enable per-instance resource tracking and isolation\n\nFEATURES:\n- \u2705 Unique ID generation (timestamp + PID + random hash)\n- \u2705 Instance lock file management\n- \u2705 Automatic stale instance cleanup\n- \u2705 Thread-safe operations with file locking\n- \u2705 Singleton pattern for consistent ID within process\n- \u2705 Environment variable override for testing\n- \u2705 Zero breaking changes - backward compatible\n\nUSAGE:\n    from instance_id_manager import InstanceIDManager\n\n    # Get singleton instance\n    manager = InstanceIDManager.get_instance()\n\n    # Get current instance ID (auto-generates if needed)\n    instance_id = manager.get_instance_id()\n\n    # List all active instances\n    active = manager.list_active_instances()\n\n    # Cleanup on exit\n    manager.cleanup()\n\nINSTANCE ID FORMAT:\n    Format: {timestamp}_{pid}_{random_hash}\n    Example: 20251116_031234_a1b2c3d4\n\n    Components:\n    - timestamp: YYYYMMDD_HHMMSS for chronological sorting\n    - pid: Process ID for uniqueness\n    - random_hash: 8-char hex for collision prevention",
+    "total_lines": 476
+  },
+  "large_scale_error_handler.py": {
+    "file": "large_scale_error_handler.py",
+    "functions": [
+      {
+        "name": "get_global_error_handler",
+        "args": [],
+        "lineno": 512,
+        "is_async": false,
+        "docstring": "Get or create global error handler instance",
+        "decorators": []
+      },
+      {
+        "name": "flaky_operation",
+        "args": [],
+        "lineno": 543,
+        "is_async": false,
+        "docstring": null,
+        "decorators": []
+      }
+    ],
+    "classes": [
+      {
+        "name": "ErrorSeverity",
+        "lineno": 36,
+        "docstring": "Error severity levels",
+        "methods": [],
+        "bases": [
+          "Enum"
+        ]
+      },
+      {
+        "name": "ErrorCategory",
+        "lineno": 44,
+        "docstring": "Error categories for classification",
+        "methods": [],
+        "bases": [
+          "Enum"
+        ]
+      },
+      {
+        "name": "ErrorContext",
+        "lineno": 55,
+        "docstring": "Context information for an error",
+        "methods": [],
+        "bases": []
+      },
+      {
+        "name": "CircuitBreaker",
+        "lineno": 69,
+        "docstring": "Circuit breaker pattern for repeated failures.\n\nPrevents cascading failures by stopping retries after threshold.",
+        "methods": [
+          {
+            "name": "__init__",
+            "args": [
+              "self",
+              "failure_threshold",
+              "timeout_seconds"
+            ],
+            "lineno": 76,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "record_success",
+            "args": [
+              "self"
+            ],
+            "lineno": 90,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "record_failure",
+            "args": [
+              "self"
+            ],
+            "lineno": 95,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "can_attempt",
+            "args": [
+              "self"
+            ],
+            "lineno": 103,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "get_state",
+            "args": [
+              "self"
+            ],
+            "lineno": 122,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          }
+        ],
+        "bases": []
+      },
+      {
+        "name": "LargeScaleErrorHandler",
+        "lineno": 127,
+        "docstring": "Production-grade error handler for massive workloads.\n\nHandles:\n- 1000+ task prompts\n- 5000+ line outputs\n- Memory pressure\n- API failures\n- File system issues",
+        "methods": [
+          {
+            "name": "__init__",
+            "args": [
+              "self",
+              "log_file"
+            ],
+            "lineno": 139,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "handle_error",
+            "args": [
+              "self",
+              "error",
+              "category",
+              "severity",
+              "context",
+              "recovery_strategy"
+            ],
+            "lineno": 164,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "retry_with_backoff",
+            "args": [
+              "self",
+              "operation",
+              "operation_name",
+              "max_retries",
+              "initial_delay",
+              "max_delay",
+              "exponential_base"
+            ],
+            "lineno": 227,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "handle_memory_pressure",
+            "args": [
+              "self",
+              "current_usage_mb",
+              "threshold_mb"
+            ],
+            "lineno": 296,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "validate_large_prompt",
+            "args": [
+              "self",
+              "prompt",
+              "max_tasks"
+            ],
+            "lineno": 348,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "get_error_summary",
+            "args": [
+              "self"
+            ],
+            "lineno": 400,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "_calculate_recovery_rate",
+            "args": [
+              "self"
+            ],
+            "lineno": 451,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "export_error_log",
+            "args": [
+              "self",
+              "output_file"
+            ],
+            "lineno": 464,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          }
+        ],
+        "bases": []
+      }
+    ],
+    "imports": [],
+    "has_main": false,
+    "has_if_name_main": true,
+    "module_docstring": "Large-Scale Error Handler for ULTRATHINK\n\nProduction-grade error handling for 1000+ task prompts and massive outputs.\n\nKey Features:\n- Handles prompts with 1000+ tasks (high-scale projects)\n- Graceful degradation under memory pressure\n- Automatic retry with exponential backoff\n- Circuit breaker pattern for repeated failures\n- Comprehensive error recovery strategies\n- Zero data loss guarantee\n\nProduction-Ready:\n- 99-100% reliability\n- Memory-safe for massive workloads\n- Detailed error reporting\n- Automatic recovery mechanisms\n- Full audit trail",
+    "total_lines": 583
+  },
+  "live_metrics_tracker.py": {
+    "file": "live_metrics_tracker.py",
+    "functions": [
+      {
+        "name": "main",
+        "args": [],
+        "lineno": 449,
+        "is_async": false,
+        "docstring": "CLI interface for testing.",
+        "decorators": []
+      }
+    ],
+    "classes": [
+      {
+        "name": "LiveMetricsTracker",
+        "lineno": 56,
+        "docstring": "Comprehensive live metrics tracker with background task awareness.\n\nFixes all identified issues:\n1. Real token tracking from conversation_stats\n2. Background task detection\n3. Smart agent persistence\n4. Dynamic confidence\n5. Accurate status updates",
+        "methods": [
+          {
+            "name": "__init__",
+            "args": [
+              "self",
+              "tmp_dir"
+            ],
+            "lineno": 68,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "detect_background_tasks",
+            "args": [
+              "self"
+            ],
+            "lineno": 81,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "calculate_background_agent_usage",
+            "args": [
+              "self",
+              "background_tasks"
+            ],
+            "lineno": 144,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "get_real_token_usage",
+            "args": [
+              "self",
+              "conversation_stats"
+            ],
+            "lineno": 163,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "calculate_dynamic_confidence",
+            "args": [
+              "self",
+              "metrics"
+            ],
+            "lineno": 194,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "calculate_status",
+            "args": [
+              "self",
+              "tokens_pct",
+              "executing",
+              "background_tasks"
+            ],
+            "lineno": 244,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "update_from_conversation",
+            "args": [
+              "self",
+              "conversation_stats",
+              "tool_name"
+            ],
+            "lineno": 276,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "_update_state_persistence",
+            "args": [
+              "self",
+              "metrics"
+            ],
+            "lineno": 359,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "get_current_metrics",
+            "args": [
+              "self"
+            ],
+            "lineno": 387,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "should_clear_agents",
+            "args": [
+              "self"
+            ],
+            "lineno": 413,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          }
+        ],
+        "bases": []
+      }
+    ],
+    "imports": [],
+    "has_main": true,
+    "has_if_name_main": true,
+    "module_docstring": "live_metrics_tracker.py - Comprehensive Live Metrics Tracking System\n\nPRODUCTION-READY IMPLEMENTATION (2025-11-16)\n============================================\n\nPURPOSE:\n- Track REAL metrics from live conversation\n- Detect and track background tasks\n- Persist metrics appropriately based on execution state\n- Calculate dynamic confidence and status\n- Handle transitions: active \u2192 completing \u2192 idle (with background awareness)\n\nFEATURES:\n- \u2705 Real token tracking from conversation_stats\n- \u2705 Background task detection and counting\n- \u2705 Agent persistence during background execution\n- \u2705 Dynamic confidence calculation\n- \u2705 Accurate status based on real token usage\n- \u2705 300ms update cycle compliance\n- \u2705 Zero breaking changes\n\nCRITICAL FIXES:\n1. Token tracking was showing 0k/200k - NOW FIXED\n2. Background tasks not counted - NOW TRACKED\n3. Agents cleared prematurely - NOW PERSISTED\n4. Confidence static at 100.0 - NOW DYNAMIC\n5. Status not updating - NOW REAL-TIME\n\nUSAGE:\n    from live_metrics_tracker import LiveMetricsTracker\n\n    tracker = LiveMetricsTracker()\n\n    # Update with conversation stats (every tool execution)\n    tracker.update_from_conversation(conversation_stats)\n\n    # Get current metrics\n    metrics = tracker.get_current_metrics()\n\n    print(f\"Agents: {metrics['agents']}\")\n    print(f\"Tokens: {metrics['tokens_display']}\")\n    print(f\"Status: {metrics['status']}\")",
+    "total_lines": 515
+  },
+  "master_orchestrator.py": {
+    "file": "master_orchestrator.py",
+    "functions": [
+      {
+        "name": "trace_function",
+        "args": [
+          "func"
+        ],
+        "lineno": 20,
+        "is_async": false,
+        "docstring": null,
+        "decorators": []
+      },
+      {
+        "name": "gather_context",
+        "args": [
+          "task",
+          "iteration_log"
+        ],
+        "lineno": 626,
+        "is_async": false,
+        "docstring": null,
+        "decorators": []
+      },
+      {
+        "name": "execute_action",
+        "args": [
+          "task",
+          "ctx"
+        ],
+        "lineno": 680,
+        "is_async": false,
+        "docstring": null,
+        "decorators": []
+      },
+      {
+        "name": "verify_work",
+        "args": [
+          "output",
+          "ctx",
+          "task"
+        ],
+        "lineno": 689,
+        "is_async": false,
+        "docstring": null,
+        "decorators": []
+      }
+    ],
+    "classes": [
+      {
+        "name": "OrchestrationResult",
+        "lineno": 57,
+        "docstring": "Result from orchestration pipeline",
+        "methods": [
+          {
+            "name": "to_dict",
+            "args": [
+              "self"
+            ],
+            "lineno": 73,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          }
+        ],
+        "bases": []
+      },
+      {
+        "name": "MasterOrchestrator",
+        "lineno": 92,
+        "docstring": "Master Orchestrator - Central coordination system\n\nPipeline Flow:\n1. Prompt Preprocessing & Intent Classification\n2. Guardrails Input Validation (Layers 1-3)\n3. Agent Execution with Adaptive Feedback Loop\n4. Guardrails Output Validation (Layers 4-7)\n5. Quality Assurance & Confidence Scoring\n6. Iterative Refinement (if confidence < 96%)\n7. Final Result Delivery\n\nTarget: 96-100% accuracy through comprehensive validation and iterative refinement",
+        "methods": [
+          {
+            "name": "__init__",
+            "args": [
+              "self",
+              "min_confidence_score",
+              "max_refinement_iterations",
+              "verbose"
+            ],
+            "lineno": 108,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "_store_to_database",
+            "args": [
+              "self",
+              "prompt",
+              "result",
+              "project_id",
+              "instance_id"
+            ],
+            "lineno": 168,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "process",
+            "args": [
+              "self",
+              "prompt",
+              "context",
+              "source_documents"
+            ],
+            "lineno": 272,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "_initialize_components",
+            "args": [
+              "self",
+              "required_components"
+            ],
+            "lineno": 577,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "_execute_agents",
+            "args": [
+              "self",
+              "prompt",
+              "prompt_analysis",
+              "context"
+            ],
+            "lineno": 601,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "_calculate_quality_metrics",
+            "args": [
+              "self",
+              "prompt_analysis",
+              "agent_result",
+              "output_validation"
+            ],
+            "lineno": 740,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "_refine_output",
+            "args": [
+              "self",
+              "prompt",
+              "output",
+              "validation_errors",
+              "prompt_analysis"
+            ],
+            "lineno": 795,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "_iterative_refinement",
+            "args": [
+              "self",
+              "prompt",
+              "output",
+              "prompt_analysis",
+              "current_confidence",
+              "source_documents"
+            ],
+            "lineno": 823,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "_determine_content_type",
+            "args": [
+              "self",
+              "prompt_analysis"
+            ],
+            "lineno": 855,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "_collect_warnings",
+            "args": [
+              "self",
+              "validation"
+            ],
+            "lineno": 864,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "_create_failed_result",
+            "args": [
+              "self",
+              "prompt_analysis",
+              "guardrails_validation",
+              "agent_execution",
+              "error",
+              "duration"
+            ],
+            "lineno": 874,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "_update_statistics",
+            "args": [
+              "self",
+              "result"
+            ],
+            "lineno": 897,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "get_statistics",
+            "args": [
+              "self"
+            ],
+            "lineno": 916,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          }
+        ],
+        "bases": []
+      }
+    ],
+    "imports": [],
+    "has_main": false,
+    "has_if_name_main": true,
+    "module_docstring": "Master Orchestrator\nCentral orchestration system that coordinates all agent framework and guardrail components\nfor maximum accuracy (96-100% success rate)",
+    "total_lines": 972
+  },
+  "metrics_aggregator.py": {
+    "file": "metrics_aggregator.py",
+    "functions": [
+      {
+        "name": "main",
+        "args": [],
+        "lineno": 420,
+        "is_async": false,
+        "docstring": "CLI interface for testing.",
+        "decorators": []
+      }
+    ],
+    "classes": [
+      {
+        "name": "MetricsAggregator",
+        "lineno": 45,
+        "docstring": "Aggregates metrics across all active Claude Code instances.\n\nScans instance-specific files and calculates:\n- Total agent count (sum across all instances)\n- Total active instances\n- Weighted average confidence\n- Combined resource usage\n- Per-instance breakdown",
+        "methods": [
+          {
+            "name": "__init__",
+            "args": [
+              "self",
+              "tmp_dir",
+              "max_age_seconds"
+            ],
+            "lineno": 57,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "scan_instance_files",
+            "args": [
+              "self",
+              "pattern"
+            ],
+            "lineno": 73,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "aggregate_agent_counts",
+            "args": [
+              "self"
+            ],
+            "lineno": 98,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "aggregate_confidence_scores",
+            "args": [
+              "self"
+            ],
+            "lineno": 139,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "aggregate_state_persistence",
+            "args": [
+              "self"
+            ],
+            "lineno": 200,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "aggregate_all",
+            "args": [
+              "self"
+            ],
+            "lineno": 264,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "get_instance_metrics",
+            "args": [
+              "self",
+              "instance_id"
+            ],
+            "lineno": 307,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "cleanup_stale_files",
+            "args": [
+              "self",
+              "max_age_hours"
+            ],
+            "lineno": 351,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "_extract_instance_id",
+            "args": [
+              "self",
+              "filename"
+            ],
+            "lineno": 389,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          }
+        ],
+        "bases": []
+      }
+    ],
+    "imports": [],
+    "has_main": true,
+    "has_if_name_main": true,
+    "module_docstring": "metrics_aggregator.py - Cross-Instance Metrics Aggregation\n\nPRODUCTION-READY IMPLEMENTATION (2025-11-16)\n============================================\n\nPURPOSE:\n- Aggregate metrics across all active Claude Code instances\n- Provide cross-instance totals for display\n- Calculate combined resource usage\n- Support per-instance and global view\n\nFEATURES:\n- \u2705 Scan all instance files automatically\n- \u2705 Calculate total agents across instances\n- \u2705 Calculate weighted average confidence\n- \u2705 Count active instances\n- \u2705 Cleanup stale instance files\n- \u2705 Thread-safe operations\n- \u2705 Graceful degradation if files missing\n\nUSAGE:\n    from metrics_aggregator import MetricsAggregator\n\n    aggregator = MetricsAggregator()\n\n    # Get aggregated metrics\n    totals = aggregator.aggregate_all()\n\n    print(f\"Total agents: {totals['total_agents']}\")\n    print(f\"Active instances: {totals['instance_count']}\")\n    print(f\"Average confidence: {totals['avg_confidence']}\")",
+    "total_lines": 496
+  },
+  "metrics_state_persistence.py": {
+    "file": "metrics_state_persistence.py",
+    "functions": [
+      {
+        "name": "main",
+        "args": [],
+        "lineno": 346,
+        "is_async": false,
+        "docstring": "CLI interface for testing.",
+        "decorators": []
+      }
+    ],
+    "classes": [
+      {
+        "name": "RequestState",
+        "lineno": 40,
+        "docstring": "Request lifecycle states.",
+        "methods": [],
+        "bases": [
+          "Enum"
+        ]
+      },
+      {
+        "name": "MetricsStatePersistence",
+        "lineno": 47,
+        "docstring": "Manages persistent state for statusline metrics across request lifecycle.\n\nSolves the problem where metrics disappear after request completion by:\n1. Storing last known good values during ACTIVE requests\n2. Freezing values when request enters COMPLETING state\n3. Persisting frozen values through IDLE state\n4. Only updating when new request starts (ACTIVE)",
+        "methods": [
+          {
+            "name": "__init__",
+            "args": [
+              "self",
+              "state_file",
+              "instance_id"
+            ],
+            "lineno": 58,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "load_state",
+            "args": [
+              "self"
+            ],
+            "lineno": 101,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "save_state",
+            "args": [
+              "self",
+              "state"
+            ],
+            "lineno": 130,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "update_active_metrics",
+            "args": [
+              "self",
+              "metrics"
+            ],
+            "lineno": 163,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "freeze_metrics",
+            "args": [
+              "self"
+            ],
+            "lineno": 194,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "mark_idle",
+            "args": [
+              "self"
+            ],
+            "lineno": 217,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "get_display_metrics",
+            "args": [
+              "self",
+              "current_metrics"
+            ],
+            "lineno": 238,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "detect_new_request",
+            "args": [
+              "self",
+              "current_executing"
+            ],
+            "lineno": 297,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          },
+          {
+            "name": "get_state_summary",
+            "args": [
+              "self"
+            ],
+            "lineno": 321,
+            "is_async": false,
+            "is_property": false,
+            "decorators": []
+          }
+        ],
+        "bases": []
+      }
+    ],
+    "imports": [],
+    "has_main": true,
+    "has_if_name_main": true,
+    "module_docstring": "metrics_state_persistence.py - State Persistence Layer for Statusline Metrics\n\nPRODUCTION-READY IMPLEMENTATION (2025-11-16)\n============================================\n\nPURPOSE:\n- Persist last known good metrics so they remain visible after request completion\n- Provide state lifecycle management (active, completing, idle)\n- Enable smooth transitions between request phases\n- Solve the \"disappearing values\" problem\n\nFEATURES:\n- \u2705 Atomic file writes for crash safety\n- \u2705 Timestamp tracking for state freshness\n- \u2705 Lifecycle state machine (ACTIVE \u2192 COMPLETING \u2192 IDLE)\n- \u2705 Graceful degradation if state file corrupted\n- \u2705 Thread-safe operations\n- \u2705 Zero breaking changes to existing code\n\nSTATE LIFECYCLE:\n1. ACTIVE: Request in progress, metrics updating every 300ms\n2. COMPLETING: Request finishing, freeze current values\n3. IDLE: Request complete, display last frozen values until next request\n\nThis ensures user can see final metrics even after request completes.",
+    "total_lines": 409
+  }
+}
