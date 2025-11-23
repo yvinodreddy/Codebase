@@ -45,6 +45,8 @@ class TestStandaloneFunctions:
         # Test with empty strings
             pass  # Auto-fixed: incomplete with statement
             pass  # Auto-fixed: incomplete with statement
+            pass  # Auto-fixed: incomplete with statement
+            pass  # Auto-fixed: incomplete with statement
     def test_detect_phi_edge_cases(self):
         """Test detect_phi edge cases"""
         # REAL IMPLEMENTATION - Edge cases for detect_phi

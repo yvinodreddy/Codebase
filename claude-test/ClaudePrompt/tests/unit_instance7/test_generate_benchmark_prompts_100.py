@@ -20,7 +20,7 @@ import time
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
 # Import module under test
-import generate_benchmark_prompts
+from evaluation import generate_benchmark_prompts
 
 # ============================================================================
 # COMPREHENSIVE FIXTURES FOR 100% COVERAGE

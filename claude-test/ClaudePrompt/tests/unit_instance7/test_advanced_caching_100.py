@@ -20,7 +20,7 @@ import time
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
 # Import module under test
-import advanced_caching
+from infrastructure import advanced_caching
 
 # ============================================================================
 # COMPREHENSIVE FIXTURES FOR 100% COVERAGE

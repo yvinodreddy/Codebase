@@ -45,6 +45,8 @@ class TestStandaloneFunctions:
         # Test with empty strings
             pass  # Auto-fixed: incomplete with statement
             pass  # Auto-fixed: incomplete with statement
+            pass  # Auto-fixed: incomplete with statement
+            pass  # Auto-fixed: incomplete with statement
     def test_search_phases_edge_cases(self):
         """Test search_phases edge cases"""
         # REAL IMPLEMENTATION - Edge cases for search_phases

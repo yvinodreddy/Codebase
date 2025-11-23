@@ -20,7 +20,7 @@ import time
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
 # Import module under test
-import performance_monitor
+from infrastructure import performance_monitor
 
 # ============================================================================
 # COMPREHENSIVE FIXTURES FOR 100% COVERAGE

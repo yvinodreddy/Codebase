@@ -45,6 +45,8 @@ class TestStandaloneFunctions:
         # Test with empty strings
             pass  # Auto-fixed: incomplete with statement
             pass  # Auto-fixed: incomplete with statement
+            pass  # Auto-fixed: incomplete with statement
+            pass  # Auto-fixed: incomplete with statement
     def test_layer1_prompt_shields_edge_cases(self):
         """Test layer1_prompt_shields edge cases"""
         # REAL IMPLEMENTATION - Edge cases for layer1_prompt_shields

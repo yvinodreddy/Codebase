@@ -91,8 +91,6 @@ class TestStandaloneFunctions:
     def test_wait_if_needed_error_handling(self):
         """Test wait_if_needed error handling"""
         # REAL IMPLEMENTATION - Error handling for wait_if_needed
-            pass  # Auto-fixed: incomplete with statement
-            pass  # Auto-fixed: incomplete with statement
         # REAL IMPLEMENTATION - Functional test
         from unittest.mock import Mock
         mock_obj = Mock(return_value="success")

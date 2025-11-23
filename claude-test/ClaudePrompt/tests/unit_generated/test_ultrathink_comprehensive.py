@@ -396,8 +396,6 @@ class TestUltrathinkEdgeCases:
 
 class TestUltrathinkSecurity:
     """Security-related tests"""
-        pass  # Auto-fixed: incomplete with statement
-        pass  # Auto-fixed: incomplete with statement
 
     def test_injection_prevention(self):
         """Test protection against injection attacks"""

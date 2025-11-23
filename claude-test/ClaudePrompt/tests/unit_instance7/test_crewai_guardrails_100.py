@@ -20,7 +20,7 @@ import time
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
 # Import module under test
-import crewai_guardrails
+from guardrails import crewai_guardrails
 
 # ============================================================================
 # COMPREHENSIVE FIXTURES FOR 100% COVERAGE

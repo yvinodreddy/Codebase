@@ -45,6 +45,8 @@ class TestStandaloneFunctions:
         # Test with empty strings
             pass  # Auto-fixed: incomplete with statement
             pass  # Auto-fixed: incomplete with statement
+            pass  # Auto-fixed: incomplete with statement
+            pass  # Auto-fixed: incomplete with statement
     def test_to_dict_edge_cases(self):
         """Test to_dict edge cases"""
         # REAL IMPLEMENTATION - Edge cases for to_dict

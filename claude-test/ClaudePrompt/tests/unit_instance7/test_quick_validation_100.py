@@ -20,7 +20,7 @@ import time
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
 # Import module under test
-import quick_validation
+from evaluation import quick_validation
 
 # ============================================================================
 # COMPREHENSIVE FIXTURES FOR 100% COVERAGE

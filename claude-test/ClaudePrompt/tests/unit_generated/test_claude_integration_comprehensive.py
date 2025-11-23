@@ -96,8 +96,6 @@ class TestStandaloneFunctions:
         result = mock_obj("test")
         assert result == "success"
         assert mock_obj.called
-            pass  # Auto-fixed: incomplete with statement
-            pass  # Auto-fixed: incomplete with statement
 
     def test_process_basic(self):
         """Test process basic functionality - REAL IMPLEMENTATION"""
