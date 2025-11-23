@@ -1,12 +1,12 @@
 {
-  "numStartups": 11,
+  "numStartups": 12,
   "installMethod": "unknown",
   "autoUpdates": true,
   "tipsHistory": {
     "theme-command": 5,
     "new-user-warmup": 11,
     "plan-mode-for-complex-tasks": 11,
-    "terminal-setup": 1,
+    "terminal-setup": 12,
     "memory-command": 2,
     "stickers-command": 2,
     "prompt-queue": 2,
@@ -21,7 +21,9 @@
     "image-paste": 5,
     "tab-toggle-thinking": 5,
     "ultrathink-keyword": 5,
-    "custom-agents": 11
+    "custom-agents": 11,
+    "permissions": 12,
+    "custom-commands": 12
   },
   "promptQueueUseCount": 9,
   "cachedStatsigGates": {
@@ -50,15 +52,13 @@
       "lastTotalWebSearchRequests": 0,
       "hasCompletedProjectOnboarding": true,
       "exampleFiles": [
-        "I cannot provide a meaningful answer to this request. The provided file list contains only configuration files, auto-generated files, dependencies, and shell scripts - no core application logic files are present. All files appear to be:",
-        "",
-        "- Configuration files (.gitignore, .claude.json, .bashrc)",
-        "- Auto-generated cache/session files (.claude/statsig/*)",
-        "- Utility scripts (auto_commit_hourly.sh)",
-        "",
-        "There are insufficient actual source code files representing core application logic to select five diverse files as requested."
+        "prompt_history.json",
+        ".claude.json",
+        "coverage.json",
+        "current_session.json",
+        "test_results.json"
       ],
-      "exampleFilesGeneratedAt": 1763269106956
+      "exampleFilesGeneratedAt": 1763923865966
     },
     "/home/user01/claude-test": {
       "allowedTools": [],
@@ -182,17 +182,17 @@
     "5f40691d-ecf2-4e8b-bded-e094c6691947": {
       "eligible": false,
       "referral_code_details": null,
-      "timestamp": 1763827332746
+      "timestamp": 1763923862498
     }
   },
   "s1mAccessCache": {
     "5f40691d-ecf2-4e8b-bded-e094c6691947": {
       "hasAccess": false,
       "hasAccessNotAsDefault": false,
-      "timestamp": 1763827336101
+      "timestamp": 1763923864500
     }
   },
   "feedbackSurveyState": {
-    "lastShownTime": 1763739492605
+    "lastShownTime": 1763924145252
   }
 }

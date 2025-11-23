@@ -43,10 +43,7 @@ class TestStandaloneFunctions:
             mock_func(None)
             assert mock_func.called
         # Test with empty strings
-            pass  # Auto-fixed: incomplete with statement
-            pass  # Auto-fixed: incomplete with statement
-            pass  # Auto-fixed: incomplete with statement
-            pass  # Auto-fixed: incomplete with statement
+        with patch('feedback_loop.to_dict') as mock_func:
     def test_to_dict_edge_cases(self):
         """Test to_dict edge cases"""
         # REAL IMPLEMENTATION - Edge cases for to_dict
@@ -116,6 +113,7 @@ class TestStandaloneFunctions:
             mock_func(None)
             assert mock_func.called
         # Test with empty strings
+        with patch('feedback_loop.execute') as mock_func:
     def test_execute_edge_cases(self):
         """Test execute edge cases"""
         # REAL IMPLEMENTATION - Edge cases for execute
@@ -150,6 +148,7 @@ class TestStandaloneFunctions:
             mock_func(None)
             assert mock_func.called
         # Test with empty strings
+        with patch('feedback_loop.get_statistics') as mock_func:
     def test_get_statistics_edge_cases(self):
         """Test get_statistics edge cases"""
         # REAL IMPLEMENTATION - Edge cases for get_statistics
@@ -184,6 +183,7 @@ class TestStandaloneFunctions:
             mock_func(None)
             assert mock_func.called
         # Test with empty strings
+        with patch('feedback_loop.example_context_gatherer') as mock_func:
     def test_example_context_gatherer_edge_cases(self):
         """Test example_context_gatherer edge cases"""
         # REAL IMPLEMENTATION - Edge cases for example_context_gatherer
@@ -218,6 +218,7 @@ class TestStandaloneFunctions:
             mock_func(None)
             assert mock_func.called
         # Test with empty strings
+        with patch('feedback_loop.example_action_executor') as mock_func:
     def test_example_action_executor_edge_cases(self):
         """Test example_action_executor edge cases"""
         # REAL IMPLEMENTATION - Edge cases for example_action_executor
@@ -252,6 +253,7 @@ class TestStandaloneFunctions:
             mock_func(None)
             assert mock_func.called
         # Test with empty strings
+        with patch('feedback_loop.example_verifier') as mock_func:
     def test_example_verifier_edge_cases(self):
         """Test example_verifier edge cases"""
         # REAL IMPLEMENTATION - Edge cases for example_verifier

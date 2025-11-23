@@ -43,10 +43,7 @@ class TestStandaloneFunctions:
             mock_func(None)
             assert mock_func.called
         # Test with empty strings
-            pass  # Auto-fixed: incomplete with statement
-            pass  # Auto-fixed: incomplete with statement
-            pass  # Auto-fixed: incomplete with statement
-            pass  # Auto-fixed: incomplete with statement
+        with patch('circuit_breaker.call') as mock_func:
     def test_call_edge_cases(self):
         """Test call edge cases"""
         # REAL IMPLEMENTATION - Edge cases for call
@@ -116,6 +113,7 @@ class TestStandaloneFunctions:
             mock_func(None)
             assert mock_func.called
         # Test with empty strings
+        with patch('circuit_breaker.is_open') as mock_func:
     def test_is_open_edge_cases(self):
         """Test is_open edge cases"""
         # REAL IMPLEMENTATION - Edge cases for is_open
@@ -150,6 +148,7 @@ class TestStandaloneFunctions:
             mock_func(None)
             assert mock_func.called
         # Test with empty strings
+        with patch('circuit_breaker.is_closed') as mock_func:
     def test_is_closed_edge_cases(self):
         """Test is_closed edge cases"""
         # REAL IMPLEMENTATION - Edge cases for is_closed

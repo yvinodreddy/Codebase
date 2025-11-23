@@ -43,10 +43,7 @@ class TestStandaloneFunctions:
             mock_func(None)
             assert mock_func.called
         # Test with empty strings
-            pass  # Auto-fixed: incomplete with statement
-            pass  # Auto-fixed: incomplete with statement
-            pass  # Auto-fixed: incomplete with statement
-            pass  # Auto-fixed: incomplete with statement
+        with patch('agentic_search.search_phases') as mock_func:
     def test_search_phases_edge_cases(self):
         """Test search_phases edge cases"""
         # REAL IMPLEMENTATION - Edge cases for search_phases
@@ -81,6 +78,7 @@ class TestStandaloneFunctions:
             mock_func(None)
             assert mock_func.called
         # Test with empty strings
+        with patch('agentic_search.find_files') as mock_func:
     def test_find_files_edge_cases(self):
         """Test find_files edge cases"""
         # REAL IMPLEMENTATION - Edge cases for find_files
@@ -115,6 +113,7 @@ class TestStandaloneFunctions:
             mock_func(None)
             assert mock_func.called
         # Test with empty strings
+        with patch('agentic_search.find_dependencies') as mock_func:
     def test_find_dependencies_edge_cases(self):
         """Test find_dependencies edge cases"""
         # REAL IMPLEMENTATION - Edge cases for find_dependencies
@@ -149,6 +148,7 @@ class TestStandaloneFunctions:
             mock_func(None)
             assert mock_func.called
         # Test with empty strings
+        with patch('agentic_search.analyze_previous_implementation') as mock_func:
     def test_analyze_previous_implementation_edge_cases(self):
         """Test analyze_previous_implementation edge cases"""
         # REAL IMPLEMENTATION - Edge cases for analyze_previous_implementation
@@ -183,6 +183,7 @@ class TestStandaloneFunctions:
             mock_func(None)
             assert mock_func.called
         # Test with empty strings
+        with patch('agentic_search.gather_context_for_phase') as mock_func:
     def test_gather_context_for_phase_edge_cases(self):
         """Test gather_context_for_phase edge cases"""
         # REAL IMPLEMENTATION - Edge cases for gather_context_for_phase
@@ -217,6 +218,7 @@ class TestStandaloneFunctions:
             mock_func(None)
             assert mock_func.called
         # Test with empty strings
+        with patch('agentic_search.search_documentation') as mock_func:
     def test_search_documentation_edge_cases(self):
         """Test search_documentation edge cases"""
         # REAL IMPLEMENTATION - Edge cases for search_documentation
@@ -251,6 +253,7 @@ class TestStandaloneFunctions:
             mock_func(None)
             assert mock_func.called
         # Test with empty strings
+        with patch('agentic_search.get_statistics') as mock_func:
     def test_get_statistics_edge_cases(self):
         """Test get_statistics edge cases"""
         # REAL IMPLEMENTATION - Edge cases for get_statistics

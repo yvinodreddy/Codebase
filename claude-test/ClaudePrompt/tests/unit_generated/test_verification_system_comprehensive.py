@@ -43,10 +43,7 @@ class TestStandaloneFunctions:
             mock_func(None)
             assert mock_func.called
         # Test with empty strings
-            pass  # Auto-fixed: incomplete with statement
-            pass  # Auto-fixed: incomplete with statement
-            pass  # Auto-fixed: incomplete with statement
-            pass  # Auto-fixed: incomplete with statement
+        with patch('verification_system.to_dict') as mock_func:
     def test_to_dict_edge_cases(self):
         """Test to_dict edge cases"""
         # REAL IMPLEMENTATION - Edge cases for to_dict
@@ -81,6 +78,7 @@ class TestStandaloneFunctions:
             mock_func(None)
             assert mock_func.called
         # Test with empty strings
+        with patch('verification_system.verify_output') as mock_func:
     def test_verify_output_edge_cases(self):
         """Test verify_output edge cases"""
         # REAL IMPLEMENTATION - Edge cases for verify_output
@@ -115,6 +113,7 @@ class TestStandaloneFunctions:
             mock_func(None)
             assert mock_func.called
         # Test with empty strings
+        with patch('verification_system.get_statistics') as mock_func:
     def test_get_statistics_edge_cases(self):
         """Test get_statistics edge cases"""
         # REAL IMPLEMENTATION - Edge cases for get_statistics
@@ -149,6 +148,7 @@ class TestStandaloneFunctions:
             mock_func(None)
             assert mock_func.called
         # Test with empty strings
+        with patch('verification_system.rule_not_empty') as mock_func:
     def test_rule_not_empty_edge_cases(self):
         """Test rule_not_empty edge cases"""
         # REAL IMPLEMENTATION - Edge cases for rule_not_empty
@@ -183,6 +183,7 @@ class TestStandaloneFunctions:
             mock_func(None)
             assert mock_func.called
         # Test with empty strings
+        with patch('verification_system.rule_no_sensitive_data') as mock_func:
     def test_rule_no_sensitive_data_edge_cases(self):
         """Test rule_no_sensitive_data edge cases"""
         # REAL IMPLEMENTATION - Edge cases for rule_no_sensitive_data
@@ -217,6 +218,7 @@ class TestStandaloneFunctions:
             mock_func(None)
             assert mock_func.called
         # Test with empty strings
+        with patch('verification_system.rule_type_match') as mock_func:
     def test_rule_type_match_edge_cases(self):
         """Test rule_type_match edge cases"""
         # REAL IMPLEMENTATION - Edge cases for rule_type_match
@@ -251,6 +253,7 @@ class TestStandaloneFunctions:
             mock_func(None)
             assert mock_func.called
         # Test with empty strings
+        with patch('verification_system.rule_required_fields') as mock_func:
     def test_rule_required_fields_edge_cases(self):
         """Test rule_required_fields edge cases"""
         # REAL IMPLEMENTATION - Edge cases for rule_required_fields

@@ -1243,3 +1243,4 @@ NoneType: None
 2025-11-23 11:21:28,754 - LargeScaleErrorHandler - WARNING - [123] Attempt 5 failed: 'str' object is not callable
 2025-11-23 11:21:28,754 - LargeScaleErrorHandler - ERROR - [123] All retries exhausted
 2025-11-23 11:22:59,711 - LargeScaleErrorHandler - INFO - Error log exported to /tmp/tmpcqxe946v/test.txt
+2025-11-23 13:49:28,290 - LargeScaleErrorHandler - INFO - Error log exported to /tmp/tmp3g8tp2nj/test.txt
