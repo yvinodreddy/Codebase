@@ -119,10 +119,13 @@
 ## get_coverage_quickly.py
 ────────────────────────────────────────────────────────────────────────────────
 
+**Functions (1):**
+  • main() [line 10]
+
 **Metadata:**
-  • Total lines: 52
-  • Has main(): False
-  • Has if __name__ == '__main__': False
+  • Total lines: 57
+  • Has main(): True
+  • Has if __name__ == '__main__': True
 
 ## get_live_context_metrics.py
 ────────────────────────────────────────────────────────────────────────────────

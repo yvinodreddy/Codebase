@@ -1,5 +1,5 @@
 {
-  "numStartups": 12,
+  "numStartups": 16,
   "installMethod": "unknown",
   "autoUpdates": true,
   "tipsHistory": {
@@ -12,12 +12,12 @@
     "prompt-queue": 2,
     "enter-to-steer-in-relatime": 5,
     "todo-list": 3,
-    "# for memory": 3,
-    "install-github-app": 3,
-    "drag-and-drop-images": 3,
-    "double-esc-code-restore": 3,
-    "continue": 4,
-    "shift-tab": 4,
+    "# for memory": 16,
+    "install-github-app": 16,
+    "drag-and-drop-images": 16,
+    "double-esc-code-restore": 16,
+    "continue": 16,
+    "shift-tab": 16,
     "image-paste": 5,
     "tab-toggle-thinking": 5,
     "ultrathink-keyword": 5,
@@ -25,7 +25,7 @@
     "permissions": 12,
     "custom-commands": 12
   },
-  "promptQueueUseCount": 9,
+  "promptQueueUseCount": 10,
   "cachedStatsigGates": {
     "tengu_disable_bypass_permissions_mode": false,
     "tengu_tool_pear": false,
@@ -182,14 +182,14 @@
     "5f40691d-ecf2-4e8b-bded-e094c6691947": {
       "eligible": false,
       "referral_code_details": null,
-      "timestamp": 1763923862498
+      "timestamp": 1763935905584
     }
   },
   "s1mAccessCache": {
     "5f40691d-ecf2-4e8b-bded-e094c6691947": {
       "hasAccess": false,
       "hasAccessNotAsDefault": false,
-      "timestamp": 1763923864500
+      "timestamp": 1763935905596
     }
   },
   "feedbackSurveyState": {

@@ -1,0 +1,17 @@
+{
+  "config": {
+    "max_tokens": 100000,
+    "compact_threshold": 0.8,
+    "keep_recent": 42
+  },
+  "statistics": {
+    "total_messages": 0,
+    "total_tokens": 0,
+    "max_tokens": 100000,
+    "usage_percentage": 0.0,
+    "compactions_performed": 0,
+    "total_tokens_saved": 0
+  },
+  "messages": [],
+  "compaction_history": []
+}

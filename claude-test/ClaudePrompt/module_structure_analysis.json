@@ -480,13 +480,22 @@
   },
   "get_coverage_quickly.py": {
     "file": "get_coverage_quickly.py",
-    "functions": [],
+    "functions": [
+      {
+        "name": "main",
+        "args": [],
+        "lineno": 10,
+        "is_async": false,
+        "docstring": "Main function to run coverage measurement",
+        "decorators": []
+      }
+    ],
     "classes": [],
     "imports": [],
-    "has_main": false,
-    "has_if_name_main": false,
+    "has_main": true,
+    "has_if_name_main": true,
     "module_docstring": "Quick coverage measurement script\nRuns pytest with coverage and reports results",
-    "total_lines": 52
+    "total_lines": 57
   },
   "get_live_context_metrics.py": {
     "file": "get_live_context_metrics.py",
