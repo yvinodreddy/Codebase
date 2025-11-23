@@ -9,7 +9,7 @@ import sys
 sys.path.insert(0, '/home/user01/claude-test/ClaudePrompt/database')
 
 from sqlite_context_loader import SQLiteContextLoader
-from multi_project_manager import MultiProjectManager
+from database.multi_project_manager import MultiProjectManager
 from token_manager import TokenManager
 
 

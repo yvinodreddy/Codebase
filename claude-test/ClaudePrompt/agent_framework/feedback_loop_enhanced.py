@@ -10,7 +10,7 @@ from dataclasses import dataclass, field
 from datetime import datetime
 import json
 
-from feedback_loop import AgentFeedbackLoop, FeedbackLoopResult, IterationLog
+from agent_framework.feedback_loop import AgentFeedbackLoop, FeedbackLoopResult, IterationLog
 
 logger = logging.getLogger(__name__)
 

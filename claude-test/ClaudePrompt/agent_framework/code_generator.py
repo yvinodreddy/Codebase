@@ -233,8 +233,8 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), '../../..', 'guardrai
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '../../..', 'agent_framework'))
 
 from multi_layer_system import MultiLayerGuardrailSystem
-from feedback_loop import AgentFeedbackLoop
-from context_manager import ContextManager
+from agent_framework.feedback_loop import AgentFeedbackLoop
+from agent_framework.context_manager import ContextManager
 
 
 class Phase{phase_id}Implementation:

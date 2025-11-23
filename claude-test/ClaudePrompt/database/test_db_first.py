@@ -29,7 +29,7 @@ from typing import Dict, List, Any
 sys.path.insert(0, os.path.dirname(__file__))
 
 from sqlite_context_loader import SQLiteContextLoader
-from multi_project_manager import MultiProjectManager
+from database.multi_project_manager import MultiProjectManager
 from token_manager import TokenManager
 
 
