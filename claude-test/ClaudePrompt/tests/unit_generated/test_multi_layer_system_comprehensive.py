@@ -43,14 +43,7 @@ class TestStandaloneFunctions:
             mock_func(None)
             assert mock_func.called
         # Test with empty strings
-            pass  # Auto-fixed: incomplete with statement
-            pass  # Auto-fixed: incomplete with statement
-            pass  # Auto-fixed: incomplete with statement
-            pass  # Auto-fixed: incomplete with statement
-            pass  # Auto-fixed: incomplete with statement
-            pass  # Auto-fixed: incomplete with statement
-            pass  # Auto-fixed: incomplete with statement
-            pass  # Auto-fixed: incomplete with statement
+        with patch('multi_layer_system.layer1_prompt_shields') as mock_func:
     def test_layer1_prompt_shields_edge_cases(self):
         """Test layer1_prompt_shields edge cases"""
         # TODO: Implement edge case tests for layer1_prompt_shields
@@ -75,6 +68,7 @@ class TestStandaloneFunctions:
             mock_func(None)
             assert mock_func.called
         # Test with empty strings
+        with patch('multi_layer_system.layer2_input_content_filter') as mock_func:
     def test_layer2_input_content_filter_edge_cases(self):
         """Test layer2_input_content_filter edge cases"""
         # TODO: Implement edge case tests for layer2_input_content_filter
@@ -99,6 +93,7 @@ class TestStandaloneFunctions:
             mock_func(None)
             assert mock_func.called
         # Test with empty strings
+        with patch('multi_layer_system.layer3_phi_detection') as mock_func:
     def test_layer3_phi_detection_edge_cases(self):
         """Test layer3_phi_detection edge cases"""
         # TODO: Implement edge case tests for layer3_phi_detection
@@ -123,6 +118,7 @@ class TestStandaloneFunctions:
             mock_func(None)
             assert mock_func.called
         # Test with empty strings
+        with patch('multi_layer_system.layer4_terminology_validation') as mock_func:
     def test_layer4_terminology_validation_edge_cases(self):
         """Test layer4_terminology_validation edge cases"""
         # TODO: Implement edge case tests for layer4_terminology_validation
@@ -147,6 +143,7 @@ class TestStandaloneFunctions:
             mock_func(None)
             assert mock_func.called
         # Test with empty strings
+        with patch('multi_layer_system.layer5_output_content_filter') as mock_func:
     def test_layer5_output_content_filter_edge_cases(self):
         """Test layer5_output_content_filter edge cases"""
         # TODO: Implement edge case tests for layer5_output_content_filter
@@ -171,6 +168,7 @@ class TestStandaloneFunctions:
             mock_func(None)
             assert mock_func.called
         # Test with empty strings
+        with patch('multi_layer_system.layer6_groundedness_check') as mock_func:
     def test_layer6_groundedness_check_edge_cases(self):
         """Test layer6_groundedness_check edge cases"""
         # TODO: Implement edge case tests for layer6_groundedness_check
@@ -195,6 +193,7 @@ class TestStandaloneFunctions:
             mock_func(None)
             assert mock_func.called
         # Test with empty strings
+        with patch('multi_layer_system.layer7_compliance_and_facts') as mock_func:
     def test_layer7_compliance_and_facts_edge_cases(self):
         """Test layer7_compliance_and_facts edge cases"""
         # TODO: Implement edge case tests for layer7_compliance_and_facts
@@ -219,6 +218,7 @@ class TestStandaloneFunctions:
             mock_func(None)
             assert mock_func.called
         # Test with empty strings
+        with patch('multi_layer_system.process_with_guardrails') as mock_func:
     def test_process_with_guardrails_edge_cases(self):
         """Test process_with_guardrails edge cases"""
         # TODO: Implement edge case tests for process_with_guardrails
@@ -243,6 +243,7 @@ class TestStandaloneFunctions:
             mock_func(None)
             assert mock_func.called
         # Test with empty strings
+        with patch('multi_layer_system.get_statistics') as mock_func:
     def test_get_statistics_edge_cases(self):
         """Test get_statistics edge cases"""
         # TODO: Implement edge case tests for get_statistics

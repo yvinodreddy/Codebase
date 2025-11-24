@@ -68,6 +68,7 @@ class TestStandaloneFunctions:
             mock_func(None)
             assert mock_func.called
         # Test with empty strings
+        with patch('rate_limiter.wait_if_needed') as mock_func:
     def test_wait_if_needed_edge_cases(self):
         """Test wait_if_needed edge cases"""
         # TODO: Implement edge case tests for wait_if_needed
@@ -76,14 +77,6 @@ class TestStandaloneFunctions:
     def test_wait_if_needed_error_handling(self):
         """Test wait_if_needed error handling"""
         # TODO: Implement error tests for wait_if_needed
-            pass  # Auto-fixed: incomplete with statement
-                pass  # Auto-fixed: incomplete with statement
-                pass  # Auto-fixed: incomplete with statement
-                pass  # Auto-fixed: incomplete with statement
-                pass  # Auto-fixed: incomplete with statement
-                pass  # Auto-fixed: incomplete with statement
-                pass  # Auto-fixed: incomplete with statement
-            pass  # Auto-fixed: incomplete with statement
         assert True  # Placeholder
 
     def test_get_current_usage_basic(self):
@@ -100,6 +93,7 @@ class TestStandaloneFunctions:
             mock_func(None)
             assert mock_func.called
         # Test with empty strings
+        with patch('rate_limiter.get_current_usage') as mock_func:
     def test_get_current_usage_edge_cases(self):
         """Test get_current_usage edge cases"""
         # TODO: Implement edge case tests for get_current_usage

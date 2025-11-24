@@ -43,6 +43,7 @@ class TestStandaloneFunctions:
             mock_func(None)
             assert mock_func.called
         # Test with empty strings
+        with patch('claude_integration.mask_api_key') as mock_func:
     def test_mask_api_key_edge_cases(self):
         """Test mask_api_key edge cases"""
         # TODO: Implement edge case tests for mask_api_key
@@ -67,6 +68,7 @@ class TestStandaloneFunctions:
             mock_func(None)
             assert mock_func.called
         # Test with empty strings
+        with patch('claude_integration.to_dict') as mock_func:
     def test_to_dict_edge_cases(self):
         """Test to_dict edge cases"""
         # TODO: Implement edge case tests for to_dict
@@ -76,14 +78,6 @@ class TestStandaloneFunctions:
         """Test to_dict error handling"""
         # TODO: Implement error tests for to_dict
         assert True  # Placeholder
-            pass  # Auto-fixed: incomplete with statement
-            pass  # Auto-fixed: incomplete with statement
-                pass  # Auto-fixed: incomplete with statement
-                pass  # Auto-fixed: incomplete with statement
-                pass  # Auto-fixed: incomplete with statement
-                pass  # Auto-fixed: incomplete with statement
-                pass  # Auto-fixed: incomplete with statement
-                pass  # Auto-fixed: incomplete with statement
 
     def test_process_basic(self):
         """Test process basic functionality - REAL IMPLEMENTATION"""
@@ -99,6 +93,7 @@ class TestStandaloneFunctions:
             mock_func(None)
             assert mock_func.called
         # Test with empty strings
+        with patch('claude_integration.process') as mock_func:
     def test_process_edge_cases(self):
         """Test process edge cases"""
         # TODO: Implement edge case tests for process
@@ -123,6 +118,7 @@ class TestStandaloneFunctions:
             mock_func(None)
             assert mock_func.called
         # Test with empty strings
+        with patch('claude_integration.process_with_validation') as mock_func:
     def test_process_with_validation_edge_cases(self):
         """Test process_with_validation edge cases"""
         # TODO: Implement edge case tests for process_with_validation
@@ -147,6 +143,7 @@ class TestStandaloneFunctions:
             mock_func(None)
             assert mock_func.called
         # Test with empty strings
+        with patch('claude_integration.get_statistics') as mock_func:
     def test_get_statistics_edge_cases(self):
         """Test get_statistics edge cases"""
         # TODO: Implement edge case tests for get_statistics
@@ -171,6 +168,7 @@ class TestStandaloneFunctions:
             mock_func(None)
             assert mock_func.called
         # Test with empty strings
+        with patch('claude_integration.get_rate_limit_stats') as mock_func:
     def test_get_rate_limit_stats_edge_cases(self):
         """Test get_rate_limit_stats edge cases"""
         # TODO: Implement edge case tests for get_rate_limit_stats
@@ -195,6 +193,7 @@ class TestStandaloneFunctions:
             mock_func(None)
             assert mock_func.called
         # Test with empty strings
+        with patch('claude_integration.claude_refinement_call') as mock_func:
     def test_claude_refinement_call_edge_cases(self):
         """Test claude_refinement_call edge cases"""
         # TODO: Implement edge case tests for claude_refinement_call
