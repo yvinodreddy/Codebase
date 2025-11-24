@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 REAL Tests for enhanced_websocket_broadcast.py
-Auto-generated for 85% coverage target
+Auto-generated for 100% coverage target
 
 These are REAL tests that import and execute actual code, not mocks.
 """

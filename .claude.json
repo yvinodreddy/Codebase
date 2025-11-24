@@ -19,8 +19,8 @@
     "continue": 16,
     "shift-tab": 16,
     "image-paste": 5,
-    "tab-toggle-thinking": 5,
-    "ultrathink-keyword": 5,
+    "tab-toggle-thinking": 16,
+    "ultrathink-keyword": 16,
     "custom-agents": 11,
     "permissions": 12,
     "custom-commands": 12

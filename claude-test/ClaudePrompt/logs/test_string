@@ -1,0 +1,62 @@
+================================================================================
+GUARDRAIL SYSTEM PERFORMANCE REPORT
+================================================================================
+
+Generated: 2025-11-23 18:59:18
+
+OVERALL STATISTICS
+--------------------------------------------------------------------------------
+Total Validations: 0
+Successful: 0 (0%)
+Failed: 0
+Warnings: 0
+Errors: 0
+
+LAYER PERFORMANCE
+--------------------------------------------------------------------------------
+
+layer_1_prompt_shields:
+  Total: 0
+  Passed: 0
+  Failed: 0
+  Pass Rate: 0.00%
+
+layer_2_input_content:
+  Total: 0
+  Passed: 0
+  Failed: 0
+  Pass Rate: 0.00%
+
+layer_3_phi_detection:
+  Total: 0
+  Passed: 0
+  Failed: 0
+  Pass Rate: 0.00%
+
+layer_4_terminology:
+  Total: 0
+  Passed: 0
+  Failed: 0
+  Pass Rate: 0.00%
+
+layer_5_output_content:
+  Total: 0
+  Passed: 0
+  Failed: 0
+  Pass Rate: 0.00%
+
+layer_6_groundedness:
+  Total: 0
+  Passed: 0
+  Failed: 0
+  Pass Rate: 0.00%
+
+layer_7_compliance:
+  Total: 0
+  Passed: 0
+  Failed: 0
+  Pass Rate: 0.00%
+
+================================================================================
+Last Updated: 2025-11-23T18:59:18.052513
+================================================================================
