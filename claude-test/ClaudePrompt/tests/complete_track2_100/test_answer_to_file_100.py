@@ -657,3 +657,49 @@ def test_append_answer_section_with_real_file():
         # Cleanup
         if os.path.exists(temp_path):
             os.unlink(temp_path)
+
+
+# ==============================================================================
+# FINAL 100% COVERAGE - Main Block Lines 45-53
+# ==============================================================================
+
+def test_main_block_all_paths_lines_45_53():
+    """Test all paths in main block (lines 45-53)"""
+    import subprocess
+    import sys
+    import tempfile
+    import os
+
+    # Test 1: Missing arguments (lines 45-47)
+    result = subprocess.run(
+        [sys.executable, 'answer_to_file.py'],
+        capture_output=True,
+        text=True,
+        cwd='/home/user01/claude-test/ClaudePrompt'
+    )
+    assert 'Usage' in result.stdout or result.returncode == 1
+
+    # Test 2: Valid execution (lines 49-53)
+    with tempfile.NamedTemporaryFile(mode='w', delete=False, suffix='.txt') as f:
+        temp_file = f.name
+        f.write("Test content\n")
+
+    try:
+        result = subprocess.run(
+            [sys.executable, 'answer_to_file.py', temp_file, 'My answer text'],
+            capture_output=True,
+            text=True,
+            cwd='/home/user01/claude-test/ClaudePrompt'
+        )
+
+        # Should succeed
+        assert result.returncode == 0 or 'Answer appended' in result.stdout
+
+        # Verify file was modified
+        with open(temp_file, 'r') as f:
+            content = f.read()
+            assert 'My answer text' in content or 'CLAUDE CODE' in content
+
+    finally:
+        if os.path.exists(temp_file):
+            os.remove(temp_file)
