@@ -193,7 +193,7 @@ class TestFindTracksComplete:
             except Exception as e:
                 # Unexpected exception
                 if "NotImplementedError" not in str(e):
-                    print(f"Unexpected error for {type_name}: {e}")
+                    print(f"Unexpected error for type_name: e")
 
     def test_find_tracks_edge_cases(self, edge_case_inputs):
         """Test edge cases for 100% coverage"""
@@ -245,7 +245,7 @@ class TestGetSystemMetricsComplete:
             except Exception as e:
                 # Unexpected exception
                 if "NotImplementedError" not in str(e):
-                    print(f"Unexpected error for {type_name}: {e}")
+                    print(f"Unexpected error for type_name: e")
 
     def test_get_system_metrics_edge_cases(self, edge_case_inputs):
         """Test edge cases for 100% coverage"""
@@ -317,7 +317,7 @@ class TestCreateDashboardLayoutComplete:
             except Exception as e:
                 # Unexpected exception
                 if "NotImplementedError" not in str(e):
-                    print(f"Unexpected error for {type_name}: {e}")
+                    print(f"Unexpected error for type_name: e")
 
     def test_create_dashboard_layout_edge_cases(self, edge_case_inputs):
         """Test edge cases for 100% coverage"""
@@ -386,7 +386,7 @@ class TestMainComplete:
             except Exception as e:
                 # Unexpected exception
                 if "NotImplementedError" not in str(e):
-                    print(f"Unexpected error for {type_name}: {e}")
+                    print(f"Unexpected error for type_name: e")
 
     def test_main_edge_cases(self, edge_case_inputs):
         """Test edge cases for 100% coverage"""
@@ -441,7 +441,7 @@ class TestInitComplete:
             except Exception as e:
                 # Unexpected exception
                 if "NotImplementedError" not in str(e):
-                    print(f"Unexpected error for {type_name}: {e}")
+                    print(f"Unexpected error for type_name: e")
 
     def test___init___edge_cases(self, edge_case_inputs):
         """Test edge cases for 100% coverage"""
@@ -609,7 +609,7 @@ class TestUpdateComplete:
             except Exception as e:
                 # Unexpected exception
                 if "NotImplementedError" not in str(e):
-                    print(f"Unexpected error for {type_name}: {e}")
+                    print(f"Unexpected error for type_name: e")
 
     def test_update_edge_cases(self, edge_case_inputs):
         """Test edge cases for 100% coverage"""

@@ -48,11 +48,11 @@ class TestModuleFunctions:
 
     def test_get_generic_test_impl_with_none_inputs(self):
         """Test get_generic_test_impl handles None inputs gracefully"""
-        from replace_remaining_placeholders import get_generic_test_impl
+        from replace_remaining_placeholders import AggressiveReplacer  # get_generic_test_impl
         
         try:
             # Test with None values
-            result = get_generic_test_impl(None, None)
+            replacer = AggressiveReplacer(); result = replacer.get_generic_test_impl(None, None)
             assert True, "Handled None inputs"
         except (TypeError, ValueError, AttributeError) as e:
             # Expected - function doesn't accept None
@@ -78,11 +78,11 @@ class TestModuleFunctions:
 
     def test_replace_placeholders_in_file_with_none_inputs(self):
         """Test replace_placeholders_in_file handles None inputs gracefully"""
-        from replace_remaining_placeholders import replace_placeholders_in_file
+        from replace_remaining_placeholders import AggressiveReplacer  # replace_placeholders_in_file
         
         try:
             # Test with None values
-            result = replace_placeholders_in_file(None)
+            replacer = AggressiveReplacer(); result = replacer.replace_placeholders_in_file(None)
             assert True, "Handled None inputs"
         except (TypeError, ValueError, AttributeError) as e:
             # Expected - function doesn't accept None

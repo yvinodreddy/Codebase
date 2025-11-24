@@ -158,7 +158,7 @@ class TestTestFileHasFailuresComplete:
             except Exception as e:
                 # Unexpected exception
                 if "NotImplementedError" not in str(e):
-                    print(f"Unexpected error for {type_name}: {e}")
+                    print(f"Unexpected error for type_name: e")
 
     def test_test_file_has_failures_edge_cases(self, edge_case_inputs):
         """Test edge cases for 100% coverage"""
@@ -279,7 +279,7 @@ class TestFixSystemExitInFileComplete:
             except Exception as e:
                 # Unexpected exception
                 if "NotImplementedError" not in str(e):
-                    print(f"Unexpected error for {type_name}: {e}")
+                    print(f"Unexpected error for type_name: e")
 
     def test_fix_system_exit_in_file_edge_cases(self, edge_case_inputs):
         """Test edge cases for 100% coverage"""
@@ -414,7 +414,7 @@ class TestMainComplete:
             except Exception as e:
                 # Unexpected exception
                 if "NotImplementedError" not in str(e):
-                    print(f"Unexpected error for {type_name}: {e}")
+                    print(f"Unexpected error for type_name: e")
 
     def test_main_edge_cases(self, edge_case_inputs):
         """Test edge cases for 100% coverage"""
@@ -469,7 +469,7 @@ class TestReplacementComplete:
             except Exception as e:
                 # Unexpected exception
                 if "NotImplementedError" not in str(e):
-                    print(f"Unexpected error for {type_name}: {e}")
+                    print(f"Unexpected error for type_name: e")
 
     def test_replacement_edge_cases(self, edge_case_inputs):
         """Test edge cases for 100% coverage"""

@@ -48,11 +48,11 @@ class TestModuleFunctions:
 
     def test_generate_test_file_with_none_inputs(self):
         """Test generate_test_file handles None inputs gracefully"""
-        from generate_tests_instance9 import generate_test_file
+        from generate_tests_instance9 import TestGeneratorInstance9  # generate_test_file
         
         try:
             # Test with None values
-            result = generate_test_file(None, None)
+            generator = TestGeneratorInstance9(); result = generator.generate_test_file(None, None)
             assert True, "Handled None inputs"
         except (TypeError, ValueError, AttributeError) as e:
             # Expected - function doesn't accept None

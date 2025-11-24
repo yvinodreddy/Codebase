@@ -1319,3 +1319,33 @@ NoneType: None
 2025-11-23 19:51:55,342 - LargeScaleErrorHandler - INFO - [123] Attempt 5/5
 2025-11-23 19:51:55,343 - LargeScaleErrorHandler - WARNING - [123] Attempt 5 failed: 'str' object is not callable
 2025-11-23 19:51:55,343 - LargeScaleErrorHandler - ERROR - [123] All retries exhausted
+2025-11-23 20:13:28,901 - LargeScaleErrorHandler - INFO - [123] Attempt 1/5
+2025-11-23 20:13:28,902 - LargeScaleErrorHandler - WARNING - [123] Attempt 1 failed: 'str' object is not callable
+2025-11-23 20:13:28,914 - LargeScaleErrorHandler - INFO - [123] Retrying in 1.0s...
+2025-11-23 20:13:29,915 - LargeScaleErrorHandler - INFO - [123] Attempt 2/5
+2025-11-23 20:13:29,916 - LargeScaleErrorHandler - WARNING - [123] Attempt 2 failed: 'str' object is not callable
+2025-11-23 20:13:29,917 - LargeScaleErrorHandler - INFO - [123] Retrying in 2.0s...
+2025-11-23 20:13:31,934 - LargeScaleErrorHandler - INFO - [123] Attempt 3/5
+2025-11-23 20:13:31,934 - LargeScaleErrorHandler - WARNING - [123] Attempt 3 failed: 'str' object is not callable
+2025-11-23 20:13:31,935 - LargeScaleErrorHandler - INFO - [123] Retrying in 4.0s...
+2025-11-23 20:13:35,938 - LargeScaleErrorHandler - INFO - [123] Attempt 4/5
+2025-11-23 20:13:35,938 - LargeScaleErrorHandler - WARNING - [123] Attempt 4 failed: 'str' object is not callable
+2025-11-23 20:13:35,945 - LargeScaleErrorHandler - INFO - [123] Retrying in 8.0s...
+2025-11-23 20:13:43,958 - LargeScaleErrorHandler - INFO - [123] Attempt 5/5
+2025-11-23 20:13:43,959 - LargeScaleErrorHandler - WARNING - [123] Attempt 5 failed: 'str' object is not callable
+2025-11-23 20:13:43,959 - LargeScaleErrorHandler - ERROR - [123] All retries exhausted
+2025-11-23 20:31:55,939 - LargeScaleErrorHandler - INFO - [123] Attempt 1/5
+2025-11-23 20:31:55,939 - LargeScaleErrorHandler - WARNING - [123] Attempt 1 failed: 'str' object is not callable
+2025-11-23 20:31:55,940 - LargeScaleErrorHandler - INFO - [123] Retrying in 1.0s...
+2025-11-23 20:31:56,943 - LargeScaleErrorHandler - INFO - [123] Attempt 2/5
+2025-11-23 20:31:56,943 - LargeScaleErrorHandler - WARNING - [123] Attempt 2 failed: 'str' object is not callable
+2025-11-23 20:31:56,944 - LargeScaleErrorHandler - INFO - [123] Retrying in 2.0s...
+2025-11-23 20:31:58,944 - LargeScaleErrorHandler - INFO - [123] Attempt 3/5
+2025-11-23 20:31:58,944 - LargeScaleErrorHandler - WARNING - [123] Attempt 3 failed: 'str' object is not callable
+2025-11-23 20:31:58,944 - LargeScaleErrorHandler - INFO - [123] Retrying in 4.0s...
+2025-11-23 20:32:02,945 - LargeScaleErrorHandler - INFO - [123] Attempt 4/5
+2025-11-23 20:32:02,945 - LargeScaleErrorHandler - WARNING - [123] Attempt 4 failed: 'str' object is not callable
+2025-11-23 20:32:02,945 - LargeScaleErrorHandler - INFO - [123] Retrying in 8.0s...
+2025-11-23 20:32:10,946 - LargeScaleErrorHandler - INFO - [123] Attempt 5/5
+2025-11-23 20:32:10,946 - LargeScaleErrorHandler - WARNING - [123] Attempt 5 failed: 'str' object is not callable
+2025-11-23 20:32:10,946 - LargeScaleErrorHandler - ERROR - [123] All retries exhausted

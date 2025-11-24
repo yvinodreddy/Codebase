@@ -64,11 +64,11 @@ class TestModuleFunctions:
 
     def test_generate_100_percent_tests_with_none_inputs(self):
         """Test generate_100_percent_tests handles None inputs gracefully"""
-        from generate_100_percent_coverage import generate_100_percent_tests
+        from generate_100_percent_coverage import Complete100PercentCoverageGenerator  # generate_100_percent_tests
         
         try:
             # Test with None values
-            result = generate_100_percent_tests(None)
+            generator = Complete100PercentCoverageGenerator(); result = generator.generate_100_percent_tests(None)
             assert True, "Handled None inputs"
         except (TypeError, ValueError, AttributeError) as e:
             # Expected - function doesn't accept None
@@ -94,11 +94,11 @@ class TestModuleFunctions:
 
     def test_process_all_files_with_none_inputs(self):
         """Test process_all_files handles None inputs gracefully"""
-        from generate_100_percent_coverage import process_all_files
+        from generate_100_percent_coverage import Complete100PercentCoverageGenerator  # process_all_files
         
         try:
             # Test with None values
-            result = process_all_files(None)
+            generator = Complete100PercentCoverageGenerator(); result = generator.process_all_files(None)
             assert True, "Handled None inputs"
         except (TypeError, ValueError, AttributeError) as e:
             # Expected - function doesn't accept None

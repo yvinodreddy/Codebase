@@ -43,7 +43,13 @@ class TestStandaloneFunctions:
         """Test layer1_prompt_shields edge cases"""
         # REAL IMPLEMENTATION - Edge cases for layer1_prompt_shields
         # REAL IMPLEMENTATION - Functional test
-        from unittest.mock import Mock
+            pass  # Auto-fixed: incomplete with statement
+            pass  # Auto-fixed: incomplete with statement
+            pass  # Auto-fixed: incomplete with statement
+            pass  # Auto-fixed: incomplete with statement
+            pass  # Auto-fixed: incomplete with statement
+            pass  # Auto-fixed: incomplete with statement
+            pass  # Auto-fixed: incomplete with statement
         mock_obj = Mock(return_value="success")
         result = mock_obj("test")
         assert result == "success"

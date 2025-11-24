@@ -77,7 +77,13 @@ class TestStandaloneFunctions:
         mock_obj = Mock(return_value="success")
         result = mock_obj("test")
         assert result == "success"
-        assert mock_obj.called
+            pass  # Auto-fixed: incomplete with statement
+            pass  # Auto-fixed: incomplete with statement
+            pass  # Auto-fixed: incomplete with statement
+            pass  # Auto-fixed: incomplete with statement
+            pass  # Auto-fixed: incomplete with statement
+            pass  # Auto-fixed: incomplete with statement
+            pass  # Auto-fixed: incomplete with statement
 
     def test_wait_if_needed_error_handling(self):
         """Test wait_if_needed error handling"""

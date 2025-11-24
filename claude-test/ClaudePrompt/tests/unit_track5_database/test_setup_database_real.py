@@ -45,6 +45,60 @@ class TestBasicFunctionality:
             # This is acceptable for now - main goal is code execution
             pass
 
+    def test_main_block_success(self):
+        """Test __main__ block execution - success path (lines 129-131)"""
+        from io import StringIO
+
+        script_path = Path(__file__).parent.parent.parent / 'setup_database.py'
+        with open(script_path, 'r') as f:
+            code = f.read()
+
+        namespace = {
+            '__name__': '__main__',
+            '__file__': str(script_path),
+            'sys': sys,
+            'Path': Path,
+            'sqlite3': MagicMock()
+        }
+
+        with patch('setup_database.create_database') as mock_create:
+            mock_create.return_value = None
+
+            with patch('sys.stdout', new_callable=StringIO):
+                try:
+                    exec(compile(code, str(script_path), 'exec'), namespace)
+                except SystemExit as e:
+                    assert e.code == 0
+
+    def test_main_block_error(self):
+        """Test __main__ block execution - error path (lines 132-134)"""
+        from io import StringIO
+
+        script_path = Path(__file__).parent.parent.parent / 'setup_database.py'
+        with open(script_path, 'r') as f:
+            code = f.read()
+
+        namespace = {
+            '__name__': '__main__',
+            '__file__': str(script_path),
+            'sys': sys,
+            'Path': Path
+        }
+
+        # Patch sqlite3.connect at the module level to raise an exception
+        with patch('sqlite3.connect') as mock_connect:
+            mock_connect.side_effect = Exception("Database connection failed")
+
+            with patch('sys.stdout', new_callable=StringIO):
+                with patch('sys.stderr', new_callable=StringIO) as mock_stderr:
+                    try:
+                        exec(compile(code, str(script_path), 'exec'), namespace)
+                    except SystemExit as e:
+                        assert e.code == 1
+
+                    stderr_output = mock_stderr.getvalue()
+                    assert "❌ Error creating database" in stderr_output or "Error creating database" in stderr_output
+
 
 
 # ====================================================================================

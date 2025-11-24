@@ -45,6 +45,156 @@ class TestBasicFunctionality:
             # This is acceptable for now - main goal is code execution
             pass
 
+    def test_analyze_module_with_invalid_python(self):
+        """Test analyze_module with invalid Python code - covers lines 108-109"""
+        from analyze_modules_structure import ModuleAnalyzer
+        import tempfile
+
+        analyzer = ModuleAnalyzer()
+
+        with tempfile.NamedTemporaryFile(mode='w', suffix='.py', delete=False) as f:
+            f.write("def invalid syntax this is broken\n")
+            temp_path = f.name
+
+        try:
+            result = analyzer.analyze_module(temp_path)
+            assert 'error' in result
+            assert result['file'] == temp_path
+            assert result['functions'] == []
+            assert result['classes'] == []
+        finally:
+            Path(temp_path).unlink()
+
+    def test_analyze_all_modules_with_missing_file(self):
+        """Test analyze_all_modules when file is missing - covers lines 167-169"""
+        from analyze_modules_structure import ModuleAnalyzer
+
+        analyzer = ModuleAnalyzer()
+        # Override the modules list with a non-existent file
+        analyzer.modules = ['/tmp/nonexistent_module_xyz123.py']
+
+        results = analyzer.analyze_all_modules()
+        assert len(results) == 1
+        assert 'error' in results[0]
+
+    def test_analyze_all_modules_with_parse_error(self):
+        """Test analyze_all_modules with parse error - covers line 174"""
+        from analyze_modules_structure import ModuleAnalyzer
+        import tempfile
+
+        analyzer = ModuleAnalyzer()
+
+        with tempfile.NamedTemporaryFile(mode='w', suffix='.py', delete=False) as f:
+            f.write("invalid syntax!!!")
+            temp_path = f.name
+
+        try:
+            analyzer.modules = [temp_path]
+            results = analyzer.analyze_all_modules()
+            assert len(results) == 1
+            assert 'error' in results[0]
+        finally:
+            Path(temp_path).unlink()
+
+    def test_generate_summary_report_with_error(self):
+        """Test generate_summary_report with error entries - covers lines 199-200"""
+        from analyze_modules_structure import ModuleAnalyzer
+
+        analyzer = ModuleAnalyzer()
+        results_with_error = [
+            {'file': 'test.py', 'error': 'Syntax error', 'functions': [], 'classes': []}
+        ]
+
+        # This should handle the error entry gracefully
+        summary = analyzer.generate_summary_report(results_with_error)
+        assert '❌ ERROR' in summary or 'error' in summary.lower()
+
+    def test_get_decorator_name_variants(self):
+        """Test _get_decorator_name with different decorator types - covers lines 128-135"""
+        from analyze_modules_structure import ModuleAnalyzer
+        import ast
+
+        analyzer = ModuleAnalyzer()
+
+        # Test with ast.Attribute decorator (lines 128-129)
+        code_with_attribute = """
+@obj.decorator
+def my_func():
+    pass
+"""
+        tree = ast.parse(code_with_attribute)
+        func_node = tree.body[0]
+        result = analyzer._get_decorator_name(func_node.decorator_list[0])
+        assert result == 'decorator'
+
+        # Test with ast.Call decorator with Name func (line 132)
+        code_with_call_name = """
+@my_decorator()
+def my_func():
+    pass
+"""
+        tree = ast.parse(code_with_call_name)
+        func_node = tree.body[0]
+        result = analyzer._get_decorator_name(func_node.decorator_list[0])
+        assert result == 'my_decorator'
+
+        # Test with ast.Call decorator with Attribute func (lines 133-134)
+        code_with_call_attribute = """
+@module.decorator()
+def my_func():
+    pass
+"""
+        tree = ast.parse(code_with_call_attribute)
+        func_node = tree.body[0]
+        result = analyzer._get_decorator_name(func_node.decorator_list[0])
+        assert result == 'decorator'
+
+    def test_get_base_name_attribute(self):
+        """Test _get_base_name with Attribute base - covers lines 141-143"""
+        from analyze_modules_structure import ModuleAnalyzer
+        import ast
+
+        analyzer = ModuleAnalyzer()
+
+        code = """
+class MyClass(module.BaseClass):
+    pass
+"""
+        tree = ast.parse(code)
+        class_node = tree.body[0]
+        result = analyzer._get_base_name(class_node.bases[0])
+        assert result == 'BaseClass'
+
+    def test_main_block_execution(self):
+        """Test __main__ block execution - covers line 281"""
+        from io import StringIO
+
+        script_path = Path(__file__).parent.parent.parent / 'analyze_modules_structure.py'
+        with open(script_path, 'r') as f:
+            code = f.read()
+
+        namespace = {
+            '__name__': '__main__',
+            '__file__': str(script_path),
+            'sys': sys,
+            'Path': Path
+        }
+
+        # Mock the ModuleAnalyzer to avoid actual execution
+        with patch('analyze_modules_structure.ModuleAnalyzer') as MockAnalyzer:
+            mock_instance = MagicMock()
+            mock_instance.analyze_all_modules.return_value = []
+            mock_instance.generate_summary_report.return_value = "Test summary"
+            MockAnalyzer.return_value = mock_instance
+
+            with patch('sys.stdout', new_callable=StringIO) as mock_stdout:
+                exec(compile(code, str(script_path), 'exec'), namespace)
+
+                # Verify the main logic executed
+                MockAnalyzer.assert_called_once()
+                mock_instance.analyze_all_modules.assert_called_once()
+                mock_instance.generate_summary_report.assert_called_once()
+
 
     def test_analyze_module_basic(self):
         """Test analyze_module with valid inputs - REAL EXECUTION"""

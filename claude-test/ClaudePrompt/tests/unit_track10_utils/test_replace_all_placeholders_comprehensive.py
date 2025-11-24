@@ -48,11 +48,11 @@ class TestModuleFunctions:
 
     def test_analyze_source_module_with_none_inputs(self):
         """Test analyze_source_module handles None inputs gracefully"""
-        from replace_all_placeholders import analyze_source_module
+        from replace_all_placeholders import ProductionTestReplacer  # analyze_source_module
         
         try:
             # Test with None values
-            result = analyze_source_module(None)
+            replacer = ProductionTestReplacer(); result = replacer.analyze_source_module(None)
             assert True, "Handled None inputs"
         except (TypeError, ValueError, AttributeError) as e:
             # Expected - function doesn't accept None
@@ -78,11 +78,11 @@ class TestModuleFunctions:
 
     def test_generate_real_function_test_with_none_inputs(self):
         """Test generate_real_function_test handles None inputs gracefully"""
-        from replace_all_placeholders import generate_real_function_test
+        from replace_all_placeholders import ProductionTestReplacer  # generate_real_function_test
         
         try:
             # Test with None values
-            result = generate_real_function_test(None, None, None, None)
+            replacer = ProductionTestReplacer(); result = replacer.generate_real_function_test(None, None, None, None)
             assert True, "Handled None inputs"
         except (TypeError, ValueError, AttributeError) as e:
             # Expected - function doesn't accept None
@@ -108,11 +108,11 @@ class TestModuleFunctions:
 
     def test_generate_real_class_test_with_none_inputs(self):
         """Test generate_real_class_test handles None inputs gracefully"""
-        from replace_all_placeholders import generate_real_class_test
+        from replace_all_placeholders import ProductionTestReplacer  # generate_real_class_test
         
         try:
             # Test with None values
-            result = generate_real_class_test(None, None, None, None, None)
+            replacer = ProductionTestReplacer(); result = replacer.generate_real_class_test(None, None, None, None, None)
             assert True, "Handled None inputs"
         except (TypeError, ValueError, AttributeError) as e:
             # Expected - function doesn't accept None
@@ -138,11 +138,11 @@ class TestModuleFunctions:
 
     def test_replace_placeholder_in_file_with_none_inputs(self):
         """Test replace_placeholder_in_file handles None inputs gracefully"""
-        from replace_all_placeholders import replace_placeholder_in_file
+        from replace_all_placeholders import ProductionTestReplacer  # replace_placeholder_in_file
         
         try:
             # Test with None values
-            result = replace_placeholder_in_file(None)
+            replacer = ProductionTestReplacer(); result = replacer.replace_placeholder_in_file(None)
             assert True, "Handled None inputs"
         except (TypeError, ValueError, AttributeError) as e:
             # Expected - function doesn't accept None

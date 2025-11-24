@@ -253,7 +253,7 @@ class TestFixStuckAgentsComplete:
             except Exception as e:
                 # Unexpected exception
                 if "NotImplementedError" not in str(e):
-                    print(f"Unexpected error for {type_name}: {e}")
+                    print(f"Unexpected error for type_name: e")
 
     def test_fix_stuck_agents_edge_cases(self, edge_case_inputs):
         """Test edge cases for 100% coverage"""
