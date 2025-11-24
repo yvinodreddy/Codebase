@@ -85,10 +85,10 @@ def main():
 
     if success_count == len(modules):
         print("\n🎉 ALL TESTS GENERATED SUCCESSFULLY!")
-        sys.exit(0)
+        return 0
     else:
         print("\n⚠️  Some tests failed to generate. Check output above.")
-        sys.exit(1)
+        return 1
 
 if __name__ == "__main__":
     main()
