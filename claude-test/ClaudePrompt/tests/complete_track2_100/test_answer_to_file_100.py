@@ -125,3 +125,60 @@ class TestErrorPathsComprehensive:
         except IndexError:
             assert True  # Expected error
 
+
+
+# ============================================================================
+# MAIN BLOCK COVERAGE - Lines 45-53
+# ============================================================================
+
+def test_answer_to_file_main_usage_error():
+    """Test answer_to_file.py main block - insufficient arguments (lines 45-47)"""
+    import subprocess
+    import sys
+
+    # Execute without arguments
+    result = subprocess.run(
+        [sys.executable, 'answer_to_file.py'],
+        capture_output=True,
+        text=True,
+        timeout=5
+    )
+
+    # Should exit with error code 1
+    assert result.returncode == 1
+    assert 'Usage' in result.stdout or 'Usage' in result.stderr
+
+def test_answer_to_file_main_success():
+    """Test answer_to_file.py main block - successful execution (lines 49-53)"""
+    import subprocess
+    import sys
+    import tempfile
+
+    # Create temp file
+    with tempfile.NamedTemporaryFile(mode='w', delete=False, suffix='.txt') as f:
+        temp_file = f.name
+        f.write("Initial content\n")
+
+    try:
+        # Execute with correct arguments
+        result = subprocess.run(
+            [sys.executable, 'answer_to_file.py', temp_file, 'Test answer'],
+            capture_output=True,
+            text=True,
+            timeout=5
+        )
+
+        # Should succeed
+        assert result.returncode == 0
+        assert 'Answer appended' in result.stdout
+
+        # Verify file was modified
+        with open(temp_file, 'r') as f:
+            content = f.read()
+            assert 'Test answer' in content
+
+    finally:
+        # Cleanup
+        import os
+        if os.path.exists(temp_file):
+            os.unlink(temp_file)

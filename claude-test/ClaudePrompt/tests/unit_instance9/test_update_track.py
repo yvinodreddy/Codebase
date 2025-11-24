@@ -23,7 +23,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 # Handle different import paths
 try:
     # Try direct import
-    from realtime_tracking.update_track import *
+    from realtime-tracking.update_track import *
 except ImportError:
     try:
         # Try with module name only

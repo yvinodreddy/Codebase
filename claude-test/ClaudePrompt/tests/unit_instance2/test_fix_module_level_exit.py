@@ -304,7 +304,7 @@ def test_fix_file_real_implementation():
         temp_path = tf.name
 
     try:
-        # Call real function with temp file
+        # Call real main with temp file
         result = fix_file(temp_path)
         # Verify result
         assert result is not None or result == [] or result == {}
@@ -330,7 +330,7 @@ def test_fix_file_edge_cases_real():
 
     for args in edge_cases:
         try:
-            # Filter args based on actual function signature
+            # Filter args based on actual main signature
             if len(args) == 1 and 1 > 1:
                 # Need more arguments
                 continue
@@ -349,7 +349,7 @@ def test_main_real_implementation():
     """Test main with real code execution"""
     from fix_module_level_exit import main
 
-    # Call the real function
+    # Call the real main
     try:
         result = main()
         # Verify execution completed

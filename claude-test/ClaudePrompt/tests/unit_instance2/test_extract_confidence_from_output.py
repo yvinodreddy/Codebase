@@ -440,7 +440,7 @@ def test_main_real_implementation():
                     # Function executed without errors
                     assert True
                 except Exception as e:
-                    # Some functions might require specific setup
+                    # Some mains might require specific setup
                     assert True, f"Function raised: {e}"
 
 def test_main_edge_cases_real():

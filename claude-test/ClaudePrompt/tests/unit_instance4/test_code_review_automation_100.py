@@ -20,7 +20,7 @@ import subprocess
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
 # Import the module to test
-from scripts.code_review_automation import *
+from code_review_automation import *
 
 class TestCodeReviewAutomationComplete:
     """Complete test coverage for code_review_automation.py"""

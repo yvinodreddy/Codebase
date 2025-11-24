@@ -321,7 +321,7 @@ def test_find_and_fix_incomplete_with_statements_real_implementation():
     # Test with typical arguments
     result = find_and_fix_incomplete_with_statements("test")
 
-    # Verify result based on function behavior
+    # Verify result based on main behavior
     if result is not None:
         assert isinstance(result, (str, int, float, bool, list, dict, tuple)), "Result should be a valid type"
 
@@ -341,7 +341,7 @@ def test_find_and_fix_incomplete_with_statements_edge_cases_real():
 
     for args in edge_cases:
         try:
-            # Filter args based on actual function signature
+            # Filter args based on actual main signature
             if len(args) == 1 and 1 > 1:
                 # Need more arguments
                 continue
@@ -360,7 +360,7 @@ def test_main_real_implementation():
     """Test main with real code execution"""
     from fix_all_with_statements import main
 
-    # Call the real function
+    # Call the real main
     try:
         result = main()
         # Verify execution completed

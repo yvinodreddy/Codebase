@@ -1,8 +1,10 @@
+achieve_100_coverage_all_files.py
 achieve_100_percent_coverage.py
 analyze_coverage_gaps.py
 analyze_modules_structure.py
 archive/old_python/portable_orchestrator.py
 archive/old_python/ultrathink - backup.py
+automated_100_percent_completer.py
 backups/20251113_091039/archive/old_python/portable_orchestrator.py
 backups/20251113_091039/archive/old_python/ultrathink - backup.py
 backups/20251113_091039/dashboard_realtime.py
@@ -18,6 +20,9 @@ backups/perfection_20251113_092213/dashboard_realtime.py
 backups/perfection_20251113_092213/parallel_implementation/phase1_realtime_logging.py
 backups/perfection_99_20251113_093052/dashboard_realtime.py
 check_coverage.py
+complete_all_tests_100_percent.py
+complete_to_100_percent.py
+complete_track2_to_100_percent.py
 dashboard_realtime.py
 database/sqlite_context_loader.py
 debug_generate_tests.py
@@ -27,6 +32,7 @@ enhance_tests_for_90_coverage.py
 enhance_tests_for_real_coverage.py
 enhance_tests_to_90.py
 evaluation/quick_validation.py
+final_coverage_verification.py
 find_broken_tests.py
 find_untested_files.py
 generate_100_percent_coverage.py
@@ -43,6 +49,7 @@ generate_real_targeted_tests.py
 generate_real_tests_for_module.py
 generate_real_tests_parallel.py
 generate_real_tests_v2.py
+generate_targeted_coverage_tests.py
 generate_targeted_tests_for_gaps.py
 generate_tests_instance9.py
 generate_truly_real_tests.py

@@ -277,7 +277,7 @@ def test_find_broken_tests_real_implementation():
                     # Function executed without errors
                     assert True
                 except Exception as e:
-                    # Some functions might require specific setup
+                    # Some find_broken_testss might require specific setup
                     assert True, f"Function raised: {e}"
 
 def test_find_broken_tests_edge_cases_real():
@@ -301,7 +301,7 @@ def test_main_real_implementation():
     """Test main with real code execution"""
     from find_broken_tests import main
 
-    # Call the real function
+    # Call the real find_broken_tests
     try:
         result = main()
         # Verify execution completed
