@@ -1,5 +1,5 @@
 {
-  "numStartups": 18,
+  "numStartups": 19,
   "installMethod": "unknown",
   "autoUpdates": true,
   "tipsHistory": {
@@ -14,7 +14,7 @@
     "todo-list": 3,
     "# for memory": 18,
     "install-github-app": 18,
-    "drag-and-drop-images": 16,
+    "drag-and-drop-images": 18,
     "double-esc-code-restore": 18,
     "continue": 18,
     "shift-tab": 18,
@@ -182,14 +182,14 @@
     "5f40691d-ecf2-4e8b-bded-e094c6691947": {
       "eligible": false,
       "referral_code_details": null,
-      "timestamp": 1763944771241
+      "timestamp": 1763951995679
     }
   },
   "s1mAccessCache": {
     "5f40691d-ecf2-4e8b-bded-e094c6691947": {
       "hasAccess": false,
       "hasAccessNotAsDefault": false,
-      "timestamp": 1763944776399
+      "timestamp": 1763951999305
     }
   },
   "feedbackSurveyState": {
