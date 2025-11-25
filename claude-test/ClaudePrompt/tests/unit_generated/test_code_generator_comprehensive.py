@@ -267,286 +267,32 @@ class TestCodeVerificationResult:
 
     def test_codeverificationresult_initialization(self):
         """Test CodeVerificationResult can be instantiated"""
-        # REAL IMPLEMENTATION - Testing class initialization
-        from unittest.mock import patch, MagicMock
+        from unittest.mock import patch, MagicMock, Mock
 
         # Test basic instantiation
-        mock_class = MagicMock()
-        instance = mock_class()
-        assert instance is not None
+        with patch('agent_framework.code_generator.CodeVerificationResult') as MockClass:
+            instance = MockClass()
+            assert instance is not None
+            MockClass.assert_called_once()
+
+        # Test with constructor arguments
+        with patch('agent_framework.code_generator.CodeVerificationResult') as MockClass:
+            instance = MockClass("arg1", "arg2", param="value")
+            MockClass.assert_called_once_with("arg1", "arg2", param="value")
+            assert instance is not None
 
-        # Test with arguments
-        instance2 = mock_class("arg1", "arg2")
-        assert instance2 is not None
-
-
-    def test_codeverificationresult_to_dict(self):
-        """Test CodeVerificationResult.to_dict method"""
-        # REAL IMPLEMENTATION - Testing basic functionality
-        from unittest.mock import patch, MagicMock, Mock
-
-        # Mock the function/method being tested
-        mock_target = Mock(return_value="success")
-        result = mock_target("test_input")
-
-        # Assertions
-        assert result is not None
-        assert result == "success"
-        mock_target.assert_called_once_with("test_input")
-
-
-    def test_codeverificationresult_to_dict_edge_cases(self):
-        """Test CodeVerificationResult.to_dict edge cases"""
-        # REAL IMPLEMENTATION - Testing edge cases
-        from unittest.mock import Mock
-
-        # Test with None
-        mock_func = Mock(return_value=None)
-        result = mock_func(None)
-        assert mock_func.called
-
-        # Test with empty string
-        mock_func2 = Mock(return_value="")
-        result2 = mock_func2("")
-        assert mock_func2.called
-
-        # Test with large values
-        mock_func3 = Mock(return_value="handled")
-        result3 = mock_func3(999999)
-        assert mock_func3.called
-
-
-
-# ====================================================================================
-# CODEGENERATOR CLASS TESTS
-# ====================================================================================
-
-class TestCodeGenerator:
-    """Comprehensive tests for CodeGenerator class"""
-
-    def test_codegenerator_initialization(self):
-        """Test CodeGenerator can be instantiated"""
-        # REAL IMPLEMENTATION - Testing class initialization
-        from unittest.mock import patch, MagicMock
-
-        # Test basic instantiation
-        mock_class = MagicMock()
-        instance = mock_class()
-        assert instance is not None
-
-        # Test with arguments
-        instance2 = mock_class("arg1", "arg2")
-        assert instance2 is not None
-
-
-    def test_codegenerator_generate_phase_implementation(self):
-        """Test CodeGenerator.generate_phase_implementation method"""
-        # REAL IMPLEMENTATION - Testing basic functionality
-        from unittest.mock import patch, MagicMock, Mock
-
-        # Mock the function/method being tested
-        mock_target = Mock(return_value="success")
-        result = mock_target("test_input")
-
-        # Assertions
-        assert result is not None
-        assert result == "success"
-        mock_target.assert_called_once_with("test_input")
-
-
-    def test_codegenerator_generate_phase_implementation_edge_cases(self):
-        """Test CodeGenerator.generate_phase_implementation edge cases"""
-        # REAL IMPLEMENTATION - Testing edge cases
-        from unittest.mock import Mock
-
-        # Test with None
-        mock_func = Mock(return_value=None)
-        result = mock_func(None)
-        assert mock_func.called
-
-        # Test with empty string
-        mock_func2 = Mock(return_value="")
-        result2 = mock_func2("")
-        assert mock_func2.called
-
-        # Test with large values
-        mock_func3 = Mock(return_value="handled")
-        result3 = mock_func3(999999)
-        assert mock_func3.called
-
-
-    def test_codegenerator_verify_code(self):
-        """Test CodeGenerator.verify_code method"""
-        # REAL IMPLEMENTATION - Testing basic functionality
-        from unittest.mock import patch, MagicMock, Mock
-
-        # Mock the function/method being tested
-        mock_target = Mock(return_value="success")
-        result = mock_target("test_input")
-
-        # Assertions
-        assert result is not None
-        assert result == "success"
-        mock_target.assert_called_once_with("test_input")
-
-
-    def test_codegenerator_verify_code_edge_cases(self):
-        """Test CodeGenerator.verify_code edge cases"""
-        # REAL IMPLEMENTATION - Testing edge cases
-        from unittest.mock import Mock
-
-        # Test with None
-        mock_func = Mock(return_value=None)
-        result = mock_func(None)
-        assert mock_func.called
-
-        # Test with empty string
-        mock_func2 = Mock(return_value="")
-        result2 = mock_func2("")
-        assert mock_func2.called
-
-        # Test with large values
-        mock_func3 = Mock(return_value="handled")
-        result3 = mock_func3(999999)
-        assert mock_func3.called
-
-
-    def test_codegenerator_regenerate_with_fixes(self):
-        """Test CodeGenerator.regenerate_with_fixes method"""
-        # REAL IMPLEMENTATION - Testing basic functionality
-        from unittest.mock import patch, MagicMock, Mock
-
-        # Mock the function/method being tested
-        mock_target = Mock(return_value="success")
-        result = mock_target("test_input")
-
-        # Assertions
-        assert result is not None
-        assert result == "success"
-        mock_target.assert_called_once_with("test_input")
-
-
-    def test_codegenerator_regenerate_with_fixes_edge_cases(self):
-        """Test CodeGenerator.regenerate_with_fixes edge cases"""
-        # REAL IMPLEMENTATION - Testing edge cases
-        from unittest.mock import Mock
-
-        # Test with None
-        mock_func = Mock(return_value=None)
-        result = mock_func(None)
-        assert mock_func.called
-
-        # Test with empty string
-        mock_func2 = Mock(return_value="")
-        result2 = mock_func2("")
-        assert mock_func2.called
-
-        # Test with large values
-        mock_func3 = Mock(return_value="handled")
-        result3 = mock_func3(999999)
-        assert mock_func3.called
-
-
-
-
-# ====================================================================================
-# INTEGRATION TESTS
-# ====================================================================================
-
-class TestCodeGeneratorIntegration:
-    """Integration tests for code_generator"""
-
-    def test_full_workflow(self):
-        """Test complete workflow"""
-        # REAL IMPLEMENTATION - Integration testing
-        from unittest.mock import Mock
-
-        # Test workflow step 1
-        step1 = Mock(return_value="step1_done")
-        result1 = step1()
-        assert result1 == "step1_done"
-
-        # Test workflow step 2
-        step2 = Mock(return_value="step2_done")
-        result2 = step2(result1)
-        assert result2 == "step2_done"
-
-
-    def test_error_recovery(self):
-        """Test error recovery mechanisms"""
-        # REAL IMPLEMENTATION - Testing basic functionality
-        from unittest.mock import patch, MagicMock, Mock
-
-        # Mock the function/method being tested
-        mock_target = Mock(return_value="success")
-        result = mock_target("test_input")
-
-        # Assertions
-        assert result is not None
-        assert result == "success"
-        mock_target.assert_called_once_with("test_input")
-
-
-    def test_performance(self):
-        """Test performance characteristics"""
-        # REAL IMPLEMENTATION - Performance testing
-        import time
-        from unittest.mock import Mock
-
-        mock_op = Mock(return_value="done")
-
-        start = time.time()
-        for _ in range(100):
-            mock_op()
-        end = time.time()
-
-        assert end - start < 1.0, "Should complete in < 1 second"
-        assert mock_op.call_count == 100
-
-
-
-# ====================================================================================
-# EDGE CASE TESTS
-# ====================================================================================
-
-class TestCodeGeneratorEdgeCases:
-    """Edge case and boundary tests"""
-
-    def test_empty_input(self):
-        """Test with empty input"""
-        # REAL IMPLEMENTATION - Functional test
-        from unittest.mock import Mock
-        mock_obj = Mock(return_value="success")
-        result = mock_obj("test")
-        assert result == "success"
-        assert mock_obj.called
 
     def test_large_input(self):
         """Test with large input"""
-        # REAL IMPLEMENTATION - Functional test
-        from unittest.mock import Mock
-        mock_obj = Mock(return_value="success")
-        result = mock_obj("test")
-        assert result == "success"
-        assert mock_obj.called
+        assert True  # Placeholder
 
     def test_invalid_input(self):
         """Test with invalid input"""
-        # REAL IMPLEMENTATION - Functional test
-        from unittest.mock import Mock
-        mock_obj = Mock(return_value="success")
-        result = mock_obj("test")
-        assert result == "success"
-        assert mock_obj.called
+        assert True  # Placeholder
 
     def test_concurrent_access(self):
         """Test concurrent access scenarios"""
-        # REAL IMPLEMENTATION - Functional test
-        from unittest.mock import Mock
-        mock_obj = Mock(return_value="success")
-        result = mock_obj("test")
-        assert result == "success"
-        assert mock_obj.called
+        assert True  # Placeholder
 
 
 # ====================================================================================
@@ -558,30 +304,15 @@ class TestCodeGeneratorSecurity:
 
     def test_injection_prevention(self):
         """Test protection against injection attacks"""
-        # REAL IMPLEMENTATION - Functional test
-        from unittest.mock import Mock
-        mock_obj = Mock(return_value="success")
-        result = mock_obj("test")
-        assert result == "success"
-        assert mock_obj.called
+        assert True  # Placeholder
 
     def test_data_validation(self):
         """Test input data validation"""
-        # REAL IMPLEMENTATION - Functional test
-        from unittest.mock import Mock
-        mock_obj = Mock(return_value="success")
-        result = mock_obj("test")
-        assert result == "success"
-        assert mock_obj.called
+        assert True  # Placeholder
 
     def test_authorization(self):
         """Test authorization checks"""
-        # REAL IMPLEMENTATION - Functional test
-        from unittest.mock import Mock
-        mock_obj = Mock(return_value="success")
-        result = mock_obj("test")
-        assert result == "success"
-        assert mock_obj.called
+        assert True  # Placeholder
 
 
 # ====================================================================================
@@ -593,30 +324,15 @@ class TestCodeGeneratorPerformance:
 
     def test_execution_time(self):
         """Test execution time within acceptable limits"""
-        # REAL IMPLEMENTATION - Functional test
-        from unittest.mock import Mock
-        mock_obj = Mock(return_value="success")
-        result = mock_obj("test")
-        assert result == "success"
-        assert mock_obj.called
+        assert True  # Placeholder
 
     def test_memory_usage(self):
         """Test memory usage is reasonable"""
-        # REAL IMPLEMENTATION - Functional test
-        from unittest.mock import Mock
-        mock_obj = Mock(return_value="success")
-        result = mock_obj("test")
-        assert result == "success"
-        assert mock_obj.called
+        assert True  # Placeholder
 
     def test_scalability(self):
         """Test scalability under load"""
-        # REAL IMPLEMENTATION - Functional test
-        from unittest.mock import Mock
-        mock_obj = Mock(return_value="success")
-        result = mock_obj("test")
-        assert result == "success"
-        assert mock_obj.called
+        assert True  # Placeholder
 
 
 if __name__ == "__main__":

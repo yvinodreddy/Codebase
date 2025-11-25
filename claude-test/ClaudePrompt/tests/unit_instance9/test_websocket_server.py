@@ -23,7 +23,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 # Handle different import paths
 try:
     # Try direct import
-    from realtime_tracking.websocket_server import *
+    from realtime-tracking.websocket_server import *
 except ImportError:
     try:
         # Try with module name only

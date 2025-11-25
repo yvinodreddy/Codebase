@@ -1,12 +1,12 @@
 [
   {
     "id": 1,
-    "timestamp": "2025-11-24 00:06:30",
-    "prompt": "what is 2+2",
-    "complexity": "SIMPLE",
-    "agents_allocated": 8,
+    "timestamp": "2025-11-24 20:06:24",
+    "prompt": "\n        Explain the ULTRATHINK framework in detail:\n        1. What are the 5 execution directives?\n        2. How do the 7 guardrail layers work?\n        3. What is the agent framework architecture?\n        4. How does the feedback loop achieve 99%+ confidence?\n        ",
+    "complexity": "COMPLEX",
+    "agents_allocated": 25,
     "mode": "claude_code",
-    "duration_seconds": 0.003,
+    "duration_seconds": 0.004,
     "success": true,
     "flags": {
       "verbose": true,
@@ -15,7 +15,7 @@
   },
   {
     "id": 2,
-    "timestamp": "2025-11-24 00:06:31",
+    "timestamp": "2025-11-24 20:06:25",
     "prompt": "what is 2+2",
     "complexity": "SIMPLE",
     "agents_allocated": 8,
@@ -29,22 +29,8 @@
   },
   {
     "id": 3,
-    "timestamp": "2025-11-24 00:06:31",
+    "timestamp": "2025-11-24 20:06:27",
     "prompt": "\n        Explain the ULTRATHINK framework in detail:\n        1. What are the 5 execution directives?\n        2. How do the 7 guardrail layers work?\n        3. What is the agent framework architecture?\n        4. How does the feedback loop achieve 99%+ confidence?\n        ",
-    "complexity": "COMPLEX",
-    "agents_allocated": 25,
-    "mode": "claude_code",
-    "duration_seconds": 0.002,
-    "success": true,
-    "flags": {
-      "verbose": true,
-      "quiet": false
-    }
-  },
-  {
-    "id": 4,
-    "timestamp": "2025-11-24 00:06:32",
-    "prompt": "\n        Analyze the complete ULTRATHINK system:\n        1. Preprocessing and intent classification\n        2. All 7 guardrail layers (input and output)\n        3. Context management (200K tokens)\n        4. All 8 agent framework components\n        5. Iterative refinement protocol\n        6. Quality scoring breakdown\n        7. Framework comparison with delta analysis\n        Provide comprehensive details with all [VERBOSE] tags.\n        ",
     "complexity": "COMPLEX",
     "agents_allocated": 25,
     "mode": "claude_code",
@@ -56,8 +42,22 @@
     }
   },
   {
+    "id": 4,
+    "timestamp": "2025-11-24 20:06:28",
+    "prompt": "\n        Analyze the complete ULTRATHINK system:\n        1. Preprocessing and intent classification\n        2. All 7 guardrail layers (input and output)\n        3. Context management (200K tokens)\n        4. All 8 agent framework components\n        5. Iterative refinement protocol\n        6. Quality scoring breakdown\n        7. Framework comparison with delta analysis\n        Provide comprehensive details with all [VERBOSE] tags.\n        ",
+    "complexity": "COMPLEX",
+    "agents_allocated": 25,
+    "mode": "claude_code",
+    "duration_seconds": 0.006,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
     "id": 5,
-    "timestamp": "2025-11-24 00:06:34",
+    "timestamp": "2025-11-24 20:06:32",
     "prompt": "test",
     "complexity": "SIMPLE",
     "agents_allocated": 8,
@@ -71,7 +71,7 @@
   },
   {
     "id": 6,
-    "timestamp": "2025-11-24 00:06:35",
+    "timestamp": "2025-11-24 20:06:33",
     "prompt": "hello world",
     "complexity": "SIMPLE",
     "agents_allocated": 8,
@@ -85,12 +85,12 @@
   },
   {
     "id": 7,
-    "timestamp": "2025-11-24 08:13:57",
+    "timestamp": "2025-11-24 20:08:16",
     "prompt": "what is 2+2",
     "complexity": "SIMPLE",
     "agents_allocated": 8,
     "mode": "claude_code",
-    "duration_seconds": 0.003,
+    "duration_seconds": 0.004,
     "success": true,
     "flags": {
       "verbose": true,
@@ -99,12 +99,12 @@
   },
   {
     "id": 8,
-    "timestamp": "2025-11-24 08:13:58",
+    "timestamp": "2025-11-24 20:08:17",
     "prompt": "\n        Explain the ULTRATHINK framework in detail:\n        1. What are the 5 execution directives?\n        2. How do the 7 guardrail layers work?\n        3. What is the agent framework architecture?\n        4. How does the feedback loop achieve 99%+ confidence?\n        ",
     "complexity": "COMPLEX",
     "agents_allocated": 25,
     "mode": "claude_code",
-    "duration_seconds": 0.003,
+    "duration_seconds": 0.007,
     "success": true,
     "flags": {
       "verbose": true,
@@ -113,10 +113,24 @@
   },
   {
     "id": 9,
-    "timestamp": "2025-11-24 08:13:59",
+    "timestamp": "2025-11-24 20:08:18",
     "prompt": "\n        Analyze the complete ULTRATHINK system:\n        1. Preprocessing and intent classification\n        2. All 7 guardrail layers (input and output)\n        3. Context management (200K tokens)\n        4. All 8 agent framework components\n        5. Iterative refinement protocol\n        6. Quality scoring breakdown\n        7. Framework comparison with delta analysis\n        Provide comprehensive details with all [VERBOSE] tags.\n        ",
     "complexity": "COMPLEX",
     "agents_allocated": 25,
+    "mode": "claude_code",
+    "duration_seconds": 0.006,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 10,
+    "timestamp": "2025-11-24 20:08:21",
+    "prompt": "test",
+    "complexity": "SIMPLE",
+    "agents_allocated": 8,
     "mode": "claude_code",
     "duration_seconds": 0.002,
     "success": true,
@@ -126,22 +140,8 @@
     }
   },
   {
-    "id": 10,
-    "timestamp": "2025-11-24 08:14:01",
-    "prompt": "test",
-    "complexity": "SIMPLE",
-    "agents_allocated": 8,
-    "mode": "claude_code",
-    "duration_seconds": 0.003,
-    "success": true,
-    "flags": {
-      "verbose": true,
-      "quiet": false
-    }
-  },
-  {
     "id": 11,
-    "timestamp": "2025-11-24 08:14:01",
+    "timestamp": "2025-11-24 20:08:22",
     "prompt": "hello world",
     "complexity": "SIMPLE",
     "agents_allocated": 8,
@@ -155,12 +155,12 @@
   },
   {
     "id": 12,
-    "timestamp": "2025-11-24 08:14:02",
+    "timestamp": "2025-11-24 20:08:24",
     "prompt": "what is 2+2",
     "complexity": "SIMPLE",
     "agents_allocated": 8,
     "mode": "claude_code",
-    "duration_seconds": 0.003,
+    "duration_seconds": 0.027,
     "success": true,
     "flags": {
       "verbose": true,
@@ -169,12 +169,12 @@
   },
   {
     "id": 13,
-    "timestamp": "2025-11-24 08:14:03",
+    "timestamp": "2025-11-24 20:08:25",
     "prompt": "\n        Explain the ULTRATHINK framework in detail:\n        1. What are the 5 execution directives?\n        2. How do the 7 guardrail layers work?\n        3. What is the agent framework architecture?\n        4. How does the feedback loop achieve 99%+ confidence?\n        ",
     "complexity": "COMPLEX",
     "agents_allocated": 25,
     "mode": "claude_code",
-    "duration_seconds": 0.002,
+    "duration_seconds": 0.005,
     "success": true,
     "flags": {
       "verbose": true,
@@ -183,12 +183,12 @@
   },
   {
     "id": 14,
-    "timestamp": "2025-11-24 08:14:04",
+    "timestamp": "2025-11-24 20:08:27",
     "prompt": "\n        Analyze the complete ULTRATHINK system:\n        1. Preprocessing and intent classification\n        2. All 7 guardrail layers (input and output)\n        3. Context management (200K tokens)\n        4. All 8 agent framework components\n        5. Iterative refinement protocol\n        6. Quality scoring breakdown\n        7. Framework comparison with delta analysis\n        Provide comprehensive details with all [VERBOSE] tags.\n        ",
     "complexity": "COMPLEX",
     "agents_allocated": 25,
     "mode": "claude_code",
-    "duration_seconds": 0.002,
+    "duration_seconds": 0.004,
     "success": true,
     "flags": {
       "verbose": true,
@@ -197,7 +197,7 @@
   },
   {
     "id": 15,
-    "timestamp": "2025-11-24 08:14:06",
+    "timestamp": "2025-11-24 20:08:29",
     "prompt": "test",
     "complexity": "SIMPLE",
     "agents_allocated": 8,
@@ -211,7 +211,7 @@
   },
   {
     "id": 16,
-    "timestamp": "2025-11-24 08:14:07",
+    "timestamp": "2025-11-24 20:08:30",
     "prompt": "hello world",
     "complexity": "SIMPLE",
     "agents_allocated": 8,
@@ -225,10 +225,38 @@
   },
   {
     "id": 17,
-    "timestamp": "2025-11-24 08:14:08",
-    "prompt": "test",
+    "timestamp": "2025-11-24 20:08:33",
+    "prompt": "\n        Explain the ULTRATHINK framework in detail:\n        1. What are the 5 execution directives?\n        2. How do the 7 guardrail layers work?\n        3. What is the agent framework architecture?\n        4. How does the feedback loop achieve 99%+ confidence?\n        ",
+    "complexity": "COMPLEX",
+    "agents_allocated": 25,
+    "mode": "claude_code",
+    "duration_seconds": 0.005,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 18,
+    "timestamp": "2025-11-24 20:08:33",
+    "prompt": "hello world",
     "complexity": "SIMPLE",
     "agents_allocated": 8,
+    "mode": "claude_code",
+    "duration_seconds": 0.005,
+    "success": true,
+    "flags": {
+      "verbose": false,
+      "quiet": false
+    }
+  },
+  {
+    "id": 19,
+    "timestamp": "2025-11-24 20:08:33",
+    "prompt": "\n        Analyze the complete ULTRATHINK system:\n        1. Preprocessing and intent classification\n        2. All 7 guardrail layers (input and output)\n        3. Context management (200K tokens)\n        4. All 8 agent framework components\n        5. Iterative refinement protocol\n        6. Quality scoring breakdown\n        7. Framework comparison with delta analysis\n        Provide comprehensive details with all [VERBOSE] tags.\n        ",
+    "complexity": "COMPLEX",
+    "agents_allocated": 25,
     "mode": "claude_code",
     "duration_seconds": 0.003,
     "success": true,
@@ -238,8 +266,92 @@
     }
   },
   {
-    "id": 18,
-    "timestamp": "2025-11-24 08:14:08",
+    "id": 20,
+    "timestamp": "2025-11-24 20:08:33",
+    "prompt": "test",
+    "complexity": "SIMPLE",
+    "agents_allocated": 8,
+    "mode": "claude_code",
+    "duration_seconds": 0.005,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 21,
+    "timestamp": "2025-11-24 20:08:33",
+    "prompt": "what is 2+2",
+    "complexity": "SIMPLE",
+    "agents_allocated": 8,
+    "mode": "claude_code",
+    "duration_seconds": 0.004,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 22,
+    "timestamp": "2025-11-24 20:08:35",
+    "prompt": "what is 2+2",
+    "complexity": "SIMPLE",
+    "agents_allocated": 8,
+    "mode": "claude_code",
+    "duration_seconds": 0.004,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 23,
+    "timestamp": "2025-11-24 20:08:36",
+    "prompt": "\n        Explain the ULTRATHINK framework in detail:\n        1. What are the 5 execution directives?\n        2. How do the 7 guardrail layers work?\n        3. What is the agent framework architecture?\n        4. How does the feedback loop achieve 99%+ confidence?\n        ",
+    "complexity": "COMPLEX",
+    "agents_allocated": 25,
+    "mode": "claude_code",
+    "duration_seconds": 0.003,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 24,
+    "timestamp": "2025-11-24 20:08:38",
+    "prompt": "\n        Analyze the complete ULTRATHINK system:\n        1. Preprocessing and intent classification\n        2. All 7 guardrail layers (input and output)\n        3. Context management (200K tokens)\n        4. All 8 agent framework components\n        5. Iterative refinement protocol\n        6. Quality scoring breakdown\n        7. Framework comparison with delta analysis\n        Provide comprehensive details with all [VERBOSE] tags.\n        ",
+    "complexity": "COMPLEX",
+    "agents_allocated": 25,
+    "mode": "claude_code",
+    "duration_seconds": 0.005,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 25,
+    "timestamp": "2025-11-24 20:08:42",
+    "prompt": "test",
+    "complexity": "SIMPLE",
+    "agents_allocated": 8,
+    "mode": "claude_code",
+    "duration_seconds": 0.005,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 26,
+    "timestamp": "2025-11-24 20:08:43",
     "prompt": "hello world",
     "complexity": "SIMPLE",
     "agents_allocated": 8,
@@ -252,120 +364,8 @@
     }
   },
   {
-    "id": 19,
-    "timestamp": "2025-11-24 08:14:08",
-    "prompt": "what is 2+2",
-    "complexity": "SIMPLE",
-    "agents_allocated": 8,
-    "mode": "claude_code",
-    "duration_seconds": 0.007,
-    "success": true,
-    "flags": {
-      "verbose": true,
-      "quiet": false
-    }
-  },
-  {
-    "id": 20,
-    "timestamp": "2025-11-24 08:14:08",
-    "prompt": "\n        Analyze the complete ULTRATHINK system:\n        1. Preprocessing and intent classification\n        2. All 7 guardrail layers (input and output)\n        3. Context management (200K tokens)\n        4. All 8 agent framework components\n        5. Iterative refinement protocol\n        6. Quality scoring breakdown\n        7. Framework comparison with delta analysis\n        Provide comprehensive details with all [VERBOSE] tags.\n        ",
-    "complexity": "COMPLEX",
-    "agents_allocated": 25,
-    "mode": "claude_code",
-    "duration_seconds": 0.003,
-    "success": true,
-    "flags": {
-      "verbose": true,
-      "quiet": false
-    }
-  },
-  {
-    "id": 21,
-    "timestamp": "2025-11-24 08:14:08",
-    "prompt": "\n        Explain the ULTRATHINK framework in detail:\n        1. What are the 5 execution directives?\n        2. How do the 7 guardrail layers work?\n        3. What is the agent framework architecture?\n        4. How does the feedback loop achieve 99%+ confidence?\n        ",
-    "complexity": "COMPLEX",
-    "agents_allocated": 25,
-    "mode": "claude_code",
-    "duration_seconds": 0.002,
-    "success": true,
-    "flags": {
-      "verbose": true,
-      "quiet": false
-    }
-  },
-  {
-    "id": 22,
-    "timestamp": "2025-11-24 08:14:09",
-    "prompt": "what is 2+2",
-    "complexity": "SIMPLE",
-    "agents_allocated": 8,
-    "mode": "claude_code",
-    "duration_seconds": 0.002,
-    "success": true,
-    "flags": {
-      "verbose": true,
-      "quiet": false
-    }
-  },
-  {
-    "id": 23,
-    "timestamp": "2025-11-24 08:14:10",
-    "prompt": "\n        Explain the ULTRATHINK framework in detail:\n        1. What are the 5 execution directives?\n        2. How do the 7 guardrail layers work?\n        3. What is the agent framework architecture?\n        4. How does the feedback loop achieve 99%+ confidence?\n        ",
-    "complexity": "COMPLEX",
-    "agents_allocated": 25,
-    "mode": "claude_code",
-    "duration_seconds": 0.002,
-    "success": true,
-    "flags": {
-      "verbose": true,
-      "quiet": false
-    }
-  },
-  {
-    "id": 24,
-    "timestamp": "2025-11-24 08:14:11",
-    "prompt": "\n        Analyze the complete ULTRATHINK system:\n        1. Preprocessing and intent classification\n        2. All 7 guardrail layers (input and output)\n        3. Context management (200K tokens)\n        4. All 8 agent framework components\n        5. Iterative refinement protocol\n        6. Quality scoring breakdown\n        7. Framework comparison with delta analysis\n        Provide comprehensive details with all [VERBOSE] tags.\n        ",
-    "complexity": "COMPLEX",
-    "agents_allocated": 25,
-    "mode": "claude_code",
-    "duration_seconds": 0.002,
-    "success": true,
-    "flags": {
-      "verbose": true,
-      "quiet": false
-    }
-  },
-  {
-    "id": 25,
-    "timestamp": "2025-11-24 08:14:13",
-    "prompt": "test",
-    "complexity": "SIMPLE",
-    "agents_allocated": 8,
-    "mode": "claude_code",
-    "duration_seconds": 0.004,
-    "success": true,
-    "flags": {
-      "verbose": true,
-      "quiet": false
-    }
-  },
-  {
-    "id": 26,
-    "timestamp": "2025-11-24 08:14:14",
-    "prompt": "hello world",
-    "complexity": "SIMPLE",
-    "agents_allocated": 8,
-    "mode": "claude_code",
-    "duration_seconds": 0.0,
-    "success": true,
-    "flags": {
-      "verbose": false,
-      "quiet": false
-    }
-  },
-  {
     "id": 27,
-    "timestamp": "2025-11-24 08:16:01",
+    "timestamp": "2025-11-24 20:18:26",
     "prompt": "what is 2+2",
     "complexity": "SIMPLE",
     "agents_allocated": 8,
@@ -379,7 +379,7 @@
   },
   {
     "id": 28,
-    "timestamp": "2025-11-24 08:16:02",
+    "timestamp": "2025-11-24 20:18:27",
     "prompt": "\n        Explain the ULTRATHINK framework in detail:\n        1. What are the 5 execution directives?\n        2. How do the 7 guardrail layers work?\n        3. What is the agent framework architecture?\n        4. How does the feedback loop achieve 99%+ confidence?\n        ",
     "complexity": "COMPLEX",
     "agents_allocated": 25,
@@ -393,7 +393,7 @@
   },
   {
     "id": 29,
-    "timestamp": "2025-11-24 08:16:03",
+    "timestamp": "2025-11-24 20:18:27",
     "prompt": "\n        Analyze the complete ULTRATHINK system:\n        1. Preprocessing and intent classification\n        2. All 7 guardrail layers (input and output)\n        3. Context management (200K tokens)\n        4. All 8 agent framework components\n        5. Iterative refinement protocol\n        6. Quality scoring breakdown\n        7. Framework comparison with delta analysis\n        Provide comprehensive details with all [VERBOSE] tags.\n        ",
     "complexity": "COMPLEX",
     "agents_allocated": 25,
@@ -407,7 +407,7 @@
   },
   {
     "id": 30,
-    "timestamp": "2025-11-24 08:16:05",
+    "timestamp": "2025-11-24 20:18:29",
     "prompt": "test",
     "complexity": "SIMPLE",
     "agents_allocated": 8,
@@ -421,12 +421,12 @@
   },
   {
     "id": 31,
-    "timestamp": "2025-11-24 08:16:06",
+    "timestamp": "2025-11-24 20:18:30",
     "prompt": "hello world",
     "complexity": "SIMPLE",
     "agents_allocated": 8,
     "mode": "claude_code",
-    "duration_seconds": 0.001,
+    "duration_seconds": 0.0,
     "success": true,
     "flags": {
       "verbose": false,
@@ -435,7 +435,7 @@
   },
   {
     "id": 32,
-    "timestamp": "2025-11-24 08:16:07",
+    "timestamp": "2025-11-24 20:18:31",
     "prompt": "what is 2+2",
     "complexity": "SIMPLE",
     "agents_allocated": 8,
@@ -449,12 +449,12 @@
   },
   {
     "id": 33,
-    "timestamp": "2025-11-24 08:16:08",
+    "timestamp": "2025-11-24 20:18:32",
     "prompt": "\n        Explain the ULTRATHINK framework in detail:\n        1. What are the 5 execution directives?\n        2. How do the 7 guardrail layers work?\n        3. What is the agent framework architecture?\n        4. How does the feedback loop achieve 99%+ confidence?\n        ",
     "complexity": "COMPLEX",
     "agents_allocated": 25,
     "mode": "claude_code",
-    "duration_seconds": 0.003,
+    "duration_seconds": 0.005,
     "success": true,
     "flags": {
       "verbose": true,
@@ -463,12 +463,12 @@
   },
   {
     "id": 34,
-    "timestamp": "2025-11-24 08:16:09",
+    "timestamp": "2025-11-24 20:18:33",
     "prompt": "\n        Analyze the complete ULTRATHINK system:\n        1. Preprocessing and intent classification\n        2. All 7 guardrail layers (input and output)\n        3. Context management (200K tokens)\n        4. All 8 agent framework components\n        5. Iterative refinement protocol\n        6. Quality scoring breakdown\n        7. Framework comparison with delta analysis\n        Provide comprehensive details with all [VERBOSE] tags.\n        ",
     "complexity": "COMPLEX",
     "agents_allocated": 25,
     "mode": "claude_code",
-    "duration_seconds": 0.003,
+    "duration_seconds": 0.002,
     "success": true,
     "flags": {
       "verbose": true,
@@ -477,7 +477,7 @@
   },
   {
     "id": 35,
-    "timestamp": "2025-11-24 08:16:10",
+    "timestamp": "2025-11-24 20:18:35",
     "prompt": "test",
     "complexity": "SIMPLE",
     "agents_allocated": 8,
@@ -491,7 +491,7 @@
   },
   {
     "id": 36,
-    "timestamp": "2025-11-24 08:16:11",
+    "timestamp": "2025-11-24 20:18:36",
     "prompt": "hello world",
     "complexity": "SIMPLE",
     "agents_allocated": 8,
@@ -505,7 +505,49 @@
   },
   {
     "id": 37,
-    "timestamp": "2025-11-24 08:16:12",
+    "timestamp": "2025-11-24 20:18:37",
+    "prompt": "what is 2+2",
+    "complexity": "SIMPLE",
+    "agents_allocated": 8,
+    "mode": "claude_code",
+    "duration_seconds": 0.004,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 38,
+    "timestamp": "2025-11-24 20:18:37",
+    "prompt": "\n        Analyze the complete ULTRATHINK system:\n        1. Preprocessing and intent classification\n        2. All 7 guardrail layers (input and output)\n        3. Context management (200K tokens)\n        4. All 8 agent framework components\n        5. Iterative refinement protocol\n        6. Quality scoring breakdown\n        7. Framework comparison with delta analysis\n        Provide comprehensive details with all [VERBOSE] tags.\n        ",
+    "complexity": "COMPLEX",
+    "agents_allocated": 25,
+    "mode": "claude_code",
+    "duration_seconds": 0.004,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 39,
+    "timestamp": "2025-11-24 20:18:37",
+    "prompt": "\n        Explain the ULTRATHINK framework in detail:\n        1. What are the 5 execution directives?\n        2. How do the 7 guardrail layers work?\n        3. What is the agent framework architecture?\n        4. How does the feedback loop achieve 99%+ confidence?\n        ",
+    "complexity": "COMPLEX",
+    "agents_allocated": 25,
+    "mode": "claude_code",
+    "duration_seconds": 0.007,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 40,
+    "timestamp": "2025-11-24 20:18:37",
     "prompt": "hello world",
     "complexity": "SIMPLE",
     "agents_allocated": 8,
@@ -518,55 +560,13 @@
     }
   },
   {
-    "id": 38,
-    "timestamp": "2025-11-24 08:16:12",
-    "prompt": "\n        Explain the ULTRATHINK framework in detail:\n        1. What are the 5 execution directives?\n        2. How do the 7 guardrail layers work?\n        3. What is the agent framework architecture?\n        4. How does the feedback loop achieve 99%+ confidence?\n        ",
-    "complexity": "COMPLEX",
-    "agents_allocated": 25,
-    "mode": "claude_code",
-    "duration_seconds": 0.003,
-    "success": true,
-    "flags": {
-      "verbose": true,
-      "quiet": false
-    }
-  },
-  {
-    "id": 39,
-    "timestamp": "2025-11-24 08:16:12",
+    "id": 41,
+    "timestamp": "2025-11-24 20:18:37",
     "prompt": "test",
     "complexity": "SIMPLE",
     "agents_allocated": 8,
     "mode": "claude_code",
-    "duration_seconds": 0.002,
-    "success": true,
-    "flags": {
-      "verbose": true,
-      "quiet": false
-    }
-  },
-  {
-    "id": 40,
-    "timestamp": "2025-11-24 08:16:12",
-    "prompt": "what is 2+2",
-    "complexity": "SIMPLE",
-    "agents_allocated": 8,
-    "mode": "claude_code",
-    "duration_seconds": 0.009,
-    "success": true,
-    "flags": {
-      "verbose": true,
-      "quiet": false
-    }
-  },
-  {
-    "id": 41,
-    "timestamp": "2025-11-24 08:16:12",
-    "prompt": "\n        Analyze the complete ULTRATHINK system:\n        1. Preprocessing and intent classification\n        2. All 7 guardrail layers (input and output)\n        3. Context management (200K tokens)\n        4. All 8 agent framework components\n        5. Iterative refinement protocol\n        6. Quality scoring breakdown\n        7. Framework comparison with delta analysis\n        Provide comprehensive details with all [VERBOSE] tags.\n        ",
-    "complexity": "COMPLEX",
-    "agents_allocated": 25,
-    "mode": "claude_code",
-    "duration_seconds": 0.002,
+    "duration_seconds": 0.006,
     "success": true,
     "flags": {
       "verbose": true,
@@ -575,7 +575,7 @@
   },
   {
     "id": 42,
-    "timestamp": "2025-11-24 08:16:13",
+    "timestamp": "2025-11-24 20:18:38",
     "prompt": "what is 2+2",
     "complexity": "SIMPLE",
     "agents_allocated": 8,
@@ -589,12 +589,12 @@
   },
   {
     "id": 43,
-    "timestamp": "2025-11-24 08:16:14",
+    "timestamp": "2025-11-24 20:18:39",
     "prompt": "\n        Explain the ULTRATHINK framework in detail:\n        1. What are the 5 execution directives?\n        2. How do the 7 guardrail layers work?\n        3. What is the agent framework architecture?\n        4. How does the feedback loop achieve 99%+ confidence?\n        ",
     "complexity": "COMPLEX",
     "agents_allocated": 25,
     "mode": "claude_code",
-    "duration_seconds": 0.002,
+    "duration_seconds": 0.003,
     "success": true,
     "flags": {
       "verbose": true,
@@ -603,7 +603,7 @@
   },
   {
     "id": 44,
-    "timestamp": "2025-11-24 08:16:15",
+    "timestamp": "2025-11-24 20:18:40",
     "prompt": "\n        Analyze the complete ULTRATHINK system:\n        1. Preprocessing and intent classification\n        2. All 7 guardrail layers (input and output)\n        3. Context management (200K tokens)\n        4. All 8 agent framework components\n        5. Iterative refinement protocol\n        6. Quality scoring breakdown\n        7. Framework comparison with delta analysis\n        Provide comprehensive details with all [VERBOSE] tags.\n        ",
     "complexity": "COMPLEX",
     "agents_allocated": 25,
@@ -617,7 +617,7 @@
   },
   {
     "id": 45,
-    "timestamp": "2025-11-24 08:16:17",
+    "timestamp": "2025-11-24 20:18:42",
     "prompt": "test",
     "complexity": "SIMPLE",
     "agents_allocated": 8,
@@ -631,12 +631,12 @@
   },
   {
     "id": 46,
-    "timestamp": "2025-11-24 08:16:18",
+    "timestamp": "2025-11-24 20:18:42",
     "prompt": "hello world",
     "complexity": "SIMPLE",
     "agents_allocated": 8,
     "mode": "claude_code",
-    "duration_seconds": 0.0,
+    "duration_seconds": 0.001,
     "success": true,
     "flags": {
       "verbose": false,
@@ -645,12 +645,12 @@
   },
   {
     "id": 47,
-    "timestamp": "2025-11-24 08:17:54",
+    "timestamp": "2025-11-24 20:20:13",
     "prompt": "what is 2+2",
     "complexity": "SIMPLE",
     "agents_allocated": 8,
     "mode": "claude_code",
-    "duration_seconds": 0.004,
+    "duration_seconds": 0.002,
     "success": true,
     "flags": {
       "verbose": true,
@@ -659,12 +659,12 @@
   },
   {
     "id": 48,
-    "timestamp": "2025-11-24 08:17:55",
+    "timestamp": "2025-11-24 20:20:14",
     "prompt": "\n        Explain the ULTRATHINK framework in detail:\n        1. What are the 5 execution directives?\n        2. How do the 7 guardrail layers work?\n        3. What is the agent framework architecture?\n        4. How does the feedback loop achieve 99%+ confidence?\n        ",
     "complexity": "COMPLEX",
     "agents_allocated": 25,
     "mode": "claude_code",
-    "duration_seconds": 0.003,
+    "duration_seconds": 0.002,
     "success": true,
     "flags": {
       "verbose": true,
@@ -673,12 +673,12 @@
   },
   {
     "id": 49,
-    "timestamp": "2025-11-24 08:17:55",
+    "timestamp": "2025-11-24 20:20:15",
     "prompt": "\n        Analyze the complete ULTRATHINK system:\n        1. Preprocessing and intent classification\n        2. All 7 guardrail layers (input and output)\n        3. Context management (200K tokens)\n        4. All 8 agent framework components\n        5. Iterative refinement protocol\n        6. Quality scoring breakdown\n        7. Framework comparison with delta analysis\n        Provide comprehensive details with all [VERBOSE] tags.\n        ",
     "complexity": "COMPLEX",
     "agents_allocated": 25,
     "mode": "claude_code",
-    "duration_seconds": 0.006,
+    "duration_seconds": 0.002,
     "success": true,
     "flags": {
       "verbose": true,
@@ -687,7 +687,7 @@
   },
   {
     "id": 50,
-    "timestamp": "2025-11-24 08:17:57",
+    "timestamp": "2025-11-24 20:20:17",
     "prompt": "test",
     "complexity": "SIMPLE",
     "agents_allocated": 8,
@@ -701,7 +701,7 @@
   },
   {
     "id": 51,
-    "timestamp": "2025-11-24 08:17:58",
+    "timestamp": "2025-11-24 20:20:17",
     "prompt": "hello world",
     "complexity": "SIMPLE",
     "agents_allocated": 8,
@@ -715,7 +715,7 @@
   },
   {
     "id": 52,
-    "timestamp": "2025-11-24 08:17:59",
+    "timestamp": "2025-11-24 20:20:18",
     "prompt": "what is 2+2",
     "complexity": "SIMPLE",
     "agents_allocated": 8,
@@ -729,7 +729,7 @@
   },
   {
     "id": 53,
-    "timestamp": "2025-11-24 08:17:59",
+    "timestamp": "2025-11-24 20:20:19",
     "prompt": "\n        Explain the ULTRATHINK framework in detail:\n        1. What are the 5 execution directives?\n        2. How do the 7 guardrail layers work?\n        3. What is the agent framework architecture?\n        4. How does the feedback loop achieve 99%+ confidence?\n        ",
     "complexity": "COMPLEX",
     "agents_allocated": 25,
@@ -743,12 +743,12 @@
   },
   {
     "id": 54,
-    "timestamp": "2025-11-24 08:18:00",
+    "timestamp": "2025-11-24 20:20:20",
     "prompt": "\n        Analyze the complete ULTRATHINK system:\n        1. Preprocessing and intent classification\n        2. All 7 guardrail layers (input and output)\n        3. Context management (200K tokens)\n        4. All 8 agent framework components\n        5. Iterative refinement protocol\n        6. Quality scoring breakdown\n        7. Framework comparison with delta analysis\n        Provide comprehensive details with all [VERBOSE] tags.\n        ",
     "complexity": "COMPLEX",
     "agents_allocated": 25,
     "mode": "claude_code",
-    "duration_seconds": 0.002,
+    "duration_seconds": 0.003,
     "success": true,
     "flags": {
       "verbose": true,
@@ -757,7 +757,7 @@
   },
   {
     "id": 55,
-    "timestamp": "2025-11-24 08:18:02",
+    "timestamp": "2025-11-24 20:20:21",
     "prompt": "test",
     "complexity": "SIMPLE",
     "agents_allocated": 8,
@@ -771,77 +771,7 @@
   },
   {
     "id": 56,
-    "timestamp": "2025-11-24 08:18:03",
-    "prompt": "hello world",
-    "complexity": "SIMPLE",
-    "agents_allocated": 8,
-    "mode": "claude_code",
-    "duration_seconds": 0.0,
-    "success": true,
-    "flags": {
-      "verbose": false,
-      "quiet": false
-    }
-  },
-  {
-    "id": 57,
-    "timestamp": "2025-11-24 08:18:04",
-    "prompt": "\n        Explain the ULTRATHINK framework in detail:\n        1. What are the 5 execution directives?\n        2. How do the 7 guardrail layers work?\n        3. What is the agent framework architecture?\n        4. How does the feedback loop achieve 99%+ confidence?\n        ",
-    "complexity": "COMPLEX",
-    "agents_allocated": 25,
-    "mode": "claude_code",
-    "duration_seconds": 0.004,
-    "success": true,
-    "flags": {
-      "verbose": true,
-      "quiet": false
-    }
-  },
-  {
-    "id": 58,
-    "timestamp": "2025-11-24 08:18:04",
-    "prompt": "\n        Analyze the complete ULTRATHINK system:\n        1. Preprocessing and intent classification\n        2. All 7 guardrail layers (input and output)\n        3. Context management (200K tokens)\n        4. All 8 agent framework components\n        5. Iterative refinement protocol\n        6. Quality scoring breakdown\n        7. Framework comparison with delta analysis\n        Provide comprehensive details with all [VERBOSE] tags.\n        ",
-    "complexity": "COMPLEX",
-    "agents_allocated": 25,
-    "mode": "claude_code",
-    "duration_seconds": 0.003,
-    "success": true,
-    "flags": {
-      "verbose": true,
-      "quiet": false
-    }
-  },
-  {
-    "id": 59,
-    "timestamp": "2025-11-24 08:18:04",
-    "prompt": "test",
-    "complexity": "SIMPLE",
-    "agents_allocated": 8,
-    "mode": "claude_code",
-    "duration_seconds": 0.003,
-    "success": true,
-    "flags": {
-      "verbose": true,
-      "quiet": false
-    }
-  },
-  {
-    "id": 60,
-    "timestamp": "2025-11-24 08:18:04",
-    "prompt": "what is 2+2",
-    "complexity": "SIMPLE",
-    "agents_allocated": 8,
-    "mode": "claude_code",
-    "duration_seconds": 0.003,
-    "success": true,
-    "flags": {
-      "verbose": true,
-      "quiet": false
-    }
-  },
-  {
-    "id": 61,
-    "timestamp": "2025-11-24 08:18:04",
+    "timestamp": "2025-11-24 20:20:22",
     "prompt": "hello world",
     "complexity": "SIMPLE",
     "agents_allocated": 8,
@@ -854,8 +784,78 @@
     }
   },
   {
+    "id": 57,
+    "timestamp": "2025-11-24 20:20:23",
+    "prompt": "\n        Analyze the complete ULTRATHINK system:\n        1. Preprocessing and intent classification\n        2. All 7 guardrail layers (input and output)\n        3. Context management (200K tokens)\n        4. All 8 agent framework components\n        5. Iterative refinement protocol\n        6. Quality scoring breakdown\n        7. Framework comparison with delta analysis\n        Provide comprehensive details with all [VERBOSE] tags.\n        ",
+    "complexity": "COMPLEX",
+    "agents_allocated": 25,
+    "mode": "claude_code",
+    "duration_seconds": 0.003,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 58,
+    "timestamp": "2025-11-24 20:20:23",
+    "prompt": "hello world",
+    "complexity": "SIMPLE",
+    "agents_allocated": 8,
+    "mode": "claude_code",
+    "duration_seconds": 0.001,
+    "success": true,
+    "flags": {
+      "verbose": false,
+      "quiet": false
+    }
+  },
+  {
+    "id": 59,
+    "timestamp": "2025-11-24 20:20:23",
+    "prompt": "\n        Explain the ULTRATHINK framework in detail:\n        1. What are the 5 execution directives?\n        2. How do the 7 guardrail layers work?\n        3. What is the agent framework architecture?\n        4. How does the feedback loop achieve 99%+ confidence?\n        ",
+    "complexity": "COMPLEX",
+    "agents_allocated": 25,
+    "mode": "claude_code",
+    "duration_seconds": 0.004,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 60,
+    "timestamp": "2025-11-24 20:20:23",
+    "prompt": "what is 2+2",
+    "complexity": "SIMPLE",
+    "agents_allocated": 8,
+    "mode": "claude_code",
+    "duration_seconds": 0.004,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 61,
+    "timestamp": "2025-11-24 20:20:23",
+    "prompt": "test",
+    "complexity": "SIMPLE",
+    "agents_allocated": 8,
+    "mode": "claude_code",
+    "duration_seconds": 0.004,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
     "id": 62,
-    "timestamp": "2025-11-24 08:18:05",
+    "timestamp": "2025-11-24 20:20:24",
     "prompt": "what is 2+2",
     "complexity": "SIMPLE",
     "agents_allocated": 8,
@@ -869,7 +869,7 @@
   },
   {
     "id": 63,
-    "timestamp": "2025-11-24 08:18:06",
+    "timestamp": "2025-11-24 20:20:25",
     "prompt": "\n        Explain the ULTRATHINK framework in detail:\n        1. What are the 5 execution directives?\n        2. How do the 7 guardrail layers work?\n        3. What is the agent framework architecture?\n        4. How does the feedback loop achieve 99%+ confidence?\n        ",
     "complexity": "COMPLEX",
     "agents_allocated": 25,
@@ -883,12 +883,12 @@
   },
   {
     "id": 64,
-    "timestamp": "2025-11-24 08:18:06",
+    "timestamp": "2025-11-24 20:20:26",
     "prompt": "\n        Analyze the complete ULTRATHINK system:\n        1. Preprocessing and intent classification\n        2. All 7 guardrail layers (input and output)\n        3. Context management (200K tokens)\n        4. All 8 agent framework components\n        5. Iterative refinement protocol\n        6. Quality scoring breakdown\n        7. Framework comparison with delta analysis\n        Provide comprehensive details with all [VERBOSE] tags.\n        ",
     "complexity": "COMPLEX",
     "agents_allocated": 25,
     "mode": "claude_code",
-    "duration_seconds": 0.002,
+    "duration_seconds": 0.003,
     "success": true,
     "flags": {
       "verbose": true,
@@ -897,7 +897,7 @@
   },
   {
     "id": 65,
-    "timestamp": "2025-11-24 08:18:08",
+    "timestamp": "2025-11-24 20:20:28",
     "prompt": "test",
     "complexity": "SIMPLE",
     "agents_allocated": 8,
@@ -911,12 +911,12 @@
   },
   {
     "id": 66,
-    "timestamp": "2025-11-24 08:18:09",
+    "timestamp": "2025-11-24 20:20:29",
     "prompt": "hello world",
     "complexity": "SIMPLE",
     "agents_allocated": 8,
     "mode": "claude_code",
-    "duration_seconds": 0.0,
+    "duration_seconds": 0.001,
     "success": true,
     "flags": {
       "verbose": false,
@@ -925,7 +925,7 @@
   },
   {
     "id": 67,
-    "timestamp": "2025-11-24 08:19:53",
+    "timestamp": "2025-11-24 20:22:27",
     "prompt": "what is 2+2",
     "complexity": "SIMPLE",
     "agents_allocated": 8,
@@ -939,7 +939,7 @@
   },
   {
     "id": 68,
-    "timestamp": "2025-11-24 08:19:53",
+    "timestamp": "2025-11-24 20:22:28",
     "prompt": "\n        Explain the ULTRATHINK framework in detail:\n        1. What are the 5 execution directives?\n        2. How do the 7 guardrail layers work?\n        3. What is the agent framework architecture?\n        4. How does the feedback loop achieve 99%+ confidence?\n        ",
     "complexity": "COMPLEX",
     "agents_allocated": 25,
@@ -953,7 +953,7 @@
   },
   {
     "id": 69,
-    "timestamp": "2025-11-24 08:19:54",
+    "timestamp": "2025-11-24 20:22:29",
     "prompt": "\n        Analyze the complete ULTRATHINK system:\n        1. Preprocessing and intent classification\n        2. All 7 guardrail layers (input and output)\n        3. Context management (200K tokens)\n        4. All 8 agent framework components\n        5. Iterative refinement protocol\n        6. Quality scoring breakdown\n        7. Framework comparison with delta analysis\n        Provide comprehensive details with all [VERBOSE] tags.\n        ",
     "complexity": "COMPLEX",
     "agents_allocated": 25,
@@ -967,7 +967,7 @@
   },
   {
     "id": 70,
-    "timestamp": "2025-11-24 08:19:56",
+    "timestamp": "2025-11-24 20:22:31",
     "prompt": "test",
     "complexity": "SIMPLE",
     "agents_allocated": 8,
@@ -981,12 +981,12 @@
   },
   {
     "id": 71,
-    "timestamp": "2025-11-24 08:19:57",
+    "timestamp": "2025-11-24 20:22:32",
     "prompt": "hello world",
     "complexity": "SIMPLE",
     "agents_allocated": 8,
     "mode": "claude_code",
-    "duration_seconds": 0.0,
+    "duration_seconds": 0.001,
     "success": true,
     "flags": {
       "verbose": false,
@@ -995,10 +995,38 @@
   },
   {
     "id": 72,
-    "timestamp": "2025-11-24 08:19:57",
+    "timestamp": "2025-11-24 20:22:32",
     "prompt": "what is 2+2",
     "complexity": "SIMPLE",
     "agents_allocated": 8,
+    "mode": "claude_code",
+    "duration_seconds": 0.002,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 73,
+    "timestamp": "2025-11-24 20:22:33",
+    "prompt": "\n        Explain the ULTRATHINK framework in detail:\n        1. What are the 5 execution directives?\n        2. How do the 7 guardrail layers work?\n        3. What is the agent framework architecture?\n        4. How does the feedback loop achieve 99%+ confidence?\n        ",
+    "complexity": "COMPLEX",
+    "agents_allocated": 25,
+    "mode": "claude_code",
+    "duration_seconds": 0.004,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 74,
+    "timestamp": "2025-11-24 20:22:34",
+    "prompt": "\n        Analyze the complete ULTRATHINK system:\n        1. Preprocessing and intent classification\n        2. All 7 guardrail layers (input and output)\n        3. Context management (200K tokens)\n        4. All 8 agent framework components\n        5. Iterative refinement protocol\n        6. Quality scoring breakdown\n        7. Framework comparison with delta analysis\n        Provide comprehensive details with all [VERBOSE] tags.\n        ",
+    "complexity": "COMPLEX",
+    "agents_allocated": 25,
     "mode": "claude_code",
     "duration_seconds": 0.003,
     "success": true,
@@ -1008,36 +1036,8 @@
     }
   },
   {
-    "id": 73,
-    "timestamp": "2025-11-24 08:19:58",
-    "prompt": "\n        Explain the ULTRATHINK framework in detail:\n        1. What are the 5 execution directives?\n        2. How do the 7 guardrail layers work?\n        3. What is the agent framework architecture?\n        4. How does the feedback loop achieve 99%+ confidence?\n        ",
-    "complexity": "COMPLEX",
-    "agents_allocated": 25,
-    "mode": "claude_code",
-    "duration_seconds": 0.002,
-    "success": true,
-    "flags": {
-      "verbose": true,
-      "quiet": false
-    }
-  },
-  {
-    "id": 74,
-    "timestamp": "2025-11-24 08:19:59",
-    "prompt": "\n        Analyze the complete ULTRATHINK system:\n        1. Preprocessing and intent classification\n        2. All 7 guardrail layers (input and output)\n        3. Context management (200K tokens)\n        4. All 8 agent framework components\n        5. Iterative refinement protocol\n        6. Quality scoring breakdown\n        7. Framework comparison with delta analysis\n        Provide comprehensive details with all [VERBOSE] tags.\n        ",
-    "complexity": "COMPLEX",
-    "agents_allocated": 25,
-    "mode": "claude_code",
-    "duration_seconds": 0.002,
-    "success": true,
-    "flags": {
-      "verbose": true,
-      "quiet": false
-    }
-  },
-  {
     "id": 75,
-    "timestamp": "2025-11-24 08:20:01",
+    "timestamp": "2025-11-24 20:22:36",
     "prompt": "test",
     "complexity": "SIMPLE",
     "agents_allocated": 8,
@@ -1051,7 +1051,7 @@
   },
   {
     "id": 76,
-    "timestamp": "2025-11-24 08:20:02",
+    "timestamp": "2025-11-24 20:22:37",
     "prompt": "hello world",
     "complexity": "SIMPLE",
     "agents_allocated": 8,
@@ -1065,12 +1065,12 @@
   },
   {
     "id": 77,
-    "timestamp": "2025-11-24 08:20:03",
-    "prompt": "\n        Analyze the complete ULTRATHINK system:\n        1. Preprocessing and intent classification\n        2. All 7 guardrail layers (input and output)\n        3. Context management (200K tokens)\n        4. All 8 agent framework components\n        5. Iterative refinement protocol\n        6. Quality scoring breakdown\n        7. Framework comparison with delta analysis\n        Provide comprehensive details with all [VERBOSE] tags.\n        ",
-    "complexity": "COMPLEX",
-    "agents_allocated": 25,
+    "timestamp": "2025-11-24 20:22:38",
+    "prompt": "what is 2+2",
+    "complexity": "SIMPLE",
+    "agents_allocated": 8,
     "mode": "claude_code",
-    "duration_seconds": 0.002,
+    "duration_seconds": 0.003,
     "success": true,
     "flags": {
       "verbose": true,
@@ -1079,12 +1079,12 @@
   },
   {
     "id": 78,
-    "timestamp": "2025-11-24 08:20:03",
-    "prompt": "what is 2+2",
+    "timestamp": "2025-11-24 20:22:38",
+    "prompt": "test",
     "complexity": "SIMPLE",
     "agents_allocated": 8,
     "mode": "claude_code",
-    "duration_seconds": 0.002,
+    "duration_seconds": 0.004,
     "success": true,
     "flags": {
       "verbose": true,
@@ -1093,7 +1093,7 @@
   },
   {
     "id": 79,
-    "timestamp": "2025-11-24 08:20:03",
+    "timestamp": "2025-11-24 20:22:38",
     "prompt": "hello world",
     "complexity": "SIMPLE",
     "agents_allocated": 8,
@@ -1107,12 +1107,12 @@
   },
   {
     "id": 80,
-    "timestamp": "2025-11-24 08:20:03",
-    "prompt": "test",
-    "complexity": "SIMPLE",
-    "agents_allocated": 8,
+    "timestamp": "2025-11-24 20:22:38",
+    "prompt": "\n        Analyze the complete ULTRATHINK system:\n        1. Preprocessing and intent classification\n        2. All 7 guardrail layers (input and output)\n        3. Context management (200K tokens)\n        4. All 8 agent framework components\n        5. Iterative refinement protocol\n        6. Quality scoring breakdown\n        7. Framework comparison with delta analysis\n        Provide comprehensive details with all [VERBOSE] tags.\n        ",
+    "complexity": "COMPLEX",
+    "agents_allocated": 25,
     "mode": "claude_code",
-    "duration_seconds": 0.003,
+    "duration_seconds": 0.005,
     "success": true,
     "flags": {
       "verbose": true,
@@ -1121,7 +1121,7 @@
   },
   {
     "id": 81,
-    "timestamp": "2025-11-24 08:20:03",
+    "timestamp": "2025-11-24 20:22:38",
     "prompt": "\n        Explain the ULTRATHINK framework in detail:\n        1. What are the 5 execution directives?\n        2. How do the 7 guardrail layers work?\n        3. What is the agent framework architecture?\n        4. How does the feedback loop achieve 99%+ confidence?\n        ",
     "complexity": "COMPLEX",
     "agents_allocated": 25,
@@ -1135,7 +1135,7 @@
   },
   {
     "id": 82,
-    "timestamp": "2025-11-24 08:20:04",
+    "timestamp": "2025-11-24 20:22:39",
     "prompt": "what is 2+2",
     "complexity": "SIMPLE",
     "agents_allocated": 8,
@@ -1149,7 +1149,7 @@
   },
   {
     "id": 83,
-    "timestamp": "2025-11-24 08:20:05",
+    "timestamp": "2025-11-24 20:22:40",
     "prompt": "\n        Explain the ULTRATHINK framework in detail:\n        1. What are the 5 execution directives?\n        2. How do the 7 guardrail layers work?\n        3. What is the agent framework architecture?\n        4. How does the feedback loop achieve 99%+ confidence?\n        ",
     "complexity": "COMPLEX",
     "agents_allocated": 25,
@@ -1163,7 +1163,77 @@
   },
   {
     "id": 84,
-    "timestamp": "2025-11-24 08:20:06",
+    "timestamp": "2025-11-24 20:22:41",
+    "prompt": "\n        Analyze the complete ULTRATHINK system:\n        1. Preprocessing and intent classification\n        2. All 7 guardrail layers (input and output)\n        3. Context management (200K tokens)\n        4. All 8 agent framework components\n        5. Iterative refinement protocol\n        6. Quality scoring breakdown\n        7. Framework comparison with delta analysis\n        Provide comprehensive details with all [VERBOSE] tags.\n        ",
+    "complexity": "COMPLEX",
+    "agents_allocated": 25,
+    "mode": "claude_code",
+    "duration_seconds": 0.003,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 85,
+    "timestamp": "2025-11-24 20:22:44",
+    "prompt": "test",
+    "complexity": "SIMPLE",
+    "agents_allocated": 8,
+    "mode": "claude_code",
+    "duration_seconds": 0.013,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 86,
+    "timestamp": "2025-11-24 20:22:45",
+    "prompt": "hello world",
+    "complexity": "SIMPLE",
+    "agents_allocated": 8,
+    "mode": "claude_code",
+    "duration_seconds": 0.001,
+    "success": true,
+    "flags": {
+      "verbose": false,
+      "quiet": false
+    }
+  },
+  {
+    "id": 87,
+    "timestamp": "2025-11-24 20:24:26",
+    "prompt": "what is 2+2",
+    "complexity": "SIMPLE",
+    "agents_allocated": 8,
+    "mode": "claude_code",
+    "duration_seconds": 0.002,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 88,
+    "timestamp": "2025-11-24 20:24:28",
+    "prompt": "\n        Explain the ULTRATHINK framework in detail:\n        1. What are the 5 execution directives?\n        2. How do the 7 guardrail layers work?\n        3. What is the agent framework architecture?\n        4. How does the feedback loop achieve 99%+ confidence?\n        ",
+    "complexity": "COMPLEX",
+    "agents_allocated": 25,
+    "mode": "claude_code",
+    "duration_seconds": 0.002,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 89,
+    "timestamp": "2025-11-24 20:24:29",
     "prompt": "\n        Analyze the complete ULTRATHINK system:\n        1. Preprocessing and intent classification\n        2. All 7 guardrail layers (input and output)\n        3. Context management (200K tokens)\n        4. All 8 agent framework components\n        5. Iterative refinement protocol\n        6. Quality scoring breakdown\n        7. Framework comparison with delta analysis\n        Provide comprehensive details with all [VERBOSE] tags.\n        ",
     "complexity": "COMPLEX",
     "agents_allocated": 25,
@@ -1176,8 +1246,8 @@
     }
   },
   {
-    "id": 85,
-    "timestamp": "2025-11-24 08:20:08",
+    "id": 90,
+    "timestamp": "2025-11-24 20:24:30",
     "prompt": "test",
     "complexity": "SIMPLE",
     "agents_allocated": 8,
@@ -1190,13 +1260,1343 @@
     }
   },
   {
-    "id": 86,
-    "timestamp": "2025-11-24 08:20:08",
+    "id": 91,
+    "timestamp": "2025-11-24 20:24:31",
+    "prompt": "hello world",
+    "complexity": "SIMPLE",
+    "agents_allocated": 8,
+    "mode": "claude_code",
+    "duration_seconds": 0.001,
+    "success": true,
+    "flags": {
+      "verbose": false,
+      "quiet": false
+    }
+  },
+  {
+    "id": 92,
+    "timestamp": "2025-11-24 20:24:32",
+    "prompt": "what is 2+2",
+    "complexity": "SIMPLE",
+    "agents_allocated": 8,
+    "mode": "claude_code",
+    "duration_seconds": 0.003,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 93,
+    "timestamp": "2025-11-24 20:24:32",
+    "prompt": "\n        Explain the ULTRATHINK framework in detail:\n        1. What are the 5 execution directives?\n        2. How do the 7 guardrail layers work?\n        3. What is the agent framework architecture?\n        4. How does the feedback loop achieve 99%+ confidence?\n        ",
+    "complexity": "COMPLEX",
+    "agents_allocated": 25,
+    "mode": "claude_code",
+    "duration_seconds": 0.002,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 94,
+    "timestamp": "2025-11-24 20:24:33",
+    "prompt": "\n        Analyze the complete ULTRATHINK system:\n        1. Preprocessing and intent classification\n        2. All 7 guardrail layers (input and output)\n        3. Context management (200K tokens)\n        4. All 8 agent framework components\n        5. Iterative refinement protocol\n        6. Quality scoring breakdown\n        7. Framework comparison with delta analysis\n        Provide comprehensive details with all [VERBOSE] tags.\n        ",
+    "complexity": "COMPLEX",
+    "agents_allocated": 25,
+    "mode": "claude_code",
+    "duration_seconds": 0.002,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 95,
+    "timestamp": "2025-11-24 20:24:35",
+    "prompt": "test",
+    "complexity": "SIMPLE",
+    "agents_allocated": 8,
+    "mode": "claude_code",
+    "duration_seconds": 0.003,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 96,
+    "timestamp": "2025-11-24 20:24:36",
     "prompt": "hello world",
     "complexity": "SIMPLE",
     "agents_allocated": 8,
     "mode": "claude_code",
     "duration_seconds": 0.0,
+    "success": true,
+    "flags": {
+      "verbose": false,
+      "quiet": false
+    }
+  },
+  {
+    "id": 97,
+    "timestamp": "2025-11-24 20:24:38",
+    "prompt": "hello world",
+    "complexity": "SIMPLE",
+    "agents_allocated": 8,
+    "mode": "claude_code",
+    "duration_seconds": 0.001,
+    "success": true,
+    "flags": {
+      "verbose": false,
+      "quiet": false
+    }
+  },
+  {
+    "id": 98,
+    "timestamp": "2025-11-24 20:24:38",
+    "prompt": "\n        Explain the ULTRATHINK framework in detail:\n        1. What are the 5 execution directives?\n        2. How do the 7 guardrail layers work?\n        3. What is the agent framework architecture?\n        4. How does the feedback loop achieve 99%+ confidence?\n        ",
+    "complexity": "COMPLEX",
+    "agents_allocated": 25,
+    "mode": "claude_code",
+    "duration_seconds": 0.005,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 99,
+    "timestamp": "2025-11-24 20:24:38",
+    "prompt": "test",
+    "complexity": "SIMPLE",
+    "agents_allocated": 8,
+    "mode": "claude_code",
+    "duration_seconds": 0.008,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 100,
+    "timestamp": "2025-11-24 20:24:38",
+    "prompt": "\n        Analyze the complete ULTRATHINK system:\n        1. Preprocessing and intent classification\n        2. All 7 guardrail layers (input and output)\n        3. Context management (200K tokens)\n        4. All 8 agent framework components\n        5. Iterative refinement protocol\n        6. Quality scoring breakdown\n        7. Framework comparison with delta analysis\n        Provide comprehensive details with all [VERBOSE] tags.\n        ",
+    "complexity": "COMPLEX",
+    "agents_allocated": 25,
+    "mode": "claude_code",
+    "duration_seconds": 0.005,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 101,
+    "timestamp": "2025-11-24 20:24:38",
+    "prompt": "what is 2+2",
+    "complexity": "SIMPLE",
+    "agents_allocated": 8,
+    "mode": "claude_code",
+    "duration_seconds": 0.005,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 102,
+    "timestamp": "2025-11-24 20:24:39",
+    "prompt": "what is 2+2",
+    "complexity": "SIMPLE",
+    "agents_allocated": 8,
+    "mode": "claude_code",
+    "duration_seconds": 0.003,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 103,
+    "timestamp": "2025-11-24 20:24:40",
+    "prompt": "\n        Explain the ULTRATHINK framework in detail:\n        1. What are the 5 execution directives?\n        2. How do the 7 guardrail layers work?\n        3. What is the agent framework architecture?\n        4. How does the feedback loop achieve 99%+ confidence?\n        ",
+    "complexity": "COMPLEX",
+    "agents_allocated": 25,
+    "mode": "claude_code",
+    "duration_seconds": 0.002,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 104,
+    "timestamp": "2025-11-24 20:24:41",
+    "prompt": "\n        Analyze the complete ULTRATHINK system:\n        1. Preprocessing and intent classification\n        2. All 7 guardrail layers (input and output)\n        3. Context management (200K tokens)\n        4. All 8 agent framework components\n        5. Iterative refinement protocol\n        6. Quality scoring breakdown\n        7. Framework comparison with delta analysis\n        Provide comprehensive details with all [VERBOSE] tags.\n        ",
+    "complexity": "COMPLEX",
+    "agents_allocated": 25,
+    "mode": "claude_code",
+    "duration_seconds": 0.002,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 105,
+    "timestamp": "2025-11-24 20:24:42",
+    "prompt": "test",
+    "complexity": "SIMPLE",
+    "agents_allocated": 8,
+    "mode": "claude_code",
+    "duration_seconds": 0.002,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 106,
+    "timestamp": "2025-11-24 20:24:43",
+    "prompt": "hello world",
+    "complexity": "SIMPLE",
+    "agents_allocated": 8,
+    "mode": "claude_code",
+    "duration_seconds": 0.001,
+    "success": true,
+    "flags": {
+      "verbose": false,
+      "quiet": false
+    }
+  },
+  {
+    "id": 107,
+    "timestamp": "2025-11-24 20:35:25",
+    "prompt": "what is 2+2",
+    "complexity": "SIMPLE",
+    "agents_allocated": 8,
+    "mode": "claude_code",
+    "duration_seconds": 0.004,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 108,
+    "timestamp": "2025-11-24 20:35:26",
+    "prompt": "\n        Explain the ULTRATHINK framework in detail:\n        1. What are the 5 execution directives?\n        2. How do the 7 guardrail layers work?\n        3. What is the agent framework architecture?\n        4. How does the feedback loop achieve 99%+ confidence?\n        ",
+    "complexity": "COMPLEX",
+    "agents_allocated": 25,
+    "mode": "claude_code",
+    "duration_seconds": 0.002,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 109,
+    "timestamp": "2025-11-24 20:35:27",
+    "prompt": "\n        Analyze the complete ULTRATHINK system:\n        1. Preprocessing and intent classification\n        2. All 7 guardrail layers (input and output)\n        3. Context management (200K tokens)\n        4. All 8 agent framework components\n        5. Iterative refinement protocol\n        6. Quality scoring breakdown\n        7. Framework comparison with delta analysis\n        Provide comprehensive details with all [VERBOSE] tags.\n        ",
+    "complexity": "COMPLEX",
+    "agents_allocated": 25,
+    "mode": "claude_code",
+    "duration_seconds": 0.004,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 110,
+    "timestamp": "2025-11-24 20:35:29",
+    "prompt": "test",
+    "complexity": "SIMPLE",
+    "agents_allocated": 8,
+    "mode": "claude_code",
+    "duration_seconds": 0.002,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 111,
+    "timestamp": "2025-11-24 20:35:30",
+    "prompt": "hello world",
+    "complexity": "SIMPLE",
+    "agents_allocated": 8,
+    "mode": "claude_code",
+    "duration_seconds": 0.001,
+    "success": true,
+    "flags": {
+      "verbose": false,
+      "quiet": false
+    }
+  },
+  {
+    "id": 112,
+    "timestamp": "2025-11-24 20:35:31",
+    "prompt": "what is 2+2",
+    "complexity": "SIMPLE",
+    "agents_allocated": 8,
+    "mode": "claude_code",
+    "duration_seconds": 0.002,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 113,
+    "timestamp": "2025-11-24 20:35:33",
+    "prompt": "\n        Explain the ULTRATHINK framework in detail:\n        1. What are the 5 execution directives?\n        2. How do the 7 guardrail layers work?\n        3. What is the agent framework architecture?\n        4. How does the feedback loop achieve 99%+ confidence?\n        ",
+    "complexity": "COMPLEX",
+    "agents_allocated": 25,
+    "mode": "claude_code",
+    "duration_seconds": 0.002,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 114,
+    "timestamp": "2025-11-24 20:35:34",
+    "prompt": "\n        Analyze the complete ULTRATHINK system:\n        1. Preprocessing and intent classification\n        2. All 7 guardrail layers (input and output)\n        3. Context management (200K tokens)\n        4. All 8 agent framework components\n        5. Iterative refinement protocol\n        6. Quality scoring breakdown\n        7. Framework comparison with delta analysis\n        Provide comprehensive details with all [VERBOSE] tags.\n        ",
+    "complexity": "COMPLEX",
+    "agents_allocated": 25,
+    "mode": "claude_code",
+    "duration_seconds": 0.003,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 115,
+    "timestamp": "2025-11-24 20:35:36",
+    "prompt": "test",
+    "complexity": "SIMPLE",
+    "agents_allocated": 8,
+    "mode": "claude_code",
+    "duration_seconds": 0.003,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 116,
+    "timestamp": "2025-11-24 20:35:36",
+    "prompt": "hello world",
+    "complexity": "SIMPLE",
+    "agents_allocated": 8,
+    "mode": "claude_code",
+    "duration_seconds": 0.001,
+    "success": true,
+    "flags": {
+      "verbose": false,
+      "quiet": false
+    }
+  },
+  {
+    "id": 117,
+    "timestamp": "2025-11-24 20:35:38",
+    "prompt": "what is 2+2",
+    "complexity": "SIMPLE",
+    "agents_allocated": 8,
+    "mode": "claude_code",
+    "duration_seconds": 0.003,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 118,
+    "timestamp": "2025-11-24 20:35:38",
+    "prompt": "hello world",
+    "complexity": "SIMPLE",
+    "agents_allocated": 8,
+    "mode": "claude_code",
+    "duration_seconds": 0.001,
+    "success": true,
+    "flags": {
+      "verbose": false,
+      "quiet": false
+    }
+  },
+  {
+    "id": 119,
+    "timestamp": "2025-11-24 20:35:39",
+    "prompt": "\n        Explain the ULTRATHINK framework in detail:\n        1. What are the 5 execution directives?\n        2. How do the 7 guardrail layers work?\n        3. What is the agent framework architecture?\n        4. How does the feedback loop achieve 99%+ confidence?\n        ",
+    "complexity": "COMPLEX",
+    "agents_allocated": 25,
+    "mode": "claude_code",
+    "duration_seconds": 0.004,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 120,
+    "timestamp": "2025-11-24 20:35:39",
+    "prompt": "\n        Analyze the complete ULTRATHINK system:\n        1. Preprocessing and intent classification\n        2. All 7 guardrail layers (input and output)\n        3. Context management (200K tokens)\n        4. All 8 agent framework components\n        5. Iterative refinement protocol\n        6. Quality scoring breakdown\n        7. Framework comparison with delta analysis\n        Provide comprehensive details with all [VERBOSE] tags.\n        ",
+    "complexity": "COMPLEX",
+    "agents_allocated": 25,
+    "mode": "claude_code",
+    "duration_seconds": 0.003,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 121,
+    "timestamp": "2025-11-24 20:35:39",
+    "prompt": "test",
+    "complexity": "SIMPLE",
+    "agents_allocated": 8,
+    "mode": "claude_code",
+    "duration_seconds": 0.008,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 122,
+    "timestamp": "2025-11-24 20:35:41",
+    "prompt": "what is 2+2",
+    "complexity": "SIMPLE",
+    "agents_allocated": 8,
+    "mode": "claude_code",
+    "duration_seconds": 0.003,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 123,
+    "timestamp": "2025-11-24 20:35:42",
+    "prompt": "\n        Explain the ULTRATHINK framework in detail:\n        1. What are the 5 execution directives?\n        2. How do the 7 guardrail layers work?\n        3. What is the agent framework architecture?\n        4. How does the feedback loop achieve 99%+ confidence?\n        ",
+    "complexity": "COMPLEX",
+    "agents_allocated": 25,
+    "mode": "claude_code",
+    "duration_seconds": 0.003,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 124,
+    "timestamp": "2025-11-24 20:35:43",
+    "prompt": "\n        Analyze the complete ULTRATHINK system:\n        1. Preprocessing and intent classification\n        2. All 7 guardrail layers (input and output)\n        3. Context management (200K tokens)\n        4. All 8 agent framework components\n        5. Iterative refinement protocol\n        6. Quality scoring breakdown\n        7. Framework comparison with delta analysis\n        Provide comprehensive details with all [VERBOSE] tags.\n        ",
+    "complexity": "COMPLEX",
+    "agents_allocated": 25,
+    "mode": "claude_code",
+    "duration_seconds": 0.002,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 125,
+    "timestamp": "2025-11-24 20:35:45",
+    "prompt": "test",
+    "complexity": "SIMPLE",
+    "agents_allocated": 8,
+    "mode": "claude_code",
+    "duration_seconds": 0.003,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 126,
+    "timestamp": "2025-11-24 20:35:46",
+    "prompt": "hello world",
+    "complexity": "SIMPLE",
+    "agents_allocated": 8,
+    "mode": "claude_code",
+    "duration_seconds": 0.001,
+    "success": true,
+    "flags": {
+      "verbose": false,
+      "quiet": false
+    }
+  },
+  {
+    "id": 127,
+    "timestamp": "2025-11-24 20:37:27",
+    "prompt": "what is 2+2",
+    "complexity": "SIMPLE",
+    "agents_allocated": 8,
+    "mode": "claude_code",
+    "duration_seconds": 0.002,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 128,
+    "timestamp": "2025-11-24 20:37:27",
+    "prompt": "\n        Explain the ULTRATHINK framework in detail:\n        1. What are the 5 execution directives?\n        2. How do the 7 guardrail layers work?\n        3. What is the agent framework architecture?\n        4. How does the feedback loop achieve 99%+ confidence?\n        ",
+    "complexity": "COMPLEX",
+    "agents_allocated": 25,
+    "mode": "claude_code",
+    "duration_seconds": 0.003,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 129,
+    "timestamp": "2025-11-24 20:37:28",
+    "prompt": "\n        Analyze the complete ULTRATHINK system:\n        1. Preprocessing and intent classification\n        2. All 7 guardrail layers (input and output)\n        3. Context management (200K tokens)\n        4. All 8 agent framework components\n        5. Iterative refinement protocol\n        6. Quality scoring breakdown\n        7. Framework comparison with delta analysis\n        Provide comprehensive details with all [VERBOSE] tags.\n        ",
+    "complexity": "COMPLEX",
+    "agents_allocated": 25,
+    "mode": "claude_code",
+    "duration_seconds": 0.002,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 130,
+    "timestamp": "2025-11-24 20:37:30",
+    "prompt": "test",
+    "complexity": "SIMPLE",
+    "agents_allocated": 8,
+    "mode": "claude_code",
+    "duration_seconds": 0.003,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 131,
+    "timestamp": "2025-11-24 20:37:31",
+    "prompt": "hello world",
+    "complexity": "SIMPLE",
+    "agents_allocated": 8,
+    "mode": "claude_code",
+    "duration_seconds": 0.001,
+    "success": true,
+    "flags": {
+      "verbose": false,
+      "quiet": false
+    }
+  },
+  {
+    "id": 132,
+    "timestamp": "2025-11-24 20:37:31",
+    "prompt": "what is 2+2",
+    "complexity": "SIMPLE",
+    "agents_allocated": 8,
+    "mode": "claude_code",
+    "duration_seconds": 0.002,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 133,
+    "timestamp": "2025-11-24 20:37:32",
+    "prompt": "\n        Explain the ULTRATHINK framework in detail:\n        1. What are the 5 execution directives?\n        2. How do the 7 guardrail layers work?\n        3. What is the agent framework architecture?\n        4. How does the feedback loop achieve 99%+ confidence?\n        ",
+    "complexity": "COMPLEX",
+    "agents_allocated": 25,
+    "mode": "claude_code",
+    "duration_seconds": 0.002,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 134,
+    "timestamp": "2025-11-24 20:37:33",
+    "prompt": "\n        Analyze the complete ULTRATHINK system:\n        1. Preprocessing and intent classification\n        2. All 7 guardrail layers (input and output)\n        3. Context management (200K tokens)\n        4. All 8 agent framework components\n        5. Iterative refinement protocol\n        6. Quality scoring breakdown\n        7. Framework comparison with delta analysis\n        Provide comprehensive details with all [VERBOSE] tags.\n        ",
+    "complexity": "COMPLEX",
+    "agents_allocated": 25,
+    "mode": "claude_code",
+    "duration_seconds": 0.002,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 135,
+    "timestamp": "2025-11-24 20:37:35",
+    "prompt": "test",
+    "complexity": "SIMPLE",
+    "agents_allocated": 8,
+    "mode": "claude_code",
+    "duration_seconds": 0.002,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 136,
+    "timestamp": "2025-11-24 20:37:35",
+    "prompt": "hello world",
+    "complexity": "SIMPLE",
+    "agents_allocated": 8,
+    "mode": "claude_code",
+    "duration_seconds": 0.0,
+    "success": true,
+    "flags": {
+      "verbose": false,
+      "quiet": false
+    }
+  },
+  {
+    "id": 137,
+    "timestamp": "2025-11-24 20:37:37",
+    "prompt": "what is 2+2",
+    "complexity": "SIMPLE",
+    "agents_allocated": 8,
+    "mode": "claude_code",
+    "duration_seconds": 0.003,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 138,
+    "timestamp": "2025-11-24 20:37:37",
+    "prompt": "test",
+    "complexity": "SIMPLE",
+    "agents_allocated": 8,
+    "mode": "claude_code",
+    "duration_seconds": 0.004,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 139,
+    "timestamp": "2025-11-24 20:37:37",
+    "prompt": "hello world",
+    "complexity": "SIMPLE",
+    "agents_allocated": 8,
+    "mode": "claude_code",
+    "duration_seconds": 0.001,
+    "success": true,
+    "flags": {
+      "verbose": false,
+      "quiet": false
+    }
+  },
+  {
+    "id": 140,
+    "timestamp": "2025-11-24 20:37:37",
+    "prompt": "\n        Explain the ULTRATHINK framework in detail:\n        1. What are the 5 execution directives?\n        2. How do the 7 guardrail layers work?\n        3. What is the agent framework architecture?\n        4. How does the feedback loop achieve 99%+ confidence?\n        ",
+    "complexity": "COMPLEX",
+    "agents_allocated": 25,
+    "mode": "claude_code",
+    "duration_seconds": 0.003,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 141,
+    "timestamp": "2025-11-24 20:37:37",
+    "prompt": "\n        Analyze the complete ULTRATHINK system:\n        1. Preprocessing and intent classification\n        2. All 7 guardrail layers (input and output)\n        3. Context management (200K tokens)\n        4. All 8 agent framework components\n        5. Iterative refinement protocol\n        6. Quality scoring breakdown\n        7. Framework comparison with delta analysis\n        Provide comprehensive details with all [VERBOSE] tags.\n        ",
+    "complexity": "COMPLEX",
+    "agents_allocated": 25,
+    "mode": "claude_code",
+    "duration_seconds": 0.002,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 142,
+    "timestamp": "2025-11-24 20:37:38",
+    "prompt": "what is 2+2",
+    "complexity": "SIMPLE",
+    "agents_allocated": 8,
+    "mode": "claude_code",
+    "duration_seconds": 0.003,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 143,
+    "timestamp": "2025-11-24 20:37:39",
+    "prompt": "\n        Explain the ULTRATHINK framework in detail:\n        1. What are the 5 execution directives?\n        2. How do the 7 guardrail layers work?\n        3. What is the agent framework architecture?\n        4. How does the feedback loop achieve 99%+ confidence?\n        ",
+    "complexity": "COMPLEX",
+    "agents_allocated": 25,
+    "mode": "claude_code",
+    "duration_seconds": 0.003,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 144,
+    "timestamp": "2025-11-24 20:37:40",
+    "prompt": "\n        Analyze the complete ULTRATHINK system:\n        1. Preprocessing and intent classification\n        2. All 7 guardrail layers (input and output)\n        3. Context management (200K tokens)\n        4. All 8 agent framework components\n        5. Iterative refinement protocol\n        6. Quality scoring breakdown\n        7. Framework comparison with delta analysis\n        Provide comprehensive details with all [VERBOSE] tags.\n        ",
+    "complexity": "COMPLEX",
+    "agents_allocated": 25,
+    "mode": "claude_code",
+    "duration_seconds": 0.002,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 145,
+    "timestamp": "2025-11-24 20:37:41",
+    "prompt": "test",
+    "complexity": "SIMPLE",
+    "agents_allocated": 8,
+    "mode": "claude_code",
+    "duration_seconds": 0.002,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 146,
+    "timestamp": "2025-11-24 20:37:42",
+    "prompt": "hello world",
+    "complexity": "SIMPLE",
+    "agents_allocated": 8,
+    "mode": "claude_code",
+    "duration_seconds": 0.0,
+    "success": true,
+    "flags": {
+      "verbose": false,
+      "quiet": false
+    }
+  },
+  {
+    "id": 147,
+    "timestamp": "2025-11-24 20:39:35",
+    "prompt": "what is 2+2",
+    "complexity": "SIMPLE",
+    "agents_allocated": 8,
+    "mode": "claude_code",
+    "duration_seconds": 0.002,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 148,
+    "timestamp": "2025-11-24 20:39:37",
+    "prompt": "\n        Explain the ULTRATHINK framework in detail:\n        1. What are the 5 execution directives?\n        2. How do the 7 guardrail layers work?\n        3. What is the agent framework architecture?\n        4. How does the feedback loop achieve 99%+ confidence?\n        ",
+    "complexity": "COMPLEX",
+    "agents_allocated": 25,
+    "mode": "claude_code",
+    "duration_seconds": 0.003,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 149,
+    "timestamp": "2025-11-24 20:39:38",
+    "prompt": "\n        Analyze the complete ULTRATHINK system:\n        1. Preprocessing and intent classification\n        2. All 7 guardrail layers (input and output)\n        3. Context management (200K tokens)\n        4. All 8 agent framework components\n        5. Iterative refinement protocol\n        6. Quality scoring breakdown\n        7. Framework comparison with delta analysis\n        Provide comprehensive details with all [VERBOSE] tags.\n        ",
+    "complexity": "COMPLEX",
+    "agents_allocated": 25,
+    "mode": "claude_code",
+    "duration_seconds": 0.002,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 150,
+    "timestamp": "2025-11-24 20:39:40",
+    "prompt": "test",
+    "complexity": "SIMPLE",
+    "agents_allocated": 8,
+    "mode": "claude_code",
+    "duration_seconds": 0.002,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 151,
+    "timestamp": "2025-11-24 20:39:41",
+    "prompt": "hello world",
+    "complexity": "SIMPLE",
+    "agents_allocated": 8,
+    "mode": "claude_code",
+    "duration_seconds": 0.0,
+    "success": true,
+    "flags": {
+      "verbose": false,
+      "quiet": false
+    }
+  },
+  {
+    "id": 152,
+    "timestamp": "2025-11-24 20:39:42",
+    "prompt": "what is 2+2",
+    "complexity": "SIMPLE",
+    "agents_allocated": 8,
+    "mode": "claude_code",
+    "duration_seconds": 0.003,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 153,
+    "timestamp": "2025-11-24 20:39:42",
+    "prompt": "\n        Explain the ULTRATHINK framework in detail:\n        1. What are the 5 execution directives?\n        2. How do the 7 guardrail layers work?\n        3. What is the agent framework architecture?\n        4. How does the feedback loop achieve 99%+ confidence?\n        ",
+    "complexity": "COMPLEX",
+    "agents_allocated": 25,
+    "mode": "claude_code",
+    "duration_seconds": 0.002,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 154,
+    "timestamp": "2025-11-24 20:39:43",
+    "prompt": "\n        Analyze the complete ULTRATHINK system:\n        1. Preprocessing and intent classification\n        2. All 7 guardrail layers (input and output)\n        3. Context management (200K tokens)\n        4. All 8 agent framework components\n        5. Iterative refinement protocol\n        6. Quality scoring breakdown\n        7. Framework comparison with delta analysis\n        Provide comprehensive details with all [VERBOSE] tags.\n        ",
+    "complexity": "COMPLEX",
+    "agents_allocated": 25,
+    "mode": "claude_code",
+    "duration_seconds": 0.002,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 155,
+    "timestamp": "2025-11-24 20:39:45",
+    "prompt": "test",
+    "complexity": "SIMPLE",
+    "agents_allocated": 8,
+    "mode": "claude_code",
+    "duration_seconds": 0.002,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 156,
+    "timestamp": "2025-11-24 20:39:45",
+    "prompt": "hello world",
+    "complexity": "SIMPLE",
+    "agents_allocated": 8,
+    "mode": "claude_code",
+    "duration_seconds": 0.0,
+    "success": true,
+    "flags": {
+      "verbose": false,
+      "quiet": false
+    }
+  },
+  {
+    "id": 157,
+    "timestamp": "2025-11-24 20:39:47",
+    "prompt": "test",
+    "complexity": "SIMPLE",
+    "agents_allocated": 8,
+    "mode": "claude_code",
+    "duration_seconds": 0.005,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 158,
+    "timestamp": "2025-11-24 20:39:47",
+    "prompt": "hello world",
+    "complexity": "SIMPLE",
+    "agents_allocated": 8,
+    "mode": "claude_code",
+    "duration_seconds": 0.001,
+    "success": true,
+    "flags": {
+      "verbose": false,
+      "quiet": false
+    }
+  },
+  {
+    "id": 159,
+    "timestamp": "2025-11-24 20:39:47",
+    "prompt": "what is 2+2",
+    "complexity": "SIMPLE",
+    "agents_allocated": 8,
+    "mode": "claude_code",
+    "duration_seconds": 0.003,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 160,
+    "timestamp": "2025-11-24 20:39:47",
+    "prompt": "\n        Explain the ULTRATHINK framework in detail:\n        1. What are the 5 execution directives?\n        2. How do the 7 guardrail layers work?\n        3. What is the agent framework architecture?\n        4. How does the feedback loop achieve 99%+ confidence?\n        ",
+    "complexity": "COMPLEX",
+    "agents_allocated": 25,
+    "mode": "claude_code",
+    "duration_seconds": 0.008,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 161,
+    "timestamp": "2025-11-24 20:39:47",
+    "prompt": "\n        Analyze the complete ULTRATHINK system:\n        1. Preprocessing and intent classification\n        2. All 7 guardrail layers (input and output)\n        3. Context management (200K tokens)\n        4. All 8 agent framework components\n        5. Iterative refinement protocol\n        6. Quality scoring breakdown\n        7. Framework comparison with delta analysis\n        Provide comprehensive details with all [VERBOSE] tags.\n        ",
+    "complexity": "COMPLEX",
+    "agents_allocated": 25,
+    "mode": "claude_code",
+    "duration_seconds": 0.003,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 162,
+    "timestamp": "2025-11-24 20:39:48",
+    "prompt": "what is 2+2",
+    "complexity": "SIMPLE",
+    "agents_allocated": 8,
+    "mode": "claude_code",
+    "duration_seconds": 0.002,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 163,
+    "timestamp": "2025-11-24 20:39:49",
+    "prompt": "\n        Explain the ULTRATHINK framework in detail:\n        1. What are the 5 execution directives?\n        2. How do the 7 guardrail layers work?\n        3. What is the agent framework architecture?\n        4. How does the feedback loop achieve 99%+ confidence?\n        ",
+    "complexity": "COMPLEX",
+    "agents_allocated": 25,
+    "mode": "claude_code",
+    "duration_seconds": 0.003,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 164,
+    "timestamp": "2025-11-24 20:39:49",
+    "prompt": "\n        Analyze the complete ULTRATHINK system:\n        1. Preprocessing and intent classification\n        2. All 7 guardrail layers (input and output)\n        3. Context management (200K tokens)\n        4. All 8 agent framework components\n        5. Iterative refinement protocol\n        6. Quality scoring breakdown\n        7. Framework comparison with delta analysis\n        Provide comprehensive details with all [VERBOSE] tags.\n        ",
+    "complexity": "COMPLEX",
+    "agents_allocated": 25,
+    "mode": "claude_code",
+    "duration_seconds": 0.002,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 165,
+    "timestamp": "2025-11-24 20:39:51",
+    "prompt": "test",
+    "complexity": "SIMPLE",
+    "agents_allocated": 8,
+    "mode": "claude_code",
+    "duration_seconds": 0.002,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 166,
+    "timestamp": "2025-11-24 20:39:52",
+    "prompt": "hello world",
+    "complexity": "SIMPLE",
+    "agents_allocated": 8,
+    "mode": "claude_code",
+    "duration_seconds": 0.0,
+    "success": true,
+    "flags": {
+      "verbose": false,
+      "quiet": false
+    }
+  },
+  {
+    "id": 167,
+    "timestamp": "2025-11-24 20:41:35",
+    "prompt": "what is 2+2",
+    "complexity": "SIMPLE",
+    "agents_allocated": 8,
+    "mode": "claude_code",
+    "duration_seconds": 0.002,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 168,
+    "timestamp": "2025-11-24 20:41:36",
+    "prompt": "\n        Explain the ULTRATHINK framework in detail:\n        1. What are the 5 execution directives?\n        2. How do the 7 guardrail layers work?\n        3. What is the agent framework architecture?\n        4. How does the feedback loop achieve 99%+ confidence?\n        ",
+    "complexity": "COMPLEX",
+    "agents_allocated": 25,
+    "mode": "claude_code",
+    "duration_seconds": 0.004,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 169,
+    "timestamp": "2025-11-24 20:41:37",
+    "prompt": "\n        Analyze the complete ULTRATHINK system:\n        1. Preprocessing and intent classification\n        2. All 7 guardrail layers (input and output)\n        3. Context management (200K tokens)\n        4. All 8 agent framework components\n        5. Iterative refinement protocol\n        6. Quality scoring breakdown\n        7. Framework comparison with delta analysis\n        Provide comprehensive details with all [VERBOSE] tags.\n        ",
+    "complexity": "COMPLEX",
+    "agents_allocated": 25,
+    "mode": "claude_code",
+    "duration_seconds": 0.003,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 170,
+    "timestamp": "2025-11-24 20:41:40",
+    "prompt": "test",
+    "complexity": "SIMPLE",
+    "agents_allocated": 8,
+    "mode": "claude_code",
+    "duration_seconds": 0.002,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 171,
+    "timestamp": "2025-11-24 20:41:41",
+    "prompt": "hello world",
+    "complexity": "SIMPLE",
+    "agents_allocated": 8,
+    "mode": "claude_code",
+    "duration_seconds": 0.0,
+    "success": true,
+    "flags": {
+      "verbose": false,
+      "quiet": false
+    }
+  },
+  {
+    "id": 172,
+    "timestamp": "2025-11-24 20:41:42",
+    "prompt": "what is 2+2",
+    "complexity": "SIMPLE",
+    "agents_allocated": 8,
+    "mode": "claude_code",
+    "duration_seconds": 0.002,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 173,
+    "timestamp": "2025-11-24 20:41:42",
+    "prompt": "\n        Explain the ULTRATHINK framework in detail:\n        1. What are the 5 execution directives?\n        2. How do the 7 guardrail layers work?\n        3. What is the agent framework architecture?\n        4. How does the feedback loop achieve 99%+ confidence?\n        ",
+    "complexity": "COMPLEX",
+    "agents_allocated": 25,
+    "mode": "claude_code",
+    "duration_seconds": 0.003,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 174,
+    "timestamp": "2025-11-24 20:41:43",
+    "prompt": "\n        Analyze the complete ULTRATHINK system:\n        1. Preprocessing and intent classification\n        2. All 7 guardrail layers (input and output)\n        3. Context management (200K tokens)\n        4. All 8 agent framework components\n        5. Iterative refinement protocol\n        6. Quality scoring breakdown\n        7. Framework comparison with delta analysis\n        Provide comprehensive details with all [VERBOSE] tags.\n        ",
+    "complexity": "COMPLEX",
+    "agents_allocated": 25,
+    "mode": "claude_code",
+    "duration_seconds": 0.002,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 175,
+    "timestamp": "2025-11-24 20:41:45",
+    "prompt": "test",
+    "complexity": "SIMPLE",
+    "agents_allocated": 8,
+    "mode": "claude_code",
+    "duration_seconds": 0.002,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 176,
+    "timestamp": "2025-11-24 20:41:45",
+    "prompt": "hello world",
+    "complexity": "SIMPLE",
+    "agents_allocated": 8,
+    "mode": "claude_code",
+    "duration_seconds": 0.0,
+    "success": true,
+    "flags": {
+      "verbose": false,
+      "quiet": false
+    }
+  },
+  {
+    "id": 177,
+    "timestamp": "2025-11-24 20:41:47",
+    "prompt": "what is 2+2",
+    "complexity": "SIMPLE",
+    "agents_allocated": 8,
+    "mode": "claude_code",
+    "duration_seconds": 0.003,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 178,
+    "timestamp": "2025-11-24 20:41:47",
+    "prompt": "\n        Analyze the complete ULTRATHINK system:\n        1. Preprocessing and intent classification\n        2. All 7 guardrail layers (input and output)\n        3. Context management (200K tokens)\n        4. All 8 agent framework components\n        5. Iterative refinement protocol\n        6. Quality scoring breakdown\n        7. Framework comparison with delta analysis\n        Provide comprehensive details with all [VERBOSE] tags.\n        ",
+    "complexity": "COMPLEX",
+    "agents_allocated": 25,
+    "mode": "claude_code",
+    "duration_seconds": 0.003,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 179,
+    "timestamp": "2025-11-24 20:41:47",
+    "prompt": "hello world",
+    "complexity": "SIMPLE",
+    "agents_allocated": 8,
+    "mode": "claude_code",
+    "duration_seconds": 0.001,
+    "success": true,
+    "flags": {
+      "verbose": false,
+      "quiet": false
+    }
+  },
+  {
+    "id": 180,
+    "timestamp": "2025-11-24 20:41:47",
+    "prompt": "\n        Explain the ULTRATHINK framework in detail:\n        1. What are the 5 execution directives?\n        2. How do the 7 guardrail layers work?\n        3. What is the agent framework architecture?\n        4. How does the feedback loop achieve 99%+ confidence?\n        ",
+    "complexity": "COMPLEX",
+    "agents_allocated": 25,
+    "mode": "claude_code",
+    "duration_seconds": 0.004,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 181,
+    "timestamp": "2025-11-24 20:41:47",
+    "prompt": "test",
+    "complexity": "SIMPLE",
+    "agents_allocated": 8,
+    "mode": "claude_code",
+    "duration_seconds": 0.003,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 182,
+    "timestamp": "2025-11-24 20:41:48",
+    "prompt": "what is 2+2",
+    "complexity": "SIMPLE",
+    "agents_allocated": 8,
+    "mode": "claude_code",
+    "duration_seconds": 0.002,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 183,
+    "timestamp": "2025-11-24 20:41:49",
+    "prompt": "\n        Explain the ULTRATHINK framework in detail:\n        1. What are the 5 execution directives?\n        2. How do the 7 guardrail layers work?\n        3. What is the agent framework architecture?\n        4. How does the feedback loop achieve 99%+ confidence?\n        ",
+    "complexity": "COMPLEX",
+    "agents_allocated": 25,
+    "mode": "claude_code",
+    "duration_seconds": 0.002,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 184,
+    "timestamp": "2025-11-24 20:41:49",
+    "prompt": "\n        Analyze the complete ULTRATHINK system:\n        1. Preprocessing and intent classification\n        2. All 7 guardrail layers (input and output)\n        3. Context management (200K tokens)\n        4. All 8 agent framework components\n        5. Iterative refinement protocol\n        6. Quality scoring breakdown\n        7. Framework comparison with delta analysis\n        Provide comprehensive details with all [VERBOSE] tags.\n        ",
+    "complexity": "COMPLEX",
+    "agents_allocated": 25,
+    "mode": "claude_code",
+    "duration_seconds": 0.002,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 185,
+    "timestamp": "2025-11-24 20:41:53",
+    "prompt": "test",
+    "complexity": "SIMPLE",
+    "agents_allocated": 8,
+    "mode": "claude_code",
+    "duration_seconds": 0.002,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 186,
+    "timestamp": "2025-11-24 20:41:54",
+    "prompt": "hello world",
+    "complexity": "SIMPLE",
+    "agents_allocated": 8,
+    "mode": "claude_code",
+    "duration_seconds": 0.001,
     "success": true,
     "flags": {
       "verbose": false,

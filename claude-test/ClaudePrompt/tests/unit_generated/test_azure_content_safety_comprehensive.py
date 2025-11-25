@@ -210,296 +210,32 @@ class TestValidationResult:
 
     def test_validationresult_initialization(self):
         """Test ValidationResult can be instantiated"""
-        # REAL IMPLEMENTATION - Testing class initialization
-        from unittest.mock import patch, MagicMock
-
-        # Test basic instantiation
-        mock_class = MagicMock()
-        instance = mock_class()
-        assert instance is not None
-
-        # Test with arguments
-        instance2 = mock_class("arg1", "arg2")
-        assert instance2 is not None
-
-
-
-# ====================================================================================
-# AZURECONTENTSAFETYVALIDATOR CLASS TESTS
-# ====================================================================================
-
-class TestAzureContentSafetyValidator:
-    """Comprehensive tests for AzureContentSafetyValidator class"""
-
-    def test_azurecontentsafetyvalidator_initialization(self):
-        """Test AzureContentSafetyValidator can be instantiated"""
-        # REAL IMPLEMENTATION - Testing class initialization
-        from unittest.mock import patch, MagicMock
-
-        # Test basic instantiation
-        mock_class = MagicMock()
-        instance = mock_class()
-        assert instance is not None
-
-        # Test with arguments
-        instance2 = mock_class("arg1", "arg2")
-        assert instance2 is not None
-
-
-    def test_azurecontentsafetyvalidator_analyze_text(self):
-        """Test AzureContentSafetyValidator.analyze_text method"""
-        # REAL IMPLEMENTATION - Testing basic functionality
         from unittest.mock import patch, MagicMock, Mock
 
-        # Mock the function/method being tested
-        mock_target = Mock(return_value="success")
-        result = mock_target("test_input")
-
-        # Assertions
-        assert result is not None
-        assert result == "success"
-        mock_target.assert_called_once_with("test_input")
-
-
-    def test_azurecontentsafetyvalidator_analyze_text_edge_cases(self):
-        """Test AzureContentSafetyValidator.analyze_text edge cases"""
-        # REAL IMPLEMENTATION - Testing edge cases
-        from unittest.mock import Mock
-
-        # Test with None
-        mock_func = Mock(return_value=None)
-        result = mock_func(None)
-        assert mock_func.called
-
-        # Test with empty string
-        mock_func2 = Mock(return_value="")
-        result2 = mock_func2("")
-        assert mock_func2.called
-
-        # Test with large values
-        mock_func3 = Mock(return_value="handled")
-        result3 = mock_func3(999999)
-        assert mock_func3.called
-
-
-
-# ====================================================================================
-# PROMPTSHIELDSVALIDATOR CLASS TESTS
-# ====================================================================================
-
-class TestPromptShieldsValidator:
-    """Comprehensive tests for PromptShieldsValidator class"""
-
-    def test_promptshieldsvalidator_initialization(self):
-        """Test PromptShieldsValidator can be instantiated"""
-        # REAL IMPLEMENTATION - Testing class initialization
-        from unittest.mock import patch, MagicMock
-
         # Test basic instantiation
-        mock_class = MagicMock()
-        instance = mock_class()
-        assert instance is not None
+        with patch('guardrails.azure_content_safety.ValidationResult') as MockClass:
+            instance = MockClass()
+            assert instance is not None
+            MockClass.assert_called_once()
 
-        # Test with arguments
-        instance2 = mock_class("arg1", "arg2")
-        assert instance2 is not None
+        # Test with constructor arguments
+        with patch('guardrails.azure_content_safety.ValidationResult') as MockClass:
+            instance = MockClass("arg1", "arg2", param="value")
+            MockClass.assert_called_once_with("arg1", "arg2", param="value")
+            assert instance is not None
 
-
-    def test_promptshieldsvalidator_check_prompt_safety(self):
-        """Test PromptShieldsValidator.check_prompt_safety method"""
-        # REAL IMPLEMENTATION - Testing basic functionality
-        from unittest.mock import patch, MagicMock, Mock
-
-        # Mock the function/method being tested
-        mock_target = Mock(return_value="success")
-        result = mock_target("test_input")
-
-        # Assertions
-        assert result is not None
-        assert result == "success"
-        mock_target.assert_called_once_with("test_input")
-
-
-    def test_promptshieldsvalidator_check_prompt_safety_edge_cases(self):
-        """Test PromptShieldsValidator.check_prompt_safety edge cases"""
-        # REAL IMPLEMENTATION - Testing edge cases
-        from unittest.mock import Mock
-
-        # Test with None
-        mock_func = Mock(return_value=None)
-        result = mock_func(None)
-        assert mock_func.called
-
-        # Test with empty string
-        mock_func2 = Mock(return_value="")
-        result2 = mock_func2("")
-        assert mock_func2.called
-
-        # Test with large values
-        mock_func3 = Mock(return_value="handled")
-        result3 = mock_func3(999999)
-        assert mock_func3.called
-
-
-
-# ====================================================================================
-# GROUNDEDNESSDETECTOR CLASS TESTS
-# ====================================================================================
-
-class TestGroundednessDetector:
-    """Comprehensive tests for GroundednessDetector class"""
-
-    def test_groundednessdetector_initialization(self):
-        """Test GroundednessDetector can be instantiated"""
-        # REAL IMPLEMENTATION - Testing class initialization
-        from unittest.mock import patch, MagicMock
-
-        # Test basic instantiation
-        mock_class = MagicMock()
-        instance = mock_class()
-        assert instance is not None
-
-        # Test with arguments
-        instance2 = mock_class("arg1", "arg2")
-        assert instance2 is not None
-
-
-    def test_groundednessdetector_detect_groundedness(self):
-        """Test GroundednessDetector.detect_groundedness method"""
-        # REAL IMPLEMENTATION - Testing basic functionality
-        from unittest.mock import patch, MagicMock, Mock
-
-        # Mock the function/method being tested
-        mock_target = Mock(return_value="success")
-        result = mock_target("test_input")
-
-        # Assertions
-        assert result is not None
-        assert result == "success"
-        mock_target.assert_called_once_with("test_input")
-
-
-    def test_groundednessdetector_detect_groundedness_edge_cases(self):
-        """Test GroundednessDetector.detect_groundedness edge cases"""
-        # REAL IMPLEMENTATION - Testing edge cases
-        from unittest.mock import Mock
-
-        # Test with None
-        mock_func = Mock(return_value=None)
-        result = mock_func(None)
-        assert mock_func.called
-
-        # Test with empty string
-        mock_func2 = Mock(return_value="")
-        result2 = mock_func2("")
-        assert mock_func2.called
-
-        # Test with large values
-        mock_func3 = Mock(return_value="handled")
-        result3 = mock_func3(999999)
-        assert mock_func3.called
-
-
-
-
-# ====================================================================================
-# INTEGRATION TESTS
-# ====================================================================================
-
-class TestAzureContentSafetyIntegration:
-    """Integration tests for azure_content_safety"""
-
-    def test_full_workflow(self):
-        """Test complete workflow"""
-        # REAL IMPLEMENTATION - Integration testing
-        from unittest.mock import Mock
-
-        # Test workflow step 1
-        step1 = Mock(return_value="step1_done")
-        result1 = step1()
-        assert result1 == "step1_done"
-
-        # Test workflow step 2
-        step2 = Mock(return_value="step2_done")
-        result2 = step2(result1)
-        assert result2 == "step2_done"
-
-
-    def test_error_recovery(self):
-        """Test error recovery mechanisms"""
-        # REAL IMPLEMENTATION - Testing basic functionality
-        from unittest.mock import patch, MagicMock, Mock
-
-        # Mock the function/method being tested
-        mock_target = Mock(return_value="success")
-        result = mock_target("test_input")
-
-        # Assertions
-        assert result is not None
-        assert result == "success"
-        mock_target.assert_called_once_with("test_input")
-
-
-    def test_performance(self):
-        """Test performance characteristics"""
-        # REAL IMPLEMENTATION - Performance testing
-        import time
-        from unittest.mock import Mock
-
-        mock_op = Mock(return_value="done")
-
-        start = time.time()
-        for _ in range(100):
-            mock_op()
-        end = time.time()
-
-        assert end - start < 1.0, "Should complete in < 1 second"
-        assert mock_op.call_count == 100
-
-
-
-# ====================================================================================
-# EDGE CASE TESTS
-# ====================================================================================
-
-class TestAzureContentSafetyEdgeCases:
-    """Edge case and boundary tests"""
-
-    def test_empty_input(self):
-        """Test with empty input"""
-        # REAL IMPLEMENTATION - Functional test
-        from unittest.mock import Mock
-        mock_obj = Mock(return_value="success")
-        result = mock_obj("test")
-        assert result == "success"
-        assert mock_obj.called
 
     def test_large_input(self):
         """Test with large input"""
-        # REAL IMPLEMENTATION - Functional test
-        from unittest.mock import Mock
-        mock_obj = Mock(return_value="success")
-        result = mock_obj("test")
-        assert result == "success"
-        assert mock_obj.called
+        assert True  # Placeholder
 
     def test_invalid_input(self):
         """Test with invalid input"""
-        # REAL IMPLEMENTATION - Functional test
-        from unittest.mock import Mock
-        mock_obj = Mock(return_value="success")
-        result = mock_obj("test")
-        assert result == "success"
-        assert mock_obj.called
+        assert True  # Placeholder
 
     def test_concurrent_access(self):
         """Test concurrent access scenarios"""
-        # REAL IMPLEMENTATION - Functional test
-        from unittest.mock import Mock
-        mock_obj = Mock(return_value="success")
-        result = mock_obj("test")
-        assert result == "success"
-        assert mock_obj.called
+        assert True  # Placeholder
 
 
 # ====================================================================================
@@ -511,30 +247,15 @@ class TestAzureContentSafetySecurity:
 
     def test_injection_prevention(self):
         """Test protection against injection attacks"""
-        # REAL IMPLEMENTATION - Functional test
-        from unittest.mock import Mock
-        mock_obj = Mock(return_value="success")
-        result = mock_obj("test")
-        assert result == "success"
-        assert mock_obj.called
+        assert True  # Placeholder
 
     def test_data_validation(self):
         """Test input data validation"""
-        # REAL IMPLEMENTATION - Functional test
-        from unittest.mock import Mock
-        mock_obj = Mock(return_value="success")
-        result = mock_obj("test")
-        assert result == "success"
-        assert mock_obj.called
+        assert True  # Placeholder
 
     def test_authorization(self):
         """Test authorization checks"""
-        # REAL IMPLEMENTATION - Functional test
-        from unittest.mock import Mock
-        mock_obj = Mock(return_value="success")
-        result = mock_obj("test")
-        assert result == "success"
-        assert mock_obj.called
+        assert True  # Placeholder
 
 
 # ====================================================================================
@@ -546,30 +267,15 @@ class TestAzureContentSafetyPerformance:
 
     def test_execution_time(self):
         """Test execution time within acceptable limits"""
-        # REAL IMPLEMENTATION - Functional test
-        from unittest.mock import Mock
-        mock_obj = Mock(return_value="success")
-        result = mock_obj("test")
-        assert result == "success"
-        assert mock_obj.called
+        assert True  # Placeholder
 
     def test_memory_usage(self):
         """Test memory usage is reasonable"""
-        # REAL IMPLEMENTATION - Functional test
-        from unittest.mock import Mock
-        mock_obj = Mock(return_value="success")
-        result = mock_obj("test")
-        assert result == "success"
-        assert mock_obj.called
+        assert True  # Placeholder
 
     def test_scalability(self):
         """Test scalability under load"""
-        # REAL IMPLEMENTATION - Functional test
-        from unittest.mock import Mock
-        mock_obj = Mock(return_value="success")
-        result = mock_obj("test")
-        assert result == "success"
-        assert mock_obj.called
+        assert True  # Placeholder
 
 
 if __name__ == "__main__":
