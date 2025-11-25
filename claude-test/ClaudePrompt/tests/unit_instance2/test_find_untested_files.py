@@ -1632,7 +1632,7 @@ def test_find_untested_files_real_implementation():
     """Test find_untested_files with real code execution"""
     from find_untested_files import find_untested_files
 
-    # Call the real function
+    # Call the real main
     try:
         result = find_untested_files()
         # Verify execution completed
@@ -1677,7 +1677,7 @@ def test_main_real_implementation():
                     # Function executed without errors
                     assert True
                 except Exception as e:
-                    # Some functions might require specific setup
+                    # Some mains might require specific setup
                     assert True, f"Function raised: e"
 
 def test_main_edge_cases_real():
@@ -1711,7 +1711,7 @@ def test_find_untested_files_real_implementation():
     """Test find_untested_files with real code execution"""
     from find_untested_files import find_untested_files
 
-    # Call the real function
+    # Call the real main
     try:
         result = find_untested_files()
         # Verify execution completed
@@ -1756,7 +1756,7 @@ def test_main_real_implementation():
                     # Function executed without errors
                     assert True
                 except Exception as e:
-                    # Some functions might require specific setup
+                    # Some mains might require specific setup
                     assert True, f"Function raised: e"
 
 def test_main_edge_cases_real():

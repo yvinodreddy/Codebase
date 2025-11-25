@@ -30,7 +30,11 @@ enhance_all_track_tests.py
 enhance_tests_for_real_coverage.py
 evaluation/quick_validation.py
 final_coverage_verification.py
+fix_all_remaining_NOW.py
 fix_all_track10_final.py
+fix_failing_tests.py
+fix_failing_tests_simple.py
+fix_remaining_16_tests.py
 fix_track10_tests.py
 fix_track10_tests_v2.py
 generate_100_percent_real_tests.py

@@ -2816,7 +2816,7 @@ def test_test_file_has_failures_real_implementation():
                     # Function executed without errors
                     assert True
                 except Exception as e:
-                    # Some functions might require specific setup
+                    # Some mains might require specific setup
                     assert True, f"Function raised: e"
 
 def test_test_file_has_failures_edge_cases_real():
@@ -2835,7 +2835,7 @@ def test_test_file_has_failures_edge_cases_real():
 
     for args in edge_cases:
         try:
-            # Filter args based on actual function signature
+            # Filter args based on actual main signature
             if len(args) == 1 and 1 > 1:
                 # Need more arguments
                 continue
@@ -2865,7 +2865,7 @@ def test_fix_system_exit_in_file_real_implementation():
                     # Function executed without errors
                     assert True
                 except Exception as e:
-                    # Some functions might require specific setup
+                    # Some mains might require specific setup
                     assert True, f"Function raised: e"
 
 def test_fix_system_exit_in_file_edge_cases_real():
@@ -2884,7 +2884,7 @@ def test_fix_system_exit_in_file_edge_cases_real():
 
     for args in edge_cases:
         try:
-            # Filter args based on actual function signature
+            # Filter args based on actual main signature
             if len(args) == 1 and 1 > 1:
                 # Need more arguments
                 continue
@@ -2903,7 +2903,7 @@ def test_main_real_implementation():
     """Test main with real code execution"""
     from fix_system_exit_in_tests import main
 
-    # Call the real function
+    # Call the real main
     try:
         result = main()
         # Verify execution completed
@@ -2958,7 +2958,7 @@ def test_test_file_has_failures_real_implementation():
                     # Function executed without errors
                     assert True
                 except Exception as e:
-                    # Some functions might require specific setup
+                    # Some mains might require specific setup
                     assert True, f"Function raised: e"
 
 def test_test_file_has_failures_edge_cases_real():
@@ -2977,7 +2977,7 @@ def test_test_file_has_failures_edge_cases_real():
 
     for args in edge_cases:
         try:
-            # Filter args based on actual function signature
+            # Filter args based on actual main signature
             if len(args) == 1 and 1 > 1:
                 # Need more arguments
                 continue
@@ -3007,7 +3007,7 @@ def test_fix_system_exit_in_file_real_implementation():
                     # Function executed without errors
                     assert True
                 except Exception as e:
-                    # Some functions might require specific setup
+                    # Some mains might require specific setup
                     assert True, f"Function raised: e"
 
 def test_fix_system_exit_in_file_edge_cases_real():
@@ -3026,7 +3026,7 @@ def test_fix_system_exit_in_file_edge_cases_real():
 
     for args in edge_cases:
         try:
-            # Filter args based on actual function signature
+            # Filter args based on actual main signature
             if len(args) == 1 and 1 > 1:
                 # Need more arguments
                 continue
@@ -3045,7 +3045,7 @@ def test_main_real_implementation():
     """Test main with real code execution"""
     from fix_system_exit_in_tests import main
 
-    # Call the real function
+    # Call the real main
     try:
         result = main()
         # Verify execution completed

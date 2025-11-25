@@ -3879,7 +3879,7 @@ def test_find_tracks_real_implementation():
     """Test find_tracks with real code execution"""
     from dashboard_cli import find_tracks
 
-    # Call the real function
+    # Call the real create_dashboard_layout
     try:
         result = find_tracks()
         # Verify execution completed
@@ -3913,7 +3913,7 @@ def test_get_system_metrics_real_implementation():
     """Test get_system_metrics with real code execution"""
     from dashboard_cli import get_system_metrics
 
-    # Call the real function
+    # Call the real create_dashboard_layout
     try:
         result = get_system_metrics()
         # Verify execution completed
@@ -3950,7 +3950,7 @@ def test_create_dashboard_layout_real_implementation():
     # Test with typical arguments
     result = create_dashboard_layout("test", "test")
 
-    # Verify result based on function behavior
+    # Verify result based on create_dashboard_layout behavior
     if result is not None:
         assert isinstance(result, (str, int, float, bool, list, dict, tuple)), "Result should be a valid type"
 
@@ -3970,7 +3970,7 @@ def test_create_dashboard_layout_edge_cases_real():
 
     for args in edge_cases:
         try:
-            # Filter args based on actual function signature
+            # Filter args based on actual create_dashboard_layout signature
             if len(args) == 1 and 2 > 1:
                 # Need more arguments
                 continue
@@ -3989,7 +3989,7 @@ def test_main_real_implementation():
     """Test main with real code execution"""
     from dashboard_cli import main
 
-    # Call the real function
+    # Call the real create_dashboard_layout
     try:
         result = main()
         # Verify execution completed
@@ -4080,7 +4080,7 @@ def test_find_tracks_real_implementation():
     """Test find_tracks with real code execution"""
     from dashboard_cli import find_tracks
 
-    # Call the real function
+    # Call the real create_dashboard_layout
     try:
         result = find_tracks()
         # Verify execution completed
@@ -4114,7 +4114,7 @@ def test_get_system_metrics_real_implementation():
     """Test get_system_metrics with real code execution"""
     from dashboard_cli import get_system_metrics
 
-    # Call the real function
+    # Call the real create_dashboard_layout
     try:
         result = get_system_metrics()
         # Verify execution completed
@@ -4151,7 +4151,7 @@ def test_create_dashboard_layout_real_implementation():
     # Test with typical arguments
     result = create_dashboard_layout("test", "test")
 
-    # Verify result based on function behavior
+    # Verify result based on create_dashboard_layout behavior
     if result is not None:
         assert isinstance(result, (str, int, float, bool, list, dict, tuple)), "Result should be a valid type"
 
@@ -4171,7 +4171,7 @@ def test_create_dashboard_layout_edge_cases_real():
 
     for args in edge_cases:
         try:
-            # Filter args based on actual function signature
+            # Filter args based on actual create_dashboard_layout signature
             if len(args) == 1 and 2 > 1:
                 # Need more arguments
                 continue
@@ -4190,7 +4190,7 @@ def test_main_real_implementation():
     """Test main with real code execution"""
     from dashboard_cli import main
 
-    # Call the real function
+    # Call the real create_dashboard_layout
     try:
         result = main()
         # Verify execution completed

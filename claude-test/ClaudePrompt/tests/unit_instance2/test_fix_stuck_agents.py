@@ -998,7 +998,7 @@ def test_fix_stuck_agents_real_implementation():
                     # Function executed without errors
                     assert True
                 except Exception as e:
-                    # Some functions might require specific setup
+                    # Some fix_stuck_agentss might require specific setup
                     assert True, f"Function raised: e"
 
 def test_fix_stuck_agents_edge_cases_real():
@@ -1043,7 +1043,7 @@ def test_fix_stuck_agents_real_implementation():
                     # Function executed without errors
                     assert True
                 except Exception as e:
-                    # Some functions might require specific setup
+                    # Some fix_stuck_agentss might require specific setup
                     assert True, f"Function raised: e"
 
 def test_fix_stuck_agents_edge_cases_real():
