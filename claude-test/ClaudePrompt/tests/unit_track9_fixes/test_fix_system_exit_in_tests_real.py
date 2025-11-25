@@ -15,8 +15,10 @@ from unittest.mock import Mock, MagicMock, patch, call
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
 # Import the actual module we're testing
+# Note: Using specific imports instead of wildcard to avoid pytest collecting
+# source file's test_file_has_failures() as a test case
 try:
-    from fix_system_exit_in_tests import *
+    import fix_system_exit_in_tests
 except ImportError as e:
     pytest.skip(f"Cannot import fix_system_exit_in_tests: {e}", allow_module_level=True)
 
