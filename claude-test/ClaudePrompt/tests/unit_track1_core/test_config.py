@@ -415,6 +415,44 @@ class TestMainBlock:
         assert "RATE_LIMIT_CALLS" in output
         assert "CLAUDE_MODEL_NAME" in output
 
+    def test_main_block_code_directly(self):
+        """Test the main block code directly for coverage using runpy"""
+        import runpy
+        import sys
+        from io import StringIO
+
+        # Get the path to config.py
+        config_path = os.path.join(os.path.dirname(__file__), '..', '..', 'config.py')
+        config_path = os.path.abspath(config_path)
+
+        # Capture stdout
+        captured_output = StringIO()
+        old_stdout = sys.stdout
+
+        try:
+            sys.stdout = captured_output
+
+            # Run config.py as __main__ to trigger the main block
+            # This will execute lines 641-656 with coverage tracking
+            runpy.run_path(config_path, run_name="__main__")
+
+        finally:
+            sys.stdout = old_stdout
+
+        output = captured_output.getvalue()
+
+        # Verify all expected content is present
+        assert "ULTRATHINK Configuration" in output
+        assert "Production confidence:" in output
+        assert "Context window:" in output
+        assert "tokens" in output
+        assert "Rate limiting:" in output
+        assert "Max iterations:" in output
+        assert "Model:" in output
+        assert "All configuration values:" in output
+        assert "Validation:" in output
+        assert "✅ PASSED" in output
+
 
 class TestConfigDocumentation:
     """Test that configuration has proper documentation"""

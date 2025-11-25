@@ -1,5 +1,5 @@
 {
-  "numStartups": 20,
+  "numStartups": 21,
   "installMethod": "unknown",
   "autoUpdates": true,
   "tipsHistory": {
@@ -182,14 +182,14 @@
     "5f40691d-ecf2-4e8b-bded-e094c6691947": {
       "eligible": false,
       "referral_code_details": null,
-      "timestamp": 1763951995679
+      "timestamp": 1764110446067
     }
   },
   "s1mAccessCache": {
     "5f40691d-ecf2-4e8b-bded-e094c6691947": {
       "hasAccess": false,
       "hasAccessNotAsDefault": false,
-      "timestamp": 1763990015097
+      "timestamp": 1764110448254
     }
   },
   "feedbackSurveyState": {
