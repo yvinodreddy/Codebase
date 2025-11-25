@@ -1,5 +1,5 @@
 {
-  "timestamp": "2025-11-24T20:41:46.122919",
+  "timestamp": "2025-11-24T21:15:50.022373",
   "total_tests": 6,
   "passed": 2,
   "failed": 4,
@@ -7,11 +7,11 @@
     {
       "test_name": "small_output",
       "success": false,
-      "duration_seconds": 0.8666574954986572,
+      "duration_seconds": 1.0689990520477295,
       "output_lines": 1111,
       "error_message": "Found ERROR in output",
       "details": {
-        "output_file": "/tmp/ultrathink_test_nnnr4qhh/small_output_output.txt",
+        "output_file": "/tmp/ultrathink_test_tma462ey/small_output_output.txt",
         "return_code": 0,
         "prompt_length": 11
       }
@@ -19,11 +19,11 @@
     {
       "test_name": "medium_output",
       "success": false,
-      "duration_seconds": 0.8172738552093506,
+      "duration_seconds": 1.172433853149414,
       "output_lines": 1267,
       "error_message": "Found ERROR in output",
       "details": {
-        "output_file": "/tmp/ultrathink_test_nnnr4qhh/medium_output_output.txt",
+        "output_file": "/tmp/ultrathink_test_tma462ey/medium_output_output.txt",
         "return_code": 0,
         "prompt_length": 272
       }
@@ -31,11 +31,11 @@
     {
       "test_name": "large_output",
       "success": false,
-      "duration_seconds": 0.766707181930542,
+      "duration_seconds": 0.7193005084991455,
       "output_lines": 1271,
       "error_message": "Found ERROR in output",
       "details": {
-        "output_file": "/tmp/ultrathink_test_nnnr4qhh/large_output_output.txt",
+        "output_file": "/tmp/ultrathink_test_tma462ey/large_output_output.txt",
         "return_code": 0,
         "prompt_length": 442
       }
@@ -43,18 +43,18 @@
     {
       "test_name": "file_based_prompt",
       "success": false,
-      "duration_seconds": 0.7667856216430664,
+      "duration_seconds": 2.1255688667297363,
       "output_lines": 5,
       "error_message": "File-based prompt test failed (return_code: 1, lines: 5)",
       "details": {
         "return_code": 1,
-        "output_file": "/tmp/ultrathink_test_nnnr4qhh/file_based_output.txt"
+        "output_file": "/tmp/ultrathink_test_tma462ey/file_based_output.txt"
       }
     },
     {
       "test_name": "verbose_flag_shorthand",
       "success": true,
-      "duration_seconds": 0.7666971683502197,
+      "duration_seconds": 1.6221809387207031,
       "output_lines": 1111,
       "error_message": null,
       "details": {}
@@ -62,7 +62,7 @@
     {
       "test_name": "backward_compatibility",
       "success": true,
-      "duration_seconds": 0.7669684886932373,
+      "duration_seconds": 1.320620059967041,
       "output_lines": 583,
       "error_message": null,
       "details": {}

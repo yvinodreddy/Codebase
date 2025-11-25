@@ -33,7 +33,7 @@ class TestBasicFunctionality:
         # Test with typical inputs
         try:
             # Import the actual function
-            from circuit_breaker import call
+            from security.circuit_breaker import call
 
             # Call with valid arguments (adjust based on signature)
             # Function has 2 parameters: self, func
@@ -51,7 +51,7 @@ class TestBasicFunctionality:
         # Test with typical inputs
         try:
             # Import the actual function
-            from circuit_breaker import reset
+            from security.circuit_breaker import reset
 
             # Call with valid arguments (adjust based on signature)
             # Function has 1 parameters: self
@@ -69,7 +69,7 @@ class TestBasicFunctionality:
         # Test with typical inputs
         try:
             # Import the actual function
-            from circuit_breaker import is_open
+            from security.circuit_breaker import is_open
 
             # Call with valid arguments (adjust based on signature)
             # Function has 1 parameters: self
@@ -87,7 +87,7 @@ class TestBasicFunctionality:
         # Test with typical inputs
         try:
             # Import the actual function
-            from circuit_breaker import is_closed
+            from security.circuit_breaker import is_closed
 
             # Call with valid arguments (adjust based on signature)
             # Function has 1 parameters: self
@@ -105,7 +105,7 @@ class TestBasicFunctionality:
         # Test with typical inputs
         try:
             # Import the actual function
-            from circuit_breaker import wrapper
+            from security.circuit_breaker import wrapper
 
             # Call with valid arguments (adjust based on signature)
             result = wrapper()
@@ -124,7 +124,7 @@ class TestCircuitState:
     def test_circuitstate_instantiation(self):
         """Test CircuitState can be instantiated"""
         try:
-            from circuit_breaker import CircuitState
+            from security.circuit_breaker import CircuitState
 
             # Try to instantiate the class
             # Adjust constructor args as needed
@@ -148,7 +148,7 @@ class TestCircuitBreakerConfig:
     def test_circuitbreakerconfig_instantiation(self):
         """Test CircuitBreakerConfig can be instantiated"""
         try:
-            from circuit_breaker import CircuitBreakerConfig
+            from security.circuit_breaker import CircuitBreakerConfig
 
             # Try to instantiate the class
             # Adjust constructor args as needed
@@ -172,7 +172,7 @@ class TestCircuitBreaker:
     def test_circuitbreaker_instantiation(self):
         """Test CircuitBreaker can be instantiated"""
         try:
-            from circuit_breaker import CircuitBreaker
+            from security.circuit_breaker import CircuitBreaker
 
             # Try to instantiate the class
             # Adjust constructor args as needed
@@ -192,7 +192,7 @@ class TestCircuitBreaker:
     def test_circuitbreaker_call(self):
         """Test CircuitBreaker.call method - REAL EXECUTION"""
         try:
-            from circuit_breaker import CircuitBreaker
+            from security.circuit_breaker import CircuitBreaker
 
             # Create instance and call method
             instance = CircuitBreaker()
@@ -206,7 +206,7 @@ class TestCircuitBreaker:
     def test_circuitbreaker_reset(self):
         """Test CircuitBreaker.reset method - REAL EXECUTION"""
         try:
-            from circuit_breaker import CircuitBreaker
+            from security.circuit_breaker import CircuitBreaker
 
             # Create instance and call method
             instance = CircuitBreaker()
@@ -220,7 +220,7 @@ class TestCircuitBreaker:
     def test_circuitbreaker_is_open(self):
         """Test CircuitBreaker.is_open method - REAL EXECUTION"""
         try:
-            from circuit_breaker import CircuitBreaker
+            from security.circuit_breaker import CircuitBreaker
 
             # Create instance and call method
             instance = CircuitBreaker()
@@ -234,7 +234,7 @@ class TestCircuitBreaker:
     def test_circuitbreaker_is_closed(self):
         """Test CircuitBreaker.is_closed method - REAL EXECUTION"""
         try:
-            from circuit_breaker import CircuitBreaker
+            from security.circuit_breaker import CircuitBreaker
 
             # Create instance and call method
             instance = CircuitBreaker()
@@ -252,7 +252,7 @@ class TestCircuitBreakerOpenError:
     def test_circuitbreakeropenerror_instantiation(self):
         """Test CircuitBreakerOpenError can be instantiated"""
         try:
-            from circuit_breaker import CircuitBreakerOpenError
+            from security.circuit_breaker import CircuitBreakerOpenError
 
             # Try to instantiate the class
             # Adjust constructor args as needed

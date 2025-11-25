@@ -33,7 +33,7 @@ class TestBasicFunctionality:
         # Test with typical inputs
         try:
             # Import the actual function
-            from security_headers import configure_cors
+            from security.security_headers import configure_cors
 
             # Call with valid arguments (adjust based on signature)
             # Function has 5 parameters: app, allowed_origins, allow_credentials, allowed_methods, allowed_headers
@@ -51,7 +51,7 @@ class TestBasicFunctionality:
         # Test with typical inputs
         try:
             # Import the actual function
-            from security_headers import add_security_headers
+            from security.security_headers import add_security_headers
 
             # Call with valid arguments (adjust based on signature)
             # Function has 2 parameters: app, enable_hsts
@@ -70,7 +70,7 @@ class TestSecurityHeadersMiddleware:
     def test_securityheadersmiddleware_instantiation(self):
         """Test SecurityHeadersMiddleware can be instantiated"""
         try:
-            from security_headers import SecurityHeadersMiddleware
+            from security.security_headers import SecurityHeadersMiddleware
 
             # Try to instantiate the class
             # Adjust constructor args as needed

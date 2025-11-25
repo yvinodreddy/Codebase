@@ -33,7 +33,7 @@ class TestBasicFunctionality:
         # Test with typical inputs
         try:
             # Import the actual function
-            from input_sanitizer import sanitize_prompt_minimal
+            from security.input_sanitizer import sanitize_prompt_minimal
 
             # Call with valid arguments (adjust based on signature)
             # Function has 1 parameters: prompt
@@ -51,7 +51,7 @@ class TestBasicFunctionality:
         # Test with typical inputs
         try:
             # Import the actual function
-            from input_sanitizer import sanitize_prompt_balanced
+            from security.input_sanitizer import sanitize_prompt_balanced
 
             # Call with valid arguments (adjust based on signature)
             # Function has 1 parameters: prompt
@@ -69,7 +69,7 @@ class TestBasicFunctionality:
         # Test with typical inputs
         try:
             # Import the actual function
-            from input_sanitizer import sanitize_prompt_production
+            from security.input_sanitizer import sanitize_prompt_production
 
             # Call with valid arguments (adjust based on signature)
             # Function has 2 parameters: prompt, strict_mode
@@ -87,7 +87,7 @@ class TestBasicFunctionality:
         # Test with typical inputs
         try:
             # Import the actual function
-            from input_sanitizer import get_active_version
+            from security.input_sanitizer import get_active_version
 
             # Call with valid arguments (adjust based on signature)
             result = get_active_version()
@@ -105,7 +105,7 @@ class TestBasicFunctionality:
         # Test with typical inputs
         try:
             # Import the actual function
-            from input_sanitizer import get_version_info
+            from security.input_sanitizer import get_version_info
 
             # Call with valid arguments (adjust based on signature)
             result = get_version_info()
@@ -124,7 +124,7 @@ class TestSecurityError:
     def test_securityerror_instantiation(self):
         """Test SecurityError can be instantiated"""
         try:
-            from input_sanitizer import SecurityError
+            from security.input_sanitizer import SecurityError
 
             # Try to instantiate the class
             # Adjust constructor args as needed

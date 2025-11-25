@@ -33,7 +33,7 @@ class TestBasicFunctionality:
         # Test with typical inputs
         try:
             # Import the actual function
-            from websocket_server import get_db_connection
+            from realtime_tracking.websocket_server import get_db_connection
 
             # Call with valid arguments (adjust based on signature)
             result = get_db_connection()
@@ -52,7 +52,7 @@ class TestConnectionManager:
     def test_connectionmanager_instantiation(self):
         """Test ConnectionManager can be instantiated"""
         try:
-            from websocket_server import ConnectionManager
+            from realtime_tracking.websocket_server import ConnectionManager
 
             # Try to instantiate the class
             # Adjust constructor args as needed

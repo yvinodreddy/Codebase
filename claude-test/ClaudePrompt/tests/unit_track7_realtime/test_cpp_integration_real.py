@@ -33,7 +33,7 @@ class TestBasicFunctionality:
         # Test with typical inputs
         try:
             # Import the actual function
-            from cpp_integration import track_cpp_execution
+            from realtime_tracking.cpp_integration import track_cpp_execution
 
             # Call with valid arguments (adjust based on signature)
             # Function has 2 parameters: prompt_text, output_file
@@ -51,7 +51,7 @@ class TestBasicFunctionality:
         # Test with typical inputs
         try:
             # Import the actual function
-            from cpp_integration import initialize_tracking
+            from realtime_tracking.cpp_integration import initialize_tracking
 
             # Call with valid arguments (adjust based on signature)
             # Function has 1 parameters: self
@@ -69,7 +69,7 @@ class TestBasicFunctionality:
         # Test with typical inputs
         try:
             # Import the actual function
-            from cpp_integration import log_entry
+            from realtime_tracking.cpp_integration import log_entry
 
             # Call with valid arguments (adjust based on signature)
             # Function has 3 parameters: self, level, message
@@ -87,7 +87,7 @@ class TestBasicFunctionality:
         # Test with typical inputs
         try:
             # Import the actual function
-            from cpp_integration import update_progress
+            from realtime_tracking.cpp_integration import update_progress
 
             # Call with valid arguments (adjust based on signature)
             # Function has 3 parameters: self, progress, current_task
@@ -105,7 +105,7 @@ class TestBasicFunctionality:
         # Test with typical inputs
         try:
             # Import the actual function
-            from cpp_integration import update_status
+            from realtime_tracking.cpp_integration import update_status
 
             # Call with valid arguments (adjust based on signature)
             # Function has 2 parameters: self, status
@@ -123,7 +123,7 @@ class TestBasicFunctionality:
         # Test with typical inputs
         try:
             # Import the actual function
-            from cpp_integration import parse_ultrathink_output
+            from realtime_tracking.cpp_integration import parse_ultrathink_output
 
             # Call with valid arguments (adjust based on signature)
             # Function has 2 parameters: self, output_text
@@ -141,7 +141,7 @@ class TestBasicFunctionality:
         # Test with typical inputs
         try:
             # Import the actual function
-            from cpp_integration import monitor_output_file
+            from realtime_tracking.cpp_integration import monitor_output_file
 
             # Call with valid arguments (adjust based on signature)
             # Function has 1 parameters: self
@@ -159,7 +159,7 @@ class TestBasicFunctionality:
         # Test with typical inputs
         try:
             # Import the actual function
-            from cpp_integration import finalize_tracking
+            from realtime_tracking.cpp_integration import finalize_tracking
 
             # Call with valid arguments (adjust based on signature)
             # Function has 2 parameters: self, success
@@ -178,7 +178,7 @@ class TestCPPTracker:
     def test_cpptracker_instantiation(self):
         """Test CPPTracker can be instantiated"""
         try:
-            from cpp_integration import CPPTracker
+            from realtime_tracking.cpp_integration import CPPTracker
 
             # Try to instantiate the class
             # Adjust constructor args as needed
@@ -198,7 +198,7 @@ class TestCPPTracker:
     def test_cpptracker_initialize_tracking(self):
         """Test CPPTracker.initialize_tracking method - REAL EXECUTION"""
         try:
-            from cpp_integration import CPPTracker
+            from realtime_tracking.cpp_integration import CPPTracker
 
             # Create instance and call method
             instance = CPPTracker()
@@ -212,7 +212,7 @@ class TestCPPTracker:
     def test_cpptracker_log_entry(self):
         """Test CPPTracker.log_entry method - REAL EXECUTION"""
         try:
-            from cpp_integration import CPPTracker
+            from realtime_tracking.cpp_integration import CPPTracker
 
             # Create instance and call method
             instance = CPPTracker()
@@ -226,7 +226,7 @@ class TestCPPTracker:
     def test_cpptracker_update_progress(self):
         """Test CPPTracker.update_progress method - REAL EXECUTION"""
         try:
-            from cpp_integration import CPPTracker
+            from realtime_tracking.cpp_integration import CPPTracker
 
             # Create instance and call method
             instance = CPPTracker()
@@ -240,7 +240,7 @@ class TestCPPTracker:
     def test_cpptracker_update_status(self):
         """Test CPPTracker.update_status method - REAL EXECUTION"""
         try:
-            from cpp_integration import CPPTracker
+            from realtime_tracking.cpp_integration import CPPTracker
 
             # Create instance and call method
             instance = CPPTracker()
@@ -254,7 +254,7 @@ class TestCPPTracker:
     def test_cpptracker_parse_ultrathink_output(self):
         """Test CPPTracker.parse_ultrathink_output method - REAL EXECUTION"""
         try:
-            from cpp_integration import CPPTracker
+            from realtime_tracking.cpp_integration import CPPTracker
 
             # Create instance and call method
             instance = CPPTracker()

@@ -33,7 +33,7 @@ class TestBasicFunctionality:
         # Test with typical inputs
         try:
             # Import the actual function
-            from dependency_scanner import scan_dependencies_on_startup
+            from security.dependency_scanner import scan_dependencies_on_startup
 
             # Call with valid arguments (adjust based on signature)
             result = scan_dependencies_on_startup()
@@ -51,7 +51,7 @@ class TestBasicFunctionality:
         # Test with typical inputs
         try:
             # Import the actual function
-            from dependency_scanner import scan
+            from security.dependency_scanner import scan
 
             # Call with valid arguments (adjust based on signature)
             # Function has 2 parameters: self, force
@@ -69,7 +69,7 @@ class TestBasicFunctionality:
         # Test with typical inputs
         try:
             # Import the actual function
-            from dependency_scanner import print_report
+            from security.dependency_scanner import print_report
 
             # Call with valid arguments (adjust based on signature)
             # Function has 2 parameters: self, scan_result
@@ -88,7 +88,7 @@ class TestDependencyScanner:
     def test_dependencyscanner_instantiation(self):
         """Test DependencyScanner can be instantiated"""
         try:
-            from dependency_scanner import DependencyScanner
+            from security.dependency_scanner import DependencyScanner
 
             # Try to instantiate the class
             # Adjust constructor args as needed
@@ -108,7 +108,7 @@ class TestDependencyScanner:
     def test_dependencyscanner_scan(self):
         """Test DependencyScanner.scan method - REAL EXECUTION"""
         try:
-            from dependency_scanner import DependencyScanner
+            from security.dependency_scanner import DependencyScanner
 
             # Create instance and call method
             instance = DependencyScanner()
@@ -122,7 +122,7 @@ class TestDependencyScanner:
     def test_dependencyscanner_print_report(self):
         """Test DependencyScanner.print_report method - REAL EXECUTION"""
         try:
-            from dependency_scanner import DependencyScanner
+            from security.dependency_scanner import DependencyScanner
 
             # Create instance and call method
             instance = DependencyScanner()

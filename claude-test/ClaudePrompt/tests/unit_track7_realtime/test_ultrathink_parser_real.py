@@ -33,7 +33,7 @@ class TestBasicFunctionality:
         # Test with typical inputs
         try:
             # Import the actual function
-            from ultrathink_parser import parse_ultrathink_output
+            from realtime_tracking.ultrathink_parser import parse_ultrathink_output
 
             # Call with valid arguments (adjust based on signature)
             # Function has 1 parameters: file_path
@@ -51,7 +51,7 @@ class TestBasicFunctionality:
         # Test with typical inputs
         try:
             # Import the actual function
-            from ultrathink_parser import parse_file
+            from realtime_tracking.ultrathink_parser import parse_file
 
             # Call with valid arguments (adjust based on signature)
             # Function has 2 parameters: self, file_path
@@ -69,7 +69,7 @@ class TestBasicFunctionality:
         # Test with typical inputs
         try:
             # Import the actual function
-            from ultrathink_parser import parse_content
+            from realtime_tracking.ultrathink_parser import parse_content
 
             # Call with valid arguments (adjust based on signature)
             # Function has 2 parameters: self, content
@@ -88,7 +88,7 @@ class TestUltrathinkParser:
     def test_ultrathinkparser_instantiation(self):
         """Test UltrathinkParser can be instantiated"""
         try:
-            from ultrathink_parser import UltrathinkParser
+            from realtime_tracking.ultrathink_parser import UltrathinkParser
 
             # Try to instantiate the class
             # Adjust constructor args as needed
@@ -108,7 +108,7 @@ class TestUltrathinkParser:
     def test_ultrathinkparser_parse_file(self):
         """Test UltrathinkParser.parse_file method - REAL EXECUTION"""
         try:
-            from ultrathink_parser import UltrathinkParser
+            from realtime_tracking.ultrathink_parser import UltrathinkParser
 
             # Create instance and call method
             instance = UltrathinkParser()
@@ -122,7 +122,7 @@ class TestUltrathinkParser:
     def test_ultrathinkparser_parse_content(self):
         """Test UltrathinkParser.parse_content method - REAL EXECUTION"""
         try:
-            from ultrathink_parser import UltrathinkParser
+            from realtime_tracking.ultrathink_parser import UltrathinkParser
 
             # Create instance and call method
             instance = UltrathinkParser()
