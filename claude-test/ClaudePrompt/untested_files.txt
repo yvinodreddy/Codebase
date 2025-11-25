@@ -51,6 +51,7 @@ generate_truly_real_tests.py
 implement_track8_tests.py
 parallel_coverage_master_plan.py
 parallel_implementation/phase1_realtime_logging.py
+parallel_instance_orchestrator.py
 quick_track9_check.py
 tests_backup_20251120_090921/conftest.py
 transform_mocks_to_real_tests.py
