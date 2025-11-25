@@ -760,3 +760,545 @@ def test_module_imports():
     """Test that ultrathink module can be imported"""
     import ultrathink
     assert ultrathink is not None
+
+
+class TestProcessPromptVerboseMode:
+    """Test process_prompt verbose mode execution (lines 516-800)"""
+
+    @patch.dict('os.environ', {'ANTHROPIC_API_KEY': 'test_key'})
+    @patch('ultrathink.generate_framework_comparison')
+    @patch('ultrathink.ClaudeOrchestrator')
+    @patch('ultrathink.sanitize_prompt')
+    @patch('ultrathink.PromptHistoryManager')
+    @patch('verbose_logger.VerboseLogger')
+    @patch('ultrathink.time.time')
+    @patch('builtins.print')
+    def test_verbose_mode_single_iteration(self, mock_print, mock_time, mock_vlog,
+                                          mock_history, mock_sanitize, mock_orchestrator,
+                                          mock_framework_comp):
+        """Test verbose mode with single iteration (lines 586-594)"""
+        # Setup
+        test_prompt = "test prompt for verbose mode"
+        mock_sanitize.return_value = test_prompt
+
+        # Mock history manager
+        mock_history_instance = Mock()
+        mock_history.return_value = mock_history_instance
+
+        # Mock VerboseLogger
+        mock_vlog_instance = Mock()
+        mock_vlog.return_value = mock_vlog_instance
+
+        # Mock orchestrator response (single iteration)
+        mock_response = Mock()
+        mock_response.response_text = "Test response text"
+        mock_response.final_confidence = 99.5
+        mock_response.total_tokens = 1000
+        mock_response.output_tokens = 400
+        mock_response.cost_estimate = 0.005
+        mock_response.claude_model = "claude-sonnet-4-5"
+
+        mock_orch_result = Mock()
+        mock_orch_result.iterations_performed = 1  # Single iteration
+        mock_orch_result.total_duration_seconds = 5.2
+        mock_orch_result.quality_metrics = {
+            'context_management': {
+                'total_messages': 1,
+                'total_tokens': 1000,
+                'usage_percentage': 0.5,
+                'compactions_performed': 0,
+                'total_tokens_saved': 0
+            },
+            'confidence_breakdown': {
+                'output_validation': 99.0,
+                'verification': 99.5
+            }
+        }
+        mock_response.orchestration_result = mock_orch_result
+
+        mock_response.output_validation = {
+            'success': True,
+            'confidence': 100.0,
+            'passed_layers': ['layer1', 'layer2', 'layer3']
+        }
+
+        mock_response.verification_result = {
+            'overall_passed': True,
+            'overall_confidence': 99.5,
+            'overall_message': 'All verification passed',
+            'methods': ['method1', 'method2']
+        }
+
+        mock_orchestrator_instance = Mock()
+        mock_orchestrator_instance.process_with_validation.return_value = mock_response
+        mock_orchestrator_instance.get_statistics.return_value = {
+            'cache_read_tokens': 500,
+            'cache_creation_tokens': 100
+        }
+        mock_orchestrator.return_value = mock_orchestrator_instance
+
+        # Mock time progression
+        mock_time.return_value = 100.0
+
+        # Mock framework comparison
+        mock_framework_comp.return_value = "Framework comparison output"
+
+        # Execute
+        result = process_prompt(test_prompt, use_claude_api=True, verbose=True)
+
+        # Verify result
+        assert result == True
+
+        # Verify VerboseLogger was called for all stages
+        mock_vlog_instance.stage_header.assert_any_call(3, "Context Management (200K Token Window)")
+        mock_vlog_instance.stage_header.assert_any_call(4, "Agent Execution - Claude API with Adaptive Feedback Loop")
+        mock_vlog_instance.stage_header.assert_any_call(5, "Guardrails - Output Validation (Layers 4-8)")
+        mock_vlog_instance.stage_header.assert_any_call(6, "Quality Scoring")
+
+        # Verify single iteration detail called (line 587-594)
+        mock_vlog_instance.iteration_detail.assert_called_once()
+        call_args = mock_vlog_instance.iteration_detail.call_args
+        assert call_args[1]['iteration'] == 1
+        assert call_args[1]['max_iterations'] == 20
+        assert call_args[1]['confidence'] == 99.5
+        assert "Initial response meets quality threshold" in call_args[1]['changes_made']
+
+        # Verify agent components displayed
+        assert mock_vlog_instance.agent_component.call_count >= 3
+
+        # Verify guardrail layers displayed (layers 4-8)
+        assert mock_vlog_instance.guardrail_layer.call_count >= 4
+        mock_vlog_instance.hallucination_detection_layer.assert_called_once()
+
+        # Verify context management called
+        mock_vlog_instance.context_management_detail.assert_called_once()
+
+        # Verify quality breakdown called
+        mock_vlog_instance.quality_breakdown.assert_called_once()
+
+    @patch.dict('os.environ', {'ANTHROPIC_API_KEY': 'test_key'})
+    @patch('ultrathink.generate_framework_comparison')
+    @patch('ultrathink.ClaudeOrchestrator')
+    @patch('ultrathink.sanitize_prompt')
+    @patch('ultrathink.PromptHistoryManager')
+    @patch('verbose_logger.VerboseLogger')
+    @patch('ultrathink.time.time')
+    @patch('builtins.print')
+    def test_verbose_mode_multiple_iterations(self, mock_print, mock_time, mock_vlog,
+                                             mock_history, mock_sanitize, mock_orchestrator,
+                                             mock_framework_comp):
+        """Test verbose mode with multiple iterations (lines 596-607)"""
+        # Setup similar to previous test but with multiple iterations
+        test_prompt = "complex test prompt"
+        mock_sanitize.return_value = test_prompt
+
+        mock_history_instance = Mock()
+        mock_history.return_value = mock_history_instance
+
+        mock_vlog_instance = Mock()
+        mock_vlog.return_value = mock_vlog_instance
+
+        # Mock orchestrator response with 3 iterations
+        mock_response = Mock()
+        mock_response.response_text = "Complex test response"
+        mock_response.final_confidence = 99.8
+        mock_response.total_tokens = 5000
+        mock_response.output_tokens = 2000
+        mock_response.cost_estimate = 0.025
+        mock_response.claude_model = "claude-sonnet-4-5"
+
+        mock_orch_result = Mock()
+        mock_orch_result.iterations_performed = 3  # Multiple iterations
+        mock_orch_result.total_duration_seconds = 15.7
+        mock_orch_result.quality_metrics = {
+            'context_management': {
+                'total_messages': 3,
+                'total_tokens': 5000,
+                'usage_percentage': 2.5,
+                'compactions_performed': 0,
+                'total_tokens_saved': 0
+            }
+        }
+        mock_response.orchestration_result = mock_orch_result
+
+        mock_response.output_validation = {'success': True, 'confidence': 100.0}
+        mock_response.verification_result = {'overall_passed': True, 'overall_confidence': 99.8}
+
+        mock_orchestrator_instance = Mock()
+        mock_orchestrator_instance.process_with_validation.return_value = mock_response
+        mock_orchestrator_instance.get_statistics.return_value = {'cache_read_tokens': 0, 'cache_creation_tokens': 0}
+        mock_orchestrator.return_value = mock_orchestrator_instance
+
+        mock_time.return_value = 100.0
+        mock_framework_comp.return_value = "Framework comparison"
+
+        # Execute
+        result = process_prompt(test_prompt, use_claude_api=True, verbose=True)
+
+        # Verify
+        assert result == True
+
+        # Verify multiple iteration details called (lines 597-607)
+        assert mock_vlog_instance.iteration_detail.call_count == 3
+
+        # Check that iterations were logged properly
+        iteration_calls = [call[1] for call in mock_vlog_instance.iteration_detail.call_args_list]
+        for i, call_kwargs in enumerate(iteration_calls, 1):
+            assert call_kwargs['iteration'] == i
+            assert call_kwargs['max_iterations'] == 20
+
+    @patch.dict('os.environ', {'ANTHROPIC_API_KEY': 'test_key'})
+    @patch('ultrathink.generate_framework_comparison')
+    @patch('ultrathink.ClaudeOrchestrator')
+    @patch('ultrathink.sanitize_prompt')
+    @patch('ultrathink.PromptHistoryManager')
+    @patch('builtins.print')
+    def test_quiet_mode_output(self, mock_print, mock_history, mock_sanitize, mock_orchestrator, mock_framework_comp):
+        """Test quiet mode output (lines 724-727)"""
+        # Setup
+        test_prompt = "test prompt"
+        mock_sanitize.return_value = test_prompt
+
+        mock_history_instance = Mock()
+        mock_history.return_value = mock_history_instance
+
+        # Mock orchestrator response
+        mock_response = Mock()
+        mock_response.response_text = "Quiet mode response"
+        mock_response.final_confidence = 99.5
+        mock_response.total_tokens = 1000
+        mock_response.output_tokens = 400
+        mock_response.cost_estimate = 0.005
+        mock_response.claude_model = "claude-sonnet-4-5"
+
+        mock_orch_result = Mock()
+        mock_orch_result.iterations_performed = 1
+        mock_orch_result.total_duration_seconds = 3.2
+        mock_orch_result.quality_metrics = {
+            'context_management': {
+                'total_messages': 1,
+                'total_tokens': 1000,
+                'usage_percentage': 0.5
+            }
+        }
+        mock_response.orchestration_result = mock_orch_result
+
+        mock_response.output_validation = {'success': True}
+        mock_response.verification_result = {'overall_passed': True}
+
+        mock_orchestrator_instance = Mock()
+        mock_orchestrator_instance.process_with_validation.return_value = mock_response
+        mock_orchestrator_instance.get_statistics.return_value = {}
+        mock_orchestrator.return_value = mock_orchestrator_instance
+
+        mock_framework_comp.return_value = "Framework comparison"
+
+        # Execute with quiet=True - requires API mode
+        result = process_prompt(test_prompt, use_claude_api=True, quiet=True)
+
+        # Verify result
+        assert result == True
+
+        # Verify output was printed
+        print_calls = [str(call) for call in mock_print.call_args_list]
+        output = ''.join(print_calls)
+
+        # In quiet mode, only response and confidence should be shown
+        assert "Quiet mode response" in output
+        assert "99.5" in output or "Confidence" in output
+
+    @patch.dict('os.environ', {'ANTHROPIC_API_KEY': 'test_key'})
+    @patch('ultrathink.generate_framework_comparison')
+    @patch('ultrathink.ClaudeOrchestrator')
+    @patch('ultrathink.sanitize_prompt')
+    @patch('ultrathink.PromptHistoryManager')
+    @patch('builtins.print')
+    def test_normal_mode_output(self, mock_print, mock_history, mock_sanitize,
+                               mock_orchestrator, mock_framework_comp):
+        """Test normal (non-verbose, non-quiet) mode output (lines 715-743)"""
+        # Setup
+        test_prompt = "normal mode test"
+        mock_sanitize.return_value = test_prompt
+
+        mock_history_instance = Mock()
+        mock_history.return_value = mock_history_instance
+
+        # Mock orchestrator response
+        mock_response = Mock()
+        mock_response.response_text = "Normal mode response text"
+        mock_response.final_confidence = 99.3
+        mock_response.total_tokens = 2000
+        mock_response.output_tokens = 800
+        mock_response.claude_model = 'claude-sonnet-4-5'
+        mock_response.cost_estimate = 0.01
+
+        mock_orch_result = Mock()
+        mock_orch_result.iterations_performed = 2
+        mock_orch_result.total_duration_seconds = 7.5
+        mock_orch_result.quality_metrics = {
+            'context_management': {
+                'total_messages': 2,
+                'total_tokens': 2000,
+                'usage_percentage': 1.0,
+                'compactions_performed': 0,
+                'total_tokens_saved': 0
+            }
+        }
+        mock_response.orchestration_result = mock_orch_result
+
+        mock_response.output_validation = {'success': True}
+        mock_response.verification_result = {'overall_passed': True}
+
+        mock_orchestrator_instance = Mock()
+        mock_orchestrator_instance.process_with_validation.return_value = mock_response
+        mock_orchestrator_instance.get_statistics.return_value = {}
+        mock_orchestrator.return_value = mock_orchestrator_instance
+
+        mock_framework_comp.return_value = "Framework comparison output"
+
+        # Execute with verbose=False, quiet=False (normal mode)
+        result = process_prompt(test_prompt, use_claude_api=True, verbose=False, quiet=False)
+
+        # Verify result
+        assert result == True
+
+        # Verify output sections
+        print_calls = [str(call) for call in mock_print.call_args_list]
+        output = ''.join(print_calls)
+
+        # Should show SUCCESS, OUTPUT, METRICS sections
+        assert "SUCCESS" in output
+        assert "Normal mode response text" in output
+        assert "99.3" in output  # confidence
+        assert "2,000" in output or "2000" in output  # tokens
+
+        # Framework comparison should be displayed
+        mock_framework_comp.assert_called_once()
+
+    @patch.dict('os.environ', {'ANTHROPIC_API_KEY': 'test_key'})
+    @patch('ultrathink.generate_framework_comparison')
+    @patch('ultrathink.ClaudeOrchestrator')
+    @patch('ultrathink.sanitize_prompt')
+    @patch('ultrathink.PromptHistoryManager')
+    @patch('verbose_logger.VerboseLogger')
+    @patch('builtins.print')
+    def test_context_management_with_compactions(self, mock_print, mock_vlog, mock_history,
+                                                 mock_sanitize, mock_orchestrator, mock_framework_comp):
+        """Test context management display with compactions (lines 746-755)"""
+        # Setup
+        test_prompt = "test with compactions"
+        mock_sanitize.return_value = test_prompt
+
+        mock_history_instance = Mock()
+        mock_history.return_value = mock_history_instance
+
+        mock_vlog_instance = Mock()
+        mock_vlog.return_value = mock_vlog_instance
+
+        # Mock orchestrator response with compactions
+        mock_response = Mock()
+        mock_response.response_text = "Response with compactions"
+        mock_response.final_confidence = 99.0
+        mock_response.total_tokens = 150000
+        mock_response.output_tokens = 60000
+        mock_response.claude_model = 'claude-sonnet-4-5'
+        mock_response.cost_estimate = 0.075
+
+        mock_orch_result = Mock()
+        mock_orch_result.iterations_performed = 5
+        mock_orch_result.total_duration_seconds = 25.3
+        mock_orch_result.quality_metrics = {
+            'context_management': {
+                'total_messages': 10,
+                'total_tokens': 150000,
+                'usage_percentage': 75.0,
+                'compactions_performed': 3,  # Compactions happened
+                'total_tokens_saved': 50000
+            }
+        }
+        mock_response.orchestration_result = mock_orch_result
+
+        mock_response.output_validation = {'success': True}
+        mock_response.verification_result = {'overall_passed': True}
+
+        mock_orchestrator_instance = Mock()
+        mock_orchestrator_instance.process_with_validation.return_value = mock_response
+        mock_orchestrator_instance.get_statistics.return_value = {}
+        mock_orchestrator.return_value = mock_orchestrator_instance
+
+        # Execute
+        mock_framework_comp.return_value = 'Framework comparison'
+
+        # Execute
+        result = process_prompt(test_prompt, use_claude_api=True, verbose=False, quiet=False)
+
+        # Verify result
+        assert result == True
+
+        # Verify compaction stats were printed (lines 753-755)
+        print_calls = [str(call) for call in mock_print.call_args_list]
+        output = ''.join(print_calls)
+
+        assert "3" in output  # compactions count
+        assert "50,000" in output or "50000" in output  # tokens saved
+
+    @patch.dict('os.environ', {'ANTHROPIC_API_KEY': 'test_key'})
+    @patch('ultrathink.generate_framework_comparison')
+    @patch('ultrathink.ClaudeOrchestrator')
+    @patch('ultrathink.sanitize_prompt')
+    @patch('ultrathink.PromptHistoryManager')
+    @patch('verbose_logger.VerboseLogger')
+    @patch('builtins.print')
+    def test_verbose_output_validation_details(self, mock_print, mock_vlog, mock_history,
+                                               mock_sanitize, mock_orchestrator, mock_framework_comp):
+        """Test verbose mode output validation details (lines 764-781)"""
+        # Setup
+        test_prompt = "test output validation"
+        mock_sanitize.return_value = test_prompt
+
+        mock_history_instance = Mock()
+        mock_history.return_value = mock_history_instance
+
+        mock_vlog_instance = Mock()
+        mock_vlog.return_value = mock_vlog_instance
+
+        # Mock orchestrator response
+        mock_response = Mock()
+        mock_response.response_text = "Test response"
+        mock_response.final_confidence = 99.5
+        mock_response.total_tokens = 1000
+        mock_response.output_tokens = 400
+        mock_response.cost_estimate = 0.005
+        mock_response.claude_model = "claude-sonnet-4-5"
+
+        mock_orch_result = Mock()
+        mock_orch_result.iterations_performed = 1
+        mock_orch_result.total_duration_seconds = 4.2
+        mock_orch_result.quality_metrics = {
+            'context_management': {
+                'total_messages': 1,
+                'total_tokens': 1000,
+                'usage_percentage': 0.5,
+                'compactions_performed': 0,
+                'total_tokens_saved': 0
+            },
+            'confidence_breakdown': {'output': 99.0, 'verification': 99.5}
+        }
+        mock_response.orchestration_result = mock_orch_result
+
+        # Output validation with detailed info
+        mock_response.output_validation = {
+            'success': True,
+            'confidence': 100.0,
+            'passed_layers': ['layer1', 'layer2', 'layer3', 'layer4']
+        }
+
+        # Verification with methods
+        mock_response.verification_result = {
+            'overall_passed': True,
+            'overall_confidence': 99.5,
+            'overall_message': 'All checks passed',
+            'methods': ['rules_based', 'guardrails', 'data_validation']
+        }
+
+        mock_orchestrator_instance = Mock()
+        mock_orchestrator_instance.process_with_validation.return_value = mock_response
+        mock_orchestrator_instance.get_statistics.return_value = {}
+        mock_orchestrator.return_value = mock_orchestrator_instance
+
+        mock_framework_comp.return_value = "Framework comparison"
+
+        # Execute in verbose mode
+        result = process_prompt(test_prompt, use_claude_api=True, verbose=True)
+
+        # Verify result
+        assert result == True
+
+        # Verify output validation details printed (lines 765-772)
+        print_calls = [str(call) for call in mock_print.call_args_list]
+        output = ''.join(print_calls)
+
+        assert "OUTPUT GUARDRAILS VALIDATION" in output
+        assert "PASSED" in output
+        assert "Passed Layers" in output or "passed_layers" in output
+
+        # Verify verification details printed (lines 775-780)
+        assert "VERIFICATION RESULTS" in output
+        assert "All checks passed" in output or "overall_message" in output
+
+    @patch.dict('os.environ', {'ANTHROPIC_API_KEY': 'test_key'})
+    @patch('ultrathink.generate_framework_comparison')
+    @patch('ultrathink.ClaudeOrchestrator')
+    @patch('ultrathink.sanitize_prompt')
+    @patch('ultrathink.PromptHistoryManager')
+    @patch('verbose_logger.VerboseLogger')
+    @patch('ultrathink.time.time')
+    @patch('builtins.print')
+    def test_verbose_guardrail_layers_display(self, mock_print, mock_time, mock_vlog,
+                                              mock_history, mock_sanitize, mock_orchestrator,
+                                              mock_framework_comp):
+        """Test all guardrail layers are displayed in verbose mode (lines 618-690)"""
+        # Setup
+        test_prompt = "guardrail test"
+        mock_sanitize.return_value = test_prompt
+
+        mock_history_instance = Mock()
+        mock_history.return_value = mock_history_instance
+
+        mock_vlog_instance = Mock()
+        mock_vlog.return_value = mock_vlog_instance
+
+        # Mock orchestrator response
+        mock_response = Mock()
+        mock_response.response_text = "Test response"
+        mock_response.final_confidence = 99.5
+        mock_response.total_tokens = 1000
+        mock_response.output_tokens = 400
+        mock_response.cost_estimate = 0.005
+        mock_response.claude_model = "claude-sonnet-4-5"
+
+        mock_orch_result = Mock()
+        mock_orch_result.iterations_performed = 1
+        mock_orch_result.total_duration_seconds = 4.0
+        mock_orch_result.quality_metrics = {'context_management': {'total_messages': 1, 'total_tokens': 1000, 'usage_percentage': 0.5, 'compactions_performed': 0, 'total_tokens_saved': 0}}
+        mock_orch_result.quality_metrics['context_management']['usage_percentage'] = 0.5
+        mock_response.orchestration_result = mock_orch_result
+
+        mock_response.output_validation = {'success': True, 'confidence': 100.0}
+        mock_response.verification_result = {'overall_passed': True, 'overall_confidence': 99.5}
+
+        mock_orchestrator_instance = Mock()
+        mock_orchestrator_instance.process_with_validation.return_value = mock_response
+        mock_orchestrator_instance.get_statistics.return_value = {}
+        mock_orchestrator.return_value = mock_orchestrator_instance
+
+        mock_time.return_value = 100.0
+        mock_framework_comp.return_value = "Framework comparison"
+
+        # Execute in verbose mode
+        result = process_prompt(test_prompt, use_claude_api=True, verbose=True)
+
+        # Verify result
+        assert result == True
+
+        # Verify all 7 guardrail layers were displayed (Layers 1-7)
+        # Input validation: Layers 1-3, Output validation: Layers 4-7
+        guardrail_calls = [call for call in mock_vlog_instance.guardrail_layer.call_args_list]
+        assert len(guardrail_calls) == 7  # All 7 layers (1-7)
+
+        # Verify layer numbers include both input and output validation layers
+        layer_nums = [call[1]['layer_num'] for call in guardrail_calls]
+        assert 1 in layer_nums  # Prompt Shields (Input)
+        assert 2 in layer_nums  # Content Filtering (Input)
+        assert 3 in layer_nums  # PHI Detection (Input)
+        assert 4 in layer_nums  # Medical Terminology (Output)
+        assert 5 in layer_nums  # Output Content Filtering (Output)
+        assert 6 in layer_nums  # Groundedness (Output)
+        assert 7 in layer_nums  # Compliance (Output)
+
+        # Verify Layer 8 (Hallucination Detection) was displayed separately
+        mock_vlog_instance.hallucination_detection_layer.assert_called_once()
+
+        # Verify summary messages
+        mock_vlog_instance.success.assert_any_call("OUTPUT VALIDATION: ✅ ALL 5 LAYERS PASSED (Layers 4-8 of 8 Total)")
+        mock_vlog_instance.success.assert_any_call("🎯 COMPLETE GUARDRAILS SUMMARY: ✅ ALL 8 LAYERS PASSED")
