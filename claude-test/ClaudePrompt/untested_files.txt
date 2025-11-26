@@ -38,6 +38,7 @@ fix_remaining_16_tests.py
 fix_track10_tests.py
 fix_track10_tests_v2.py
 generate_100_percent_real_tests.py
+generate_critical_coverage_tests.py
 generate_enhanced_track9_tests.py
 generate_real_coverage_tests.py
 generate_real_logic_tests.py
@@ -55,4 +56,5 @@ parallel_instance_orchestrator.py
 quick_track9_check.py
 tests_backup_20251120_090921/conftest.py
 transform_mocks_to_real_tests.py
+update_coverage_metrics.py
 update_realtime_metrics.py

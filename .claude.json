@@ -5,7 +5,7 @@
   "tipsHistory": {
     "theme-command": 5,
     "new-user-warmup": 11,
-    "plan-mode-for-complex-tasks": 18,
+    "plan-mode-for-complex-tasks": 25,
     "terminal-setup": 23,
     "memory-command": 18,
     "stickers-command": 23,
@@ -25,7 +25,7 @@
     "permissions": 25,
     "custom-commands": 12
   },
-  "promptQueueUseCount": 11,
+  "promptQueueUseCount": 12,
   "cachedStatsigGates": {
     "tengu_disable_bypass_permissions_mode": false,
     "tengu_tool_pear": false,
