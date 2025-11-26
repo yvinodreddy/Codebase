@@ -238,7 +238,12 @@ dependencies=(
 
 for dep in "${dependencies[@]}"; do
     log_info "Installing $dep..."
-    retry_with_backoff pip3 install -q "$dep" 2>&1 | tee -a "$LOGS_DIR/dependencies.log"
+    # Check if already installed
+    if pip3 show "$dep" > /dev/null 2>&1; then
+        log_info "$dep already installed, skipping"
+    else
+        retry_with_backoff pip3 install --break-system-packages -q "$dep" 2>&1 | tee -a "$LOGS_DIR/dependencies.log"
+    fi
 done
 
 log_success "All dependencies installed"
