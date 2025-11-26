@@ -51,6 +51,10 @@ class TestStandaloneFunctions:
             pass  # Auto-fixed: incomplete with statement
             pass  # Auto-fixed: incomplete with statement
             pass  # Auto-fixed: incomplete with statement
+            pass  # Auto-fixed: incomplete with statement
+            pass  # Auto-fixed: incomplete with statement
+            pass  # Auto-fixed: incomplete with statement
+            pass  # Auto-fixed: incomplete with statement
     def test_call_edge_cases(self):
         """Test call edge cases"""
         # TODO: Implement edge case tests for call
