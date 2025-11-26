@@ -14,7 +14,7 @@ import uuid
 import logging
 from typing import Dict, List, Optional, Any
 from datetime import datetime
-from sqlite_context_loader import SQLiteContextLoader
+from database.sqlite_context_loader import SQLiteContextLoader
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)

@@ -423,3 +423,39 @@ Otherwise it's not worth it.
 This applies to ALL Python files in ALL projects.
 
 ================================================================================
+
+
+================================================================================
+📊 LIVE TEST COVERAGE - UPDATED 2025-11-26 11:47:57
+================================================================================
+
+**CURRENT COVERAGE: 13.28%**
+
+This data is LIVE and updated automatically.
+Last Coverage Run: 2025-11-26 11:47:57
+
+**Coverage Breakdown:**
+- Total Statements: 20275
+- Covered Statements: 2692
+- Missing Statements: 17583
+
+**Test Statistics:**
+- Coverage updated every test run
+- Stored in: coverage_live.json
+- Tracked in Git for all instances
+
+**How to get latest coverage:**
+```bash
+python3 update_coverage_metrics.py
+```
+
+This will:
+1. Run full coverage analysis
+2. Update all CLAUDE.md files
+3. Save to coverage_live.json
+4. Display current metrics
+
+**PERMANENT TRACKING:** This coverage data is committed to Git and available
+across all instances, windows, and sessions.
+
+================================================================================
