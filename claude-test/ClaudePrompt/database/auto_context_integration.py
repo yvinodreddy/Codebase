@@ -49,8 +49,14 @@ class AutoContextIntegration:
         Returns:
             Tuple of (project_id, is_new)
         """
-        # Use working directory as project identifier
-        cwd = Path.cwd()
+        # CRITICAL: Use original working directory from environment variable
+        # This ensures we use the directory where cpp was called, not where scripts are located
+        original_cwd = os.environ.get('ULTRATHINK_ORIGINAL_CWD')
+        if original_cwd:
+            cwd = Path(original_cwd)
+        else:
+            cwd = Path.cwd()
+
         project_name = cwd.name or "root"
 
         # STEP 1: Check if we have an existing mapping for this directory
@@ -119,14 +125,15 @@ class AutoContextIntegration:
         # Create new instance
         instance_id = self.manager.launch_instance(project_id, phase_id)
 
-        # Save session
+        # Save session with original working directory
+        original_cwd = os.environ.get('ULTRATHINK_ORIGINAL_CWD', str(Path.cwd()))
         self._save_session({
             'project_id': project_id,
             'instance_id': instance_id,
             'started_at': datetime.now().isoformat(),
             'hostname': socket.gethostname(),
             'process_id': os.getpid(),
-            'working_directory': str(Path.cwd())
+            'working_directory': original_cwd
         })
 
         return instance_id, True

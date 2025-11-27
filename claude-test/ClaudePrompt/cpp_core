@@ -13,6 +13,12 @@
 #   cpp "prompt" -v     (verbose mode)
 #
 
+# CRITICAL: Preserve original working directory if not already set
+# This allows nested calls to maintain the original context
+if [ -z "$ULTRATHINK_ORIGINAL_CWD" ]; then
+    export ULTRATHINK_ORIGINAL_CWD="$(pwd)"
+fi
+
 # Get the directory where this script is actually located (resolve symlinks)
 SOURCE="${BASH_SOURCE[0]}"
 while [ -h "$SOURCE" ]; do
@@ -23,4 +29,5 @@ done
 SCRIPT_DIR="$(cd -P "$(dirname "$SOURCE")" && pwd)"
 
 # Call ultrathink.py with all arguments
+# The exec replaces this process with Python, but environment variables are preserved
 exec python3 "$SCRIPT_DIR/ultrathink.py" "$@"

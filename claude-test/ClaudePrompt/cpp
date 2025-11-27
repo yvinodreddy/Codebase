@@ -19,6 +19,11 @@
 #   cpp "prompt" --project-id proj_xxx  (use specific project)
 #
 
+# CRITICAL: Capture the original working directory FIRST
+# This must be done before ANY directory changes
+ORIGINAL_WORKING_DIR="$(pwd)"
+export ULTRATHINK_ORIGINAL_CWD="$ORIGINAL_WORKING_DIR"
+
 # Get the directory where this script is actually located (resolve symlinks)
 SOURCE="${BASH_SOURCE[0]}"
 while [ -h "$SOURCE" ]; do
@@ -89,7 +94,8 @@ echo "==========================================================================
 echo ""
 echo "  📁 Project ID:  $PROJECT_ID"
 echo "  🔹 Instance ID: $INSTANCE_ID"
-echo "  📂 Directory:   $(pwd)"
+echo "  📂 Directory:   $ORIGINAL_WORKING_DIR"
+echo "  🏠 Script Dir:  $SCRIPT_DIR"
 echo ""
 echo "  💡 TIP: Use --project-id flag to override auto-detection"
 echo "     Example: cpp \"prompt\" --project-id $PROJECT_ID"

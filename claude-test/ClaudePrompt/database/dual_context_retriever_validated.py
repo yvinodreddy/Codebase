@@ -1,24 +1,19 @@
 """
-Dual retrieval: keyword AND semantic search with comparison.
+Dual retrieval with 99% CONFIDENCE VALIDATION for BOTH methods.
 
-⚠️ CRITICAL UPDATE 2025-11-27:
-This module now supports 99% confidence validation for BOTH methods.
-Use retrieve_with_both_methods_validated() for production-grade results.
-
-⚠️ CRITICAL REQUIREMENT (Effective 2025-11-27):
-BOTH keyword AND semantic results MUST be printed in output for comparison.
-Use print_both_results() to display complete comparison.
-
-Legacy retrieve_with_both_methods() available for backward compatibility.
+CRITICAL PRODUCTION-GRADE REQUIREMENT:
+- BOTH keyword AND semantic search MUST reach 99% confidence
+- Use feedback loop (up to 20 iterations) for each method
+- Apply all 8 guardrail layers
+- Only return results when BOTH methods are 99% validated
+- This is NON-NEGOTIABLE for production deployment
 """
 from database.context_retriever import ContextRetriever
 from database.semantic_retriever import SemanticRetriever
-from database.result_formatter import ResultFormatter
 from typing import Dict, List, Tuple
 import concurrent.futures
 import json
 import subprocess
-import time
 import logging
 
 logger = logging.getLogger(__name__)
@@ -28,11 +23,17 @@ MAX_VALIDATION_ITERATIONS = 20
 TARGET_CONFIDENCE = 99.0
 VALIDATION_SCRIPT = "/home/user01/claude-test/ClaudePrompt/validate_my_response.py"
 
-class DualContextRetriever:
-    """Provides BOTH keyword and semantic search with side-by-side comparison."""
+
+class DualContextRetrieverValidated:
+    """
+    PRODUCTION-GRADE dual retrieval with 99% confidence validation.
+
+    This class ensures BOTH keyword and semantic search results are
+    validated to 99% confidence before comparison.
+    """
 
     def __init__(self):
-        logger.info("Initializing DualContextRetriever")
+        logger.info("Initializing DualContextRetrieverValidated (99% validation enabled)")
         try:
             self.keyword_retriever = ContextRetriever()
             logger.info("Keyword retriever: OK")
@@ -46,119 +47,6 @@ class DualContextRetriever:
         except Exception as e:
             logger.error(f"Semantic retriever failed: {e}")
             self.semantic_retriever = None
-
-    def retrieve_with_both_methods(self, query: str, k: int = 10) -> Dict:
-        """
-        Run BOTH keyword and semantic search, return BOTH results for comparison.
-
-        ⚠️ LEGACY METHOD - NO VALIDATION:
-        This method does NOT validate to 99% confidence.
-        For PRODUCTION use, call retrieve_with_both_methods_validated() instead!
-
-        This is the key feature: user sees BOTH methods side-by-side!
-        """
-        logger.warning("⚠️ Using legacy retrieve_with_both_methods() - NO 99% validation!")
-        logger.warning("   For production, use retrieve_with_both_methods_validated() instead")
-        logger.info(f"Dual retrieval for query: {query[:50]}...")
-
-        # Get all messages for semantic search
-        messages = self._get_all_messages()
-
-        # Run both methods in parallel
-        keyword_results = []
-        semantic_results = []
-
-        with concurrent.futures.ThreadPoolExecutor(max_workers=2) as executor:
-            # Submit both tasks
-            if self.keyword_retriever:
-                keyword_future = executor.submit(
-                    self._keyword_search_safe, query, k
-                )
-
-            if self.semantic_retriever:
-                semantic_future = executor.submit(
-                    self._semantic_search_safe, query, messages, k
-                )
-
-            # Get results
-            if self.keyword_retriever:
-                keyword_results = keyword_future.result()
-
-            if self.semantic_retriever:
-                semantic_results = semantic_future.result()
-
-        # Compare results
-        comparison = self._compare_results(keyword_results, semantic_results)
-
-        return {
-            'keyword_results': keyword_results,
-            'semantic_results': semantic_results,
-            'comparison': comparison,
-            'recommendation': self._recommend_method(comparison)
-        }
-
-    def _keyword_search_safe(self, query: str, k: int) -> List[Dict]:
-        """Safe keyword search with error handling."""
-        try:
-            if self.keyword_retriever:
-                return self.keyword_retriever.retrieve(query, limit=k)
-        except Exception as e:
-            logger.error(f"Keyword search failed: {e}")
-        return []
-
-    def _semantic_search_safe(self, query: str, messages: List[Dict], k: int) -> List[Dict]:
-        """Safe semantic search with error handling."""
-        try:
-            if self.semantic_retriever:
-                return self.semantic_retriever.retrieve(query, messages, k)
-        except Exception as e:
-            logger.error(f"Semantic search failed: {e}")
-        return []
-
-    def _get_all_messages(self) -> List[Dict]:
-        """Get all messages from database."""
-        # For now, return empty list
-        # TODO: Integrate with actual context database
-        return []
-
-    def _compare_results(self, keyword_results, semantic_results):
-        """Compare the two result sets."""
-        keyword_ids = {r.get('id', i) for i, r in enumerate(keyword_results)}
-        semantic_ids = {r['message'].get('id', i) for i, r in enumerate(semantic_results)}
-
-        overlap_ids = keyword_ids & semantic_ids
-
-        return {
-            'overlap_percentage': len(overlap_ids) / max(len(keyword_ids), 1) if keyword_ids else 0,
-            'overlap_count': len(overlap_ids),
-            'keyword_unique_count': len(keyword_ids - overlap_ids),
-            'semantic_unique_count': len(semantic_ids - overlap_ids),
-            'keyword_time': keyword_results[0].get('retrieval_time', 0) if keyword_results else 0,
-            'semantic_time': semantic_results[0].get('retrieval_time', 0) if semantic_results else 0,
-            'total_keyword': len(keyword_results),
-            'total_semantic': len(semantic_results)
-        }
-
-    def _recommend_method(self, comparison):
-        """
-        Recommend which method to use based on comparison.
-
-        ⚠️ LEGACY METHOD - OVERLAP-BASED (NOT CONFIDENCE-BASED):
-        This uses overlap percentage, NOT confidence scores.
-        For production, use _recommend_method_by_confidence() instead!
-        """
-        overlap_pct = comparison['overlap_percentage']
-
-        if overlap_pct >= 0.9:
-            return 'keyword'  # Fast and accurate enough
-        elif overlap_pct < 0.5:
-            return 'both'  # Different results, use both for comprehensive coverage
-        else:
-            return 'semantic'  # Better semantic understanding
-
-    # =========================================================================
-    # PRODUCTION-GRADE METHODS WITH 99% CONFIDENCE VALIDATION
-    # =========================================================================
 
     def retrieve_with_both_methods_validated(
         self,
@@ -494,6 +382,11 @@ class DualContextRetriever:
         # For now, just return original results
         return results
 
+    def _get_all_messages(self) -> List[Dict]:
+        """Get all messages from database."""
+        # TODO: Integrate with actual context database
+        return []
+
     def _compare_validated_results(
         self,
         keyword_results: List[Dict],
@@ -567,69 +460,3 @@ class DualContextRetriever:
         else:
             # Medium overlap - prefer semantic (better understanding)
             return 'semantic'
-
-    # =========================================================================
-    # RESULT PRINTING FOR COMPARISON (CRITICAL REQUIREMENT 2025-11-27)
-    # =========================================================================
-
-    def print_both_results(self, query: str, k: int = 10, output_file: str = None) -> str:
-        """
-        Print BOTH keyword and semantic results for comparison.
-
-        CRITICAL REQUIREMENT (Effective 2025-11-27):
-        - BOTH results MUST be visible in output
-        - Complete details (content, scores, metadata)
-        - Side-by-side comparison
-        - MANDATORY for all production use
-
-        This allows users to:
-        - See exactly what each method returns
-        - Understand differences between methods
-        - Make informed decisions
-        - Validate both methods work correctly
-
-        Args:
-            query: Search query
-            k: Number of results
-            output_file: Optional file to write output (in addition to return)
-
-        Returns:
-            Formatted string with BOTH results
-        """
-        logger.info(f"🔥 Printing BOTH results for comparison: {query[:50]}...")
-
-        # Get validated results
-        result = self.retrieve_with_both_methods_validated(
-            query=query,
-            k=k,
-            require_99_confidence=True  # ALWAYS validate in production
-        )
-
-        # Format for output
-        formatted_output = ResultFormatter.format_comparison_for_output(result, query)
-
-        # Write to file if specified
-        if output_file:
-            try:
-                with open(output_file, 'a') as f:
-                    f.write("\n\n")
-                    f.write(formatted_output)
-                    f.write("\n\n")
-                logger.info(f"✅ Results written to: {output_file}")
-            except Exception as e:
-                logger.error(f"Failed to write to file: {e}")
-
-        return formatted_output
-
-    def print_both_results_to_file(self, query: str, output_file: str, k: int = 10):
-        """
-        Convenience method to print results directly to file.
-
-        CRITICAL: This ensures BOTH results are saved for review.
-
-        Args:
-            query: Search query
-            output_file: File path to write results
-            k: Number of results
-        """
-        return self.print_both_results(query=query, k=k, output_file=output_file)

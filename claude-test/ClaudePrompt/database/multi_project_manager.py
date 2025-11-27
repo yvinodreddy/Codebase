@@ -12,9 +12,15 @@ Version: 1.0.0
 
 import uuid
 import logging
+import sys
+from pathlib import Path
 from typing import Dict, List, Optional, Any
 from datetime import datetime
-from database.sqlite_context_loader import SQLiteContextLoader
+
+# Ensure database directory is in path for imports
+sys.path.insert(0, str(Path(__file__).parent))
+
+from sqlite_context_loader import SQLiteContextLoader
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
