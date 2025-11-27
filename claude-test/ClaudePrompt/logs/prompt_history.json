@@ -320,5 +320,47 @@
       "verbose": true,
       "quiet": false
     }
+  },
+  {
+    "id": 24,
+    "timestamp": "2025-11-27 11:04:23",
+    "prompt": "Now I want to run a query and see the results give me the sample how I can test from a Basic to advanced testing and see the results what it is coming how can I do it",
+    "complexity": "MODERATE",
+    "agents_allocated": 12,
+    "mode": "claude_code",
+    "duration_seconds": 0.006,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 25,
+    "timestamp": "2025-11-27 11:08:57",
+    "prompt": "\n1. **BASIC** - Quick keyword search test (30 seconds)\n2. **INTERMEDIATE** - Semantic search validation (2 minutes)\n3. **ADVANCED** - Dual retrieval with 99% confidence (5 minutes)\n4. **PRODUCTION** - Full ULTRATHINK integration test (15 minutes) \n\nWhat do you mean by these I didn't understand it \n\nand I want you to give me some commands where I can enter that command and see the result and I did not understand what is this basic intermediate advanced and production ",
+    "complexity": "COMPLEX",
+    "agents_allocated": 25,
+    "mode": "claude_code",
+    "duration_seconds": 0.001,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
+  },
+  {
+    "id": 26,
+    "timestamp": "2025-11-27 11:17:05",
+    "prompt": "I want you to give me the examples that I can test it with cpp \"basic prompt\" -v and cpp \"advanced prompt\" -v and cpp \"complex prompt\" -v and cpp \"critical prompt production grade \" -v So I  can test all of these scenarios that's what I am expecting ",
+    "complexity": "COMPLEX",
+    "agents_allocated": 25,
+    "mode": "claude_code",
+    "duration_seconds": 0.002,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": false
+    }
   }
 ]

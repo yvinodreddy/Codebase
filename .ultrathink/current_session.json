@@ -1,8 +1,8 @@
 {
-  "project_id": "proj_20251119_161527_66d5174c",
-  "instance_id": "inst_20251127_105742_43ffae01",
-  "started_at": "2025-11-27T10:57:42.456362",
+  "project_id": "proj_user01_1160c142",
+  "instance_id": "inst_20251127_110422_eae10119",
+  "started_at": "2025-11-27T11:04:22.496859",
   "hostname": "User01",
-  "process_id": 55285,
-  "working_directory": "/tmp"
+  "process_id": 58211,
+  "working_directory": "/home/user01"
 }
