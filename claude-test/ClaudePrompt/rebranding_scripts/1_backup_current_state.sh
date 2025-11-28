@@ -25,4 +25,4 @@ mkdir -p /home/user01/claude-test/ClaudePrompt/rebranding_logs
 
 # 6. Set execution timestamp
 export REBRAND_TIMESTAMP=$(date +%Y%m%d_%H%M%S)
-echo "Execution timestamp: $REBRAND_TIMESTAMP" > rebranding_logs/execution_${REBRAND_TIMESTAMP}.log
+echo "Execution timestamp: $REBRAND_TIMESTAMP" > /home/user01/claude-test/ClaudePrompt/rebranding_logs/execution_${REBRAND_TIMESTAMP}.log
