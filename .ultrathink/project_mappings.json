@@ -6,5 +6,6 @@
   "/home/user01": "proj_user01_1160c142",
   "/home/user01/claude-test": "proj_claude-test_22c04638",
   "/tmp/unique_test_project": "proj_unique_test_project_9518ccf4",
-  "/tmp/new_instance_test_abc": "proj_new_instance_test_abc_7b189329"
+  "/tmp/new_instance_test_abc": "proj_new_instance_test_abc_7b189329",
+  "/home/user01/claude-test/ClaudePrompt/tmp": "proj_tmp_29aba201"
 }
