@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# 1. Backup current state
+cd /home/user01/claude-test/ClaudePrompt
+git status  # Should show clean working directory
+git branch rebranding-backup-$(date +%Y%m%d_%H%M%S)  # Create backup branch
+git add -A
+git commit -m "Pre-rebranding backup $(date +%Y-%m-%d)"
+
+# 2. Verify dependencies
+python3 --version  # Should be Python 3.8+
+grep --version     # Should be installed
+sed --version      # Should be installed
+find --version     # Should be installed
+
+# 3. Verify database access
+python3 -c "from database.context_manager import ContextManager; cm = ContextManager(); print('Database OK')"
+
+# 4. Verify test suite
+python3 -m pytest tests/ -v  # Should show current test status
+
+# 5. Create execution log directory
+mkdir -p /home/user01/claude-test/ClaudePrompt/rebranding_logs
+
+# 6. Set execution timestamp
+export REBRAND_TIMESTAMP=$(date +%Y%m%d_%H%M%S)
+echo "Execution timestamp: $REBRAND_TIMESTAMP" > rebranding_logs/execution_${REBRAND_TIMESTAMP}.log
