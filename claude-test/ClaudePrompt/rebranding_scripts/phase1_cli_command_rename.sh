@@ -5,7 +5,9 @@
 set -e
 
 TIMESTAMP=$(date +%Y%m%d_%H%M%S)
-LOG_FILE="rebranding_logs/phase1_cli_rename_${TIMESTAMP}.log"
+LOG_DIR="/home/user01/claude-test/ClaudePrompt/rebranding_scripts/logs"
+mkdir -p "$LOG_DIR"
+LOG_FILE="${LOG_DIR}/phase1_cli_rename_${TIMESTAMP}.log"
 
 echo "==================================================================" | tee -a "$LOG_FILE"
 echo "PHASE 1.2: CLI Command Rename" | tee -a "$LOG_FILE"
