@@ -5,7 +5,9 @@
 set -e
 
 TIMESTAMP=$(date +%Y%m%d_%H%M%S)
-LOG_FILE="/home/user01/claude-test/ParaGroupAI/rebranding_logs/phase2_subdirs_${TIMESTAMP}.log"
+LOG_DIR="/home/user01/claude-test/ClaudePrompt/rebranding_scripts/logs"
+mkdir -p "$LOG_DIR"
+LOG_FILE="${LOG_DIR}/phase2_subdirs_${TIMESTAMP}.log"
 
 echo "==================================================================" | tee -a "$LOG_FILE"
 echo "PHASE 2.2: Subdirectory Rename" | tee -a "$LOG_FILE"

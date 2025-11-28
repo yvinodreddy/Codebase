@@ -5,7 +5,9 @@
 set -e
 
 TIMESTAMP=$(date +%Y%m%d_%H%M%S)
-LOG_FILE="/home/user01/claude-test/ParaGroupAI/rebranding_logs/phase8_package_json_${TIMESTAMP}.log"
+LOG_DIR="/home/user01/claude-test/ClaudePrompt/rebranding_scripts/logs"
+mkdir -p "$LOG_DIR"
+LOG_FILE="${LOG_DIR}/phase8_package_json_${TIMESTAMP}.log"
 
 echo "==================================================================" | tee -a "$LOG_FILE"
 echo "PHASE 8.1: package.json Update" | tee -a "$LOG_FILE"

@@ -5,7 +5,9 @@
 set -e
 
 TIMESTAMP=$(date +%Y%m%d_%H%M%S)
-LOG_FILE="/home/user01/claude-test/ParaGroupAI/rebranding_logs/phase4_comments_${TIMESTAMP}.log"
+LOG_DIR="/home/user01/claude-test/ClaudePrompt/rebranding_scripts/logs"
+mkdir -p "$LOG_DIR"
+LOG_FILE="${LOG_DIR}/phase4_comments_${TIMESTAMP}.log"
 
 echo "==================================================================" | tee -a "$LOG_FILE"
 echo "PHASE 4.3: Code Comments Update" | tee -a "$LOG_FILE"
