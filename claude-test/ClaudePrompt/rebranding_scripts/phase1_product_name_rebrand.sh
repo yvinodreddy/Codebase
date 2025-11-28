@@ -32,27 +32,33 @@ replace_product_name() {
     echo "✅ Updated: $file" | tee -a "$LOG_FILE"
 }
 
-# Find all relevant files (exclude .git, node_modules, __pycache__)
-echo "Finding files to update..." | tee -a "$LOG_FILE"
-FILES=$(find /home/user01/claude-test/ClaudePrompt \
-    -type f \
-    \( -name "*.py" -o -name "*.md" -o -name "*.txt" -o -name "*.json" -o -name "*.yml" -o -name "*.yaml" \) \
-    ! -path "*/.git/*" \
-    ! -path "*/node_modules/*" \
-    ! -path "*/__pycache__/*" \
-    ! -path "*/venv/*" \
-    ! -path "*/tmp/*" \
-    ! -path "*/rebranding_logs/*")
+# Find ONLY files that contain "ClaudePrompt" (much faster!)
+echo "Finding files containing 'ClaudePrompt'..." | tee -a "$LOG_FILE"
 
-FILE_COUNT=$(echo "$FILES" | wc -l)
-echo "Found $FILE_COUNT files to process" | tee -a "$LOG_FILE"
+# Use grep to find files containing the string (much faster than processing all files)
+FILES=$(grep -rl "ClaudePrompt" /home/user01/claude-test/ClaudePrompt \
+    --include="*.py" --include="*.md" --include="*.txt" --include="*.json" --include="*.yml" --include="*.yaml" \
+    --exclude-dir=.git --exclude-dir=node_modules --exclude-dir=__pycache__ --exclude-dir=venv --exclude-dir=tmp --exclude-dir=rebranding_logs \
+    2>/dev/null || true)
+
+FILE_COUNT=$(echo "$FILES" | grep -c . || echo "0")
+echo "Found $FILE_COUNT files containing 'ClaudePrompt'" | tee -a "$LOG_FILE"
 echo "" | tee -a "$LOG_FILE"
 
-# Process each file
+if [ "$FILE_COUNT" -eq 0 ]; then
+    echo "✅ No files to process (already rebranded or no matches)" | tee -a "$LOG_FILE"
+    exit 0
+fi
+
+# Process each file with progress reporting
 PROCESSED=0
 ERRORS=0
+PROGRESS=0
 
 for file in $FILES; do
+    ((PROGRESS++))
+    echo "[$PROGRESS/$FILE_COUNT] Processing: $file" | tee -a "$LOG_FILE"
+
     if replace_product_name "$file"; then
         ((PROCESSED++))
     else
