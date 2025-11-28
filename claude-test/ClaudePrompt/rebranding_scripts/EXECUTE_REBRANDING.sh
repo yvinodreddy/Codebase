@@ -7,7 +7,7 @@
 # Backup Branch: rebranding-backup-$(date +%Y%m%d_%H%M%S) (already created)
 #
 
-set -e  # Exit on any error
+# NOTE: Not using 'set -e' because we handle errors explicitly with if/then/else blocks
 
 TIMESTAMP=$(date +%Y%m%d_%H%M%S)
 SCRIPTS_DIR="/home/user01/claude-test/ClaudePrompt/rebranding_scripts"
