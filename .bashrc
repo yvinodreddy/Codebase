@@ -134,7 +134,7 @@ alias uc="python3 /home/user01/claude-test/TestPrompt/ultrathink.py"
 export PATH="$HOME/bin:$PATH"
 
 # ClaudePrompt - Isolated ULTRATHINK Instance (Experimental)
-alias cpp="/home/user01/claude-test/ClaudePrompt/cpp"
+alias cpp='/home/user01/claude-test/ClaudePrompt/cpp' # DEPRECATED: Use 'prsg' instead
 
 # Quick Navigation Aliases
 alias cdtp='cd /home/user01/claude-test/TestPrompt'
@@ -167,3 +167,4 @@ export PATH="$HOME/bin:$PATH"
 cppm() {
     /home/user01/claude-test/ClaudePrompt/cpp_with_metrics "$@"
 }
+alias prsg='/home/user01/claude-test/ClaudePrompt/prsg'
