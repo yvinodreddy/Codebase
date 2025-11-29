@@ -19,13 +19,13 @@
     "continue": 18,
     "shift-tab": 18,
     "image-paste": 28,
-    "tab-toggle-thinking": 28,
-    "ultrathink-keyword": 28,
-    "custom-agents": 28,
+    "tab-toggle-thinking": 30,
+    "ultrathink-keyword": 30,
+    "custom-agents": 30,
     "permissions": 25,
-    "custom-commands": 28
+    "custom-commands": 30
   },
-  "promptQueueUseCount": 15,
+  "promptQueueUseCount": 16,
   "cachedStatsigGates": {
     "tengu_disable_bypass_permissions_mode": false,
     "tengu_tool_pear": false,
