@@ -1,0 +1,23 @@
+#!/bin/bash
+# cpps - Para Group ULTRATHINK Wrapper with Database-First Integration
+# Maps -v flag to --verbose for cpp command
+# This is the command format required by Para Group Web UI
+#
+# Database integration is handled by the cpp wrapper, so this just
+# passes through to cpp with argument conversion.
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# Convert -v to --verbose, pass through all other arguments
+ARGS=()
+for arg in "$@"; do
+    if [ "$arg" = "-v" ]; then
+        ARGS+=("--verbose")
+    else
+        ARGS+=("$arg")
+    fi
+done
+
+# Execute cpp with converted arguments
+# Database integration happens automatically in cpp
+exec "${SCRIPT_DIR}/cpp" "${ARGS[@]}"

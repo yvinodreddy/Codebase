@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+#
+# ULTRATHINKC - Wrapper for ultrathink.py
+#
+# This is a separate command to avoid interfering with any existing 'ultrathink' command.
+# It calls ultrathink.py with all the same arguments.
+#
+# Usage:
+#   ultrathinkc "your prompt"
+#   ultrathinkc "your prompt" --api
+#   ultrathinkc --file prompt.txt
+#   ultrathinkc --help
+#
+
+# Get the directory where this script is actually located (resolve symlinks)
+SOURCE="${BASH_SOURCE[0]}"
+while [ -h "$SOURCE" ]; do
+  SCRIPT_DIR="$(cd -P "$(dirname "$SOURCE")" && pwd)"
+  SOURCE="$(readlink "$SOURCE")"
+  [[ $SOURCE != /* ]] && SOURCE="$SCRIPT_DIR/$SOURCE"
+done
+SCRIPT_DIR="$(cd -P "$(dirname "$SOURCE")" && pwd)"
+
+# Call ultrathink.py with all arguments
+exec python3 "$SCRIPT_DIR/ultrathink.py" "$@"

@@ -1,0 +1,12 @@
+result_pattern.py
+agent_framework/context_manager_optimized.py
+replace_final_placeholders.py
+agent_framework/code_generator.py
+instance_id_manager.py
+security/audit_log.py
+multi_source_metrics_verifier.py
+agent_framework/verification_system.py
+infrastructure/caching.py
+guardrails/medical_guardrails.py
+validate_my_response.py
+tests_backup_20251120_090921/conftest.py

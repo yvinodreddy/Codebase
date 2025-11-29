@@ -1,0 +1,353 @@
+
+================================================================================
+📊 MODULE STRUCTURE SUMMARY
+================================================================================
+
+## fix_test_files_complete.py
+────────────────────────────────────────────────────────────────────────────────
+
+**Functions (2):**
+  • fix_file(filepath, start_line, end_line) [line 24]
+  • main() [line 63]
+
+**Metadata:**
+  • Total lines: 86
+  • Has main(): True
+  • Has if __name__ == '__main__': True
+
+## generate_100_percent_tests.py
+────────────────────────────────────────────────────────────────────────────────
+
+**Classes (1):**
+  • ComprehensiveTestGenerator [line 14]
+    Methods (4):
+      - __init__(self) [line 17]
+      - analyze_module(self, module_path) [line 58]
+      - generate_test_for_module(self, module_path, package, estimated_lines) [line 86]
+      - generate_all_tests(self) [line 274]
+
+**Metadata:**
+  • Total lines: 318
+  • Has main(): False
+  • Has if __name__ == '__main__': True
+
+## generate_effective_tests.py
+────────────────────────────────────────────────────────────────────────────────
+
+**Functions (5):**
+  • analyze_source_file(filepath) [line 15]
+  • generate_function_tests(func, module_name) [line 72]
+  • generate_class_tests(cls, module_name) [line 119]
+  • generate_comprehensive_test(source_file, test_file) [line 193]
+  • main() [line 310]
+
+**Metadata:**
+  • Total lines: 334
+  • Has main(): True
+  • Has if __name__ == '__main__': True
+
+## generate_real_coverage_tests.py
+────────────────────────────────────────────────────────────────────────────────
+
+**Functions (1):**
+  • main() [line 268]
+
+**Classes (1):**
+  • RealTestGenerator [line 15]
+    Methods (6):
+      - __init__(self, source_file) [line 18]
+      - load_module(self) [line 25]
+      - analyze_code(self) [line 39]
+      - generate_function_test(self, func_name, func_obj) [line 50]
+      - generate_class_test(self, class_name, class_obj) [line 140]
+      - generate_test_file(self) [line 203]
+
+**Metadata:**
+  • Total lines: 290
+  • Has main(): True
+  • Has if __name__ == '__main__': True
+
+## generate_real_test_fixed.py
+────────────────────────────────────────────────────────────────────────────────
+
+**Functions (3):**
+  • sanitize_module_path(filepath) [line 12]
+  • get_module_name_from_path(filepath) [line 24]
+  • generate_test(source_file, test_file, task_id) [line 28]
+
+**Metadata:**
+  • Total lines: 152
+  • Has main(): False
+  • Has if __name__ == '__main__': True
+
+## generate_real_test_implementations.py
+────────────────────────────────────────────────────────────────────────────────
+
+**Classes (1):**
+  • IntelligentTestGenerator [line 15]
+    Methods (10):
+      - __init__(self) [line 18]
+      - analyze_function(self, func_node, source_code) [line 22]
+      - generate_real_test_for_function(self, func_name, analysis, module_name) [line 53]
+      - generate_real_test_for_class(self, class_name, methods, module_name) [line 163]
+      - generate_real_integration_tests(self, module_name) [line 236]
+      - generate_real_edge_case_tests(self, module_name) [line 309]
+      - generate_real_security_tests(self, module_name) [line 397]
+      - generate_real_performance_tests(self, module_name) [line 467]
+      - replace_placeholders_in_file(self, test_file_path, module_path) [line 538]
+      - replace_all_placeholders(self) [line 639]
+
+**Metadata:**
+  • Total lines: 682
+  • Has main(): False
+  • Has if __name__ == '__main__': True
+
+## generate_real_tests_for_module.py
+────────────────────────────────────────────────────────────────────────────────
+
+**Functions (4):**
+  • analyze_module(module_file) [line 14]
+  • generate_function_test(module_path, func_info) [line 49]
+  • generate_class_test(module_path, class_info) [line 108]
+  • generate_test_file(module_file, output_file) [line 158]
+
+**Metadata:**
+  • Total lines: 221
+  • Has main(): False
+  • Has if __name__ == '__main__': True
+
+## get_coverage_quickly.py
+────────────────────────────────────────────────────────────────────────────────
+
+**Functions (1):**
+  • main() [line 10]
+
+**Metadata:**
+  • Total lines: 57
+  • Has main(): True
+  • Has if __name__ == '__main__': True
+
+## get_live_context_metrics.py
+────────────────────────────────────────────────────────────────────────────────
+
+**Functions (1):**
+  • main() [line 227]
+
+**Classes (1):**
+  • LiveContextMetrics [line 27]
+    Methods (8):
+      - __init__(self) [line 30]
+      - get_context_output(self) [line 47]
+      - parse_context_output(self, output) [line 71]
+      - _convert_model_name(self, model_full) [line 147]
+      - parse_from_stdin(self) [line 168]
+      - get_metrics(self) [line 188]
+      - to_json(self) [line 197]
+      - to_text(self) [line 206]
+
+**Metadata:**
+  • Total lines: 261
+  • Has main(): True
+  • Has if __name__ == '__main__': True
+
+## high_scale_orchestrator.py
+────────────────────────────────────────────────────────────────────────────────
+
+**Functions (2):**
+  • create_high_scale_orchestrator(max_agents, strategy, memory_limit_gb) [line 401]
+  • test_task(task_num) [line 447]
+
+**Classes (5):**
+  • SearchStrategy(Enum) [line 39]
+  • AgentPriority(Enum) [line 46]
+  • AgentTask [line 55]
+  • ResourceMetrics [line 72]
+  • HighScaleOrchestrator [line 83]
+    Methods (14):
+      - __init__(self, max_agents, strategy, memory_limit_mb, enable_realtime_display) [line 90]
+      - add_task(self, name, function, args, kwargs, priority, dependencies) [line 134]
+      - _can_execute_task(self, task) [line 170]
+      - _get_ready_tasks(self) [line 177]
+      - _execute_task(self, task) [line 188]
+      - _monitor_resources(self) [line 205]
+      - _display_progress(self, metrics) [line 232]
+      - _adaptive_agent_count(self) [line 253]
+      - execute_all(self, max_workers) [line 276]
+      - _execute_breadth_first(self, max_workers) [line 327]
+      - _execute_depth_first(self, max_workers) [line 357]
+      - _execute_hybrid(self, max_workers) [line 362]
+      - _compile_results(self) [line 367]
+      - get_statistics(self) [line 392]
+
+**Metadata:**
+  • Total lines: 478
+  • Has main(): False
+  • Has if __name__ == '__main__': True
+
+## instance_id_manager.py
+────────────────────────────────────────────────────────────────────────────────
+
+**Functions (1):**
+  • main() [line 410]
+
+**Classes (1):**
+  • InstanceIDManager [line 60]
+    Methods (11):
+      - __init__(self, lock_dir) [line 78]
+      - get_instance(cls, lock_dir) [line 96]
+      - generate_instance_id(self) [line 110]
+      - get_instance_id(self, auto_register) [line 143]
+      - register_instance(self, metadata) [line 161]
+      - update_heartbeat(self) [line 212]
+      - list_active_instances(self, max_age_seconds) [line 251]
+      - cleanup_stale_instances(self, max_age_seconds) [line 289]
+      - cleanup(self) [line 349]
+      - get_instance_file_path(self, base_name, extension) [line 369]
+      - get_all_instance_files(self, base_name, extension) [line 390]
+
+**Metadata:**
+  • Total lines: 476
+  • Has main(): True
+  • Has if __name__ == '__main__': True
+
+## large_scale_error_handler.py
+────────────────────────────────────────────────────────────────────────────────
+
+**Functions (2):**
+  • get_global_error_handler() [line 512]
+  • flaky_operation() [line 543]
+
+**Classes (5):**
+  • ErrorSeverity(Enum) [line 36]
+  • ErrorCategory(Enum) [line 44]
+  • ErrorContext [line 55]
+  • CircuitBreaker [line 69]
+    Methods (5):
+      - __init__(self, failure_threshold, timeout_seconds) [line 76]
+      - record_success(self) [line 90]
+      - record_failure(self) [line 95]
+      - can_attempt(self) [line 103]
+      - get_state(self) [line 122]
+  • LargeScaleErrorHandler [line 127]
+    Methods (8):
+      - __init__(self, log_file) [line 139]
+      - handle_error(self, error, category, severity, context, recovery_strategy) [line 164]
+      - retry_with_backoff(self, operation, operation_name, max_retries, initial_delay, max_delay, exponential_base) [line 227]
+      - handle_memory_pressure(self, current_usage_mb, threshold_mb) [line 296]
+      - validate_large_prompt(self, prompt, max_tasks) [line 348]
+      - get_error_summary(self) [line 400]
+      - _calculate_recovery_rate(self) [line 451]
+      - export_error_log(self, output_file) [line 464]
+
+**Metadata:**
+  • Total lines: 583
+  • Has main(): False
+  • Has if __name__ == '__main__': True
+
+## live_metrics_tracker.py
+────────────────────────────────────────────────────────────────────────────────
+
+**Functions (1):**
+  • main() [line 449]
+
+**Classes (1):**
+  • LiveMetricsTracker [line 56]
+    Methods (10):
+      - __init__(self, tmp_dir) [line 68]
+      - detect_background_tasks(self) [line 81]
+      - calculate_background_agent_usage(self, background_tasks) [line 144]
+      - get_real_token_usage(self, conversation_stats) [line 163]
+      - calculate_dynamic_confidence(self, metrics) [line 194]
+      - calculate_status(self, tokens_pct, executing, background_tasks) [line 244]
+      - update_from_conversation(self, conversation_stats, tool_name) [line 276]
+      - _update_state_persistence(self, metrics) [line 359]
+      - get_current_metrics(self) [line 387]
+      - should_clear_agents(self) [line 413]
+
+**Metadata:**
+  • Total lines: 515
+  • Has main(): True
+  • Has if __name__ == '__main__': True
+
+## master_orchestrator.py
+────────────────────────────────────────────────────────────────────────────────
+
+**Functions (4):**
+  • trace_function(func) [line 20]
+  • gather_context(task, iteration_log) [line 626]
+  • execute_action(task, ctx) [line 680]
+  • verify_work(output, ctx, task) [line 689]
+
+**Classes (2):**
+  • OrchestrationResult [line 57]
+    Methods (1):
+      - to_dict(self) [line 73]
+  • MasterOrchestrator [line 92]
+    Methods (13):
+      - __init__(self, min_confidence_score, max_refinement_iterations, verbose) [line 108]
+      - _store_to_database(self, prompt, result, project_id, instance_id) [line 168]
+      - process(self, prompt, context, source_documents) [line 272]
+      - _initialize_components(self, required_components) [line 577]
+      - _execute_agents(self, prompt, prompt_analysis, context) [line 601]
+      - _calculate_quality_metrics(self, prompt_analysis, agent_result, output_validation) [line 740]
+      - _refine_output(self, prompt, output, validation_errors, prompt_analysis) [line 795]
+      - _iterative_refinement(self, prompt, output, prompt_analysis, current_confidence, source_documents) [line 823]
+      - _determine_content_type(self, prompt_analysis) [line 855]
+      - _collect_warnings(self, validation) [line 864]
+      - _create_failed_result(self, prompt_analysis, guardrails_validation, agent_execution, error, duration) [line 874]
+      - _update_statistics(self, result) [line 897]
+      - get_statistics(self) [line 916]
+
+**Metadata:**
+  • Total lines: 972
+  • Has main(): False
+  • Has if __name__ == '__main__': True
+
+## metrics_aggregator.py
+────────────────────────────────────────────────────────────────────────────────
+
+**Functions (1):**
+  • main() [line 420]
+
+**Classes (1):**
+  • MetricsAggregator [line 45]
+    Methods (9):
+      - __init__(self, tmp_dir, max_age_seconds) [line 57]
+      - scan_instance_files(self, pattern) [line 73]
+      - aggregate_agent_counts(self) [line 98]
+      - aggregate_confidence_scores(self) [line 139]
+      - aggregate_state_persistence(self) [line 200]
+      - aggregate_all(self) [line 264]
+      - get_instance_metrics(self, instance_id) [line 307]
+      - cleanup_stale_files(self, max_age_hours) [line 351]
+      - _extract_instance_id(self, filename) [line 389]
+
+**Metadata:**
+  • Total lines: 496
+  • Has main(): True
+  • Has if __name__ == '__main__': True
+
+## metrics_state_persistence.py
+────────────────────────────────────────────────────────────────────────────────
+
+**Functions (1):**
+  • main() [line 346]
+
+**Classes (2):**
+  • RequestState(Enum) [line 40]
+  • MetricsStatePersistence [line 47]
+    Methods (9):
+      - __init__(self, state_file, instance_id) [line 58]
+      - load_state(self) [line 101]
+      - save_state(self, state) [line 130]
+      - update_active_metrics(self, metrics) [line 163]
+      - freeze_metrics(self) [line 194]
+      - mark_idle(self) [line 217]
+      - get_display_metrics(self, current_metrics) [line 238]
+      - detect_new_request(self, current_executing) [line 297]
+      - get_state_summary(self) [line 321]
+
+**Metadata:**
+  • Total lines: 409
+  • Has main(): True
+  • Has if __name__ == '__main__': True

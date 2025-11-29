@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "timestamp": "2025-11-23 20:29:07",
+    "prompt": "test_prompt",
+    "complexity": "test_complexity",
+    "agents_allocated": 42,
+    "mode": "test_mode",
+    "duration_seconds": 3.14,
+    "success": true,
+    "flags": {
+      "verbose": true,
+      "quiet": true
+    },
+    "metadata": "test_additional_metadata"
+  }
+]

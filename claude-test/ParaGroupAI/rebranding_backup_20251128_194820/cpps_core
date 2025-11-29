@@ -1,0 +1,19 @@
+#!/bin/bash
+# cpps - Para Group ULTRATHINK Wrapper
+# Maps -v flag to --verbose for cpp command
+# This is the command format required by Para Group Web UI
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# Convert -v to --verbose, pass through all other arguments
+ARGS=()
+for arg in "$@"; do
+    if [ "$arg" = "-v" ]; then
+        ARGS+=("--verbose")
+    else
+        ARGS+=("$arg")
+    fi
+done
+
+# Execute cpp with converted arguments
+exec "${SCRIPT_DIR}/cpp" "${ARGS[@]}"

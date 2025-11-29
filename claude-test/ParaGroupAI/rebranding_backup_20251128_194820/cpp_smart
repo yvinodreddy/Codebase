@@ -1,0 +1,137 @@
+#!/bin/bash
+################################################################################
+# cpp_smart - Smart CPP Wrapper with Automatic Dashboard Integration
+#
+# Features:
+# - Automatically tracks ALL cpp commands in dashboard
+# - Auto-categorizes by command type (bug fix, feature, testing, analysis)
+# - Real-time progress updates every 2 seconds
+# - Full ULTRATHINK framework integration
+# - Zero breaking changes (original cpp still works)
+#
+# Usage: cpp_smart "your prompt" -v
+# Or create alias: alias cpp='./cpp_smart'
+################################################################################
+
+set -e
+
+# Get the directory where this script is located
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# Check if real-time tracking is enabled
+ENABLE_TRACKING=${ENABLE_CPP_TRACKING:-true}
+
+# Get the prompt (all arguments)
+PROMPT_TEXT="$*"
+
+# Auto-categorize the command based on prompt content
+TRACK_TYPE="general"
+TRACK_COLOR="gray"
+TRACK_ICON="📝"
+
+# Bug fixes and error resolution
+if echo "$PROMPT_TEXT" | grep -qiE "fix|bug|error|issue|problem|resolve|debug|crash|fail"; then
+    TRACK_TYPE="bug_fix"
+    TRACK_COLOR="red"
+    TRACK_ICON="🐛"
+
+# Features and implementation
+elif echo "$PROMPT_TEXT" | grep -qiE "feature|implement|add|create|build|develop|new|enhance"; then
+    TRACK_TYPE="feature"
+    TRACK_COLOR="green"
+    TRACK_ICON="⭐"
+
+# Testing and validation
+elif echo "$PROMPT_TEXT" | grep -qiE "test|verify|validate|check|ensure|prove|confirm"; then
+    TRACK_TYPE="testing"
+    TRACK_COLOR="blue"
+    TRACK_ICON="🧪"
+
+# Explanations and analysis
+elif echo "$PROMPT_TEXT" | grep -qiE "explain|what|how|why|describe|analyze|understand|show|tell"; then
+    TRACK_TYPE="analysis"
+    TRACK_COLOR="yellow"
+    TRACK_ICON="📊"
+
+# Refactoring and optimization
+elif echo "$PROMPT_TEXT" | grep -qiE "refactor|optimize|improve|clean|reorganize|restructure"; then
+    TRACK_TYPE="refactor"
+    TRACK_COLOR="purple"
+    TRACK_ICON="🔧"
+
+# Documentation
+elif echo "$PROMPT_TEXT" | grep -qiE "document|readme|guide|tutorial|help|doc"; then
+    TRACK_TYPE="documentation"
+    TRACK_COLOR="cyan"
+    TRACK_ICON="📚"
+fi
+
+# Get output file path
+OUTPUT_FILE=$(python3 "$SCRIPT_DIR/get_output_path.py" 2>/dev/null)
+if [ $? -ne 0 ]; then
+    # Fallback if get_output_path.py fails
+    OUTPUT_FILE="$SCRIPT_DIR/tmp/cppultrathink_output_$(date +%Y%m%d_%H%M%S)_$RANDOM.txt"
+fi
+
+# Display tracking info
+echo ""
+echo "════════════════════════════════════════════════════════════════════════════════"
+echo "  $TRACK_ICON  cpp_smart - Intelligent Tracking Enabled"
+echo "════════════════════════════════════════════════════════════════════════════════"
+echo "  Category: $TRACK_TYPE"
+echo "  Prompt: ${PROMPT_TEXT:0:70}..."
+echo "════════════════════════════════════════════════════════════════════════════════"
+echo ""
+
+# Initialize tracking if enabled
+TRACKER_PID=""
+if [ "$ENABLE_TRACKING" = "true" ]; then
+    if [ -f "$SCRIPT_DIR/realtime-tracking/cpp_integration.py" ]; then
+        # Start tracking in background with category info
+        TRACK_CATEGORY="$TRACK_TYPE" python3 "$SCRIPT_DIR/realtime-tracking/cpp_integration.py" "$PROMPT_TEXT" "$OUTPUT_FILE" &
+        TRACKER_PID=$!
+
+        # Give tracker time to initialize
+        sleep 0.5
+
+        echo "✅ Tracking initialized - view at http://localhost:8000/dashboard.html"
+        echo ""
+    else
+        echo "⚠️  Warning: cpp_integration.py not found, tracking disabled"
+        echo ""
+    fi
+fi
+
+# Run the actual cpp command
+echo "🚀 Executing cpp with ULTRATHINK framework..."
+echo ""
+
+"$SCRIPT_DIR/cpp" "$@" --verbose 2>&1 > "$OUTPUT_FILE"
+CPP_EXIT_CODE=$?
+
+echo ""
+echo "════════════════════════════════════════════════════════════════════════════════"
+
+# Update tracking with completion status
+if [ "$ENABLE_TRACKING" = "true" ] && [ -n "$TRACKER_PID" ]; then
+    # Tracker will automatically detect completion by monitoring the output file
+    # Just wait for it to finish
+    wait "$TRACKER_PID" 2>/dev/null || true
+    echo "✅ Tracking completed"
+fi
+
+# Display results
+echo ""
+echo "════════════════════════════════════════════════════════════════════════════════"
+echo "  📄 CPP Execution Complete"
+echo "════════════════════════════════════════════════════════════════════════════════"
+echo "  Status: $([ $CPP_EXIT_CODE -eq 0 ] && echo '✅ Success' || echo '❌ Failed')"
+echo "  Category: $TRACK_ICON $TRACK_TYPE"
+echo "  Output file: $OUTPUT_FILE"
+if [ "$ENABLE_TRACKING" = "true" ]; then
+    echo "  Dashboard: http://localhost:8000/dashboard.html"
+fi
+echo "════════════════════════════════════════════════════════════════════════════════"
+echo ""
+
+exit $CPP_EXIT_CODE

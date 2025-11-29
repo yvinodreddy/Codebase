@@ -1,0 +1,2 @@
+Write a Python function to calculate the nth Fibonacci number using iteration.
+The function should handle edge cases and be efficient.

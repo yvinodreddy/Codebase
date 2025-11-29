@@ -1,0 +1,455 @@
+{
+  "stats": {
+    "total_coverage": 0.0,
+    "total_files": 78,
+    "phase1_count": 55,
+    "phase2_count": 0,
+    "phase3_count": 0,
+    "good_count": 0
+  },
+  "phase1": [
+    {
+      "path": "agent_activity_tracker.py",
+      "coverage": 0.0,
+      "covered": 0,
+      "total": 203,
+      "missing": 203,
+      "gap": 100.0
+    },
+    {
+      "path": "analyze_codebase.py",
+      "coverage": 0.0,
+      "covered": 0,
+      "total": 155,
+      "missing": 155,
+      "gap": 100.0
+    },
+    {
+      "path": "analyze_metrics.py",
+      "coverage": 0.0,
+      "covered": 0,
+      "total": 192,
+      "missing": 192,
+      "gap": 100.0
+    },
+    {
+      "path": "answer_to_file.py",
+      "coverage": 0.0,
+      "covered": 0,
+      "total": 34,
+      "missing": 34,
+      "gap": 100.0
+    },
+    {
+      "path": "api/health_endpoints.py",
+      "coverage": 0.0,
+      "covered": 0,
+      "total": 36,
+      "missing": 36,
+      "gap": 100.0
+    },
+    {
+      "path": "api/main.py",
+      "coverage": 0.0,
+      "covered": 0,
+      "total": 60,
+      "missing": 60,
+      "gap": 100.0
+    },
+    {
+      "path": "api/orchestrator_integration.py",
+      "coverage": 0.0,
+      "covered": 0,
+      "total": 27,
+      "missing": 27,
+      "gap": 100.0
+    },
+    {
+      "path": "claude_integration.py",
+      "coverage": 0.0,
+      "covered": 0,
+      "total": 248,
+      "missing": 248,
+      "gap": 100.0
+    },
+    {
+      "path": "component_introspector.py",
+      "coverage": 0.0,
+      "covered": 0,
+      "total": 77,
+      "missing": 77,
+      "gap": 100.0
+    },
+    {
+      "path": "component_introspector_enhanced.py",
+      "coverage": 0.0,
+      "covered": 0,
+      "total": 115,
+      "missing": 115,
+      "gap": 100.0
+    },
+    {
+      "path": "comprehensive_metrics_updater.py",
+      "coverage": 0.0,
+      "covered": 0,
+      "total": 161,
+      "missing": 161,
+      "gap": 100.0
+    },
+    {
+      "path": "config.py",
+      "coverage": 0.0,
+      "covered": 0,
+      "total": 120,
+      "missing": 120,
+      "gap": 100.0
+    },
+    {
+      "path": "config_objects.py",
+      "coverage": 0.0,
+      "covered": 0,
+      "total": 102,
+      "missing": 102,
+      "gap": 100.0
+    },
+    {
+      "path": "convert_to_pdf.py",
+      "coverage": 0.0,
+      "covered": 0,
+      "total": 75,
+      "missing": 75,
+      "gap": 100.0
+    },
+    {
+      "path": "dashboard_archive.py",
+      "coverage": 0.0,
+      "covered": 0,
+      "total": 239,
+      "missing": 239,
+      "gap": 100.0
+    },
+    {
+      "path": "dashboard_cli.py",
+      "coverage": 0.0,
+      "covered": 0,
+      "total": 137,
+      "missing": 137,
+      "gap": 100.0
+    },
+    {
+      "path": "dashboard_enhanced.py",
+      "coverage": 0.0,
+      "covered": 0,
+      "total": 347,
+      "missing": 347,
+      "gap": 100.0
+    },
+    {
+      "path": "dashboard_realtime.py",
+      "coverage": 0.0,
+      "covered": 0,
+      "total": 204,
+      "missing": 204,
+      "gap": 100.0
+    },
+    {
+      "path": "dashboard_redirect.py",
+      "coverage": 0.0,
+      "covered": 0,
+      "total": 14,
+      "missing": 14,
+      "gap": 100.0
+    },
+    {
+      "path": "dashboard_redirect_8889.py",
+      "coverage": 0.0,
+      "covered": 0,
+      "total": 14,
+      "missing": 14,
+      "gap": 100.0
+    },
+    {
+      "path": "dashboard_server.py",
+      "coverage": 0.0,
+      "covered": 0,
+      "total": 205,
+      "missing": 205,
+      "gap": 100.0
+    },
+    {
+      "path": "enhanced_websocket_broadcast.py",
+      "coverage": 0.0,
+      "covered": 0,
+      "total": 16,
+      "missing": 16,
+      "gap": 100.0
+    },
+    {
+      "path": "extract_confidence_from_output.py",
+      "coverage": 0.0,
+      "covered": 0,
+      "total": 134,
+      "missing": 134,
+      "gap": 100.0
+    },
+    {
+      "path": "fix_all_with_statements.py",
+      "coverage": 0.0,
+      "covered": 0,
+      "total": 66,
+      "missing": 66,
+      "gap": 100.0
+    },
+    {
+      "path": "fix_module_level_exit.py",
+      "coverage": 0.0,
+      "covered": 0,
+      "total": 52,
+      "missing": 52,
+      "gap": 100.0
+    },
+    {
+      "path": "get_live_context_metrics.py",
+      "coverage": 0.0,
+      "covered": 0,
+      "total": 115,
+      "missing": 115,
+      "gap": 100.0
+    },
+    {
+      "path": "get_output_path.py",
+      "coverage": 0.0,
+      "covered": 0,
+      "total": 30,
+      "missing": 30,
+      "gap": 100.0
+    },
+    {
+      "path": "high_scale_orchestrator.py",
+      "coverage": 0.0,
+      "covered": 0,
+      "total": 212,
+      "missing": 212,
+      "gap": 100.0
+    },
+    {
+      "path": "instance_id_manager.py",
+      "coverage": 0.0,
+      "covered": 0,
+      "total": 196,
+      "missing": 196,
+      "gap": 100.0
+    },
+    {
+      "path": "large_scale_error_handler.py",
+      "coverage": 0.0,
+      "covered": 0,
+      "total": 220,
+      "missing": 220,
+      "gap": 100.0
+    },
+    {
+      "path": "live_metrics_tracker.py",
+      "coverage": 0.0,
+      "covered": 0,
+      "total": 193,
+      "missing": 193,
+      "gap": 100.0
+    },
+    {
+      "path": "master_orchestrator.py",
+      "coverage": 0.0,
+      "covered": 0,
+      "total": 386,
+      "missing": 386,
+      "gap": 100.0
+    },
+    {
+      "path": "metrics_aggregator.py",
+      "coverage": 0.0,
+      "covered": 0,
+      "total": 198,
+      "missing": 198,
+      "gap": 100.0
+    },
+    {
+      "path": "metrics_state_persistence.py",
+      "coverage": 0.0,
+      "covered": 0,
+      "total": 145,
+      "missing": 145,
+      "gap": 100.0
+    },
+    {
+      "path": "multi_source_metrics_verifier.py",
+      "coverage": 0.0,
+      "covered": 0,
+      "total": 257,
+      "missing": 257,
+      "gap": 100.0
+    },
+    {
+      "path": "prompt_history.py",
+      "coverage": 0.0,
+      "covered": 0,
+      "total": 177,
+      "missing": 177,
+      "gap": 100.0
+    },
+    {
+      "path": "prompt_preprocessor.py",
+      "coverage": 0.0,
+      "covered": 0,
+      "total": 153,
+      "missing": 153,
+      "gap": 100.0
+    },
+    {
+      "path": "realtime_db_updates.py",
+      "coverage": 0.0,
+      "covered": 0,
+      "total": 53,
+      "missing": 53,
+      "gap": 100.0
+    },
+    {
+      "path": "realtime_log_monitor.py",
+      "coverage": 0.0,
+      "covered": 0,
+      "total": 29,
+      "missing": 29,
+      "gap": 100.0
+    },
+    {
+      "path": "realtime_verbose_logger.py",
+      "coverage": 0.0,
+      "covered": 0,
+      "total": 95,
+      "missing": 95,
+      "gap": 100.0
+    },
+    {
+      "path": "replace_all_placeholders.py",
+      "coverage": 0.0,
+      "covered": 0,
+      "total": 164,
+      "missing": 164,
+      "gap": 100.0
+    },
+    {
+      "path": "replace_final_placeholders.py",
+      "coverage": 0.0,
+      "covered": 0,
+      "total": 36,
+      "missing": 36,
+      "gap": 100.0
+    },
+    {
+      "path": "replace_remaining_placeholders.py",
+      "coverage": 0.0,
+      "covered": 0,
+      "total": 98,
+      "missing": 98,
+      "gap": 100.0
+    },
+    {
+      "path": "result_pattern.py",
+      "coverage": 0.0,
+      "covered": 0,
+      "total": 233,
+      "missing": 233,
+      "gap": 100.0
+    },
+    {
+      "path": "setup.py",
+      "coverage": 0.0,
+      "covered": 0,
+      "total": 11,
+      "missing": 11,
+      "gap": 100.0
+    },
+    {
+      "path": "setup_database.py",
+      "coverage": 0.0,
+      "covered": 0,
+      "total": 44,
+      "missing": 44,
+      "gap": 100.0
+    },
+    {
+      "path": "stage_progress_tracker.py",
+      "coverage": 0.0,
+      "covered": 0,
+      "total": 37,
+      "missing": 37,
+      "gap": 100.0
+    },
+    {
+      "path": "statusline_formatter.py",
+      "coverage": 0.0,
+      "covered": 0,
+      "total": 69,
+      "missing": 69,
+      "gap": 100.0
+    },
+    {
+      "path": "streaming_output.py",
+      "coverage": 0.0,
+      "covered": 0,
+      "total": 154,
+      "missing": 154,
+      "gap": 100.0
+    },
+    {
+      "path": "task_archiver.py",
+      "coverage": 0.0,
+      "covered": 0,
+      "total": 209,
+      "missing": 209,
+      "gap": 100.0
+    },
+    {
+      "path": "ultrathink.py",
+      "coverage": 0.0,
+      "covered": 0,
+      "total": 540,
+      "missing": 540,
+      "gap": 100.0
+    },
+    {
+      "path": "update_realtime_metrics.py",
+      "coverage": 0.0,
+      "covered": 0,
+      "total": 75,
+      "missing": 75,
+      "gap": 100.0
+    },
+    {
+      "path": "validate_my_response.py",
+      "coverage": 0.0,
+      "covered": 0,
+      "total": 99,
+      "missing": 99,
+      "gap": 100.0
+    },
+    {
+      "path": "validation_loop.py",
+      "coverage": 0.0,
+      "covered": 0,
+      "total": 79,
+      "missing": 79,
+      "gap": 100.0
+    },
+    {
+      "path": "verbose_logger.py",
+      "coverage": 0.0,
+      "covered": 0,
+      "total": 354,
+      "missing": 354,
+      "gap": 100.0
+    }
+  ],
+  "phase2": [],
+  "phase3": [],
+  "good": []
+}

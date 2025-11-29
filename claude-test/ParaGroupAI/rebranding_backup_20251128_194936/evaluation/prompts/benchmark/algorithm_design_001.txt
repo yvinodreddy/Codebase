@@ -1,0 +1,8 @@
+Design an algorithm to find the shortest path in a weighted graph using Dijkstra's algorithm. Requirements:
+1. Implement in Python with type hints
+2. Handle disconnected graphs
+3. Return both path and total distance
+4. Time complexity: O((V+E) log V)
+5. Include test cases
+
+Provide production-ready, well-documented code.

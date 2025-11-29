@@ -1,0 +1,586 @@
+{
+  "tasks": [
+    {
+      "task_id": "cppultrathink_output_20251112_141752_077",
+      "output_file": "/home/user01/claude-test/ClaudePrompt/tmp/cppultrathink_output_20251112_141752_077.txt",
+      "file_size_kb": 53.1,
+      "line_count": 946,
+      "created_at": "2025-11-12T14:17:53.793556",
+      "completed_at": "2025-11-12T14:17:53.793556",
+      "prompt": "COMPLEX (552 chars, 109 words) Agents: 25 of 500 (5.0%) \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u2502   USER PROMPT INPUT     \u2502 \u2502   [    COMPLEX    ]   \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 \u2502 \u25bc \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u2502  \ud83d\udee1\ufe0f  SECURITY LAYER                       \u2502 \u2502  \u2022 Input Sanitizer (9 patterns)          \u2502 \u2502  \u2022 Injection Detection                   \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 \u2502 \u25bc \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u2502  \ud83e\udd16 AGENT ORCHESTRATOR                    \u2502 \u2502  Spaw",
+      "agents": {
+        "total_allocated": 25,
+        "max_available": 30,
+        "details": [
+          {
+            "id": "A1",
+            "name": "Input Analyzer Secondary                          ",
+            "role": "Deep prompt analysis                                       \u2502",
+            "priority": "HIGH     \u2502"
+          },
+          {
+            "id": "A2",
+            "name": "Context Gatherer 1                                ",
+            "role": "Intent classification                                      \u2502",
+            "priority": "HIGH     \u2502"
+          },
+          {
+            "id": "A3",
+            "name": "Context Gatherer 2                                ",
+            "role": "File system context                                        \u2502",
+            "priority": "HIGH     \u2502"
+          },
+          {
+            "id": "A4",
+            "name": "Security Validator 1                              ",
+            "role": "Code structure analysis                                    \u2502",
+            "priority": "HIGH     \u2502"
+          },
+          {
+            "id": "A5",
+            "name": "Security Validator 2                              ",
+            "role": "Input sanitization                                         \u2502",
+            "priority": "HIGH     \u2502"
+          },
+          {
+            "id": "A6",
+            "name": "Guardrail L1                                      ",
+            "role": "Dependency scanning                                        \u2502",
+            "priority": "CRITICAL \u2502"
+          },
+          {
+            "id": "A7",
+            "name": "Guardrail L2                                      ",
+            "role": "Prompt Shields                                             \u2502",
+            "priority": "CRITICAL \u2502"
+          },
+          {
+            "id": "A8",
+            "name": "Guardrail L3                                      ",
+            "role": "Content Filtering                                          \u2502",
+            "priority": "CRITICAL \u2502"
+          },
+          {
+            "id": "A9",
+            "name": "Task Executor 1                                   ",
+            "role": "PHI Detection                                              \u2502",
+            "priority": "HIGH     \u2502"
+          },
+          {
+            "id": "A10",
+            "name": "Task Executor 2                                   ",
+            "role": "Primary execution                                          \u2502",
+            "priority": "HIGH     \u2502"
+          },
+          {
+            "id": "A11",
+            "name": "Task Executor 3                                   ",
+            "role": "Secondary execution                                        \u2502",
+            "priority": "HIGH     \u2502"
+          },
+          {
+            "id": "A12",
+            "name": "Task Executor 4                                   ",
+            "role": "Tertiary execution                                         \u2502",
+            "priority": "MEDIUM   \u2502"
+          },
+          {
+            "id": "A13",
+            "name": "Task Executor 5                                   ",
+            "role": "Parallel workload 1                                        \u2502",
+            "priority": "MEDIUM   \u2502"
+          },
+          {
+            "id": "A14",
+            "name": "Verifier 1                                        ",
+            "role": "Parallel workload 2                                        \u2502",
+            "priority": "HIGH     \u2502"
+          },
+          {
+            "id": "A15",
+            "name": "Verifier 2                                        ",
+            "role": "Logical consistency                                        \u2502",
+            "priority": "HIGH     \u2502"
+          },
+          {
+            "id": "A16",
+            "name": "Verifier 3                                        ",
+            "role": "Factual accuracy                                           \u2502",
+            "priority": "HIGH     \u2502"
+          },
+          {
+            "id": "A17",
+            "name": "Verifier 4                                        ",
+            "role": "Completeness check                                         \u2502",
+            "priority": "HIGH     \u2502"
+          },
+          {
+            "id": "A18",
+            "name": "Output Guardrail L4                               ",
+            "role": "Quality assurance                                          \u2502",
+            "priority": "CRITICAL \u2502"
+          },
+          {
+            "id": "A19",
+            "name": "Output Guardrail L5                               ",
+            "role": "Medical terminology                                        \u2502",
+            "priority": "CRITICAL \u2502"
+          },
+          {
+            "id": "A20",
+            "name": "Output Guardrail L6                               ",
+            "role": "Output content filtering                                   \u2502",
+            "priority": "CRITICAL \u2502"
+          },
+          {
+            "id": "A21",
+            "name": "Output Guardrail L7                               ",
+            "role": "Groundedness check                                         \u2502",
+            "priority": "CRITICAL \u2502"
+          },
+          {
+            "id": "A22",
+            "name": "Quality Assurance 1                               ",
+            "role": "Compliance validation                                      \u2502",
+            "priority": "HIGH     \u2502"
+          },
+          {
+            "id": "A23",
+            "name": "Quality Assurance 2                               ",
+            "role": "Production readiness                                       \u2502",
+            "priority": "HIGH     \u2502"
+          },
+          {
+            "id": "A24",
+            "name": "Result Compiler                                   ",
+            "role": "Final validation                                           \u2502",
+            "priority": "HIGH     \u2502"
+          },
+          {
+            "id": "A25",
+            "name": "Result Compiler                                   ",
+            "role": "Aggregate and format output                                \u2502"
+          }
+        ]
+      },
+      "stages": [
+        {
+          "number": 1,
+          "name": "Prompt Preprocessing & Analysis"
+        },
+        {
+          "number": 2,
+          "name": "Guardrails - Input Validation (Layers 1-3)"
+        },
+        {
+          "number": 3,
+          "name": "Context Management"
+        },
+        {
+          "number": 4,
+          "name": "Agent Orchestration"
+        }
+      ],
+      "guardrails": {
+        "total_layers": 0,
+        "layers": []
+      },
+      "context_usage": {
+        "used_tokens": 0,
+        "max_tokens": 200000,
+        "percentage": 0.0
+      },
+      "execution_time": {
+        "started_at": null,
+        "completed_at": null,
+        "duration_seconds": 0
+      },
+      "status": "COMPLETED",
+      "errors": [
+        "- large_scale_error_handler.py"
+      ],
+      "warnings": [
+        "- Note any warnings"
+      ],
+      "summary": ""
+    },
+    {
+      "task_id": "cppultrathink_output_20251112_135925_302",
+      "output_file": "/home/user01/claude-test/ClaudePrompt/tmp/cppultrathink_output_20251112_135925_302.txt",
+      "file_size_kb": 59.5,
+      "line_count": 1112,
+      "created_at": "2025-11-12T14:09:25.832405",
+      "completed_at": "2025-11-12T14:09:25.832405",
+      "prompt": "COMPLEX (1476 chars, 275 words) Agents: 25 of 500 (5.0%) \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u2502   USER PROMPT INPUT     \u2502 \u2502   [    COMPLEX    ]   \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 \u2502 \u25bc \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u2502  \ud83d\udee1\ufe0f  SECURITY LAYER                       \u2502 \u2502  \u2022 Input Sanitizer (9 patterns)          \u2502 \u2502  \u2022 Injection Detection                   \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 \u2502 \u25bc \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u2502  \ud83e\udd16 AGENT ORCHESTRATOR                    \u2502 \u2502  Spa",
+      "agents": {
+        "total_allocated": 25,
+        "max_available": 30,
+        "details": [
+          {
+            "id": "A1",
+            "name": "Input Analyzer Secondary                          ",
+            "role": "Deep prompt analysis                                       \u2502",
+            "priority": "HIGH     \u2502"
+          },
+          {
+            "id": "A2",
+            "name": "Context Gatherer 1                                ",
+            "role": "Intent classification                                      \u2502",
+            "priority": "HIGH     \u2502"
+          },
+          {
+            "id": "A3",
+            "name": "Context Gatherer 2                                ",
+            "role": "File system context                                        \u2502",
+            "priority": "HIGH     \u2502"
+          },
+          {
+            "id": "A4",
+            "name": "Security Validator 1                              ",
+            "role": "Code structure analysis                                    \u2502",
+            "priority": "HIGH     \u2502"
+          },
+          {
+            "id": "A5",
+            "name": "Security Validator 2                              ",
+            "role": "Input sanitization                                         \u2502",
+            "priority": "HIGH     \u2502"
+          },
+          {
+            "id": "A6",
+            "name": "Guardrail L1                                      ",
+            "role": "Dependency scanning                                        \u2502",
+            "priority": "CRITICAL \u2502"
+          },
+          {
+            "id": "A7",
+            "name": "Guardrail L2                                      ",
+            "role": "Prompt Shields                                             \u2502",
+            "priority": "CRITICAL \u2502"
+          },
+          {
+            "id": "A8",
+            "name": "Guardrail L3                                      ",
+            "role": "Content Filtering                                          \u2502",
+            "priority": "CRITICAL \u2502"
+          },
+          {
+            "id": "A9",
+            "name": "Task Executor 1                                   ",
+            "role": "PHI Detection                                              \u2502",
+            "priority": "HIGH     \u2502"
+          },
+          {
+            "id": "A10",
+            "name": "Task Executor 2                                   ",
+            "role": "Primary execution                                          \u2502",
+            "priority": "HIGH     \u2502"
+          },
+          {
+            "id": "A11",
+            "name": "Task Executor 3                                   ",
+            "role": "Secondary execution                                        \u2502",
+            "priority": "HIGH     \u2502"
+          },
+          {
+            "id": "A12",
+            "name": "Task Executor 4                                   ",
+            "role": "Tertiary execution                                         \u2502",
+            "priority": "MEDIUM   \u2502"
+          },
+          {
+            "id": "A13",
+            "name": "Task Executor 5                                   ",
+            "role": "Parallel workload 1                                        \u2502",
+            "priority": "MEDIUM   \u2502"
+          },
+          {
+            "id": "A14",
+            "name": "Verifier 1                                        ",
+            "role": "Parallel workload 2                                        \u2502",
+            "priority": "HIGH     \u2502"
+          },
+          {
+            "id": "A15",
+            "name": "Verifier 2                                        ",
+            "role": "Logical consistency                                        \u2502",
+            "priority": "HIGH     \u2502"
+          },
+          {
+            "id": "A16",
+            "name": "Verifier 3                                        ",
+            "role": "Factual accuracy                                           \u2502",
+            "priority": "HIGH     \u2502"
+          },
+          {
+            "id": "A17",
+            "name": "Verifier 4                                        ",
+            "role": "Completeness check                                         \u2502",
+            "priority": "HIGH     \u2502"
+          },
+          {
+            "id": "A18",
+            "name": "Output Guardrail L4                               ",
+            "role": "Quality assurance                                          \u2502",
+            "priority": "CRITICAL \u2502"
+          },
+          {
+            "id": "A19",
+            "name": "Output Guardrail L5                               ",
+            "role": "Medical terminology                                        \u2502",
+            "priority": "CRITICAL \u2502"
+          },
+          {
+            "id": "A20",
+            "name": "Output Guardrail L6                               ",
+            "role": "Output content filtering                                   \u2502",
+            "priority": "CRITICAL \u2502"
+          },
+          {
+            "id": "A21",
+            "name": "Output Guardrail L7                               ",
+            "role": "Groundedness check                                         \u2502",
+            "priority": "CRITICAL \u2502"
+          },
+          {
+            "id": "A22",
+            "name": "Quality Assurance 1                               ",
+            "role": "Compliance validation                                      \u2502",
+            "priority": "HIGH     \u2502"
+          },
+          {
+            "id": "A23",
+            "name": "Quality Assurance 2                               ",
+            "role": "Production readiness                                       \u2502",
+            "priority": "HIGH     \u2502"
+          },
+          {
+            "id": "A24",
+            "name": "Result Compiler                                   ",
+            "role": "Final validation                                           \u2502",
+            "priority": "HIGH     \u2502"
+          },
+          {
+            "id": "A25",
+            "name": "Result Compiler                                   ",
+            "role": "Aggregate and format output                                \u2502"
+          }
+        ]
+      },
+      "stages": [
+        {
+          "number": 1,
+          "name": "Prompt Preprocessing & Analysis"
+        },
+        {
+          "number": 2,
+          "name": "Guardrails - Input Validation (Layers 1-3)"
+        },
+        {
+          "number": 3,
+          "name": "Context Management"
+        },
+        {
+          "number": 4,
+          "name": "Agent Orchestration"
+        }
+      ],
+      "guardrails": {
+        "total_layers": 0,
+        "layers": []
+      },
+      "context_usage": {
+        "used_tokens": 0,
+        "max_tokens": 200000,
+        "percentage": 0.0
+      },
+      "execution_time": {
+        "started_at": null,
+        "completed_at": null,
+        "duration_seconds": 0
+      },
+      "status": "COMPLETED",
+      "errors": [
+        "\u2705 STATUS INDICATORS: Added COMPLETED, EXECUTING, WAITING, FAILED badges",
+        "\u2705 **Smart Status** - COMPLETED/EXECUTING/WAITING/FAILED with color coding",
+        "\u2705 **Task Cards** - Progress bars, file metrics, current task, errors/warnings",
+        "- Statistics bar (Total, Executing, Waiting, Completed, Failed)"
+      ],
+      "warnings": [
+        "\u2705 **Task Cards** - Progress bars, file metrics, current task, errors/warnings"
+      ],
+      "summary": ""
+    },
+    {
+      "task_id": "cppultrathink_output_track1_20251112_125138_940",
+      "output_file": "/home/user01/claude-test/ClaudePrompt/tmp/cppultrathink_output_track1_20251112_125138_940.txt",
+      "file_size_kb": 48.6,
+      "line_count": 1026,
+      "created_at": "2025-11-12T13:47:10.727275",
+      "completed_at": "2025-11-12T13:47:10.727275",
+      "prompt": "MODERATE (181 chars, 24 words) Agents: 12 of 500 (2.4%) \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u2502   USER PROMPT INPUT     \u2502 \u2502   [   MODERATE    ]   \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 \u2502 \u25bc \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u2502  \ud83d\udee1\ufe0f  SECURITY LAYER                       \u2502 \u2502  \u2022 Input Sanitizer (9 patterns)          \u2502 \u2502  \u2022 Injection Detection                   \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 \u2502 \u25bc \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u2502  \ud83e\udd16 AGENT ORCHESTRATOR                    \u2502 \u2502  Spaw",
+      "agents": {
+        "total_allocated": 12,
+        "max_available": 30,
+        "details": [
+          {
+            "id": "A1",
+            "name": "Context Gatherer                                  ",
+            "role": "Parse and classify prompt                                  \u2502",
+            "priority": "HIGH     \u2502"
+          },
+          {
+            "id": "A2",
+            "name": "Security Validator                                ",
+            "role": "Collect file/directory context                             \u2502",
+            "priority": "HIGH     \u2502"
+          },
+          {
+            "id": "A3",
+            "name": "Guardrail L1 Validator                            ",
+            "role": "Pre-execution security checks                              \u2502",
+            "priority": "CRITICAL \u2502"
+          },
+          {
+            "id": "A4",
+            "name": "Guardrail L2 Validator                            ",
+            "role": "Prompt Shields (parallel)                                  \u2502",
+            "priority": "CRITICAL \u2502"
+          },
+          {
+            "id": "A5",
+            "name": "Guardrail L3 Validator                            ",
+            "role": "Content Filtering (parallel)                               \u2502",
+            "priority": "CRITICAL \u2502"
+          },
+          {
+            "id": "A6",
+            "name": "Task Executor 1                                   ",
+            "role": "PHI Detection (parallel)                                   \u2502",
+            "priority": "HIGH     \u2502"
+          },
+          {
+            "id": "A7",
+            "name": "Task Executor 2                                   ",
+            "role": "Primary task execution                                     \u2502",
+            "priority": "HIGH     \u2502"
+          },
+          {
+            "id": "A8",
+            "name": "Verifier 1                                        ",
+            "role": "Parallel task execution                                    \u2502",
+            "priority": "HIGH     \u2502"
+          },
+          {
+            "id": "A9",
+            "name": "Verifier 2                                        ",
+            "role": "Logical consistency + factual accuracy                     \u2502",
+            "priority": "HIGH     \u2502"
+          },
+          {
+            "id": "A10",
+            "name": "Output Guardrail L4-5                             ",
+            "role": "Completeness + quality assurance                           \u2502",
+            "priority": "CRITICAL \u2502"
+          },
+          {
+            "id": "A11",
+            "name": "Output Guardrail L6-7                             ",
+            "role": "Medical + content filtering                                \u2502",
+            "priority": "CRITICAL \u2502"
+          },
+          {
+            "id": "A12",
+            "name": "Output Guardrail L6-7                             ",
+            "role": "Groundedness + compliance                                  \u2502"
+          }
+        ]
+      },
+      "stages": [
+        {
+          "number": 1,
+          "name": "Prompt Preprocessing & Analysis"
+        },
+        {
+          "number": 2,
+          "name": "Guardrails - Input Validation (Layers 1-3)"
+        },
+        {
+          "number": 3,
+          "name": "Context Management"
+        },
+        {
+          "number": 4,
+          "name": "Agent Orchestration"
+        }
+      ],
+      "guardrails": {
+        "total_layers": 8,
+        "layers": [
+          {
+            "number": 1,
+            "name": "Unknown",
+            "status": "PASS"
+          },
+          {
+            "number": 2,
+            "name": "Unknown",
+            "status": "PASS"
+          },
+          {
+            "number": 3,
+            "name": "Unknown",
+            "status": "PASS"
+          },
+          {
+            "number": 4,
+            "name": "Unknown",
+            "status": "PASS"
+          },
+          {
+            "number": 5,
+            "name": "Unknown",
+            "status": "PASS"
+          },
+          {
+            "number": 6,
+            "name": "Unknown",
+            "status": "PASS"
+          },
+          {
+            "number": 7,
+            "name": "Unknown",
+            "status": "PASS"
+          },
+          {
+            "number": 8,
+            "name": "Unknown",
+            "status": "PASS"
+          }
+        ]
+      },
+      "context_usage": {
+        "used_tokens": 0,
+        "max_tokens": 200000,
+        "percentage": 0.0
+      },
+      "execution_time": {
+        "started_at": null,
+        "completed_at": null,
+        "duration_seconds": 0
+      },
+      "status": "COMPLETED",
+      "errors": [
+        "- 90%+ coverage requirement (--cov-fail-under=90)"
+      ],
+      "warnings": [],
+      "summary": ""
+    },
+    {
+      "task_id": "",
+      "error": "[Errno 21] Is a directory: '.'",
+      "status": "ERROR"
+    }
+  ],
+  "last_updated": "2025-11-12T14:20:02.641995"
+}

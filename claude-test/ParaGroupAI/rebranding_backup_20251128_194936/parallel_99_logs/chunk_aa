@@ -1,0 +1,12 @@
+fix_all_test_syntax_errors.py
+fix_all_with_statements.py
+fix_module_level_exit.py
+fix_test_files_complete.py
+generate_real_test_fixed.py
+tests_backup_20251120_090921/mock_claude_api.py
+transform_mocks_to_real_tests.py
+update_realtime_metrics.py
+infrastructure/tracing/opentelemetry_config.py
+guardrails/crewai_guardrails.py
+parallel_implementation/phase6_testing.py
+parallel_implementation/phase5_websocket_enhancement.py

@@ -1,0 +1,36 @@
+#!/usr/bin/env python3
+"""
+Accurate Tests for get_coverage_quickly.py
+Generated based on real AST analysis
+Target: 90%+ code coverage
+"""
+
+import pytest
+import sys
+import os
+import json
+import tempfile
+from pathlib import Path
+from unittest.mock import patch, Mock, MagicMock, mock_open, call
+from typing import Any
+
+# Add module to path
+sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+
+# Import module under test
+import get_coverage_quickly
+
+
+class TestGetcoveragequicklyAccurate:
+    """Accurate tests based on real module structure"""
+
+    def setup_method(self):
+        """Setup for each test"""
+        self.test_dir = tempfile.mkdtemp()
+
+    def teardown_method(self):
+        """Cleanup after each test"""
+        import shutil
+        if hasattr(self, 'test_dir') and os.path.exists(self.test_dir):
+            shutil.rmtree(self.test_dir, ignore_errors=True)
+

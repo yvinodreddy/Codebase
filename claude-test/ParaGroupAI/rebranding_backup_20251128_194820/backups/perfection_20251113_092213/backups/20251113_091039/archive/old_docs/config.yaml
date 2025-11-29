@@ -1,0 +1,180 @@
+# Orchestration System Configuration
+# Configure all aspects of the orchestration pipeline for optimal performance
+
+# Master Orchestrator Settings
+orchestrator:
+  min_confidence_score: 96.0  # Target confidence score (0-100)
+  max_refinement_iterations: 5  # Maximum iterations for quality refinement
+  enable_parallel_processing: true
+  enable_caching: true
+
+# Prompt Preprocessor Settings
+preprocessor:
+  default_complexity_threshold: "moderate"
+  enable_intent_classification: true
+  enable_metadata_extraction: true
+
+# Guardrails Settings
+guardrails:
+  # Layer 1: Prompt Shields
+  enable_prompt_shields: true
+  prompt_shields_endpoint: "${CONTENT_SAFETY_ENDPOINT}"
+  prompt_shields_key: "${CONTENT_SAFETY_KEY}"
+
+  # Layer 2: Content Filtering
+  enable_content_filtering: true
+  content_threshold: 2  # 0=Safe, 2=Low, 4=Medium, 6=High
+
+  # Layer 3: PHI Detection
+  enable_phi_detection: true
+
+  # Layer 4: Medical Terminology
+  medical_terminology_validation: true
+  enforce_terminology: false  # If true, fail on issues; if false, warn only
+
+  # Layer 5: Output Content Filtering
+  # Uses same settings as Layer 2
+
+  # Layer 6: Groundedness Detection
+  enable_groundedness_check: true
+  groundedness_threshold: 20  # Percentage threshold for ungrounded content
+
+  # Layer 7: HIPAA Compliance & Fact Checking
+  enable_compliance_validation: true
+  require_medical_disclaimers: true
+
+# Agent Framework Settings
+agent_framework:
+  # Context Manager
+  context_manager:
+    max_tokens: 100000
+    compact_threshold: 0.8  # Compact at 80% usage
+    keep_recent_messages: 10
+
+  # Feedback Loop
+  feedback_loop:
+    max_iterations: 10
+    enable_learning: true
+    enable_adaptive_limits: true
+    enable_profiling: true
+
+  # Code Generator
+  code_generator:
+    enable_syntax_check: true
+    enable_security_check: true
+    enable_style_check: true
+    min_code_quality_score: 70
+
+  # Agentic Search
+  agentic_search:
+    enable_parallel_search: true
+    max_search_results: 50
+
+  # Verification System
+  verification:
+    enable_rules_based: true
+    enable_code_verification: true
+    enable_guardrails_verification: true
+    enable_llm_judge: false  # Expensive, use only when needed
+
+  # Subagent Orchestrator
+  subagent_orchestrator:
+    max_parallel_subagents: 5
+    default_context_size: 50000
+    enable_result_merging: true
+
+# Claude Integration Settings
+claude:
+  default_model: "claude-3-5-sonnet-20241022"
+  max_tokens: 4096
+  temperature: 1.0
+  enable_streaming: false
+
+  # Model selection based on task complexity
+  auto_model_selection:
+    enabled: true
+    simple: "claude-3-haiku-20240307"
+    moderate: "claude-3-5-sonnet-20241022"
+    complex: "claude-3-5-sonnet-20241022"
+    very_complex: "claude-3-opus-20240229"
+
+# Monitoring & Logging
+monitoring:
+  enable_metrics_logging: true
+  metrics_file: "logs/guardrail_metrics.json"
+  log_level: "INFO"  # DEBUG, INFO, WARNING, ERROR
+  log_dir: "logs"
+
+  # Performance monitoring
+  enable_performance_tracking: true
+  track_token_usage: true
+  track_api_costs: true
+
+  # Alerts
+  enable_alerts: false
+  alert_on_low_confidence: true
+  low_confidence_threshold: 90.0
+
+# Quality Assurance
+quality_assurance:
+  # Confidence scoring weights
+  confidence_weights:
+    prompt_analysis: 0.15
+    agent_execution: 0.25
+    guardrails_validation: 0.30
+    iteration_efficiency: 0.15
+    verification_results: 0.15
+
+  # Quality thresholds
+  min_acceptable_confidence: 90.0
+  target_confidence: 96.0
+  excellent_confidence: 98.0
+
+  # Refinement settings
+  enable_auto_refinement: true
+  max_auto_refinement_iterations: 3
+
+# Performance Optimization
+performance:
+  enable_caching: true
+  cache_ttl_seconds: 3600
+
+  # Parallel processing
+  max_parallel_tasks: 10
+  enable_async_processing: true
+
+  # Resource limits
+  max_memory_mb: 4096
+  request_timeout_seconds: 300
+
+# Development & Testing
+development:
+  debug_mode: false
+  save_intermediate_results: true
+  intermediate_results_dir: "debug"
+
+  # Testing
+  enable_dry_run: false
+  mock_api_calls: false
+  use_test_data: false
+
+# Security
+security:
+  enable_input_sanitization: true
+  enable_output_sanitization: true
+  max_prompt_length: 100000
+  max_output_length: 100000
+
+  # Rate limiting
+  enable_rate_limiting: true
+  max_requests_per_minute: 60
+  max_requests_per_hour: 1000
+
+# Custom Rules (Optional)
+custom_rules:
+  enabled: false
+  rules: []
+  # Example:
+  # - name: "no_medical_advice"
+  #   pattern: "you should.*medication"
+  #   message: "Cannot provide direct medical advice"

@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# Database-First CLI Tool Wrapper
+python3 "$(dirname "$0")/database/db_cli.py" "$@"

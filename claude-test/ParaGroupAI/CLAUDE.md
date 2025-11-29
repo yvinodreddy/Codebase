@@ -4,16 +4,16 @@ This file provides guidance to Claude Code (claude.ai/code) when working with th
 
 ## 🎯 WORKING DIRECTORY CONTEXT (PERMANENT - AS OF 2025-11-27)
 
-**CRITICAL: cpp NOW PRESERVES ORIGINAL WORKING DIRECTORY**
+**CRITICAL: prsg NOW PRESERVES ORIGINAL WORKING DIRECTORY**
 
-This enhancement allows `cpp` to be run from ANY directory while maintaining correct context:
+This enhancement allows `prsg` to be run from ANY directory while maintaining correct context:
 
 ### Key Features
 
-1. **Run cpp from any directory** - No need to cd to ClaudePrompt first
+1. **Run prsg from any directory** - No need to cd to ClaudePrompt first
    ```bash
    cd /home/user01/my-project
-   cpp "your question" -v
+   prsg "your question" -v
    # System stays in /home/user01/my-project and uses this context
    ```
 
@@ -28,15 +28,15 @@ This enhancement allows `cpp` to be run from ANY directory while maintaining cor
    - All context stored with correct directory reference
    - Access via: `./db-cli inspect proj_my-project_abc12345`
 
-4. **Timestamped output files** - Always written to ClaudePrompt/tmp
-   - Format: `ClaudePrompt/tmp/cppultrathink_output_YYYYMMDD_HHMMSS_mmm.txt`
+4. **Timestamped output files** - Always written to ParaGroupAI/tmp
+   - Format: `ParaGroupAI/tmp/prsgultrathink_output_YYYYMMDD_HHMMSS_mmm.txt`
    - Complete history preserved
    - No file conflicts
 
 5. **Override with --project-id** - Point to different project context
    ```bash
    cd /anywhere
-   cpp "question" --project-id proj_my-project_abc12345
+   prsg "question" --project-id proj_my-project_abc12345
    ```
 
 ### Technical Implementation
@@ -48,8 +48,8 @@ This enhancement allows `cpp` to be run from ANY directory while maintaining cor
 - Preserved through entire execution chain
 
 **Modified Files**:
-- `cpp` - Captures and exports original working directory
-- `cpp_core` - Preserves ULTRATHINK_ORIGINAL_CWD if not set
+- `prsg` - Captures and exports original working directory
+- `prsg_core` - Preserves ULTRATHINK_ORIGINAL_CWD if not set
 - `database/auto_context_integration.py` - Reads ULTRATHINK_ORIGINAL_CWD
 - `database/multi_project_manager.py` - Fixed import paths for any-directory execution
 
@@ -140,7 +140,7 @@ Because ULTRATHINK is benchmarked against industry standards from:
 
 ### Implementation Details
 
-**File**: `/home/user01/claude-test/ClaudePrompt/database/dual_context_retriever.py`
+**File**: `/home/user01/claude-test/ParaGroupAI/database/dual_context_retriever.py`
 
 **Production Method**: `retrieve_with_both_methods_validated()`
 - Validates BOTH methods to 99%
@@ -244,7 +244,7 @@ Without seeing BOTH results, you cannot understand:
 
 ### Implementation
 
-**File**: `/home/user01/claude-test/ClaudePrompt/database/dual_context_retriever.py`
+**File**: `/home/user01/claude-test/ParaGroupAI/database/dual_context_retriever.py`
 
 **Method**: `print_both_results(query, k=10, output_file=None)`
 
@@ -377,7 +377,7 @@ This is:
 
 Run the demo to see this in action:
 ```bash
-cd /home/user01/claude-test/ClaudePrompt
+cd /home/user01/claude-test/ParaGroupAI
 ./demo_print_both_results.py
 ```
 
@@ -472,8 +472,8 @@ Instead, use:
 
 This time limit policy must be present in:
 - ✅ /home/user01/claude-test/CLAUDE.md - Global rules
-- ✅ /home/user01/claude-test/ClaudePrompt/CLAUDE.md (this file) - ULTRATHINK project rules
-- ✅ /home/user01/claude-test/ClaudePrompt/web-ui-implementation/.claude_docs/DEVELOPMENT_STANDARDS.md
+- ✅ /home/user01/claude-test/ParaGroupAI/CLAUDE.md (this file) - ULTRATHINK project rules
+- ✅ /home/user01/claude-test/ParaGroupAI/web-ui-implementation/.claude_docs/DEVELOPMENT_STANDARDS.md
 
 All three files MUST contain consistent messaging about:
 1. NO time limits for Claude Code
@@ -492,7 +492,7 @@ This is a PERMANENT, NON-NEGOTIABLE standard effective 2025-11-14 and forever.
 
 ### Critical Rule: Display 3-Way Comparison on EVERY Execution
 
-Every `cpp` command execution MUST display the permanent metrics comparison table showing:
+Every `prsg` command execution MUST display the permanent metrics comparison table showing:
 
 1. **Claude Code (Baseline)** - Standard Claude Code without enhancements
 2. **cpps (Before Metrics)** - ULTRATHINK v1.0 before industry metrics implementation
@@ -553,7 +553,7 @@ ROI: \$500K-\$2M annual savings (99% reduction in production incidents)
 ### Documentation Requirements
 
 This requirement must be present in:
-- ✅ /home/user01/claude-test/ClaudePrompt/CLAUDE.md (this file)
+- ✅ /home/user01/claude-test/ParaGroupAI/CLAUDE.md (this file)
 - ✅ /home/user01/claude-test/CLAUDE.md (root level)
 - ✅ ultrathink.py (implemented in generate_3way_metrics_comparison() function)
 
@@ -584,49 +584,49 @@ This directory contains the ULTRATHINK system - an advanced orchestration framew
 
 There are TWO separate ULTRATHINK systems that are FULLY ISOLATED:
 - **TestPrompt**: Commands `ultrathinkc` or `uc` → `/tmp/ultrathink_output.txt`
-- **ClaudePrompt**: Command `cpp` → Timestamped output files
+- **ClaudePrompt**: Command `prsg` → Timestamped output files
 
 Each has its OWN output file, answer_to_file.py script, and directory.
 
 ---
 
-### 📌 PRIMARY PROTOCOL FOR `cpp` (ClaudePrompt - THIS DIRECTORY)
+### 📌 PRIMARY PROTOCOL FOR `prsg` (ParaGroupAI - THIS DIRECTORY)
 
 **⚠️ CRITICAL - DEFAULT BEHAVIOR AS OF 2025-11-12:**
 **ALL cpp executions now use TIMESTAMPED OUTPUT by default!**
 
 #### **DEFAULT METHOD: Timestamped Output (ALWAYS USE THIS)**
 
-When the user sends a message with `cpp` command:
+When the user sends a message with `prsg` command:
 
 1. **Run the command** with timestamped output:
    ```bash
    OUTPUT_FILE=$(python3 get_output_path.py)
-   ./cpp "prompt" --verbose 2>&1 > "$OUTPUT_FILE"
+   ./prsg "prompt" --verbose 2>&1 > "$OUTPUT_FILE"
    ```
 
    Or with track number for parallel execution:
    ```bash
    OUTPUT_FILE=$(python3 get_output_path.py --track 1)
-   ./cpp "prompt" --verbose 2>&1 > "$OUTPUT_FILE"
+   ./prsg "prompt" --verbose 2>&1 > "$OUTPUT_FILE"
    ```
 
 2. **Output file will be automatically timestamped**:
-   - Format: `/home/user01/claude-test/ClaudePrompt/tmp/cppultrathink_output_YYYYMMDD_HHMMSS_mmm.txt`
-   - With track: `/home/user01/claude-test/ClaudePrompt/tmp/cppultrathink_output_track1_YYYYMMDD_HHMMSS_mmm.txt`
+   - Format: `/home/user01/claude-test/ParaGroupAI/tmp/cppultrathink_output_YYYYMMDD_HHMMSS_mmm.txt`
+   - With track: `/home/user01/claude-test/ParaGroupAI/tmp/cppultrathink_output_track1_YYYYMMDD_HHMMSS_mmm.txt`
 
 3. **Generate your answer** to the user's question (apply all ULTRATHINK directives, guardrails, verification)
 
 4. **Append your answer to the file** using this command:
    ```bash
-   python3 /home/user01/claude-test/ClaudePrompt/answer_to_file.py "$OUTPUT_FILE" "Your complete answer here with all details, validation, confidence scores, etc."
+   python3 /home/user01/claude-test/ParaGroupAI/answer_to_file.py "$OUTPUT_FILE" "Your complete answer here with all details, validation, confidence scores, etc."
    ```
 
 5. **Tell the user** to read the timestamped file from top to bottom
 
 6. **Also display your answer** in the chat (with fire emoji boxes) for immediate visibility
 
-**Output file location:** `/home/user01/claude-test/ClaudePrompt/tmp/cppultrathink_output_{timestamp}.txt`
+**Output file location:** `/home/user01/claude-test/ParaGroupAI/tmp/cppultrathink_output_{timestamp}.txt`
 
 **THIS IS THE DEFAULT - USE THIS FOR EVERY cpp EXECUTION**
 
@@ -642,7 +642,7 @@ For backward compatibility only:
 2. **Generate your answer** to the user's question (apply all ULTRATHINK directives, guardrails, verification)
 3. **Append your answer to the file** using this command:
    ```bash
-   python3 /home/user01/claude-test/ClaudePrompt/answer_to_file.py /tmp/cppultrathink_output.txt "Your complete answer here with all details, validation, confidence scores, etc."
+   python3 /home/user01/claude-test/ParaGroupAI/answer_to_file.py /tmp/cppultrathink_output.txt "Your complete answer here with all details, validation, confidence scores, etc."
    ```
 4. **Tell the user** to read `/tmp/cppultrathink_output.txt` from top to bottom
 5. **Also display your answer** in the chat (with fire emoji boxes) for immediate visibility
@@ -688,11 +688,11 @@ When the user sends a message containing an `ultrathinkc` command or `uc` comman
 
 | Command | Output File | answer_to_file.py Location |
 |---------|-------------|----------------------------|
-| `cpp` (DEFAULT) | `ClaudePrompt/tmp/cppultrathink_output_{timestamp}.txt` ⭐ | `/home/user01/claude-test/ClaudePrompt/answer_to_file.py` |
-| `cpp` (legacy - only if requested) | `/tmp/cppultrathink_output.txt` | `/home/user01/claude-test/ClaudePrompt/answer_to_file.py` |
+| `prsg` (DEFAULT) | `ParaGroupAI/tmp/prsgultrathink_output_{timestamp}.txt` ⭐ | `/home/user01/claude-test/ParaGroupAI/answer_to_file.py` |
+| `prsg` (legacy - only if requested) | `/tmp/cppultrathink_output.txt` | `/home/user01/claude-test/ParaGroupAI/answer_to_file.py` |
 | `ultrathinkc` or `uc` | `/tmp/ultrathink_output.txt` | `/home/user01/claude-test/TestPrompt/answer_to_file.py` |
 
-**⭐ DEFAULT:** Always use timestamped output for `cpp` unless user explicitly asks for /tmp/ path
+**⭐ DEFAULT:** Always use timestamped output for `prsg` unless user explicitly asks for /tmp/ path
 
 **The file will contain:**
 - Part 1: ULTRATHINK system output (all [VERBOSE] stages, guardrails, metrics)
@@ -852,7 +852,7 @@ For EVERY response you generate, you MUST:
 
 2. **Validate Draft**
    ```bash
-   python3 /home/user01/claude-test/ClaudePrompt/validate_my_response.py \
+   python3 /home/user01/claude-test/ParaGroupAI/validate_my_response.py \
      "your draft response here" \
      --prompt "original user prompt" \
      --iteration 1
@@ -926,7 +926,7 @@ If 20 iterations reached without 99%+:
 
 **Location of validation tool**:
 ```
-/home/user01/claude-test/ClaudePrompt/validate_my_response.py
+/home/user01/claude-test/ParaGroupAI/validate_my_response.py
 ```
 
 **What it validates**:
@@ -1258,7 +1258,7 @@ jobs:
 ### DOCUMENTATION REQUIREMENTS
 
 **This standard MUST be present in:**
-- ✅ `/home/user01/claude-test/ClaudePrompt/CLAUDE.md` (this file)
+- ✅ `/home/user01/claude-test/ParaGroupAI/CLAUDE.md` (this file)
 - ✅ `/home/user01/claude-test/CLAUDE.md` (root project)
 - ✅ Pre-commit hook: `.git/hooks/pre-commit`
 - ✅ CI/CD pipeline: `.github/workflows/test-coverage.yml`

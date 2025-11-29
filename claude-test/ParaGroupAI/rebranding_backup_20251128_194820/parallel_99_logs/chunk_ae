@@ -1,0 +1,12 @@
+ultrathink.py
+generate_real_tests_for_module.py
+get_live_context_metrics.py
+infrastructure/structured_logging.py
+infrastructure/response_cache.py
+tests_backup_20251120_090921/e2e_framework.py
+infrastructure/prometheus_metrics.py
+statusline_formatter.py
+security/security_headers.py
+backups/perfection_20251113_092213/tests/mock_claude_api.py
+security/input_sanitizer.py
+claude_integration.py

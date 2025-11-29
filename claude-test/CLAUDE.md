@@ -132,7 +132,7 @@ Instead, use:
 
 This time limit policy must be present in:
 - ✅ /home/user01/claude-test/CLAUDE.md (this file) - Global rules
-- ✅ /home/user01/claude-test/ClaudePrompt/CLAUDE.md - ULTRATHINK project rules
+- ✅ /home/user01/claude-test/ParaGroupAI/CLAUDE.md - Para Group AI Orchestrator® rules
 - ✅ /home/user01/claude-test/ClaudePrompt/web-ui-implementation/.claude_docs/DEVELOPMENT_STANDARDS.md
 
 All three files MUST contain consistent messaging about:
@@ -187,7 +187,7 @@ This is:
 - **PERMANENT** - Effective 2025-11-20 and forever
 - **PRODUCTION-READY** - Fully tested and validated
 
-Implemented in: `/home/user01/claude-test/ClaudePrompt/ultrathink.py` (generate_3way_metrics_comparison() function)
+Implemented in: `/home/user01/claude-test/ParaGroupAI/ultrathink.py` (generate_3way_metrics_comparison() function)
 
 **DO NOT remove or modify this requirement without explicit user authorization.**
 
@@ -334,7 +334,7 @@ This system is **PRODUCTION READY** for large-scale projects with 1000+ tasks.
 **Effective:** 2025-11-20 and FOREVER
 **Enforcement:** AUTOMATED (pre-commit hooks + CI/CD blocks)
 
-**See full documentation in:** `/home/user01/claude-test/ClaudePrompt/CLAUDE.md`
+**See full documentation in:** `/home/user01/claude-test/ParaGroupAI/CLAUDE.md`
 
 ---
 
@@ -395,7 +395,7 @@ When creating OR modifying ANY Python file:
 
 ---
 
-**Full documentation:** `/home/user01/claude-test/ClaudePrompt/CLAUDE.md#mandatory-testing-standards`
+**Full documentation:** `/home/user01/claude-test/ParaGroupAI/CLAUDE.md#mandatory-testing-standards`
 
 **YOU MUST CREATE TESTS FOR EVERY PYTHON FILE. NO EXCEPTIONS.**
 

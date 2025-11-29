@@ -1,0 +1,73 @@
+#!/usr/bin/env bash
+#
+# CPP_TIMESTAMPED - Enhanced ClaudePrompt wrapper with timestamped output files
+#
+# This wrapper automatically generates unique timestamped output files for each execution.
+# Perfect for parallel execution across multiple tracks.
+#
+# Usage:
+#   cpp_timestamped "your prompt" -v
+#   cpp_timestamped "your prompt" -v --track 1
+#   cpp_timestamped "your prompt" -v --legacy  (uses /tmp/ path)
+#
+# The output file path is:
+#   - New format: /home/user01/claude-test/ClaudePrompt/tmp/cppultrathink_output_YYYYMMDD_HHMMSS_mmm.txt
+#   - Legacy format: /tmp/cppultrathink_output.txt (with --legacy flag)
+#
+
+# Get the directory where this script is actually located (resolve symlinks)
+SOURCE="${BASH_SOURCE[0]}"
+while [ -h "$SOURCE" ]; do
+  SCRIPT_DIR="$(cd -P "$(dirname "$SOURCE")" && pwd)"
+  SOURCE="$(readlink "$SOURCE")"
+  [[ $SOURCE != /* ]] && SOURCE="$SCRIPT_DIR/$SOURCE"
+done
+SCRIPT_DIR="$(cd -P "$(dirname "$SOURCE")" && pwd)"
+
+# Parse arguments to check for --track and --legacy flags
+TRACK_NUM=""
+USE_LEGACY=false
+CLEAN_ARGS=()
+
+for arg in "$@"; do
+  if [[ "$arg" == --track* ]]; then
+    # Extract track number
+    if [[ "$arg" == *"="* ]]; then
+      TRACK_NUM="${arg#*=}"
+    else
+      # Next arg should be the track number
+      TRACK_NUM="$2"
+      shift
+    fi
+  elif [[ "$arg" == "--legacy" ]]; then
+    USE_LEGACY=true
+  else
+    CLEAN_ARGS+=("$arg")
+  fi
+done
+
+# Generate output file path
+if [ "$USE_LEGACY" = true ]; then
+  OUTPUT_PATH=$(python3 "$SCRIPT_DIR/get_output_path.py" --legacy)
+else
+  if [ -n "$TRACK_NUM" ]; then
+    OUTPUT_PATH=$(python3 "$SCRIPT_DIR/get_output_path.py" --track "$TRACK_NUM")
+  else
+    OUTPUT_PATH=$(python3 "$SCRIPT_DIR/get_output_path.py")
+  fi
+fi
+
+# Export the output path for answer_to_file.py to use
+export CPP_OUTPUT_FILE="$OUTPUT_PATH"
+
+# Show user where output will be saved
+echo "📁 Output will be saved to: $OUTPUT_PATH"
+echo ""
+
+# Call ultrathink.py with clean arguments and redirect to generated path
+python3 "$SCRIPT_DIR/ultrathink.py" "${CLEAN_ARGS[@]}" 2>&1 | tee "$OUTPUT_PATH"
+
+# Show final message
+echo ""
+echo "✅ Complete output saved to: $OUTPUT_PATH"
+echo "📖 Read it with: cat $OUTPUT_PATH"

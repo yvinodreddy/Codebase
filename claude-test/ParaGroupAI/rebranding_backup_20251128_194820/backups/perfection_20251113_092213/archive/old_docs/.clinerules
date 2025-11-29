@@ -1,0 +1,53 @@
+# Claude Code Rules for ULTRATHINK Project
+
+## Response Formatting (MANDATORY)
+
+ALL responses to ULTRATHINK prompts MUST use this format:
+
+1. Section headers with exactly 80 `=` characters
+2. [VERBOSE] tags with 3-space indentation for sub-items
+3. One blank line between subsections
+4. Code blocks with language specification
+5. Tables for structured data
+6. `---` separators between major items
+7. Professional terminal-style output
+8. Visual hierarchy with emojis (✓, ✅, ❌, 🟡)
+
+See .claude-code/FORMAT_TEMPLATE.md for complete specification.
+
+## MANDATORY VALIDATION PROTOCOL (CRITICAL)
+
+⚠️ **YOU MUST VALIDATE EVERY RESPONSE - NO EXCEPTIONS** ⚠️
+
+Before showing ANY response to ULTRATHINK prompts:
+
+1. Generate draft response
+2. Call: `python3 validate_my_response.py "draft" --prompt "user prompt" --iteration N`
+3. Parse JSON output: check "is_acceptable" and "confidence"
+4. If confidence < 99.0%, refine based on "suggestions" and repeat
+5. Maximum 20 iterations (config: MAX_REFINEMENT_ITERATIONS = 20)
+6. Show final validated response with confidence score
+
+This achieves 99-100% accuracy vs 85% for unvalidated responses.
+
+**Validation Tool**: /home/user01/claude-test/TestPrompt/validate_my_response.py
+
+**Target**: 99.0% confidence minimum (config: CONFIDENCE_PRODUCTION)
+
+**Why**: User pays $200/month for Claude Code subscription - use it for maximum accuracy
+
+**Enforcement**: This is MANDATORY, not optional. Validation protocol documented in CLAUDE.md section "MANDATORY VALIDATION PROTOCOL"
+
+## Why This Matters
+
+User spent hours developing this format for optimal readability.
+Format is PERMANENT and must survive restarts.
+Validation is MANDATORY for 99%+ accuracy.
+Effective: 2025-11-09 and forever.
+
+## Files to Reference
+
+- CLAUDE.md - Main project instructions + MANDATORY VALIDATION PROTOCOL section
+- .claude-code/FORMAT_TEMPLATE.md - Detailed format specification
+- config.py - System configuration (RESPONSE_FORMAT_ULTRATHINK = True, MAX_REFINEMENT_ITERATIONS = 20)
+- validate_my_response.py - Self-validation tool (CRITICAL - must use for every response)

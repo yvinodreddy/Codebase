@@ -1,0 +1,20 @@
+Explain the race condition in this multi-threaded code and provide a fix:
+
+```python
+counter = 0
+
+def increment():
+    global counter
+    for _ in range(100000):
+        counter += 1
+
+threads = [Thread(target=increment) for _ in range(10)]
+for t in threads:
+    t.start()
+for t in threads:
+    t.join()
+
+print(counter)  # Expected: 1000000, Actual: varies
+```
+
+Explain why the result is inconsistent and provide thread-safe solution.
