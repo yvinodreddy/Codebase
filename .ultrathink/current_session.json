@@ -1,8 +1,8 @@
 {
-  "project_id": "proj_claude-test_22c04638",
-  "instance_id": "inst_20251128_201521_9c1a205c",
-  "started_at": "2025-11-28T20:15:21.840809",
+  "project_id": "proj_ParaGroupAI_519ef523",
+  "instance_id": "inst_20251128_230558_2cdee2cd",
+  "started_at": "2025-11-28T23:05:58.096948",
   "hostname": "User01",
-  "process_id": 144912,
-  "working_directory": "/home/user01/claude-test"
+  "process_id": 151855,
+  "working_directory": "/home/user01/claude-test/ParaGroupAI"
 }

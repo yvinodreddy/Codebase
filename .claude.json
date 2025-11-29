@@ -1,5 +1,5 @@
 {
-  "numStartups": 29,
+  "numStartups": 30,
   "installMethod": "unknown",
   "autoUpdates": true,
   "tipsHistory": {
@@ -13,8 +13,8 @@
     "enter-to-steer-in-relatime": 28,
     "todo-list": 24,
     "# for memory": 19,
-    "install-github-app": 18,
-    "drag-and-drop-images": 18,
+    "install-github-app": 30,
+    "drag-and-drop-images": 30,
     "double-esc-code-restore": 18,
     "continue": 18,
     "shift-tab": 18,
