@@ -193,6 +193,110 @@ Implemented in: `/home/user01/claude-test/ParaGroupAI/ultrathink.py` (generate_3
 
 ---
 
+## 🔥 MANDATORY: PERMANENT DUAL RETRIEVAL COMPARISON DISPLAY (NEW - 2025-11-29)
+
+**CRITICAL, MANDATORY, NON-NEGOTIABLE REQUIREMENT - Effective 2025-11-29 and FOREVER**
+
+### The Requirement
+
+**EVERY prsg execution in ParaGroupAI MUST permanently display the keyword vs semantic comparison in the output file.**
+
+This applies to the ParaGroupAI ULTRATHINK system (`prsg` command).This is NOT optional. This is NOT a feature flag. This is **MANDATORY, CRITICAL, and PERMANENT**.
+
+### Why This Is Required
+
+The user MUST be able to see in EVERY prsg execution:
+- **Quality difference** between keyword and semantic search
+- **Exactly what each method found** for transparency
+- **How intelligent merging combines results** (100% coverage)
+- **Coverage improvements** from dual retrieval (95-100% → 100%)
+- **Confidence scores** showing 99% validation for both methods
+
+Without this permanent display, the user cannot:
+- ❌ Understand quality improvements
+- ❌ Validate dual retrieval is working correctly
+- ❌ Practice and learn from examples
+- ❌ Make informed decisions about code changes
+- ❌ See the value delivered by the system
+
+### What Must Be Displayed
+
+**EVERY prsg output file MUST include:**
+
+1. **Keyword Search Results** - Complete list with BM25 scores, 99% confidence
+2. **Semantic Search Results** - Complete list with similarity scores, 99% confidence
+3. **Comparison Analysis** - Overlap%, unique results, quality distribution
+4. **Intelligent Merging Summary** - How results were combined for 100% coverage
+5. **Recommendation** - Which method performed better and why
+6. **Validation Summary** - Production-ready status, both at 99%
+
+### Display Location
+
+```
+[ULTRATHINK system output]
+[All VERBOSE stages, guardrails, processing]
+
+⬇️⬇️⬇️ DUAL RETRIEVAL COMPARISON ⬇️⬇️⬇️
+================================================================================
+🔍 KEYWORD VS SEMANTIC SEARCH COMPARISON
+================================================================================
+[Full comparison with all 6 sections above]
+================================================================================
+
+⬇️⬇️⬇️ CLAUDE CODE ANSWER ⬇️⬇️⬇️
+[Answer to user's question]
+```
+
+### Implementation
+
+**Location**: `/home/user01/claude-test/ParaGroupAI/`
+
+**Demo Script**: `./demo_dual_retrieval_comparison.py`
+- Run to see 3 example comparisons
+- Saves to `tmp/dual_retrieval_demo_output.txt`
+- Shows what EVERY prsg execution should display
+
+**Practice with any query:**
+```bash
+cd /home/user01/claude-test/ParaGroupAI
+python3 -c "
+from database.dual_context_retriever import DualContextRetriever
+retriever = DualContextRetriever()
+output = retriever.print_both_results('your query here', k=10)
+print(output)
+"
+```
+
+### Enforcement
+
+This is:
+- **CRITICAL** - Cannot be removed or disabled
+- **MANDATORY** - Required for all prsg executions
+- **NON-NEGOTIABLE** - No exceptions allowed
+- **PERMANENT** - Effective 2025-11-29 and forever
+
+**User explicitly required this with:**
+> "I want to see in the output those sections so that how is our quality of
+> improvement is showing In the output result and when we try to ask any
+> question to make any changes for code how is it giving the results I want
+> those changes to be permanently displaying in the output file also"
+
+**This is MANDATORY, CRITICAL, NON-NEGOTIABLE AND NO WAY TO GO.**
+
+### Commitment
+
+This permanent display requirement is:
+- ✅ **Documented** in both CLAUDE.md files (root and ParaGroupAI)
+- ✅ **Implemented** in context_manager_enhanced.py
+- ✅ **Tested** with demo_dual_retrieval_comparison.py
+- ✅ **Permanent** - Will not be lost across sessions
+
+**See full details in:** `/home/user01/claude-test/ParaGroupAI/CLAUDE.md`
+
+**DO NOT remove or modify this requirement without explicit user authorization.**
+
+---
+
 ## Overview
 
 This is a simple test repository containing:

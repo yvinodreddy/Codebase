@@ -180,7 +180,7 @@ class ContextManagerEnhanced:
 
         return usage >= self.compact_threshold
 
-    def compact(self):
+    def compact(self, output_file: Optional[str] = None):
         """
         ENHANCED COMPACTION with DATABASE RETRIEVAL.
 
@@ -195,6 +195,9 @@ class ContextManagerEnhanced:
         2. Important messages (marked in metadata)
         3. Key information (errors, successes)
         4. **NEW: Relevant context from database**
+
+        Args:
+            output_file: Optional path to save dual retrieval comparison (NEW 2025-11-29)
         """
         if len(self.messages) <= self.keep_recent:
             logger.info("Not enough messages to compact")

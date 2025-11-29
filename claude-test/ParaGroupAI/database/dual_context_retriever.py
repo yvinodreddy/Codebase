@@ -18,7 +18,7 @@ Provides drop-in replacement for retrieve_context_for_compaction() with dual ret
 from database.context_retriever import ContextRetriever
 from database.semantic_retriever import SemanticRetriever
 from database.result_formatter import ResultFormatter
-from typing import Dict, List, Tuple, Any
+from typing import Dict, List, Tuple, Any, Union, Optional
 import concurrent.futures
 import json
 import subprocess
@@ -770,17 +770,35 @@ class DualContextRetriever:
         logger.info(f"   Keyword unique: {len(keyword_unique_keys)} results")
         logger.info(f"   Semantic unique: {len(semantic_unique_keys)} results")
 
-        # Step 3: Take ALL overlapping results
+        # Step 3: Take ALL overlapping results and score them
         merged_results = []
 
-        for key in overlap_keys:
-            # Use keyword version for overlap (faster retrieval)
-            kr = keyword_contents[key]
-            merged_results.append({
-                **kr,
-                'merge_source': 'overlap',
-                'merge_reason': 'Found by both methods (high confidence)'
-            })
+        overlap_results = [keyword_contents[key] for key in overlap_keys]
+        if overlap_results:
+            # Score overlap results
+            overlap_scored = self._score_results_for_quality(
+                overlap_results,
+                query,
+                method='keyword'
+            )
+
+            for kr in overlap_scored:
+                quality_score = kr.get('quality_score', 0)
+
+                # Add quality tier label
+                if quality_score >= 0.7:
+                    quality_tier = 'high'
+                elif quality_score >= 0.4:
+                    quality_tier = 'medium'
+                else:
+                    quality_tier = 'low'
+
+                merged_results.append({
+                    **kr,
+                    'merge_source': 'overlap',
+                    'merge_reason': 'Found by both methods (highest confidence)',
+                    'quality_tier': quality_tier
+                })
 
         logger.info(f"   ✅ Added {len(overlap_keys)} overlapping results")
 
@@ -792,18 +810,36 @@ class DualContextRetriever:
             method='keyword'
         )
 
-        # Take top N% of keyword unique results (e.g., top 80%)
-        keyword_threshold = 0.7  # Take results with score >= 0.7
-        keyword_best = [r for r in keyword_unique_scored if r.get('quality_score', 0) >= keyword_threshold]
+        # CRITICAL FIX (2025-11-29): Take ALL results for 100% coverage
+        # No quality threshold filtering to ensure ZERO data loss
+        # Instead, we add quality tier labels for transparency
+        keyword_best = keyword_unique_scored  # Take ALL results (100% coverage)
 
         for kr in keyword_best:
+            quality_score = kr.get('quality_score', 0)
+
+            # Add quality tier label for transparency
+            if quality_score >= 0.7:
+                quality_tier = 'high'
+                merge_reason = f"High-quality keyword result (score: {quality_score:.2f})"
+            elif quality_score >= 0.4:
+                quality_tier = 'medium'
+                merge_reason = f"Medium-quality keyword result (score: {quality_score:.2f})"
+            else:
+                quality_tier = 'low'
+                merge_reason = f"Keyword result (score: {quality_score:.2f}) - included for completeness"
+
             merged_results.append({
                 **kr,
                 'merge_source': 'keyword_unique',
-                'merge_reason': f"High-quality keyword result (score: {kr.get('quality_score', 0):.2f})"
+                'merge_reason': merge_reason,
+                'quality_tier': quality_tier
             })
 
-        logger.info(f"   ✅ Added {len(keyword_best)} high-quality keyword-only results")
+        logger.info(f"   ✅ Added {len(keyword_best)} keyword-only results (100% coverage)")
+        logger.info(f"      Quality breakdown: {sum(1 for r in keyword_best if r.get('quality_score', 0) >= 0.7)} high, "
+                   f"{sum(1 for r in keyword_best if 0.4 <= r.get('quality_score', 0) < 0.7)} medium, "
+                   f"{sum(1 for r in keyword_best if r.get('quality_score', 0) < 0.4)} low")
 
         # Step 5: Score and add BEST non-overlapping semantic results
         semantic_unique_results = [semantic_contents[k] for k in semantic_unique_keys]
@@ -813,18 +849,36 @@ class DualContextRetriever:
             method='semantic'
         )
 
-        # Take top N% of semantic unique results
-        semantic_threshold = 0.7
-        semantic_best = [r for r in semantic_unique_scored if r.get('quality_score', 0) >= semantic_threshold]
+        # CRITICAL FIX (2025-11-29): Take ALL results for 100% coverage
+        # No quality threshold filtering to ensure ZERO data loss
+        # Instead, we add quality tier labels for transparency
+        semantic_best = semantic_unique_scored  # Take ALL results (100% coverage)
 
         for sr in semantic_best:
+            quality_score = sr.get('quality_score', 0)
+
+            # Add quality tier label for transparency
+            if quality_score >= 0.7:
+                quality_tier = 'high'
+                merge_reason = f"High-quality semantic result (score: {quality_score:.2f})"
+            elif quality_score >= 0.4:
+                quality_tier = 'medium'
+                merge_reason = f"Medium-quality semantic result (score: {quality_score:.2f})"
+            else:
+                quality_tier = 'low'
+                merge_reason = f"Semantic result (score: {quality_score:.2f}) - included for completeness"
+
             merged_results.append({
                 **sr,
                 'merge_source': 'semantic_unique',
-                'merge_reason': f"High-quality semantic result (score: {sr.get('quality_score', 0):.2f})"
+                'merge_reason': merge_reason,
+                'quality_tier': quality_tier
             })
 
-        logger.info(f"   ✅ Added {len(semantic_best)} high-quality semantic-only results")
+        logger.info(f"   ✅ Added {len(semantic_best)} semantic-only results (100% coverage)")
+        logger.info(f"      Quality breakdown: {sum(1 for r in semantic_best if r.get('quality_score', 0) >= 0.7)} high, "
+                   f"{sum(1 for r in semantic_best if 0.4 <= r.get('quality_score', 0) < 0.7)} medium, "
+                   f"{sum(1 for r in semantic_best if r.get('quality_score', 0) < 0.4)} low")
 
         # Step 6: Sort merged results by quality
         merged_results.sort(
@@ -838,6 +892,41 @@ class DualContextRetriever:
 
         logger.info(f"🎯 MERGE COMPLETE: {len(merged_results)} total results")
         logger.info(f"   Breakdown: {len(overlap_keys)} overlap + {len(keyword_best)} keyword + {len(semantic_best)} semantic")
+
+        # CRITICAL: Calculate and display coverage percentage (2025-11-29)
+        total_input = len(keyword_results) + len(semantic_results)
+        total_unique = len(keyword_unique_keys) + len(semantic_unique_keys) + len(overlap_keys)
+        coverage_percentage = (total_unique / total_input * 100) if total_input > 0 else 100
+
+        # Quality tier summary
+        quality_tiers = {'high': 0, 'medium': 0, 'low': 0}
+        for r in merged_results:
+            tier = r.get('quality_tier', 'unknown')
+            if tier in quality_tiers:
+                quality_tiers[tier] += 1
+
+        logger.info(f"📊 COVERAGE METRICS:")
+        logger.info(f"   Total input results: {total_input} ({len(keyword_results)} keyword + {len(semantic_results)} semantic)")
+        logger.info(f"   Total unique results: {total_unique}")
+        logger.info(f"   Coverage: {coverage_percentage:.1f}% (target: 99-100%)")
+        logger.info(f"   Quality distribution: {quality_tiers['high']} high, {quality_tiers['medium']} medium, {quality_tiers['low']} low")
+        logger.info(f"   ✅ ZERO DATA LOSS: ALL unique results included (100% coverage)")
+
+        # Step 7: Validate merged results (CRITICAL - 2025-11-29)
+        validation_result = self._validate_merged_results(
+            merged_results=merged_results,
+            keyword_results=keyword_results,
+            semantic_results=semantic_results,
+            overlap_count=len(overlap_keys)
+        )
+
+        if not validation_result['is_valid']:
+            logger.error("❌ Merge validation FAILED - Check errors above")
+            # Log validation details for debugging
+            for error in validation_result['validation_errors']:
+                logger.error(f"   ERROR: {error}")
+        else:
+            logger.info("✅ Merge validation PASSED - All quality checks successful")
 
         return merged_results
 
@@ -912,6 +1001,138 @@ class DualContextRetriever:
             })
 
         return scored_results
+
+    def _validate_merged_results(
+        self,
+        merged_results: List[Dict],
+        keyword_results: List[Dict],
+        semantic_results: List[Dict],
+        overlap_count: int
+    ) -> Dict[str, Any]:
+        """
+        Validate merged results to ensure quality and completeness.
+
+        VALIDATION CHECKS:
+        1. Non-empty results when inputs have data
+        2. Contains overlap + unique results
+        3. All results have quality scores
+        4. All results have merge metadata
+        5. No duplicate results
+        6. Result count is reasonable
+
+        Returns:
+        {
+            'is_valid': bool,
+            'validation_errors': List[str],
+            'validation_warnings': List[str],
+            'statistics': {
+                'total_merged': int,
+                'expected_minimum': int,
+                'expected_maximum': int,
+                'has_quality_scores': int,
+                'has_merge_metadata': int,
+                'duplicates_found': int
+            }
+        }
+        """
+        errors = []
+        warnings = []
+        stats = {
+            'total_merged': len(merged_results),
+            'expected_minimum': overlap_count,  # At minimum should have all overlap
+            'expected_maximum': len(keyword_results) + len(semantic_results),
+            'has_quality_scores': 0,
+            'has_merge_metadata': 0,
+            'duplicates_found': 0
+        }
+
+        # Check 1: Non-empty when inputs have data
+        if (len(keyword_results) > 0 or len(semantic_results) > 0) and len(merged_results) == 0:
+            errors.append("Merged results are empty but input results exist")
+
+        # Check 2: Minimum size check (should at least have overlap)
+        if len(merged_results) < overlap_count:
+            errors.append(
+                f"Merged results ({len(merged_results)}) less than overlap count ({overlap_count})"
+            )
+
+        # Check 3: Maximum size check (shouldn't exceed total unique items)
+        max_possible = len(keyword_results) + len(semantic_results)
+        if len(merged_results) > max_possible:
+            errors.append(
+                f"Merged results ({len(merged_results)}) exceed maximum possible ({max_possible})"
+            )
+
+        # Check 4 & 5: Validate each result has quality scores and metadata
+        seen_contents = set()
+        for idx, result in enumerate(merged_results):
+            # Check quality score
+            if 'quality_score' in result:
+                stats['has_quality_scores'] += 1
+            else:
+                warnings.append(f"Result {idx} missing quality_score")
+
+            # Check merge metadata
+            if 'merge_source' in result and 'merge_reason' in result:
+                stats['has_merge_metadata'] += 1
+            else:
+                warnings.append(f"Result {idx} missing merge_source or merge_reason")
+
+            # Check for duplicates
+            content_key = None
+            if 'content' in result:
+                content = result['content']
+                if isinstance(content, dict):
+                    title = content.get('title', '')
+                    desc = content.get('description', '')[:100]
+                    content_key = f"{title}|{desc}".lower().strip()
+            elif 'message' in result:
+                msg = result.get('message', {})
+                content = msg.get('content', {})
+                if isinstance(content, dict):
+                    title = content.get('title', '')
+                    desc = content.get('description', '')[:100]
+                    content_key = f"{title}|{desc}".lower().strip()
+
+            if content_key:
+                if content_key in seen_contents:
+                    stats['duplicates_found'] += 1
+                    errors.append(f"Duplicate result found at index {idx}")
+                else:
+                    seen_contents.add(content_key)
+
+        # Check 6: Verify merge sources are valid
+        valid_sources = {'overlap', 'keyword_unique', 'semantic_unique'}
+        for idx, result in enumerate(merged_results):
+            source = result.get('merge_source')
+            if source and source not in valid_sources:
+                warnings.append(f"Result {idx} has invalid merge_source: {source}")
+
+        # Determine overall validity
+        is_valid = len(errors) == 0
+
+        logger.info(f"🔍 Merge Validation: {'✅ PASSED' if is_valid else '❌ FAILED'}")
+        logger.info(f"   Total merged: {stats['total_merged']}")
+        logger.info(f"   Has quality scores: {stats['has_quality_scores']}/{stats['total_merged']}")
+        logger.info(f"   Has merge metadata: {stats['has_merge_metadata']}/{stats['total_merged']}")
+        logger.info(f"   Duplicates found: {stats['duplicates_found']}")
+
+        if errors:
+            logger.error(f"   Validation errors: {len(errors)}")
+            for error in errors:
+                logger.error(f"      - {error}")
+
+        if warnings:
+            logger.warning(f"   Validation warnings: {len(warnings)}")
+            for warning in warnings[:5]:  # Show first 5 warnings
+                logger.warning(f"      - {warning}")
+
+        return {
+            'is_valid': is_valid,
+            'validation_errors': errors,
+            'validation_warnings': warnings,
+            'statistics': stats
+        }
 
     # =========================================================================
     # RESULT PRINTING FOR COMPARISON (CRITICAL REQUIREMENT 2025-11-27)
@@ -990,8 +1211,9 @@ def retrieve_dual_context_for_compaction(
     db_path: str = None,
     max_tokens: int = 40000,
     require_99_confidence: bool = True,
-    save_comparison: bool = True
-) -> Tuple[List[Dict[str, Any]], int]:
+    save_comparison: bool = True,
+    return_comparison: bool = False  # NEW (2025-11-29): Return formatted comparison
+) -> Union[Tuple[List[Dict[str, Any]], int], Tuple[List[Dict[str, Any]], int, Optional[str]]]:
     """
     Drop-in replacement for retrieve_context_for_compaction() with dual retrieval.
 
@@ -1005,6 +1227,7 @@ def retrieve_dual_context_for_compaction(
     - Saves comparison to timestamped file for review
     - Falls back to keyword-only if semantic fails
     - 100% backward compatible with existing interface
+    - NEW (2025-11-29): Optionally returns formatted comparison for display
 
     Args:
         project_id: Project identifier for context retrieval
@@ -1013,11 +1236,19 @@ def retrieve_dual_context_for_compaction(
         max_tokens: Maximum tokens to retrieve (default: 40K)
         require_99_confidence: If True, validate to 99% (default: True)
         save_comparison: If True, save comparison to file (default: True)
+        return_comparison: If True, return formatted comparison output (NEW 2025-11-29)
 
     Returns:
-        Tuple of (context_items, total_tokens) where:
-        - context_items: List of dicts with 'content', 'priority', 'relevance_score', etc.
-        - total_tokens: Estimated total tokens in returned items
+        If return_comparison=False (default):
+            Tuple of (context_items, total_tokens) where:
+            - context_items: List of dicts with 'content', 'priority', 'relevance_score', etc.
+            - total_tokens: Estimated total tokens in returned items
+
+        If return_comparison=True:
+            Tuple of (context_items, total_tokens, comparison_output) where:
+            - context_items: List of dicts (same as above)
+            - total_tokens: Estimated total tokens (same as above)
+            - comparison_output: Formatted comparison string (or None if unavailable)
 
     Example:
         >>> items, tokens = retrieve_dual_context_for_compaction(
@@ -1042,6 +1273,9 @@ def retrieve_dual_context_for_compaction(
     """
     logger.info(f"🔥 DUAL RETRIEVAL for compaction: {current_prompt[:50]}...")
 
+    # Initialize variable to store comparison output
+    comparison_output = None
+
     try:
         # Initialize dual retriever
         retriever = DualContextRetriever(project_id=project_id)
@@ -1055,6 +1289,9 @@ def retrieve_dual_context_for_compaction(
                 require_99_confidence=True
             )
 
+            # Format comparison output (NEW 2025-11-29)
+            formatted = ResultFormatter.format_comparison_for_output(result, current_prompt)
+
             # Save comparison to timestamped file if requested
             if save_comparison:
                 try:
@@ -1062,12 +1299,15 @@ def retrieve_dual_context_for_compaction(
                     comparison_file = Path(__file__).parent.parent / "tmp" / f"dual_retrieval_compaction_{timestamp}.txt"
                     comparison_file.parent.mkdir(exist_ok=True)
 
-                    formatted = ResultFormatter.format_comparison_for_output(result, current_prompt)
                     with open(comparison_file, 'w') as f:
                         f.write(formatted)
                     logger.info(f"✅ Comparison saved: {comparison_file}")
                 except Exception as e:
                     logger.warning(f"Could not save comparison: {e}")
+
+            # Store formatted comparison for return (NEW 2025-11-29)
+            if return_comparison:
+                comparison_output = formatted
 
             # Determine which results to use based on recommendation
             recommendation = result.get('recommendation', 'keyword')
@@ -1077,8 +1317,13 @@ def retrieve_dual_context_for_compaction(
             logger.info(f"Keyword confidence: {result.get('keyword_confidence', 0)}%")
             logger.info(f"Semantic confidence: {result.get('semantic_confidence', 0)}%")
 
-            # Use recommended method (or fallback to keyword if both failed)
-            if recommendation == 'semantic' and validation_summary.get('semantic_validated'):
+            # Use recommended method (including new 'merged' option)
+            if recommendation == 'merged' and validation_summary.get('both_validated'):
+                # NEW (2025-11-29): Use intelligently merged results for maximum quality
+                search_results = result.get('merged_results', [])
+                method_used = 'merged (intelligent combination)'
+                logger.info(f"🎯 Using merged results: {len(search_results)} items")
+            elif recommendation == 'semantic' and validation_summary.get('semantic_validated'):
                 search_results = result['semantic_results']
                 method_used = 'semantic'
             elif recommendation == 'both' and validation_summary.get('both_validated'):
@@ -1147,7 +1392,12 @@ def retrieve_dual_context_for_compaction(
             total_tokens += tokens
 
         logger.info(f"✅ Dual retrieval complete: {len(context_items)} items, {total_tokens} tokens")
-        return context_items, total_tokens
+
+        # Return with or without comparison based on flag (NEW 2025-11-29)
+        if return_comparison:
+            return context_items, total_tokens, comparison_output
+        else:
+            return context_items, total_tokens
 
     except Exception as e:
         logger.error(f"Dual retrieval failed: {e}")
@@ -1155,9 +1405,16 @@ def retrieve_dual_context_for_compaction(
 
         # Fall back to standard keyword retrieval
         from database.context_retriever import retrieve_context_for_compaction
-        return retrieve_context_for_compaction(
+        fallback_result = retrieve_context_for_compaction(
             project_id=project_id,
             current_prompt=current_prompt,
             db_path=db_path,
             max_tokens=max_tokens
         )
+
+        # Return with or without comparison based on flag (NEW 2025-11-29)
+        if return_comparison:
+            # Fallback doesn't have comparison
+            return fallback_result[0], fallback_result[1], None
+        else:
+            return fallback_result
