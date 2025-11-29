@@ -13,7 +13,8 @@ class SemanticRetriever:
 
     def __init__(self, model_name: str = "all-MiniLM-L6-v2"):
         logger.info(f"Initializing SemanticRetriever with model: {model_name}")
-        self.model = SentenceTransformer(model_name)
+        # Force CPU usage to avoid CUDA compatibility issues
+        self.model = SentenceTransformer(model_name, device='cpu')
         self.cache = EmbeddingCache()
         self.model_name = model_name
 

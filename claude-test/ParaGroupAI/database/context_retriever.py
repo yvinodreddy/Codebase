@@ -523,6 +523,46 @@ class ContextRetriever:
 
         return min(score, 1.0)
 
+    def retrieve(self, query: str, limit: int = 10, project_id: str = "default") -> List[Dict[str, Any]]:
+        """
+        Simple retrieve method for compatibility with DualContextRetriever.
+
+        This is a wrapper around search_context() that provides a simpler interface.
+
+        Args:
+            query: Search query string
+            limit: Maximum number of results to return
+            project_id: Project identifier (default: "default")
+
+        Returns:
+            List of matching context items with relevant fields
+        """
+        # Extract keywords from query
+        keywords = self._extract_keywords(query)
+
+        if not keywords:
+            return []
+
+        # Use search_context to find matching items
+        results = self.search_context(
+            project_id=project_id,
+            keywords=keywords,
+            max_results=limit
+        )
+
+        # Convert to simpler format expected by DualContextRetriever
+        simplified_results = []
+        for item in results:
+            simplified_results.append({
+                'id': item.get('snapshot_id', ''),
+                'content': item.get('content', {}),
+                'score': item.get('relevance_score', 0.0),
+                'timestamp': item.get('created_at', ''),
+                'priority': item.get('priority', 'MEDIUM')
+            })
+
+        return simplified_results
+
     def close(self):
         """Close database connection."""
         if self.conn:

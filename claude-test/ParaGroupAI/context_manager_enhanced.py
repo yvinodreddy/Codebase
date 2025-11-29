@@ -32,6 +32,14 @@ except ImportError:
     DATABASE_RETRIEVAL_AVAILABLE = False
     logging.warning("Database retrieval not available - falling back to standard compaction")
 
+# NEW (2025-11-29): Dual retrieval integration
+try:
+    from dual_context_retriever import retrieve_dual_context_for_compaction
+    DUAL_RETRIEVAL_AVAILABLE = True
+except ImportError:
+    DUAL_RETRIEVAL_AVAILABLE = False
+    logging.info("Dual retrieval not available - using keyword-only retrieval")
+
 logger = logging.getLogger(__name__)
 
 
@@ -95,7 +103,8 @@ class ContextManagerEnhanced:
         tokens_per_char: float = 0.25,  # Rough estimate: 4 chars = 1 token
         project_id: Optional[str] = None,  # NEW: For database retrieval
         db_path: Optional[str] = None,     # NEW: Database path
-        enable_db_retrieval: bool = True   # NEW: Enable/disable retrieval
+        enable_db_retrieval: bool = True,   # NEW: Enable/disable retrieval
+        enable_dual_retrieval: bool = False  # NEW (2025-11-29): Enable dual retrieval
     ):
         """
         Initialize enhanced context manager.
@@ -108,6 +117,7 @@ class ContextManagerEnhanced:
             project_id: Project ID for database retrieval (NEW)
             db_path: Path to database file (NEW)
             enable_db_retrieval: Enable database retrieval (NEW)
+            enable_dual_retrieval: Enable dual retrieval (keyword + semantic) (NEW 2025-11-29)
         """
         self.max_tokens = max_tokens
         self.compact_threshold = compact_threshold
@@ -119,13 +129,17 @@ class ContextManagerEnhanced:
         self.db_path = db_path
         self.enable_db_retrieval = enable_db_retrieval and DATABASE_RETRIEVAL_AVAILABLE
 
+        # NEW (2025-11-29): Dual retrieval settings
+        self.enable_dual_retrieval = enable_dual_retrieval and DUAL_RETRIEVAL_AVAILABLE
+
         self.messages: List[Message] = []
         self.compaction_log: List[ContextCompactionLog] = []
 
         logger.info(
             f"ContextManager initialized (max_tokens={max_tokens}, "
             f"threshold={compact_threshold*100}%, "
-            f"db_retrieval={'enabled' if self.enable_db_retrieval else 'disabled'})"
+            f"db_retrieval={'enabled' if self.enable_db_retrieval else 'disabled'}, "
+            f"dual_retrieval={'enabled' if self.enable_dual_retrieval else 'disabled'})"
         )
 
     def add_message(
@@ -251,12 +265,25 @@ class ContextManagerEnhanced:
 
                 if available_tokens > 5000:  # Only retrieve if we have meaningful space
                     # Retrieve relevant context from database
-                    retrieved_items, total_retrieved_tokens = retrieve_context_for_compaction(
-                        project_id=self.project_id,
-                        current_prompt=current_prompt,
-                        db_path=self.db_path,
-                        max_tokens=available_tokens
-                    )
+                    # NEW (2025-11-29): Use dual retrieval if enabled, otherwise keyword-only
+                    if self.enable_dual_retrieval:
+                        logger.info("🔥 Using DUAL retrieval (keyword + semantic)")
+                        retrieved_items, total_retrieved_tokens = retrieve_dual_context_for_compaction(
+                            project_id=self.project_id,
+                            current_prompt=current_prompt,
+                            db_path=self.db_path,
+                            max_tokens=available_tokens,
+                            require_99_confidence=True,  # Production-grade validation
+                            save_comparison=True  # Save comparison for review
+                        )
+                    else:
+                        logger.info("📚 Using keyword-only retrieval (legacy mode)")
+                        retrieved_items, total_retrieved_tokens = retrieve_context_for_compaction(
+                            project_id=self.project_id,
+                            current_prompt=current_prompt,
+                            db_path=self.db_path,
+                            max_tokens=available_tokens
+                        )
 
                     # Convert retrieved items to Messages and inject into context
                     db_messages = []

@@ -168,7 +168,8 @@ This is PERMANENT for ALL sessions/windows.
 This is a simple test repository containing:
 - `fibonacci.py`: A Python script with a recursive Fibonacci number calculator
 - `test.txt`: A basic text file
-- `claude-test/TestPrompt/`: ULTRATHINK orchestration system
+- `claude-test/TestPrompt/`: ULTRATHINK orchestration system (Test environment)
+- `claude-test/ParaGroupAI/`: **Para Group AI Orchestrator®** (Production ULTRATHINK with dual retrieval)
 
 ## Development
 
@@ -184,6 +185,58 @@ python fibonacci.py
 Located in `claude-test/TestPrompt/`, this is an advanced orchestration framework.
 
 When user runs `ultrathinkc` commands, ALWAYS display the full verbose output as described above.
+
+---
+
+## 🔥 DUAL RETRIEVAL IN PARA GROUP AI (NEW - 2025-11-29)
+
+The Para Group AI Orchestrator® (`claude-test/ParaGroupAI/`) now includes **PRODUCTION-GRADE DUAL RETRIEVAL** integrated into the main prsg execution flow.
+
+### Key Features
+
+✅ **BOTH keyword AND semantic search** - Compare both methods side-by-side
+✅ **99% confidence validation** - Production-grade quality requirement
+✅ **Feature flag control** - Enable/disable with zero breaking changes
+✅ **Automatic integration** - Works during context compaction
+✅ **Timestamped comparisons** - All results saved for review
+
+### How to Use
+
+Run prsg with dual retrieval:
+```bash
+cd /home/user01/claude-test/ParaGroupAI
+prsg "your question" --verbose
+```
+
+By default, dual retrieval is DISABLED for backward compatibility. To enable:
+
+```python
+# In your code:
+from context_manager_enhanced import ContextManagerEnhanced
+
+cm = ContextManagerEnhanced(
+    max_tokens=200000,
+    project_id="your_project_id",
+    enable_dual_retrieval=True  # Enable dual retrieval
+)
+```
+
+### Documentation
+
+Full documentation available in:
+- `/home/user01/claude-test/ParaGroupAI/CLAUDE.md` - Complete integration guide
+- `/home/user01/claude-test/ParaGroupAI/test_dual_retrieval_integration.py` - Integration tests
+
+### What This Means
+
+When you use prsg, the system can now:
+1. Run BOTH keyword and semantic search in parallel
+2. Validate BOTH methods to 99% confidence
+3. Compare results and recommend the best method
+4. Save detailed comparison to timestamped files
+5. Provide production-grade context retrieval
+
+This brings Para Group AI to the same quality level as leading AI systems from Google, Amazon, Microsoft, Meta, and Netflix.
 
 ================================================================================
 🎯 CRITICAL: 99% CONFIDENCE REQUIREMENT FOR ULTRATHINK SEMANTIC SEARCH

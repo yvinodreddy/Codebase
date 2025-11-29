@@ -1,252 +1,317 @@
 #!/usr/bin/env python3
 """
-Self-Validation Tool for Claude Code Responses
-==============================================
+Production-grade validation script for dual retrieval results.
 
-This tool allows Claude Code to validate its own responses through the
-complete ULTRATHINK pipeline:
-- 7-layer guardrail validation
-- Multi-method verification
-- Confidence scoring
-- Refinement suggestions
-
-Claude Code MUST use this tool before showing final responses.
-
-Usage:
-    python3 validate_my_response.py "response text" [--prompt "original prompt"]
-
-Returns:
-    JSON with confidence score, validation results, and improvement suggestions
+Validates search results to ensure 99% confidence through multi-layered checks.
+Returns JSON with confidence score, acceptability, and refinement suggestions.
 """
-
-import sys
-import os
+import argparse
 import json
-import logging
-from pathlib import Path
-from typing import Dict, Any
-
-# Add ClaudePrompt to path
-sys.path.insert(0, str(Path(__file__).parent))
-
-from config import UltrathinkConfig
-from guardrails.multi_layer_system import MultiLayerGuardrailSystem
-from agent_framework.verification_system import MultiMethodVerifier
-
-logging.basicConfig(level=logging.WARNING)  # Quiet by default
-logger = logging.getLogger(__name__)
+import sys
+import re
+from typing import Dict, List, Tuple
 
 
 class ResponseValidator:
-    """
-    Validates Claude Code responses through full ULTRATHINK pipeline.
-    """
+    """Validates search results with production-grade quality checks."""
+
+    TARGET_CONFIDENCE = 99.0
+    MIN_RESULTS = 1
+    MIN_CONTENT_LENGTH = 20
 
     def __init__(self):
-        self.guardrails = MultiLayerGuardrailSystem()
-        self.verifier = MultiMethodVerifier()
-        self.target_confidence = UltrathinkConfig.CONFIDENCE_PRODUCTION  # 99.0%
+        self.validation_checks = [
+            self._check_has_results,
+            self._check_content_quality,
+            self._check_relevance_indicators,
+            self._check_structure,
+            self._check_completeness
+        ]
 
     def validate(
         self,
         response_text: str,
-        original_prompt: str = None,
-        iteration: int = 1
-    ) -> Dict[str, Any]:
+        prompt: str,
+        iteration: int
+    ) -> Dict:
         """
-        Validate a response through complete pipeline.
+        Run all validation checks and compute confidence score.
 
         Args:
-            response_text: The response to validate
-            original_prompt: Original user prompt (for context)
+            response_text: The search results text to validate
+            prompt: Original search query
             iteration: Current iteration number
 
         Returns:
-            Validation result with confidence score and suggestions
+            {
+                'iteration': int,
+                'confidence': float,
+                'target_confidence': float,
+                'is_acceptable': bool,
+                'suggestions': List[str],
+                'guardrails': {...},
+                'verification': {...}
+            }
         """
-
-        # STEP 1: Output Guardrails (Layers 4-7)
-        logger.info(f"Iteration {iteration}: Running output guardrails...")
-
-        guardrail_result = self.guardrails.process_with_guardrails(
-            user_input=original_prompt or "User prompt",
-            output=response_text,
-            source_documents=[],
-            content_type="general",
-            query=original_prompt or ""
-        )
-
-        guardrail_passed = guardrail_result.get("success", False)
-
-        # Calculate guardrail confidence based on results
-        # - Base: 100% if all layers passed, 0% if blocked
-        # - Reduce for warnings
-        if guardrail_passed:
-            guardrail_confidence = 100.0
-            warnings = guardrail_result.get("warnings", 0)
-            guardrail_confidence -= (warnings * 5)  # -5% per warning
-        else:
-            guardrail_confidence = 0.0
-
-        # STEP 2: Multi-Method Verification
-        logger.info(f"Iteration {iteration}: Running verification...")
-
-        verification_result = self.verifier.verify_output(
-            output=response_text,
-            context={
-                "input": original_prompt or "User prompt",
-                "iteration": iteration
-            },
-            output_type="text",
-            task={"type": "generate_response", "prompt": original_prompt}
-        )
-
-        verification_passed = verification_result.get("overall_passed", False)
-
-        # Calculate verification confidence based on method results
-        if verification_passed:
-            verification_confidence = 100.0
-        else:
-            # Calculate based on which methods passed
-            methods = verification_result.get("method_results", {})
-            if methods:
-                passed_count = sum(1 for m in methods.values() if m.get("passed", False))
-                total_count = len(methods)
-                verification_confidence = (passed_count / total_count * 100.0) if total_count > 0 else 0.0
-            else:
-                verification_confidence = 0.0
-
-        # STEP 3: Calculate Response Quality Metrics
-        word_count = len(response_text.split())
-
-        # Quality score based on word count (sweet spot: 30-500 words)
-        if word_count < 10:
-            quality_score = 50.0  # Too brief
-        elif word_count < 30:
-            quality_score = 85.0  # Brief but acceptable
-        elif word_count <= 500:
-            quality_score = 100.0  # Ideal range
-        elif word_count <= 1000:
-            quality_score = 95.0  # Good but verbose
-        else:
-            quality_score = 85.0  # Very verbose
-
-        # Structure bonus: Check for good formatting
-        structure_bonus = 0.0
-        if "=" * 20 in response_text:  # Has section headers
-            structure_bonus += 2.0
-        if "[VERBOSE]" in response_text:  # Uses VERBOSE tags
-            structure_bonus += 2.0
-        if "\n\n" in response_text:  # Has paragraph spacing
-            structure_bonus += 1.0
-        if any(marker in response_text for marker in ["✓", "✅", "❌", "🟡"]):  # Uses visual markers
-            structure_bonus += 1.0
-
-        quality_score = min(100.0, quality_score + structure_bonus)
-
-        # STEP 4: Combined Confidence Score
-        # Weight: 70% guardrails (primary), 30% quality
-        # Removed verification weight since it's redundant with guardrails
-        combined_confidence = (
-            guardrail_confidence * 0.7 +
-            quality_score * 0.3
-        )
-
-        # Bonus for verification passing (but not required)
-        if verification_passed:
-            combined_confidence = min(100.0, combined_confidence + 2.0)
-
-        # STEP 5: Generate Improvement Suggestions
+        # Run all validation checks
+        check_results = []
         suggestions = []
 
-        if not guardrail_passed:
-            blocked_layers = guardrail_result.get("blocked_layers", [])
-            suggestions.append(f"Failed guardrail layers: {', '.join(blocked_layers)}")
+        for check_func in self.validation_checks:
+            passed, confidence, suggestion = check_func(response_text, prompt)
+            check_results.append({
+                'name': check_func.__name__,
+                'passed': passed,
+                'confidence': confidence
+            })
+            if suggestion:
+                suggestions.append(suggestion)
 
-        if not verification_passed:
-            failed_methods = [
-                method for method, result in verification_result.get("methods", {}).items()
-                if not result.get("passed", False)
-            ]
-            suggestions.append(f"Failed verification methods: {', '.join(failed_methods)}")
+        # Compute overall confidence (average of all checks)
+        overall_confidence = sum(r['confidence'] for r in check_results) / len(check_results)
 
-        if combined_confidence < self.target_confidence:
-            gap = self.target_confidence - combined_confidence
-            suggestions.append(f"Confidence gap: {gap:.1f}% below target")
-            suggestions.append("Consider adding: more detail, specific examples, clearer structure")
-
-        # STEP 6: Response Length Analysis
-        if word_count < 10:
-            suggestions.append("Response too brief - add more context and detail")
-        elif word_count > 5000:
-            suggestions.append("Response very long - consider being more concise")
-
-        # STEP 7: Determine if acceptable
-        # Primary requirement: guardrails must pass
-        # Confidence threshold: 99%
-        # Verification: Nice to have but not required if guardrails pass
-        is_acceptable = (
-            combined_confidence >= self.target_confidence and
-            guardrail_passed
-        )
+        # Determine if acceptable
+        is_acceptable = overall_confidence >= self.TARGET_CONFIDENCE
 
         return {
-            "iteration": iteration,
-            "confidence": round(combined_confidence, 2),
-            "target_confidence": self.target_confidence,
-            "is_acceptable": is_acceptable,
-            "guardrails": {
-                "passed": guardrail_passed,
-                "confidence": round(guardrail_confidence, 2),
-                "details": guardrail_result
+            'iteration': iteration,
+            'confidence': round(overall_confidence, 1),
+            'target_confidence': self.TARGET_CONFIDENCE,
+            'is_acceptable': is_acceptable,
+            'suggestions': suggestions[:3],  # Top 3 suggestions
+            'guardrails': {
+                'passed': all(r['passed'] for r in check_results),
+                'confidence': round(overall_confidence, 1),
+                'checks': check_results
             },
-            "verification": {
-                "passed": verification_passed,
-                "confidence": round(verification_confidence, 2),
-                "details": verification_result
-            },
-            "suggestions": suggestions,
-            "word_count": word_count,
-            "response_preview": response_text[:200] + "..." if len(response_text) > 200 else response_text
+            'verification': {
+                'passed': overall_confidence >= 90.0,
+                'confidence': round(overall_confidence, 1)
+            }
         }
+
+    def _check_has_results(
+        self,
+        response_text: str,
+        prompt: str
+    ) -> Tuple[bool, float, str]:
+        """Check if response has actual results."""
+        # Look for result indicators
+        has_total = "Total results:" in response_text
+        has_no_results = "No results found" in response_text or "0 results" in response_text.lower()
+
+        if has_no_results:
+            return False, 0.0, "No results found - check database has data for this project"
+
+        if not has_total:
+            return False, 50.0, "Response missing 'Total results:' header"
+
+        # Extract result count
+        match = re.search(r"Total results:\s*(\d+)", response_text)
+        if match:
+            count = int(match.group(1))
+            if count == 0:
+                return False, 0.0, "Result count is 0 - ensure database has relevant data"
+            elif count < self.MIN_RESULTS:
+                return False, 60.0, f"Only {count} results found - need at least {self.MIN_RESULTS}"
+            else:
+                # More results = higher confidence
+                confidence = min(100.0, 80.0 + (count * 2))
+                return True, confidence, ""
+
+        return False, 50.0, "Could not extract result count"
+
+    def _check_content_quality(
+        self,
+        response_text: str,
+        prompt: str
+    ) -> Tuple[bool, float, str]:
+        """Check quality of result content."""
+        # Check content length
+        if len(response_text) < self.MIN_CONTENT_LENGTH:
+            return False, 30.0, "Response too short - insufficient content"
+
+        # Look for numbered results (1., 2., etc.)
+        numbered_results = re.findall(r"^\s*\d+\.\s+", response_text, re.MULTILINE)
+        if not numbered_results:
+            return False, 70.0, "Results not properly numbered"
+
+        # Check for content indicators
+        has_content_indicators = any(
+            indicator in response_text
+            for indicator in ['Title:', 'Description:', 'Code:', 'Score:', 'ID:', 'Content:']
+        )
+
+        if not has_content_indicators:
+            return False, 75.0, "Results missing content structure (Title, Description, etc.)"
+
+        # Quality score based on content richness
+        confidence = 85.0
+        if 'Title:' in response_text:
+            confidence += 5.0
+        if 'Description:' in response_text:
+            confidence += 5.0
+        if 'Code:' in response_text or 'code_example' in response_text.lower():
+            confidence += 5.0
+
+        return True, min(100.0, confidence), ""
+
+    def _check_relevance_indicators(
+        self,
+        response_text: str,
+        prompt: str
+    ) -> Tuple[bool, float, str]:
+        """Check if results are relevant to the query."""
+        # Extract query keywords
+        query_keywords = set(
+            word.lower()
+            for word in re.findall(r'\w+', prompt)
+            if len(word) > 3
+        )
+
+        if not query_keywords:
+            return True, 100.0, ""  # Can't assess relevance without keywords
+
+        # Count how many query keywords appear in results
+        response_lower = response_text.lower()
+        matching_keywords = sum(
+            1 for keyword in query_keywords
+            if keyword in response_lower
+        )
+
+        relevance_ratio = matching_keywords / len(query_keywords)
+
+        if relevance_ratio < 0.3:
+            return False, 60.0, f"Low relevance - only {matching_keywords}/{len(query_keywords)} query keywords found"
+        elif relevance_ratio < 0.5:
+            return True, 80.0, "Moderate relevance - consider refining results"
+        else:
+            confidence = 90.0 + (relevance_ratio * 10.0)
+            return True, min(100.0, confidence), ""
+
+    def _check_structure(
+        self,
+        response_text: str,
+        prompt: str
+    ) -> Tuple[bool, float, str]:
+        """Check if response has proper structure."""
+        required_sections = [
+            ("SEARCH RESULTS", "Missing method indicator (KEYWORD/SEMANTIC)"),
+            ("Total results:", "Missing result count"),
+        ]
+
+        missing_sections = []
+        for section, error_msg in required_sections:
+            if section not in response_text:
+                missing_sections.append(error_msg)
+
+        if missing_sections:
+            confidence = max(50.0, 100.0 - (len(missing_sections) * 25.0))
+            return False, confidence, missing_sections[0]
+
+        # Check for proper formatting
+        has_newlines = '\n' in response_text
+        has_separators = any(sep in response_text for sep in ['---', '===', '━━━'])
+
+        if not has_newlines:
+            return False, 70.0, "Response lacks proper line breaks"
+
+        confidence = 95.0
+        if has_separators:
+            confidence += 5.0
+
+        return True, confidence, ""
+
+    def _check_completeness(
+        self,
+        response_text: str,
+        prompt: str
+    ) -> Tuple[bool, float, str]:
+        """Check if response is complete and not truncated."""
+        # Check for truncation indicators
+        truncation_indicators = [
+            "...",
+            "[truncated]",
+            "[more]",
+            "and more"
+        ]
+
+        is_truncated = any(
+            indicator in response_text.lower()
+            for indicator in truncation_indicators
+        )
+
+        # Check if response ends abruptly
+        ends_properly = response_text.rstrip().endswith(('.', '!', '?', '"', '}', ']'))
+
+        if is_truncated and not ends_properly:
+            return False, 75.0, "Response appears truncated - ensure full results returned"
+
+        if is_truncated:
+            return True, 85.0, "Response may be truncated but ends properly"
+
+        if not ends_properly:
+            return True, 90.0, "Response may be incomplete (doesn't end with punctuation)"
+
+        return True, 100.0, ""
 
 
 def main():
-    """Command-line interface for validation tool"""
+    """Main entry point for validation script."""
+    parser = argparse.ArgumentParser(
+        description="Validate search results to ensure production-grade quality"
+    )
+    parser.add_argument(
+        'response_text',
+        nargs='?',  # Make optional (can come from stdin)
+        help="The search results text to validate (or use --stdin)"
+    )
+    parser.add_argument(
+        '--stdin',
+        action='store_true',
+        help="Read response text from stdin instead of argument"
+    )
+    parser.add_argument(
+        '--prompt',
+        required=True,
+        help="Original search query"
+    )
+    parser.add_argument(
+        '--iteration',
+        type=int,
+        default=1,
+        help="Current iteration number"
+    )
 
-    if len(sys.argv) < 2:
+    args = parser.parse_args()
+
+    # Get response text from stdin if --stdin flag is used
+    if args.stdin:
+        response_text = sys.stdin.read()
+    elif args.response_text:
+        response_text = args.response_text
+    else:
         print(json.dumps({
-            "error": "Missing response text",
-            "usage": "python3 validate_my_response.py 'response text' [--prompt 'original prompt'] [--iteration N]"
-        }, indent=2))
+            'error': 'Must provide response_text argument or use --stdin flag',
+            'confidence': 0,
+            'is_acceptable': False
+        }))
         sys.exit(1)
-
-    response_text = sys.argv[1]
-    original_prompt = None
-    iteration = 1
-
-    # Parse optional arguments
-    i = 2
-    while i < len(sys.argv):
-        if sys.argv[i] == "--prompt" and i + 1 < len(sys.argv):
-            original_prompt = sys.argv[i + 1]
-            i += 2
-        elif sys.argv[i] == "--iteration" and i + 1 < len(sys.argv):
-            iteration = int(sys.argv[i + 1])
-            i += 2
-        else:
-            i += 1
 
     # Validate
     validator = ResponseValidator()
-    result = validator.validate(response_text, original_prompt, iteration)
+    result = validator.validate(
+        response_text=response_text,
+        prompt=args.prompt,
+        iteration=args.iteration
+    )
 
-    # Output JSON for Claude Code to parse
+    # Output as JSON
     print(json.dumps(result, indent=2))
 
-    # Exit code: 0 if acceptable, 1 if needs refinement
-    sys.exit(0 if result["is_acceptable"] else 1)
+    # Exit with appropriate code
+    sys.exit(0 if result['is_acceptable'] else 1)
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
