@@ -1,5 +1,5 @@
 {
-  "numStartups": 28,
+  "numStartups": 29,
   "installMethod": "unknown",
   "autoUpdates": true,
   "tipsHistory": {
@@ -25,7 +25,7 @@
     "permissions": 25,
     "custom-commands": 28
   },
-  "promptQueueUseCount": 14,
+  "promptQueueUseCount": 15,
   "cachedStatsigGates": {
     "tengu_disable_bypass_permissions_mode": false,
     "tengu_tool_pear": false,
@@ -182,14 +182,14 @@
     "5f40691d-ecf2-4e8b-bded-e094c6691947": {
       "eligible": false,
       "referral_code_details": null,
-      "timestamp": 1764177052963
+      "timestamp": 1764388175203
     }
   },
   "s1mAccessCache": {
     "5f40691d-ecf2-4e8b-bded-e094c6691947": {
       "hasAccess": false,
       "hasAccessNotAsDefault": false,
-      "timestamp": 1764256044509
+      "timestamp": 1764388178362
     }
   },
   "feedbackSurveyState": {
