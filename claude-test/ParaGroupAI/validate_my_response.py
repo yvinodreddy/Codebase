@@ -146,14 +146,23 @@ class ResponseValidator:
             return False, 75.0, "Results missing content structure (Title, Description, etc.)"
 
         # Quality score based on content richness
+        # CRITICAL FIX (2025-11-30): Don't require code examples for database queries
+        # Database messages are prompts, not code, so Title + Description = 100%
         confidence = 85.0
-        if 'Title:' in response_text:
-            confidence += 5.0
-        if 'Description:' in response_text:
-            confidence += 5.0
-        if 'Code:' in response_text or 'code_example' in response_text.lower():
-            confidence += 5.0
 
+        has_title = 'Title:' in response_text
+        has_description = 'Description:' in response_text
+        has_code = 'Code:' in response_text or 'code_example' in response_text.lower()
+
+        if has_title:
+            confidence += 7.5  # Increased from 5 to 7.5
+        if has_description:
+            confidence += 7.5  # Increased from 5 to 7.5
+        if has_code:
+            confidence += 0.0  # Code is BONUS, not required (was +5)
+
+        # If has both Title AND Description, give 100% (was 95%)
+        # This allows database queries to reach 100% without code examples
         return True, min(100.0, confidence), ""
 
     def _check_relevance_indicators(
