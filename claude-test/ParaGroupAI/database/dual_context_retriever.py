@@ -354,6 +354,63 @@ class DualContextRetriever:
             }
         }
 
+    def _transform_database_messages_to_validation_format(self, results: List[Dict]) -> List[Dict]:
+        """
+        Transform database message format to expected validation format.
+
+        CRITICAL FIX (2025-11-30): Issue #2 - Database Message Format Mismatch
+
+        Database messages have format:
+        {
+          'prompt': 'Some query',
+          'timestamp': '2025-11-28T...',
+          'hostname': 'User01',
+          'working_directory': '/path'
+        }
+
+        Validation expects format:
+        {
+          'content': {
+            'title': 'Query: Some query',
+            'description': 'Some query',
+            'timestamp': '2025-11-28...',
+            'directory': '/path'
+          }
+        }
+
+        This transformation fixes the validation loop stuck at 94%/96% issue.
+        """
+        transformed = []
+
+        for result in results:
+            # If already in expected format, keep as-is
+            if 'content' in result and isinstance(result['content'], dict):
+                if 'title' in result['content'] and 'description' in result['content']:
+                    transformed.append(result)
+                    continue
+
+            # Transform database format → validation format
+            prompt = result.get('prompt', result.get('query', ''))
+
+            transformed_result = {
+                'content': {
+                    'title': f"Query: {prompt[:50]}" if len(prompt) > 50 else f"Query: {prompt}",
+                    'description': prompt,
+                    'timestamp': result.get('timestamp', ''),
+                    'directory': result.get('working_directory', ''),
+                    'hostname': result.get('hostname', '')
+                },
+                # Preserve original fields
+                'id': result.get('id', result.get('snapshot_id', '')),
+                'score': result.get('score', 0),
+                'timestamp': result.get('timestamp', '')
+            }
+
+            transformed.append(transformed_result)
+
+        logger.info(f"   Transformed {len(transformed)} database messages to validation format")
+        return transformed
+
     def _validate_keyword_search(
         self,
         query: str,
@@ -373,6 +430,9 @@ class DualContextRetriever:
         except Exception as e:
             logger.error(f"Keyword search failed: {e}")
             return {'results': [], 'confidence': 0, 'iterations': 0}
+
+        # CRITICAL FIX (2025-11-30): Transform database messages to validation format
+        results = self._transform_database_messages_to_validation_format(results)
 
         # If validation not required, return immediately
         if not require_99:
@@ -407,6 +467,9 @@ class DualContextRetriever:
         except Exception as e:
             logger.error(f"Semantic search failed: {e}")
             return {'results': [], 'confidence': 0, 'iterations': 0}
+
+        # CRITICAL FIX (2025-11-30): Transform database messages to validation format
+        results = self._transform_database_messages_to_validation_format(results)
 
         # If validation not required, return immediately
         if not require_99:
