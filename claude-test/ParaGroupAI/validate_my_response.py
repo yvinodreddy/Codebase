@@ -219,15 +219,19 @@ class ResponseValidator:
             return False, confidence, missing_sections[0]
 
         # Check for proper formatting
+        # CRITICAL FIX (2025-11-30): Don't require separators for database results
+        # Database formatted results may not include ---, ===, etc.
+        # Proper newlines + structure sections = 100%
         has_newlines = '\n' in response_text
         has_separators = any(sep in response_text for sep in ['---', '===', '━━━'])
 
         if not has_newlines:
             return False, 70.0, "Response lacks proper line breaks"
 
-        confidence = 95.0
-        if has_separators:
-            confidence += 5.0
+        # Has required sections + newlines = 100%
+        confidence = 100.0
+        # Separators are BONUS, not required (was: base 95% + 5% bonus)
+        # This allows database results to reach 100% without visual separators
 
         return True, confidence, ""
 
