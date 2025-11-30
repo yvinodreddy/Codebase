@@ -358,14 +358,28 @@ class DualContextRetriever:
         """
         Transform database message format to expected validation format.
 
-        CRITICAL FIX (2025-11-30): Issue #2 - Database Message Format Mismatch
+        CRITICAL FIX (2025-11-30): Issue #2 & #3 - Database Message Format Mismatch
 
-        Database messages have format:
+        Database messages have TWO different structures:
+
+        KEYWORD PATH (top-level):
         {
           'prompt': 'Some query',
           'timestamp': '2025-11-28T...',
           'hostname': 'User01',
           'working_directory': '/path'
+        }
+
+        SEMANTIC PATH (nested in 'message'):
+        {
+          'message': {
+            'prompt': 'Some query',
+            'timestamp': '...',
+            'hostname': '...',
+            'working_directory': '...'
+          },
+          'score': 0.87,
+          'method': 'semantic'
         }
 
         Validation expects format:
@@ -389,21 +403,43 @@ class DualContextRetriever:
                     transformed.append(result)
                     continue
 
-            # Transform database format → validation format
-            prompt = result.get('prompt', result.get('query', ''))
+            # ISSUE #3 FIX (2025-11-30): Handle BOTH keyword AND semantic paths
+            # Semantic results have data nested in 'message' field
+            if 'message' in result:
+                # Semantic path: extract from nested 'message'
+                msg = result['message']
+                prompt = msg.get('prompt', msg.get('query', ''))
+                timestamp = msg.get('timestamp', '')
+                working_dir = msg.get('working_directory', '')
+                hostname = msg.get('hostname', '')
+                msg_id = msg.get('id', msg.get('snapshot_id', ''))
+                # Preserve semantic-specific fields
+                score = result.get('score', result.get('similarity', 0))
+                method = result.get('method', 'semantic')
+            else:
+                # Keyword path: extract from top level
+                prompt = result.get('prompt', result.get('query', ''))
+                timestamp = result.get('timestamp', '')
+                working_dir = result.get('working_directory', '')
+                hostname = result.get('hostname', '')
+                msg_id = result.get('id', result.get('snapshot_id', ''))
+                score = result.get('score', 0)
+                method = result.get('method', 'keyword')
 
+            # Transform database format → validation format
             transformed_result = {
                 'content': {
                     'title': f"Query: {prompt[:50]}" if len(prompt) > 50 else f"Query: {prompt}",
                     'description': prompt,
-                    'timestamp': result.get('timestamp', ''),
-                    'directory': result.get('working_directory', ''),
-                    'hostname': result.get('hostname', '')
+                    'timestamp': timestamp,
+                    'directory': working_dir,
+                    'hostname': hostname
                 },
                 # Preserve original fields
-                'id': result.get('id', result.get('snapshot_id', '')),
-                'score': result.get('score', 0),
-                'timestamp': result.get('timestamp', '')
+                'id': msg_id,
+                'score': score,
+                'timestamp': timestamp,
+                'method': method  # Preserve method for debugging
             }
 
             transformed.append(transformed_result)
@@ -757,17 +793,29 @@ class DualContextRetriever:
                 else:
                     text_parts.append(f"{i}. {str(content)[:300]}.")  # More content, end with period
             else:  # semantic
-                msg = result.get('message', {})
+                # ISSUE #3 FIX (2025-11-30): Format semantic results same as keyword
+                # After transformation, semantic results have same 'content' structure as keyword
+                content = result.get('content', {})
                 similarity = result.get('score', result.get('similarity', 0))
-                # Format message content (no truncation markers)
-                if isinstance(msg, dict):
-                    content = msg.get('content', str(msg))
-                    if len(content) > 300:
-                        text_parts.append(f"{i}. [Score: {similarity:.3f}] {content[:300]}.")
-                    else:
-                        text_parts.append(f"{i}. [Score: {similarity:.3f}] {content}.")
+
+                # Format content properly for validation (matches keyword path)
+                if isinstance(content, dict):
+                    formatted = []
+                    if 'title' in content:
+                        formatted.append(f"Title: {content['title']}")
+                    if 'description' in content:
+                        # Show more description to avoid truncation warning
+                        desc = content['description']
+                        if len(desc) > 300:
+                            formatted.append(f"Description: {desc[:300]}.")  # End with period, not ...
+                        else:
+                            formatted.append(f"Description: {desc}")
+                    if 'tags' in content:
+                        formatted.append(f"Tags: {', '.join(content['tags'][:5])}")
+                    text_parts.append(f"{i}. [Score: {similarity:.3f}] {' | '.join(formatted)}.")  # End with period
                 else:
-                    text_parts.append(f"{i}. [Score: {similarity:.3f}] {str(msg)[:300]}.")
+                    # Fallback for non-transformed results (shouldn't happen)
+                    text_parts.append(f"{i}. [Score: {similarity:.3f}] {str(content)[:300]}.")  # More content, end with period
 
         # SAFEGUARD (2025-11-30): Limit text length to prevent validation timeouts
         # For 1342-point projects, we need to validate ALL results to reach 99.9% confidence
